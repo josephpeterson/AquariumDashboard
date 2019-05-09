@@ -1,0 +1,33 @@
+<h3>Aquarium Preview</h3>
+<div class="aquarium-preview-component row">
+    <div class="col-md-2">
+        <div class="row">
+            <table>
+                <tr>
+                    <td>Temperature: </td>
+                    <td>70F</td>
+                </tr>
+                <tr>
+                    <td>Fish Count: </td>
+                    <td>4</td>
+                </tr>
+            </table>
+        </div>
+        <h6 class="m-1">Today's Tasks</h6>
+        <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">Water Test</h6>
+                    <a href="#" class="card-link">View</a>
+                </div>
+            </div>
+            <span class="row"><a class="link" [routerLink]='["/maintenance","tasks"]' [routerLinkActive]='["link-active"]'>View All Tasks</a></span>
+        </div>
+
+        <h6 class="m-1">Lighting</h6>
+        <div class="row">
+            <div><button class="btn btn-primary">Toggle Lights</button></div>
+        </div>
+    </div>
+    <aquarium-preview-scroller></aquarium-preview-scroller>
+</div>

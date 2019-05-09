@@ -1,0 +1,32 @@
+<div class="lighting-component">
+	<div class="row">
+		<div class="card">
+
+			<div class="card-body">
+				<div class="card-title">
+					<h3>Lighting</h3>
+
+				</div>
+				<mat-form-field>
+					<mat-label>Light Frame</mat-label>
+					<mat-select>
+						<mat-option *ngFor="let food of foods" [value]="food.value">
+							{{food.viewValue}}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+				<ng-container>
+					<div class="ledRow" *ngFor="let row of rows">
+						<ng-container *ngFor="let led of row">
+							<div [(colorPicker)]="led.color" [style.background]="led.color" *ngIf="led.active" class="led active">{{led.id}}</div>
+							<div *ngIf="led.active == false" class="led">-</div>
+						</ng-container>
+					</div>
+				</ng-container>
+				<button class="btn btn-primary" (click)="sendUpdate();">Send</button>
+
+			</div>
+
+		</div>
+	</div>
+</div>
