@@ -1,5 +1,9 @@
 .aquarium-preview-component
 {
+  .card {
+    width:100%;
+    user-select:none;
+  }
   .left {
     text-align:right;
   }

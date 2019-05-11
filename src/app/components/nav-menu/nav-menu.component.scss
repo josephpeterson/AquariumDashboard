@@ -20,3 +20,6 @@ html {
   font-weight:500;
   border-bottom:3px solid #859BD3;
 }
+::ng-deep .mat-select-content {
+  max-height: 20vh !important;
+}
