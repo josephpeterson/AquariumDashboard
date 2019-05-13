@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource, MatSort, MatPaginator, MatDialog } from '@angular/material';
 import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
+import { AquariumService } from 'src/app/services/aquarium-service/aquarium.service';
 
 @Component({
   selector: 'aquarium-preview-scroller',
@@ -12,30 +13,21 @@ export class AquariumPreviewScrollerComponent implements OnInit {
  
   @ViewChild("scroller") scroller;
 
-  data:AquariumSnapshot[] = [
-    new AquariumSnapshot(),
-    new AquariumSnapshot(),
-    new AquariumSnapshot(),
-    new AquariumSnapshot(),
-    new AquariumSnapshot(),
-    new AquariumSnapshot(),
-    new AquariumSnapshot(),
-    new AquariumSnapshot(),
-    new AquariumSnapshot(),
-    new AquariumSnapshot(),
-    new AquariumSnapshot(),
-    new AquariumSnapshot(),
-  ];
+  data: AquariumSnapshot[] = []
 
   selectedId: number = 0;
 
 
-  constructor(
+  constructor(public aquariumService: AquariumService,
     public dialog: MatDialog,
   ) {}
 
   ngOnInit() {
-    
+    //Load snapshots
+    var promise = this.aquariumService.GetSnapshots();
+    promise.then(data => {
+      this.data = data;
+    });
   }
 
 
@@ -65,5 +57,23 @@ export class AquariumPreviewScrollerComponent implements OnInit {
     snapshots[this.selectedId].scrollIntoView({behavior: "auto", block: "end", inline: "nearest"});
   }
 
+  
+  getSnapshotSrc(snapshot: AquariumSnapshot)
+  {
+    return this.aquariumService.GetPhotoSource(snapshot);
+  }
+
+  takeSnapshot(event){
+    var ele = event.target;
+    ele.disabled = true;
+    var a = this.aquariumService.TakeSnapshot();
+    a.then(data => {
+      this.data.push(data);
+    }).catch(e => {
+
+    }).finally(() => {
+      ele.disabled = false;
+    });
+  }
 }
 

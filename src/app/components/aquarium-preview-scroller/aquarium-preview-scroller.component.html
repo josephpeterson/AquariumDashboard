@@ -1,18 +1,23 @@
 <div class="aquarium-preview-scroller-component" tabindex="0" (keydown.arrowup)="handleKey($event)" (keydown.arrowdown)="handleKey($event)">
-    <div class="currentImage" *ngIf="data[selectedId]; let current">
-        <img src={{current.src}}/>
-        <div class="banner">
-            {{current.date.toLocaleDateString('en-US')}} {{current.date.toLocaleTimeString('en-US')}}
-            {{current.parameters.temperature}}F
-            PH: {{current.parameters.ph}}
-            Nitrite: {{current.parameters.nitrite}}
-            Nitrate: {{current.parameters.nitrate}}
-        </div>
+    <div class="currentImage" *ngIf="data.length && data[selectedId]">
+        <ng-container *ngIf="data[selectedId]; let current">
+                <img src={{getSnapshotSrc(current)}}/>
+                <div class="banner">
+                    {{current.date}}
+                    {{current.temperature}}F
+                    PH: {{current.ph}}
+                    Nitrite: {{current.nitrite}}
+                    Nitrate: {{current.nitrate}}
+                </div>
+        </ng-container>
+        
     </div>
     <div class="scroll-area" #scroller>
         <ng-container *ngFor="let snapshot of data;let i = index">
-            <div [style.background-image]="'url(' + snapshot.src + ')'" [ngClass]="{'selected': selectedId === i }" class="content" (click)="setSelectedId(i)">{{snapshot.id}}</div>
+            <div [style.background-image]="'url(' + getSnapshotSrc(snapshot) + ')'" [ngClass]="{'selected': selectedId === i }" class="content" (click)="setSelectedId(i)">{{snapshot.id}}</div>
         </ng-container>
     </div>
 </div>
+<button class="btn btn-primary" (click)="takeSnapshot($event)">Take Snapshot</button>
+
 <div style="clear:both;"></div>

@@ -1,4 +1,4 @@
-import { AquariumParameters } from './AquariumParameters';
+import { Aquarium } from './Aquarium';
 
 var MockSnapshotImages:string[] =
 [
@@ -12,8 +12,18 @@ function randomDate(start, end) {
 }
 export class AquariumSnapshot
 {
-  id: number = Math.floor(Math.random() * 100);
-  date: Date = randomDate(new Date(2012, 0, 1), new Date());
-  src: string = MockSnapshotImages[Math.floor(Math.random() * (MockSnapshotImages.length))];
-  parameters: AquariumParameters = new AquariumParameters();
+  id: number //= Math.floor(Math.random() * 100);
+  aquarium: Aquarium
+  aquariumId: number
+  date: Date
+  ammonia: number
+  nitrite: number
+  nitrate: number
+  ph: number
+  temperature: number
+
+
+  getImgSrc() {
+    return "/photos/0/" + this.id + ".jpg";
+  }
 }
