@@ -1,9 +1,9 @@
 // prod config
 
 export const environment = {
-  production: true,
+  production: false,
   urls : {
-    aquariumApi : "https://api.rwbaird.com/creditforceapi/v1"
+    aquariumApi : "https://localhost:5000"
   },
   environmentTag: "PROD"
 };

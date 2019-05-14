@@ -1,23 +1,31 @@
-<div class="aquarium-preview-scroller-component" tabindex="0" (keydown.arrowup)="handleKey($event)" (keydown.arrowdown)="handleKey($event)">
+<div class="aquarium-preview-scroller-component" tabindex="0" (keydown.arrowup)="handleKey($event)"
+    (keydown.arrowdown)="handleKey($event)">
     <div class="currentImage" *ngIf="data.length && data[selectedId]">
         <ng-container *ngIf="data[selectedId]; let current">
-                <img src={{getSnapshotSrc(current)}}/>
-                <div class="banner">
-                    {{current.date}}
-                    {{current.temperature}}F
-                    PH: {{current.ph}}
-                    Nitrite: {{current.nitrite}}
-                    Nitrate: {{current.nitrate}}
-                </div>
+            <img src={{getSnapshotSrc(current)}} />
+            <div class="banner">
+                {{current.date}}
+                {{current.temperature}}F
+                PH: {{current.ph}}
+                Nitrite: {{current.nitrite}}
+                Nitrate: {{current.nitrate}}
+            </div>
         </ng-container>
-        
+
     </div>
     <div class="scroll-area" #scroller>
         <ng-container *ngFor="let snapshot of data;let i = index">
-            <div [style.background-image]="'url(' + getSnapshotSrc(snapshot) + ')'" [ngClass]="{'selected': selectedId === i }" class="content" (click)="setSelectedId(i)">{{snapshot.id}}</div>
+            <div [style.background-image]="'url(' + getSnapshotSrc(snapshot) + ')'"
+                [ngClass]="{'selected': selectedId === i }" class="content" (click)="setSelectedId(i)">{{snapshot.id}}
+            </div>
         </ng-container>
     </div>
 </div>
-<button class="btn btn-primary" (click)="takeSnapshot($event)">Take Snapshot</button>
+<div class="row">
+    <button class="m-2 btn btn-primary" (click)="takeSnapshot($event)">Take Snapshot</button>
+    <ng-container *ngIf="data.length && data[selectedId]">
+        <button class="m-2 btn btn-danger" (click)="deleteSnapshot($event)">Delete Snapshot</button>
+    </ng-container>
+</div>
 
 <div style="clear:both;"></div>

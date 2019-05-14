@@ -24,7 +24,7 @@ export class AquariumPreviewScrollerComponent implements OnInit {
 
   ngOnInit() {
     //Load snapshots
-    var promise = this.aquariumService.GetSnapshots();
+    var promise = this.aquariumService.getSnapshots();
     promise.then(data => {
       this.data = data;
     });
@@ -66,14 +66,18 @@ export class AquariumPreviewScrollerComponent implements OnInit {
   takeSnapshot(event){
     var ele = event.target;
     ele.disabled = true;
-    var a = this.aquariumService.TakeSnapshot();
+    var a = this.aquariumService.takeSnapshot();
     a.then(data => {
-      this.data.push(data);
+      //this.data.push(data);
     }).catch(e => {
 
     }).finally(() => {
       ele.disabled = false;
     });
+  }
+  deleteSnapshot(event) {
+    var ele = event.target;
+    ele.disabled = true;
   }
 }
 

@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 
 //Material Imports
 import { MatTableModule } from '@angular/material/table';
-import { MatCheckboxModule, MatInputModule, MatSelectModule, MatCard, MatDialogModule, MatButton, MatButtonModule } from '@angular/material';
+import { MatCheckboxModule, MatInputModule, MatSelectModule, MatCard, MatDialogModule, MatButton, MatButtonModule, MatNativeDateModule } from '@angular/material';
 import {MatTabsModule} from '@angular/material/tabs';
 import { MatSortModule } from '@angular/material/sort';
 import { MatMenuModule } from '@angular/material/menu';
@@ -18,6 +18,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatCardModule} from '@angular/material';
 
+import {MatListModule} from '@angular/material/list';
+
 
 //Component declarations
 import { AppComponent } from './components/app-root/app.component';
@@ -27,7 +29,6 @@ import { AquariumPreviewComponent } from './components/aquarium-preview/aquarium
 
 
 //Misc.
-import { environment } from './environments/environment';
 import { FishComponent } from './components/fish/fish.component';
 import { MaintenanceComponent } from './components/maintenance/maintenance.component';
 import { SettingsComponent } from './components/settings/settings.component';
@@ -40,6 +41,15 @@ import { LightingComponent } from './components/lighting/lighting.component';
 
 //Color picker
 import { ColorPickerModule } from 'ngx-color-picker';
+import { StoreModule } from '@ngrx/store';
+import { AquariumSelectionComponent } from './components/aquarium-selection/aquarium-selection.component';
+import { AppRoutingModule } from './app-routing.module';
+import { ErrorMessageModalComponent } from './components/error-message-modal/error-message-modal.component';
+import { aquariumReducer } from './store/aquarium/aquarium.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { AquariumEffects } from './store/aquarium/aquarium.effect';
+
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [
@@ -50,29 +60,25 @@ import { ColorPickerModule } from 'ngx-color-picker';
     LightingComponent,
     MaintenanceComponent,
     SettingsComponent,
+    AquariumSelectionComponent,
     AquariumPreviewComponent,
     AquariumPreviewScrollerComponent,
     TaskListComponent,
     OperationsComponent,
     TaskTableComponent,
+    ErrorMessageModalComponent,
     //New components here
   ],
   entryComponents: [
     //Modal components here
+    ErrorMessageModalComponent
   ],
+  
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot([
-      { path: '', component: DashboardComponent, pathMatch: 'full' },
-      { path: 'maintenance/:tab', component: MaintenanceComponent,},
-      { path: 'fish', component: FishComponent, pathMatch: 'full' },
-      { path: 'lighting', component: LightingComponent, pathMatch: 'full' },
-      { path: 'settings', component: SettingsComponent, pathMatch: 'full' },
-      //New routes here
-      //{ path: 'counterparty', component: CounterpartyDetailComponent, pathMatch: 'full' },
-    ]),
+    AppRoutingModule,
     MatProgressSpinnerModule,
     MatCardModule,
     MatTableModule,
@@ -82,6 +88,7 @@ import { ColorPickerModule } from 'ngx-color-picker';
     MatSortModule,
     MatMenuModule,
     MatIconModule,
+    MatListModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     MatFormFieldModule,
@@ -89,14 +96,20 @@ import { ColorPickerModule } from 'ngx-color-picker';
     MatSelectModule,
     MatDialogModule,
     MatButtonModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     ReactiveFormsModule,
-    ColorPickerModule
+    ColorPickerModule,
+    StoreModule.forRoot({ aquariums: aquariumReducer}),
+    EffectsModule.forRoot([AquariumEffects]),
+    AppRoutingModule
   ],
   providers: [
     //Providers for authenticaion
     //{ provide: HTTP_INTERCEPTORS, useClass: ConfigVaultInterceptor, multi: true },
     //{ provide: 'OAuth.Environment', useValue: environment.environmentTag },
     //{ provide: 'OAuth.ClientName', useValue: environment.appName },
+    MatDatepickerModule
   ],
   bootstrap: [AppComponent]
 })

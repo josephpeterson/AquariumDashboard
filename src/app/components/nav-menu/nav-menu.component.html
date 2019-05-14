@@ -2,30 +2,54 @@
   <nav class='navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3'>
     <div class="container">
       <a class="navbar-brand" [routerLink]='["/"]'>MyAquarium</a>
-      <a class="navbar-brand" [routerLink]='["/"]'>Main Tank</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-label="Toggle navigation"
-        [attr.aria-expanded]="isExpanded" (click)="toggle()">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" [ngClass]='{"show": isExpanded}'>
-        <ul class="navbar-nav flex-grow">
-          <li class="nav-item">
-            <a class="nav-link text-dark" [routerLink]='["/"]'  [routerLinkActiveOptions]='{ exact: true }' [routerLinkActive]='["link-active"]'>Overview</a>
-          </li>
-          <li class="nav-item" >
-            <a class="nav-link text-dark" [routerLink]='["/maintenance","tasks"]' [routerLinkActive]='["link-active"]'>Maintenance</a>
-          </li>
-          <li class="nav-item" >
-              <a class="nav-link text-dark" [routerLink]='["/fish"]' [routerLinkActive]='["link-active"]'>Fish</a>
+      <ng-container *ngIf="!(loading | async);">
+          <mat-form-field>
+              <mat-select [(value)]="aquarium.id">
+                <mat-option *ngFor="let aq of aquariums | async" [value]="aq.id">
+                  <a class="navbar-brand" [routerLink]='["/" + aq.id]'>{{aq.name}}</a>
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+        
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse"
+          aria-label="Toggle navigation" [attr.aria-expanded]="isExpanded" (click)="toggle()">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" [ngClass]='{"show": isExpanded}'>
+          <ul class="navbar-nav flex-grow">
+            <li class="nav-item">
+              <a class="nav-link text-dark" [routerLink]='["/" + aquarium.id]'
+                [routerLinkActiveOptions]='{ exact: true }' [routerLinkActive]='["link-active"]'>Overview</a>
             </li>
-            <li class="nav-item" >
-                <a class="nav-link text-dark" [routerLink]='["/lighting"]' [routerLinkActive]='["link-active"]'>Lighting</a>
-              </li>
-          <li class="nav-item" >
-            <a class="nav-link text-dark" [routerLink]='["/settings"]' [routerLinkActive]='["link-active"]'>Settings</a>
-          </li>
-        </ul>
-      </div>
+            <li class="nav-item">
+              <a class="nav-link text-dark" [routerLink]='["maintenance","tasks"]'
+                [routerLinkActive]='["link-active"]'>Maintenance</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" [routerLink]='["fish"]' [routerLinkActive]='["link-active"]'>Fish</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" [routerLink]='["lighting"]'
+                [routerLinkActive]='["link-active"]'>Lighting</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" [routerLink]='["settings"]'
+                [routerLinkActive]='["link-active"]'>Settings</a>
+            </li>
+          </ul>
+        </div>
+      </ng-container>
     </div>
   </nav>
 </header>
+<div class="container">
+  <ng-container *ngIf="!(loading | async)">
+    <router-outlet></router-outlet>
+  </ng-container>
+  <ng-container *ngIf="loading | async">
+    <div class="d-flex m-5 justify-content-center">
+      <mat-progress-spinner mode="indeterminate">
+      </mat-progress-spinner>
+    </div>
+  </ng-container>
+</div>

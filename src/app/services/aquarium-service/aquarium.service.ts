@@ -4,6 +4,8 @@ import { Observable } from "rxjs";
 import { environment } from "../../environments/environment";
 import { LightingConfiguration } from 'src/app/models/LightingConfiguration';
 import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
+import { Aquarium } from 'src/app/models/Aquarium';
+import { catchError } from 'rxjs/operators';
 
 const httpOptions = {
     headers: new HttpHeaders({
@@ -18,6 +20,8 @@ const httpOptions = {
 })
 export class AquariumService {
   private _url: string;
+
+  public aquariumId: number;
 
   constructor(private http: HttpClient) {
     this._url = environment.urls.aquariumApi;
@@ -35,18 +39,34 @@ export class AquariumService {
     });
   }
 
-  public GetSnapshots()
+  public getSnapshots()
   {
     var aqId = 1;
 
     return this.http.get<AquariumSnapshot[]>(this._url + "/v1/Snapshot/" + aqId + "/All").toPromise();
   }
-  public TakeSnapshot() {
+  public takeSnapshot() {
     var aqId = 1;
     return this.http.get<AquariumSnapshot[]>(this._url + "/v1/Snapshot/" + aqId + "/Take").toPromise();
   }
   public GetPhotoSource(snapshot: AquariumSnapshot)
   {
     return this._url + "/photos/" + snapshot.aquariumId + "/" + snapshot.id + ".jpg";
+  }
+
+  public getAquariums(): Observable<Aquarium[]> {
+    return this.http.get<Aquarium[]>(this._url + "/v1/Aquarium/All")
+    .pipe(catchError((error: any) => Observable.throw(error.json())))
+
+  }
+  public getAquariumById(aquariumId:number) {
+    this.aquariumId = aquariumId;
+    return this.http.get<Aquarium>(this._url + "/v1/Aquarium/" + aquariumId);
+  }
+
+  public updateAquarium(aquarium: Aquarium) {
+    return this.http.get<Aquarium>("http://thisworkwontever.com/v1/Aquarium/" + aquarium.id + "/Update");
+    return this.http.get<Aquarium>(this._url + "/v1/Aquarium/" + aquarium.id + "/Update");
+
   }
 }

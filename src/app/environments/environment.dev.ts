@@ -3,7 +3,7 @@
 export const environment = {
     production: false,
     urls : {
-      aquariumApi : "https://raspberrypi:5000/api"
+      aquariumApi : "https://65.29.174.115"
     },
     environmentTag: "DEV"
   };

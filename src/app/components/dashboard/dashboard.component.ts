@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource, MatSort, MatPaginator, MatDialog } from '@angular/material';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'dashboard-page-component',
