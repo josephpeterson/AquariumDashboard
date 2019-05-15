@@ -1,6 +1,6 @@
 import { Aquarium } from './models/Aquarium';
-import { AquariumState } from './store/aquarium/aquarium.reducer';
+import { AquariumSelectionState } from './store/aquarium/aquarium.reducer';
 
 export interface AppState {
-    readonly aquariums: AquariumState
+    readonly aquariums: AquariumSelectionState
 }

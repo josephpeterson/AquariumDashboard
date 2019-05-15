@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core'
 import { Effect, Actions, ofType } from '@ngrx/effects'
-import { AquariumActions, AquariumLoadAction, AquariumLoadSuccessAction, AquariumLoadFailAction, AquariumUpdateAction, AquariumUpdateSuccessAction, AquariumUpdateFailAction } from './aquarium.actions';
+import { AquariumActions, AquariumListAction, AquariumLoadSuccessAction, AquariumLoadFailAction, AquariumUpdateAction, AquariumUpdateSuccessAction, AquariumUpdateFailAction } from './aquarium.actions';
 
-import { switchMap, tap, map, catchError, mergeMap } from 'rxjs/operators'
+import { map, catchError, mergeMap } from 'rxjs/operators'
 import { AquariumService } from 'src/app/services/aquarium-service/aquarium.service';
-import { of, Observable } from 'rxjs'
-import { Action } from 'rxjs/internal/scheduler/Action';
+import { of } from 'rxjs'
 import { Aquarium } from 'src/app/models/Aquarium';
 
 @Injectable()
@@ -16,11 +15,10 @@ export class AquariumEffects {
     }
 
     @Effect()
-    loadAquariums$ = this.actions$.pipe(ofType<AquariumLoadAction>(AquariumActions.Load),
+    loadAquariums$ = this.actions$.pipe(ofType<AquariumListAction>(AquariumActions.Load),
         mergeMap(() => this.aquariumService.getAquariums().pipe(
-            map(aquariums => new AquariumLoadSuccessAction(aquariums),
-                catchError(error => of(new AquariumLoadFailAction(error)))
-            )
+            map(aquariums => new AquariumLoadSuccessAction(aquariums)),
+            catchError(error => of(new AquariumLoadFailAction(error)))
         )));
     @Effect()
     updateAquarium$ = this.actions$.pipe(
@@ -31,11 +29,12 @@ export class AquariumEffects {
         mergeMap((aquarium: Aquarium) =>
             this.aquariumService.updateAquarium(aquarium).pipe(
                 map(
+                    //We can either return a new AquariumLoadAction, OR just update our store
                     (newAquarium: Aquarium) =>
                         new AquariumUpdateSuccessAction({
                             id: newAquarium.id,
                             changes: newAquarium
-                          })
+                        })
                 ),
                 catchError(err => of(new AquariumUpdateFailAction(err)))
             )

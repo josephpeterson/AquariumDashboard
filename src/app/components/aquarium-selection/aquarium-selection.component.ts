@@ -1,13 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { Store, select } from '@ngrx/store';
-import { AppState } from 'src/app/app.state';
-import { selectAquarium, isLoading } from '../../store/aquarium/aquarium.selector';
-import { AquariumLoadAction, AquariumActions, AllAquariumActions, AquariumSelectionAction } from 'src/app/store/aquarium/aquarium.actions';
-import { map, filter } from 'rxjs/operators';
-import { AquariumEffects } from 'src/app/store/aquarium/aquarium.effect';
-import { Action } from 'rxjs/internal/scheduler/Action';
 import { Aquarium } from 'src/app/models/Aquarium';
+import { ErrorMessageModalComponent } from '../error-message-modal/error-message-modal.component';
+import { ConnectionError } from 'src/app/models/ConnectionError';
+import { AquariumSelectionComponentData } from './aquarium-selection.component.data';
 
 @Component({
   selector: 'aquarium-selection-component',
@@ -15,25 +11,30 @@ import { Aquarium } from 'src/app/models/Aquarium';
   styleUrls: ['./aquarium-selection.component.scss']
 })
 export class AquariumSelectionComponent implements OnInit {
+  constructor(public data: AquariumSelectionComponentData,public dialog: MatDialog,) {}
 
-
-  constructor(private store: Store<AppState>,
-    public dialog: MatDialog,
-  ) {
-    //this.aquariums = store.pipe(select('aquariums'));
-  }
-
-  public aquariums = this.store.pipe(select(selectAquarium));
-  public loading = this.store.select(isLoading);
-
-
+  public aquariums = this.data.aquariums;
+  public loading = this.data.loading;
+  public connectionError = this.data.connectionError;
 
   ngOnInit() {
-    this.store.dispatch(new AquariumLoadAction());
+    this.loadAquariums();
+    this.connectionError.subscribe(
+      error => {
+      if(error)
+        this.displayErrorDialog(error);
+    });
   }
-
+  displayErrorDialog(error) {
+    var dialog = this.dialog.open(ErrorMessageModalComponent,{
+    }).componentInstance;
+    dialog.error = new ConnectionError(error);
+  }
   selectAquarium(aquarium: Aquarium) {
-    this.store.dispatch(new AquariumSelectionAction(aquarium.id));
+    this.data.select(aquarium);
+  }
+  loadAquariums() {
+    this.data.load();
   }
 }
 

@@ -14,8 +14,9 @@ export enum AquariumActions {
   Decrement = '[Counter Component] Decrement',
   Reset = '[Counter Component] Reset',
 }
- 
-export class AquariumLoadAction implements Action {
+
+
+export class AquariumListAction implements Action {
   readonly type = AquariumActions.Load
 }
 export class AquariumLoadSuccessAction implements Action {
@@ -56,4 +57,4 @@ export class AquariumUpdateFailAction implements Action {
   {
   }
 }
-export type AllAquariumActions = AquariumUpdateSuccessAction | AquariumUpdateFailAction | AquariumSelectionAction | AquariumLoadAction | AquariumLoadSuccessAction | AquariumLoadFailAction;
+export type AllAquariumActions = AquariumUpdateSuccessAction | AquariumUpdateFailAction | AquariumSelectionAction | AquariumListAction | AquariumLoadSuccessAction | AquariumLoadFailAction;

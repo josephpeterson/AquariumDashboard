@@ -3,17 +3,16 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { AquariumActions, AllAquariumActions } from './aquarium.actions';
 import { Aquarium } from '../../models/Aquarium';
 
-export class AquariumState {
+export class AquariumSelectionState {
   aquariums: Aquarium[]
-  loading: boolean = false
-  selectedAquarium: Aquarium
+  loading: boolean
+  selectedAquariumId: number
   error: string
 }
-
-export const defaultAquariumState: AquariumState = {
+export const defaultAquariumState: AquariumSelectionState = {
   aquariums: [],
-  loading: false,
-  selectedAquarium: null,
+  loading: true,
+  selectedAquariumId: null,
   error: null
 };
 export const aquariumAdapater: EntityAdapter<Aquarium> = createEntityAdapter<Aquarium>();
@@ -25,25 +24,28 @@ export function aquariumReducer(state = initialState, action: AllAquariumActions
     case AquariumActions.Load:
       return {
         ...state,
-        loading: true
+        loading: true,
+        error: null
       }
 
     case AquariumActions.LoadSuccess:
       return {
         ...state,
         loading: false,
-        aquariums: action.payload
+        aquariums: action.payload,
+        error: null
       }
 
     case AquariumActions.LoadFail:
       return {
         ...state,
-        loading: false
+        error: action.payload,
+        loading: false,
       }
     case AquariumActions.MakeSelection:
       return {
         ...state,
-        selectedAquarium: state.aquariums.filter(aq => aq.id == action.aquariumId)[0]
+        selectedAquariumId: action.aquariumId
       }
     case AquariumActions.UpdateSuccess:
       return aquariumAdapater.updateOne(action.aquarium, state)

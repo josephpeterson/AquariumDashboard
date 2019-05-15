@@ -1,73 +1,78 @@
-<div class="row m-2">
-    <div class="card w-100">
-
-        <div class="card-body" *ngIf="aquarium">
-            <div class="card-title">
-                <h3>Basic Information</h3>
-            </div>
-            <div>
-                <mat-form-field class="example-full-width m-3">
-                    <input matInput placeholder="Name" [value]="aquarium.name">
-                </mat-form-field>
-                <mat-form-field class="m-3">
-                    <input matInput [matDatepicker]="picker1" placeholder="Start Date" [formControl]="date"
-                        [value]="aquarium.startDate">
-                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                    <mat-datepicker #picker1></mat-datepicker>
-                </mat-form-field>
-            </div>
-
-            <div>
-                <mat-form-field class="example-full-width m-3">
-                    <input type="number" matInput placeholder="Size (Gallons)" [value]="aquarium.gallons">
-                </mat-form-field>
-            </div>
-        </div>
-        <div class="card-body">
-            <button class="m-2 btn btn-success" (click)="saveChanges()">Save Changes</button>
-            <mat-error *ngIf="error$ | async as error">{{error.message}}</mat-error>
-        </div>
-    </div>
-</div>
-<div class="row m-2">
-    <div class="card w-100">
-
-        <div class="card-body" *ngIf="aquarium">
-            <div class="row">
-                <div class="col-sm">
-                    <div class="card-title">
-                        <h3>Peripherals</h3>
-                    </div>
-                    <p class="card-text">
-                        These are the enabled peripherals/sensors that are currently enabled. Some may be unavailable
-                        depending on hardware installed on your device.
-                    </p>
-                    <ul class="list-group">
-                        <li class="list-group-item list-group-item-success">Photo Module</li>
-                        <li class="list-group-item">Temperature Sensor</li>
-                        <li class="list-group-item list-group-item-success">LED Controller</li>
-                        <li class="list-group-item">Ph Sensor</li>
-                        <li class="list-group-item">Nitrate/Nitrite Sensor</li>
-                    </ul>
+<ng-container *ngIf="aquarium$ | async as aquarium else loading">
+    <div class="row m-2">
+        <div class="card w-100">
+    
+            <div class="card-body">
+                <div class="card-title">
+                    <h3>Basic Information</h3>
                 </div>
-                <div class="col-sm">
-                    <div class="card-title">
-                        <h3>Aquarium Operations</h3>
-                    </div>
-                    <p class="card-text">
-                        Perform operations on your aquarium here. You may remove your aquarium here. These actions may
-                        be
-                        irreversible.
-                    </p>
-                    <h6>Aquarium</h6>
-                    <button class="m-2 btn btn-secondary" (click)="aquariumExport()">Export Aquarium</button>
-                    <button class="m-2 btn btn-danger" (click)="aquariumDelete()">Delete Aquarium</button>
-                    <h6>Snapshots</h6>
-                    <button class="m-2 btn btn-primary" (click)="snapshotManage()">Manage..</button>
-                    <button class="m-2 btn btn-danger" (click)="snapshotDeleteAll()">Delete All</button>
+                <div>
+                    <mat-form-field class="example-full-width m-3">
+                        <input matInput placeholder="Name" [value]="aquarium.name">
+                    </mat-form-field>
+                    <mat-form-field class="m-3">
+                        <input matInput [matDatepicker]="picker1" placeholder="Start Date" [formControl]="date"
+                            [value]="aquarium.startDate">
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker #picker1></mat-datepicker>
+                    </mat-form-field>
                 </div>
-
+    
+                <div>
+                    <mat-form-field class="example-full-width m-3">
+                        <input type="number" matInput placeholder="Size (Gallons)" [value]="aquarium.gallons">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="card-body">
+                <button class="m-2 btn btn-success" (click)="saveChanges()">Save Changes</button>
+                <mat-error *ngIf="error$ | async as error">{{error.message}}</mat-error>
             </div>
         </div>
     </div>
-</div>
+    <div class="row m-2">
+        <div class="card w-100">
+    
+            <div class="card-body" *ngIf="aquarium">
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="card-title">
+                            <h3>Peripherals</h3>
+                        </div>
+                        <p class="card-text">
+                            These are the enabled peripherals/sensors that are currently enabled. Some may be unavailable
+                            depending on hardware installed on your device.
+                        </p>
+                        <ul class="list-group">
+                            <li class="list-group-item list-group-item-success">Photo Module</li>
+                            <li class="list-group-item">Temperature Sensor</li>
+                            <li class="list-group-item list-group-item-success">LED Controller</li>
+                            <li class="list-group-item">Ph Sensor</li>
+                            <li class="list-group-item">Nitrate/Nitrite Sensor</li>
+                        </ul>
+                    </div>
+                    <div class="col-sm">
+                        <div class="card-title">
+                            <h3>Aquarium Operations</h3>
+                        </div>
+                        <p class="card-text">
+                            Perform operations on your aquarium here. You may remove your aquarium here. These actions may
+                            be
+                            irreversible.
+                        </p>
+                        <h6>Aquarium</h6>
+                        <button class="m-2 btn btn-secondary" (click)="aquariumExport()">Export Aquarium</button>
+                        <button class="m-2 btn btn-danger" (click)="aquariumDelete()">Delete Aquarium</button>
+                        <h6>Snapshots</h6>
+                        <button class="m-2 btn btn-primary" (click)="snapshotManage()">Manage..</button>
+                        <button class="m-2 btn btn-danger" (click)="snapshotDeleteAll()">Delete All</button>
+                    </div>
+    
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
+<ng-template #loading>
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+</ng-template>

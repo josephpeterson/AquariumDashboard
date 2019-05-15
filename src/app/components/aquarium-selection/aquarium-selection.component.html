@@ -13,8 +13,8 @@
         <button *ngFor="let aquarium of aquariums | async" mat-list-item [routerLink]='["/" + aquarium.id]' (click)="selectAquarium(aquarium)"> {{aquarium.name}}
         </button>
       </mat-action-list>
-      <ng-container *ngIf="connectionError">
-        <mat-error>Unable to retrieve aquarium list.</mat-error>
+      <ng-container *ngIf="connectionError | async">
+        <mat-error>Unable to retrieve aquarium list. {{connectionError.toString()}}</mat-error>
         <div class="row">
           <button class="m-2 btn btn-secondary" (click)="loadAquariums()">Reconnect</button>
         </div>

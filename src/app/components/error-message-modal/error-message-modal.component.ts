@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { ConnectionError } from 'src/app/models/ConnectionError';
 
 @Component({
   selector: 'error-message-modal',
@@ -8,11 +9,8 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 export class ErrorMessageModalComponent implements OnInit {
 
   constructor() { }
-
-  public title: string
-  public description: string
-
-  public exception;
+  
+  public error: ConnectionError;
 
   ngOnInit() {
   }

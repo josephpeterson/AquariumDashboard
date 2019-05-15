@@ -1,12 +1,13 @@
 <div class="error-message-modal">
-  <h1 mat-dialog-title>{{title}}</h1>
+  <h1 mat-dialog-title>{{error.title}}</h1>
   <p>
-    {{description}}
+    {{error.description}}
   </p>
-  <mat-error>
-    {{exception.message}}
+  <mat-error *ngIf="error.exception">
+    {{error.exception.message}}
   </mat-error>
+
   <mat-dialog-actions>
-    <button mat-button mat-dialog-close>Close</button>
+    <button class="m-2 btn btn-secondary" mat-dialog-close>Close</button>
   </mat-dialog-actions>
 </div>
