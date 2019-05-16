@@ -21,9 +21,5 @@ export class AquariumSnapshot
   nitrate: number
   ph: number
   temperature: number
-
-
-  getImgSrc() {
-    return "/photos/0/" + this.id + ".jpg";
-  }
+  photoId: number
 }

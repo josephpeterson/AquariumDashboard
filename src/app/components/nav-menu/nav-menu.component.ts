@@ -17,7 +17,7 @@ export class NavMenuComponent {
 
   public loading$ = this.data.loading
   public aquariums$ = this.data.aquariums
-  public aquarium$ = this.data.aquariums
+  public aquarium$ = this.data.aquarium
   public hasValidAquarium = this.data.hasValidAquarium;
 
 
@@ -34,7 +34,9 @@ export class NavMenuComponent {
     });
   }
 
-
+  selectAquarium(event) {
+    console.log(event);
+  }
   toggle() {
     this.isExpanded = !this.isExpanded;
   }

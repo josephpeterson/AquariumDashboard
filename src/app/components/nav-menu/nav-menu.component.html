@@ -1,5 +1,5 @@
 <ng-container *ngIf="!(loading$ | async) else loading">
-  <ng-container *ngIf="aquarium$ | async as aquarium else selectAquarium">
+  <ng-container *ngIf="aquarium$ | async as aquarium; else selectAquarium">
     <ng-container *ngIf="hasValidAquarium | async else selectAquarium">
       <header>
         <nav class='navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3'>
@@ -7,7 +7,7 @@
             <a class="navbar-brand" [routerLink]='["/"]'>MyAquarium</a>
             <ng-container>
               <mat-form-field>
-                <mat-select [(value)]="aquarium.id">
+                <mat-select [(ngModel)]="aquarium.id" (selectionChange)="selectAquarium($event.value)">
                   <mat-option *ngFor="let aq of aquariums$ | async" [value]="aq.id">
                     <a class="navbar-brand" [routerLink]='["/" + aq.id]'>{{aq.name}}</a>
                   </mat-option>

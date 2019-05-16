@@ -48,7 +48,9 @@ export class AquariumService {
     return this.http.get<AquariumSnapshot[]>(this._url + "/v1/Snapshot/" + aqId + "/Take").toPromise();
   }
   public GetPhotoSource(snapshot: AquariumSnapshot) {
-    return this._url + "/photos/" + snapshot.aquariumId + "/" + snapshot.id + ".jpg";
+    if(snapshot.photoId != null)
+      return this._url + "/photos/" + snapshot.aquariumId + "/" + snapshot.photoId + ".jpg";
+    return null;
   }
 
   public getAquariums(): Observable<Aquarium[]> {
@@ -60,6 +62,6 @@ export class AquariumService {
   }
 
   public updateAquarium(aquarium: Aquarium) {
-    return this.http.get<Aquarium>("http://thisworkwontever.com/v1/Aquarium/" + aquarium.id + "/Update");
+    return this.http.post<Aquarium>(this._url + "/v1/Aquarium/" + aquarium.id + "/Update",aquarium);
   }
 }

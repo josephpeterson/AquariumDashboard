@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { FormControl } from '@angular/forms';
 import { Aquarium } from 'src/app/models/Aquarium';
@@ -16,24 +16,30 @@ export class SettingsComponent implements OnInit {
   public date = new FormControl(new Date());
   public serializedDate = new FormControl((new Date()).toISOString());
   public aquarium$ = this.data.aquarium;
-  @Input("aquariumName") aquariumName: string
-  @Input("aquariumSize") aquariumSize: number
+
+  public aquariumSize: number
+  public aquariumName: string
 
   constructor(public data: SettingsComponentData,public dialog: MatDialog) { }
 
   ngOnInit() {
-
+    this.aquarium$.subscribe(aq => {
+      this.aquariumSize = aq.gallons;
+      this.aquariumName = aq.name;
+    });
   }
 
   saveChanges() {
     this.aquarium$.subscribe(aquarium => {
       var newAquarium:Aquarium = new Aquarium();
-      Object.apply(newAquarium, {
+
+      newAquarium = {
+        ...newAquarium,
         id: aquarium.id,
-        date: this.date.value,
+        startDate: this.date.value,
         gallons: this.aquariumSize,
         name: this.aquariumName
-      });
+      };
       this.data.save(newAquarium);
     });
   }

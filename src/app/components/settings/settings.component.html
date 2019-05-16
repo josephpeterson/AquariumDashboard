@@ -8,7 +8,7 @@
                 </div>
                 <div>
                     <mat-form-field class="example-full-width m-3">
-                        <input matInput placeholder="Name" [value]="aquarium.name">
+                        <input matInput placeholder="Name" [value]="aquarium.name" [(ngModel)]="aquariumName">
                     </mat-form-field>
                     <mat-form-field class="m-3">
                         <input matInput [matDatepicker]="picker1" placeholder="Start Date" [formControl]="date"
@@ -20,7 +20,7 @@
     
                 <div>
                     <mat-form-field class="example-full-width m-3">
-                        <input type="number" matInput placeholder="Size (Gallons)" [value]="aquarium.gallons">
+                        <input type="number" matInput placeholder="Size (Gallons)" [value]="aquarium.gallons" [(ngModel)]="aquariumSize">
                     </mat-form-field>
                 </div>
             </div>

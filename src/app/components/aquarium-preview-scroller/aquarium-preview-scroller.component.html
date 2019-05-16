@@ -2,7 +2,7 @@
     (keydown.arrowdown)="handleKey($event)">
     <div class="currentImage" *ngIf="data.length && data[selectedId]">
         <ng-container *ngIf="data[selectedId]; let current">
-            <img src={{getSnapshotSrc(current)}} />
+            <img *ngIf="current.photoId != null" src={{getSnapshotSrc(current)}} />
             <div class="banner">
                 {{current.date}}
                 {{current.temperature}}F
@@ -15,7 +15,7 @@
     </div>
     <div class="scroll-area" #scroller>
         <ng-container *ngFor="let snapshot of data;let i = index">
-            <div [style.background-image]="'url(' + getSnapshotSrc(snapshot) + ')'"
+            <div *ngIf="snapshot.photoId != null" [style.background-image]="'url(' + getSnapshotSrc(snapshot) + ')'"
                 [ngClass]="{'selected': selectedId === i }" class="content" (click)="setSelectedId(i)">{{snapshot.id}}
             </div>
         </ng-container>
