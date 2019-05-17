@@ -62,6 +62,7 @@ export class AquariumService {
   }
 
   public updateAquarium(aquarium: Aquarium) {
-    return this.http.post<Aquarium>(this._url + "/v1/Aquarium/" + aquarium.id + "/Update",aquarium);
+    console.log(aquarium);
+    return this.http.post<Aquarium>(this._url + "/v1/Aquarium/Update",aquarium);
   }
 }
