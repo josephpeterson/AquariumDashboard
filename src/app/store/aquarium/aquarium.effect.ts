@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { Effect, Actions, ofType } from '@ngrx/effects'
-import { AquariumActions, AquariumListAction, AquariumLoadSuccessAction, AquariumLoadFailAction, AquariumUpdateAction, AquariumUpdateSuccessAction, AquariumUpdateFailAction } from './aquarium.actions';
+import { AquariumActions, AquariumListAction, AquariumLoadSuccessAction, AquariumLoadFailAction, AquariumUpdateAction, AquariumUpdateSuccessAction, AquariumUpdateFailAction, AquariumCreateSuccessAction, AquariumCreateFailAction, AquariumCreateAction } from './aquarium.actions';
 
 import { map, catchError, mergeMap } from 'rxjs/operators'
 import { AquariumService } from 'src/app/services/aquarium-service/aquarium.service';
@@ -37,6 +37,23 @@ export class AquariumEffects {
                         })
                 ),
                 catchError(err => of(new AquariumUpdateFailAction(err)))
+            )
+        )
+    );
+    @Effect()
+    createAquarium$ = this.actions$.pipe(
+        ofType<AquariumCreateAction>(
+            AquariumActions.Create
+        ),
+        map((action: AquariumCreateAction) => action.payload),
+        mergeMap((payload: Aquarium) =>
+            this.aquariumService.createAquarium(payload).pipe(
+                map(
+                    //We can either return a new AquariumLoadAction, OR just update our store
+                    (newAquarium: Aquarium) =>
+                        new AquariumCreateSuccessAction(newAquarium)
+                ),
+                catchError(err => of(new AquariumCreateFailAction(err)))
             )
         )
     );

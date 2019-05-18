@@ -19,6 +19,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatCardModule} from '@angular/material';
 
 import {MatListModule} from '@angular/material/list';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 //Component declarations
@@ -50,6 +51,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { AquariumEffects } from './store/aquarium/aquarium.effect';
 
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { CreateAquariumModelComponent } from './components/create-aquarium-modal/create-aquarium-modal.component';
 
 @NgModule({
   declarations: [
@@ -67,10 +69,12 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     OperationsComponent,
     TaskTableComponent,
     ErrorMessageModalComponent,
+    CreateAquariumModelComponent,
     //New components here
   ],
   entryComponents: [
     //Modal components here
+    CreateAquariumModelComponent,
     ErrorMessageModalComponent
   ],
   
@@ -100,6 +104,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     MatNativeDateModule,
     ReactiveFormsModule,
     ColorPickerModule,
+    FontAwesomeModule,
     StoreModule.forRoot({ aquariums: aquariumReducer}),
     EffectsModule.forRoot([AquariumEffects]),
     AppRoutingModule

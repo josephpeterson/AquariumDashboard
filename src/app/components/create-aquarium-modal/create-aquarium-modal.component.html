@@ -1,0 +1,39 @@
+<div class="error-message-modal">
+	<h1 mat-dialog-title>New Aquarium</h1>
+	<p>
+		Yall tryna create a new aquarium
+	</p>
+	<mat-error *ngIf="createError | async as error">
+		{{error.message}}
+	</mat-error>
+	<form>
+		<fieldset [disabled]="data.loading | async">
+			<div>
+				<mat-form-field class="example-full-width m-3">
+					<input matInput placeholder="Name" [(ngModel)]="aquariumName" name="name">
+				</mat-form-field>
+				<mat-form-field class="m-3">
+					<input matInput [matDatepicker]="picker1" placeholder="Start Date" [formControl]="aquariumDate"
+						name="date">
+					<mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+					<mat-datepicker #picker1></mat-datepicker>
+				</mat-form-field>
+			</div>
+
+			<div>
+				<mat-form-field class="example-full-width m-3">
+					<input type="number" matInput placeholder="Size (Gallons)" [(ngModel)]="aquariumSize"
+						name="gallons">
+				</mat-form-field>
+
+				<mat-form-field class="example-full-width m-3">
+					<input matInput placeholder="Tank Type" [(ngModel)]="aquariumType" name="type">
+				</mat-form-field>
+			</div>
+			<mat-dialog-actions>
+				<button class="m-2 btn btn-secondary" mat-dialog-close>Cancel</button>
+				<button class="m-2 btn btn-success" (click)="createAquarium()">Create</button>
+			</mat-dialog-actions>
+		</fieldset>
+	</form>
+</div>

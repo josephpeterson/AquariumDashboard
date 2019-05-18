@@ -16,3 +16,12 @@ export const getAquariumById = (id: number) => createSelector(aquariumState,
 export const isLoadingAquariums = createSelector(aquariumState,(state: AquariumSelectionState) => state.loading);
 
 export const getConnectionError = createSelector(aquariumState,(state: AquariumSelectionState) => state.error);
+
+
+
+
+
+/* Create aquarium */
+export const getAquariumWasCreated = createSelector(aquariumState,(state: AquariumSelectionState) => state.aquariumCreated);
+export const getAquariumCreateError = createSelector(aquariumState,(state: AquariumSelectionState) => state.createError);
+export const isCreatingAquarium = createSelector(aquariumState,(state: AquariumSelectionState) => state.creating);

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container aquarium-selection-component">
   <mat-card class="m-5">
     <mat-card-title>
       <h3>Select an Aquarium</h3>
@@ -9,16 +9,23 @@
       </div>
     </ng-container>
     <ng-container *ngIf="!(loading | async)">
-      <mat-action-list>
-        <button *ngFor="let aquarium of aquariums | async" mat-list-item [routerLink]='["/" + aquarium.id]' (click)="selectAquarium(aquarium)"> {{aquarium.name}}
-        </button>
-      </mat-action-list>
-      <ng-container *ngIf="connectionError | async">
+      <ng-container *ngIf="connectionError | async else success">
         <mat-error>Unable to retrieve aquarium list. {{connectionError.toString()}}</mat-error>
         <div class="row">
           <button class="m-2 btn btn-secondary" (click)="loadAquariums()">Reconnect</button>
         </div>
       </ng-container>
+      <ng-template #success>
+        <mat-action-list>
+          <button *ngFor="let aquarium of aquariums | async" mat-list-item [routerLink]='["/" + aquarium.id]'
+            (click)="selectAquarium(aquarium)"> {{aquarium.name}}
+          </button>
+          <button mat-list-item type="button" class="btn btn-default btn-sm" (click)="displayCreateAquariumDialog()">
+              <fa-icon class="addIcon mr-2" [icon]="faCoffee"></fa-icon>Create New...
+            </button>
+        </mat-action-list>
+      </ng-template>
+
     </ng-container>
 
   </mat-card>
