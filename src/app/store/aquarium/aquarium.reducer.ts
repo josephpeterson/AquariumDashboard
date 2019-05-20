@@ -1,35 +1,43 @@
-import { Action } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { AquariumActions, AllAquariumActions } from './aquarium.actions';
 import { Aquarium } from '../../models/Aquarium';
 import { HttpErrorResponse } from '@angular/common/http';
 
-export class AquariumSelectionState {
-  aquariums: Aquarium[]
+export interface AquariumsState extends EntityState<Aquarium> {
   loading: boolean
   selectedAquariumId: number
-  error: string
+  error: HttpErrorResponse
 
   creating: boolean
   aquariumCreated: boolean
   createError: HttpErrorResponse
+
+  updating: boolean
+  updated: boolean
 }
-export const defaultAquariumState: AquariumSelectionState = {
-  aquariums: [],
+export const adapter: EntityAdapter<Aquarium> = createEntityAdapter<Aquarium>();
+
+export const defaultAquariumState: AquariumsState = {
+  ids: [],
+  entities: {},
   loading: true,
   selectedAquariumId: null,
   error: null,
 
   creating: false,
   aquariumCreated: false,
-  createError: null
+  createError: null,
+
+  updating: false,
+  updated: false
 };
-export const aquariumAdapater: EntityAdapter<Aquarium> = createEntityAdapter<Aquarium>();
-export const initialState = aquariumAdapater.getInitialState(defaultAquariumState);
+
+export const initialState: AquariumsState = adapter.getInitialState(defaultAquariumState);
 
 
-export function aquariumReducer(state = initialState, action: AllAquariumActions) {
+export function aquariumReducer(state = initialState, action: AllAquariumActions): AquariumsState {
   switch (action.type) {
+
     case AquariumActions.Load:
       return {
         ...state,
@@ -38,10 +46,10 @@ export function aquariumReducer(state = initialState, action: AllAquariumActions
       }
 
     case AquariumActions.LoadSuccess:
+      var newState = adapter.addMany(action.payload, state);
       return {
-        ...state,
+        ...newState,
         loading: false,
-        aquariums: action.payload,
         error: null
       }
 
@@ -57,12 +65,19 @@ export function aquariumReducer(state = initialState, action: AllAquariumActions
         selectedAquariumId: action.aquariumId
       }
     case AquariumActions.UpdateSuccess:
-      return aquariumAdapater.updateOne(action.aquarium, state) //Doesn't work?
+      return adapter.updateOne(action.aquarium, state);
+      return {
+        ...newState,
+        updating: false,
+        updated: true,
+      }
     case AquariumActions.UpdateFail:
       return {
         ...state,
         error: action.payload
       }
+
+
     case AquariumActions.CreateReset:
       return {
         ...state,
@@ -77,21 +92,27 @@ export function aquariumReducer(state = initialState, action: AllAquariumActions
         creating: true
       }
     case AquariumActions.CreateSuccess:
+      var newState = adapter.addOne(action.payload, state);
       return {
-        ...state,
-        aquariums: state.aquariums.concat([action.payload]),
+        ...newState,
         creating: false,
         aquariumCreated: true
       }
     case AquariumActions.CreateFail:
-  return {
-    ...state,
-    error: null,
-    creating: false,
-    aquariumCreated: false,
-    createError: action.payload
-  }
+      return {
+        ...state,
+        error: null,
+        creating: false,
+        aquariumCreated: false,
+        createError: action.payload
+      }
     default:
-  return state;
+      return state;
+  }
 }
-}
+export const {
+  selectAll,
+  selectEntities,
+  selectIds,
+  selectTotal
+} = adapter.getSelectors();

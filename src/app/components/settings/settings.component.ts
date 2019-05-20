@@ -19,6 +19,7 @@ export class SettingsComponent implements OnInit {
 
   public aquariumSize: number
   public aquariumName: string
+  public updating = this.data.updating;
 
   constructor(public data: SettingsComponentData,public dialog: MatDialog) { }
 

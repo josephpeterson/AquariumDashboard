@@ -35,7 +35,7 @@ export class AquariumLoadSuccessAction implements Action {
 }
 export class AquariumLoadFailAction implements Action {
   readonly type = AquariumActions.LoadFail
-  constructor(public payload: any[]) {
+  constructor(public payload: HttpErrorResponse) {
 
   }
 }
@@ -56,7 +56,7 @@ export class AquariumUpdateSuccessAction implements Action {
 }
 export class AquariumUpdateFailAction implements Action {
   readonly type = AquariumActions.UpdateFail
-  constructor(public payload: string) {
+  constructor(public payload: HttpErrorResponse) {
   }
 }
 

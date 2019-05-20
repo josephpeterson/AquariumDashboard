@@ -2,7 +2,7 @@
     <div class="row m-2">
         <div class="card w-100">
     
-            <div class="card-body">
+            <div class="card-body" *ngIf="!(updating | async)">
                 <div class="card-title">
                     <h3>Basic Information</h3>
                 </div>

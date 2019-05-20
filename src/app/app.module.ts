@@ -52,6 +52,7 @@ import { AquariumEffects } from './store/aquarium/aquarium.effect';
 
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { CreateAquariumModelComponent } from './components/create-aquarium-modal/create-aquarium-modal.component';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 
 @NgModule({
   declarations: [
@@ -106,6 +107,9 @@ import { CreateAquariumModelComponent } from './components/create-aquarium-modal
     ColorPickerModule,
     FontAwesomeModule,
     StoreModule.forRoot({ aquariums: aquariumReducer}),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25
+    }),
     EffectsModule.forRoot([AquariumEffects]),
     AppRoutingModule
   ],
