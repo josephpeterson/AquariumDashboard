@@ -6,6 +6,7 @@ import { LightingConfiguration } from 'src/app/models/LightingConfiguration';
 import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { catchError } from 'rxjs/operators';
+import { Snapshot } from 'src/app/models/Snapshot';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -38,18 +39,24 @@ export class AquariumService {
       });
   }
 
-  public getSnapshots() {
-    var aqId = 1;
+  public getSnapshots(aqId: number):Observable<Snapshot[]> {
 
-    return this.http.get<AquariumSnapshot[]>(this._url + "/v1/Snapshot/" + aqId + "/All").toPromise();
+    return this.http.get<Snapshot[]>(this._url + "/v1/Snapshot/" + aqId + "/All");
   }
-  public takeSnapshot() {
-    var aqId = 1;
-    return this.http.get<AquariumSnapshot[]>(this._url + "/v1/Snapshot/" + aqId + "/Take").toPromise();
+  public deleteSnapshot(snapshot: Snapshot) {
+    return this.http.post<Snapshot>(this._url + "/v1/Snapshot/Delete",snapshot.id);
+  }
+  public takeSnapshot(aqId: number) {
+    return this.http.get<Snapshot>(this._url + "/v1/Snapshot/" + aqId + "/Take/true");
   }
   public GetPhotoSource(snapshot: AquariumSnapshot) {
     if(snapshot.photoId != null)
-      return this._url + "/photos/" + snapshot.aquariumId + "/" + snapshot.photoId + ".jpg";
+    {
+      //REMOVE
+
+      //return this._url + "/photos/" + snapshot.aquariumId + "/" + snapshot.photoId + ".jpg";
+      return "http://65.29.174.115/photos/" + snapshot.aquariumId + "/" + snapshot.photoId + ".jpg";
+    }
     return null;
   }
 
@@ -65,7 +72,9 @@ export class AquariumService {
     return this.http.post<Aquarium>(this._url + "/v1/Aquarium/Update",aquarium);
   }
   public createAquarium(aquarium: Aquarium) {
-    console.log(aquarium);
     return this.http.post<Aquarium>(this._url + "/v1/Aquarium/Add",aquarium);
+  }
+  public deleteAquarium(aquarium: Aquarium) {
+    return this.http.post<Aquarium>(this._url + "/v1/Aquarium/Delete",aquarium.id);
   }
 }

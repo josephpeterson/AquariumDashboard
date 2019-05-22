@@ -29,3 +29,8 @@ export const isCreatingAquarium = createSelector(AquariumsState, (state: Aquariu
 /* Update */
 export const isUpdatingAquarium = createSelector(AquariumsState, (state: AquariumReducer.AquariumsState) => state.updating);
 
+
+/* Delete */
+export const isDeletingAquarium = createSelector(AquariumsState, (state: AquariumReducer.AquariumsState) => state.deleting);
+export const getDidDelete = createSelector(AquariumsState, (state: AquariumReducer.AquariumsState) => state.deleted);
+export const getDeleteError = createSelector(AquariumsState, (state: AquariumReducer.AquariumsState) => state.deleteError);

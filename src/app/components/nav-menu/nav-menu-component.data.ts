@@ -15,7 +15,7 @@ export class NavMenuComponentData {
     public connectionError = this.store.select(getConnectionError);
     public hasValidAquarium = this.store.select(hasValidAquarium);
   
-    constructor(private store: Store<AppState>) { }
+    constructor(private store: Store<AppState>){}
 
 
     load(aquariumId: number) {

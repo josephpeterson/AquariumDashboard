@@ -17,6 +17,10 @@ export enum AquariumActions {
   CreateFail = '[Aquariums] CreateFail',
   CreateReset = '[Aquariums] CreateReset',
 
+  Delete = '[Aquariums] Delete',
+  DeleteSuccess = '[Aquariums] DeleteSuccess',
+  DeleteFail = '[Aquariums] DeleteFail',
+
   MakeSelection = '[Aquariums] Tank Selected',
   Increment = '[Counter Component] Increment',
   Decrement = '[Counter Component] Decrement',
@@ -83,15 +87,43 @@ export class AquariumCreateResetAction implements Action {
   readonly type = AquariumActions.CreateReset
 }
 
+/* Delete Aquarium */
+export class AquariumDeleteAction implements Action {
+  readonly type = AquariumActions.Delete
+  constructor(public payload: Aquarium) {
+  }
+}
+export class AquariumDeleteSuccessAction implements Action {
+  readonly type = AquariumActions.DeleteSuccess
+  constructor(public payload: Aquarium) {
+  }
+}
+export class AquariumDeleteFailAction implements Action {
+  readonly type = AquariumActions.DeleteFail
+  constructor(public payload: HttpErrorResponse) {
+  }
+}
+export class AquariumResetAction implements Action {
+  readonly type = AquariumActions.Reset
+}
 
 export type AllAquariumActions =
+  AquariumResetAction |
   AquariumCreateResetAction |
   AquariumCreateFailAction |
+  AquariumCreateSuccessAction |
   AquariumCreateAction |
+
+  AquariumDeleteAction |
+  AquariumDeleteFailAction |
+  AquariumDeleteSuccessAction |
+
+  AquariumUpdateAction |
   AquariumUpdateSuccessAction |
   AquariumUpdateFailAction |
+
   AquariumSelectionAction |
   AquariumListAction |
+
   AquariumLoadSuccessAction |
-  AquariumCreateSuccessAction |
   AquariumLoadFailAction;

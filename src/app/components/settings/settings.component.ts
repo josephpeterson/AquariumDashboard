@@ -3,6 +3,10 @@ import { MatDialog } from '@angular/material';
 import { FormControl } from '@angular/forms';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { SettingsComponentData } from './settings.component.data';
+import { ConfirmModalComponent } from '../modals/confirm-modal/confirm-modal.component';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'settings-page-component',
@@ -18,38 +22,61 @@ export class SettingsComponent implements OnInit {
   public aquarium$ = this.data.aquarium;
 
   public aquariumSize: number
+  public aquariumType: string
   public aquariumName: string
   public updating = this.data.updating;
 
-  constructor(public data: SettingsComponentData,public dialog: MatDialog) { }
+  public deleting = this.data.deleting;
+  public deleteError = this.data.deleteError;
+
+  public faSpinner = faSpinner;
+
+  private aquarium: Aquarium;
+
+  constructor(public data: SettingsComponentData, public dialog: MatDialog,private router: Router) { }
 
   ngOnInit() {
     this.aquarium$.subscribe(aq => {
+      if(!aq) return;
+      this.aquarium = aq;
       this.aquariumSize = aq.gallons;
       this.aquariumName = aq.name;
+      this.aquariumType = aq.type;
     });
+    this.data.deleted.subscribe(val => {
+      if(val)
+        this.data.reset();
+    })
   }
 
   saveChanges() {
-    this.aquarium$.subscribe(aquarium => {
-      var newAquarium:Aquarium = new Aquarium();
+    var newAquarium: Aquarium = new Aquarium();
 
-      newAquarium = {
-        ...newAquarium,
-        id: aquarium.id,
-        startDate: this.date.value,
-        gallons: this.aquariumSize,
-        name: this.aquariumName
-      };
-      this.data.save(newAquarium);
-    });
+    newAquarium = {
+      ...newAquarium,
+      id: this.aquarium.id,
+      startDate: this.date.value,
+      gallons: this.aquariumSize,
+      type: this.aquariumType,
+      name: this.aquariumName
+    };
+    this.data.save(newAquarium);
   }
 
   aquariumExport() {
 
   }
   aquariumDelete() {
+    var dialog = this.dialog.open(ConfirmModalComponent, {
+    });
+    dialog.componentInstance.title = "Delete Aquarium";
+    dialog.componentInstance.body = "Are you sure you would like to delete this aquarium?";
 
+    dialog.afterClosed().subscribe((confirm: boolean) => {
+      if (confirm) {
+        this.data.delete(this.aquarium);
+      }
+    });
   }
   snapshotManage() {
 

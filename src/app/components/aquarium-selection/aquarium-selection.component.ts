@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Aquarium } from 'src/app/models/Aquarium';
-import { ErrorMessageModalComponent } from '../error-message-modal/error-message-modal.component';
+import { ErrorMessageModalComponent } from '../modals/error-message-modal/error-message-modal.component';
 import { ConnectionError } from 'src/app/models/ConnectionError';
 import { AquariumSelectionComponentData } from './aquarium-selection.component.data';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { CreateAquariumModelComponent } from '../create-aquarium-modal/create-aquarium-modal.component';
+import { CreateAquariumModelComponent } from '../modals/create-aquarium-modal/create-aquarium-modal.component';
 
 @Component({
   selector: 'aquarium-selection-component',
@@ -13,27 +13,31 @@ import { CreateAquariumModelComponent } from '../create-aquarium-modal/create-aq
   styleUrls: ['./aquarium-selection.component.scss']
 })
 export class AquariumSelectionComponent implements OnInit {
-  constructor(public data: AquariumSelectionComponentData,public dialog: MatDialog,) {}
+  constructor(public data: AquariumSelectionComponentData, public dialog: MatDialog, ) { }
 
   public aquariums = this.data.aquariums;
   public loading = this.data.loading;
   public connectionError = this.data.connectionError;
 
+  @Input("autoload")
+  public autoload: boolean = true;
+
   //Font-Awesome Icons
   faCoffee = faPlus;
 
   ngOnInit() {
-    this.loadAquariums();
+    if(this.autoload)
+      this.loadAquariums();
     this.connectionError.subscribe(
       error => {
-      if(error)
-        this.displayErrorDialog(error);
-    });
+        if (error)
+          this.displayErrorDialog(error);
+      });
 
     //this.displayCreateAquariumDialog();
   }
   displayErrorDialog(error) {
-    var dialog = this.dialog.open(ErrorMessageModalComponent,{
+    var dialog = this.dialog.open(ErrorMessageModalComponent, {
     }).componentInstance;
     dialog.error = new ConnectionError(error);
   }
@@ -45,7 +49,7 @@ export class AquariumSelectionComponent implements OnInit {
   }
 
   displayCreateAquariumDialog() {
-    var dialog = this.dialog.open(CreateAquariumModelComponent,{
+    var dialog = this.dialog.open(CreateAquariumModelComponent, {
     });
 
     dialog.afterClosed().subscribe(() => {

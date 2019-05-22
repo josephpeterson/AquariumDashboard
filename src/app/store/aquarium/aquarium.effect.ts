@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { Effect, Actions, ofType } from '@ngrx/effects'
-import { AquariumActions, AquariumListAction, AquariumLoadSuccessAction, AquariumLoadFailAction, AquariumUpdateAction, AquariumUpdateSuccessAction, AquariumUpdateFailAction, AquariumCreateSuccessAction, AquariumCreateFailAction, AquariumCreateAction } from './aquarium.actions';
+import { AquariumActions, AquariumListAction, AquariumLoadSuccessAction, AquariumLoadFailAction, AquariumUpdateAction, AquariumUpdateSuccessAction, AquariumUpdateFailAction, AquariumCreateSuccessAction, AquariumCreateFailAction, AquariumCreateAction, AquariumDeleteAction, AquariumDeleteSuccessAction, AquariumDeleteFailAction } from './aquarium.actions';
 
 import { map, catchError, mergeMap } from 'rxjs/operators'
 import { AquariumService } from 'src/app/services/aquarium-service/aquarium.service';
@@ -54,6 +54,21 @@ export class AquariumEffects {
                         new AquariumCreateSuccessAction(newAquarium)
                 ),
                 catchError(err => of(new AquariumCreateFailAction(err)))
+            )
+        )
+    );
+    @Effect()
+    deleteAquarium$ = this.actions$.pipe(
+        ofType<AquariumDeleteAction>(
+            AquariumActions.Delete
+        ),
+        map((action: AquariumDeleteAction) => action.payload),
+        mergeMap((payload: Aquarium) =>
+            this.aquariumService.deleteAquarium(payload).pipe(
+                map(
+                    () => new AquariumDeleteSuccessAction(payload)
+                ),
+                catchError(err => of(new AquariumDeleteFailAction(err)))
             )
         )
     );

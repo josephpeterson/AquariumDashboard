@@ -1,38 +1,46 @@
 <ng-container *ngIf="aquarium$ | async as aquarium else loading">
     <div class="row m-2">
         <div class="card w-100">
-    
-            <div class="card-body" *ngIf="!(updating | async)">
+
+            <div class="card-body">
                 <div class="card-title">
                     <h3>Basic Information</h3>
                 </div>
                 <div>
                     <mat-form-field class="example-full-width m-3">
-                        <input matInput placeholder="Name" [value]="aquarium.name" [(ngModel)]="aquariumName">
+                        <input matInput placeholder="Name" [value]="aquarium.name" [(ngModel)]="aquariumName"
+                            [disabled]="(updating | async)">
                     </mat-form-field>
                     <mat-form-field class="m-3">
                         <input matInput [matDatepicker]="picker1" placeholder="Start Date" [formControl]="date"
-                            [value]="aquarium.startDate">
+                            [value]="aquarium.startDate" [disabled]="(updating | async)">
                         <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                         <mat-datepicker #picker1></mat-datepicker>
                     </mat-form-field>
                 </div>
-    
+
                 <div>
                     <mat-form-field class="example-full-width m-3">
-                        <input type="number" matInput placeholder="Size (Gallons)" [value]="aquarium.gallons" [(ngModel)]="aquariumSize">
+                        <input type="number" matInput placeholder="Size (Gallons)" [value]="aquarium.gallons"
+                            [(ngModel)]="aquariumSize" [disabled]="(updating | async)">
                     </mat-form-field>
+                    <mat-form-field class="example-full-width m-3">
+                        <input type="text" matInput placeholder="Tank Type" [value]="aquarium.type"
+                            [(ngModel)]="aquariumType" [disabled]="(updating | async)">
+                    </mat-form-field>
+
                 </div>
             </div>
             <div class="card-body">
-                <button class="m-2 btn btn-success" (click)="saveChanges()">Save Changes</button>
+                <button class="m-2 btn btn-success" (click)="saveChanges()" [disabled]="(updating | async)">Save
+                    Changes</button>
                 <mat-error *ngIf="error$ | async as error">{{error.message}}</mat-error>
             </div>
         </div>
     </div>
     <div class="row m-2">
         <div class="card w-100">
-    
+
             <div class="card-body" *ngIf="aquarium">
                 <div class="row">
                     <div class="col-sm">
@@ -40,7 +48,8 @@
                             <h3>Peripherals</h3>
                         </div>
                         <p class="card-text">
-                            These are the enabled peripherals/sensors that are currently enabled. Some may be unavailable
+                            These are the enabled peripherals/sensors that are currently enabled. Some may be
+                            unavailable
                             depending on hardware installed on your device.
                         </p>
                         <ul class="list-group">
@@ -56,18 +65,26 @@
                             <h3>Aquarium Operations</h3>
                         </div>
                         <p class="card-text">
-                            Perform operations on your aquarium here. You may remove your aquarium here. These actions may
+                            Perform operations on your aquarium here. You may remove your aquarium here. These actions
+                            may
                             be
                             irreversible.
                         </p>
                         <h6>Aquarium</h6>
                         <button class="m-2 btn btn-secondary" (click)="aquariumExport()">Export Aquarium</button>
-                        <button class="m-2 btn btn-danger" (click)="aquariumDelete()">Delete Aquarium</button>
+                        <button class="m-2 btn btn-danger" (click)="aquariumDelete()"
+                            [disabled]="deleting | async">Delete Aquarium</button>
+                        <ng-container *ngIf="deleting | async">
+                            <fa-icon class="mr-2" [icon]="faSpinner"></fa-icon>
+                        </ng-container>
+                        <ng-container *ngIf="deleteError | async as error">
+                            <mat-error>{{error.message}}</mat-error>
+                        </ng-container>
                         <h6>Snapshots</h6>
                         <button class="m-2 btn btn-primary" (click)="snapshotManage()">Manage..</button>
                         <button class="m-2 btn btn-danger" (click)="snapshotDeleteAll()">Delete All</button>
                     </div>
-    
+
                 </div>
             </div>
         </div>

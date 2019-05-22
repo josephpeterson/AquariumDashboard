@@ -45,14 +45,17 @@ import { ColorPickerModule } from 'ngx-color-picker';
 import { StoreModule } from '@ngrx/store';
 import { AquariumSelectionComponent } from './components/aquarium-selection/aquarium-selection.component';
 import { AppRoutingModule } from './app-routing.module';
-import { ErrorMessageModalComponent } from './components/error-message-modal/error-message-modal.component';
+import { ErrorMessageModalComponent } from './components/modals/error-message-modal/error-message-modal.component';
 import { aquariumReducer } from './store/aquarium/aquarium.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { AquariumEffects } from './store/aquarium/aquarium.effect';
 
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import { CreateAquariumModelComponent } from './components/create-aquarium-modal/create-aquarium-modal.component';
+import { CreateAquariumModelComponent } from './components/modals/create-aquarium-modal/create-aquarium-modal.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
+import { ConfirmModalComponent } from './components/modals/confirm-modal/confirm-modal.component';
+import { SnapshotEffects } from './store/snapshot/snapshot.effect';
+import { snapshotReducer } from './store/snapshot/snapshot.reducer';
 
 @NgModule({
   declarations: [
@@ -71,11 +74,13 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools'
     TaskTableComponent,
     ErrorMessageModalComponent,
     CreateAquariumModelComponent,
+    ConfirmModalComponent,
     //New components here
   ],
   entryComponents: [
     //Modal components here
     CreateAquariumModelComponent,
+    ConfirmModalComponent,
     ErrorMessageModalComponent
   ],
   
@@ -106,11 +111,13 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools'
     ReactiveFormsModule,
     ColorPickerModule,
     FontAwesomeModule,
-    StoreModule.forRoot({ aquariums: aquariumReducer}),
+    StoreModule.forRoot({}),
+    StoreModule.forFeature('aquariums', aquariumReducer),
+    StoreModule.forFeature('snapshots', snapshotReducer),
     StoreDevtoolsModule.instrument({
       maxAge: 25
     }),
-    EffectsModule.forRoot([AquariumEffects]),
+    EffectsModule.forRoot([AquariumEffects,SnapshotEffects]),
     AppRoutingModule
   ],
   providers: [
