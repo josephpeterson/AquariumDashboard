@@ -50,7 +50,11 @@ export class AquariumSelectionComponent implements OnInit {
 
   displayCreateAquariumDialog() {
     var dialog = this.dialog.open(CreateAquariumModelComponent, {
+      width: "40%"
     });
+
+    dialog.componentInstance.aquariumSize = 10;
+    dialog.componentInstance.aquariumType = "Normal";
 
     dialog.afterClosed().subscribe(() => {
       //this.data.load(); //Shouldn't have to do this if we just add to the store

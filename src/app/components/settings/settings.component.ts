@@ -6,6 +6,7 @@ import { SettingsComponentData } from './settings.component.data';
 import { ConfirmModalComponent } from '../modals/confirm-modal/confirm-modal.component';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
+import { CameraConfiguration } from 'src/app/models/CameraConfiguration';
 
 
 @Component({
@@ -26,12 +27,15 @@ export class SettingsComponent implements OnInit {
   public aquariumName: string
   public updating = this.data.updating;
 
+  public cameraConfig: CameraConfiguration = new CameraConfiguration();
+
   public deleting = this.data.deleting;
   public deleteError = this.data.deleteError;
 
   public faSpinner = faSpinner;
 
   private aquarium: Aquarium;
+  
 
   constructor(public data: SettingsComponentData, public dialog: MatDialog,private router: Router) { }
 
@@ -40,8 +44,8 @@ export class SettingsComponent implements OnInit {
       if(!aq) return;
       this.aquarium = aq;
       this.aquariumSize = aq.gallons;
-      this.aquariumName = aq.name;
-      this.aquariumType = aq.type;
+      this.aquariumName = aq.name.trim();
+      this.aquariumType = aq.type.trim();
     });
     this.data.deleted.subscribe(val => {
       if(val)
@@ -57,8 +61,8 @@ export class SettingsComponent implements OnInit {
       id: this.aquarium.id,
       startDate: this.date.value,
       gallons: this.aquariumSize,
-      type: this.aquariumType,
-      name: this.aquariumName
+      type: this.aquariumType.trim(),
+      name: this.aquariumName.trim()
     };
     this.data.save(newAquarium);
   }

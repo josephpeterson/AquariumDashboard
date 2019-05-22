@@ -13,6 +13,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatSliderModule} from '@angular/material/slider';
+
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
@@ -105,6 +107,7 @@ import { snapshotReducer } from './store/snapshot/snapshot.reducer';
     MatPaginatorModule,
     MatSelectModule,
     MatDialogModule,
+    MatSliderModule,
     MatButtonModule,
     MatDatepickerModule,
     MatNativeDateModule,
