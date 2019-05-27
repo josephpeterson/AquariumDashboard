@@ -24,6 +24,7 @@ export class SnapshotPreviewScrollerComponentData {
     public taken$ = this.store.select(getDidTake);
     public takeError$ = this.store.select(getTakeError);
 
+
     constructor(private store: Store<AppState>)
     {
         this.aquarium$.subscribe(aq => {
@@ -45,6 +46,6 @@ export class SnapshotPreviewScrollerComponentData {
     }
 
     getSrc(snapshot:Snapshot) {
-        return "http://65.29.174.115/photos/" + snapshot.aquariumId + "/" + snapshot.photoId + ".jpg";
+        return "http://65.29.174.115/v1/Snapshot/Photo/" + snapshot.id + "?" + snapshot.date;
     }
-}
+} 

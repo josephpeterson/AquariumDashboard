@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { Effect, Actions, ofType } from '@ngrx/effects'
-import { AquariumActions, AquariumListAction, AquariumLoadSuccessAction, AquariumLoadFailAction, AquariumUpdateAction, AquariumUpdateSuccessAction, AquariumUpdateFailAction, AquariumCreateSuccessAction, AquariumCreateFailAction, AquariumCreateAction, AquariumDeleteAction, AquariumDeleteSuccessAction, AquariumDeleteFailAction } from './aquarium.actions';
+import { AquariumActions, AquariumListAction, AquariumLoadSuccessAction, AquariumLoadFailAction, AquariumUpdateAction, AquariumUpdateSuccessAction, AquariumUpdateFailAction, AquariumCreateSuccessAction, AquariumCreateFailAction, AquariumCreateAction, AquariumDeleteAction, AquariumDeleteSuccessAction, AquariumDeleteFailAction, AquariumLoadByIdAction, AquariumSelectionAction } from './aquarium.actions';
 
 import { map, catchError, mergeMap } from 'rxjs/operators'
 import { AquariumService } from 'src/app/services/aquarium-service/aquarium.service';
@@ -20,6 +20,22 @@ export class AquariumEffects {
             map(aquariums => new AquariumLoadSuccessAction(aquariums)),
             catchError(error => of(new AquariumLoadFailAction(error)))
         )));
+    @Effect()
+    loadAquariumDetailed$ = this.actions$.pipe(
+        ofType<AquariumSelectionAction>(AquariumActions.MakeSelection),map((action) => action.aquariumId),
+        mergeMap((aquariumId: number) =>
+            this.aquariumService.getAquariumById(aquariumId).pipe(
+                map(
+                    //We can either return a new AquariumLoadAction, OR just update our store
+                    (detailedAquarium: Aquarium) =>
+                    {
+                        return new AquariumLoadSuccessAction([detailedAquarium])
+                    }
+                ),
+                catchError(err => of(new AquariumUpdateFailAction(err)))
+            )
+        )
+    );
     @Effect()
     updateAquarium$ = this.actions$.pipe(
         ofType<AquariumUpdateAction>(

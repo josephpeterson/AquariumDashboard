@@ -1,9 +1,11 @@
 import { select, Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
-import { AquariumListAction, AquariumSelectionAction, AquariumUpdateAction, AquariumDeleteAction, AquariumResetAction } from 'src/app/store/aquarium/aquarium.actions';
+import { AquariumListAction, AquariumSelectionAction, AquariumUpdateAction, AquariumDeleteAction, AquariumResetAction, AquariumLoadByIdAction } from 'src/app/store/aquarium/aquarium.actions';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { Injectable } from '@angular/core';
 import { isLoadingAquariums, getConnectionError, getSelectedAquarium, isUpdatingAquarium, isDeletingAquarium, getDeleteError, getDidDelete } from 'src/app/store/aquarium/aquarium.selector';
+import { AquariumService } from 'src/app/services/aquarium-service/aquarium.service';
+import { CameraConfiguration } from 'src/app/models/CameraConfiguration';
 @Injectable({
   providedIn: "root"
 })
@@ -16,7 +18,21 @@ export class SettingsComponentData {
   public deleted = this.store.select(getDidDelete);
   public deleteError = this.store.select(getDeleteError);
 
-  constructor(private store: Store<AppState>) { }
+  public applicationLog = this.service.getApplicationLog();
+
+  public cameraConfiguration = this.service.getCameraConfiguration();
+
+  constructor(private store: Store<AppState>,private service: AquariumService){
+    //Everytime our selected aquarium changes, load a detailed info about it
+    this.aquarium.subscribe(aq => {
+      if(aq && !this.isDetailed(aq))
+        this.store.dispatch(new AquariumLoadByIdAction(aq.id));
+    })
+  }
+
+  isDetailed(aq) {
+    return aq.cameraConfiguration != undefined;
+  }
 
   save(aquarium: Aquarium) {
     this.store.dispatch(new AquariumUpdateAction(aquarium));
@@ -26,5 +42,9 @@ export class SettingsComponentData {
   }
   reset() {
     this.store.dispatch(new AquariumResetAction());
+  }
+
+  applyCameraConfiguration(configuration:CameraConfiguration) {
+    return this.service.applyCameraConfiguration(configuration).subscribe();
   }
 }

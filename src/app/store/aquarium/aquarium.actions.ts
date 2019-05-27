@@ -9,6 +9,7 @@ export enum AquariumActions {
   UpdateFail = '[Aquariums] Tank failed to update',
 
   Load = '[Aquariums] Load',
+  LoadById = '[Aquariums] Load by id',
   LoadSuccess = '[Aquariums] Load Success',
   LoadFail = '[Aquariums] Load Failure',
 
@@ -30,6 +31,10 @@ export enum AquariumActions {
 
 export class AquariumListAction implements Action {
   readonly type = AquariumActions.Load
+}
+export class AquariumLoadByIdAction implements Action {
+  readonly type = AquariumActions.LoadById
+  constructor(public payload: number) {}
 }
 export class AquariumLoadSuccessAction implements Action {
   readonly type = AquariumActions.LoadSuccess
@@ -124,6 +129,7 @@ export type AllAquariumActions =
 
   AquariumSelectionAction |
   AquariumListAction |
+  AquariumLoadByIdAction |
 
   AquariumLoadSuccessAction |
   AquariumLoadFailAction;

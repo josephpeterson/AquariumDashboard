@@ -36,7 +36,7 @@ export class AquariumPreviewScrollerComponent implements OnInit {
 
   ngOnInit() {
     this.data$.subscribe(data => {
-      var photos = data.filter(snapshot => (snapshot.photoId != null));
+      var photos = data.filter(snapshot => (snapshot.photoPath != null));
       this.photoSnapshots = photos.sort((a, b) => b.id - a.id);
     });
     this.taken$.subscribe(val => {

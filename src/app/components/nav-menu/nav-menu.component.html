@@ -9,7 +9,7 @@
               <mat-form-field>
                 <mat-select [(ngModel)]="aquarium.id" (selectionChange)="selectAquarium($event.value)">
                   <mat-option *ngFor="let aq of aquariums$ | async" [value]="aq.id">
-                    <a class="navbar-brand" [routerLink]='["/" + aq.id]'>{{aq.name}}</a>
+                    {{aq.name}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>

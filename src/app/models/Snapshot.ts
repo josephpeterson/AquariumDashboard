@@ -11,5 +11,5 @@ export class Snapshot
   nitrate: number
   ph: number
   temperature: number
-  photoId: number
+  photoPath: number
 }

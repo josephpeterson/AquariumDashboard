@@ -34,8 +34,8 @@ export class NavMenuComponent {
     });
   }
 
-  selectAquarium(event) {
-    console.log(event);
+  selectAquarium(val) {
+    console.log(val);
   }
   toggle() {
     this.isExpanded = !this.isExpanded;

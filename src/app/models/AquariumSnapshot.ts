@@ -21,5 +21,5 @@ export class AquariumSnapshot
   nitrate: number
   ph: number
   temperature: number
-  photoId: number
+  photoPath: number
 }

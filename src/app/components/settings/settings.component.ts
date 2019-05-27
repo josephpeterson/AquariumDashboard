@@ -6,7 +6,8 @@ import { SettingsComponentData } from './settings.component.data';
 import { ConfirmModalComponent } from '../modals/confirm-modal/confirm-modal.component';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
-import { CameraConfiguration } from 'src/app/models/CameraConfiguration';
+import { CameraConfiguration, CameraExposureModes } from 'src/app/models/CameraConfiguration';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -35,6 +36,11 @@ export class SettingsComponent implements OnInit {
   public faSpinner = faSpinner;
 
   private aquarium: Aquarium;
+
+  public applicationLog$: Observable<string> = this.data.applicationLog;
+
+  public exposureModes = CameraExposureModes;
+
   
 
   constructor(public data: SettingsComponentData, public dialog: MatDialog,private router: Router) { }
@@ -46,6 +52,9 @@ export class SettingsComponent implements OnInit {
       this.aquariumSize = aq.gallons;
       this.aquariumName = aq.name.trim();
       this.aquariumType = aq.type.trim();
+      if(aq.cameraConfiguration)
+        this.cameraConfig = aq.cameraConfiguration;
+
     });
     this.data.deleted.subscribe(val => {
       if(val)
@@ -62,11 +71,14 @@ export class SettingsComponent implements OnInit {
       startDate: this.date.value,
       gallons: this.aquariumSize,
       type: this.aquariumType.trim(),
-      name: this.aquariumName.trim()
+      name: this.aquariumName.trim(),
+      cameraConfiguration: this.cameraConfig
     };
     this.data.save(newAquarium);
   }
-
+  resetDefault() {
+    this.cameraConfig = new CameraConfiguration();
+  }
   aquariumExport() {
 
   }

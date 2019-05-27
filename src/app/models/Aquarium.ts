@@ -1,3 +1,5 @@
+import { CameraConfiguration } from './CameraConfiguration';
+
 export class Aquarium
 {
   id: number //= Math.floor(Math.random() * 100);
@@ -5,4 +7,5 @@ export class Aquarium
   gallons: number
   type: string
   startDate: Date
+  cameraConfiguration: CameraConfiguration
 }

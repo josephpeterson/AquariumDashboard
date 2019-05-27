@@ -5,8 +5,9 @@ import { environment } from "../../../environments/environment";
 import { LightingConfiguration } from 'src/app/models/LightingConfiguration';
 import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
 import { Aquarium } from 'src/app/models/Aquarium';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { Snapshot } from 'src/app/models/Snapshot';
+import { CameraConfiguration } from 'src/app/models/CameraConfiguration';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -39,25 +40,15 @@ export class AquariumService {
       });
   }
 
-  public getSnapshots(aqId: number):Observable<Snapshot[]> {
+  public getSnapshots(aqId: number): Observable<Snapshot[]> {
 
     return this.http.get<Snapshot[]>(this._url + "/v1/Snapshot/" + aqId + "/All");
   }
   public deleteSnapshot(snapshot: Snapshot) {
-    return this.http.post<Snapshot>(this._url + "/v1/Snapshot/Delete",snapshot.id);
+    return this.http.post<Snapshot>(this._url + "/v1/Snapshot/Delete", snapshot.id);
   }
   public takeSnapshot(aqId: number) {
     return this.http.get<Snapshot>(this._url + "/v1/Snapshot/" + aqId + "/Take/true");
-  }
-  public GetPhotoSource(snapshot: AquariumSnapshot) {
-    if(snapshot.photoId != null)
-    {
-      //REMOVE
-
-      //return this._url + "/photos/" + snapshot.aquariumId + "/" + snapshot.photoId + ".jpg";
-      return "http://65.29.174.115/photos/" + snapshot.aquariumId + "/" + snapshot.photoId + ".jpg";
-    }
-    return null;
   }
 
   public getAquariums(): Observable<Aquarium[]> {
@@ -68,13 +59,22 @@ export class AquariumService {
     return this.http.get<Aquarium>(this._url + "/v1/Aquarium/" + aquariumId);
   }
 
-  public updateAquarium(aquarium: Aquarium) {
-    return this.http.post<Aquarium>(this._url + "/v1/Aquarium/Update",aquarium);
+  public updateAquarium(aquarium: Aquarium): Observable<Aquarium> {
+    return this.http.post<Aquarium>(this._url + "/v1/Aquarium/Update", aquarium);
   }
-  public createAquarium(aquarium: Aquarium) {
-    return this.http.post<Aquarium>(this._url + "/v1/Aquarium/Add",aquarium);
+  public createAquarium(aquarium: Aquarium): Observable<Aquarium> {
+    return this.http.post<Aquarium>(this._url + "/v1/Aquarium/Add", aquarium);
   }
-  public deleteAquarium(aquarium: Aquarium) {
-    return this.http.post<Aquarium>(this._url + "/v1/Aquarium/Delete",aquarium.id);
+  public deleteAquarium(aquarium: Aquarium): Observable<Aquarium> {
+    return this.http.post<Aquarium>(this._url + "/v1/Aquarium/Delete", aquarium.id);
+  }
+  public getApplicationLog(): Observable<string> {
+    return this.http.get(this._url + "/v1/Settings/Log", { responseType: "text" });
+  }
+  public getCameraConfiguration(): Observable<CameraConfiguration> {
+    return this.http.get<CameraConfiguration>(this._url + "/v1/Settings/CameraConfiguration");
+  }
+  public applyCameraConfiguration(configuration: CameraConfiguration) {
+    return this.http.post(this._url + "/v1/Settings/ApplyCameraConfiguration", configuration);
   }
 }

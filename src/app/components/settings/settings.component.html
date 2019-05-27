@@ -39,38 +39,48 @@
                     <div class="col-lg-2">
                         <label>Sharpness</label>
                         <div class="row">
-                            <mat-slider min="-100" max="100" step="1" [value]="cameraConfig.sharpness"
-                                [disabled]="(updating | async)" thumbLabel></mat-slider>
+                            <mat-slider min="-100" max="100" step="1" [disabled]="(updating | async)" thumbLabel [(ngModel)]="cameraConfig.sharpness">
+                            </mat-slider>
                         </div>
                         <label>Contrast</label>
                         <div class="row">
-                            <mat-slider min="-100" max="100" step="1" [value]="cameraConfig.contrast"
-                                [disabled]="(updating | async)" thumbLabel></mat-slider>
+                            <mat-slider min="-100" max="100" step="1" [disabled]="(updating | async)" thumbLabel [(ngModel)]="cameraConfig.contrast">
+                            </mat-slider>
                         </div>
                         <label>Brightness</label>
                         <div class="row">
-                            <mat-slider min="-100" max="100" step="1" [value]="cameraConfig.brightness"
-                                [disabled]="(updating | async)" thumbLabel></mat-slider>
+                            <mat-slider min="-100" max="100" step="1" [disabled]="(updating | async)" thumbLabel [(ngModel)]="cameraConfig.brightness">
+                            </mat-slider>
                         </div>
                         <label>Saturation</label>
                         <div class="row">
-                            <mat-slider min="-100" max="100" step="1" [value]="cameraConfig.saturation"
-                                [disabled]="(updating | async)" thumbLabel></mat-slider>
+                            <mat-slider min="-100" max="100" step="1" [disabled]="(updating | async)" thumbLabel [(ngModel)]="cameraConfig.saturation">
+                            </mat-slider>
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="row">
 
                             <mat-form-field class="example-full-width m-3">
-                                <input matInput placeholder="ISO" [value]="cameraConfig.iso"
-                                    [(ngModel)]="cameraConfig.iso" [disabled]="(updating | async)">
+                                <input matInput placeholder="ISO" [(ngModel)]="cameraConfig.iso"
+                                    [disabled]="(updating | async)">
                             </mat-form-field>
                         </div>
                         <div class="row">
 
                             <mat-form-field class="example-full-width m-3">
-                                <input matInput placeholder="Rotation" [value]="cameraConfig.rotation"
-                                    [(ngModel)]="cameraConfig.rotation" [disabled]="(updating | async)">
+                                <input matInput placeholder="Rotation" [(ngModel)]="cameraConfig.rotation"
+                                    [disabled]="(updating | async)">
+                            </mat-form-field>
+                        </div>
+                        <div class="row">
+                            <mat-form-field>
+                                <mat-label>Exposure</mat-label>
+                                <mat-select [(value)]="cameraConfig.exposureMode">
+                                    <mat-option *ngFor="let mode of exposureModes" [value]="mode.value">
+                                        {{mode.viewValue}}
+                                    </mat-option>
+                                </mat-select>
                             </mat-form-field>
                         </div>
                     </div>
@@ -80,39 +90,46 @@
                             </mat-checkbox>
                         </div>
                         <div class="row">
-                            <mat-checkbox class="example-margin" [(ngModel)]="cameraConfig.vFlip">Vertical Flip
+                            <mat-checkbox class="example-margin" [(ngModel)]="cameraConfig.vFlip">Vertical
+                                Flip
                             </mat-checkbox>
                         </div>
                         <div class="row">
                             <mat-form-field class="example-full-width mt-3 mb-3">
-                                <input matInput placeholder="Width" [value]="cameraConfig.width"
-                                    [(ngModel)]="cameraConfig.width" [disabled]="(updating | async)">
+                                <input matInput placeholder="Width" [(ngModel)]="cameraConfig.width"
+                                    [disabled]="(updating | async)">
                             </mat-form-field>
                         </div>
                         <div class="row">
                             <mat-form-field class="example-full-width mt-3 mb-3">
-                                <input matInput placeholder="Height" [value]="cameraConfig.height"
-                                    [(ngModel)]="cameraConfig.height" [disabled]="(updating | async)">
+                                <input matInput placeholder="Height" [(ngModel)]="cameraConfig.height"
+                                    [disabled]="(updating | async)">
                             </mat-form-field>
                         </div>
                     </div>
                     <div class="col-md-auto">
                         <div class="row">
                             <mat-form-field class="example-full-width">
-                                <input matInput placeholder="X" [value]="cameraConfig.roi.x"
-                                    [(ngModel)]="cameraConfig.roi.x" [disabled]="(updating | async)">
+                                <input matInput placeholder="X" [(ngModel)]="cameraConfig.roiX"
+                                    [(ngModel)]="cameraConfig.roiX" [disabled]="(updating | async)">
                             </mat-form-field>
                         </div>
                         <div class="row">
                             <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Y" [value]="cameraConfig.roi.x"
-                                    [(ngModel)]="cameraConfig.roi.y" [disabled]="(updating | async)">
+                                <input matInput placeholder="Y" [(ngModel)]="cameraConfig.roiY"
+                                    [(ngModel)]="cameraConfig.roiY" [disabled]="(updating | async)">
                             </mat-form-field>
                         </div>
                         <div class="row">
                             <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Z" [value]="cameraConfig.roi.x"
-                                    [(ngModel)]="cameraConfig.roi.z" [disabled]="(updating | async)">
+                                <input matInput placeholder="Width" [(ngModel)]="cameraConfig.roiW"
+                                    [(ngModel)]="cameraConfig.roiW" [disabled]="(updating | async)">
+                            </mat-form-field>
+                        </div>
+                        <div class="row">
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Height" [(ngModel)]="cameraConfig.roiH"
+                                    [(ngModel)]="cameraConfig.roiH" [disabled]="(updating | async)">
                             </mat-form-field>
                         </div>
                     </div>
@@ -121,6 +138,8 @@
             <div class="card-body">
                 <button class="m-2 btn btn-success" (click)="saveChanges()" [disabled]="(updating | async)">Save
                     Changes</button>
+                    <button class="m-2 btn btn-primary" (click)="resetDefault()" [disabled]="(updating | async)">
+                        Reset Settings</button>
                 <mat-error *ngIf="error$ | async as error">{{error.message}}</mat-error>
             </div>
         </div>
@@ -176,7 +195,18 @@
             </div>
         </div>
     </div>
-
+    <div class="row m-2">
+        <div class="card w-100">
+            <div class="card-body">
+                <div class="card-title">
+                    <h3>Application Log</h3>
+                </div>
+                <label for="exampleFormControlTextarea1">Aquarium Service</label>
+                <textarea disabled class="form-control rounded-0" id="exampleFormControlTextarea1"
+                    rows="10">{{applicationLog$ | async}}</textarea>
+            </div>
+        </div>
+    </div>
 </ng-container>
 <ng-template #loading>
     <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
