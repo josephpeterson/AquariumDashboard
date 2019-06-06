@@ -58,6 +58,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 import { ConfirmModalComponent } from './components/modals/confirm-modal/confirm-modal.component';
 import { SnapshotEffects } from './store/snapshot/snapshot.effect';
 import { snapshotReducer } from './store/snapshot/snapshot.reducer';
+import { SnapshotListComponent } from './components/maintenance/snapshot-list/snapshot-list.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import { snapshotReducer } from './store/snapshot/snapshot.reducer';
     ErrorMessageModalComponent,
     CreateAquariumModelComponent,
     ConfirmModalComponent,
+    SnapshotListComponent
     //New components here
   ],
   entryComponents: [

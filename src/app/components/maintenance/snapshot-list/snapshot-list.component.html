@@ -1,0 +1,31 @@
+<ng-container *ngIf="!(loading | async) else loading">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="data$ | async as data">
+
+        <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="position">
+            <th mat-header-cell *matHeaderCellDef>Task No.</th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Type</th>
+            <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="symbol">
+            <th mat-header-cell *matHeaderCellDef> Est. Due Date </th>
+            <td mat-cell *matCellDef="let element"> {{element.dueDate.toDateString()}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</ng-container>
+<ng-template #loading>
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+</ng-template>

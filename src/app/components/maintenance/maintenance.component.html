@@ -1,5 +1,15 @@
-<mat-tab-group>
-    <mat-tab label="Tasks"><task-table></task-table></mat-tab>
-    <mat-tab label="Water"> Content 2 </mat-tab>
-    <mat-tab label="Parameters"> Content 3 </mat-tab>
-  </mat-tab-group>
+<mat-tab-group #navbar [selectedIndex]='getSelectedTab()' (selectedTabChange)="clickTab(event$)">
+  <mat-tab [label]="link.label" *ngFor="let link of links"></mat-tab>
+</mat-tab-group>
+<ng-container *ngIf="activeTab == 'tasks' || !activeTab">
+  <task-table></task-table>
+</ng-container>
+<ng-container *ngIf="activeTab == 'feeding'">
+
+</ng-container>
+<ng-container *ngIf="activeTab == 'parameters'">
+
+</ng-container>
+<ng-container *ngIf="activeTab == 'notifications'">
+
+</ng-container>
