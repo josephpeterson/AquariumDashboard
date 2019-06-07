@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { AquariumListAction, AquariumSelectionAction } from 'src/app/store/aquarium/aquarium.actions';
@@ -22,7 +22,8 @@ export class NavMenuComponent {
 
 
   constructor(public data: NavMenuComponentData,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   collapse() {
     this.isExpanded = false;
@@ -35,7 +36,7 @@ export class NavMenuComponent {
   }
 
   selectAquarium(val) {
-    console.log(val);
+    this.router.navigate([val]);
   }
   toggle() {
     this.isExpanded = !this.isExpanded;

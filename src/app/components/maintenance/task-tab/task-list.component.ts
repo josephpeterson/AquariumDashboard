@@ -8,11 +8,11 @@ import { SnapshotResetAction, SnapshotLoadByAquariumAction, SnapshotDeleteAction
 import { Snapshot } from 'src/app/models/Snapshot';
 
 @Component({
-    selector: 'task-list',
+    selector: 'task-tab',
     templateUrl: './task-list.component.html',
     styleUrls: ['./task-list.component.scss']
   })
-export class TaskListComponent {
+export class TaskTabComponent {
     public aquarium: Aquarium;
 
     public aquarium$ = this.store.pipe(select(getSelectedAquarium));

@@ -1,6 +1,6 @@
 <ng-container *ngIf="!(loading$ | async) else loading">
-  <ng-container *ngIf="aquarium$ | async as aquarium; else selectAquarium">
-    <ng-container *ngIf="hasValidAquarium | async else selectAquarium">
+  <ng-container *ngIf="aquarium$ | async as aquarium; else selectAquariumPage">
+    <ng-container *ngIf="hasValidAquarium | async else selectAquariumPage">
       <header>
         <nav class='navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3'>
           <div class="container">
@@ -51,7 +51,7 @@
       </div>
     </ng-container>
   </ng-container>
-  <ng-template #selectAquarium>
+  <ng-template #selectAquariumPage>
     <aquarium-selection-component [autoload]="false"></aquarium-selection-component>
   </ng-template>
 </ng-container>

@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 
 //Material Imports
 import { MatTableModule } from '@angular/material/table';
-import { MatCheckboxModule, MatInputModule, MatSelectModule, MatCard, MatDialogModule, MatButton, MatButtonModule, MatNativeDateModule } from '@angular/material';
+import { MatCheckboxModule, MatInputModule, MatSelectModule, MatCard, MatDialogModule, MatButton, MatButtonModule, MatNativeDateModule, MatSelectTrigger, MatAutocompleteModule } from '@angular/material';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSortModule } from '@angular/material/sort';
 import { MatMenuModule } from '@angular/material/menu';
@@ -61,6 +61,10 @@ import { snapshotReducer } from './store/snapshot/snapshot.reducer';
 import { NotifierModule } from 'angular-notifier';
 import {AquariumNotifierConfig} from './config/notifier';
 import { SnapshotListComponent } from './components/maintenance/snapshot-list/snapshot-list.component';
+import { FeedingListComponent } from './components/maintenance/feeding-list/feeding-list.component';
+import { NotificationsListComponent } from './components/maintenance/notifications-list/notifications-list.component';
+import { FeedTableComponent } from './components/maintenance/feed-table/feed-table.component';
+import { TaskTabComponent } from './components/maintenance/task-tab/task-list.component';
 
 @NgModule({
   declarations: [
@@ -75,12 +79,15 @@ import { SnapshotListComponent } from './components/maintenance/snapshot-list/sn
     MaintenanceComponent,
     SnapshotListComponent,
     TaskListComponent,
+    TaskTabComponent,
+    FeedingListComponent,
+    NotificationsListComponent,
+    FeedTableComponent,
 
     SettingsComponent,
     AquariumSelectionComponent,
     AquariumPreviewComponent,
     AquariumPreviewScrollerComponent,
-    TaskListComponent,
     OperationsComponent,
     TaskTableComponent,
     ErrorMessageModalComponent,
@@ -119,6 +126,7 @@ import { SnapshotListComponent } from './components/maintenance/snapshot-list/sn
     MatSliderModule,
     MatButtonModule,
     MatDatepickerModule,
+    MatAutocompleteModule,
     MatNativeDateModule,
     ReactiveFormsModule,
     ColorPickerModule,

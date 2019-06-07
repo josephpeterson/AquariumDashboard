@@ -7,6 +7,7 @@ import { SnapshotPreviewScrollerComponentData } from './aquarium-preview-scrolle
 import { Snapshot } from 'src/app/models/Snapshot';
 import { Observable } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
   selector: 'aquarium-preview-scroller',
@@ -29,9 +30,13 @@ export class AquariumPreviewScrollerComponent implements OnInit {
   public taking$: Observable<boolean> = this.dataSource.taking$;
   public takeError$: Observable<HttpErrorResponse> = this.dataSource.takeError$;
 
+  public startTime:number = 0;
+  public snapshotTimeLength:number;
+
 
   constructor(public dataSource: SnapshotPreviewScrollerComponentData,
     public dialog: MatDialog,
+    private notifier: NotifierService
   ) { }
 
   ngOnInit() {
@@ -43,6 +48,20 @@ export class AquariumPreviewScrollerComponent implements OnInit {
       if (!val) return;
       this.setSelectedId(0);
       this.dataSource.reset();
+      this.notifier.notify("success","Snapshot taken successfully (" + this.snapshotTimeLength + "ms)");
+    })
+    this.takeError$.subscribe(error => {
+      if(error) this.notifier.notify("error",error.message);
+    })
+    this.takeError$.subscribe(error => {
+    })
+
+    //Elasped time
+    this.taking$.subscribe(val => {
+      if(val)
+        this.startTime = Date.now();
+      else
+        this.snapshotTimeLength = Date.now()-this.startTime;
     })
   }
 

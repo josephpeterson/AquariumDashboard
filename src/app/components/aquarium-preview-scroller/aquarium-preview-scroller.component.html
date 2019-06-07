@@ -33,7 +33,6 @@
                 <div class="row">
                     <button class="m-2 btn btn-primary" (click)="takeSnapshot()" [disabled]="taking$ | async">Take
                         Snapshot</button>
-                    <mat-error *ngIf="takeError$ | async as error">{{error.message}}</mat-error>
                     <ng-container *ngIf="photoSnapshots[selectedId] as current">
                         <button class="m-2 btn btn-danger" (click)="deleteSnapshot(current)"
                             [disabled]="deleting$ | async">Delete
