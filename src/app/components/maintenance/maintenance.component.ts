@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MatTabGroup } from '@angular/material';
-import { ActivatedRoute, Router } from '@angular/router'
+import { MatDialog, MatTabGroup, MatTabChangeEvent } from '@angular/material';
 import { AquariumService } from 'src/app/services/aquarium-service/aquarium.service';
 import { Store, select } from '@ngrx/store';
 import { getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
 import { AppState } from 'src/app/app.state';
 import { Aquarium } from 'src/app/models/Aquarium';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'maintenance-page-component',
@@ -14,51 +14,47 @@ import { Aquarium } from 'src/app/models/Aquarium';
 })
 export class MaintenanceComponent implements OnInit {
 
-  public activeTab: string;
-  links = [{
+  public tabs = [{
     label: "Tasks",
-    route: "tasks"
+    tabId: "tasks"
   }, {
     label: "Feeding",
-    route: "feeding"
+    tabId: "feeding"
   },
   {
     label: "Parameters",
-    route: "parameters"
+    tabId: "parameters"
   },
   {
     label: "Notifications",
-    route: "notifications"
+    tabId: "notifications"
   }
   ];
+  public aquarium$ = this.store.pipe(select(getSelectedAquarium));
 
   public aquarium:Aquarium;
 
-  @ViewChild("navbar") tabber: MatTabGroup
+  @ViewChild("tabber") tabber: MatTabGroup
 
   constructor(private store: Store<AppState>,
     public dialog: MatDialog,
-    public activatedRoute: ActivatedRoute,
-    public router: Router
+    private route: ActivatedRoute,
+    private router: Router
   ) {
-    activatedRoute.params.subscribe(p => this.activeTab = p.tab)
   }
-
-  public aquarium$ = this.store.pipe(select(getSelectedAquarium));
 
   ngOnInit() {
     this.aquarium$.subscribe(aquarium => {
       this.aquarium = aquarium;
     });
+    this.route.params.subscribe(p => this.setSelectedTab(p.tabId))
   }
-  clickTab(event) {
-    var linkId = this.tabber.selectedIndex;
-    var link = this.links[linkId];
-    this.router.navigate([this.aquarium.id,'maintenance',link.route]);
+  public setSelectedTab(tabId:string) {    
+    var idx = this.tabs.map(t => t.tabId).indexOf(tabId);
+    this.tabber.selectedIndex = idx;
   }
-  getSelectedTab() {
-    for(var i=0;i<this.links.length;i++) 
-      if(this.links[i].route == this.activeTab) return i;
-    return 0;
+  updateTabRoute() {
+    var tab = this.tabs[this.tabber.selectedIndex];
+    this.router.navigate([this.aquarium.id,'maintenance',tab.tabId]);
   }
 }

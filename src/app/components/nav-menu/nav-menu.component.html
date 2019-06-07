@@ -26,18 +26,18 @@
                       [routerLinkActiveOptions]='{ exact: true }' [routerLinkActive]='["link-active"]'>Overview</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link text-dark" [routerLink]='["maintenance","tasks"]'
-                      [routerLinkActive]='["link-active"]'>Maintenance</a>
+                    <a class="nav-link text-dark" [routerLink]='["/" + aquarium.id + "/maintenance"]'
+                      [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]="{exact: false}">Maintenance</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link text-dark" [routerLink]='["fish"]' [routerLinkActive]='["link-active"]'>Fish</a>
+                    <a class="nav-link text-dark" [routerLink]='["/" + aquarium.id + "/fish"]' [routerLinkActive]='["link-active"]'>Fish</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link text-dark" [routerLink]='["lighting"]'
+                    <a class="nav-link text-dark" [routerLink]='["/" + aquarium.id + "/lighting"]'
                       [routerLinkActive]='["link-active"]'>Lighting</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link text-dark" [routerLink]='["settings"]'
+                    <a class="nav-link text-dark" [routerLink]='["/" + aquarium.id + "/settings"]'
                       [routerLinkActive]='["link-active"]'>Settings</a>
                   </li>
                 </ul>

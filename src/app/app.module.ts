@@ -7,20 +7,20 @@ import { RouterModule } from '@angular/router';
 //Material Imports
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule, MatInputModule, MatSelectModule, MatCard, MatDialogModule, MatButton, MatButtonModule, MatNativeDateModule } from '@angular/material';
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatSortModule } from '@angular/material/sort';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {MatSliderModule} from '@angular/material/slider';
+import { MatSliderModule } from '@angular/material/slider';
 
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatCardModule} from '@angular/material';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatCardModule } from '@angular/material';
 
-import {MatListModule} from '@angular/material/list';
+import { MatListModule } from '@angular/material/list';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
@@ -52,12 +52,14 @@ import { aquariumReducer } from './store/aquarium/aquarium.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { AquariumEffects } from './store/aquarium/aquarium.effect';
 
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { CreateAquariumModelComponent } from './components/modals/create-aquarium-modal/create-aquarium-modal.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 import { ConfirmModalComponent } from './components/modals/confirm-modal/confirm-modal.component';
 import { SnapshotEffects } from './store/snapshot/snapshot.effect';
 import { snapshotReducer } from './store/snapshot/snapshot.reducer';
+import { NotifierModule } from 'angular-notifier';
+import {AquariumNotifierConfig} from './config/notifier';
 import { SnapshotListComponent } from './components/maintenance/snapshot-list/snapshot-list.component';
 
 @NgModule({
@@ -65,9 +67,15 @@ import { SnapshotListComponent } from './components/maintenance/snapshot-list/sn
     AppComponent,
     NavMenuComponent,
     DashboardComponent,
+
     FishComponent,
+
     LightingComponent,
+
     MaintenanceComponent,
+    SnapshotListComponent,
+    TaskListComponent,
+
     SettingsComponent,
     AquariumSelectionComponent,
     AquariumPreviewComponent,
@@ -78,7 +86,6 @@ import { SnapshotListComponent } from './components/maintenance/snapshot-list/sn
     ErrorMessageModalComponent,
     CreateAquariumModelComponent,
     ConfirmModalComponent,
-    SnapshotListComponent
     //New components here
   ],
   entryComponents: [
@@ -87,7 +94,7 @@ import { SnapshotListComponent } from './components/maintenance/snapshot-list/sn
     ConfirmModalComponent,
     ErrorMessageModalComponent
   ],
-  
+
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
@@ -122,7 +129,8 @@ import { SnapshotListComponent } from './components/maintenance/snapshot-list/sn
     StoreDevtoolsModule.instrument({
       maxAge: 25
     }),
-    EffectsModule.forRoot([AquariumEffects,SnapshotEffects]),
+    NotifierModule.withConfig(AquariumNotifierConfig),
+    EffectsModule.forRoot([AquariumEffects, SnapshotEffects]),
     AppRoutingModule
   ],
   providers: [

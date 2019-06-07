@@ -17,10 +17,6 @@ const routes: Routes = [
         component: DashboardComponent
       },
       {
-        path: 'maintenance/:tab',
-        component: MaintenanceComponent
-      },
-      {
         path: 'fish',
         component: FishComponent
       },
@@ -33,14 +29,24 @@ const routes: Routes = [
         component: SettingsComponent
       },
       {
+        path: 'maintenance/:tabId',
+        component: MaintenanceComponent
+      },
+      {
+        path: 'maintenance',
+        component: MaintenanceComponent
+      },
+      {
         path: '',
         component: DashboardComponent
       }
     ]
   },
+  /*
   { path: ':aqId/fish', component: FishComponent, pathMatch: 'full' },
   { path: ':aqId/lighting', component: LightingComponent, pathMatch: 'full' },
   { path: ':aqId/settings', component: SettingsComponent, pathMatch: 'full' },
+  */
 ];
 @NgModule({
   exports: [RouterModule],

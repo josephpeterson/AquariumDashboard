@@ -8,6 +8,7 @@ import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { CameraConfiguration, CameraExposureModes } from 'src/app/models/CameraConfiguration';
 import { Observable } from 'rxjs';
+import { NotifierService } from 'angular-notifier';
 
 
 @Component({

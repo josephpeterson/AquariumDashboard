@@ -1,4 +1,4 @@
-<ng-container *ngIf="!(loading | async) else loading">
+<ng-container *ngIf="!(loading$ | async) else loading">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="data$ | async as data">
 
         <!--- Note that these columns can be defined in any order.

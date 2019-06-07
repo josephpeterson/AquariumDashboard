@@ -28,6 +28,7 @@ export const isCreatingAquarium = createSelector(AquariumsState, (state: Aquariu
 
 /* Update */
 export const isUpdatingAquarium = createSelector(AquariumsState, (state: AquariumReducer.AquariumsState) => state.updating);
+export const getDidUpdate = createSelector(AquariumsState, (state: AquariumReducer.AquariumsState) => state.updated);
 
 
 /* Delete */
