@@ -28,7 +28,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppComponent } from './components/app-root/app.component';
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 import { DashboardComponent } from './components/containers/dashboard/dashboard.component';
-import { AquariumPreviewComponent } from './components/containers/dashboard/aquarium-preview/aquarium-preview.component';
 
 
 //Misc.
@@ -93,7 +92,6 @@ import { SnapshotDeleteButtonComponent } from './components/snapshot-delete-butt
 
     SettingsComponent,
     AquariumSelectionComponent,
-    AquariumPreviewComponent,
     OperationsComponent,
     TaskTableComponent,
     ErrorMessageModalComponent,

@@ -39,6 +39,7 @@
     "angular-material": "^1.1.19",
     "angular-notifier": "^4.1.1",
     "bootstrap": "^4.3.1",
+    "chart.js": "^2.8.0",
     "core-js": "^2.6.9",
     "hammerjs": "^2.0.8",
     "jquery": "^3.4.1",

@@ -24,6 +24,7 @@ export class SnapshotCarouselComponent implements OnInit {
 
   selectedId: number = 0;
 
+  public aquarium: Aquarium;
   public componentLifeCycle = new Subject();
 
 
@@ -41,6 +42,7 @@ export class SnapshotCarouselComponent implements OnInit {
     });
     this.aquarium$.pipe(take(1)).subscribe(aq => {
       this.store.dispatch(new SnapshotLoadByAquariumAction(aq.id));
+      this.aquarium = aq;
     });
   }
 
@@ -82,6 +84,10 @@ export class SnapshotCarouselComponent implements OnInit {
   }
   readableDate(dateString: string) {
     return new Date(dateString).toLocaleTimeString('en-US');
+  }
+
+  generateChart() {
+    
   }
 }
 
