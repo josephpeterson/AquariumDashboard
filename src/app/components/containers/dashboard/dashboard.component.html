@@ -1,4 +1,4 @@
-<h3>Overview</h3>
+<h3 class="p-2">Overview</h3>
 <div class="row m-2">
     <div class="flex-row mr-3">
         <div class="card mb-2">
@@ -6,37 +6,36 @@
                 <div class="card-title">
                     <h4 class="m-1">Parameters</h4>
                 </div>
-                <div class="container">
-                    <table>
-                        <tr>
-                            <td>Temperature: </td>
-                            <td>70F</td>
-                        </tr>
-                        <tr>
-                            <td>Water PH: </td>
-                            <td>6.5ppm</td>
-                        </tr>
-                        <tr>
-                            <td>Ammonia: </td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td>Nitrate: </td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td>Nitrate: </td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td>Fish Count: </td>
-                            <td>4</td>
-                        </tr>
-                    </table>
-                </div>
+                <table>
+                    <tr>
+                        <td>Temperature: </td>
+                        <td>70F</td>
+                    </tr>
+                    <tr>
+                        <td>Water PH: </td>
+                        <td>6.5ppm</td>
+                    </tr>
+                    <tr>
+                        <td>Ammonia: </td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>Nitrate: </td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>Nitrate: </td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>Fish Count: </td>
+                        <td>4</td>
+                    </tr>
+                </table>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
             </div>
         </div>
-        <div class="card mb-2">
+        <div class="card mb-2 border border-warning">
             <div class="card-body">
                 <div class="card-title">
                     <h4 class="m-1">Maintenance</h4>
@@ -44,7 +43,7 @@
                 <div class="container">
                     <table>
                         <tr>
-                            <td>Feeding: </td>
+                            <td class="text-warning">Feeding: </td>
                             <td>Okay</td>
                         </tr>
                         <tr>
@@ -54,6 +53,10 @@
                     </table>
                 </div>
             </div>
+            <div class="card-footer">
+                <fa-icon class="addIcon mr-2 text-warning" [icon]="faExclamationTriangle"></fa-icon>
+                <small class="text-muted">Maintenance needed!</small>
+            </div>
         </div>
     </div>
     <div class="flex-row">
@@ -61,7 +64,13 @@
     </div>
 
 </div>
+<h3 class="p-2">Tasks</h3>
 <div class="row m-2">
     <task-list></task-list>
 </div>
+<h3>Fish</h3>
+<div class="row m-2">
+    <task-list></task-list>
+</div>
+
 <operations></operations>

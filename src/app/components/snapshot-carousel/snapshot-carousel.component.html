@@ -1,50 +1,61 @@
-<div class="shadow bg-white rounded" tabindex="0" (keydown.arrowup)="handleKey($event)"
+<div class="carousel shadow bg-white rounded" tabindex="0" (keydown.arrowup)="handleKey($event)"
     (keydown.arrowdown)="handleKey($event)">
     <ng-container *ngIf="!(loading$ | async) else loading">
-        <ng-container *ngIf="connectionError$ | async as error else noError">
-            <mat-error>{{error.message}}</mat-error>
-        </ng-container>
-        <ng-template #noError>
-            <ng-container *ngIf="data$ | async as data">
-                <div class="d-flex flex-row" class="aquariumCarousel">
-                    <div class="currentImage justify-content-end">
-                        <ng-container *ngIf="photoSnapshots[selectedId] as current else notSelected">
-                            <div class="expandedImage"
-                                [style.background-image]="'url(' + getSnapshotSrc(current) + ')'">
+        <div class="d-flex flex-row" class="aquariumCarousel">
+            <ng-container *ngIf="photoSnapshots.length > 0 else noPhotos">
+                <div class="currentImage justify-content-end">
+                    <ng-container *ngIf="photoSnapshots[selectedId] as current">
+                        <div class="expandedImage" [style.background-image]="'url(' + getSnapshotSrc(current) + ')'">
 
-                            </div>
-                            <div class="banner">
-                                {{readableDate(current.date)}}
-                                {{current.temperature}}F
-                                PH: {{current.ph}}
-                                Nitrite: {{current.nitrite}}
-                                Nitrate: {{current.nitrate}}
-                            </div>
-                        </ng-container>
-                        <ng-template #notSelected>
-                            <h3 class="m-5" *ngIf="photoSnapshots.length == 0">No Photos Available</h3>
-                        </ng-template>
-
-                    </div>
-                    <div class="scroll-area justify-content-start" #scroller>
-                        <ng-container *ngFor="let snapshot of photoSnapshots;let i = index">
-                            <div [style.background-image]="'url(' + getSnapshotSrc(snapshot) + ')'"
-                                [ngClass]="{'selected': selectedId === i }" class="content" (click)="setSelectedId(i)">
-                            </div>
-                        </ng-container>
-                    </div>
+                        </div>
+                        <div class="banner">
+                            {{readableDate(current.date)}}
+                            {{current.temperature}}F
+                            PH: {{current.ph}}
+                            Nitrite: {{current.nitrite}}
+                            Nitrate: {{current.nitrate}}
+                        </div>
+                    </ng-container>
                 </div>
-                <div>
-                    <snapshot-take-button></snapshot-take-button>
-                    <snapshot-delete-button *ngIf="photoSnapshots[selectedId] as current" [snapshot]="current">
-                    </snapshot-delete-button>
-                    <button routerLink="maintenance/parameters" class="m-2 btn btn-info float-right">View All
-                        ({{data.length}})</button>
+                <div class="scroll-area justify-content-start" #scroller>
+                    <ng-container *ngFor="let snapshot of photoSnapshots;let i = index">
+                        <div [style.background-image]="'url(' + getSnapshotSrc(snapshot) + ')'"
+                            [ngClass]="{'selected': selectedId === i }" class="content" (click)="setSelectedId(i)">
+                        </div>
+                    </ng-container>
                 </div>
             </ng-container>
-        </ng-template>
+            <ng-template #noPhotos>
+                <div class="d-flex flex-row aquariumCarousel text-center">
+                    <table style="width:100%;height:100%;">
+                        <tr>
+                            <td>
+                                No Snapshot Previews
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </ng-template>
+        </div>
+        <div>
+            <snapshot-take-button></snapshot-take-button>
+            <snapshot-delete-button *ngIf="photoSnapshots[selectedId] as current" [snapshot]="current">
+            </snapshot-delete-button>
+            <button routerLink="maintenance/parameters" class="m-2 btn btn-info float-right">View All
+                ({{photoSnapshots.length}})</button>
+        </div>
     </ng-container>
     <ng-template #loading>
-        <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+        <div class="d-flex flex-row aquariumCarousel text-center">
+            <table style="width:100%;height:100%;">
+                <tr>
+                    <td>
+                        <mat-progress-spinner class="mr-auto ml-auto align-middle" color="warn" mode="indeterminate">
+                        </mat-progress-spinner>
+
+                    </td>
+                </tr>
+            </table>
+        </div>
     </ng-template>
 </div>

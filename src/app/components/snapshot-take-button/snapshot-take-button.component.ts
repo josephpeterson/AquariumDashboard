@@ -6,6 +6,7 @@ import { AppState } from 'src/app/app.state';
 import { isTakingSnapshot, getDidTake, getTakeError } from 'src/app/store/snapshot/snapshot.selector';
 import { SnapshotTakeAction } from 'src/app/store/snapshot/snapshot.actions';
 import { getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
+import { faCamera, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'snapshot-take-button',
@@ -15,6 +16,8 @@ import { getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
 export class SnapshotTakeButtonComponent implements OnInit
 {
     private aquarium;
+
+    public faCamera:IconDefinition = faCamera;
 
     //Store data
     public aquarium$ = this.store.select(getSelectedAquarium);

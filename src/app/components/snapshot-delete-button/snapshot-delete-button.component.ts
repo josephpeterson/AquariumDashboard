@@ -8,6 +8,7 @@ import { SnapshotDeleteAction } from 'src/app/store/snapshot/snapshot.actions';
 import { getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
 import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
 import { HttpErrorResponse } from '@angular/common/http';
+import { faTrashAlt, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'snapshot-delete-button',
@@ -22,6 +23,8 @@ export class SnapshotDeleteButtonComponent
     public aquarium$ = this.store.select(getSelectedAquarium);
     public deleting$ = this.store.select(isDeletingSnapshot);
     public deleteError$ = this.store.select(getDeleteError);
+
+    public faTrashAlt:IconDefinition = faTrashAlt
 
     deleteSnapshot() {
         this.store.dispatch(new SnapshotDeleteAction(this.snapshot));
