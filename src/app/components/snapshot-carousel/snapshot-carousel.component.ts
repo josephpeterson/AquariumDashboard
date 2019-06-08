@@ -26,11 +26,6 @@ export class SnapshotCarouselComponent implements OnInit {
 
   public componentLifeCycle = new Subject();
 
-  public expandedImage = {
-    width: 1280,
-    height: 720
-  }
-
 
   public photoSnapshots: Snapshot[]
   public loading$: Observable<boolean> = this.store.select(isLoadingSnapshots);
@@ -53,7 +48,6 @@ export class SnapshotCarouselComponent implements OnInit {
     this.componentLifeCycle.next();
     this.componentLifeCycle.unsubscribe();
   }
-  
 
 
   //Deprecated
