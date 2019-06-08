@@ -36,7 +36,9 @@ export class NavMenuComponent {
   }
 
   selectAquarium(val) {
-    this.router.navigate([val]);
+    var url = this.router.url;
+    var path = url.split("/").splice(2);
+    this.router.navigate([val,...path]);
   }
   toggle() {
     this.isExpanded = !this.isExpanded;

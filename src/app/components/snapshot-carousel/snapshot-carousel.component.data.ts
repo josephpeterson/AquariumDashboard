@@ -1,16 +1,16 @@
 import { select, Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
-import { Aquarium } from 'src/app/models/Aquarium';
 import { Injectable } from '@angular/core';
-import { getAllAquariums, isLoadingAquariums, getConnectionError, getSelectedAquarium, hasValidAquarium, getDidDelete, getDeleteError } from 'src/app/store/aquarium/aquarium.selector';
-import { Observable } from 'rxjs';
-import { getAllSnapshots, isLoadingSnapshots, isDeletingSnapshot, isTakingSnapshot, getDidTake, getTakeError } from 'src/app/store/snapshot/snapshot.selector';
-import { SnapshotResetAction, SnapshotLoadByAquariumAction, SnapshotTakeAction, SnapshotDeleteAction } from 'src/app/store/snapshot/snapshot.actions';
+import { getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
+import { isLoadingSnapshots, getConnectionError, getAllSnapshots, getDeleteError, isDeletingSnapshot, getDidDelete, getDidTake, getTakeError, isTakingSnapshot } from 'src/app/store/snapshot/snapshot.selector';
+import { SnapshotLoadByAquariumAction, SnapshotTakeAction, SnapshotDeleteAction, SnapshotResetAction } from 'src/app/store/snapshot/snapshot.actions';
+import { Aquarium } from 'src/app/models/Aquarium';
 import { Snapshot } from 'src/app/models/Snapshot';
+
 @Injectable({
     providedIn: "root"
 })
-export class MaintenanceComponentData {
+export class SnapshotPreviewScrollerComponentData {
     public aquarium: Aquarium;
 
     public aquarium$ = this.store.pipe(select(getSelectedAquarium));
@@ -29,19 +29,8 @@ export class MaintenanceComponentData {
         this.aquarium$.subscribe(aq => {
             if (!aq) return;
             this.aquarium = aq;
-            this.store.dispatch(new SnapshotResetAction());
+            //this.store.dispatch(new SnapshotResetAction());
             this.store.dispatch(new SnapshotLoadByAquariumAction(aq.id));
         })
     }
-
-    delete(snapshot: Snapshot) {
-        this.store.dispatch(new SnapshotDeleteAction(snapshot));
-    }
-    reset() {
-        this.store.dispatch(new SnapshotResetAction());
-    }
-
-    getSrc(snapshot: Snapshot) {
-        return "http://65.29.174.115/v1/Snapshot/Photo/" + snapshot.id + "?" + snapshot.date;
-    }
-}
+} 

@@ -1,0 +1,25 @@
+.mat-progress-spinner {
+  margin:auto;
+}
+.scroller2 {
+  height:400px;
+ background-color:#343434;
+  white-space: nowrap;
+  overflow: scroll;
+  overflow-x: hidden;
+  margin:0px;
+
+}
+.scroller2 div {
+  background-position: center center;
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+}
+.expandedImage {
+  margin:0px;
+ background-color:#343434;
+ background-position: center center;
+ background-size: auto 90%;
+ background-repeat: no-repeat;
+ height:400px;
+}

@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AquariumSelectionComponent } from './components/aquarium-selection/aquarium-selection.component';
-import { MaintenanceComponent } from './components/maintenance/maintenance.component';
-import { FishComponent } from './components/fish/fish.component';
-import { LightingComponent } from './components/lighting/lighting.component';
-import { SettingsComponent } from './components/settings/settings.component';
+import { AquariumSelectionComponent } from './components/containers/aquarium-selection/aquarium-selection.component';
+import { MaintenanceComponent } from './components/containers/maintenance/maintenance.component';
+import { FishComponent } from './components/containers/fish/fish.component';
+import { LightingComponent } from './components/containers/lighting/lighting.component';
+import { SettingsComponent } from './components/containers/settings/settings.component';
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { DashboardComponent } from './components/containers/dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: '', component: AquariumSelectionComponent, pathMatch: 'full' },
@@ -41,12 +41,7 @@ const routes: Routes = [
         component: DashboardComponent
       }
     ]
-  },
-  /*
-  { path: ':aqId/fish', component: FishComponent, pathMatch: 'full' },
-  { path: ':aqId/lighting', component: LightingComponent, pathMatch: 'full' },
-  { path: ':aqId/settings', component: SettingsComponent, pathMatch: 'full' },
-  */
+  }
 ];
 @NgModule({
   exports: [RouterModule],

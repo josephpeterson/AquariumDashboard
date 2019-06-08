@@ -1,11 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Aquarium } from 'src/app/models/Aquarium';
-import { ErrorMessageModalComponent } from '../modals/error-message-modal/error-message-modal.component';
+import { ErrorMessageModalComponent } from '../../modals/error-message-modal/error-message-modal.component';
 import { ConnectionError } from 'src/app/models/ConnectionError';
 import { AquariumSelectionComponentData } from './aquarium-selection.component.data';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { CreateAquariumModelComponent } from '../modals/create-aquarium-modal/create-aquarium-modal.component';
+import { CreateAquariumModelComponent } from '../../modals/create-aquarium-modal/create-aquarium-modal.component';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'aquarium-selection-component',
@@ -26,14 +27,8 @@ export class AquariumSelectionComponent implements OnInit {
   faCoffee = faPlus;
 
   ngOnInit() {
-    if(this.autoload)
+    if (this.autoload)
       this.loadAquariums();
-    this.connectionError.subscribe(
-      error => {
-        if (error)
-          this.displayErrorDialog(error);
-      });
-
     //this.displayCreateAquariumDialog();
   }
   displayErrorDialog(error) {
@@ -46,6 +41,11 @@ export class AquariumSelectionComponent implements OnInit {
   }
   loadAquariums() {
     this.data.load();
+    this.connectionError.pipe(take(2)).subscribe(
+      error => {
+        if (error)
+          this.displayErrorDialog(error);
+      });
   }
 
   displayCreateAquariumDialog() {
@@ -56,7 +56,7 @@ export class AquariumSelectionComponent implements OnInit {
     dialog.componentInstance.aquariumSize = 10;
     dialog.componentInstance.aquariumType = "Normal";
 
-    dialog.afterClosed().subscribe(() => {
+    dialog.afterClosed().pipe(take(1)).subscribe(() => {
       //this.data.load(); //Shouldn't have to do this if we just add to the store
     });
     //dialog.error = new ConnectionError(error);

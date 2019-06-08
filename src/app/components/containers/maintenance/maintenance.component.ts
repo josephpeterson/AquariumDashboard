@@ -6,6 +6,7 @@ import { getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
 import { AppState } from 'src/app/app.state';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { ActivatedRoute, Router } from '@angular/router';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'maintenance-page-component',
@@ -44,10 +45,10 @@ export class MaintenanceComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.aquarium$.subscribe(aquarium => {
+    this.aquarium$.pipe(take(1)).subscribe(aquarium => {
       this.aquarium = aquarium;
     });
-    this.route.params.subscribe(p => this.setSelectedTab(p.tabId))
+    this.route.params.pipe(take(1)).subscribe(p => this.setSelectedTab(p.tabId))
   }
   public setSelectedTab(tabId:string) {    
     var idx = this.tabs.map(t => t.tabId).indexOf(tabId);

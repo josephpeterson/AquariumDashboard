@@ -28,22 +28,6 @@ export class TaskTabComponent {
 
 
     constructor(private store: Store<AppState>) {
-        this.aquarium$.subscribe(aq => {
-            if (!aq) return;
-            this.aquarium = aq;
-            this.store.dispatch(new SnapshotResetAction());
-            this.store.dispatch(new SnapshotLoadByAquariumAction(aq.id));
-        })
-    }
-
-    delete(snapshot: Snapshot) {
-        this.store.dispatch(new SnapshotDeleteAction(snapshot));
-    }
-    reset() {
-        this.store.dispatch(new SnapshotResetAction());
-    }
-
-    getSrc(snapshot: Snapshot) {
-        return "http://65.29.174.115/v1/Snapshot/Photo/" + snapshot.id + "?" + snapshot.date;
+       
     }
 }

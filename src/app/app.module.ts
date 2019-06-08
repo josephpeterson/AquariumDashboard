@@ -27,25 +27,24 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 //Component declarations
 import { AppComponent } from './components/app-root/app.component';
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { AquariumPreviewComponent } from './components/aquarium-preview/aquarium-preview.component';
+import { DashboardComponent } from './components/containers/dashboard/dashboard.component';
+import { AquariumPreviewComponent } from './components/containers/dashboard/aquarium-preview/aquarium-preview.component';
 
 
 //Misc.
-import { FishComponent } from './components/fish/fish.component';
-import { MaintenanceComponent } from './components/maintenance/maintenance.component';
-import { SettingsComponent } from './components/settings/settings.component';
+import { FishComponent } from './components/containers/fish/fish.component';
+import { MaintenanceComponent } from './components/containers/maintenance/maintenance.component';
+import { SettingsComponent } from './components/containers/settings/settings.component';
 import { TaskListComponent } from './components/task-list/task-list.component';
 import { OperationsComponent } from './components/operations/operations.component';
 import { TaskTableComponent } from './components/task-table/task-table.component';
-import { AquariumPreviewScrollerComponent } from './components/aquarium-preview-scroller/aquarium-preview-scroller.component';
-import { LightingComponent } from './components/lighting/lighting.component';
+import { LightingComponent } from './components/containers/lighting/lighting.component';
 
 
 //Color picker
 import { ColorPickerModule } from 'ngx-color-picker';
 import { StoreModule } from '@ngrx/store';
-import { AquariumSelectionComponent } from './components/aquarium-selection/aquarium-selection.component';
+import { AquariumSelectionComponent } from './components/containers/aquarium-selection/aquarium-selection.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ErrorMessageModalComponent } from './components/modals/error-message-modal/error-message-modal.component';
 import { aquariumReducer } from './store/aquarium/aquarium.reducer';
@@ -59,12 +58,15 @@ import { ConfirmModalComponent } from './components/modals/confirm-modal/confirm
 import { SnapshotEffects } from './store/snapshot/snapshot.effect';
 import { snapshotReducer } from './store/snapshot/snapshot.reducer';
 import { NotifierModule } from 'angular-notifier';
-import {AquariumNotifierConfig} from './config/notifier';
-import { SnapshotListComponent } from './components/maintenance/snapshot-list/snapshot-list.component';
-import { FeedingListComponent } from './components/maintenance/feeding-list/feeding-list.component';
-import { NotificationsListComponent } from './components/maintenance/notifications-list/notifications-list.component';
-import { FeedTableComponent } from './components/maintenance/feed-table/feed-table.component';
-import { TaskTabComponent } from './components/maintenance/task-tab/task-list.component';
+import { AquariumNotifierConfig } from './config/notifier';
+import { SnapshotListComponent } from './components/containers/maintenance/snapshot-list/snapshot-list.component';
+import { FeedingListComponent } from './components/containers/maintenance/feeding-list/feeding-list.component';
+import { NotificationsListComponent } from './components/containers/maintenance/notifications-list/notifications-list.component';
+import { FeedTableComponent } from './components/containers/maintenance/feed-table/feed-table.component';
+import { TaskTabComponent } from './components/containers/maintenance/task-tab/task-list.component';
+import { SnapshotCarouselComponent } from './components/snapshot-carousel/snapshot-carousel.component';
+import { SnapshotTakeButtonComponent } from './components/snapshot-take-button/snapshot-take-button.component';
+import { SnapshotDeleteButtonComponent } from './components/snapshot-delete-button/snapshot-delete-button.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +79,12 @@ import { TaskTabComponent } from './components/maintenance/task-tab/task-list.co
     LightingComponent,
 
     MaintenanceComponent,
+
+    SnapshotCarouselComponent,
     SnapshotListComponent,
+    SnapshotTakeButtonComponent,
+    SnapshotDeleteButtonComponent,
+
     TaskListComponent,
     TaskTabComponent,
     FeedingListComponent,
@@ -87,7 +94,6 @@ import { TaskTabComponent } from './components/maintenance/task-tab/task-list.co
     SettingsComponent,
     AquariumSelectionComponent,
     AquariumPreviewComponent,
-    AquariumPreviewScrollerComponent,
     OperationsComponent,
     TaskTableComponent,
     ErrorMessageModalComponent,

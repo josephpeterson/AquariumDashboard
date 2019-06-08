@@ -7,6 +7,7 @@ import { isLoadingAquariums, getConnectionError, getSelectedAquarium, isUpdating
 import { AquariumService } from 'src/app/services/aquarium-service/aquarium.service';
 import { CameraConfiguration } from 'src/app/models/CameraConfiguration';
 import { NotifierService } from 'angular-notifier';
+import { take } from 'rxjs/operators';
 @Injectable({
   providedIn: "root"
 })
@@ -25,14 +26,6 @@ export class SettingsComponentData {
   public cameraConfiguration = this.service.getCameraConfiguration();
 
   constructor(private store: Store<AppState>,private service: AquariumService,public notifier: NotifierService){
-    //Everytime our selected aquarium changes, load a detailed info about it
-    this.aquarium.subscribe(aq => {
-      if(aq && !this.isDetailed(aq))
-        this.store.dispatch(new AquariumLoadByIdAction(aq.id));
-    })
-    this.updated.subscribe(val => {
-      if(val) this.notifier.notify('success',"Changes saved successfully");
-    })
   }
 
   isDetailed(aq) {
@@ -40,6 +33,11 @@ export class SettingsComponentData {
   }
 
   save(aquarium: Aquarium) {
+    var err = false;
+
+    this.updated.pipe(take(2)).subscribe(val => {
+      if(val) this.notifier.notify('success',"Changes saved successfully");
+    })
     this.store.dispatch(new AquariumUpdateAction(aquarium));
   }
   delete(aquarium: Aquarium) {

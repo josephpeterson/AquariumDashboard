@@ -3,12 +3,13 @@ import { MatDialog } from '@angular/material';
 import { FormControl } from '@angular/forms';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { SettingsComponentData } from './settings.component.data';
-import { ConfirmModalComponent } from '../modals/confirm-modal/confirm-modal.component';
+import { ConfirmModalComponent } from '../../modals/confirm-modal/confirm-modal.component';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { CameraConfiguration, CameraExposureModes } from 'src/app/models/CameraConfiguration';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { NotifierService } from 'angular-notifier';
+import { take, takeUntil } from 'rxjs/operators';
 
 
 @Component({
@@ -23,6 +24,8 @@ export class SettingsComponent implements OnInit {
   public date = new FormControl(new Date());
   public serializedDate = new FormControl((new Date()).toISOString());
   public aquarium$ = this.data.aquarium;
+  public componentLifeCycle = new Subject();
+
 
   public aquariumSize: number
   public aquariumType: string
@@ -47,7 +50,7 @@ export class SettingsComponent implements OnInit {
   constructor(public data: SettingsComponentData, public dialog: MatDialog,private router: Router) { }
 
   ngOnInit() {
-    this.aquarium$.subscribe(aq => {
+    this.aquarium$.pipe(takeUntil(this.componentLifeCycle)).subscribe(aq => {
       if(!aq) return;
       this.aquarium = aq;
       this.aquariumSize = aq.gallons;
@@ -61,6 +64,10 @@ export class SettingsComponent implements OnInit {
       if(val)
         this.data.reset();
     })
+  }
+  ngOnDestroy() {
+    this.componentLifeCycle.next();
+    this.componentLifeCycle.unsubscribe();
   }
 
   saveChanges() {
@@ -89,7 +96,7 @@ export class SettingsComponent implements OnInit {
     dialog.componentInstance.title = "Delete Aquarium";
     dialog.componentInstance.body = "Are you sure you would like to delete this aquarium?";
 
-    dialog.afterClosed().subscribe((confirm: boolean) => {
+    dialog.afterClosed().pipe(take(1)).subscribe((confirm: boolean) => {
       if (confirm) {
         this.data.delete(this.aquarium);
       }

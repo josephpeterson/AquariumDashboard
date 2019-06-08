@@ -1,0 +1,45 @@
+<div class="aquarium-preview-scroller-component" tabindex="0" (keydown.arrowup)="handleKey($event)"
+    (keydown.arrowdown)="handleKey($event)">
+    <ng-container *ngIf="!(loading$ | async) else loading">
+        <ng-container *ngIf="data$ | async as data">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row p-3">
+                        <div *ngIf="photoSnapshots[selectedId] as current" class="col-sm-10 expandedImage"
+                            [style.background-image]="'url(' + getSnapshotSrc(current) + ')'">
+
+                        </div>
+                        <div class="col-sm-2 scroller2">
+                            <div [style.height]="'100px'"
+                                *ngFor="let snapshot of photoSnapshots"
+                                [style.background-image]="'url(' + getSnapshotSrc(snapshot) + ')'">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h5>Snapshot Parameters</h5>
+                            <ul>
+                                <li>Ammonia: 10</li>
+                                <li>Ammonia: 10</li>
+                                <li>Ammonia: 10</li>
+                                <li>Ammonia: 10</li>
+                                <li>Ammonia: 10</li>
+                                <li>Ammonia: 10</li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-6">
+                            <snapshot-take-button></snapshot-take-button>
+                            <snapshot-delete-button *ngIf="photoSnapshots[selectedId] as current" [snapshot]="current">
+                            </snapshot-delete-button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </ng-container>
+    </ng-container>
+    <ng-template #loading class="row">
+        <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+    </ng-template>
+</div>

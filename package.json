@@ -35,6 +35,7 @@
     "@ngrx/entity": "^7.4.0",
     "@ngrx/store": "^7.4.0",
     "@ngrx/store-devtools": "^7.4.0",
+    "angular-bootstrap-md": "^7.5.3",
     "angular-material": "^1.1.19",
     "angular-notifier": "^4.1.1",
     "bootstrap": "^4.3.1",
