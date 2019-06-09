@@ -1,0 +1,8 @@
+<mat-form-field>
+    <mat-label>Aquarium</mat-label>
+    <mat-select [formControl]="selectControl" [(ngModel)]="value">
+        <mat-option *ngFor="let aquarium of availableAquariums" [value]="aquarium">
+            {{aquarium.name}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>

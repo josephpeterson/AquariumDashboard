@@ -26,7 +26,6 @@ export enum SpeciesActions {
 /* Loading */
 export class SpeciesLoadAction implements Action {
   readonly type = SpeciesActions.LoadSpecies
-  constructor(public payload: number) { }
 }
 export class SpeciesLoadSuccessAction implements Action {
   readonly type = SpeciesActions.LoadSpeciesSuccess

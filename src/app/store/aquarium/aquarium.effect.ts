@@ -33,7 +33,7 @@ export class AquariumEffects {
                         return new AquariumLoadSuccessAction([detailedAquarium])
                     }
                 ),
-                catchError(err => of(new AquariumUpdateFailAction(err)))
+                catchError(err => of(new AquariumLoadFailAction(err)))
             )
         )
     );
@@ -100,8 +100,7 @@ export class AquariumEffects {
             this.aquariumService.createFish(payload).pipe(
                 map(
                     //We can either return a new AquariumLoadAction, OR just update our store
-                    (addedFish: Fish) =>
-                        new AquariumAddFishSuccessAction(addedFish)
+                    (addedFish: Fish) => new AquariumAddFishSuccessAction(addedFish)
                 ),
                 catchError(err => of(new AquariumAddFishFailAction(err)))
             )

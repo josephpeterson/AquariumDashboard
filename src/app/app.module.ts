@@ -68,10 +68,13 @@ import { FeedingListComponent } from './components/containers/maintenance/feedin
 import { NotificationsListComponent } from './components/containers/maintenance/notifications-list/notifications-list.component';
 import { FeedTableComponent } from './components/containers/maintenance/feed-table/feed-table.component';
 import { TaskTabComponent } from './components/containers/maintenance/task-tab/task-list.component';
-import { SnapshotCarouselComponent } from './components/snapshot-carousel/snapshot-carousel.component';
-import { SnapshotTakeButtonComponent } from './components/snapshot-take-button/snapshot-take-button.component';
-import { SnapshotDeleteButtonComponent } from './components/snapshot-delete-button/snapshot-delete-button.component';
-
+import { SnapshotCarouselComponent } from './components/snapshot/carousel/snapshot-carousel.component';
+import { SnapshotTakeButtonComponent } from './components/snapshot/take-button/snapshot-take-button.component';
+import { SnapshotDeleteButtonComponent } from './components/snapshot/delete-button/snapshot-delete-button.component';
+import { FishTableListComponent } from './components/fish/table-list/fish-table-list.component';
+import { FishCreateFormComponent } from './components/fish/create-form/fish-create-form.component';
+import { SpeciesSelectComponent } from './components/species/select/species-select.component';
+import { AquariumSelectComponent } from './components/aquarium/select/aquarium-select.component';
 
 @NgModule({
   declarations: [
@@ -89,6 +92,14 @@ import { SnapshotDeleteButtonComponent } from './components/snapshot-delete-butt
     SnapshotListComponent,
     SnapshotTakeButtonComponent,
     SnapshotDeleteButtonComponent,
+
+    FishTableListComponent,
+    FishCreateFormComponent,
+
+    SpeciesSelectComponent,
+
+    AquariumSelectComponent,
+    
 
     TaskListComponent,
     TaskTabComponent,

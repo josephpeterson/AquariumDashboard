@@ -200,7 +200,8 @@ export function aquariumReducer(state = initialState, action: AllAquariumActions
 		case AquariumActions.AddFishSuccess:
 			var aqId = action.payload.aquariumId
 			var aq = state.entities[aqId];
-			aq.fish.push(action.payload);
+			if(aq.fish)
+				aq.fish.push(action.payload);
 			var update: Update<Aquarium> = {
 				id: aqId,
 				changes: aq

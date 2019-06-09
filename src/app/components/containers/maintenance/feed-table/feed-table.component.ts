@@ -6,7 +6,7 @@ import { getAllSnapshots, isLoadingSnapshots, isDeletingSnapshot, isTakingSnapsh
 import { AppState } from 'src/app/app.state';
 import { SnapshotResetAction, SnapshotLoadByAquariumAction, SnapshotDeleteAction } from 'src/app/store/snapshot/snapshot.actions';
 import { Snapshot } from 'src/app/models/Snapshot';
-import { AquariumFeeding } from './AquariumFeeding';
+import { AquariumFeeding } from '../../../../models/AquariumFeeding';
 import { Observable } from 'rxjs';
 import { MatTableDataSource } from '@angular/material';
 import { FormControl } from '@angular/forms';
