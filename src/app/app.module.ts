@@ -42,20 +42,25 @@ import { LightingComponent } from './components/containers/lighting/lighting.com
 
 //Color picker
 import { ColorPickerModule } from 'ngx-color-picker';
+
+//ngRx Store support
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { AquariumEffects } from './store/aquarium/aquarium.effect';
+import { SnapshotEffects } from './store/snapshot/snapshot.effect';
+import { SpeciesEffects } from './store/species/species.effect';
+import { aquariumReducer } from './store/aquarium/aquarium.reducer';
+import { snapshotReducer } from './store/snapshot/snapshot.reducer';
+import { speciesReducer } from './store/species/species.reducer';
+
 import { AquariumSelectionComponent } from './components/containers/aquarium-selection/aquarium-selection.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ErrorMessageModalComponent } from './components/modals/error-message-modal/error-message-modal.component';
-import { aquariumReducer } from './store/aquarium/aquarium.reducer';
-import { EffectsModule } from '@ngrx/effects';
-import { AquariumEffects } from './store/aquarium/aquarium.effect';
 
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { CreateAquariumModelComponent } from './components/modals/create-aquarium-modal/create-aquarium-modal.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 import { ConfirmModalComponent } from './components/modals/confirm-modal/confirm-modal.component';
-import { SnapshotEffects } from './store/snapshot/snapshot.effect';
-import { snapshotReducer } from './store/snapshot/snapshot.reducer';
 import { NotifierModule } from 'angular-notifier';
 import { AquariumNotifierConfig } from './config/notifier';
 import { SnapshotListComponent } from './components/containers/maintenance/snapshot-list/snapshot-list.component';
@@ -66,6 +71,7 @@ import { TaskTabComponent } from './components/containers/maintenance/task-tab/t
 import { SnapshotCarouselComponent } from './components/snapshot-carousel/snapshot-carousel.component';
 import { SnapshotTakeButtonComponent } from './components/snapshot-take-button/snapshot-take-button.component';
 import { SnapshotDeleteButtonComponent } from './components/snapshot-delete-button/snapshot-delete-button.component';
+
 
 @NgModule({
   declarations: [
@@ -138,11 +144,12 @@ import { SnapshotDeleteButtonComponent } from './components/snapshot-delete-butt
     StoreModule.forRoot({}),
     StoreModule.forFeature('aquariums', aquariumReducer),
     StoreModule.forFeature('snapshots', snapshotReducer),
+    StoreModule.forFeature('species', speciesReducer),
     StoreDevtoolsModule.instrument({
       maxAge: 25
     }),
     NotifierModule.withConfig(AquariumNotifierConfig),
-    EffectsModule.forRoot([AquariumEffects, SnapshotEffects]),
+    EffectsModule.forRoot([AquariumEffects, SnapshotEffects,SpeciesEffects]),
     AppRoutingModule
   ],
   providers: [

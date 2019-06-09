@@ -1,4 +1,5 @@
 import { CameraConfiguration } from './CameraConfiguration';
+import { Fish } from './Fish';
 
 export class Aquarium
 {
@@ -8,4 +9,5 @@ export class Aquarium
   type: string
   startDate: Date
   cameraConfiguration: CameraConfiguration
+  fish: Fish[]
 }

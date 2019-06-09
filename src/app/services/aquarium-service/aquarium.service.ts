@@ -8,6 +8,8 @@ import { Aquarium } from 'src/app/models/Aquarium';
 import { catchError, map } from 'rxjs/operators';
 import { Snapshot } from 'src/app/models/Snapshot';
 import { CameraConfiguration } from 'src/app/models/CameraConfiguration';
+import { Fish } from 'src/app/models/Fish';
+import { Species } from 'src/app/models/Species';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -76,5 +78,33 @@ export class AquariumService {
   }
   public applyCameraConfiguration(configuration: CameraConfiguration) {
     return this.http.post(this._url + "/v1/Settings/ApplyCameraConfiguration", configuration);
+  }
+
+  /* Species Controller */
+  public getAllSpecies(): Observable<Species[]> {
+    return this.http.get<Species[]>(this._url + `/v1/Species`);
+  }
+  public createSpecies(species: Species): Observable<Species> {
+    return this.http.post<Species>(this._url + "/v1/Species/Add", species);
+  }
+  public updateSpecies(species: Species): Observable<Species> {
+    return this.http.post<Species>(this._url + "/v1/Species/Update", species);
+  }
+  public deleteSpecies(species: Species): Observable<Species> {
+    return this.http.post<Species>(this._url + "/v1/Species/Delete", species.id);
+  }
+
+  /* Fish Controller */
+  public getFishById(fishId: number): Observable<Fish> {
+    return this.http.get<Fish>(this._url + `/v1/Fish/${fishId}`);
+  }
+  public updateFish(fish: Fish): Observable<Fish> {
+    return this.http.post<Fish>(this._url + "/v1/Fish/Update", fish);
+  }
+  public createFish(fish: Fish): Observable<Fish> {
+    return this.http.post<Fish>(this._url + "/v1/Fish/Add", fish);
+  }
+  public deleteFish(fish: Fish): Observable<Fish> {
+    return this.http.post<Fish>(this._url + "/v1/Fish/Delete", fish.id);
   }
 }

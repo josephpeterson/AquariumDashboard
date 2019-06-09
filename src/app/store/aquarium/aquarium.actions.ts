@@ -2,6 +2,7 @@ import { Action } from '@ngrx/store';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { Update } from '@ngrx/entity';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Fish } from 'src/app/models/Fish';
 
 export enum AquariumActions {
   Update = '[Aquariums] Tank updated',
@@ -23,7 +24,20 @@ export enum AquariumActions {
   DeleteFail = '[Aquariums] DeleteFail',
 
   MakeSelection = '[Aquariums] Tank Selected',
-  Increment = '[Counter Component] Increment',
+
+
+  AddFish = '[Aquariums] AddFish',
+  AddFishFail = '[Aquariums] AddFishFail',
+  AddFishSuccess = '[Aquariums] AddFishSuccess',
+
+  UpdateFish = '[Aquariums] UpdateFish',
+  UpdateFishFail = '[Aquariums] UpdateFishFail',
+  UpdateFishSuccess = '[Aquariums] UpdateFishSuccess',
+
+  DeleteFish = '[Aquariums] DeleteFish',
+  DeleteFishFail = '[Aquariums] DeleteFishFail',
+  DeleteFishSuccess = '[Aquariums] DeleteFishSuccess',
+
   Decrement = '[Counter Component] Decrement',
   Reset = '[Counter Component] Reset',
 }
@@ -34,7 +48,7 @@ export class AquariumListAction implements Action {
 }
 export class AquariumLoadByIdAction implements Action {
   readonly type = AquariumActions.LoadById
-  constructor(public payload: number) {}
+  constructor(public payload: number) { }
 }
 export class AquariumLoadSuccessAction implements Action {
   readonly type = AquariumActions.LoadSuccess
@@ -48,11 +62,26 @@ export class AquariumLoadFailAction implements Action {
 
   }
 }
+
+
+
+
+
+
+
 export class AquariumSelectionAction implements Action {
   readonly type = AquariumActions.MakeSelection
   constructor(public aquariumId: number) {
   }
 }
+
+
+
+
+
+
+
+
 export class AquariumUpdateAction implements Action {
   readonly type = AquariumActions.Update
   constructor(public aquarium: Aquarium) {
@@ -68,6 +97,73 @@ export class AquariumUpdateFailAction implements Action {
   constructor(public payload: HttpErrorResponse) {
   }
 }
+
+
+
+
+
+
+
+
+
+
+export class AquariumAddFishAction implements Action {
+  readonly type = AquariumActions.AddFish
+  constructor(public payload: Fish) {
+  }
+}
+export class AquariumAddFishSuccessAction implements Action {
+  readonly type = AquariumActions.AddFishSuccess
+  constructor(public payload: Fish) {
+  }
+}
+export class AquariumAddFishFailAction implements Action {
+  readonly type = AquariumActions.AddFishFail
+  constructor(public payload: HttpErrorResponse) {
+  }
+}
+
+
+
+
+export class AquariumUpdateFishAction implements Action {
+  readonly type = AquariumActions.UpdateFish
+  constructor(public payload: Fish) {
+  }
+}
+export class AquariumUpdateFishSuccessAction implements Action {
+  readonly type = AquariumActions.UpdateFishSuccess
+  constructor(public payload: Fish) {
+  }
+}
+export class AquariumUpdateFishFailAction implements Action {
+  readonly type = AquariumActions.UpdateFishFail
+  constructor(public payload: HttpErrorResponse) {
+  }
+}
+
+
+
+
+
+
+
+export class AquariumDeleteFishAction implements Action {
+  readonly type = AquariumActions.DeleteFish
+  constructor(public payload: Fish) {
+  }
+}
+export class AquariumDeleteFishSuccessAction implements Action {
+  readonly type = AquariumActions.DeleteFishSuccess
+  constructor(public payload: Update<Fish>) {
+  }
+}
+export class AquariumDeleteFishFailAction implements Action {
+  readonly type = AquariumActions.DeleteFishFail
+  constructor(public payload: HttpErrorResponse) {
+  }
+}
+
 
 
 
@@ -130,6 +226,18 @@ export type AllAquariumActions =
   AquariumSelectionAction |
   AquariumListAction |
   AquariumLoadByIdAction |
+
+  AquariumAddFishAction |
+  AquariumAddFishSuccessAction |
+  AquariumAddFishFailAction |
+
+  AquariumUpdateFishAction |
+  AquariumUpdateFishSuccessAction |
+  AquariumUpdateFishFailAction |
+
+  AquariumDeleteFishAction |
+  AquariumDeleteFishSuccessAction |
+  AquariumDeleteFishFailAction |
 
   AquariumLoadSuccessAction |
   AquariumLoadFailAction;

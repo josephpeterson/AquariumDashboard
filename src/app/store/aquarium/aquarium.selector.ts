@@ -35,3 +35,21 @@ export const getDidUpdate = createSelector(AquariumsState, (state: AquariumReduc
 export const isDeletingAquarium = createSelector(AquariumsState, (state: AquariumReducer.AquariumsState) => state.deleting);
 export const getDidDelete = createSelector(AquariumsState, (state: AquariumReducer.AquariumsState) => state.deleted);
 export const getDeleteError = createSelector(AquariumsState, (state: AquariumReducer.AquariumsState) => state.deleteError);
+
+
+
+
+//Fish support (maybe move this into it's own store at some point)
+
+/* Create */
+export const isCreatingFish = createSelector(AquariumsState, (state: AquariumReducer.AquariumsState) => state.addingFish);
+export const getFishWasCreated = createSelector(AquariumsState, (state: AquariumReducer.AquariumsState) => state.addedFish);
+export const getFishCreateError = createSelector(AquariumsState, (state: AquariumReducer.AquariumsState) => state.addFishError);
+/* Update */
+export const isUpdatingFish = createSelector(AquariumsState, (state: AquariumReducer.AquariumsState) => state.updatingFish);
+export const getFishWasUpdated = createSelector(AquariumsState, (state: AquariumReducer.AquariumsState) => state.updatedFish);
+export const getFishUpdateError = createSelector(AquariumsState, (state: AquariumReducer.AquariumsState) => state.updateFishError);
+/* Delete */
+export const isDeletingFish = createSelector(AquariumsState, (state: AquariumReducer.AquariumsState) => state.deletingFish);
+export const getFishWasDeleted = createSelector(AquariumsState, (state: AquariumReducer.AquariumsState) => state.deletedFish);
+export const getFishDeleteError = createSelector(AquariumsState, (state: AquariumReducer.AquariumsState) => state.deleteFishError);
