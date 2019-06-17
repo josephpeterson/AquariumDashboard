@@ -1,3 +1,5 @@
-.fish-table-list {
-  width:100%;
+.fish-table-list tr:hover
+{
+  cursor: pointer;
+  background-color:#F0F0F0;
 }

@@ -21,6 +21,10 @@ const routes: Routes = [
         component: FishComponent
       },
       {
+        path: 'fish/:fishId',
+        component: FishComponent
+      },
+      {
         path: 'lighting',
         component: LightingComponent
       },

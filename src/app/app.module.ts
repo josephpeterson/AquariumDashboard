@@ -72,9 +72,15 @@ import { SnapshotCarouselComponent } from './components/snapshot/carousel/snapsh
 import { SnapshotTakeButtonComponent } from './components/snapshot/take-button/snapshot-take-button.component';
 import { SnapshotDeleteButtonComponent } from './components/snapshot/delete-button/snapshot-delete-button.component';
 import { FishTableListComponent } from './components/fish/table-list/fish-table-list.component';
-import { FishCreateFormComponent } from './components/fish/create-form/fish-create-form.component';
+import { FishDetailFormComponent } from './components/fish/fish-detail-form/fish-detail-form.component';
 import { SpeciesSelectComponent } from './components/species/select/species-select.component';
 import { AquariumSelectComponent } from './components/aquarium/select/aquarium-select.component';
+import { ManageSpeciesModalComponent } from './components/modals/manage-species-modal/manage-species-modal.component';
+import { SpeciesTableComponent } from './components/species/species-table/species-table.component';
+import { SpeciesDetailFormComponent } from './components/species/species-detail-form/species-detail-form.component';
+import { FishInformationComponent } from './components/fish/fish-information/fish-information.component';
+import { FishSelectComponent } from './components/fish/select/fish-select.component';
+import { ManageFishModalComponent } from './components/modals/manage-fish-modal/manage-fish-modal.component';
 
 @NgModule({
   declarations: [
@@ -94,9 +100,13 @@ import { AquariumSelectComponent } from './components/aquarium/select/aquarium-s
     SnapshotDeleteButtonComponent,
 
     FishTableListComponent,
-    FishCreateFormComponent,
+    FishDetailFormComponent,
+    FishInformationComponent,
+    FishSelectComponent,
 
+    SpeciesDetailFormComponent,
     SpeciesSelectComponent,
+    SpeciesTableComponent,
 
     AquariumSelectComponent,
     
@@ -114,13 +124,17 @@ import { AquariumSelectComponent } from './components/aquarium/select/aquarium-s
     ErrorMessageModalComponent,
     CreateAquariumModelComponent,
     ConfirmModalComponent,
+    ManageSpeciesModalComponent,
+    ManageFishModalComponent,
     //New components here
   ],
   entryComponents: [
     //Modal components here
     CreateAquariumModelComponent,
     ConfirmModalComponent,
-    ErrorMessageModalComponent
+    ErrorMessageModalComponent,
+    ManageSpeciesModalComponent,
+    ManageFishModalComponent
   ],
 
   imports: [

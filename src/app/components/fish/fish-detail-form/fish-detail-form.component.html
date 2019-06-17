@@ -1,0 +1,48 @@
+<h4 class='text-center'>{{(exists) ? fish.name:"Create New Fish"}}</h4>
+<small class="text-muted">Please enter details about your fish.</small>
+<div class="row m-2">
+    <mat-form-field class="m-2 example-full-width">
+        <input type="text" placeholder="Fish Name" aria-label="Number" matInput [(ngModel)]="fish.name">
+    </mat-form-field>
+    <species-select class="ml-2" (onChange)="selectSpecies($event)" [value]='fish.species'></species-select>
+</div>
+<div class="row m-2">
+    <aquarium-select class="ml-2" (onChange)="selectAquarium($event)" [value]="aquarium">
+    </aquarium-select>
+    <mat-form-field class="m-3">
+        <input matInput [matDatepicker]="picker1" placeholder="Start Date" [(ngModel)]="fish.date">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+</div>
+<div class="row m-2">
+    <mat-form-field>
+        <mat-label>Gender</mat-label>
+        <mat-select [(ngModel)]="fish.gender">
+            <mat-option value=0>
+                Male
+            </mat-option>
+            <mat-option value=1>
+                Female
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+<div class="row m-2">
+    <mat-form-field class="w-100">
+        <textarea matInput [(ngModel)]="fish.description"
+            placeholder="Fish description, notes, attributes, features, etc..."></textarea>
+    </mat-form-field>
+</div>
+
+<div class="row m-2">
+    <ng-container *ngIf="exists else newFish">
+        <button type="submit" class="m-2 btn btn-success" (click)="clickUpdateFish()">Update Fish</button>
+        <button type="submit" class="m-2 btn btn-danger" (click)="clickDeleteFish()">Delete Fish</button>
+    </ng-container>
+    <ng-template #newFish>
+        <button type="submit" class="m-2 btn btn-success" (click)="clickCreateFish()">Add to
+            Aquarium</button>
+    </ng-template>
+
+</div>

@@ -1,5 +1,6 @@
 import { CameraConfiguration } from './CameraConfiguration';
 import { Fish } from './Fish';
+import { AquariumFeeding } from './AquariumFeeding';
 
 export class Aquarium
 {
@@ -10,4 +11,6 @@ export class Aquarium
   startDate: Date
   cameraConfiguration: CameraConfiguration
   fish: Fish[]
+
+  feedings: AquariumFeeding[] | null
 }

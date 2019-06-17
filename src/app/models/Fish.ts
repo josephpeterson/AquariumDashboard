@@ -1,4 +1,5 @@
 import { Aquarium } from './Aquarium';
+import { Species } from './Species';
 
 export class Fish
 {
@@ -9,5 +10,7 @@ export class Fish
   name: string
   description: string
   date: Date
+  
   aquarium: Aquarium
+  species: Species | null
 }

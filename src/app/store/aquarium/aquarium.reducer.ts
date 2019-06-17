@@ -78,8 +78,6 @@ export function aquariumReducer(state = initialState, action: AllAquariumActions
 			}
 
 		case AquariumActions.LoadSuccess:
-			if (action.payload.length == 1)
-				console.log(action.payload[0]);
 			var newState = adapter.upsertMany(action.payload, state);
 			return {
 				...newState,

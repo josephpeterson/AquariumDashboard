@@ -8,22 +8,21 @@ import { AppState } from 'src/app/app.state';
 import { takeUntil } from 'rxjs/operators';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { SpeciesLoadAction } from 'src/app/store/species/species.actions';
+import { Species } from 'src/app/models/Species';
+import { isLoadingSpecies, getAllSpecies } from 'src/app/store/species/species.selector';
 
 @Injectable({
     providedIn: "root"
 })
-export class FishTableListComponentData extends MatTableDataSource<Fish> {
-
-    public aquarium$: Observable<Aquarium> = this.store.select(getSelectedAquarium);
-    public loading$: Observable<Boolean> = this.store.select(isLoadingAquariums);
+export class SpeciesTableComponentData extends MatTableDataSource<Species> {
+    public loading$: Observable<Boolean> = this.store.select(isLoadingSpecies);
+    public species$: Observable<Species[]> = this.store.select(getAllSpecies);
     public componentLifeCycle = new Subject();
 
     constructor(private store: Store<AppState>) {
         super();
-        this.aquarium$.pipe(takeUntil(this.componentLifeCycle)).subscribe(aq => {
-            if(!aq.fish) return
-            console.log(aq);
-            this.data = aq.fish;
+        this.species$.pipe(takeUntil(this.componentLifeCycle)).subscribe(species => {
+            this.data = species;
         });
         //Load species store (it may not be loaded)
         this.store.dispatch(new SpeciesLoadAction());

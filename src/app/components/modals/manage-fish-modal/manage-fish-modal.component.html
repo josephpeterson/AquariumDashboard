@@ -1,0 +1,14 @@
+<div class="manage-fish-modal-component" *ngIf="aquarium$ | async as aquarium">
+  <h1 mat-dialog-title>Manage Fish: {{aquarium.name}}</h1>
+  <ng-container *ngIf="(selectedFishId || addingFish) else listing">
+    <fish-detail-form [fishId]='selectedFishId' (onSuccess)='clickBack()'></fish-detail-form>
+  </ng-container>
+  <ng-template #listing>
+    <fish-table-list [displayedColumns]="['id','name','description','readableDate','speciesName']" [aquariumId]='aquarium.id' (rowClicked)="clickFish($event[1])"></fish-table-list>
+  </ng-template>
+  <mat-dialog-actions align="end">
+    <button *ngIf="(selectedFishId || addingFish)" class="m-2 btn btn-dark" (click)='clickBack()'>Back</button>
+    <button  *ngIf="!(selectedFishId || addingFish)" class="m-2 btn btn-secondary md-float-right" (click)='clickAddFish()'>Add Fish...</button>
+    <button class="m-2 btn btn-primary" [mat-dialog-close]="true">Done</button>
+  </mat-dialog-actions>
+</div>

@@ -99,6 +99,7 @@ export class AquariumService {
     return this.http.get<Fish>(this._url + `/v1/Fish/${fishId}`);
   }
   public updateFish(fish: Fish): Observable<Fish> {
+    console.log(fish);
     return this.http.post<Fish>(this._url + "/v1/Fish/Update", fish);
   }
   public createFish(fish: Fish): Observable<Fish> {

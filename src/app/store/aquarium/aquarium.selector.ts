@@ -12,9 +12,11 @@ export const getSelectedAquarium = createSelector(AquariumsState,
         return state.entities[state.selectedAquariumId]
     }
 );
+export const getAquariumById = createSelector(
+    AquariumsState,
+    (state: AquariumReducer.AquariumsState, aqId) => state.entities[aqId]
+);
 
-export const getAquariumById = (id: number) => createSelector(AquariumsState,
-    (state: AquariumReducer.AquariumsState) => state.entities[id]);
 
 export const isLoadingAquariums = createSelector(AquariumsState, (state: AquariumReducer.AquariumsState) => state.loading);
 

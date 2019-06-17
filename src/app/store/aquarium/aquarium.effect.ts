@@ -134,7 +134,7 @@ export class AquariumEffects {
                 map(
                     () => new AquariumDeleteFishSuccessAction({
                         id: payload.id,
-                        changes: null
+                        changes: payload
                     })
                 ),
                 catchError(err => of(new AquariumDeleteFishFailAction(err)))

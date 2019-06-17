@@ -1,0 +1,57 @@
+<div class="shadow p-3 mb-5 bg-white rounded">
+    <h3>{{fish.name}}</h3>
+    <p class="text-muted">This is your fish's personal profile.</p>
+    <hr>
+    <h5>Status</h5>
+    <ul>
+        <li>Does not need food</li>
+        <li>Health: Good</li>
+    </ul>
+    <h5>Reccomendations</h5>
+    <p>Your fish is very healthly. There is nothing to do at this time. Upcomming tasks: (2 days; Feed fish)</p>
+    <div>
+        <h5>General Information</h5>
+        <div class="row">
+            <ul>
+                <li>Name: {{fish.name}}</li>
+                <li>Age: 20 days</li>
+                <li>Fed 20 times</li>
+                <li>In Aquarium "Bedroom Tank"</li>
+            </ul>
+        </div>
+        <div class="row">
+            <button class="btn btn-primary m-2">Modify...</button>
+
+        </div>
+    </div>
+
+    <h5>Species</h5>
+    <ul>
+        <li><b>30</b> fish of this species being tracked accross <b>5</b> aquariums.</li>
+        <li>Average life span: 10 months (50%)</li>
+        <li>Max Size: 5in (Currently 2in)</li>
+        <li>ph Range: 5.5-6.0</li>
+        <li>Food: Basic Fish Feed (1tbsp 3x daily)</li>
+        <li>References: <a href="http://fishbase.se" target="_blank">http://fishbase.se</a></li>
+    </ul>
+    <h5>Snapshots</h5>
+    <p class="text-muted">(Beta) Snapshots that contain this fish. We will scan your snapshots and based on the
+        information you provide, we will determine where your fish is within the aquarium.</p>
+
+    <div>
+        <h5>Activity</h5>
+        <p class="text-muted">This is a history of the associated activity with this fish. This includes feedings, fish
+            snapshots etc.</p>
+        <feeding-list></feeding-list>
+    </div>
+
+    <h5>Environment Parameters</h5>
+    <p class="text-muted">This is how your aquarium parameters match up with the fish's ideal living conditions.</p>
+    <h5>Operations</h5>
+    <div>
+        <button class="btn btn-primary m-2">Feed</button>
+        <button class="btn btn-primary m-2">Add Snapshot</button>
+        <button class="btn btn-primary m-2">Remove Fish</button>
+        <button class="btn btn-primary m-2">Move Fish...</button>
+    </div>
+</div>
