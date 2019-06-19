@@ -1,5 +1,6 @@
 import { Aquarium } from './Aquarium';
 import { Species } from './Species';
+import { AquariumFeeding } from './AquariumFeeding';
 
 export class Fish
 {
@@ -13,4 +14,5 @@ export class Fish
   
   aquarium: Aquarium
   species: Species | null
+  feedings: AquariumFeeding[] | null
 }

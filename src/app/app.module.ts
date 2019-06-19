@@ -66,7 +66,6 @@ import { AquariumNotifierConfig } from './config/notifier';
 import { SnapshotListComponent } from './components/containers/maintenance/snapshot-list/snapshot-list.component';
 import { FeedingListComponent } from './components/containers/maintenance/feeding-list/feeding-list.component';
 import { NotificationsListComponent } from './components/containers/maintenance/notifications-list/notifications-list.component';
-import { FeedTableComponent } from './components/containers/maintenance/feed-table/feed-table.component';
 import { TaskTabComponent } from './components/containers/maintenance/task-tab/task-list.component';
 import { SnapshotCarouselComponent } from './components/snapshot/carousel/snapshot-carousel.component';
 import { SnapshotTakeButtonComponent } from './components/snapshot/take-button/snapshot-take-button.component';
@@ -81,17 +80,15 @@ import { SpeciesDetailFormComponent } from './components/species/species-detail-
 import { FishInformationComponent } from './components/fish/fish-information/fish-information.component';
 import { FishSelectComponent } from './components/fish/select/fish-select.component';
 import { ManageFishModalComponent } from './components/modals/manage-fish-modal/manage-fish-modal.component';
+import { FeedingTableListComponent } from './components/containers/maintenance/feed-table/feeding-table-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     DashboardComponent,
-
     FishComponent,
-
     LightingComponent,
-
     MaintenanceComponent,
 
     SnapshotCarouselComponent,
@@ -115,7 +112,8 @@ import { ManageFishModalComponent } from './components/modals/manage-fish-modal/
     TaskTabComponent,
     FeedingListComponent,
     NotificationsListComponent,
-    FeedTableComponent,
+
+    FeedingTableListComponent,
 
     SettingsComponent,
     AquariumSelectionComponent,
