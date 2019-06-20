@@ -1,12 +1,18 @@
 <ng-container *ngIf="aquarium$ | async as aquarium">
-    <ng-container *ngIf="selectedFishId else dashboard">
-        <fish-detail-form [fishId]="selectedFishId"></fish-detail-form>
+    <ng-container *ngIf="getSelectedFish(aquarium) as fish else dashboard">
+        <fish-detail-form [fishId]="fish.id"></fish-detail-form>
+        <species-detail-view [speciesId]='fish.speciesId'></species-detail-view>
     </ng-container>
     <ng-template #dashboard>
         <fish-select [aquariumId]='aquarium.id'></fish-select>
         <fish-table-list (rowClicked)="selectFish($event[1])"></fish-table-list>
         <button class="btn btn-primary m-2" (click)="openManageFishModal()">Manage Fish</button>
+<<<<<<< HEAD
+=======
         <h4 class='mt-5'>Feeding History</h4>
         <feeding-table-list class="m-3" [aquariumId]='aquarium.id' [fishId]='selectedFishId'></feeding-table-list>
+>>>>>>> 4e14378b4e59bf792e948cee6829b6a682753443
     </ng-template>
+    <h4 class='mt-5'>Feeding History</h4>
+    <feeding-table-list class="m-3" [aquariumId]='aquarium.id' [fishId]='selectedFishId'></feeding-table-list>
 </ng-container>

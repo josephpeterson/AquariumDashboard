@@ -10,7 +10,7 @@ import { Observable, Subject } from 'rxjs';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { Store } from '@ngrx/store';
 import { Species } from 'src/app/models/Species';
-import { getAllSpecies } from 'src/app/store/species/species.selector';
+import { getAllSpecies, isLoadingSpecies } from 'src/app/store/species/species.selector';
 import { SpeciesLoadAction } from 'src/app/store/species/species.actions';
 
 @Component({
@@ -24,6 +24,8 @@ export class FishTableListComponent {
   public aquarium$: Observable<Aquarium>;
   public species$: Observable<Species[]> = this.store.select(getAllSpecies);
 
+  public loaded: boolean;
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   private selection: SelectionModel<Fish> = new SelectionModel<FishTableItem>(true, []);
@@ -35,9 +37,9 @@ export class FishTableListComponent {
     { name: 'name', label: 'Full Name', visible: true },
     { name: 'description', label: 'Description', visible: true },
     { name: 'date', label: 'Adoption Date', visible: true },
-    { name: 'speciesId', label: 'Species Id', visible: true },
+    { name: 'speciesId', label: 'Species Id', visible: false },
     { name: 'aquariumId', label: 'Assigned Aquarium', visible: false },
-    { name: 'speciesName', label: 'Species', visible: false },
+    { name: 'speciesName', label: 'Species', visible: true },
     { name: 'readableDate', label: 'Adoption Date', visible: false },
   ];
 
@@ -58,19 +60,29 @@ export class FishTableListComponent {
     if (this.searchBox)
       this.bindSearchBox();
 
-    this.store.dispatch(new SpeciesLoadAction());
+    this.load();
     this.setAquarium(this.aquariumId);
-
     this.dataSource.paginator = this.paginator;
+
+
+  }
+  load() {
+    return this.store.select(isLoadingSpecies).pipe(take(1)).subscribe(val => {
+      if (!val) this.store.dispatch(new SpeciesLoadAction());
+    });
   }
   setAquarium(id: number) {
+    this.loaded = false;
     this.aquariumId = id;
     this.aquarium$ = this.store.select(getAquariumById, this.aquariumId);
-    this.store.dispatch(new AquariumLoadByIdAction(id)); //todo remove this? cache possibly
     this.aquarium$.pipe(takeUntil(this.componentLifecycle)).subscribe(aq => {
-      if (!aq.fish) return
+      if (!aq.fish) {
+        this.store.dispatch(new AquariumLoadByIdAction(id)); //todo remove this? cache possibly
+        return;
+      }
       var fishList = aq.fish;
       this.species$.pipe(take(2)).subscribe(species => {
+        if(species.length == 0) return;
         var data = fishList.map(fish => {
           var item = new FishTableItem(fish);
           item.readableDate = new Date(item.date).toDateString();
@@ -80,6 +92,7 @@ export class FishTableListComponent {
           return item;
         })
         this.dataSource.data = data;
+        this.loaded = true;
       });
     });
   }

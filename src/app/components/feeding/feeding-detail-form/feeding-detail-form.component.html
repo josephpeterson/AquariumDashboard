@@ -1,0 +1,71 @@
+<div class="container" *ngIf="aquarium$ | async as aquarium">
+    <div class="row">
+        <div class="col-sm">
+            <div class="mt-5 card p-3">
+                <h4 class='text-center'>{{exists ? "Edit Feeding":"New Aquarium Feeding"}}</h4>
+                <small class="text-muted p-3">Three days have passed since you've fed your fish! You should feed your
+                    fish
+                    soon!</small>
+                <div class="row">
+                    <aquarium-select class="ml-2" (onChange)="selectAquarium($event)" [value]="aquarium">
+                    </aquarium-select>
+                    <mat-form-field class="ml-2">
+                        <input matInput [matDatepicker]="picker1" placeholder="Feeding Date"
+                            [(ngModel)]="newFeeding.date">
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker #picker1></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <fish-select [aquariumId]='aquarium.id' (onChange)="selectFish($event)"></fish-select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <mat-form-field class="example-full-width">
+                            <input type="text" placeholder="Food Brand..." aria-label="Number" matInput
+                                [(ngModel)]="newFeeding.foodBrand" [matAutocomplete]="auto">
+                            <mat-autocomplete #auto="matAutocomplete">
+                                <mat-option *ngFor="let option of distinctBrands" [value]="option">
+                                    {{option}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+                    <div class="col">
+                        <mat-form-field class="example-full-width">
+                            <input type="text" placeholder="Food Product..." aria-label="Number" matInput
+                                [(ngModel)]="newFeeding.foodProduct" [matAutocomplete]="auto">
+                            <mat-autocomplete #auto="matAutocomplete">
+                                <mat-option *ngFor="let option of distinctBrands" [value]="option">
+                                    {{option}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <mat-form-field>
+                            <mat-label>Amount</mat-label>
+                            <input matInput type="number" class="form-control" aria-describedby="amountHelp"
+                                placeholder="Amount">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <mat-form-field class="w-100 m-2">
+                        <textarea matInput placeholder="Additional notes..."></textarea>
+                    </mat-form-field>
+                </div>
+
+                <div class="row">
+                    <button type="submit" class="btn btn-primary m-2">Feed Fish</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

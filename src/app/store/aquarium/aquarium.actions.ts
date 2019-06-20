@@ -10,7 +10,7 @@ export enum AquariumActions {
   UpdateFail = '[Aquariums] Tank failed to update',
 
   Load = '[Aquariums] Load',
-  LoadById = '[Aquariums] Load by id',
+  LoadById = '[Aquariums] Load Detailed Aquarium',
   LoadSuccess = '[Aquariums] Load Success',
   LoadFail = '[Aquariums] Load Failure',
 

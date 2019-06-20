@@ -1,11 +1,18 @@
 <ng-container *ngIf="aquarium$ | async as aquarium else loading">
     <div class="row m-2">
         <div class="card w-100">
-
             <div class="card-body">
                 <div class="card-title">
-                    <h3>Basic Information</h3>
+                    <h2>Aquarium Settings</h2>
                 </div>
+                <div class="card-title">
+                    <h6>Basic Information</h6>
+                </div>
+                <p class="card-text text-muted">
+                    You may alter basic information about your aquarium here. The size of your tank should be measured
+                    in gallons and will help provide insights regarding water changes and adequte living environments.
+                    Tank type should reflect the style of your tank (Normal, tall, short, etc.).
+                </p>
                 <div>
                     <mat-form-field class="example-full-width m-3">
                         <input matInput placeholder="Name" [value]="aquarium.name" [(ngModel)]="aquariumName"
@@ -33,28 +40,36 @@
             </div>
             <div class="card-body">
                 <div class="card-title">
-                    <h3>Photo Configuration</h3>
+                    <h6>Photo Configuration</h6>
                 </div>
+                <p class="card-text text-muted">
+                    This is the configuration for the photo module for snapshots. These are all the settings supported
+                    by the RaspberryPi Camera module v2. The reset button will provide you the system defaults.
+                </p>
                 <div class="row">
                     <div class="col-lg-2">
                         <label>Sharpness</label>
                         <div class="row">
-                            <mat-slider min="-100" max="100" step="1" [disabled]="(updating | async)" thumbLabel [(ngModel)]="cameraConfig.sharpness">
+                            <mat-slider min="-100" max="100" step="1" [disabled]="(updating | async)" thumbLabel
+                                [(ngModel)]="cameraConfig.sharpness">
                             </mat-slider>
                         </div>
                         <label>Contrast</label>
                         <div class="row">
-                            <mat-slider min="-100" max="100" step="1" [disabled]="(updating | async)" thumbLabel [(ngModel)]="cameraConfig.contrast">
+                            <mat-slider min="-100" max="100" step="1" [disabled]="(updating | async)" thumbLabel
+                                [(ngModel)]="cameraConfig.contrast">
                             </mat-slider>
                         </div>
                         <label>Brightness</label>
                         <div class="row">
-                            <mat-slider min="-100" max="100" step="1" [disabled]="(updating | async)" thumbLabel [(ngModel)]="cameraConfig.brightness">
+                            <mat-slider min="-100" max="100" step="1" [disabled]="(updating | async)" thumbLabel
+                                [(ngModel)]="cameraConfig.brightness">
                             </mat-slider>
                         </div>
                         <label>Saturation</label>
                         <div class="row">
-                            <mat-slider min="-100" max="100" step="1" [disabled]="(updating | async)" thumbLabel [(ngModel)]="cameraConfig.saturation">
+                            <mat-slider min="-100" max="100" step="1" [disabled]="(updating | async)" thumbLabel
+                                [(ngModel)]="cameraConfig.saturation">
                             </mat-slider>
                         </div>
                     </div>
@@ -135,11 +150,11 @@
                     </div>
                 </div>
             </div>
-            <div class="card-body">
-                <button class="m-2 btn btn-success" (click)="saveChanges()" [disabled]="(updating | async)">Save
+            <div class="card-body ">
+                <button class="m-2 btn btn-success float-right" (click)="saveChanges()" [disabled]="(updating | async)">Save
                     Changes</button>
-                    <button class="m-2 btn btn-primary" (click)="resetDefault()" [disabled]="(updating | async)">
-                        Reset Settings</button>
+                <button class="m-2 btn btn-primary float-right" (click)="resetDefault()" [disabled]="(updating | async)">
+                    Reset Settings</button>
                 <mat-error *ngIf="error$ | async as error">{{error.message}}</mat-error>
             </div>
         </div>
@@ -192,6 +207,20 @@
                     </div>
 
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="row m-2">
+        <div class="card w-100">
+            <div class="card-body">
+                <div class="card-title">
+                    <h3>Species List</h3>
+                    <p class="text-muted">List of all fish species available. Click on a species to modify. You may also
+                        see the amount of fish alive for a given species. You may not add a new fish of a given species
+                        without first adding the species to this list.</p>
+                </div>
+                <species-table (rowClicked)="speciesClickRow($event[1])"></species-table>
+                <button class="btn btn-success" (click)="speciesClickNew()">Add Species...</button>
             </div>
         </div>
     </div>

@@ -38,14 +38,14 @@ export class FishSelectComponent {
         this.selectControl.valueChanges.pipe(takeUntil(this.componentLifeCycle$)).subscribe(val => {
             this.onChange.emit(val);
         });
-        this.selectControl.setValue(this.value);
-
-        
+        this.setAquarium(this.aquariumId);
+    }
+    setAquarium(aquariumId: number) {
         this.aquarium$ = this.store.select(getAquariumById,this.aquariumId);
         this.aquarium$.pipe(takeUntil(this.componentLifeCycle$)).subscribe(aquarium => {
             if (!aquarium) return;
             this.availableFish = aquarium.fish;
-        })
+        });
     }
     ngOnDestory() {
         this.componentLifeCycle$.next();

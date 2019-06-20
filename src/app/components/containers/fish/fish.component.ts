@@ -10,6 +10,7 @@ import { getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
 import { AppState } from 'src/app/app.state';
 import { Store } from '@ngrx/store';
 import { ManageFishModalComponent } from '../../modals/manage-fish-modal/manage-fish-modal.component';
+import { AquariumFeeding } from 'src/app/models/AquariumFeeding';
 
 @Component({
   selector: 'fish-page-component',
@@ -20,8 +21,9 @@ import { ManageFishModalComponent } from '../../modals/manage-fish-modal/manage-
 
 export class FishComponent implements OnInit {
 
-  public selectedFishId;
-  public selectedAquariumId;
+  public selectedFishId: number;
+  public selectedFish: Fish;
+  public selectedAquariumId:number;
 
   public aquarium$: Observable<Aquarium> = this.store.select(getSelectedAquarium);
 
@@ -39,6 +41,10 @@ export class FishComponent implements OnInit {
         this.selectedFishId = p.fishId;
       }
     });
+  }
+  getSelectedFish(aquarium: Aquarium) {
+    if(!aquarium.fish) return;
+    return aquarium.fish.filter(fish => fish.id == this.selectedFishId)[0];
   }
   openManageFishModal() {
     var inst  = this.dialog.open(ManageFishModalComponent,{

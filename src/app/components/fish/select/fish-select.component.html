@@ -1,7 +1,7 @@
 <mat-form-field>
-    <mat-label>Fish List</mat-label>
+    <mat-label>Select a Fish</mat-label>
     <mat-select [formControl]="selectControl" [(ngModel)]="value">
-        <mat-option *ngFor="let fish of availableFish" [value]="species">
+        <mat-option *ngFor="let fish of availableFish" [value]="fish">
             {{fish.name}}
         </mat-option>
         <mat-option (click)="openFishManager()">

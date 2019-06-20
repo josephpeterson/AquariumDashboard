@@ -3,7 +3,7 @@ import { Component, ViewChild, Input, Output } from '@angular/core';
 import { MatPaginator, MatSort } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 import { EventEmitter } from '@angular/core';
-import { SpeciesTableComponentData } from './species-table.component.data';
+import { SpeciesDataSource } from '../species.datasource';
 import { Species } from 'src/app/models/Species';
 
 @Component({
@@ -24,10 +24,14 @@ export class SpeciesTableComponent {
     { name: 'select', visible: false },
     { name: 'id', label: "ID", visible: true },
     { name: 'name', label: 'Full Name', visible: true },
-    { name: 'description', label: 'Description', visible: true },
-    { name: 'website', label: 'Website', visible: true },
+    { name: 'price', label: 'Price ($)', visible: true },
+    { name: 'phRange', label: 'ph Range', visible: true },
+    { name: 'allColors', label: 'Color', visible: true },
+    { name: 'tempRange', label: 'Temp. Range', visible: true },
     { name: 'fishCount', label: 'Alive Fish', visible: true },
-    { name: 'aquariumCount', label: 'Aquariums', visible: true },
+    { name: 'description', label: 'Description', visible: false },
+    { name: 'website', label: 'Website', visible: false },
+    { name: 'aquariumCount', label: 'Aquariums', visible: false },
   ];
 
   @Input() displayedColumns: any[] = this.columns.filter(col => col.visible).map(col => col.name);
@@ -36,7 +40,7 @@ export class SpeciesTableComponent {
   //Event handlers
   @Output() rowClicked = new EventEmitter();
 
-  constructor(private dataSource: SpeciesTableComponentData){}
+  constructor(private dataSource: SpeciesDataSource){}
   ngOnInit() {
     if (this.searchBox)
       this.bindSearchBox();

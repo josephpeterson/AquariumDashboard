@@ -10,6 +10,8 @@ import { CameraConfiguration, CameraExposureModes } from 'src/app/models/CameraC
 import { Observable, Subject } from 'rxjs';
 import { NotifierService } from 'angular-notifier';
 import { take, takeUntil } from 'rxjs/operators';
+import { Species } from 'src/app/models/Species';
+import { ManageSpeciesModalComponent } from '../../modals/manage-species-modal/manage-species-modal.component';
 
 
 @Component({
@@ -45,23 +47,23 @@ export class SettingsComponent implements OnInit {
 
   public exposureModes = CameraExposureModes;
 
-  
 
-  constructor(public data: SettingsComponentData, public dialog: MatDialog,private router: Router) { }
+
+  constructor(public data: SettingsComponentData, public dialog: MatDialog, private router: Router) { }
 
   ngOnInit() {
     this.aquarium$.pipe(takeUntil(this.componentLifeCycle)).subscribe(aq => {
-      if(!aq) return;
+      if (!aq) return;
       this.aquarium = aq;
       this.aquariumSize = aq.gallons;
       this.aquariumName = aq.name.trim();
       this.aquariumType = aq.type.trim();
-      if(aq.cameraConfiguration)
+      if (aq.cameraConfiguration)
         this.cameraConfig = aq.cameraConfiguration;
 
     });
     this.data.deleted.subscribe(val => {
-      if(val)
+      if (val)
         this.data.reset();
     })
   }
@@ -107,6 +109,19 @@ export class SettingsComponent implements OnInit {
   }
   snapshotDeleteAll() {
 
+  }
+
+  speciesClickRow(species: Species) {
+    var dialog = this.dialog.open(ManageSpeciesModalComponent, {
+      width: "60%"
+    }).componentInstance;
+    dialog.selectedSpeciesId = species.id;
+  }
+  speciesClickNew() {
+    var dialog = this.dialog.open(ManageSpeciesModalComponent, {
+      width: "60%"
+    }).componentInstance;
+    dialog.addingSpecies = true;
   }
 }
 

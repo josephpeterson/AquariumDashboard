@@ -8,6 +8,7 @@ import { takeUntil } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { ManageSpeciesModalComponent } from '../../modals/manage-species-modal/manage-species-modal.component';
+import { SpeciesDataSource as SpeciesDataSource } from '../species.datasource';
 
 @Component({
     selector: 'species-select',
@@ -15,26 +16,26 @@ import { ManageSpeciesModalComponent } from '../../modals/manage-species-modal/m
     styleUrls: ['./species-select.component.scss'],
 })
 export class SpeciesSelectComponent {
-    public availableSpecies: Species[] = [];
-
-    public species$ = this.store.pipe(select(getAllSpecies));
-    public componentLifeCycle$ = new Subject();
-
-    public selectControl: FormControl = new FormControl();
 
     @Output() onChange = new EventEmitter();
     @Input() value: Species;
+    public availableSpecies: Species[] = [];
+    public componentLifeCycle$ = new Subject();
+    public selectControl: FormControl = new FormControl();
 
-    constructor(private store: Store<AppState>,private dialog:MatDialog) {
+    constructor(private dialog: MatDialog, private speciesDataSource: SpeciesDataSource) {
     }
     ngOnInit() {
+        this.speciesDataSource.species$.pipe(takeUntil(this.componentLifeCycle$)).subscribe(species => {
+            if (!species) return;
+            this.availableSpecies = species;
+        });
+        this.bindSelectControl();
+    }
+    bindSelectControl() {
         this.selectControl.valueChanges.pipe(takeUntil(this.componentLifeCycle$)).subscribe(val => {
             this.onChange.emit(val);
         });
-        this.species$.pipe(takeUntil(this.componentLifeCycle$)).subscribe(species => {
-            if (!species) return;
-            this.availableSpecies = species;
-        })
         this.selectControl.setValue(this.value);
     }
     ngOnDestory() {
@@ -45,6 +46,6 @@ export class SpeciesSelectComponent {
         var dialog = this.dialog.open(ManageSpeciesModalComponent, {
             //height: "80%",
             width: "60%"
-          }).componentInstance;
+        }).componentInstance;
     }
 }
