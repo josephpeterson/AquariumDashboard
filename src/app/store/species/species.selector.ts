@@ -5,11 +5,6 @@ import * as SpeciesReducer from './species.reducer';
 export const SpeciesState = createFeatureSelector<SpeciesReducer.SpeciesState>("species");
 
 export const getAllSpecies = createSelector(SpeciesState, SpeciesReducer.selectAll);
-export const getSpeciesById = createSelector(
-    SpeciesState,
-    (state: SpeciesReducer.SpeciesState, speciesId) => state.entities[speciesId]
-);
-
 
 export const isLoadingSpecies = createSelector(SpeciesState, (state: SpeciesReducer.SpeciesState) => state.loading);
 export const getSpeciesLoadError = createSelector(SpeciesState, (state: SpeciesReducer.SpeciesState) => state.loadError);

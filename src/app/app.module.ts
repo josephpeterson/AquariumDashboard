@@ -26,17 +26,16 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 //Component declarations
 import { AppComponent } from './components/app-root/app.component';
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
-import { DashboardComponent } from './components/containers/dashboard/dashboard.component';
+import { DashboardComponent } from './components/containers/AquariumContainer/dashboard/dashboard.component';
 
 
 //Misc.
-import { FishComponent } from './components/containers/fish/fish.component';
+import { FishComponent } from './components/containers/AquariumContainer/fish/fish.component';
 import { MaintenanceComponent } from './components/containers/maintenance/maintenance.component';
-import { SettingsComponent } from './components/containers/settings/settings.component';
+import { SettingsComponent } from './components/containers/AquariumContainer/settings/settings.component';
 import { TaskListComponent } from './components/task-list/task-list.component';
-import { OperationsComponent } from './components/operations/operations.component';
 import { TaskTableComponent } from './components/task-table/task-table.component';
-import { LightingComponent } from './components/containers/lighting/lighting.component';
+import { LightingComponent } from './components/containers/AquariumContainer/lighting/lighting.component';
 
 
 //Color picker
@@ -52,7 +51,7 @@ import { aquariumReducer } from './store/aquarium/aquarium.reducer';
 import { snapshotReducer } from './store/snapshot/snapshot.reducer';
 import { speciesReducer } from './store/species/species.reducer';
 
-import { AquariumSelectionComponent } from './components/containers/aquarium-selection/aquarium-selection.component';
+import { MasterDashboardComponent } from './components/master-dashboard/master-dashboard.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ErrorMessageModalComponent } from './components/modals/error-message-modal/error-message-modal.component';
 
@@ -65,38 +64,40 @@ import { AquariumNotifierConfig } from './config/notifier';
 import { SnapshotListComponent } from './components/containers/maintenance/snapshot-list/snapshot-list.component';
 import { NotificationsListComponent } from './components/containers/maintenance/notifications-list/notifications-list.component';
 import { TaskTabComponent } from './components/containers/maintenance/task-tab/task-list.component';
-import { SnapshotCarouselComponent } from './components/snapshot/carousel/snapshot-carousel.component';
-import { SnapshotTakeButtonComponent } from './components/snapshot/take-button/snapshot-take-button.component';
-import { SnapshotDeleteButtonComponent } from './components/snapshot/delete-button/snapshot-delete-button.component';
-import { FishTableListComponent } from './components/fish/fish-table/fish-table-list.component';
-import { FishDetailFormComponent } from './components/fish/fish-detail-form/fish-detail-form.component';
-import { SpeciesSelectComponent } from './components/species/select/species-select.component';
-import { AquariumSelectComponent } from './components/aquarium/select/aquarium-select.component';
+import { SnapshotCarouselComponent } from './components/data/snapshot/carousel/snapshot-carousel.component';
+import { SnapshotTakeButtonComponent } from './components/data/snapshot/take-button/snapshot-take-button.component';
+import { SnapshotDeleteButtonComponent } from './components/data/snapshot/delete-button/snapshot-delete-button.component';
+import { FishTableListComponent } from './components/data/fish/table-list/fish-table-list.component';
+import { FishDetailFormComponent } from './components/data/fish/fish-detail-form/fish-detail-form.component';
+import { SpeciesSelectComponent } from './components/data/species/select/species-select.component';
+import { AquariumSelectComponent } from './components/data/aquarium/select/aquarium-select.component';
 import { ManageSpeciesModalComponent } from './components/modals/manage-species-modal/manage-species-modal.component';
-import { SpeciesTableComponent } from './components/species/species-table/species-table.component';
-import { SpeciesDetailFormComponent } from './components/species/species-detail-form/species-detail-form.component';
-import { FishInformationComponent } from './components/fish/fish-information/fish-information.component';
-import { FishSelectComponent } from './components/fish/select/fish-select.component';
+import { SpeciesTableComponent } from './components/data/species/species-table/species-table.component';
+import { SpeciesDetailFormComponent } from './components/data/species/species-detail-form/species-detail-form.component';
+import { FishInformationComponent } from './components/data/fish/fish-information/fish-information.component';
+import { FishSelectComponent } from './components/data/fish/select/fish-select.component';
 import { ManageFishModalComponent } from './components/modals/manage-fish-modal/manage-fish-modal.component';
-<<<<<<< HEAD
-import { FeedingTableListComponent } from './components/feeding/feeding-table/feeding-table-list.component';
+import { FeedingTableListComponent } from './components/data/feeding/feeding-table/feeding-table-list.component';
 import { FeedingListComponent } from './components/containers/maintenance/feeding-list/feeding-list.component';
-import { FeedingDetailFormComponent } from './components/feeding/feeding-detail-form/feeding-detail-form.component';
-import { SpeciesDetailViewComponent } from './components/species/species-detail-view/species-detail-view.component';
-=======
-import { FeedingTableListComponent } from './components/containers/maintenance/feed-table/feeding-table-list.component';
->>>>>>> 4e14378b4e59bf792e948cee6829b6a682753443
+import { FeedingDetailFormComponent } from './components/data/feeding/feeding-detail-form/feeding-detail-form.component';
+import { SpeciesComponent } from './components/containers/species/species.component';
+import { AquariumContainer } from './components/containers/AquariumContainer/aquarium-container.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
+    FeedingListComponent,
+    SpeciesComponent,
+
+    /* Aquarium Container */
+    AquariumContainer,
     DashboardComponent,
     FishComponent,
     LightingComponent,
     MaintenanceComponent,
-    FeedingListComponent,
 
+    /* Data sources */
     SnapshotCarouselComponent,
     SnapshotListComponent,
     SnapshotTakeButtonComponent,
@@ -110,7 +111,6 @@ import { FeedingTableListComponent } from './components/containers/maintenance/f
     SpeciesDetailFormComponent,
     SpeciesSelectComponent,
     SpeciesTableComponent,
-    SpeciesDetailViewComponent,
 
     AquariumSelectComponent,
     
@@ -120,14 +120,10 @@ import { FeedingTableListComponent } from './components/containers/maintenance/f
     NotificationsListComponent,
 
     FeedingTableListComponent,
-<<<<<<< HEAD
     FeedingDetailFormComponent,
-=======
->>>>>>> 4e14378b4e59bf792e948cee6829b6a682753443
 
     SettingsComponent,
-    AquariumSelectionComponent,
-    OperationsComponent,
+    MasterDashboardComponent,
     TaskTableComponent,
     ErrorMessageModalComponent,
     CreateAquariumModelComponent,

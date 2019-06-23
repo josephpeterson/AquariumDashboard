@@ -1,63 +1,41 @@
-<ng-container *ngIf="!(loading$ | async) else loading">
-  <ng-container *ngIf="aquarium$ | async as aquarium; else selectAquariumPage">
-    <ng-container *ngIf="hasValidAquarium | async else selectAquariumPage">
-      <header>
-        <nav class='navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3'>
-          <div class="container">
-            <a class="navbar-brand" [routerLink]='["/"]'>MyAquarium</a>
-            <ng-container>
-              <mat-form-field>
-                <mat-select [(ngModel)]="aquarium.id" (selectionChange)="selectAquarium($event.value)">
-                  <mat-option *ngFor="let aq of aquariums$ | async" [value]="aq.id">
-                    {{aq.name}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
+<header>
+  <nav class='navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3'>
+    <div class="container">
+      <a class="navbar-brand" [routerLink]='["/"]'>Aquarium Monitor</a>
 
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse"
-                aria-label="Toggle navigation" [attr.aria-expanded]="isExpanded" (click)="toggle()">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse"
-                [ngClass]='{"show": isExpanded}'>
-                <ul class="navbar-nav flex-grow">
-                  <li class="nav-item">
-                    <a class="nav-link text-dark" [routerLink]='["/" + aquarium.id]'
-                      [routerLinkActiveOptions]='{ exact: true }' [routerLinkActive]='["link-active"]'>Overview</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link text-dark" [routerLink]='["/" + aquarium.id + "/maintenance"]'
-                      [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]="{exact: false}">Maintenance</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link text-dark" [routerLink]='["/" + aquarium.id + "/fish"]' [routerLinkActive]='["link-active"]'>Fish</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link text-dark" [routerLink]='["/" + aquarium.id + "/lighting"]'
-                      [routerLinkActive]='["link-active"]'>Lighting</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link text-dark" [routerLink]='["/" + aquarium.id + "/settings"]'
-                      [routerLinkActive]='["link-active"]'>Settings</a>
-                  </li>
-                </ul>
-              </div>
-            </ng-container>
-          </div>
-        </nav>
-      </header>
-      <div class="container">
-        <router-outlet></router-outlet>
+      <a *ngIf="aquarium$ | async as aquarium" class="nav-link text-dark"
+        [routerLink]='["/" + aquarium.id]' (click)="openAquariumSelection()">{{aquarium.name}}</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse"
+        aria-label="Toggle navigation" [attr.aria-expanded]="isExpanded" (click)="toggle()">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Aquarium Navigation -->
+      <div *ngIf="aquarium$ | async as aquarium" class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse"
+        [ngClass]='{"show": isExpanded}'>
+        <ul class="navbar-nav flex-grow">
+          <li class="nav-item">
+            <a class="nav-link text-dark" [routerLink]='["/" + aquarium.id]' [routerLinkActiveOptions]='{ exact: true }'
+              [routerLinkActive]='["link-active"]'>Overview</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark" [routerLink]='["/" + aquarium.id + "/maintenance"]'
+              [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]="{exact: false}">Maintenance</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark" [routerLink]='["/" + aquarium.id + "/fish"]'
+              [routerLinkActive]='["link-active"]'>Fish</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark" [routerLink]='["/" + aquarium.id + "/lighting"]'
+              [routerLinkActive]='["link-active"]'>Lighting</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark" [routerLink]='["/" + aquarium.id + "/settings"]'
+              [routerLinkActive]='["link-active"]'>Settings</a>
+          </li>
+        </ul>
       </div>
-    </ng-container>
-  </ng-container>
-  <ng-template #selectAquariumPage>
-    <aquarium-selection-component [autoload]="false"></aquarium-selection-component>
-  </ng-template>
-</ng-container>
-<ng-template #loading>
-  <div class="d-flex m-5 justify-content-center">
-    <mat-progress-spinner mode="indeterminate">
-    </mat-progress-spinner>
-  </div>
-</ng-template>
+    </div>
+  </nav>
+</header>

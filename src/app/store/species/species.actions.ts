@@ -4,7 +4,7 @@ import { Species } from 'src/app/models/Species';
 import { Update } from '@ngrx/entity';
 
 export enum SpeciesActions {
-  LoadSpecies = '[Species] LoadByAquarium',
+  LoadSpecies = '[Species] LoadAllSpecies',
   LoadSpeciesSuccess = '[Species] LoadSpeciesSuccess',
   LoadAllSpeciesFail = '[Species] LoadAllSpeciesFail',
 

@@ -1,11 +1,11 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { ConnectionError } from 'src/app/models/ConnectionError';
-import { Aquarium } from 'src/app/models/Aquarium';
 import { CreateAquariumModalComponentData } from './create-aquarium-model.component.data';
 import { Observable } from 'rxjs';
 import { MatDialogRef } from '@angular/material';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormControl } from '@angular/forms';
+import { ConnectionError } from 'src/app/models/ConnectionError';
+import { Aquarium } from 'src/app/models/Aquarium';
 
 @Component({
   selector: 'create-aquarium-modal',

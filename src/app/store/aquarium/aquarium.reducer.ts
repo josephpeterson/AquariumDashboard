@@ -96,6 +96,11 @@ export function aquariumReducer(state = initialState, action: AllAquariumActions
 				...state,
 				selectedAquariumId: action.aquariumId
 			}
+		case AquariumActions.Unselect:
+			return {
+				...state,
+				selectedAquariumId: undefined
+			}
 		case AquariumActions.UpdateSuccess:
 			var newState = adapter.updateOne(action.aquarium, state);
 			return {
@@ -198,7 +203,7 @@ export function aquariumReducer(state = initialState, action: AllAquariumActions
 		case AquariumActions.AddFishSuccess:
 			var aqId = action.payload.aquariumId
 			var aq = state.entities[aqId];
-			if(aq.fish)
+			if (aq.fish)
 				aq.fish.push(action.payload);
 			var update: Update<Aquarium> = {
 				id: aqId,

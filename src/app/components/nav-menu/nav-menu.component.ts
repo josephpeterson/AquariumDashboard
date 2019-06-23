@@ -1,29 +1,28 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
-import { AquariumListAction, AquariumSelectionAction } from 'src/app/store/aquarium/aquarium.actions';
+import { AquariumSelectionAction, AquariumLoadByIdAction } from 'src/app/store/aquarium/aquarium.actions';
+import { isLoadingAquariums, getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
 import { Aquarium } from 'src/app/models/Aquarium';
-import { isLoadingAquariums, getAllAquariums, getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
-import { NavMenuComponentData } from './nav-menu-component.data';
+import { MatDialog } from '@angular/material';
+import { ManageFishModalComponent } from '../modals/manage-fish-modal/manage-fish-modal.component';
 
 @Component({
-  selector: 'app-nav-menu',
+  selector: 'nav-menu',
   templateUrl: './nav-menu.component.html',
   styleUrls: ['./nav-menu.component.scss']
 })
 export class NavMenuComponent {
   isExpanded = false;
 
-  public loading$ = this.data.loading
-  public aquariums$ = this.data.aquariums
-  public aquarium$ = this.data.aquarium
-  public hasValidAquarium = this.data.hasValidAquarium;
+  public loading$ = this.store.select(isLoadingAquariums);
+  public aquarium$ = this.store.select(getSelectedAquarium);
 
 
-  constructor(public data: NavMenuComponentData,
+  constructor(private store: Store<AppState>,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private dialog: MatDialog) { }
 
   collapse() {
     this.isExpanded = false;
@@ -31,14 +30,18 @@ export class NavMenuComponent {
 
   ngOnInit() {
     this.route.params.subscribe(p => {
-      this.data.load(p.aqId);
+      if (p.aqId) {
+        this.store.dispatch(new AquariumSelectionAction(p.aqId));
+        this.store.dispatch(new AquariumLoadByIdAction(p.aqId));
+      }
     });
   }
 
-  selectAquarium(val) {
-    var url = this.router.url;
-    var path = url.split("/").splice(2);
-    this.router.navigate([val,...path]);
+  openAquariumSelection() {
+    var inst  = this.dialog.open(ManageFishModalComponent,{
+      height: "70%",
+      width: "60%",
+    });
   }
   toggle() {
     this.isExpanded = !this.isExpanded;

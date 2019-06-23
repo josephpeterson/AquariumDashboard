@@ -10,7 +10,7 @@ export enum AquariumActions {
   UpdateFail = '[Aquariums] Tank failed to update',
 
   Load = '[Aquariums] Load',
-  LoadById = '[Aquariums] Load Detailed Aquarium',
+  LoadById = '[Aquariums] Load by id',
   LoadSuccess = '[Aquariums] Load Success',
   LoadFail = '[Aquariums] Load Failure',
 
@@ -24,6 +24,7 @@ export enum AquariumActions {
   DeleteFail = '[Aquariums] DeleteFail',
 
   MakeSelection = '[Aquariums] Tank Selected',
+  Unselect = '[Aquariums] Tank Unselected',
 
 
   AddFish = '[Aquariums] AddFish',
@@ -73,6 +74,9 @@ export class AquariumSelectionAction implements Action {
   readonly type = AquariumActions.MakeSelection
   constructor(public aquariumId: number) {
   }
+}
+export class AquariumUnSelectionAction implements Action {
+  readonly type = AquariumActions.Unselect
 }
 
 
@@ -224,6 +228,7 @@ export type AllAquariumActions =
   AquariumUpdateFailAction |
 
   AquariumSelectionAction |
+  AquariumUnSelectionAction |
   AquariumListAction |
   AquariumLoadByIdAction |
 
