@@ -93,6 +93,12 @@ export class AquariumService {
   public deleteSpecies(species: Species): Observable<Species> {
     return this.http.post<Species>(this._url + "/v1/Species/Delete", species.id);
   }
+  public scrapeSpecies(resource: string): Observable<Species> {
+    var species = new Species({
+      website: resource
+    });
+    return this.http.post<Species>(this._url + "/v1/Scraper/Scrape", species);
+  }
 
   /* Fish Controller */
   public getFishById(fishId: number): Observable<Fish> {
@@ -108,4 +114,5 @@ export class AquariumService {
   public deleteFish(fish: Fish): Observable<Fish> {
     return this.http.post<Fish>(this._url + "/v1/Fish/Delete", fish.id);
   }
+  
 }

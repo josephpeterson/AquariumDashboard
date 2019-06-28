@@ -1,0 +1,15 @@
+<div>
+	<h1 mat-dialog-title>Select Aquarium</h1>
+	<small class="text-muted">
+			Enter your aquarium details. The type of aquarium should reflect your tank style (tall, short, long, etc...).
+
+	</small>
+	<aquarium-table (rowClicked)="makeSelection($event[1])"></aquarium-table>
+	<mat-dialog-actions align="end">
+		<button *ngIf="(selectedSpeciesId || addingSpecies)" class="m-2 btn btn-dark"
+			(click)='clickBack()'>Back</button>
+		<button *ngIf="!(selectedSpeciesId || addingSpecies)" class="m-2 btn btn-secondary md-float-right"
+			(click)='clickNewSpecies()'>Add Species...</button>
+		<button class="m-2 btn btn-primary" [mat-dialog-close]="true">Done</button>
+	</mat-dialog-actions>
+</div>

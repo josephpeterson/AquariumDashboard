@@ -28,6 +28,13 @@ export class SpeciesTableComponent {
     { name: 'website', label: 'Website', visible: true },
     { name: 'fishCount', label: 'Alive Fish', visible: true },
     { name: 'aquariumCount', label: 'Aquariums', visible: true },
+    { name: 'price', label: 'Price ($)', visible: true },
+    { name: 'careLevel', label: 'Care Level', visible: true },
+    { name: 'maxSize', label: 'Max Size (in.)', visible: true },
+    { name: 'primaryColor', label: 'Primary Color', visible: true },
+    { name: 'secondaryColor', label: 'Secondary Color', visible: true },
+    { name: 'lifespan', label: 'Lifespan', visible: true },
+    { name: 'minimumGallons', label: 'Minimum Gallons', visible: true },
   ];
 
   @Input() displayedColumns: any[] = this.columns.filter(col => col.visible).map(col => col.name);
@@ -66,7 +73,6 @@ export class SpeciesTableComponent {
     this.dataSource.filter = this.getFilterString();
   }
   rowClickHandler(event: MouseEvent,row: Species) {
-    console.log(row);
     this.rowClicked.emit([event,row]);
   }
 }

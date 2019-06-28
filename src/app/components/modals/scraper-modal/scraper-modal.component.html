@@ -1,0 +1,65 @@
+<div class="scraper-modal-component">
+  <h1 mat-dialog-title>Web Scraper</h1>
+  <div class="d-flex flex-row text-center" *ngIf="loading">
+    <table style="width:100%;height:100%;">
+      <tr>
+        <td>
+          <mat-progress-spinner class="mr-auto ml-auto align-middle" color="warn" mode="indeterminate">
+          </mat-progress-spinner>
+
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="row" *ngIf="!loading">
+    <h4>New Properties</h4>
+    <ul class="list-group w-100" *ngIf="!editing">
+      <li *ngIf="species.careLevel" class="list-group-item">Care Level: {{species.careLevel}}<small class="ml-3 text-muted">Current Value: {{originalSpecies.careLevel}}</small>
+        <button class="btn btn-danger float-right" (click)="species.careLevel = undefined">Remove</button>
+      </li>
+      <li *ngIf="species.price" class="list-group-item">Base Price: ${{species.price}}<small class="ml-3 text-muted">Current Value: {{originalSpecies.price}}</small>
+        <button class="btn btn-danger float-right" (click)="species.price = undefined">Remove</button>
+      </li>
+      <li *ngIf="species.phMin" class="list-group-item">pH Minimum: {{species.phMin}}<small class="ml-3 text-muted">Current Value: {{originalSpecies.phMin}}</small>
+        <button class="btn btn-danger float-right" (click)="species.phMin = undefined">Remove</button>
+      </li>
+      <li *ngIf="species.phMax" class="list-group-item">pH Maximum: {{species.phMax}}<small class="ml-3 text-muted">Current Value: {{originalSpecies.phMax}}</small>
+        <button class="btn btn-danger float-right" (click)="species.phMax = undefined">Remove</button>
+      </li>
+      <li *ngIf="species.phMin" class="list-group-item">Temperature Minimum: {{species.phMin}}<small class="ml-3 text-muted">Current Value: {{originalSpecies.phMin}}</small>
+        <button class="btn btn-danger float-right" (click)="species.phMin = undefined">Remove</button>
+      </li>
+      <li *ngIf="species.phMax" class="list-group-item">Temperature Maximum: {{species.phMax}}<small class="ml-3 text-muted">Current Value: {{originalSpecies.phMax}}</small>
+        <button class="btn btn-danger float-right" (click)="species.phMax = undefined">Remove</button>
+      </li>
+      <li *ngIf="species.maxSize" class="list-group-item">Max Size: {{species.maxSize}}<small class="ml-3 text-muted">Current Value: {{originalSpecies.maxSize}}</small>
+        <button class="btn btn-danger float-right" (click)="species.maxSize = undefined">Remove</button>
+      </li>
+      <li *ngIf="species.minimumGallons" class="list-group-item">Minimum Gallons: {{species.minimumGallons}}<small class="ml-3 text-muted">Current Value: {{originalSpecies.minimumGallons}}</small>
+        <button class="btn btn-danger float-right" (click)="species.minimumGallons = undefined">Remove</button>
+      </li>
+      <li *ngIf="species.lifespan" class="list-group-item">Lifespan: {{species.lifespan}}<small class="ml-3 text-muted">Current Value: {{originalSpecies.lifespan}}</small>
+        <button class="btn btn-danger float-right" (click)="species.lifespan = undefined">Remove</button>
+      </li>
+      <li *ngIf="species.primaryColor" class="list-group-item">Primary Color: {{species.primaryColor}}<small class="ml-3 text-muted">Current Value: {{originalSpecies.primaryColor}}</small>
+        <button class="btn btn-danger float-right" (click)="species.primaryColor = undefined">Remove</button>
+      </li>
+      <li *ngIf="species.secondaryColor" class="list-group-item">Secondary Color: {{species.secondaryColor}}<small class="ml-3 text-muted">Current Value: {{originalSpecies.secondaryColor}}</small>
+        <button class="btn btn-danger float-right" (click)="species.secondaryColor = undefined">Remove</button>
+      </li>
+
+      <li *ngIf="species.description" class="list-group-item">
+        <mat-form-field class="w-100">
+          <textarea [disabled]='updating$ | async' matInput [(ngModel)]="species.description" matTextareaAutosize
+            matAutosizeMinRows=5 matAutosizeMaxRows=10
+            placeholder="Fish description, notes, attributes, features, etc..."></textarea>
+        </mat-form-field>
+      </li>
+
+    </ul>
+  </div>
+  <div class="row justify-content-end" *ngIf="!loading">
+    <button class="m-2 btn btn-danger" mat-dialog-close>Cancel</button>
+    <button class="m-2 btn btn-success" [mat-dialog-close]="species">Apply</button>
+  </div>
+</div>

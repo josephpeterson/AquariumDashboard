@@ -11,6 +11,7 @@ import { AquariumListAction, AquariumSelectionAction, AquariumUnSelectionAction 
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { getAllAquariums, isLoadingAquariums, getConnectionError } from 'src/app/store/aquarium/aquarium.selector';
+import { Aquarium } from 'src/app/models/Aquarium';
 
 @Component({
   selector: 'master-dashboard-component',
@@ -65,6 +66,10 @@ export class MasterDashboardComponent implements OnInit {
 
   clickSpecies(species: Species) {
     var url = ["species", species.id];
+    this.router.navigate(url);
+  }
+  clickAquarium(aquarium: Aquarium) {
+    var url = [aquarium.id];
     this.router.navigate(url);
   }
 }

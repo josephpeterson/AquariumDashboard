@@ -3,8 +3,7 @@
     <div class="container">
       <a class="navbar-brand" [routerLink]='["/"]'>Aquarium Monitor</a>
 
-      <a *ngIf="aquarium$ | async as aquarium" class="nav-link text-dark"
-        [routerLink]='["/" + aquarium.id]' (click)="openAquariumSelection()">{{aquarium.name}}</a>
+      <button *ngIf="aquarium$ | async as aquarium" class="btn nav-link text-dark" (click)="openAquariumSelection()">{{aquarium.name}}</button>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse"
         aria-label="Toggle navigation" [attr.aria-expanded]="isExpanded" (click)="toggle()">
         <span class="navbar-toggler-icon"></span>

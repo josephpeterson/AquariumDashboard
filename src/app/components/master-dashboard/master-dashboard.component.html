@@ -1,41 +1,20 @@
 <div class="container aquarium-selection-component">
   <mat-card class="m-5">
     <mat-card-title>
-      <h3>Select an Aquarium</h3>
+      <h3>Aquarium List</h3>
+      <aquarium-table (rowClicked)="clickAquarium($event[1])"></aquarium-table>
     </mat-card-title>
-    <ng-container *ngIf="loading$ | async else loaded">
-      <div class="row justify-content-center">
-        <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
-      </div>
-    </ng-container>
-    <ng-template #loaded>
-      <ng-container *ngIf="connectionError$ | async else success">
-        <div class="row">
-          <button class="m-2 btn btn-secondary" (click)="loadAquariums()">Reconnect</button>
-        </div>
-      </ng-container>
-      <ng-template #success>
-        <mat-action-list>
-          <button *ngFor="let aquarium of aquariums$ | async" mat-list-item [routerLink]='["/" + aquarium.id]'>
-            {{aquarium.name}}
-          </button>
-          <button mat-list-item type="button" class="btn btn-default btn-sm" (click)="displayCreateAquariumDialog()">
-            <fa-icon class="addIcon mr-2" [icon]="faCreate"></fa-icon>Create New...
-          </button>
-        </mat-action-list>
-      </ng-template>
-    </ng-template>
-
   </mat-card>
 
   <mat-card class="m-5">
     <mat-card-title>
       <h3>View Species</h3>
-      <species-table (rowClicked)="clickSpecies($event[1])"></species-table>
+      <species-table (rowClicked)="clickSpecies($event[1])"
+        [displayedColumns]="['name','fishCount','aquariumCount','price','careLevel']"></species-table>
     </mat-card-title>
     <mat-action-list>
-      <button mat-list-item type="button" class="btn btn-default btn-sm" (click)="displayCreateAquariumDialog()">
-        <fa-icon class="addIcon mr-2" [icon]="faCreate"></fa-icon>Create New...
+      <button mat-list-item type="button" class="btn btn-default btn-sm" [routerLink]="['species','add']">
+        <fa-icon class="addIcon mr-2" [icon]="faCreate"></fa-icon>New Species...
       </button>
     </mat-action-list>
   </mat-card>

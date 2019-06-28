@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MasterDashboardComponent } from './components/master-dashboard/master-dashboard.component';
-import { MaintenanceComponent } from './components/containers/maintenance/maintenance.component';
 import { FishComponent } from './components/containers/AquariumContainer/fish/fish.component';
 import { LightingComponent } from './components/containers/AquariumContainer/lighting/lighting.component';
 import { SettingsComponent } from './components/containers/AquariumContainer/settings/settings.component';
 import { DashboardComponent } from './components/containers/AquariumContainer/dashboard/dashboard.component';
 import { SpeciesComponent } from './components/containers/species/species.component';
 import { AquariumContainer } from './components/containers/AquariumContainer/aquarium-container.component';
+import { MaintenanceComponent } from './components/containers/AquariumContainer/maintenance/maintenance.component';
 
 const routes: Routes = [
   //{ path: '', component: AquariumSelectionComponent, pathMatch: 'full' },
@@ -20,7 +20,10 @@ const routes: Routes = [
     component: SpeciesComponent
   },
   {
-    path: ':aqId', component: AquariumContainer, children: [
+    path: ':aqId',
+    component: AquariumContainer,
+    runGuardsAndResolvers: "always",
+    children: [
       {
         path: 'dashboard',
         component: DashboardComponent
@@ -62,7 +65,7 @@ const routes: Routes = [
 ];
 @NgModule({
   exports: [RouterModule],
-  imports: [RouterModule.forRoot(routes)]
+  imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' })]
 })
 export class AppRoutingModule { }
 

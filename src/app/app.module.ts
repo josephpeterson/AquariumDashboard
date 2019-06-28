@@ -31,7 +31,7 @@ import { DashboardComponent } from './components/containers/AquariumContainer/da
 
 //Misc.
 import { FishComponent } from './components/containers/AquariumContainer/fish/fish.component';
-import { MaintenanceComponent } from './components/containers/maintenance/maintenance.component';
+import { MaintenanceComponent } from './components/containers/AquariumContainer/maintenance/maintenance.component';
 import { SettingsComponent } from './components/containers/AquariumContainer/settings/settings.component';
 import { TaskListComponent } from './components/task-list/task-list.component';
 import { TaskTableComponent } from './components/task-table/task-table.component';
@@ -61,9 +61,9 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 import { ConfirmModalComponent } from './components/modals/confirm-modal/confirm-modal.component';
 import { NotifierModule } from 'angular-notifier';
 import { AquariumNotifierConfig } from './config/notifier';
-import { SnapshotListComponent } from './components/containers/maintenance/snapshot-list/snapshot-list.component';
-import { NotificationsListComponent } from './components/containers/maintenance/notifications-list/notifications-list.component';
-import { TaskTabComponent } from './components/containers/maintenance/task-tab/task-list.component';
+import { SnapshotListComponent } from './components/containers/AquariumContainer/maintenance/snapshot-list/snapshot-list.component';
+import { NotificationsListComponent } from './components/containers/AquariumContainer/maintenance/notifications-list/notifications-list.component';
+import { TaskTabComponent } from './components/containers/AquariumContainer/maintenance/task-tab/task-list.component';
 import { SnapshotCarouselComponent } from './components/data/snapshot/carousel/snapshot-carousel.component';
 import { SnapshotTakeButtonComponent } from './components/data/snapshot/take-button/snapshot-take-button.component';
 import { SnapshotDeleteButtonComponent } from './components/data/snapshot/delete-button/snapshot-delete-button.component';
@@ -78,10 +78,14 @@ import { FishInformationComponent } from './components/data/fish/fish-informatio
 import { FishSelectComponent } from './components/data/fish/select/fish-select.component';
 import { ManageFishModalComponent } from './components/modals/manage-fish-modal/manage-fish-modal.component';
 import { FeedingTableListComponent } from './components/data/feeding/feeding-table/feeding-table-list.component';
-import { FeedingListComponent } from './components/containers/maintenance/feeding-list/feeding-list.component';
+import { FeedingListComponent } from './components/containers/AquariumContainer/maintenance/feeding-list/feeding-list.component';
 import { FeedingDetailFormComponent } from './components/data/feeding/feeding-detail-form/feeding-detail-form.component';
 import { SpeciesComponent } from './components/containers/species/species.component';
 import { AquariumContainer } from './components/containers/AquariumContainer/aquarium-container.component';
+import { SpeciesDetailViewComponent } from './components/data/species/species-detail-view/species-detail-view.component';
+import { ScraperModalComponent } from './components/modals/scraper-modal/scraper-modal.component';
+import { AquariumTableComponent } from './components/data/aquarium/aquarium-table/aquarium-table.component';
+import { SelectAquariumModelComponent } from './components/modals/select-aquarium-modal/select-aquarium-modal.component';
 
 @NgModule({
   declarations: [
@@ -111,8 +115,11 @@ import { AquariumContainer } from './components/containers/AquariumContainer/aqu
     SpeciesDetailFormComponent,
     SpeciesSelectComponent,
     SpeciesTableComponent,
+    SpeciesDetailViewComponent,
 
     AquariumSelectComponent,
+    AquariumTableComponent,
+    SelectAquariumModelComponent,
     
 
     TaskListComponent,
@@ -130,6 +137,7 @@ import { AquariumContainer } from './components/containers/AquariumContainer/aqu
     ConfirmModalComponent,
     ManageSpeciesModalComponent,
     ManageFishModalComponent,
+    ScraperModalComponent,
     //New components here
   ],
   entryComponents: [
@@ -138,7 +146,9 @@ import { AquariumContainer } from './components/containers/AquariumContainer/aqu
     ConfirmModalComponent,
     ErrorMessageModalComponent,
     ManageSpeciesModalComponent,
-    ManageFishModalComponent
+    ManageFishModalComponent,
+    SelectAquariumModelComponent,
+    ScraperModalComponent
   ],
 
   imports: [
