@@ -10,9 +10,9 @@ import { AppState } from 'src/app/app.state';
   templateUrl: './select-aquarium-modal.component.html',
   styleUrls: ['./select-aquarium-modal.component.scss']
 })
-export class SelectAquariumModelComponent implements OnInit {
+export class SelectAquariumModalComponent implements OnInit {
 
-  constructor(private dialogRef: MatDialogRef<SelectAquariumModelComponent>){}
+  constructor(private dialogRef: MatDialogRef<SelectAquariumModalComponent>){}
   public aquariumName;
   public aquariumType;
   public aquariumDate = new FormControl(new Date());

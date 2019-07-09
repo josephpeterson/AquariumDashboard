@@ -10,6 +10,8 @@ import { getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
 import { AppState } from 'src/app/app.state';
 import { Store } from '@ngrx/store';
 import { ManageFishModalComponent } from '../../../modals/manage-fish-modal/manage-fish-modal.component';
+import { FishLoadByAquariumIdAction, FishLoadByFishIdAction } from 'src/app/store/fish/fish.actions';
+import { getAllFish } from 'src/app/store/fish/fish.selector';
 
 @Component({
   selector: 'fish-page-component',
@@ -20,10 +22,14 @@ import { ManageFishModalComponent } from '../../../modals/manage-fish-modal/mana
 
 export class FishComponent implements OnInit {
 
-  public selectedFishId;
+  public fishId: number;
+  public fish: Fish;
+  
   public selectedAquariumId;
 
   public aquarium$: Observable<Aquarium> = this.store.select(getSelectedAquarium);
+  public fish$: Observable<Fish[]> = this.store.select(getAllFish);
+
 
   constructor(
     public dialog: MatDialog,
@@ -36,10 +42,18 @@ export class FishComponent implements OnInit {
     this.route.params.subscribe(p => {
       if(p.fishId)
       {
-        this.selectedFishId = p.fishId;
+        this.fishId = p.fishId;
+        this.store.dispatch(new FishLoadByFishIdAction(p.fishId));
       }
     });
+    this.fish$.subscribe(fish => {
+      console.log(fish);
+      var list = fish.filter(f => f.id == this.selectedFishId);
+      if(list.length > 0 )
+        this.fish = list[0];
+    });
   }
+  
   openManageFishModal() {
     var inst  = this.dialog.open(ManageFishModalComponent,{
       height: "70%",

@@ -6,7 +6,7 @@ import { AquariumSelectionAction, AquariumLoadByIdAction } from 'src/app/store/a
 import { isLoadingAquariums, getSelectedAquarium, getConnectionError } from 'src/app/store/aquarium/aquarium.selector';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { MatDialog } from '@angular/material';
-import { SelectAquariumModelComponent } from '../modals/select-aquarium-modal/select-aquarium-modal.component';
+import { SelectAquariumModalComponent } from '../modals/select-aquarium-modal/select-aquarium-modal.component';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -48,7 +48,7 @@ export class NavMenuComponent {
   }
 
   openAquariumSelection() {
-  this.dialog.open(SelectAquariumModelComponent, {
+  this.dialog.open(SelectAquariumModalComponent, {
       height: "70%",
       width: "60%",
     }).afterClosed().subscribe(aq => {

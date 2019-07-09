@@ -101,6 +101,9 @@ export class AquariumService {
   }
 
   /* Fish Controller */
+  public getFishByAquariumId(aquariumId: number): Observable<Fish[]> {
+    return this.http.get<Fish[]>(this._url + `/v1/Fish/Aquarium/${aquariumId}`);
+  }
   public getFishById(fishId: number): Observable<Fish> {
     return this.http.get<Fish>(this._url + `/v1/Fish/${fishId}`);
   }

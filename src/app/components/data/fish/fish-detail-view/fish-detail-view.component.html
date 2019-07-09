@@ -1,0 +1,78 @@
+<div class="shadow p-3 mb-5 bg-white rounded" *ngIf="fish else loading">
+    <h2 *ngIf="!editing">{{fish.name}}
+        <button class="btn btn-secondary edit float-right" (click)="clickEdit()">
+            <fa-icon class="pr-1" [icon]="faEdit"></fa-icon>Edit Fish
+        </button>
+    </h2>
+    <div class="row p-4" *ngIf="editing">
+        <mat-form-field class="m-2 example-full-width">
+            <input [disabled]='updating$ | async' type="text" placeholder="Species Name" matInput
+                [(ngModel)]="species.name">
+        </mat-form-field>
+    </div>
+    <div class="row p-3">
+            <ul class="list-group">
+                <li class="list-group-item">Age: 40day</li>
+                <li class="list-group-item">Species: <a [routerLink]='["species",fish.speciesId]'>Species</a></li>
+                <li class="list-group-item">Aquarium: 40day</li>
+            </ul>
+    </div>
+    <div class="row p-3" *ngIf="!editing">
+        <h4>Feeding History</h4>
+        
+    </div>
+    <div class="row p-3" *ngIf="!editing">
+        <h4>Photos</h4>
+        
+    </div>
+    <div class="row" *ngIf="!editing">
+        <small class="p-3">Resource: <a target="blank" [href]="species.website">{{species.website}}</a></small>
+    </div>
+
+
+    <div class="row" *ngIf="editing">
+        <div class="col">
+            <mat-form-field class="m-2 w-50">
+                <input [disabled]='updating$ | async' type="text" placeholder="Resource" aria-label="Number" matInput
+                    [(ngModel)]="species.website">
+            </mat-form-field>
+            <button [disabled]='updating$ | async' class="m-2 btn btn-info" (click)="clickScrape()">Scrape from
+                Resource...</button>
+        </div>
+
+    </div>
+    <div class="row justify-content-end p-4" *ngIf="editing">
+        <mat-form-field class="w-100">
+            <textarea [disabled]='updating$ | async' matInput [(ngModel)]="species.description" matTextareaAutosize
+                matAutosizeMinRows=5 matAutosizeMaxRows=10
+                placeholder="Fish description, notes, attributes, features, etc..."></textarea>
+        </mat-form-field>
+        <button *ngIf="!adding" [disabled]='updating$ | async' (click)="clickDelete()" class="m-2 btn btn-danger">
+            <fa-icon class="pr-1" [icon]="faTrash"></fa-icon>Delete
+        </button>
+        <button *ngIf="!adding" [disabled]='updating$ | async' (click)="clickReset()"
+            class="m-2 btn btn-info">Reset</button>
+        <button *ngIf="!adding" [disabled]='updating$ | async' (click)="clickCancel()"
+            class="m-2 btn btn-danger">Cancel</button>
+        <button [disabled]='(updating$ | async) || (adding$ | async)' (click)="adding ? clickAdd():clickSave()"
+            class="m-2 btn btn-success">Save Changes</button>
+    </div>
+    <ng-container *ngIf="exists">
+        <h2>Photos</h2>
+        <h2>Currently Alive Fish</h2>
+        <h2>Feeding History</h2>
+    </ng-container>
+</div>
+<ng-template #loading>
+    <div class="shadow p-3 mb-5 bg-white rounded d-flex flex-row text-center">
+        <table style="width:100%;height:100%;">
+            <tr>
+                <td>
+                    <mat-progress-spinner class="mr-auto ml-auto align-middle" color="warn" mode="indeterminate">
+                    </mat-progress-spinner>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</ng-template>

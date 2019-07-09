@@ -85,7 +85,10 @@ import { AquariumContainer } from './components/containers/AquariumContainer/aqu
 import { SpeciesDetailViewComponent } from './components/data/species/species-detail-view/species-detail-view.component';
 import { ScraperModalComponent } from './components/modals/scraper-modal/scraper-modal.component';
 import { AquariumTableComponent } from './components/data/aquarium/aquarium-table/aquarium-table.component';
-import { SelectAquariumModelComponent } from './components/modals/select-aquarium-modal/select-aquarium-modal.component';
+import { SelectAquariumModalComponent } from './components/modals/select-aquarium-modal/select-aquarium-modal.component';
+import { FishDetailViewComponent } from './components/data/fish/fish-detail-view/fish-detail-view.component';
+import { FishEffects } from './store/fish/fish.effect';
+import { fishReducer } from './store/fish/fish.reducer';
 
 @NgModule({
   declarations: [
@@ -111,6 +114,7 @@ import { SelectAquariumModelComponent } from './components/modals/select-aquariu
     FishDetailFormComponent,
     FishInformationComponent,
     FishSelectComponent,
+    FishDetailViewComponent,
 
     SpeciesDetailFormComponent,
     SpeciesSelectComponent,
@@ -119,7 +123,7 @@ import { SelectAquariumModelComponent } from './components/modals/select-aquariu
 
     AquariumSelectComponent,
     AquariumTableComponent,
-    SelectAquariumModelComponent,
+    SelectAquariumModalComponent,
     
 
     TaskListComponent,
@@ -147,7 +151,7 @@ import { SelectAquariumModelComponent } from './components/modals/select-aquariu
     ErrorMessageModalComponent,
     ManageSpeciesModalComponent,
     ManageFishModalComponent,
-    SelectAquariumModelComponent,
+    SelectAquariumModalComponent,
     ScraperModalComponent
   ],
 
@@ -184,11 +188,12 @@ import { SelectAquariumModelComponent } from './components/modals/select-aquariu
     StoreModule.forFeature('aquariums', aquariumReducer),
     StoreModule.forFeature('snapshots', snapshotReducer),
     StoreModule.forFeature('species', speciesReducer),
+    StoreModule.forFeature('fish', fishReducer),
     StoreDevtoolsModule.instrument({
       maxAge: 25
     }),
     NotifierModule.withConfig(AquariumNotifierConfig),
-    EffectsModule.forRoot([AquariumEffects, SnapshotEffects,SpeciesEffects]),
+    EffectsModule.forRoot([AquariumEffects, SnapshotEffects,SpeciesEffects,FishEffects]),
     AppRoutingModule
   ],
   providers: [

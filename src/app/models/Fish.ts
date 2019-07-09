@@ -8,7 +8,7 @@ export class Fish
   aquariumId: number
   speciesId: number
   gender: string
-  name: string
+  name: string = "Test Fish"
   description: string
   date: Date
   
