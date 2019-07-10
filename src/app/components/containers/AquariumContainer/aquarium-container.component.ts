@@ -3,9 +3,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { AquariumSelectionAction, AquariumLoadByIdAction } from 'src/app/store/aquarium/aquarium.actions';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
 import { Aquarium } from 'src/app/models/Aquarium';
+import { Title } from '@angular/platform-browser';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'aquarium-container',
@@ -14,14 +16,19 @@ import { Aquarium } from 'src/app/models/Aquarium';
 })
 export class AquariumContainer {
   public aquarium$: Observable<Aquarium> = this.store.select(getSelectedAquarium);
+  public componentLifeCycle = new Subject();
 
   constructor(private route: ActivatedRoute,
     private router: Router,
-    private store: Store<AppState>) { }
+    private store: Store<AppState>,
+    private title: Title) { }
 
   ngOnInit() {
     this.route.params.subscribe(p => {
       this.load(p.aqId);
+    });
+    this.aquarium$.pipe(takeUntil(this.componentLifeCycle)).subscribe(aq => {
+      if(aq) this.title.setTitle(aq.name);
     });
   }
 
@@ -33,6 +40,11 @@ export class AquariumContainer {
   selectAquarium(val) {
     var url = this.router.url;
     var path = url.split("/").splice(2);
-    this.router.navigate([val,...path]);
+    this.router.navigate([val, ...path]);
+  }
+
+  ngOnDestroy() {
+    this.componentLifeCycle.next();
+    this.componentLifeCycle.unsubscribe();
   }
 }

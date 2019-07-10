@@ -11,25 +11,48 @@
         </mat-form-field>
     </div>
     <div class="row p-3">
-            <ul class="list-group">
-                <li class="list-group-item">Age: 40day</li>
-                <li class="list-group-item">Species: <a [routerLink]='["species",fish.speciesId]'>Species</a></li>
-                <li class="list-group-item">Aquarium: 40day</li>
-            </ul>
+        <ul class="list-group">
+            <li class="list-group-item">Age: {{getFishAge()}} days</li>
+            <li class="list-group-item">Species: <a [routerLink]='["/species",fish.speciesId]'>{{fish.species.name}}</a>
+            </li>
+            <li class="list-group-item">Aquarium: Aquarium name here</li>
+        </ul>
     </div>
-    <div class="row p-3" *ngIf="!editing">
-        <h4>Feeding History</h4>
-        
-    </div>
-    <div class="row p-3" *ngIf="!editing">
-        <h4>Photos</h4>
-        
-    </div>
-    <div class="row" *ngIf="!editing">
-        <small class="p-3">Resource: <a target="blank" [href]="species.website">{{species.website}}</a></small>
-    </div>
+    <ng-container *ngIf="!editing">
+        <div class="row p-3">
+            <h4>Feeding History</h4>
 
+        </div>
+        <div class="row">
+            <feeding-table-list class="w-100 p-2" *ngIf="fish.feedings && fish.feedings.length else noContent" [fish]="fish"></feeding-table-list>
+            <ng-template #noContent>
+                <p class="p-3">
+                    No Content
+                </p>
+            </ng-template>
+        </div>
+        <div class="row p-3">
+            <h4>Photos</h4>
 
+        </div>
+        <div class="row">
+            <p class="p-3">
+                No Content
+            </p>
+        </div>
+        <div class="row p-3">
+            <h4>Notes</h4>
+
+        </div>
+        <div class="row">
+            <p class="p-3">
+                No Content
+            </p>
+        </div>
+        <div class="row">
+            <small class="p-3">Resource: <a target="blank" [href]="species.website">{{species.website}}</a></small>
+        </div>
+    </ng-container>
     <div class="row" *ngIf="editing">
         <div class="col">
             <mat-form-field class="m-2 w-50">

@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core'
 import { Effect, Actions, ofType } from '@ngrx/effects'
-import { map, catchError, mergeMap } from 'rxjs/operators'
+import { map, catchError, mergeMap, switchMap } from 'rxjs/operators'
 import { AquariumService } from 'src/app/services/aquarium-service/aquarium.service';
 import { of } from 'rxjs'
-import { Snapshot } from 'src/app/models/Snapshot';
-import { FishLoadByAquariumIdAction, FishActions, FishLoadSuccessAction, FishLoadFailAction, FishAddAction, FishAddSuccessAction, FishAddFailAction, FishUpdateAction, FishUpdateSuccessAction, FishUpdateFailAction, FishDeleteAction, FishDeleteSuccessAction, FishDeleteFailAction } from './fish.actions';
+import { FishLoadByAquariumIdAction, FishActions, FishLoadSuccessAction, FishLoadFailAction, FishAddAction, FishAddSuccessAction, FishAddFailAction, FishUpdateAction, FishUpdateSuccessAction, FishUpdateFailAction, FishDeleteAction, FishDeleteSuccessAction, FishDeleteFailAction, FishLoadByFishIdAction } from './fish.actions';
 import { Fish } from 'src/app/models/Fish';
-import { Update } from '@ngrx/entity';
+import { SpeciesLoadSuccessAction } from '../species/species.actions';
 
 @Injectable()
 export class FishEffects {
@@ -21,6 +20,18 @@ export class FishEffects {
             map((Fish: Fish[]) => new FishLoadSuccessAction(Fish)),
             catchError(error => of(new FishLoadFailAction(error)))
         )));
+    @Effect()
+    loadFishByFishId$ = this.actions$.pipe(ofType<FishLoadByFishIdAction>(FishActions.LoadFishByFishId),
+        mergeMap((action: FishLoadByFishIdAction) => this.aquariumService.getFishById(action.payload).pipe(
+            switchMap((fish: Fish) => [
+                new FishLoadSuccessAction([fish]),
+                //new SpeciesLoadSuccessAction([fish.species]),
+            ]),
+            catchError(error => of(new FishLoadFailAction(error)))
+        )));
+
+
+
     @Effect()
     createFish$ = this.actions$.pipe(
         ofType<FishAddAction>(

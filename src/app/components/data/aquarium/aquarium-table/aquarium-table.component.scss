@@ -1,5 +1,8 @@
-.aquarium-table tr:hover
-{
-  cursor: pointer;
-  background-color:#F0F0F0;
+.aquarium-table {
+  tr.mat-row {
+    cursor: pointer;
+  }
+  tr.mat-row:hover {
+    background-color: #f0f0f0;
+  }
 }

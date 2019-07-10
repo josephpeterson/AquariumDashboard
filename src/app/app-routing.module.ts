@@ -62,6 +62,7 @@ const routes: Routes = [
     path: '',
     component: MasterDashboardComponent
   },
+  { path: '**', redirectTo: "/" }
 ];
 @NgModule({
   exports: [RouterModule],

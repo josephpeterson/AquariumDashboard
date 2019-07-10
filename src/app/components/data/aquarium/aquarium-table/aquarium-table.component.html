@@ -31,34 +31,3 @@
 
   <mat-paginator [pageSizeOptions]="[10, 20, 5]" showFirstLastButtons></mat-paginator>
 </div>
-<!--
-
-  <mat-card class="m-5">
-    <mat-card-title>
-      <h3>Select an Aquarium</h3>
-    </mat-card-title>
-    <ng-container *ngIf="loading$ | async else loaded">
-      <div class="row justify-content-center">
-        <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
-      </div>
-    </ng-container>
-    <ng-template #loaded>
-      <ng-container *ngIf="connectionError$ | async else success">
-        <div class="row">
-          <button class="m-2 btn btn-secondary" (click)="loadAquariums()">Reconnect</button>
-        </div>
-      </ng-container>
-      <ng-template #success>
-        <mat-action-list>
-          <button *ngFor="let aquarium of aquariums$ | async" mat-list-item [routerLink]='["/" + aquarium.id]'>
-            {{aquarium.name}}
-          </button>
-          <button mat-list-item type="button" class="btn btn-default btn-sm" (click)="displayCreateAquariumDialog()">
-            <fa-icon class="addIcon mr-2" [icon]="faCreate"></fa-icon>Create New...
-          </button>
-        </mat-action-list>
-      </ng-template>
-    </ng-template>
-  
-  </mat-card>
--->

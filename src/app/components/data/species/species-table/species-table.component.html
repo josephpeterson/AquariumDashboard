@@ -1,4 +1,4 @@
-<div class="row species-table-list">
+<div class="species-table-list mat-elevation-z2">
     <div *ngIf="loading$ | async else notLoading">
       <mat-progress-spinner mode="indeterminate">
       </mat-progress-spinner>
@@ -28,6 +28,5 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
     </ng-template>
-  
+    <mat-paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons></mat-paginator>
   </div>
-  <mat-paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons></mat-paginator>

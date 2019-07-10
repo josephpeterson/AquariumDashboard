@@ -6,6 +6,9 @@ export const FishState = createFeatureSelector<FishReducer.FishState>("fish");
 
 export const getAllFish = createSelector(FishState, FishReducer.selectAll);
 
+export const getFishById = (targetId: number) => createSelector(FishState,(state: FishReducer.FishState) => state.entities[targetId]);
+
+
 export const isLoadingFish = createSelector(FishState, (state: FishReducer.FishState) => state.loading);
 export const getFishLoadError = createSelector(FishState, (state: FishReducer.FishState) => state.loadError);
 

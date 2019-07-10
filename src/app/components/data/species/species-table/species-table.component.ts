@@ -24,7 +24,7 @@ export class SpeciesTableComponent {
     { name: 'select', visible: false },
     { name: 'id', label: "ID", visible: true },
     { name: 'name', label: 'Full Name', visible: true },
-    { name: 'description', label: 'Description', visible: true },
+    { name: 'description', label: 'Description', visible: false },
     { name: 'website', label: 'Website', visible: true },
     { name: 'fishCount', label: 'Alive Fish', visible: true },
     { name: 'aquariumCount', label: 'Aquariums', visible: true },

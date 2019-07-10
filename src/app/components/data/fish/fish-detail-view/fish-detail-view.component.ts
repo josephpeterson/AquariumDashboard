@@ -16,6 +16,7 @@ import { Aquarium } from 'src/app/models/Aquarium';
 import { Fish } from 'src/app/models/Fish';
 
 
+
 @Component({
     selector: 'fish-detail-view',
     templateUrl: './fish-detail-view.component.html',
@@ -148,5 +149,11 @@ export class FishDetailViewComponent implements OnInit {
                 if (val) this.species[key] = val;
             }
         });
+    }
+
+
+    getFishAge()
+    {
+        return Math.floor((Date.now() - new Date(this.fish.date).getTime()) / 1000 / 60 / 60 / 24);
     }
 }

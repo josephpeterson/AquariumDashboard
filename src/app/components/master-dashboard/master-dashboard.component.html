@@ -1,21 +1,10 @@
 <div class="container aquarium-selection-component">
-  <mat-card class="m-5">
-    <mat-card-title>
-      <h3>Aquarium List</h3>
-      <aquarium-table (rowClicked)="clickAquarium($event[1])"></aquarium-table>
-    </mat-card-title>
-  </mat-card>
-
-  <mat-card class="m-5">
-    <mat-card-title>
-      <h3>View Species</h3>
-      <species-table (rowClicked)="clickSpecies($event[1])"
-        [displayedColumns]="['name','fishCount','aquariumCount','price','careLevel']"></species-table>
-    </mat-card-title>
-    <mat-action-list>
-      <button mat-list-item type="button" class="btn btn-default btn-sm" [routerLink]="['species','add']">
-        <fa-icon class="addIcon mr-2" [icon]="faCreate"></fa-icon>New Species...
-      </button>
-    </mat-action-list>
-  </mat-card>
+  <h3 class="m-2">Aquariums</h3>
+  <aquarium-table (rowClicked)="clickAquarium($event[1])"></aquarium-table>
+  <h3 class="m-2">Species</h3>
+  <species-table (rowClicked)="clickSpecies($event[1])"
+    [displayedColumns]="['name','fishCount','aquariumCount','price','careLevel']"></species-table>
+  <button mat-list-item type="button" class="btn btn-default btn-sm" [routerLink]="['species','add']">
+    <fa-icon class="addIcon mr-2" [icon]="faCreate"></fa-icon>New Species...
+  </button>
 </div>

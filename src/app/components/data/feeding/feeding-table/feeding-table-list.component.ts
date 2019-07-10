@@ -13,6 +13,8 @@ import { Species } from 'src/app/models/Species';
 import { getAllSpecies } from 'src/app/store/species/species.selector';
 import { SpeciesLoadAction } from 'src/app/store/species/species.actions';
 import { AquariumFeeding } from 'src/app/models/AquariumFeeding';
+import { getAllFish, getFishById } from 'src/app/store/fish/fish.selector';
+import { FishLoadByFishIdAction } from 'src/app/store/fish/fish.actions';
 
 @Component({
   selector: 'feeding-table-list',
@@ -41,6 +43,7 @@ export class FeedingTableListComponent {
     { name: 'aquariumId', label: 'Aquarium ID', visible: false },
   ];
 
+  @Input() fish: Fish;
   @Input() aquariumId: number;
   @Input() fishId: number;
 
@@ -59,12 +62,32 @@ export class FeedingTableListComponent {
     if (this.searchBox)
       this.bindSearchBox();
 
-    this.store.dispatch(new SpeciesLoadAction());
-    this.setAquarium(this.aquariumId);
+    if (this.fish) this.setFish(this.fish);
+    else if (this.fishId) this.setFishId(this.fishId);
+    else if (this.aquariumId) this.setAquariumId(this.aquariumId);
+    else this.setAllFeedings();
+
+    //this.store.dispatch(new SpeciesLoadAction());
 
     this.dataSource.paginator = this.paginator;
   }
-  setAquarium(id: number) {
+  setFish(fish: Fish) {
+    this.fish = fish;
+    var data = fish.feedings.map(feed => {
+      var item = new FeedingTableItem(feed);
+      item.readableDate = new Date(item.date).toDateString();
+      item.fishName = fish.name;
+      return item;
+    });
+    this.dataSource.data = data;
+  }
+  setFishId(fishId: number) {
+    this.store.select(getFishById(fishId)).pipe(take(2)).subscribe(fish => {
+      if (!fish) this.store.dispatch(new FishLoadByFishIdAction(fishId));
+      else this.setFish(fish);
+    });
+  }
+  setAquariumId(id: number) {
     this.aquariumId = id;
     this.aquarium$ = this.store.select(getAquariumById, this.aquariumId);
     this.store.dispatch(new AquariumLoadByIdAction(id)); //todo remove this? cache possibly
@@ -83,6 +106,9 @@ export class FeedingTableListComponent {
         this.dataSource.data = data;
       });
     });
+  }
+  setAllFeedings() {
+
   }
 
   updateSort() {
