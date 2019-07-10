@@ -6,10 +6,6 @@
 	</small>
 	<aquarium-table (rowClicked)="makeSelection($event[1])"></aquarium-table>
 	<mat-dialog-actions align="end">
-		<button *ngIf="(selectedSpeciesId || addingSpecies)" class="m-2 btn btn-dark"
-			(click)='clickBack()'>Back</button>
-		<button *ngIf="!(selectedSpeciesId || addingSpecies)" class="m-2 btn btn-secondary md-float-right"
-			(click)='clickNewSpecies()'>Add Species...</button>
 		<button class="m-2 btn btn-primary" [mat-dialog-close]="true">Done</button>
 	</mat-dialog-actions>
 </div>
