@@ -1,4 +1,4 @@
-<h4 class='text-center'>{{(exists) ? fish.name:"Create New Fish"}}</h4>
+<h4 class='text-center'>{{(fish.id) ? fish.name:"Create New Fish"}}</h4>
 <small class="text-muted">Please enter details about your fish.</small>
 <div class="row m-2">
     <mat-form-field class="m-2 example-full-width">
@@ -19,11 +19,14 @@
     <mat-form-field>
         <mat-label>Gender</mat-label>
         <mat-select [(ngModel)]="fish.gender">
-            <mat-option value=0>
+            <mat-option value=1>
                 Male
             </mat-option>
-            <mat-option value=1>
+            <mat-option value=2>
                 Female
+            </mat-option>
+            <mat-option value=0>
+                Unknown
             </mat-option>
         </mat-select>
     </mat-form-field>

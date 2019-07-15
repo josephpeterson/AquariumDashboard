@@ -1,9 +1,9 @@
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { AllSnapshotActions, SnapshotActions } from './snapshot.actions';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Snapshot } from 'src/app/models/Snapshot';
+import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
 
-export interface SnapshotState extends EntityState<Snapshot> {
+export interface SnapshotState extends EntityState<AquariumSnapshot> {
 	loading: boolean
 	aquariumId: number
 	connectionError: HttpErrorResponse
@@ -16,7 +16,7 @@ export interface SnapshotState extends EntityState<Snapshot> {
 	taking: boolean
 	taken: boolean
 }
-export const adapter: EntityAdapter<Snapshot> = createEntityAdapter<Snapshot>();
+export const adapter: EntityAdapter<AquariumSnapshot> = createEntityAdapter<AquariumSnapshot>();
 
 export const defaultAquariumState: SnapshotState = {
 	ids: [],

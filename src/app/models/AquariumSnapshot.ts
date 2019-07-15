@@ -1,4 +1,5 @@
 import { Aquarium } from './Aquarium';
+import { AquariumPhoto } from './AquariumPhoto';
 
 var MockSnapshotImages:string[] =
 [
@@ -21,5 +22,7 @@ export class AquariumSnapshot
   nitrate: number
   ph: number
   temperature: number
-  photoPath: number
+  photoId: number
+
+  photo: AquariumPhoto
 }

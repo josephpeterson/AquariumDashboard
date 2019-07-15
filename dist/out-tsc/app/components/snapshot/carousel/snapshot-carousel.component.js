@@ -18,7 +18,7 @@ var SnapshotCarouselComponent = /** @class */ (function () {
     SnapshotCarouselComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.data$.subscribe(function (data) {
-            var photos = data.filter(function (snapshot) { return (snapshot.photoPath != null); });
+            var photos = data.filter(function (snapshot) { return (snapshot.photo != null); });
             _this.photoSnapshots = photos.sort(function (a, b) { return b.id - a.id; });
         });
         this.aquarium$.pipe(take(1)).subscribe(function (aq) {

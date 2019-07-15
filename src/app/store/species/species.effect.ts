@@ -3,7 +3,7 @@ import { Effect, Actions, ofType } from '@ngrx/effects'
 import { map, catchError, mergeMap } from 'rxjs/operators'
 import { AquariumService } from 'src/app/services/aquarium-service/aquarium.service';
 import { of } from 'rxjs'
-import { Snapshot } from 'src/app/models/Snapshot';
+import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
 import { SpeciesLoadAction, SpeciesActions, SpeciesLoadSuccessAction, SpeciesLoadFailAction, SpeciesAddAction, SpeciesAddSuccessAction, SpeciesAddFailAction, SpeciesUpdateAction, SpeciesUpdateSuccessAction, SpeciesUpdateFailAction, SpeciesDeleteAction, SpeciesDeleteSuccessAction, SpeciesDeleteFailAction } from './species.actions';
 import { Species } from 'src/app/models/Species';
 import { Update } from '@ngrx/entity';

@@ -1,5 +1,6 @@
 <div class="shadow p-3 mb-5 bg-white rounded" *ngIf="fish else loading">
     <h2 *ngIf="!editing">{{fish.name}}
+
         <button class="btn btn-secondary edit float-right" (click)="clickEdit()">
             <fa-icon class="pr-1" [icon]="faEdit"></fa-icon>Edit Fish
         </button>
@@ -23,14 +24,16 @@
             <h4>Feeding History</h4>
 
         </div>
-        <div class="row">
-            <feeding-table-list class="w-100 p-2" *ngIf="fish.feedings && fish.feedings.length else noContent" [fish]="fish"></feeding-table-list>
-            <ng-template #noContent>
-                <p class="p-3">
-                    No Content
-                </p>
-            </ng-template>
-        </div>
+        <feeding-table-list class="w-100 p-2" *ngIf="fish.feedings && fish.feedings.length else noContent"
+            [fish]="fish"></feeding-table-list>
+        <ng-template #noContent>
+            <p class="p-3">
+                No Content
+            </p>
+        </ng-template>
+        <button class="btn btn-primary" (click)="clickFeedFish()">
+            Feed <fa-icon class="pr-1" [icon]="faAngleRight"></fa-icon>
+        </button>
         <div class="row p-3">
             <h4>Photos</h4>
 

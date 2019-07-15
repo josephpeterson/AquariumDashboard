@@ -5,7 +5,7 @@ import { getSelectedAquarium, getConnectionError, getDidDelete, getDeleteError }
 import { getAllSnapshots, isLoadingSnapshots, isDeletingSnapshot, isTakingSnapshot, getDidTake, getTakeError } from 'src/app/store/snapshot/snapshot.selector';
 import { AppState } from 'src/app/app.state';
 import { SnapshotResetAction, SnapshotLoadByAquariumAction, SnapshotDeleteAction } from 'src/app/store/snapshot/snapshot.actions';
-import { Snapshot } from 'src/app/models/Snapshot';
+import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
 
 @Component({
     selector: 'task-tab',

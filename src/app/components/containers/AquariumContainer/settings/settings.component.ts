@@ -12,6 +12,7 @@ import { NotifierService } from 'angular-notifier';
 import { take, takeUntil } from 'rxjs/operators';
 import { Species } from 'src/app/models/Species';
 import { ManageSpeciesModalComponent } from '../../../modals/manage-species-modal/manage-species-modal.component';
+import { ManageAquariumDeviceModalComponent } from 'src/app/components/modals/manage-aquarium-device-modal/manage-aquarium-device-modal.component';
 
 
 @Component({
@@ -60,12 +61,12 @@ export class SettingsComponent implements OnInit {
       this.aquariumType = aq.type.trim();
       if (aq.cameraConfiguration)
         this.cameraConfig = aq.cameraConfiguration;
-
     });
     this.data.deleted.subscribe(val => {
       if (val)
         this.data.reset();
     })
+
   }
   ngOnDestroy() {
     this.componentLifeCycle.next();
@@ -123,5 +124,16 @@ export class SettingsComponent implements OnInit {
     }).componentInstance;
     dialog.addingSpecies = true;
   }
+
+  deviceClickManage() {
+    var id = null;
+    if (this.aquarium.device)
+      id = this.aquarium.device.id;
+    this.dialog.open(ManageAquariumDeviceModalComponent, {
+      width: "60%",
+      data: id
+    });
+  }
+
 }
 

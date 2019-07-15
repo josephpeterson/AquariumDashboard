@@ -6,6 +6,7 @@
     <ng-template #dashboard>
         <fish-select [aquariumId]='aquarium.id'></fish-select>
         <fish-table-list (rowClicked)="selectFish($event[1])"></fish-table-list>
+        <fish-create-button></fish-create-button>
         <button class="btn btn-primary m-2" (click)="openManageFishModal()">Manage Fish</button>
         <h4 class='mt-5'>Feeding History</h4>
         <feeding-table-list class="m-3" [aquariumId]='aquarium.id' [fishId]='selectedFishId'></feeding-table-list>

@@ -15,6 +15,7 @@ import { Subject } from 'rxjs';
 })
 export class ManageFishModalComponent implements OnInit {
 
+  @Input() aquarium: Aquarium;
   @Input() aquariumId: number;
 
   public selectedFishId;
@@ -27,13 +28,11 @@ export class ManageFishModalComponent implements OnInit {
   constructor(private store: Store<AppState>) {
   }
   ngOnInit() {
-
-    this.loadAquarium(this.aquariumId);
-    return;
-    this.aquarium$.pipe(takeUntil(this.componentLifecycle)).subscribe(aq => {
-      if (aq)
-        this.applyAquarium(aq);
-    });
+    if (this.aquarium) {
+      this.applyAquarium(this.aquarium);
+    }
+    else if(this.aquariumId)
+      this.loadAquarium(this.aquariumId);
   }
 
   loadAquarium(id) {

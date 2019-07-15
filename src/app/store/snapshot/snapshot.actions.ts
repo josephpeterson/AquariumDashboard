@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Snapshot } from '../../models/Snapshot';
+import { AquariumSnapshot } from '../../models/AquariumSnapshot';
 import { Aquarium } from 'src/app/models/Aquarium';
 
 export enum SnapshotActions {
@@ -25,7 +25,7 @@ export class SnapshotLoadByAquariumAction implements Action {
 }
 export class SnapshotLoadSuccessAction implements Action {
   readonly type = SnapshotActions.LoadSuccess
-  constructor(public payload: Snapshot[]) { }
+  constructor(public payload: AquariumSnapshot[]) { }
 }
 export class SnapshotLoadFailedAction implements Action {
   readonly type = SnapshotActions.LoadFailed
@@ -33,11 +33,11 @@ export class SnapshotLoadFailedAction implements Action {
 }
 export class SnapshotDeleteAction implements Action {
   readonly type = SnapshotActions.Delete
-  constructor(public payload: Snapshot) { }
+  constructor(public payload: AquariumSnapshot) { }
 }
 export class SnapshotDeleteSuccessAction implements Action {
   readonly type = SnapshotActions.DeleteSuccess
-  constructor(public payload: Snapshot) { }
+  constructor(public payload: AquariumSnapshot) { }
 }
 export class SnapshotDeleteFailedAction implements Action {
   readonly type = SnapshotActions.DeleteFail
@@ -52,7 +52,7 @@ export class SnapshotTakeAction implements Action {
 }
 export class SnapshotTakeSuccessAction implements Action {
   readonly type = SnapshotActions.TakeSuccess
-  constructor(public payload: Snapshot) { }
+  constructor(public payload: AquariumSnapshot) { }
 }
 export class SnapshotTakeFailedAction implements Action {
   readonly type = SnapshotActions.TakeFail

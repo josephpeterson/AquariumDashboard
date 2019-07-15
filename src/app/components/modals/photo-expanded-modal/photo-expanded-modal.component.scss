@@ -1,0 +1,17 @@
+.photo-expanded-modal
+{
+    position: relative;
+    width:100%;
+    height:100%;
+    overflow: hidden;
+}
+::ng-deep .darkDialog .mat-dialog-container
+{
+    background-color:#343434;
+
+}
+.close
+{
+    position:absolute;
+    right:0px;
+}

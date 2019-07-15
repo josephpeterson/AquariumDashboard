@@ -3,7 +3,7 @@ import { Effect, Actions, ofType } from '@ngrx/effects'
 import { map, catchError, mergeMap } from 'rxjs/operators'
 import { AquariumService } from 'src/app/services/aquarium-service/aquarium.service';
 import { of } from 'rxjs'
-import { Snapshot } from 'src/app/models/Snapshot';
+import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
 import { SnapshotLoadByAquariumAction, SnapshotActions, SnapshotLoadSuccessAction, SnapshotLoadFailedAction, SnapshotDeleteAction, SnapshotDeleteSuccessAction, SnapshotDeleteFailedAction, SnapshotTakeAction, SnapshotTakeSuccessAction, SnapshotTakeFailedAction } from './snapshot.actions';
 
 @Injectable()
@@ -16,7 +16,7 @@ export class SnapshotEffects {
     @Effect()
     loadSnapshotsByAquarium$ = this.actions$.pipe(ofType<SnapshotLoadByAquariumAction>(SnapshotActions.LoadByAquarium),
         mergeMap((action: SnapshotLoadByAquariumAction) => this.aquariumService.getSnapshots(action.payload).pipe(
-            map((snapshots: Snapshot[]) => new SnapshotLoadSuccessAction(snapshots)),
+            map((snapshots: AquariumSnapshot[]) => new SnapshotLoadSuccessAction(snapshots)),
             catchError(error => of(new SnapshotLoadFailedAction(error)))
         )));
     @Effect()
@@ -28,7 +28,7 @@ export class SnapshotEffects {
     @Effect()
     takeSnapshot$ = this.actions$.pipe(ofType<SnapshotTakeAction>(SnapshotActions.Take),
         mergeMap((action: SnapshotTakeAction) => this.aquariumService.takeSnapshot(action.payload.id).pipe(
-            map((newSnapshot: Snapshot) => {
+            map((newSnapshot: AquariumSnapshot) => {
                 //We can map the aquarium to the snapshot here
                 newSnapshot.aquarium = action.payload;
                 return new SnapshotTakeSuccessAction(newSnapshot)

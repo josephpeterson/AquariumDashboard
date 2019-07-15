@@ -5,7 +5,7 @@ import { getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
 import { isLoadingSnapshots, getConnectionError, getAllSnapshots, getDeleteError, isDeletingSnapshot, getDidDelete, getDidTake, getTakeError, isTakingSnapshot } from 'src/app/store/snapshot/snapshot.selector';
 import { SnapshotLoadByAquariumAction, SnapshotTakeAction, SnapshotDeleteAction, SnapshotResetAction } from 'src/app/store/snapshot/snapshot.actions';
 import { Aquarium } from 'src/app/models/Aquarium';
-import { Snapshot } from 'src/app/models/Snapshot';
+import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
 
 @Injectable({
     providedIn: "root"

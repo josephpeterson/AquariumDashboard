@@ -32,8 +32,11 @@ export class AquariumTableComponent {
   //Columns
   public columns: Array<any> = [
     { name: 'select', visible: false },
-    { name: 'id', label: "ID", visible: true },
+    { name: 'id', label: "ID", visible: false },
     { name: 'name', label: 'Aquarium Name', visible: true },
+    { name: 'gallons', label: 'Size (Gal.)', visible: true },
+    { name: 'age', label: 'Age', visible: true },
+    { name: 'monitored', label: 'Monitoring', visible: true },
   ];
 
   @Input() displayedColumns: any[] = this.columns.filter(col => col.visible).map(col => col.name);
@@ -53,9 +56,15 @@ export class AquariumTableComponent {
     this.dataSource.paginator = this.paginator;
 
     this.aquariums$.pipe(takeUntil(this.componentLifecycle)).subscribe(aquariums => {
-      if(aquariums.length < 2)
+      if (aquariums.length < 2)
         this.store.dispatch(new AquariumListAction());
-      if(aquariums) this.dataSource.data = aquariums;
+      if (aquariums) this.dataSource.data = aquariums.map(a => {
+        return {
+          ...a,
+          monitored: a.device != undefined ? "Yes":"",
+          age: millisecondsToStr(Date.now()-new Date(a.startDate).getTime())
+        }
+      });
     });
   }
   updateSort() {
@@ -82,4 +91,45 @@ export class AquariumTableComponent {
   rowClickHandler(event: MouseEvent, row: Aquarium) {
     this.rowClicked.emit([event, row]);
   }
+}
+class AquariumTableItem extends Aquarium {
+  public age: string;
+  public monitored: boolean;
+
+  constructor(source: Aquarium) {
+    super();
+    Object.assign(this, source);
+  }
+}
+function millisecondsToStr(milliseconds) {
+  // TIP: to find current time in milliseconds, use:
+  // var  current_time_milliseconds = new Date().getTime();
+
+  function numberEnding (number) {
+      return (number > 1) ? 's' : '';
+  }
+
+  var temp = Math.floor(milliseconds / 1000);
+  var years = Math.floor(temp / 31536000);
+  if (years) {
+      return years + ' year' + numberEnding(years);
+  }
+  //TODO: Months! Maybe weeks? 
+  var days = Math.floor((temp %= 31536000) / 86400);
+  if (days) {
+      return days + ' day' + numberEnding(days);
+  }
+  var hours = Math.floor((temp %= 86400) / 3600);
+  if (hours) {
+      return hours + ' hour' + numberEnding(hours);
+  }
+  var minutes = Math.floor((temp %= 3600) / 60);
+  if (minutes) {
+      return minutes + ' minute' + numberEnding(minutes);
+  }
+  var seconds = temp % 60;
+  if (seconds) {
+      return seconds + ' second' + numberEnding(seconds);
+  }
+  return 'less than a second'; //'just now' //or other string you like;
 }

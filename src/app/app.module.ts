@@ -89,6 +89,10 @@ import { SelectAquariumModalComponent } from './components/modals/select-aquariu
 import { FishDetailViewComponent } from './components/data/fish/fish-detail-view/fish-detail-view.component';
 import { FishEffects } from './store/fish/fish.effect';
 import { fishReducer } from './store/fish/fish.reducer';
+import { DeviceDetailFormComponent } from './components/data/device/device-detail-form/device-detail-form.component';
+import { ManageAquariumDeviceModalComponent } from './components/modals/manage-aquarium-device-modal/manage-aquarium-device-modal.component';
+import { PhotoExpandedModalComponent } from './components/modals/photo-expanded-modal/photo-expanded-modal.component';
+import { FishCreateButtonComponent } from './components/data/fish/create-button/fish-create-button.component';
 
 @NgModule({
   declarations: [
@@ -109,17 +113,22 @@ import { fishReducer } from './store/fish/fish.reducer';
     SnapshotListComponent,
     SnapshotTakeButtonComponent,
     SnapshotDeleteButtonComponent,
+    
 
     FishTableListComponent,
     FishDetailFormComponent,
     FishInformationComponent,
     FishSelectComponent,
+    FishCreateButtonComponent,
     FishDetailViewComponent,
 
     SpeciesDetailFormComponent,
     SpeciesSelectComponent,
     SpeciesTableComponent,
     SpeciesDetailViewComponent,
+
+    DeviceDetailFormComponent,
+    ManageAquariumDeviceModalComponent,
 
     AquariumSelectComponent,
     AquariumTableComponent,
@@ -133,6 +142,7 @@ import { fishReducer } from './store/fish/fish.reducer';
     FeedingTableListComponent,
     FeedingDetailFormComponent,
 
+
     SettingsComponent,
     MasterDashboardComponent,
     TaskTableComponent,
@@ -142,6 +152,7 @@ import { fishReducer } from './store/fish/fish.reducer';
     ManageSpeciesModalComponent,
     ManageFishModalComponent,
     ScraperModalComponent,
+    PhotoExpandedModalComponent,
     //New components here
   ],
   entryComponents: [
@@ -151,8 +162,10 @@ import { fishReducer } from './store/fish/fish.reducer';
     ErrorMessageModalComponent,
     ManageSpeciesModalComponent,
     ManageFishModalComponent,
+    ManageAquariumDeviceModalComponent,
     SelectAquariumModalComponent,
-    ScraperModalComponent
+    ScraperModalComponent,
+    PhotoExpandedModalComponent,
   ],
 
   imports: [

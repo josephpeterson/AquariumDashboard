@@ -1,0 +1,83 @@
+<ng-container *ngIf="disabled else formArea">
+    <div class="text-center m-0 d-flex flex-column justify-content-center">
+        <mat-progress-spinner mode="indeterminate" class="align-self-center">
+        </mat-progress-spinner>
+    </div>
+</ng-container>
+<ng-template #formArea>
+    <small class="text-muted">Connect to your aquarium monitoring device. Currently only supported by Raspberry
+        Pis.</small>
+    <div class="row m-2">
+        <mat-form-field class="m-2 example-full-width">
+            <input type="text" placeholder="Device Name" aria-label="Number" matInput [(ngModel)]="device.name"
+                name="name">
+        </mat-form-field>
+    </div>
+    <form #form>
+        <div class="row m-2">
+            <mat-form-field>
+                <mat-label>Type</mat-label>
+                <mat-select [(ngModel)]="device.type" name="type">
+                    <mat-option value=1>
+                        Raspberry Pi
+                    </mat-option>
+                    <mat-option value=0>
+                        Other
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="row m-2">
+            <mat-form-field class="m-2 example-full-width">
+                <input type="text" placeholder="Address (0.0.0.0)" aria-label="Number" matInput
+                    [(ngModel)]="device.address" name="address">
+            </mat-form-field>
+            <mat-form-field class="m-2 example-full-width">
+                <input type="text" placeholder="Port" aria-label="Number" matInput [(ngModel)]="device.port"
+                    name="port">
+            </mat-form-field>
+        </div>
+        <mat-error *ngIf="error">All fields are required.</mat-error>
+        <div class="float-md-right">
+            <button type="submit" class="m-2 btn btn-danger" *ngIf="device.id" (click)='clickDeleteDevice()'>Delete
+                Device</button>
+            <button type="submit" class="m-2 btn btn-primary" *ngIf="device.id" (click)="clickUpdateDevice()">Update
+                Device</button>
+            <button type="submit" class="m-2 btn btn-success" *ngIf="!device.id" (click)="clickCreateDevice()">Add
+                Device</button>
+        </div>
+    </form>
+    <div class="row p-2" *ngIf="device.id">
+        <h4>Peripherials</h4>
+        <small class="text-muted">These are the enabled peripherals/sensors that are currently enabled. Some may be
+            unavailable
+            depending on hardware installed on your device.</small>
+        <ul class="list-group w-50">
+            <li class="list-group-item" [ngClass]="{'list-group-item-success': device.enabledPhoto}">Photo Module
+                <fa-icon *ngIf="device.enabledPhoto" class="float-md-right" [icon]="faCheck"></fa-icon>
+            </li>
+            <li class="list-group-item" [ngClass]="{'list-group-item-success': device.enabledTemperature}">Temperature
+                Sensor
+                <fa-icon *ngIf="device.enabledTemperature" class="float-md-right" [icon]="faCheck"></fa-icon>
+            </li>
+            <li class="list-group-item" [ngClass]="{'list-group-item-success': device.enabledLighting}">LED Controller
+
+                <fa-icon *ngIf="device.enabledLighting" class="float-md-right" [icon]="faCheck"></fa-icon>
+            </li>
+            <li class="list-group-item" [ngClass]="{'list-group-item-success': device.enabledPh}">Ph Sensor
+                <fa-icon *ngIf="device.enabledPh" class="float-md-right" [icon]="faCheck"></fa-icon>
+            </li>
+            <li class="list-group-item" [ngClass]="{'list-group-item-success': device.enabledNitrate}">Nitrate/Nitrite
+                Sensor
+                <fa-icon *ngIf="device.enabledNitrate" class="float-md-right" [icon]="faCheck"></fa-icon>
+            </li>
+        </ul>
+        <div>
+
+            <button [disabled]="scanning" type="submit" class="m-2 btn btn-secondary"
+                (click)="clickScanDeviceHardware()">Scan Hardware</button>
+            <button [disabled]="pinging" type="submit" class="m-2 btn btn-secondary" (click)="clickPingDevice()">Test
+                Connection</button>
+        </div>
+    </div>
+</ng-template>

@@ -29,8 +29,7 @@ export class FishDetailFormComponent implements OnInit {
     @Output() public onSuccess = new EventEmitter();
 
     public aquarium$;
-    public exists: boolean = false;
-    public fish: Fish = new Fish();
+    public fish: Fish;
 
     public adding$ = this.store.select(isCreatingFish);
     public addError$ = this.store.select(getFishCreateError);
@@ -45,9 +44,11 @@ export class FishDetailFormComponent implements OnInit {
     public newFish: Fish = new Fish();
 
     constructor(private store: Store<AppState>, private notifier: NotifierService) {
-        this.fish.date = new Date(); //default date
     }
     ngOnInit() {
+        this.fish = new Fish();
+        this.fish.aquariumId = this.aquariumId;
+        this.fish.date = new Date(); //default date
         this.loadAquarium(this.aquariumId);
     }
 
@@ -56,12 +57,10 @@ export class FishDetailFormComponent implements OnInit {
         this.aquarium$ = this.store.select(getAquariumById, this.aquariumId);
         this.aquarium$.pipe(takeUntil(this.componentLifeCycle$)).subscribe(aq => {
             if (!aq) return;
-            this.exists = false;
             this.aquarium = aq;
             if (aq.fish)
                 aq.fish.forEach(f => {
                     if (f.id == this.fishId) {
-                        this.exists = true;
                         this.setFish(f);
                     }
                 })
@@ -84,6 +83,7 @@ export class FishDetailFormComponent implements OnInit {
 
     clickCreateFish() {
         var newFish = this.fish;
+        newFish.aquariumId = this.aquarium.id;
         this.store.dispatch(new AquariumAddFishAction(newFish));
         this.addError$.pipe(take(2)).subscribe(err => {
             if (err) {

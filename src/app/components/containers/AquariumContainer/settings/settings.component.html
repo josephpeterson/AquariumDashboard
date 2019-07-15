@@ -7,7 +7,9 @@
                     <h3>Basic Information</h3>
                 </div>
                 <p class="card-text text-muted">
-                    You may alter basic information about your aquarium here. The size of your tank should be measured in gallons and will help provide insights regarding water changes and adequte living environments. Tank type should reflect the style of your tank (Normal, tall, short, etc.).
+                    You may alter basic information about your aquarium here. The size of your tank should be measured
+                    in gallons and will help provide insights regarding water changes and adequte living environments.
+                    Tank type should reflect the style of your tank (Normal, tall, short, etc.).
                 </p>
                 <div>
                     <mat-form-field class="example-full-width m-3">
@@ -39,7 +41,8 @@
                     <h3>Photo Configuration</h3>
                 </div>
                 <p class="card-text text-muted">
-                    This is the configuration for the photo module for snapshots. These are all the settings supported by the RaspberryPi Camera module v2. The reset button will provide you the system defaults.
+                    This is the configuration for the photo module for snapshots. These are all the settings supported
+                    by the RaspberryPi Camera module v2. The reset button will provide you the system defaults.
                 </p>
                 <div class="row">
                     <div class="col-lg-2">
@@ -156,52 +159,40 @@
     </div>
     <div class="row m-2">
         <div class="card w-100">
-
             <div class="card-body" *ngIf="aquarium">
-                <div class="row">
-                    <div class="col-sm">
-                        <div class="card-title">
-                            <h3>Peripherals</h3>
-                        </div>
-                        <p class="card-text">
-                            These are the enabled peripherals/sensors that are currently enabled. Some may be
-                            unavailable
-                            depending on hardware installed on your device.
-                        </p>
-                        <ul class="list-group">
-                            <li class="list-group-item list-group-item-success">Photo Module</li>
-                            <li class="list-group-item">Temperature Sensor</li>
-                            <li class="list-group-item list-group-item-success">LED Controller</li>
-                            <li class="list-group-item">Ph Sensor</li>
-                            <li class="list-group-item">Nitrate/Nitrite Sensor</li>
-                        </ul>
-                    </div>
-                    <div class="col-sm">
-                        <div class="card-title">
-                            <h3>Aquarium Operations</h3>
-                        </div>
-                        <p class="card-text">
-                            Perform operations on your aquarium here. You may remove your aquarium here. These actions
-                            may
-                            be
-                            irreversible.
-                        </p>
-                        <h6>Aquarium</h6>
-                        <button class="m-2 btn btn-secondary" (click)="aquariumExport()">Export Aquarium</button>
-                        <button class="m-2 btn btn-danger" (click)="aquariumDelete()"
-                            [disabled]="deleting | async">Delete Aquarium</button>
-                        <ng-container *ngIf="deleting | async">
-                            <fa-icon class="mr-2" [icon]="faSpinner"></fa-icon>
-                        </ng-container>
-                        <ng-container *ngIf="deleteError | async as error">
-                            <mat-error>{{error.message}}</mat-error>
-                        </ng-container>
-                        <h6>Snapshots</h6>
-                        <button class="m-2 btn btn-primary" (click)="snapshotManage()">Manage..</button>
-                        <button class="m-2 btn btn-danger" (click)="snapshotDeleteAll()">Delete All</button>
-                    </div>
-
+                <div class="card-title">
+                    <h3>Aquarium Device</h3>
                 </div>
+                <device-detail-form [aquarium]="aquarium"> </device-detail-form>
+            </div>
+        </div>
+    </div>
+    <div class="row m-2">
+        <div class="card w-100">
+            <div class="card-body" *ngIf="aquarium">
+
+                <div class="card-title">
+                    <h3>Aquarium Operations</h3>
+                </div>
+                <p class="card-text">
+                    Perform operations on your aquarium here. You may remove your aquarium here. These actions
+                    may
+                    be
+                    irreversible.
+                </p>
+                <h6>Aquarium</h6>
+                <button class="m-2 btn btn-secondary" (click)="aquariumExport()">Export Aquarium</button>
+                <button class="m-2 btn btn-danger" (click)="aquariumDelete()" [disabled]="deleting | async">Delete
+                    Aquarium</button>
+                <ng-container *ngIf="deleting | async">
+                    <fa-icon class="mr-2" [icon]="faSpinner"></fa-icon>
+                </ng-container>
+                <ng-container *ngIf="deleteError | async as error">
+                    <mat-error>{{error.message}}</mat-error>
+                </ng-container>
+                <h6>Snapshots</h6>
+                <button class="m-2 btn btn-primary" (click)="snapshotManage()">Manage..</button>
+                <button class="m-2 btn btn-danger" (click)="snapshotDeleteAll()">Delete All</button>
             </div>
         </div>
     </div>
@@ -210,7 +201,11 @@
             <div class="card-body">
                 <div class="card-title">
                     <h3>Species List</h3>
-                    <p class="text-muted">List of all fish species available. Click on a species to modify. You may also see the amount of fish alive for a given species. You may not add a new fish of a given species without first adding the species to this list.</p>
+                    <p class="text-muted">List of all fish species available. Click on a species to modify. You
+                        may also
+                        see the amount of fish alive for a given species. You may not add a new fish of a given
+                        species
+                        without first adding the species to this list.</p>
                 </div>
                 <species-table (rowClicked)="speciesClickRow($event[1])"></species-table>
                 <button class="btn btn-success" (click)="speciesClickNew()">Add Species...</button>

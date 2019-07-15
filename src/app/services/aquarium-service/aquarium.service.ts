@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpParams, HttpHeaders, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { environment } from "../../../environments/environment";
@@ -6,10 +6,11 @@ import { LightingConfiguration } from 'src/app/models/LightingConfiguration';
 import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { catchError, map } from 'rxjs/operators';
-import { Snapshot } from 'src/app/models/Snapshot';
-import { CameraConfiguration } from 'src/app/models/CameraConfiguration';
 import { Fish } from 'src/app/models/Fish';
 import { Species } from 'src/app/models/Species';
+import { AquariumDevice } from 'src/app/models/AquariumDevice';
+import { CameraConfiguration } from 'src/app/models/CameraConfiguration';
+import { AquariumPhoto } from 'src/app/models/AquariumPhoto';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -23,6 +24,7 @@ const httpOptions = {
   providedIn: "root"
 })
 export class AquariumService {
+
   private _url: string;
 
   public aquariumId: number;
@@ -42,16 +44,26 @@ export class AquariumService {
       });
   }
 
-  public getSnapshots(aqId: number): Observable<Snapshot[]> {
+  public getSnapshots(aqId: number): Observable<AquariumSnapshot[]> {
 
-    return this.http.get<Snapshot[]>(this._url + "/v1/Snapshot/" + aqId + "/All");
+    return this.http.get<AquariumSnapshot[]>(this._url + "/v1/Snapshot/" + aqId + "/All");
   }
-  public deleteSnapshot(snapshot: Snapshot) {
-    return this.http.post<Snapshot>(this._url + "/v1/Snapshot/Delete", snapshot.id);
+  public deleteSnapshot(snapshot: AquariumSnapshot) {
+    return this.http.post<AquariumSnapshot>(this._url + "/v1/Snapshot/Delete", snapshot.id);
   }
   public takeSnapshot(aqId: number) {
-    return this.http.get<Snapshot>(this._url + "/v1/Snapshot/" + aqId + "/Take/true");
+    return this.http.get<AquariumSnapshot>(this._url + "/v1/Snapshot/" + aqId + "/Take/true");
   }
+  public getPhotoPermalink(photoId: number): string {
+    return this._url + "/v1/Snapshot/Photo/" + photoId;
+  }
+  public getLatestSnapshot(aqId: number): Observable<AquariumSnapshot> {
+
+    return this.http.get<AquariumSnapshot>(this._url + "/v1/Snapshot/" + aqId + "/Latest");
+  }
+
+
+
 
   public getAquariums(): Observable<Aquarium[]> {
     return this.http.get<Aquarium[]>(this._url + "/v1/Aquarium/All");
@@ -117,5 +129,24 @@ export class AquariumService {
   public deleteFish(fish: Fish): Observable<Fish> {
     return this.http.post<Fish>(this._url + "/v1/Fish/Delete", fish.id);
   }
-  
+
+  /* Device Controller */
+  createAquariumDevice(device: AquariumDevice): Observable<AquariumDevice> {
+    return this.http.post<AquariumDevice>(this._url + `/v1/Device/Add`, device);
+  }
+  getAquariumDeviceById(deviceId: number): Observable<AquariumDevice> {
+    return this.http.get<AquariumDevice>(this._url + `/v1/Device/${deviceId}`);
+  }
+  updateAquariumDevice(device: AquariumDevice): Observable<AquariumDevice> {
+    return this.http.post<AquariumDevice>(this._url + `/v1/Device/${device.id}/Update`, device);
+  }
+  deleteAquariumDevice(deviceId: number): Observable<AquariumDevice> {
+    return this.http.post<AquariumDevice>(this._url + `/v1/Device/${deviceId}/Delete`, deviceId);
+  }
+  scanDeviceHardware(deviceId: number): Observable<AquariumDevice> {
+    return this.http.get<AquariumDevice>(this._url + `/v1/Device/${deviceId}/Scan`);
+  }
+  pingDevice(deviceId: number) {
+    return this.http.get(this._url + `/v1/Device/${deviceId}/Ping`);
+  }
 }

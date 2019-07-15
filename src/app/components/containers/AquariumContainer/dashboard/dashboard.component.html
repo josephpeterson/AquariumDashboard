@@ -2,37 +2,37 @@
 <div class="row m-2">
     <div class="flex-row mr-3">
         <div class="card mb-2">
-            <div class="card-body">
+            <div class="card-body" *ngIf="latestSnapshot">
                 <div class="card-title">
                     <h4 class="m-1">Parameters</h4>
                 </div>
                 <table>
                     <tr>
                         <td>Temperature: </td>
-                        <td>70F</td>
+                        <td>{{latestSnapshot.temperature/10}}C</td>
                     </tr>
                     <tr>
                         <td>Water PH: </td>
-                        <td>6.5ppm</td>
+                        <td>{{latestSnapshot.ph}}</td>
                     </tr>
                     <tr>
                         <td>Ammonia: </td>
-                        <td>0</td>
+                        <td>{{latestSnapshot.ammonia}}</td>
                     </tr>
                     <tr>
                         <td>Nitrate: </td>
-                        <td>0</td>
+                        <td>{{latestSnapshot.nitrate}}</td>
                     </tr>
                     <tr>
-                        <td>Nitrate: </td>
-                        <td>0</td>
+                        <td>Nitrite: </td>
+                        <td>{{latestSnapshot.nitrite}}</td>
                     </tr>
                     <tr>
                         <td>Fish Count: </td>
                         <td>4</td>
                     </tr>
                 </table>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                <p class="card-text"><small class="text-muted">Updated {{getAgeText()}} ago</small></p>
             </div>
         </div>
         <div class="card mb-2 border border-warning">

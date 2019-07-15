@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 import { takeUntil, take } from 'rxjs/operators';
 import { Species } from 'src/app/models/Species';
 import { SpeciesLoadAction, SpeciesUpdateAction, SpeciesAddAction, SpeciesDeleteAction } from 'src/app/store/species/species.actions';
-import { faPenFancy, faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faPenFancy, faPen, faTrash,faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { NotifierService } from 'angular-notifier';
 import { MatDialog } from '@angular/material';
 import { ScraperModalComponent } from '../../../modals/scraper-modal/scraper-modal.component';
@@ -45,6 +45,7 @@ export class FishDetailViewComponent implements OnInit {
     public deleteError$ = this.store.select(getSpeciesDeleteError);
 
     faEdit = faPenFancy;
+    faAngleRight = faAngleRight;
     faTrash = faTrash;
     private _matchedSpecies: Species;
 
@@ -150,7 +151,9 @@ export class FishDetailViewComponent implements OnInit {
             }
         });
     }
-
+    clickFeedFish() {
+        
+    }
 
     getFishAge()
     {
