@@ -61,7 +61,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 import { ConfirmModalComponent } from './components/modals/confirm-modal/confirm-modal.component';
 import { NotifierModule } from 'angular-notifier';
 import { AquariumNotifierConfig } from './config/notifier';
-import { SnapshotListComponent } from './components/containers/AquariumContainer/maintenance/snapshot-list/snapshot-list.component';
+import { ParameterTabComponent } from './components/containers/AquariumContainer/maintenance/parameters-tab/maintenance-parameters-tab.component';
 import { NotificationsListComponent } from './components/containers/AquariumContainer/maintenance/notifications-list/notifications-list.component';
 import { TaskTabComponent } from './components/containers/AquariumContainer/maintenance/task-tab/task-list.component';
 import { SnapshotCarouselComponent } from './components/data/snapshot/carousel/snapshot-carousel.component';
@@ -93,6 +93,7 @@ import { DeviceDetailFormComponent } from './components/data/device/device-detai
 import { ManageAquariumDeviceModalComponent } from './components/modals/manage-aquarium-device-modal/manage-aquarium-device-modal.component';
 import { PhotoExpandedModalComponent } from './components/modals/photo-expanded-modal/photo-expanded-modal.component';
 import { FishCreateButtonComponent } from './components/data/fish/create-button/fish-create-button.component';
+import { SnapshotTableListComponent } from './components/data/snapshot/table-list/snapshot-table-list.component';
 
 @NgModule({
   declarations: [
@@ -110,9 +111,10 @@ import { FishCreateButtonComponent } from './components/data/fish/create-button/
 
     /* Data sources */
     SnapshotCarouselComponent,
-    SnapshotListComponent,
+    ParameterTabComponent,
     SnapshotTakeButtonComponent,
     SnapshotDeleteButtonComponent,
+    SnapshotTableListComponent,
     
 
     FishTableListComponent,

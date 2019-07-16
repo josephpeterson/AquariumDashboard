@@ -1,8 +1,8 @@
 <div class="species-table-list mat-elevation-z2">
-    <div *ngIf="loading$ | async else notLoading">
-      <mat-progress-spinner mode="indeterminate">
-      </mat-progress-spinner>
-    </div>
+    <div *ngIf="(loading$ | async) else notLoading" class="p-5">
+        <mat-progress-spinner class="mr-auto ml-auto" color="warn" mode="indeterminate">
+        </mat-progress-spinner>
+      </div>
     <ng-template #notLoading>
       <table class="mat-elevation-z2 w-100" *ngIf="!isLoading" [dataSource]="dataSource" mat-table matSort>
         <ng-container *ngFor="let column of columns" matColumnDef="{{column.name}}">
