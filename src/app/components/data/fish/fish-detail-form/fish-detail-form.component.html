@@ -39,7 +39,7 @@
 </div>
 
 <div class="row m-2">
-    <ng-container *ngIf="exists else newFish">
+    <ng-container *ngIf="fish.id else newFish">
         <button type="submit" class="m-2 btn btn-success" (click)="clickUpdateFish()">Update Fish</button>
         <button type="submit" class="m-2 btn btn-danger" (click)="clickDeleteFish()">Delete Fish</button>
     </ng-container>
