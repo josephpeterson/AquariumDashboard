@@ -7,6 +7,7 @@ export class AquariumDevice
   type: string
   port: string
   address: string
+  privateKey: string
   name: string
   enabledTemperature: boolean
   enabledPhoto: boolean

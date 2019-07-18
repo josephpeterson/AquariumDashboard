@@ -37,6 +37,12 @@
                     name="port">
             </mat-form-field>
         </div>
+        <div class="row m-2">
+            <mat-form-field class="m-2 w-100">
+                <input type="text" placeholder="Private Key (Config. Property)" aria-label="Number" matInput [(ngModel)]="device.privateKey"
+                    name="privateKey">
+            </mat-form-field>
+        </div>
         <mat-error *ngIf="error">All fields are required.</mat-error>
         <div class="float-md-right">
             <button type="submit" class="m-2 btn btn-danger" *ngIf="device.id" (click)='clickDeleteDevice()'>Delete
