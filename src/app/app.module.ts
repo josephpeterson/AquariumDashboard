@@ -94,6 +94,7 @@ import { ManageAquariumDeviceModalComponent } from './components/modals/manage-a
 import { PhotoExpandedModalComponent } from './components/modals/photo-expanded-modal/photo-expanded-modal.component';
 import { FishCreateButtonComponent } from './components/data/fish/create-button/fish-create-button.component';
 import { SnapshotTableListComponent } from './components/data/snapshot/table-list/snapshot-table-list.component';
+import { SnapshotPhotoConfigDetail } from './components/data/snapshot/photo-config-detail/snapshot-photo-config-detail.component';
 
 @NgModule({
   declarations: [
@@ -115,6 +116,7 @@ import { SnapshotTableListComponent } from './components/data/snapshot/table-lis
     SnapshotTakeButtonComponent,
     SnapshotDeleteButtonComponent,
     SnapshotTableListComponent,
+    SnapshotPhotoConfigDetail,
     
 
     FishTableListComponent,

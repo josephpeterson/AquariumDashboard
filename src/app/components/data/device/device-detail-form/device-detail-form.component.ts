@@ -78,11 +78,12 @@ export class DeviceDetailFormComponent implements OnInit {
         this.disable();
         this._aquariumService.createAquariumDevice(this.device).subscribe(
             (device: AquariumDevice) => {
+                console.log("Created: ",device);
                 this.device = device;
                 this.enable();
             },
             err => {
-                this.error = true;
+                this.notifier.notify("error", "Could not create device");
                 this.enable();
             }
         );
@@ -91,12 +92,11 @@ export class DeviceDetailFormComponent implements OnInit {
         this.disable();
         this._aquariumService.updateAquariumDevice(this.device).subscribe(
             (device: AquariumDevice) => {
-                console.log(device);
                 this.device = device;
                 this.enable();
             },
             err => {
-                this.error = true;
+                this.notifier.notify("error", "Could not update device");
                 this.enable();
             }
         )
@@ -115,7 +115,7 @@ export class DeviceDetailFormComponent implements OnInit {
                     this.enable();
                 },
                 err => {
-                    this.error = true;
+                    this.notifier.notify("error", "Could not delete device");
                     this.enable();
                 }
             )

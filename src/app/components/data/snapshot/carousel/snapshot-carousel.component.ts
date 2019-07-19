@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
 import { Observable, Subject } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
-import { SnapshotPreviewScrollerComponentData } from './snapshot-carousel.component.data';
 import { MatDialog } from '@angular/material';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
@@ -41,7 +40,7 @@ export class SnapshotCarouselComponent implements OnInit {
   constructor(private store: Store<AppState>, private dialog: MatDialog,public aquariumService:AquariumService) { }
 
   ngOnInit() {
-    this.data$.subscribe(data => {
+    this.data$.pipe(take(2)).subscribe(data => {
       var photos = data.filter(snapshot => (snapshot.photo != null));
       this.photoSnapshots = photos.sort((a, b) => b.id - a.id);
     });

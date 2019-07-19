@@ -138,7 +138,7 @@ export class AquariumService {
     return this.http.get<AquariumDevice>(this._url + `/v1/Device/${deviceId}`);
   }
   updateAquariumDevice(device: AquariumDevice): Observable<AquariumDevice> {
-    return this.http.post<AquariumDevice>(this._url + `/v1/Device/${device.id}/Update`, device);
+    return this.http.post<AquariumDevice>(this._url + `/v1/Device/Update`, device);
   }
   deleteAquariumDevice(deviceId: number): Observable<AquariumDevice> {
     return this.http.post<AquariumDevice>(this._url + `/v1/Device/${deviceId}/Delete`, deviceId);

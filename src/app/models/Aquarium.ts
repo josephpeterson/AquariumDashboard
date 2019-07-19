@@ -10,7 +10,6 @@ export class Aquarium
   gallons: number
   type: string
   startDate: Date
-  cameraConfiguration: CameraConfiguration
   fish: Fish[]
 
   feedings: AquariumFeeding[] | null

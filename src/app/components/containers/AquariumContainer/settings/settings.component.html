@@ -37,116 +37,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <div class="card-title">
-                    <h3>Photo Configuration</h3>
-                </div>
-                <p class="card-text text-muted">
-                    This is the configuration for the photo module for snapshots. These are all the settings supported
-                    by the RaspberryPi Camera module v2. The reset button will provide you the system defaults.
-                </p>
-                <div class="row">
-                    <div class="col-lg-2">
-                        <label>Sharpness</label>
-                        <div class="row">
-                            <mat-slider min="-100" max="100" step="1" [disabled]="(updating | async)" thumbLabel
-                                [(ngModel)]="cameraConfig.sharpness">
-                            </mat-slider>
-                        </div>
-                        <label>Contrast</label>
-                        <div class="row">
-                            <mat-slider min="-100" max="100" step="1" [disabled]="(updating | async)" thumbLabel
-                                [(ngModel)]="cameraConfig.contrast">
-                            </mat-slider>
-                        </div>
-                        <label>Brightness</label>
-                        <div class="row">
-                            <mat-slider min="-100" max="100" step="1" [disabled]="(updating | async)" thumbLabel
-                                [(ngModel)]="cameraConfig.brightness">
-                            </mat-slider>
-                        </div>
-                        <label>Saturation</label>
-                        <div class="row">
-                            <mat-slider min="-100" max="100" step="1" [disabled]="(updating | async)" thumbLabel
-                                [(ngModel)]="cameraConfig.saturation">
-                            </mat-slider>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="row">
 
-                            <mat-form-field class="example-full-width m-3">
-                                <input matInput placeholder="ISO" [(ngModel)]="cameraConfig.iso"
-                                    [disabled]="(updating | async)">
-                            </mat-form-field>
-                        </div>
-                        <div class="row">
-
-                            <mat-form-field class="example-full-width m-3">
-                                <input matInput placeholder="Rotation" [(ngModel)]="cameraConfig.rotation"
-                                    [disabled]="(updating | async)">
-                            </mat-form-field>
-                        </div>
-                        <div class="row">
-                            <mat-form-field>
-                                <mat-label>Exposure</mat-label>
-                                <mat-select [(value)]="cameraConfig.exposureMode">
-                                    <mat-option *ngFor="let mode of exposureModes" [value]="mode.value">
-                                        {{mode.viewValue}}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
-                    </div>
-                    <div class="col-md-auto">
-                        <div class="row">
-                            <mat-checkbox class="example-margin" [(ngModel)]="cameraConfig.hFlip">Horizonal Flip
-                            </mat-checkbox>
-                        </div>
-                        <div class="row">
-                            <mat-checkbox class="example-margin" [(ngModel)]="cameraConfig.vFlip">Vertical
-                                Flip
-                            </mat-checkbox>
-                        </div>
-                        <div class="row">
-                            <mat-form-field class="example-full-width mt-3 mb-3">
-                                <input matInput placeholder="Width" [(ngModel)]="cameraConfig.width"
-                                    [disabled]="(updating | async)">
-                            </mat-form-field>
-                        </div>
-                        <div class="row">
-                            <mat-form-field class="example-full-width mt-3 mb-3">
-                                <input matInput placeholder="Height" [(ngModel)]="cameraConfig.height"
-                                    [disabled]="(updating | async)">
-                            </mat-form-field>
-                        </div>
-                    </div>
-                    <div class="col-md-auto">
-                        <div class="row">
-                            <mat-form-field class="example-full-width">
-                                <input matInput placeholder="X" [(ngModel)]="cameraConfig.roiX"
-                                    [(ngModel)]="cameraConfig.roiX" [disabled]="(updating | async)">
-                            </mat-form-field>
-                        </div>
-                        <div class="row">
-                            <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Y" [(ngModel)]="cameraConfig.roiY"
-                                    [(ngModel)]="cameraConfig.roiY" [disabled]="(updating | async)">
-                            </mat-form-field>
-                        </div>
-                        <div class="row">
-                            <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Width" [(ngModel)]="cameraConfig.roiW"
-                                    [(ngModel)]="cameraConfig.roiW" [disabled]="(updating | async)">
-                            </mat-form-field>
-                        </div>
-                        <div class="row">
-                            <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Height" [(ngModel)]="cameraConfig.roiH"
-                                    [(ngModel)]="cameraConfig.roiH" [disabled]="(updating | async)">
-                            </mat-form-field>
-                        </div>
-                    </div>
-                </div>
             </div>
             <div class="card-body">
                 <button class="m-2 btn btn-success" (click)="saveChanges()" [disabled]="(updating | async)">Save
@@ -165,6 +56,18 @@
                 </div>
                 <device-detail-form [aquarium]="aquarium"> </device-detail-form>
             </div>
+        </div>
+    </div>
+    <div class="row m-2" *ngIf="aquarium.device">
+        <div class="card w-100">
+            <div class="card-title">
+                <h3>Photo Configuration</h3>
+            </div>
+            <p class="card-text text-muted">
+                This is the configuration for the photo module for snapshots. These are all the settings supported
+                by the RaspberryPi Camera module v2. The reset button will provide you the system defaults.
+            </p>
+            <snapshot-photo-config-detail></snapshot-photo-config-detail>
         </div>
     </div>
     <div class="row m-2">
@@ -193,22 +96,6 @@
                 <h6>Snapshots</h6>
                 <button class="m-2 btn btn-primary" (click)="snapshotManage()">Manage..</button>
                 <button class="m-2 btn btn-danger" (click)="snapshotDeleteAll()">Delete All</button>
-            </div>
-        </div>
-    </div>
-    <div class="row m-2">
-        <div class="card w-100">
-            <div class="card-body">
-                <div class="card-title">
-                    <h3>Species List</h3>
-                    <p class="text-muted">List of all fish species available. Click on a species to modify. You
-                        may also
-                        see the amount of fish alive for a given species. You may not add a new fish of a given
-                        species
-                        without first adding the species to this list.</p>
-                </div>
-                <species-table (rowClicked)="speciesClickRow($event[1])"></species-table>
-                <button class="btn btn-success" (click)="speciesClickNew()">Add Species...</button>
             </div>
         </div>
     </div>

@@ -46,8 +46,6 @@ export class SettingsComponent implements OnInit {
 
   public applicationLog$: Observable<string> = this.data.applicationLog;
 
-  public exposureModes = CameraExposureModes;
-
 
 
   constructor(public data: SettingsComponentData, public dialog: MatDialog, private router: Router) { }
@@ -59,8 +57,6 @@ export class SettingsComponent implements OnInit {
       this.aquariumSize = aq.gallons;
       this.aquariumName = aq.name.trim();
       this.aquariumType = aq.type.trim();
-      if (aq.cameraConfiguration)
-        this.cameraConfig = aq.cameraConfiguration;
     });
     this.data.deleted.subscribe(val => {
       if (val)
@@ -82,8 +78,7 @@ export class SettingsComponent implements OnInit {
       startDate: this.date.value,
       gallons: this.aquariumSize,
       type: this.aquariumType.trim(),
-      name: this.aquariumName.trim(),
-      cameraConfiguration: this.cameraConfig
+      name: this.aquariumName.trim()
     };
     this.data.save(newAquarium);
   }

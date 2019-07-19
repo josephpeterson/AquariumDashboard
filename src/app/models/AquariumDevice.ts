@@ -1,4 +1,5 @@
 import { Aquarium } from './Aquarium';
+import { CameraConfiguration } from './CameraConfiguration';
 
 export class AquariumDevice
 {
@@ -14,6 +15,7 @@ export class AquariumDevice
   enabledPh: boolean
   enabledNitrate: boolean
   enabledLighting: boolean
+  cameraConfiguration: CameraConfiguration
   
   aquarium: Aquarium
 }
