@@ -39,8 +39,8 @@
         </div>
         <div class="row m-2">
             <mat-form-field class="m-2 w-100">
-                <input type="text" placeholder="Private Key (Config. Property)" aria-label="Number" matInput [(ngModel)]="device.privateKey"
-                    name="privateKey">
+                <input type="text" placeholder="Private Key (Config. Property)" aria-label="Number" matInput
+                    [(ngModel)]="device.privateKey" name="privateKey">
             </mat-form-field>
         </div>
         <mat-error *ngIf="error">All fields are required.</mat-error>
@@ -85,5 +85,14 @@
             <button [disabled]="pinging" type="submit" class="m-2 btn btn-secondary" (click)="clickPingDevice()">Test
                 Connection</button>
         </div>
+
+        <div class="card-title">
+            <h3>Photo Configuration</h3>
+        </div>
+        <p class="card-text text-muted">
+            This is the configuration for the photo module for snapshots. These are all the settings supported
+            by the RaspberryPi Camera module v2. The reset button will provide you the system defaults.
+        </p>
+        <snapshot-photo-config-detail></snapshot-photo-config-detail>
     </div>
 </ng-template>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Inject } from '@angular/core';
 import { NotifierService } from 'angular-notifier';
 import { take } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
@@ -10,6 +10,7 @@ import { faCamera, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { CameraConfiguration, CameraExposureModes } from 'src/app/models/CameraConfiguration';
 import { AquariumService } from 'src/app/services/aquarium-service/aquarium.service';
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
+import { MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
     selector: 'snapshot-photo-config-detail',
@@ -17,7 +18,7 @@ import { AquariumDevice } from 'src/app/models/AquariumDevice';
     styleUrls: ['./snapshot-photo-config-detail.component.scss']
 })
 export class SnapshotPhotoConfigDetail implements OnInit {
-    public device: AquariumDevice;
+    @Input() public device: AquariumDevice;
     public editing = true;
     public updating = false;
 
@@ -25,11 +26,12 @@ export class SnapshotPhotoConfigDetail implements OnInit {
 
     //Store data
     public aquarium$ = this.store.select(getSelectedAquarium);
-  public exposureModes = CameraExposureModes;
+    public exposureModes = CameraExposureModes;
 
 
     ngOnInit() {
-        this.aquarium$.pipe(take(2)).subscribe(aq => this.device = aq.device);
+        if (!this.device)
+            this.aquarium$.pipe(take(2)).subscribe(aq => this.device = aq.device);
     }
 
     clickEdit() {
@@ -59,6 +61,10 @@ export class SnapshotPhotoConfigDetail implements OnInit {
     }
 
 
-    constructor(private notifier: NotifierService, private store: Store<AppState>, private _aquariumService: AquariumService) { }
+    constructor(private notifier: NotifierService, private store: Store<AppState>, private _aquariumService: AquariumService,
+        @Inject(MAT_DIALOG_DATA) device) {
+        if (device)
+            this.device = device;
+    }
 }
 

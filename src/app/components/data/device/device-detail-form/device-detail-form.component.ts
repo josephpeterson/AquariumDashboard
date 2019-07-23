@@ -78,7 +78,7 @@ export class DeviceDetailFormComponent implements OnInit {
         this.disable();
         this._aquariumService.createAquariumDevice(this.device).subscribe(
             (device: AquariumDevice) => {
-                console.log("Created: ",device);
+                console.log("Created: ", device);
                 this.device = device;
                 this.enable();
             },
@@ -111,7 +111,7 @@ export class DeviceDetailFormComponent implements OnInit {
             this.disable();
             this._aquariumService.deleteAquariumDevice(this.device.id).subscribe(
                 (device: AquariumDevice) => {
-                    this.device = new AquariumDevice();
+                    this.createNewDevice();
                     this.enable();
                 },
                 err => {
@@ -142,5 +142,10 @@ export class DeviceDetailFormComponent implements OnInit {
                 this.pinging = false;
                 this.notifier.notify("error", "Could not connect to device");
             })
+    }
+
+    createNewDevice() {
+        this.device = new AquariumDevice();
+        this.device.aquariumId = this.aquarium.id;
     }
 }

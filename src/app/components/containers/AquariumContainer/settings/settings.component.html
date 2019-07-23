@@ -58,18 +58,6 @@
             </div>
         </div>
     </div>
-    <div class="row m-2" *ngIf="aquarium.device">
-        <div class="card w-100">
-            <div class="card-title">
-                <h3>Photo Configuration</h3>
-            </div>
-            <p class="card-text text-muted">
-                This is the configuration for the photo module for snapshots. These are all the settings supported
-                by the RaspberryPi Camera module v2. The reset button will provide you the system defaults.
-            </p>
-            <snapshot-photo-config-detail></snapshot-photo-config-detail>
-        </div>
-    </div>
     <div class="row m-2">
         <div class="card w-100">
             <div class="card-body" *ngIf="aquarium">
