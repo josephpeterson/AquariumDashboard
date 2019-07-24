@@ -31,7 +31,9 @@ export class SnapshotPhotoConfigDetail implements OnInit {
 
     ngOnInit() {
         if (!this.device)
-            this.aquarium$.pipe(take(2)).subscribe(aq => this.device = aq.device);
+            this.aquarium$.pipe(take(2)).subscribe(aq => this.device = {...aq.device});
+        else
+            this.device = {...this.device}
     }
 
     clickEdit() {
@@ -41,8 +43,9 @@ export class SnapshotPhotoConfigDetail implements OnInit {
         this.editing = false;
     }
     clickReset() {
-        //this.editing = true;
-        this.device.cameraConfiguration = new CameraConfiguration();
+        var config = new CameraConfiguration();
+        config.id = this.device.cameraConfiguration.id;
+        this.device.cameraConfiguration = config;
     }
     clickUpdateCamera() {
         //this.editing = true;
@@ -59,12 +62,6 @@ export class SnapshotPhotoConfigDetail implements OnInit {
             }
         );
     }
-
-
-    constructor(private notifier: NotifierService, private store: Store<AppState>, private _aquariumService: AquariumService,
-        @Inject(MAT_DIALOG_DATA) device) {
-        if (device)
-            this.device = device;
-    }
+    constructor(private notifier: NotifierService, private store: Store<AppState>, private _aquariumService: AquariumService){}
 }
 

@@ -1,0 +1,22 @@
+<div class="manage-photo-configuration-component">
+  <ng-container *ngIf="updating else notUpdating">
+    <div class="text-center m-0 d-flex flex-column justify-content-center">
+      <mat-progress-spinner mode="indeterminate" class="align-self-center">
+      </mat-progress-spinner>
+    </div>
+  </ng-container>
+  <ng-template #notUpdating>
+    <div class="card-title">
+      <h3>Photo Configuration</h3>
+    </div>
+    <p class="card-text text-muted">
+      This is the configuration for the photo module for snapshots. These are all the settings supported
+      by the RaspberryPi Camera module v2. The reset button will provide you the system defaults.
+    </p>
+    <snapshot-photo-config-detail [device]="device"></snapshot-photo-config-detail>
+  </ng-template>
+  <mat-dialog-actions align="end">
+    <button class="m-2 btn btn-danger" mat-dialog-close [disabled]="updating">Cancel</button>
+    <button class="m-2 btn btn-success" (click)="clickUpdateConfiguration()" [disabled]="updating">Confirm</button>
+  </mat-dialog-actions>
+</div>

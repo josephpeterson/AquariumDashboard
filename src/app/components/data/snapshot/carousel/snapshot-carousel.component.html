@@ -5,15 +5,18 @@
             <ng-container *ngIf="photoSnapshots.length > 0 else noPhotos">
                 <div class="currentImage justify-content-end">
                     <ng-container *ngIf="photoSnapshots[selectedId] as current">
-                        <div class="expandedImage" [style.background-image]="'url(' + aquariumService.getPhotoPermalink(current.photoId) + ')'" (click)="clickExpandedImage(current.photo)">
+                        <div class="expandedImage"
+                            [style.background-image]="'url(' + aquariumService.getPhotoPermalink(current.photoId) + ')'"
+                            (click)="clickExpandedImage(current.photo)">
 
                         </div>
                         <div class="banner">
                             {{readableDate(current.date)}}
-                            {{current.temperature}}F
-                            PH: {{current.ph}}
-                            Nitrite: {{current.nitrite}}
-                            Nitrate: {{current.nitrate}}
+                            <span *ngIf="current.temperature">{{current.temperature/10}}C</span>
+                            <span *ngIf="current.ph">PH: {{current.ph}}</span>
+                            <span *ngIf="current.ammonia">Ammonia: {{current.ammonia}}</span>
+                            <span *ngIf="current.nitrite">Nitrite: {{current.nitrite}}</span>
+                            <span *ngIf="current.nitrate">Nitrate: {{current.nitrate}}</span>
                         </div>
                     </ng-container>
                 </div>
@@ -38,7 +41,7 @@
             </ng-template>
         </div>
         <div>
-            <snapshot-take-button></snapshot-take-button>
+            <snapshot-take-button (onPhotoTaken)="addNewSnapshot($event[0])"></snapshot-take-button>
             <snapshot-delete-button *ngIf="photoSnapshots[selectedId] as current" [snapshot]="current">
             </snapshot-delete-button>
             <button routerLink="maintenance/parameters" class="m-2 btn btn-info float-right">View All

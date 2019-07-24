@@ -16,6 +16,7 @@ import { Router } from '@angular/router';
 import { PhotoExpandedModalComponent } from 'src/app/components/modals/photo-expanded-modal/photo-expanded-modal.component';
 import { AquariumService } from 'src/app/services/aquarium-service/aquarium.service';
 import { AquariumPhoto } from 'src/app/models/AquariumPhoto';
+import { SnapshotTakeButtonComponent } from '../take-button/snapshot-take-button.component';
 
 @Component({
   selector: 'snapshot-carousel',
@@ -37,17 +38,22 @@ export class SnapshotCarouselComponent implements OnInit {
   public data$: Observable<AquariumSnapshot[]> = this.store.select(getAllSnapshots);
   public aquarium$: Observable<Aquarium> = this.store.select(getSelectedAquarium);
 
+  @ViewChild(SnapshotTakeButtonComponent) takeButton: SnapshotTakeButtonComponent; 
+
   constructor(private store: Store<AppState>, private dialog: MatDialog,public aquariumService:AquariumService) { }
 
   ngOnInit() {
-    this.data$.pipe(take(2)).subscribe(data => {
-      var photos = data.filter(snapshot => (snapshot.photo != null));
+    this.data$.pipe(takeUntil(this.componentLifeCycle)).subscribe(data => {
+      var photos = data.filter(snapshot => (snapshot.
+        photo != null));
       this.photoSnapshots = photos.sort((a, b) => b.id - a.id);
     });
     this.aquarium$.pipe(take(1)).subscribe(aq => {
       this.store.dispatch(new SnapshotLoadByAquariumAction(aq.id));
       this.aquarium = aq;
     });
+
+
   }
 
   ngOnDestroy() {
@@ -94,6 +100,10 @@ export class SnapshotCarouselComponent implements OnInit {
       panelClass: "darkDialog"
     });
     dialog.componentInstance.photoId = photo.id;
+  }
+
+  addNewSnapshot(snapshot: AquariumSnapshot) {
+    //this.photoSnapshots.push(snapshot);
   }
 }
 

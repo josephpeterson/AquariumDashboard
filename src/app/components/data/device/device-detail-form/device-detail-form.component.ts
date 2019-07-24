@@ -10,7 +10,9 @@ import { Aquarium } from 'src/app/models/Aquarium';
 import { MatDialog } from '@angular/material';
 import { ConfirmModalComponent } from 'src/app/components/modals/confirm-modal/confirm-modal.component';
 import { take } from 'rxjs/operators';
-import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { faCheckCircle, faDesktop, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { ManagePhotoConfigurationModal } from 'src/app/components/modals/manage-photo-configuration/manage-photo-configuration.component';
+import { CameraConfiguration } from 'src/app/models/CameraConfiguration';
 
 
 @Component({
@@ -19,6 +21,7 @@ import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
     styleUrls: ['./device-detail-form.component.scss']
 })
 export class DeviceDetailFormComponent implements OnInit {
+    public editing:boolean = false;
     public device: AquariumDevice;
     public disabled: boolean = false;
     public error: boolean;
@@ -26,13 +29,14 @@ export class DeviceDetailFormComponent implements OnInit {
     public scanning: boolean = false;
 
     @Input() aquarium: Aquarium;
-    @Input() deviceId: number;
+    //@Input() deviceId: number;
     @Output() public onSuccess = new EventEmitter();
 
     @ViewChild("form") form: ElementRef;
     private componentLifeCycle$ = new Subject();
     pinging: boolean;
     faCheck = faCheckCircle;
+    public faDevice:IconDefinition = faDesktop;
 
 
 
@@ -43,19 +47,20 @@ export class DeviceDetailFormComponent implements OnInit {
 
     }
     ngOnInit() {
-        if (this.aquarium && this.aquarium.device)
-            this.device = this.aquarium.device;
-        else
-            this.device = new AquariumDevice();
-        if (this.aquarium)
-            this.device.aquariumId = this.aquarium.id;
-        if (!this.aquarium && this.deviceId) this.loadDevice(this.deviceId);
+        if(this.aquarium.device)
+            this.device = {...this.aquarium.device};
+            
+        
+        //if (!this.aquarium && this.deviceId) this.loadDevice(this.deviceId);
+
+        console.log(this.device);
     }
 
     loadDevice(id: number) {
+        return;
         //Load device
         this.disable();
-        this._aquariumService.getAquariumDeviceById(this.deviceId).subscribe((device: AquariumDevice) => {
+        this._aquariumService.getAquariumDeviceById(0).subscribe((device: AquariumDevice) => {
             this.enable();
             if (this.device) this.device = device;
         })
@@ -81,6 +86,7 @@ export class DeviceDetailFormComponent implements OnInit {
                 console.log("Created: ", device);
                 this.device = device;
                 this.enable();
+                this.editing = false;
             },
             err => {
                 this.notifier.notify("error", "Could not create device");
@@ -94,6 +100,7 @@ export class DeviceDetailFormComponent implements OnInit {
             (device: AquariumDevice) => {
                 this.device = device;
                 this.enable();
+                this.editing = false;
             },
             err => {
                 this.notifier.notify("error", "Could not update device");
@@ -147,5 +154,32 @@ export class DeviceDetailFormComponent implements OnInit {
     createNewDevice() {
         this.device = new AquariumDevice();
         this.device.aquariumId = this.aquarium.id;
+    }
+
+    clickManagePhotoModule() {
+        this.dialog.open(ManagePhotoConfigurationModal, {
+            width: "50%",
+            data: this.device
+        }).afterClosed().subscribe((device: AquariumDevice) => {
+            if(device)
+                this.device.cameraConfiguration = device.cameraConfiguration;
+        });
+    }
+
+    clickEditDevice() {
+        this.editing = !this.editing;
+    }
+
+    clickConnectDevice() {
+        this.device = new AquariumDevice();
+        this.device.aquariumId = this.aquarium.id;
+        this.editing = true;
+    }
+    clickCancelEditing() {
+        this.editing = false;
+        if(this.aquarium.device)
+            this.device = {...this.aquarium.device};
+        else
+            delete this.device;
     }
 }

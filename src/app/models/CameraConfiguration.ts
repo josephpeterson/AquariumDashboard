@@ -2,6 +2,7 @@ class Vector {
     constructor(public x, public y, public z) { };
 }
 export class CameraConfiguration {
+    id: number;
     height: number = 1080;
     width: number = 1920;
     sharpness: number = 0;

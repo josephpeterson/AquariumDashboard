@@ -95,6 +95,7 @@ import { PhotoExpandedModalComponent } from './components/modals/photo-expanded-
 import { FishCreateButtonComponent } from './components/data/fish/create-button/fish-create-button.component';
 import { SnapshotTableListComponent } from './components/data/snapshot/table-list/snapshot-table-list.component';
 import { SnapshotPhotoConfigDetail } from './components/data/snapshot/photo-config-detail/snapshot-photo-config-detail.component';
+import { ManagePhotoConfigurationModal } from './components/modals/manage-photo-configuration/manage-photo-configuration.component';
 
 @NgModule({
   declarations: [
@@ -157,6 +158,7 @@ import { SnapshotPhotoConfigDetail } from './components/data/snapshot/photo-conf
     ManageFishModalComponent,
     ScraperModalComponent,
     PhotoExpandedModalComponent,
+    ManagePhotoConfigurationModal,
     //New components here
   ],
   entryComponents: [
@@ -170,6 +172,7 @@ import { SnapshotPhotoConfigDetail } from './components/data/snapshot/photo-conf
     SelectAquariumModalComponent,
     ScraperModalComponent,
     PhotoExpandedModalComponent,
+    ManagePhotoConfigurationModal,
   ],
 
   imports: [
