@@ -7,32 +7,37 @@
                     <h4 class="m-1">Parameters</h4>
                 </div>
                 <table>
-                    <tr>
+                    <tr *ngIf="latestSnapshot.temperature != undefined">
                         <td>Temperature: </td>
                         <td>{{latestSnapshot.temperature/10}}C</td>
                     </tr>
-                    <tr>
+                    <tr *ngIf="latestSnapshot.ph != undefined">
                         <td>Water PH: </td>
                         <td>{{latestSnapshot.ph}}</td>
                     </tr>
-                    <tr>
+                    <tr *ngIf="latestSnapshot.ammonia != undefined">
                         <td>Ammonia: </td>
                         <td>{{latestSnapshot.ammonia}}</td>
                     </tr>
-                    <tr>
+                    <tr *ngIf="latestSnapshot.nitrate != undefined">
                         <td>Nitrate: </td>
                         <td>{{latestSnapshot.nitrate}}</td>
                     </tr>
-                    <tr>
+                    <tr *ngIf="latestSnapshot.nitrite != undefined">
                         <td>Nitrite: </td>
                         <td>{{latestSnapshot.nitrite}}</td>
+                    </tr>
+                    <tr class="text-muted">
+                        <td>Nitrite: </td>
+                        <td>232</td>
                     </tr>
                     <tr>
                         <td>Fish Count: </td>
                         <td>4</td>
                     </tr>
                 </table>
-                <p class="card-text"><small class="text-muted">Updated {{getAgeText()}} ago</small></p>
+                <p class="card-text"><small class="text-muted">{{getAgeText()}}</small></p>
+                <button class="btn btn-link" (click)="clickAddSnapshot()">Insert Parameters</button>
             </div>
         </div>
         <div class="card mb-2 border border-warning">
@@ -69,6 +74,8 @@
     <task-list></task-list>
 </div>
 <h3>Fish</h3>
-<div class="row m-2">
-    <task-list></task-list>
+<div class="row">
+    <div class="card-group">
+        <fish-card class="card m-2" *ngFor="let fish of aquarium.fish" [fish]="fish"></fish-card>
+    </div>
 </div>

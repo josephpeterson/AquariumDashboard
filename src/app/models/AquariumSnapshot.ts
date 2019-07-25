@@ -16,7 +16,7 @@ export class AquariumSnapshot
   id: number //= Math.floor(Math.random() * 100);
   aquarium: Aquarium
   aquariumId: number
-  date: Date
+  date: any
   ammonia: number
   nitrite: number
   nitrate: number

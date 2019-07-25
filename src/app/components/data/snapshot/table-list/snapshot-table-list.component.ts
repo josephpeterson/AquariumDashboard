@@ -1,5 +1,5 @@
 import { Fish } from 'src/app/models/Fish';
-import { Component, ViewChild, Input, Output, EventEmitter } from '@angular/core';
+import { Component, ViewChild, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 import { getAquariumById, isLoadingAquariums } from 'src/app/store/aquarium/aquarium.selector';
@@ -15,13 +15,15 @@ import { SpeciesLoadAction } from 'src/app/store/species/species.actions';
 import { getAllSnapshots, isLoadingSnapshots } from 'src/app/store/snapshot/snapshot.selector';
 import { SnapshotLoadByAquariumAction } from 'src/app/store/snapshot/snapshot.actions';
 import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
+import * as moment from 'moment';
+import { AquariumService } from 'src/app/services/aquarium-service/aquarium.service';
 
 @Component({
   selector: 'snapshot-table-list',
   templateUrl: './snapshot-table-list.component.html',
   styleUrls: ['./snapshot-table-list.component.scss']
 })
-export class SnapshotTableListComponent {
+export class SnapshotTableListComponent implements OnInit {
 
   public loading$: Observable<Boolean> = this.store.select(isLoadingSnapshots);
   public snapshots$: Observable<AquariumSnapshot[]> = this.store.select(getAllSnapshots);
@@ -33,6 +35,7 @@ export class SnapshotTableListComponent {
   //Columns
   public columns: Array<any> = [
     { name: 'select', visible: true },
+    { name: 'imageSrc', visible: true },
     { name: 'id', label: "ID", visible: false },
     { name: 'readableDate', label: 'Date', visible: true },
     { name: 'ammonia', label: 'Ammonia', visible: true },
@@ -47,43 +50,45 @@ export class SnapshotTableListComponent {
 
   @Input() displayedColumns: any[] = this.columns.filter(col => col.visible).map(col => col.name);
   @Input() searchBox: HTMLInputElement;
-
   //Event handlers
   @Output() rowClicked = new EventEmitter();
   @Output() rowSelected = new EventEmitter();
 
   public dataSource: MatTableDataSource<AquariumSnapshot> = new MatTableDataSource<AquariumSnapshot>();
-  private componentLifecycle = new Subject();
+  private componentLifeCycle$ = new Subject();
 
-  constructor(private store: Store<AppState>) {
+  constructor(private store: Store<AppState>,private _aquariumService:AquariumService) {
   }
   ngOnInit() {
     if (this.searchBox)
       this.bindSearchBox();
     this.dataSource.paginator = this.paginator;
 
-    console.log(this.aquariumId);
-
     var loading = false;
-    this.snapshots$.subscribe(snapshots => {
-      if (snapshots.length == 0 && !loading) {
-        console.log("Weat");
-        this.store.dispatch(new SnapshotLoadByAquariumAction(this.aquariumId));
+    this.snapshots$.pipe(takeUntil(this.componentLifeCycle$)).subscribe(snapshots => {
+      if (!snapshots.length && !loading) {
+        this.setAquarium(this.aquariumId);
         loading = true;
+        return;
       }
-      else {
-        this.dataSource.data = snapshots.map(s => {
-          return {
-            ...s,
-            temperature: s.temperature / 10,
-            readableDate: new Date(s.date).toLocaleDateString("en-US") + " " + new Date(s.date).toLocaleTimeString("en-US")
-          }
-        });
-      }
+      this.dataSource.data = snapshots.map(s => {
+        return {
+          ...s,
+          temperature: s.temperature,
+          readableDate: moment(s.date).calendar(),
+          imageSrc: 'url(' + this._aquariumService.getPhotoPermalink(s.photoId) + ')'
+        }
+      });
     });
   }
+  ngOnDestory() {
+    this.componentLifeCycle$.next();
+    this.componentLifeCycle$.unsubscribe();
+  }
+
   setAquarium(id: number) {
     this.aquariumId = id;
+    this.store.dispatch(new SnapshotLoadByAquariumAction(id));
   }
 
   updateSort() {
@@ -91,7 +96,7 @@ export class SnapshotTableListComponent {
   }
   toggleSelection(row) {
     this.selection.toggle(row);
-    this.rowSelected.emit([event,row,this.selection.isSelected(row)]);
+    this.rowSelected.emit([event, row, this.selection.isSelected(row)]);
   }
   getSelectedItems() {
     return this.selection.selected;

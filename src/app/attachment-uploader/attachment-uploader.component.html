@@ -1,0 +1,12 @@
+<div class="file-upload-component">
+    <div *ngIf="fileUploadQueue.files == 0" [fileUploadInputFor]="fileUploadQueue" class="upload-drop-zone" (click)="openFilePicker()">
+        Drag and drop or click to upload
+        <input #fileInput type="file" hidden [fileUploadInputFor]= "fileUploadQueue">
+    </div>
+    <div style="width: 500px">
+        <mat-file-upload-queue #fileUploadQueue [fileAlias]="'file'">
+            <mat-file-upload [file]="fileUploadQueue.files[0]" [id]="0" *ngIf="fileUploadQueue.files.length > 0">
+            </mat-file-upload>
+        </mat-file-upload-queue>
+    </div>
+</div>

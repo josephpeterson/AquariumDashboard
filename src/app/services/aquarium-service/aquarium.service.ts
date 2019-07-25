@@ -44,6 +44,8 @@ export class AquariumService {
       });
   }
 
+
+  /* Snapshot */
   public getSnapshots(aqId: number): Observable<AquariumSnapshot[]> {
 
     return this.http.get<AquariumSnapshot[]>(this._url + "/v1/Snapshot/" + aqId + "/All");
@@ -61,18 +63,41 @@ export class AquariumService {
 
     return this.http.get<AquariumSnapshot>(this._url + "/v1/Snapshot/" + aqId + "/Latest");
   }
+  public updateSnapshot(snapshot: AquariumSnapshot): Observable<AquariumSnapshot> {
+    return this.http.post<AquariumSnapshot>(this._url + "/v1/Snapshot/Update", snapshot);
+  }
+  public createSnapshot(snapshot: AquariumSnapshot,uploadedPhoto: any): Observable<any> {
+    console.log(snapshot,uploadedPhoto);
+    const url = this._url + "/v1/Snapshot/" + snapshot.aquariumId + "/Create";
+    let formData = new FormData();
+
+    var response = {
+      ...snapshot,
+      snapshotImage: uploadedPhoto ? uploadedPhoto.file:null
+    }
+    console.log(response);
+    response.date = snapshot.date.toISOString();
+    for(var key in response) formData.set(key,response[key]);
+
+    let options: any = {
+      observe: "response",
+      reportProgress: true,
+    };
+
+    console.log(url,formData);
+    return this.http.post<any>(url, formData,options);
+  }
 
 
 
 
+  /* Aquariums */
   public getAquariums(): Observable<Aquarium[]> {
     return this.http.get<Aquarium[]>(this._url + "/v1/Aquarium/All");
-
   }
   public getAquariumById(aquariumId: number) {
     return this.http.get<Aquarium>(this._url + "/v1/Aquarium/" + aquariumId);
   }
-
   public updateAquarium(aquarium: Aquarium): Observable<Aquarium> {
     return this.http.post<Aquarium>(this._url + "/v1/Aquarium/Update", aquarium);
   }
@@ -82,6 +107,9 @@ export class AquariumService {
   public deleteAquarium(aquarium: Aquarium): Observable<Aquarium> {
     return this.http.post<Aquarium>(this._url + "/v1/Aquarium/Delete", aquarium.id);
   }
+
+
+  /* Settings */
   public getApplicationLog(): Observable<string> {
     return this.http.get(this._url + "/v1/Settings/Log", { responseType: "text" });
   }

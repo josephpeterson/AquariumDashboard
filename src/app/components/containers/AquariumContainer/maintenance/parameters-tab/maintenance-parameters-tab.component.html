@@ -1,11 +1,5 @@
-<div class="row">
-    <p>Insert graph of paramters over time</p>
-</div>
-<mat-card>
-    <div class="card-body">
+<snapshot-table-list [aquariumId]="aquarium.id" (rowSelected)="selectSnapshot($event)" (rowClicked)="clickSnapshotRow($event[1])"></snapshot-table-list>
 
-        <snapshot-table-list [aquariumId]="aquarium.id" (rowSelected)="selectSnapshot($event)"></snapshot-table-list>
-        <button class="btn btn-primary m-2">Add Snapshot</button>
+    <p>Insert graph of paramters over time</p>
+<button class="btn btn-primary m-2" (click)="clickAddSnapshot()">Add Snapshot</button>
         <button class="btn btn-danger m-2" *ngIf="selectedSnapshots.length > 0">Delete Selected Snapshots</button>
-    </div>
-</mat-card>

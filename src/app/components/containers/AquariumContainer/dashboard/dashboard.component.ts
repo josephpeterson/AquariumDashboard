@@ -10,7 +10,8 @@ import { getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
 import { AppState } from 'src/app/app.state';
 import { take } from 'rxjs/operators';
 import { AquariumService } from 'src/app/services/aquarium-service/aquarium.service';
-
+import { ManageSnapshotModal } from 'src/app/components/modals/manage-snapshot-modal/manage-snapshot-modal.component';
+import * as moment from 'moment';
 
 @Component({
   selector: 'dashboard-page-component',
@@ -20,20 +21,22 @@ import { AquariumService } from 'src/app/services/aquarium-service/aquarium.serv
 
 
 export class DashboardComponent implements OnInit {
- 
-  faExclamationTriangle  = faExclamationTriangle;
+
+  faExclamationTriangle = faExclamationTriangle;
 
   public latestSnapshot: AquariumSnapshot;
   public aquarium$: Observable<Aquarium> = this.store.select(getSelectedAquarium);
+  public aquarium: Aquarium;
 
   constructor(
     public dialog: MatDialog,
     private store: Store<AppState>,
     private aquariumService: AquariumService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.aquarium$.pipe(take(1)).subscribe(aq => {
+      this.aquarium = aq;
       this.aquariumService.getLatestSnapshot(aq.id).subscribe(snapshot => {
         this.latestSnapshot = snapshot;
       });
@@ -47,7 +50,23 @@ export class DashboardComponent implements OnInit {
   }
   getAgeText() {
     var ms = (new Date().getTime() - new Date(this.latestSnapshot.date).getTime());
+    return moment().subtract(ms,"ms").calendar(); 
     return millisecondsToStr(ms);
+  }
+
+
+  clickAddSnapshot() {
+    var snapshot = new AquariumSnapshot();
+    snapshot.aquariumId = this.aquarium.id;
+    snapshot.date = new Date();
+    this.dialog.open(ManageSnapshotModal, {
+      //width: "50%",
+      data: snapshot
+    }).afterClosed().subscribe((snapshot: AquariumSnapshot) => {
+      if (snapshot) {
+        //add snapshot to table
+      }
+    });
   }
 }
 
@@ -55,31 +74,31 @@ function millisecondsToStr(milliseconds) {
   // TIP: to find current time in milliseconds, use:
   // var  current_time_milliseconds = new Date().getTime();
 
-  function numberEnding (number) {
-      return (number > 1) ? 's' : '';
+  function numberEnding(number) {
+    return (number > 1) ? 's' : '';
   }
 
   var temp = Math.floor(milliseconds / 1000);
   var years = Math.floor(temp / 31536000);
   if (years) {
-      return years + ' year' + numberEnding(years);
+    return years + ' year' + numberEnding(years);
   }
   //TODO: Months! Maybe weeks? 
   var days = Math.floor((temp %= 31536000) / 86400);
   if (days) {
-      return days + ' day' + numberEnding(days);
+    return days + ' day' + numberEnding(days);
   }
   var hours = Math.floor((temp %= 86400) / 3600);
   if (hours) {
-      return hours + ' hour' + numberEnding(hours);
+    return hours + ' hour' + numberEnding(hours);
   }
   var minutes = Math.floor((temp %= 3600) / 60);
   if (minutes) {
-      return minutes + ' minute' + numberEnding(minutes);
+    return minutes + ' minute' + numberEnding(minutes);
   }
   var seconds = temp % 60;
   if (seconds) {
-      return seconds + ' second' + numberEnding(seconds);
+    return seconds + ' second' + numberEnding(seconds);
   }
   return 'less than a second'; //'just now' //or other string you like;
 }

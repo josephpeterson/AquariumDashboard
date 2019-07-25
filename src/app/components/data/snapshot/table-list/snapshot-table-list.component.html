@@ -1,4 +1,4 @@
-<div class="fish-table-list mat-elevation-z2">
+<div class="snapshot-table-list mat-elevation-z2">
   <div *ngIf="(loading$ | async) else notLoading" class="p-5">
     <mat-progress-spinner class="mr-auto ml-auto" color="warn" mode="indeterminate">
     </mat-progress-spinner>
@@ -19,7 +19,13 @@
           <th (click)="updateSort()" mat-header-cell *matHeaderCellDef mat-sort-header>{{column.label}}</th>
 
           <td mat-cell *matCellDef="let element" (click)="rowClickHandler($event,element)">
-            <span>{{element[column.name]}}</span>
+            <ng-container *ngIf="column.name == 'imageSrc' else reg">
+              <div class="snapshotThumbnail" [style.background-image]="element[column.name]"></div>
+            </ng-container>
+            <ng-template #reg>  
+              <span>{{element[column.name]}}</span>
+            </ng-template>
+            
           </td>
         </ng-template>
       </ng-container>
@@ -29,5 +35,5 @@
     </table>
   </ng-template>
 
-  <mat-paginator [pageSizeOptions]="[10, 20, 5]" showFirstLastButtons></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[10, 20,50,100,200]" showFirstLastButtons></mat-paginator>
 </div>

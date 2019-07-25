@@ -1,0 +1,84 @@
+.chart .col div
+{
+    text-align: center;
+    font-weight: bold;
+    margin-bottom:10px;
+    height:30px;
+    font-size:12pt;
+    line-height: 14px;
+}
+.chart {
+    user-select: none;
+    
+    .chart-item
+    {
+        display: block;
+        height:30px;
+        width:80%;
+        margin-left:auto;
+        margin-right:auto;
+        text-align: center;
+        font-size:10pt;
+        line-height: 80px;
+        margin-bottom:20px;
+        cursor: pointer;
+        border:1px solid transparent;
+    }
+    .chart-item:hover
+    {
+        border:1px solid lightblue;
+    }
+    .chart-item.disabled
+    {
+        opacity: 0.4;
+    }
+
+    .ph
+    {
+        span:nth-child(2) { background-color: #FBF087;}
+        span:nth-child(3) { background-color: #F2F3B9;}
+        span:nth-child(4) { background-color: #CADEA3;}
+        span:nth-child(5) { background-color: #B5D2B4;}
+        span:nth-child(6) { background-color: #9DC7B1;}
+        span:nth-child(7) { background-color: #8ABBB7;}
+        span:nth-child(8) { background-color: #6CAFDA;}
+    }
+    .high-ph
+    {
+        span:nth-child(2) { background-color: #C3A038;}
+        span:nth-child(3) { background-color: #D4984F;}
+        span:nth-child(4) { background-color: #B77D57;}
+        span:nth-child(5) { background-color: #8F5553;}
+        span:nth-child(6) { background-color: #6C4176;}
+        span:nth-child(7) { background-color: #50376E;}
+    }
+    .ammonia
+    {
+        span:nth-child(2) { background-color: #F9E956;}
+        span:nth-child(3) { background-color: #F1F04A;}
+        span:nth-child(4) { background-color: #D8E356;}
+        span:nth-child(5) { background-color: #A3C25A;}
+        span:nth-child(6) { background-color: #6DA14E;}
+        span:nth-child(7) { background-color: #599555;}
+        span:nth-child(8) { background-color: #4B6E4D;}
+    }
+    .nitrite
+    {
+        span:nth-child(2) { background-color: #C4E6EF;}
+        span:nth-child(3) { background-color: #9092B9;}
+        span:nth-child(4) { background-color: #77608E;}
+        span:nth-child(5) { background-color: #6A4578;}
+        span:nth-child(6) { background-color: #6C376B;}
+        span:nth-child(7) { background-color: #5D2E5C;}
+    }
+    .nitrate
+    {
+        span:nth-child(2) { background-color: #F6E43C;}
+        span:nth-child(3) { background-color: #DAAA3B;}
+        span:nth-child(4) { background-color: #C4723A;}
+        span:nth-child(5) { background-color: #CA7648;}
+        span:nth-child(6) { background-color: #B13B39;}
+        span:nth-child(7) { background-color: #A43335;}
+        span:nth-child(8) { background-color: #803134;}
+    }
+}

@@ -94,8 +94,17 @@ import { ManageAquariumDeviceModalComponent } from './components/modals/manage-a
 import { PhotoExpandedModalComponent } from './components/modals/photo-expanded-modal/photo-expanded-modal.component';
 import { FishCreateButtonComponent } from './components/data/fish/create-button/fish-create-button.component';
 import { SnapshotTableListComponent } from './components/data/snapshot/table-list/snapshot-table-list.component';
-import { SnapshotPhotoConfigDetail } from './components/data/snapshot/photo-config-detail/snapshot-photo-config-detail.component';
+import { SnapshotPhotoConfigDetail } from './components/containers/AquariumContainer/settings/photo-config-detail/snapshot-photo-config-detail.component';
 import { ManagePhotoConfigurationModal } from './components/modals/manage-photo-configuration/manage-photo-configuration.component';
+import { ManageSnapshotModal } from './components/modals/manage-snapshot-modal/manage-snapshot-modal.component';
+import { SnapshotDetailComponent } from './components/data/snapshot/snapshot-detail-form/snapshot-detail-form.component';
+import { AttachmentUploaderComponent } from './attachment-uploader/attachment-uploader.component';
+import { MatFileUploadModule } from 'angular-material-fileupload';
+import { SnapshotDetailChartComponent } from './components/data/snapshot/snapshot-detail-chart/snapshot-detail-chart.component';
+
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { FishCardComponent } from './components/data/fish/fish-card/fish-card.component';
+
 
 @NgModule({
   declarations: [
@@ -104,21 +113,28 @@ import { ManagePhotoConfigurationModal } from './components/modals/manage-photo-
     FeedingListComponent,
     SpeciesComponent,
 
+    /* Misc. */
+    AttachmentUploaderComponent,
+
     /* Aquarium Container */
     AquariumContainer,
     DashboardComponent,
     FishComponent,
     LightingComponent,
+
     MaintenanceComponent,
+    ParameterTabComponent,
 
     /* Data sources */
+
     SnapshotCarouselComponent,
-    ParameterTabComponent,
     SnapshotTakeButtonComponent,
     SnapshotDeleteButtonComponent,
     SnapshotTableListComponent,
     SnapshotPhotoConfigDetail,
-    
+    SnapshotDetailComponent,
+    SnapshotDetailChartComponent,
+
 
     FishTableListComponent,
     FishDetailFormComponent,
@@ -126,6 +142,7 @@ import { ManagePhotoConfigurationModal } from './components/modals/manage-photo-
     FishSelectComponent,
     FishCreateButtonComponent,
     FishDetailViewComponent,
+    FishCardComponent,
 
     SpeciesDetailFormComponent,
     SpeciesSelectComponent,
@@ -138,7 +155,7 @@ import { ManagePhotoConfigurationModal } from './components/modals/manage-photo-
     AquariumSelectComponent,
     AquariumTableComponent,
     SelectAquariumModalComponent,
-    
+
 
     TaskListComponent,
     TaskTabComponent,
@@ -148,17 +165,19 @@ import { ManagePhotoConfigurationModal } from './components/modals/manage-photo-
     FeedingDetailFormComponent,
 
 
-    SettingsComponent,
-    MasterDashboardComponent,
-    TaskTableComponent,
-    ErrorMessageModalComponent,
-    CreateAquariumModelComponent,
+    /* Modals */
     ConfirmModalComponent,
-    ManageSpeciesModalComponent,
+    ErrorMessageModalComponent,
+    MasterDashboardComponent,
+    SettingsComponent,
+    TaskTableComponent,
+    CreateAquariumModelComponent,
     ManageFishModalComponent,
+    ManageSpeciesModalComponent,
     ScraperModalComponent,
     PhotoExpandedModalComponent,
     ManagePhotoConfigurationModal,
+    ManageSnapshotModal,
     //New components here
   ],
   entryComponents: [
@@ -173,6 +192,7 @@ import { ManagePhotoConfigurationModal } from './components/modals/manage-photo-
     ScraperModalComponent,
     PhotoExpandedModalComponent,
     ManagePhotoConfigurationModal,
+    ManageSnapshotModal,
   ],
 
   imports: [
@@ -201,9 +221,14 @@ import { ManagePhotoConfigurationModal } from './components/modals/manage-photo-
     MatDatepickerModule,
     MatAutocompleteModule,
     MatNativeDateModule,
+    MatFileUploadModule,
     ReactiveFormsModule,
     ColorPickerModule,
     FontAwesomeModule,
+
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
+
     StoreModule.forRoot({}),
     StoreModule.forFeature('aquariums', aquariumReducer),
     StoreModule.forFeature('snapshots', snapshotReducer),
@@ -213,7 +238,7 @@ import { ManagePhotoConfigurationModal } from './components/modals/manage-photo-
       maxAge: 25
     }),
     NotifierModule.withConfig(AquariumNotifierConfig),
-    EffectsModule.forRoot([AquariumEffects, SnapshotEffects,SpeciesEffects,FishEffects]),
+    EffectsModule.forRoot([AquariumEffects, SnapshotEffects, SpeciesEffects, FishEffects]),
     AppRoutingModule
   ],
   providers: [

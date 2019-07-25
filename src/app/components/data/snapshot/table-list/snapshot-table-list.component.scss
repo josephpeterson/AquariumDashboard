@@ -5,4 +5,13 @@
   tr.mat-row:hover {
     background-color: #f0f0f0;
   }
+  .snapshotThumbnail {
+    width:60px;
+    height:60px;
+  
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
 }
+
