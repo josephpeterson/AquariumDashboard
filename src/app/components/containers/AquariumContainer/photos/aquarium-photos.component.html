@@ -1,0 +1,48 @@
+<div class="lighting-component">
+	<div class="row">
+		<div class="card">
+
+			<div class="card-body">
+				<div class="card-title">
+					<h3>Light Frames</h3>
+
+				</div>
+				<mat-form-field>
+					<mat-label>Light Frame</mat-label>
+					<mat-select>
+						
+					</mat-select>
+				</mat-form-field>
+				<ng-container>
+					<div class="ledRow" *ngFor="let row of rows">
+						<ng-container *ngFor="let led of row">
+							<div [(colorPicker)]="led.color" [style.background]="led.color" *ngIf="led.active" class="led active">{{led.id}}</div>
+							<div *ngIf="led.active == false" class="led">-</div>
+						</ng-container>
+					</div>
+				</ng-container>
+				<button class="btn btn-primary" (click)="sendUpdate();">Preview</button>
+				<button class="btn btn-primary" (click)="sendUpdate();">Save Frame...</button>
+
+			</div>
+
+		</div>
+	</div>
+	<div class="row">
+		<div class="card">
+
+			<div class="card-body">
+				<div class="card-title">
+					<h3>Schedule</h3>
+					<mat-form-field>
+						<mat-label>Schedule Name</mat-label>
+						<mat-select>
+							
+						</mat-select>
+					</mat-form-field>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>

@@ -44,6 +44,7 @@ export class SnapshotTableListComponent implements OnInit {
     { name: 'ph', label: 'PH', visible: true },
     { name: 'temperature', label: 'Temperature (C)', visible: true },
     { name: 'photoId', label: 'Photo ID', visible: false },
+    { name: 'manualEntry', label: 'Manual Test', visible: true },
   ];
 
   @Input() aquariumId: number;

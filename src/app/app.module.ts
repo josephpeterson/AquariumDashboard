@@ -104,6 +104,8 @@ import { SnapshotDetailChartComponent } from './components/data/snapshot/snapsho
 
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { FishCardComponent } from './components/data/fish/fish-card/fish-card.component';
+import { AquariumParametersComponent } from './components/containers/AquariumContainer/parameters/aquarium-parameters.component';
+import { AquariumPhotosComponent } from './components/containers/AquariumContainer/photos/aquarium-photos.component';
 
 
 @NgModule({
@@ -121,6 +123,8 @@ import { FishCardComponent } from './components/data/fish/fish-card/fish-card.co
     DashboardComponent,
     FishComponent,
     LightingComponent,
+    AquariumParametersComponent,
+    AquariumPhotosComponent,
 
     MaintenanceComponent,
     ParameterTabComponent,

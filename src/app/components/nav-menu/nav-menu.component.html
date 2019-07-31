@@ -15,19 +15,23 @@
         <ul class="navbar-nav flex-grow">
           <li class="nav-item">
             <a class="nav-link text-dark" [routerLink]='["/" + aquarium.id]' [routerLinkActiveOptions]='{ exact: true }'
-              [routerLinkActive]='["link-active"]'>Overview</a>
+              [routerLinkActive]='["link-active"]'>Dashboard</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-dark" [routerLink]='["/" + aquarium.id + "/maintenance"]'
-              [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]="{exact: false}">Maintenance</a>
+            <a class="nav-link text-dark" [routerLink]='["/" + aquarium.id + "/parameters"]' [routerLinkActiveOptions]='{ exact: true }'
+              [routerLinkActive]='["link-active"]'>Parameters</a>
           </li>
           <li class="nav-item">
             <a class="nav-link text-dark" [routerLink]='["/" + aquarium.id + "/fish"]'
               [routerLinkActive]='["link-active"]'>Fish</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-dark" [routerLink]='["/" + aquarium.id + "/lighting"]'
-              [routerLinkActive]='["link-active"]'>Lighting</a>
+            <a class="nav-link text-dark" [routerLink]='["/" + aquarium.id + "/photos"]'
+              [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]="{exact: false}">Photos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark" [routerLink]='["/" + aquarium.id + "/maintenance"]'
+              [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]="{exact: false}">Maintenance</a>
           </li>
           <li class="nav-item">
             <a class="nav-link text-dark" [routerLink]='["/" + aquarium.id + "/settings"]'

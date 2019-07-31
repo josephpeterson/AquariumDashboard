@@ -23,6 +23,6 @@ export class AquariumSnapshot
   ph: number
   temperature: number
   photoId: number
-
+  manualEntry: boolean
   photo: AquariumPhoto
 }
