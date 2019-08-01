@@ -7,7 +7,7 @@ import { AppState } from 'src/app/app.state';
 import { takeUntil } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material';
-import { ManageSpeciesModalComponent } from '../../../modals/manage-species-modal/manage-species-modal.component';
+import { ManageSpeciesModalComponent } from '../../../shared/modals/manage-species-modal/manage-species-modal.component';
 import { Fish } from 'src/app/models/Fish';
 import { getAquariumById, getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
 import { Aquarium } from 'src/app/models/Aquarium';

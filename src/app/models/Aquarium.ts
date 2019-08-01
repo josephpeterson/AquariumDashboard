@@ -6,6 +6,7 @@ import { AquariumDevice } from './AquariumDevice';
 export class Aquarium
 {
   id: number //= Math.floor(Math.random() * 100);
+  ownerId: number //= Math.floor(Math.random() * 100);
   name: string
   gallons: number
   type: string

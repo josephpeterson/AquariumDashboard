@@ -7,7 +7,7 @@ import { AppState } from 'src/app/app.state';
 import { takeUntil } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material';
-import { ManageSpeciesModalComponent } from '../../../modals/manage-species-modal/manage-species-modal.component';
+import { ManageSpeciesModalComponent } from '../../../shared/modals/manage-species-modal/manage-species-modal.component';
 
 @Component({
     selector: 'species-select',

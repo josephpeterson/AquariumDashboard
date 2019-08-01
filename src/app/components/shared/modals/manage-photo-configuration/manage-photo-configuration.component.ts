@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild, Inject } from '@angular/core';
 import { ConnectionError } from 'src/app/models/ConnectionError';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { AquariumService } from 'src/app/services/aquarium-service/aquarium.service';
+import { AquariumService } from 'src/app/services/aquarium.service';
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
 import { NotifierService } from 'angular-notifier';
 

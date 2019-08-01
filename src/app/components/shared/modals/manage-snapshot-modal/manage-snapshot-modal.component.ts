@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild, Inject } from '@angular/core';
 import { ConnectionError } from 'src/app/models/ConnectionError';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { AquariumService } from 'src/app/services/aquarium-service/aquarium.service';
+import { AquariumService } from 'src/app/services/aquarium.service';
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
 import { NotifierService } from 'angular-notifier';
 import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
@@ -9,8 +9,8 @@ import { AttachmentUploaderComponent } from 'src/app/attachment-uploader/attachm
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { SnapshotDeleteSuccessAction, SnapshotTakeSuccessAction } from 'src/app/store/snapshot/snapshot.actions';
-import { SnapshotDetailComponent } from '../../data/snapshot/snapshot-detail-form/snapshot-detail-form.component';
-import { SnapshotDetailChartComponent } from '../../data/snapshot/snapshot-detail-chart/snapshot-detail-chart.component';
+import { SnapshotDetailComponent } from 'src/app/components/data/snapshot/snapshot-detail-form/snapshot-detail-form.component';
+import { SnapshotDetailChartComponent } from 'src/app/components/data/snapshot/snapshot-detail-chart/snapshot-detail-chart.component';
 
 @Component({
   selector: 'manage-snapshot-modal',

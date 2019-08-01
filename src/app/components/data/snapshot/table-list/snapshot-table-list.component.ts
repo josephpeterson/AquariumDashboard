@@ -16,7 +16,7 @@ import { getAllSnapshots, isLoadingSnapshots } from 'src/app/store/snapshot/snap
 import { SnapshotLoadByAquariumAction } from 'src/app/store/snapshot/snapshot.actions';
 import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
 import * as moment from 'moment';
-import { AquariumService } from 'src/app/services/aquarium-service/aquarium.service';
+import { AquariumService } from 'src/app/services/aquarium.service';
 
 @Component({
   selector: 'snapshot-table-list',

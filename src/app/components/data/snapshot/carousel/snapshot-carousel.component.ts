@@ -13,8 +13,8 @@ import { getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
-import { PhotoExpandedModalComponent } from 'src/app/components/modals/photo-expanded-modal/photo-expanded-modal.component';
-import { AquariumService } from 'src/app/services/aquarium-service/aquarium.service';
+import { PhotoExpandedModalComponent } from 'src/app/components/shared/modals/photo-expanded-modal/photo-expanded-modal.component';
+import { AquariumService } from 'src/app/services/aquarium.service';
 import { AquariumPhoto } from 'src/app/models/AquariumPhoto';
 import { SnapshotTakeButtonComponent } from '../take-button/snapshot-take-button.component';
 

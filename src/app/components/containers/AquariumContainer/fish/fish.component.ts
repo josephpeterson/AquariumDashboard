@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource, MatSort, MatPaginator, MatDialog } from '@angular/material';
-import { ManageSpeciesModalComponent } from '../../../modals/manage-species-modal/manage-species-modal.component';
+import { ManageSpeciesModalComponent } from '../../../shared/modals/manage-species-modal/manage-species-modal.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Fish } from 'src/app/models/Fish';
 import { Observable } from 'rxjs';
@@ -9,7 +9,7 @@ import { Aquarium } from 'src/app/models/Aquarium';
 import { getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
 import { AppState } from 'src/app/app.state';
 import { Store } from '@ngrx/store';
-import { ManageFishModalComponent } from '../../../modals/manage-fish-modal/manage-fish-modal.component';
+import { ManageFishModalComponent } from '../../../shared/modals/manage-fish-modal/manage-fish-modal.component';
 import { FishLoadByAquariumIdAction, FishLoadByFishIdAction } from 'src/app/store/fish/fish.actions';
 import { getAllFish, getFishLoadError, getFishById } from 'src/app/store/fish/fish.selector';
 import { HttpErrorResponse } from '@angular/common/http';

@@ -3,6 +3,13 @@
   background-color: #294F2D;
   height:60px;
   color: rgb(125, 184, 161);
+
+  a.nav-link {
+    color:#343a40;
+  }
+  a.nav-link:hover {
+    color:skyblue;
+  }
 }
 a.navbar-brand {
   white-space: normal;

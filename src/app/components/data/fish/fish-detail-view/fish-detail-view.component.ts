@@ -9,9 +9,9 @@ import { SpeciesLoadAction, SpeciesUpdateAction, SpeciesAddAction, SpeciesDelete
 import { faPenFancy, faPen, faTrash,faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { NotifierService } from 'angular-notifier';
 import { MatDialog } from '@angular/material';
-import { ScraperModalComponent } from '../../../modals/scraper-modal/scraper-modal.component';
+import { ScraperModalComponent } from '../../../shared/modals/scraper-modal/scraper-modal.component';
 import { Router } from '@angular/router';
-import { ConfirmModalComponent } from '../../../modals/confirm-modal/confirm-modal.component';
+import { ConfirmModalComponent } from '../../../shared/modals/confirm-modal/confirm-modal.component';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { Fish } from 'src/app/models/Fish';
 

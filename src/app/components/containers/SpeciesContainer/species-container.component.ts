@@ -7,11 +7,11 @@ import {Location} from '@angular/common';
 
 
 @Component({
-  selector: 'species-page-component',
-  templateUrl: './species.component.html',
-  styleUrls: ['./species.component.scss']
+  selector: 'species-container',
+  templateUrl: './species-container.component.html',
+  styleUrls: ['./species-container.component.scss']
 })
-export class SpeciesComponent implements OnInit {
+export class SpeciesContainer implements OnInit {
   public speciesId: number = -1;
 
   constructor(

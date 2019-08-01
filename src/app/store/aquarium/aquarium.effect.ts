@@ -3,7 +3,7 @@ import { Effect, Actions, ofType } from '@ngrx/effects'
 import { AquariumActions, AquariumListAction, AquariumLoadSuccessAction, AquariumLoadFailAction, AquariumUpdateAction, AquariumUpdateSuccessAction, AquariumUpdateFailAction, AquariumCreateSuccessAction, AquariumCreateFailAction, AquariumCreateAction, AquariumDeleteAction, AquariumDeleteSuccessAction, AquariumDeleteFailAction, AquariumLoadByIdAction, AquariumSelectionAction, AquariumAddFishAction, AquariumAddFishSuccessAction, AquariumAddFishFailAction, AquariumUpdateFishAction, AquariumUpdateFishSuccessAction, AquariumUpdateFishFailAction, AquariumDeleteFishAction, AquariumDeleteFishSuccessAction, AquariumDeleteFishFailAction } from './aquarium.actions';
 
 import { map, catchError, mergeMap } from 'rxjs/operators'
-import { AquariumService } from 'src/app/services/aquarium-service/aquarium.service';
+import { AquariumService } from 'src/app/services/aquarium.service';
 import { of } from 'rxjs'
 import { Aquarium } from 'src/app/models/Aquarium';
 import { Fish } from 'src/app/models/Fish';

@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material';
 import { FormControl } from '@angular/forms';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { SettingsComponentData } from './settings.component.data';
-import { ConfirmModalComponent } from '../../../modals/confirm-modal/confirm-modal.component';
+import { ConfirmModalComponent } from '../../../shared/modals/confirm-modal/confirm-modal.component';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { CameraConfiguration, CameraExposureModes } from 'src/app/models/CameraConfiguration';
@@ -11,8 +11,8 @@ import { Observable, Subject } from 'rxjs';
 import { NotifierService } from 'angular-notifier';
 import { take, takeUntil } from 'rxjs/operators';
 import { Species } from 'src/app/models/Species';
-import { ManageSpeciesModalComponent } from '../../../modals/manage-species-modal/manage-species-modal.component';
-import { ManageAquariumDeviceModalComponent } from 'src/app/components/modals/manage-aquarium-device-modal/manage-aquarium-device-modal.component';
+import { ManageSpeciesModalComponent } from '../../../shared/modals/manage-species-modal/manage-species-modal.component';
+import { ManageAquariumDeviceModalComponent } from 'src/app/components/shared/modals/manage-aquarium-device-modal/manage-aquarium-device-modal.component';
 
 
 @Component({

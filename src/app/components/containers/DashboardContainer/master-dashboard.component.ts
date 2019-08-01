@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { ErrorMessageModalComponent } from '../modals/error-message-modal/error-message-modal.component';
+import { ErrorMessageModalComponent } from '../../shared/modals/error-message-modal/error-message-modal.component';
 import { ConnectionError } from 'src/app/models/ConnectionError';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { CreateAquariumModelComponent } from '../modals/create-aquarium-modal/create-aquarium-modal.component';
+import { CreateAquariumModelComponent } from '../../shared/modals/create-aquarium-modal/create-aquarium-modal.component';
 import { take } from 'rxjs/operators';
 import { Species } from 'src/app/models/Species';
 import { Router } from '@angular/router';
@@ -12,6 +12,8 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { getAllAquariums, isLoadingAquariums, getConnectionError } from 'src/app/store/aquarium/aquarium.selector';
 import { Aquarium } from 'src/app/models/Aquarium';
+import { LoginModalComponent } from '../../shared/modals/login-modal/login-modal.component';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'master-dashboard-component',
@@ -19,7 +21,8 @@ import { Aquarium } from 'src/app/models/Aquarium';
   styleUrls: ['./master-dashboard.component.scss']
 })
 export class MasterDashboardComponent implements OnInit {
-  constructor(public dialog: MatDialog, public router: Router, private store: Store<AppState>) { }
+  logged: boolean;
+  constructor(public dialog: MatDialog, public router: Router, private store: Store<AppState>,private auth:AuthService) { }
 
   public aquariums$ = this.store.select(getAllAquariums);
   public loading$ = this.store.select(isLoadingAquariums);
@@ -29,15 +32,23 @@ export class MasterDashboardComponent implements OnInit {
   faCreate = faPlus;
 
   ngOnInit() {
+
+
     //Unselect our tank
     this.store.dispatch(new AquariumUnSelectionAction());
     this.loadAquariums();
 
     //Bind error to dialog
     this.connectionError$.pipe(take(2)).subscribe(error => {
-      console.log(error);
-      if(error)
-        this.displayErrorDialog(error);
+      if (error) {
+        if (error.status == 401)
+        {
+          //this.logged = false;
+          //this.auth.clearToken();
+        }
+        else
+          this.displayErrorDialog(error);
+      }
     });
   }
   displayErrorDialog(error) {
@@ -71,6 +82,18 @@ export class MasterDashboardComponent implements OnInit {
   clickAquarium(aquarium: Aquarium) {
     var url = [aquarium.id];
     this.router.navigate(url);
+  }
+
+  clickLogin() {
+    var dialog = this.dialog.open(LoginModalComponent, {
+    });
+    dialog.afterClosed().subscribe(val => {
+      if(val)
+      {
+        this.logged = true;
+        this.loadAquariums();
+      }
+    })
   }
 }
 

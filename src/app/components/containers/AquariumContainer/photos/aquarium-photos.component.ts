@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Aquarium } from 'src/app/models/Aquarium';
-import { AquariumService } from 'src/app/services/aquarium-service/aquarium.service';
+import { AquariumService } from 'src/app/services/aquarium.service';
 import { MatDialog } from '@angular/material';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';

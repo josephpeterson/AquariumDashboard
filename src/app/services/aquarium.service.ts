@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams, HttpHeaders, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { environment } from "../../../environments/environment";
+import { environment } from "../../environments/environment";
 import { LightingConfiguration } from 'src/app/models/LightingConfiguration';
 import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
 import { Aquarium } from 'src/app/models/Aquarium';

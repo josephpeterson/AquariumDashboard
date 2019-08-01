@@ -1,13 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { AquariumService } from 'src/app/services/aquarium-service/aquarium.service';
+import { AquariumService } from 'src/app/services/aquarium.service';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
 import { take } from 'rxjs/operators';
 import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
-import { ManageSnapshotModal } from 'src/app/components/modals/manage-snapshot-modal/manage-snapshot-modal.component';
+import { ManageSnapshotModal } from 'src/app/components/shared/modals/manage-snapshot-modal/manage-snapshot-modal.component';
 
 @Component({
   selector: 'aquarium-parameters',

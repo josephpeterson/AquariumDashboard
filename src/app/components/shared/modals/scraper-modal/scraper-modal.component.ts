@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ConnectionError } from 'src/app/models/ConnectionError';
-import { AquariumService } from 'src/app/services/aquarium-service/aquarium.service';
+import { AquariumService } from 'src/app/services/aquarium.service';
 import { take } from 'rxjs/operators';
 import { Species } from 'src/app/models/Species';
 

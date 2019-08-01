@@ -7,7 +7,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { Fish } from 'src/app/models/Fish';
 import { Subject } from 'rxjs';
-import { AquariumService } from 'src/app/services/aquarium-service/aquarium.service';
+import { AquariumService } from 'src/app/services/aquarium.service';
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
 import { MAT_DIALOG_DATA } from '@angular/material';
 

@@ -4,7 +4,7 @@ import { AquariumListAction, AquariumSelectionAction, AquariumUpdateAction, Aqua
 import { Aquarium } from 'src/app/models/Aquarium';
 import { Injectable } from '@angular/core';
 import { isLoadingAquariums, getConnectionError, getSelectedAquarium, isUpdatingAquarium, isDeletingAquarium, getDeleteError, getDidDelete, getDidUpdate } from 'src/app/store/aquarium/aquarium.selector';
-import { AquariumService } from 'src/app/services/aquarium-service/aquarium.service';
+import { AquariumService } from 'src/app/services/aquarium.service';
 import { CameraConfiguration } from 'src/app/models/CameraConfiguration';
 import { NotifierService } from 'angular-notifier';
 import { take } from 'rxjs/operators';

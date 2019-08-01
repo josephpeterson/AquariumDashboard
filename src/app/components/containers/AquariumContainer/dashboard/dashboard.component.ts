@@ -9,8 +9,8 @@ import { Aquarium } from 'src/app/models/Aquarium';
 import { getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
 import { AppState } from 'src/app/app.state';
 import { take } from 'rxjs/operators';
-import { AquariumService } from 'src/app/services/aquarium-service/aquarium.service';
-import { ManageSnapshotModal } from 'src/app/components/modals/manage-snapshot-modal/manage-snapshot-modal.component';
+import { AquariumService } from 'src/app/services/aquarium.service';
+import { ManageSnapshotModal } from 'src/app/components/shared/modals/manage-snapshot-modal/manage-snapshot-modal.component';
 import * as moment from 'moment';
 
 @Component({

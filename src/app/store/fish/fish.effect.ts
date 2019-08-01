@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { Effect, Actions, ofType } from '@ngrx/effects'
 import { map, catchError, mergeMap, switchMap } from 'rxjs/operators'
-import { AquariumService } from 'src/app/services/aquarium-service/aquarium.service';
+import { AquariumService } from 'src/app/services/aquarium.service';
 import { of } from 'rxjs'
 import { FishLoadByAquariumIdAction, FishActions, FishLoadSuccessAction, FishLoadFailAction, FishAddAction, FishAddSuccessAction, FishAddFailAction, FishUpdateAction, FishUpdateSuccessAction, FishUpdateFailAction, FishDeleteAction, FishDeleteSuccessAction, FishDeleteFailAction, FishLoadByFishIdAction } from './fish.actions';
 import { Fish } from 'src/app/models/Fish';

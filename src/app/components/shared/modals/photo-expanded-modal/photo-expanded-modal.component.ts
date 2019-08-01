@@ -3,7 +3,7 @@ import { AquariumPhoto } from 'src/app/models/AquariumPhoto';
 import { Subject } from 'rxjs';
 import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
 import { environment } from 'src/environments/environment';
-import { AquariumService } from 'src/app/services/aquarium-service/aquarium.service';
+import { AquariumService } from 'src/app/services/aquarium.service';
 
 @Component({
   selector: 'photo-expanded-modal',

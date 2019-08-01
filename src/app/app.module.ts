@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 //Material Imports
 import { MatTableModule } from '@angular/material/table';
@@ -25,7 +25,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 //Component declarations
 import { AppComponent } from './components/app-root/app.component';
-import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
+import { NavMenuComponent } from './components/shared/nav-menu/nav-menu.component';
 import { DashboardComponent } from './components/containers/AquariumContainer/dashboard/dashboard.component';
 
 
@@ -33,8 +33,8 @@ import { DashboardComponent } from './components/containers/AquariumContainer/da
 import { FishComponent } from './components/containers/AquariumContainer/fish/fish.component';
 import { MaintenanceComponent } from './components/containers/AquariumContainer/maintenance/maintenance.component';
 import { SettingsComponent } from './components/containers/AquariumContainer/settings/settings.component';
-import { TaskListComponent } from './components/task-list/task-list.component';
-import { TaskTableComponent } from './components/task-table/task-table.component';
+import { TaskListComponent } from './components/shared/task-list/task-list.component';
+import { TaskTableComponent } from './components/shared/task-table/task-table.component';
 import { LightingComponent } from './components/containers/AquariumContainer/lighting/lighting.component';
 
 
@@ -51,14 +51,14 @@ import { aquariumReducer } from './store/aquarium/aquarium.reducer';
 import { snapshotReducer } from './store/snapshot/snapshot.reducer';
 import { speciesReducer } from './store/species/species.reducer';
 
-import { MasterDashboardComponent } from './components/master-dashboard/master-dashboard.component';
+import { MasterDashboardComponent } from './components/containers/DashboardContainer/master-dashboard.component';
 import { AppRoutingModule } from './app-routing.module';
-import { ErrorMessageModalComponent } from './components/modals/error-message-modal/error-message-modal.component';
+import { ErrorMessageModalComponent } from './components/shared/modals/error-message-modal/error-message-modal.component';
 
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { CreateAquariumModelComponent } from './components/modals/create-aquarium-modal/create-aquarium-modal.component';
+import { CreateAquariumModelComponent } from './components/shared/modals/create-aquarium-modal/create-aquarium-modal.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
-import { ConfirmModalComponent } from './components/modals/confirm-modal/confirm-modal.component';
+import { ConfirmModalComponent } from './components/shared/modals/confirm-modal/confirm-modal.component';
 import { NotifierModule } from 'angular-notifier';
 import { AquariumNotifierConfig } from './config/notifier';
 import { ParameterTabComponent } from './components/containers/AquariumContainer/maintenance/parameters-tab/maintenance-parameters-tab.component';
@@ -71,32 +71,31 @@ import { FishTableListComponent } from './components/data/fish/table-list/fish-t
 import { FishDetailFormComponent } from './components/data/fish/fish-detail-form/fish-detail-form.component';
 import { SpeciesSelectComponent } from './components/data/species/select/species-select.component';
 import { AquariumSelectComponent } from './components/data/aquarium/select/aquarium-select.component';
-import { ManageSpeciesModalComponent } from './components/modals/manage-species-modal/manage-species-modal.component';
+import { ManageSpeciesModalComponent } from './components/shared/modals/manage-species-modal/manage-species-modal.component';
 import { SpeciesTableComponent } from './components/data/species/species-table/species-table.component';
 import { SpeciesDetailFormComponent } from './components/data/species/species-detail-form/species-detail-form.component';
 import { FishInformationComponent } from './components/data/fish/fish-information/fish-information.component';
 import { FishSelectComponent } from './components/data/fish/select/fish-select.component';
-import { ManageFishModalComponent } from './components/modals/manage-fish-modal/manage-fish-modal.component';
+import { ManageFishModalComponent } from './components/shared/modals/manage-fish-modal/manage-fish-modal.component';
 import { FeedingTableListComponent } from './components/data/feeding/feeding-table/feeding-table-list.component';
 import { FeedingListComponent } from './components/containers/AquariumContainer/maintenance/feeding-list/feeding-list.component';
 import { FeedingDetailFormComponent } from './components/data/feeding/feeding-detail-form/feeding-detail-form.component';
-import { SpeciesComponent } from './components/containers/species/species.component';
 import { AquariumContainer } from './components/containers/AquariumContainer/aquarium-container.component';
 import { SpeciesDetailViewComponent } from './components/data/species/species-detail-view/species-detail-view.component';
-import { ScraperModalComponent } from './components/modals/scraper-modal/scraper-modal.component';
+import { ScraperModalComponent } from './components/shared/modals/scraper-modal/scraper-modal.component';
 import { AquariumTableComponent } from './components/data/aquarium/aquarium-table/aquarium-table.component';
-import { SelectAquariumModalComponent } from './components/modals/select-aquarium-modal/select-aquarium-modal.component';
+import { SelectAquariumModalComponent } from './components/shared/modals/select-aquarium-modal/select-aquarium-modal.component';
 import { FishDetailViewComponent } from './components/data/fish/fish-detail-view/fish-detail-view.component';
 import { FishEffects } from './store/fish/fish.effect';
 import { fishReducer } from './store/fish/fish.reducer';
 import { DeviceDetailFormComponent } from './components/data/device/device-detail-form/device-detail-form.component';
-import { ManageAquariumDeviceModalComponent } from './components/modals/manage-aquarium-device-modal/manage-aquarium-device-modal.component';
-import { PhotoExpandedModalComponent } from './components/modals/photo-expanded-modal/photo-expanded-modal.component';
+import { ManageAquariumDeviceModalComponent } from './components/shared/modals/manage-aquarium-device-modal/manage-aquarium-device-modal.component';
+import { PhotoExpandedModalComponent } from './components/shared/modals/photo-expanded-modal/photo-expanded-modal.component';
 import { FishCreateButtonComponent } from './components/data/fish/create-button/fish-create-button.component';
 import { SnapshotTableListComponent } from './components/data/snapshot/table-list/snapshot-table-list.component';
 import { SnapshotPhotoConfigDetail } from './components/containers/AquariumContainer/settings/photo-config-detail/snapshot-photo-config-detail.component';
-import { ManagePhotoConfigurationModal } from './components/modals/manage-photo-configuration/manage-photo-configuration.component';
-import { ManageSnapshotModal } from './components/modals/manage-snapshot-modal/manage-snapshot-modal.component';
+import { ManagePhotoConfigurationModal } from './components/shared/modals/manage-photo-configuration/manage-photo-configuration.component';
+import { ManageSnapshotModal } from './components/shared/modals/manage-snapshot-modal/manage-snapshot-modal.component';
 import { SnapshotDetailComponent } from './components/data/snapshot/snapshot-detail-form/snapshot-detail-form.component';
 import { AttachmentUploaderComponent } from './attachment-uploader/attachment-uploader.component';
 import { MatFileUploadModule } from 'angular-material-fileupload';
@@ -106,6 +105,16 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { FishCardComponent } from './components/data/fish/fish-card/fish-card.component';
 import { AquariumParametersComponent } from './components/containers/AquariumContainer/parameters/aquarium-parameters.component';
 import { AquariumPhotosComponent } from './components/containers/AquariumContainer/photos/aquarium-photos.component';
+import { SpeciesContainer } from './components/containers/SpeciesContainer/species-container.component';
+import { AquariumInterceptor } from './services/aquarium.interceptor';
+import { LoginModalComponent } from './components/shared/modals/login-modal/login-modal.component';
+import { JwtModule } from '@auth0/angular-jwt';
+import { AquariumService } from './services/aquarium.service';
+import { AuthGuard } from './guards/AuthGuard';
+import { AuthService } from './services/auth.service';
+import { LoginComponent } from './components/routes/login/login.component';
+import { SignupComponent } from './components/routes/signup/signup.component';
+import { HomeComponent } from './components/routes/home/home.component';
 
 
 @NgModule({
@@ -113,7 +122,11 @@ import { AquariumPhotosComponent } from './components/containers/AquariumContain
     AppComponent,
     NavMenuComponent,
     FeedingListComponent,
-    SpeciesComponent,
+    SpeciesContainer,
+
+    HomeComponent,
+    LoginComponent,
+    SignupComponent,
 
     /* Misc. */
     AttachmentUploaderComponent,
@@ -182,6 +195,7 @@ import { AquariumPhotosComponent } from './components/containers/AquariumContain
     PhotoExpandedModalComponent,
     ManagePhotoConfigurationModal,
     ManageSnapshotModal,
+    LoginModalComponent,
     //New components here
   ],
   entryComponents: [
@@ -197,6 +211,7 @@ import { AquariumPhotosComponent } from './components/containers/AquariumContain
     PhotoExpandedModalComponent,
     ManagePhotoConfigurationModal,
     ManageSnapshotModal,
+    LoginModalComponent,
   ],
 
   imports: [
@@ -246,8 +261,11 @@ import { AquariumPhotosComponent } from './components/containers/AquariumContain
     AppRoutingModule
   ],
   providers: [
+    AquariumService,
+    AuthService,
+    AuthGuard,
     //Providers for authenticaion
-    //{ provide: HTTP_INTERCEPTORS, useClass: ConfigVaultInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AquariumInterceptor, multi: true },
     //{ provide: 'OAuth.Environment', useValue: environment.environmentTag },
     //{ provide: 'OAuth.ClientName', useValue: environment.appName },
     MatDatepickerModule

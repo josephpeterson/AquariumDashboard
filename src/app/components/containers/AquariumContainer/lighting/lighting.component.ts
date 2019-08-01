@@ -3,7 +3,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource, MatSort, MatPaginator, MatDialog } from '@angular/material';
 import { LEDElement } from 'src/app/models/LEDElement';
 import { LightingConfiguration } from 'src/app/models/LightingConfiguration';
-import { AquariumService } from 'src/app/services/aquarium-service/aquarium.service';
+import { AquariumService } from 'src/app/services/aquarium.service';
 
 
 
