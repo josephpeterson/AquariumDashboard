@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Observable, Subject } from 'rxjs';
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { AquariumAccount } from '../models/AquariumAccount';
+import { SignupRequest } from '../models/SignupRequest';
 
 @Injectable({
   providedIn: "root"
@@ -40,6 +41,18 @@ export class AuthService {
       email: email,
       password: password
     });
+    var a = new Subject();
+    req.subscribe((response: TokenResponse) => {
+      this.storeToken(response.token);
+      a.next(this.getUser());
+    },
+      err => {
+        a.error(err);
+      });
+    return a;
+  }
+  public signup(signupRequest: SignupRequest) {
+    var req = this.http.post(this._url + `/v1/Auth/Signup`, signupRequest);
     var a = new Subject();
     req.subscribe((response: TokenResponse) => {
       this.storeToken(response.token);

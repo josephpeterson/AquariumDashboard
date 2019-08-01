@@ -12,10 +12,10 @@ import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
 })
 export class LoginComponent implements OnInit {
 
-  error: string;
-
+  
   constructor(private auth: AuthService,private router: Router) { }
-
+  
+  public error: string;
   public password: string;
   public email: string;
   public disabled: boolean = false;
@@ -30,7 +30,6 @@ export class LoginComponent implements OnInit {
   clickLogin() {
     this.disabled = true;
     this.auth.login(this.email, this.password).subscribe(val => {
-      console.log(val);
       this.router.navigateByUrl("dashboard");
     },
       err => {
