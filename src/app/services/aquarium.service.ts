@@ -57,7 +57,7 @@ export class AquariumService {
     return this.http.get<AquariumSnapshot>(this._url + "/v1/Snapshot/" + aqId + "/Take/true");
   }
   public getPhotoPermalink(photoId: number): string {
-    return this._url + "/v1/Snapshot/Photo/" + photoId;
+    return this._url + "/v1/Snapshot/Photo/" + photoId + "/small";
   }
   public getLatestSnapshot(aqId: number): Observable<AquariumSnapshot> {
 
