@@ -11,8 +11,7 @@
     "e2e": "ng e2e",
     "create-empty-folder": "if not exist dist2\\empty mkdir dist2\\empty",
     "build-dev": "ng build --configuration dev --outputPath=./dist2/environments/dev",
-    "build-prod": "ng build --configuration prod --outputPath=./dist2/environments/prod",
-    "prod-build-dev": "ng build --configuration prod --aot --outputPath=D:/a/1/a",
+    "build-prod": "ng build --configuration prod --aot --outputPath=dist/environments/prod",
     "copy-main-dev": "xcopy dist\\DEV\\main.js dist\\main\\main.dev.js*",
     "copy-main-prod": "xcopy dist\\PROD\\main.js dist\\main\\main.prod.js*"
   },
