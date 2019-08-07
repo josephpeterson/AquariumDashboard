@@ -2,18 +2,12 @@
   "name": "aquarium-dashboard",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
     "start": "ng serve",
-    "build": "npm run build-dev && npm run create-empty-folder",
-    "copy": "xcopy dist\\DEV\\main.js dist\\main\\main.dev.js*",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "create-empty-folder": "if not exist dist2\\empty mkdir dist2\\empty",
-    "build-dev": "ng build --configuration dev --outputPath=./dist2/environments/dev",
-    "build-prod": "ng build --configuration prod --aot --outputPath=dist/environments/prod",
-    "copy-main-dev": "xcopy dist\\DEV\\main.js dist\\main\\main.dev.js*",
-    "copy-main-prod": "xcopy dist\\PROD\\main.js dist\\main\\main.prod.js*"
+    "build-dev": "ng build --configuration dev --outputPath=dist/environments/dev",
+    "build-prod": "ng build --configuration prod --aot --outputPath=dist/environments/prod"
   },
   "private": true,
   "dependencies": {
