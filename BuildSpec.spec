@@ -16,29 +16,29 @@
 			{
 				env: 'dev', 
 				directories: [ 
-					'\\\\mil-crgwb-sd01\\F$\\Web\\creditforcedashboard' 
+					'\\\\mil-crgwb-sd01\\F$\\Web\\AquariumDashboard' 
 				]
 			},
 			{
 				env: 'sit', 
 				directories: [ 
-					'\\\\mil-crgwb-ss01\\F$\\Web\\creditforcedashboard' 
+					'\\\\mil-crgwb-ss01\\F$\\Web\\AquariumDashboard' 
 				]
 			},
 			{
 				env: 'uat', 
 				directories: [
-					'\\\\mil-crgwb-su01\\F$\\Web\\creditforcedashboard',
-					'\\\\mil-crgwb-su02\\F$\\Web\\creditforcedashboard'
+					'\\\\mil-crgwb-su01\\F$\\Web\\AquariumDashboard',
+					'\\\\mil-crgwb-su02\\F$\\Web\\AquariumDashboard'
 				]
 			},
 			{
 				env: 'prod', 
 				directories: [ 
-					'\\\\mil-crgwb-sp01\\F$\\Web\\creditforcedashboard',
-					'\\\\mil-crgwb-sp02\\F$\\Web\\creditforcedashboard',
-					'\\\\ord-crgwb-sp01\\F$\\Web\\creditforcedashboard',
-					'\\\\ord-crgwb-sp02\\F$\\Web\\creditforcedashboard' 
+					'\\\\mil-crgwb-sp01\\F$\\Web\\AquariumDashboard',
+					'\\\\mil-crgwb-sp02\\F$\\Web\\AquariumDashboard',
+					'\\\\ord-crgwb-sp01\\F$\\Web\\AquariumDashboard',
+					'\\\\ord-crgwb-sp02\\F$\\Web\\AquariumDashboard' 
 				]
 			}
 		]
