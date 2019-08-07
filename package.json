@@ -12,7 +12,7 @@
     "create-empty-folder": "if not exist dist2\\empty mkdir dist2\\empty",
     "build-dev": "ng build --configuration dev --outputPath=./dist2/environments/dev",
     "build-prod": "ng build --configuration prod --outputPath=./dist2/environments/prod",
-    "prod-build-dev": "ng build --configuration prod --build-optimizer",
+    "prod-build-dev": "ng build --configuration prod --outputPath=D:/a/1/a --build-optimizer",
     "copy-main-dev": "xcopy dist\\DEV\\main.js dist\\main\\main.dev.js*",
     "copy-main-prod": "xcopy dist\\PROD\\main.js dist\\main\\main.prod.js*"
   },
