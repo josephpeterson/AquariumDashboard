@@ -1,81 +1,22 @@
-<h3 class="p-2">Dashboard</h3>
-<div class="row m-2">
-    <div class="flex-row mr-3">
-        <div class="card mb-2">
-            <div class="card-body" *ngIf="latestSnapshot">
-                <div class="card-title">
-                    <h4 class="m-1">Parameters</h4>
-                </div>
-                <table>
-                    <tr *ngIf="latestSnapshot.temperature != undefined">
-                        <td>Temperature: </td>
-                        <td>{{latestSnapshot.temperature/10}}C</td>
-                    </tr>
-                    <tr *ngIf="latestSnapshot.ph != undefined">
-                        <td>Water PH: </td>
-                        <td>{{latestSnapshot.ph}}</td>
-                    </tr>
-                    <tr *ngIf="latestSnapshot.ammonia != undefined">
-                        <td>Ammonia: </td>
-                        <td>{{latestSnapshot.ammonia}}</td>
-                    </tr>
-                    <tr *ngIf="latestSnapshot.nitrate != undefined">
-                        <td>Nitrate: </td>
-                        <td>{{latestSnapshot.nitrate}}</td>
-                    </tr>
-                    <tr *ngIf="latestSnapshot.nitrite != undefined">
-                        <td>Nitrite: </td>
-                        <td>{{latestSnapshot.nitrite}}</td>
-                    </tr>
-                    <tr class="text-muted">
-                        <td>Nitrite: </td>
-                        <td>232</td>
-                    </tr>
-                    <tr>
-                        <td>Fish Count: </td>
-                        <td>4</td>
-                    </tr>
-                </table>
-                <p class="card-text"><small class="text-muted">{{getAgeText()}}</small></p>
-                <button class="btn btn-link" (click)="clickAddSnapshot()">Insert Parameters</button>
-            </div>
-        </div>
-        <div class="card mb-2 border border-warning">
-            <div class="card-body">
-                <div class="card-title">
-                    <h4 class="m-1">Maintenance</h4>
-                </div>
-                <div class="container">
-                    <table>
-                        <tr>
-                            <td class="text-warning">Feeding: </td>
-                            <td>Okay</td>
-                        </tr>
-                        <tr>
-                            <td>Water: </td>
-                            <td>Test !</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-            <div class="card-footer">
-                <fa-icon class="addIcon mr-2 text-warning" [icon]="faExclamationTriangle"></fa-icon>
-                <small class="text-muted">Maintenance needed!</small>
-            </div>
-        </div>
-    </div>
-    <div class="flex-row">
-        <snapshot-carousel></snapshot-carousel>
-    </div>
+<h3 class="p-2">Device</h3>
+<device-detail-view *ngIf="aquarium.device as device" [device]="device"></device-detail-view>
+<device-detail-form *ngIf="!aquarium.device" [aquarium]="aquarium"> </device-detail-form>
 
-</div>
-<h3 class="p-2">Tasks</h3>
-<div class="row m-2">
-    <task-list></task-list>
-</div>
 <h3>Fish</h3>
 <div class="row">
     <div class="card-group">
         <fish-card class="card m-2" *ngFor="let fish of aquarium.fish" [fish]="fish"></fish-card>
     </div>
+    <div class="empty-card" *ngIf="!aquarium.fish || aquarium.fish.length == 0">
+        <p>
+            You do not have any fish! Click to add new fish to your aquarium.
+        </p>
+        <div>
+            <fish-create-button></fish-create-button>
+        </div>
+    </div>
+</div>
+<h3 class="p-2">Tasks</h3>
+<div class="row m-2">
+    <task-list></task-list>
 </div>

@@ -1,0 +1,70 @@
+<div class="device-detail-view container">
+    <div class="row">
+        <div class="col-3">
+            <div class="card mb-2 overview">
+                <div class="card-body">
+                    <div class="card-title">
+                        <h4 class="m-1">
+                            <fa-icon class="mr-2" [icon]="faDevice"></fa-icon>
+                            {{device.name}}
+                        </h4>
+                    </div>
+                    <table>
+                        <tr>
+                            <td *ngIf="deviceStatus == 0">
+                                <fa-icon class="mr-2" style="color: indianred;" [icon]="faTimesCircle"></fa-icon>Offline
+                            </td>
+                            <td *ngIf="deviceStatus == 1">
+                                <fa-icon class="mr-2" [icon]="faSpinner"></fa-icon>Connecting...
+                            </td>
+                            <td *ngIf="deviceStatus == 2">
+                                <fa-icon class="mr-2" style="color: limegreen;" [icon]="faCheck"></fa-icon>Online
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Uptime -</td>
+                            <td>DAYS</td>
+                        </tr>
+                    </table>
+                    <button class="btn btn-link">Manage...</button>
+                    <div class="card-title">
+                        <h4 class="m-1">Parameters</h4>
+                    </div>
+                    <table *ngIf="latestSnapshot">
+                        <tr *ngIf="latestSnapshot.temperature != undefined">
+                            <td>Temperature: </td>
+                            <td>{{latestSnapshot.temperature/10}}C</td>
+                        </tr>
+                        <tr *ngIf="latestSnapshot.ph != undefined">
+                            <td>Water PH: </td>
+                            <td>{{latestSnapshot.ph}}</td>
+                        </tr>
+                        <tr *ngIf="latestSnapshot.ammonia != undefined">
+                            <td>Ammonia: </td>
+                            <td>{{latestSnapshot.ammonia}}</td>
+                        </tr>
+                        <tr *ngIf="latestSnapshot.nitrate != undefined">
+                            <td>Nitrate: </td>
+                            <td>{{latestSnapshot.nitrate}}</td>
+                        </tr>
+                        <tr *ngIf="latestSnapshot.nitrite != undefined">
+                            <td>Nitrite: </td>
+                            <td>{{latestSnapshot.nitrite}}</td>
+                        </tr>
+                        <tr class="text-muted">
+                            <td>Nitrite: </td>
+                            <td>232</td>
+                        </tr>
+                        <tr>
+                            <td>Fish Count: </td>
+                            <td>4</td>
+                        </tr>
+                    </table>
+                    <p class="card-text" *ngIf="latestSnapshot"><small class="text-muted">{{getSnapshotAge()}}</small></p>
+                    <button class="btn btn-link" (click)="clickAddSnapshot()">Insert Parameters</button>
+                </div>
+            </div>
+        </div>
+        <snapshot-carousel></snapshot-carousel>
+    </div>
+</div>

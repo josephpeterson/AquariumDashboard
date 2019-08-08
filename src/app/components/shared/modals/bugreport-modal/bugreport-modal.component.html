@@ -1,0 +1,13 @@
+<div class="bugreport-modal-component">
+  <h1 mat-dialog-title>Report Bug</h1>
+  <p>
+    Thank you for your time to submit feedback and we are sorry for any issues you have experienced. Our team of developers will take every inch of feedback into consideration.
+  </p>
+  <form>
+    <textarea name="body" placeholder="Tell us what happened..." rows=10 class="w-100"></textarea>
+  </form>
+  <mat-dialog-actions align="end">
+    <button class="m-2 btn btn-danger" mat-dialog-close>Cancel</button>
+    <button class="m-2 btn btn-success" [mat-dialog-close]="true">Submit</button>
+  </mat-dialog-actions>
+</div>

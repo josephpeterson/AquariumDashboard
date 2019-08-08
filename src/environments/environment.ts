@@ -3,7 +3,7 @@
 export const environment = {
   production: false,
   urls: {
-    aquariumApi : "https://localhost:5000"
+    aquariumApi : "https://aquarium-api-dev.azurewebsites.net"
   },
   environmentTag: "DEV"
 };

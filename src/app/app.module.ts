@@ -115,6 +115,9 @@ import { AuthService } from './services/auth.service';
 import { LoginComponent } from './components/routes/login/login.component';
 import { SignupComponent } from './components/routes/signup/signup.component';
 import { HomeComponent } from './components/routes/home/home.component';
+import { DeviceDetailViewComponent } from './components/data/device/device-detail-view/device-detail-view.component';
+import { BugReportModalComponent } from './components/shared/modals/bugreport-modal/bugreport-modal.component';
+import { BugReportButtonComponent } from './components/shared/bugreport-button/bugreport-button.component';
 
 
 @NgModule({
@@ -130,6 +133,7 @@ import { HomeComponent } from './components/routes/home/home.component';
 
     /* Misc. */
     AttachmentUploaderComponent,
+    BugReportButtonComponent,
 
     /* Aquarium Container */
     AquariumContainer,
@@ -167,6 +171,7 @@ import { HomeComponent } from './components/routes/home/home.component';
     SpeciesDetailViewComponent,
 
     DeviceDetailFormComponent,
+    DeviceDetailViewComponent,
     ManageAquariumDeviceModalComponent,
 
     AquariumSelectComponent,
@@ -184,6 +189,7 @@ import { HomeComponent } from './components/routes/home/home.component';
 
     /* Modals */
     ConfirmModalComponent,
+    BugReportModalComponent,
     ErrorMessageModalComponent,
     MasterDashboardComponent,
     SettingsComponent,
@@ -202,6 +208,7 @@ import { HomeComponent } from './components/routes/home/home.component';
     //Modal components here
     CreateAquariumModelComponent,
     ConfirmModalComponent,
+    BugReportModalComponent,
     ErrorMessageModalComponent,
     ManageSpeciesModalComponent,
     ManageFishModalComponent,
