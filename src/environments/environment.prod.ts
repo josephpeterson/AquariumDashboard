@@ -1,10 +1,9 @@
 // prod config
 
 export const environment = {
-  production: false,
+  production: true,
   urls : {
-    //aquariumApi : "http://65.29.174.115" //PI
-    aquariumApi : "http://ec2-18-220-143-66.us-east-2.compute.amazonaws.com:8080" //AWS
+    aquariumApi : "https://aquarium-api-prod.azurewebsites.net" //AWS
   },
   environmentTag: "PROD"
 };
