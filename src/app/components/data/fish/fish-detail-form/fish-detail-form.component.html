@@ -4,11 +4,9 @@
     <mat-form-field class="m-2 example-full-width">
         <input type="text" placeholder="Fish Name" aria-label="Number" matInput [(ngModel)]="fish.name">
     </mat-form-field>
-    <species-select class="ml-2" (onChange)="selectSpecies($event)" [value]='fish.species'></species-select>
+    <species-select class="ml-2" [value]='fish.species' [fish]="fish"></species-select>
 </div>
 <div class="row m-2">
-    <aquarium-select class="ml-2" (onChange)="selectAquarium($event)" [value]="aquarium">
-    </aquarium-select>
     <mat-form-field class="m-3">
         <input matInput [matDatepicker]="picker1" placeholder="Start Date" [(ngModel)]="fish.date">
         <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
@@ -39,13 +37,14 @@
 </div>
 
 <div class="row m-2">
-    <ng-container *ngIf="fish.id else newFish">
-        <button type="submit" class="m-2 btn btn-success" (click)="clickUpdateFish()">Update Fish</button>
-        <button type="submit" class="m-2 btn btn-danger" (click)="clickDeleteFish()">Delete Fish</button>
+    <ng-container *ngIf="fish.id else newOne">
+        <button type="submit" [disabled]="disabled" class="m-2 btn btn-primary" (click)="clickUpdate()">Update Fish</button>
+        <button [disabled]="disabled" class="m-2 btn btn-danger"
+            (click)="clickDeleteSpecies()">Delete Fish</button>
     </ng-container>
-    <ng-template #newFish>
-        <button type="submit" class="m-2 btn btn-success" (click)="clickCreateFish()">Add to
-            Aquarium</button>
+    <ng-template #newOne>
+        <button type="submit" [disabled]="disabled" class="m-2 btn btn-success" (click)="clickNew()">Add Fish</button>
+
     </ng-template>
 
 </div>

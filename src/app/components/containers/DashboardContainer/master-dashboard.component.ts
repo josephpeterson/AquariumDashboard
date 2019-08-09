@@ -36,25 +36,7 @@ export class MasterDashboardComponent implements OnInit {
 
     //Unselect our tank
     this.store.dispatch(new AquariumUnSelectionAction());
-    this.loadAquariums();
-
-    //Bind error to dialog
-    this.connectionError$.pipe(take(2)).subscribe(error => {
-      if (error) {
-        if (error.status == 401)
-        {
-          //this.logged = false;
-          //this.auth.clearToken();
-        }
-        else
-          this.displayErrorDialog(error);
-      }
-    });
-  }
-  displayErrorDialog(error) {
-    var dialog = this.dialog.open(ErrorMessageModalComponent, {
-    }).componentInstance;
-    dialog.error = new ConnectionError(error);
+    this.store.dispatch(new AquariumListAction());
   }
 
   loadAquariums() {

@@ -5,7 +5,7 @@ import { AquariumService } from 'src/app/services/aquarium.service';
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
 import { NotifierService } from 'angular-notifier';
 import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
-import { AttachmentUploaderComponent } from 'src/app/attachment-uploader/attachment-uploader.component';
+import { AttachmentUploaderComponent } from 'src/app/components/shared/attachment-uploader/attachment-uploader.component';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { SnapshotDeleteSuccessAction, SnapshotTakeSuccessAction } from 'src/app/store/snapshot/snapshot.actions';

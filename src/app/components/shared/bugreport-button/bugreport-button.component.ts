@@ -20,8 +20,6 @@ export class BugReportButtonComponent implements OnInit {
     }
     clickReportBug() {
         this.dialog.open(BugReportModalComponent, {
-            height: "70%",
-            width: "60%",
         });
     }
 }

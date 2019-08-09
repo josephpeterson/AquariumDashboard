@@ -97,7 +97,7 @@ import { SnapshotPhotoConfigDetail } from './components/containers/AquariumConta
 import { ManagePhotoConfigurationModal } from './components/shared/modals/manage-photo-configuration/manage-photo-configuration.component';
 import { ManageSnapshotModal } from './components/shared/modals/manage-snapshot-modal/manage-snapshot-modal.component';
 import { SnapshotDetailComponent } from './components/data/snapshot/snapshot-detail-form/snapshot-detail-form.component';
-import { AttachmentUploaderComponent } from './attachment-uploader/attachment-uploader.component';
+import { AttachmentUploaderComponent } from './components/shared/attachment-uploader/attachment-uploader.component';
 import { MatFileUploadModule } from 'angular-material-fileupload';
 import { SnapshotDetailChartComponent } from './components/data/snapshot/snapshot-detail-chart/snapshot-detail-chart.component';
 

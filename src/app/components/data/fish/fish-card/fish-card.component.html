@@ -1,7 +1,7 @@
 <ng-container *ngIf="fish else loading">
     <img class="card-img-top" src="https://via.placeholder.com/140x100" alt="Card image cap">
     <div class="card-body">
-        <h5 class="card-title">{{fish.name}}</h5>
+        <a [routerLink]="'/' + fish.aquariumId + '/fish/' + fish.id" class=" card-title">{{fish.name}}</a>
         <h6 class="card-subtitle mb-2 text-muted">
             {{getReadableDate(fish.date)}} days old
         </h6>

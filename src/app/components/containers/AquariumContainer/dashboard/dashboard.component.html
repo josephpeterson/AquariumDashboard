@@ -1,21 +1,30 @@
 <h3 class="p-2">Device</h3>
 <device-detail-view *ngIf="aquarium.device as device" [device]="device"></device-detail-view>
-<device-detail-form *ngIf="!aquarium.device" [aquarium]="aquarium"> </device-detail-form>
 
-<h3>Fish</h3>
-<div class="row">
-    <div class="card-group">
-        <fish-card class="card m-2" *ngFor="let fish of aquarium.fish" [fish]="fish"></fish-card>
-    </div>
-    <div class="empty-card" *ngIf="!aquarium.fish || aquarium.fish.length == 0">
-        <p>
-            You do not have any fish! Click to add new fish to your aquarium.
-        </p>
-        <div>
-            <fish-create-button></fish-create-button>
+<div class="empty-card" *ngIf="!aquarium.device">
+    <device-detail-form [aquarium]="aquarium"> </device-detail-form>
+</div>
+
+<h3 class="p-2">Fish</h3>
+<div class="container">
+    <div class="row">
+        <div class="card-group">
+            <fish-card class="card m-2" *ngFor="let fish of aquarium.fish" [fish]="fish"></fish-card>
+        </div>
+        <div class="empty-card" *ngIf="!aquarium.fish || aquarium.fish.length == 0">
+            <p>
+                You do not have any fish! Click to add new fish to your aquarium.
+            </p>
+            <div>
+                <fish-create-button [aquarium]="aquarium"></fish-create-button>
+            </div>
         </div>
     </div>
+    <div class="row">
+        <button class="btn btn-link mt-2" [routerLink]="['fish']" *ngIf="aquarium.fish.length">View All</button>
+    </div>
 </div>
+
 <h3 class="p-2">Tasks</h3>
 <div class="row m-2">
     <task-list></task-list>

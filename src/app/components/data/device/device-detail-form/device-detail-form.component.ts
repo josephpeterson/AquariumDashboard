@@ -13,6 +13,7 @@ import { take } from 'rxjs/operators';
 import { faCheckCircle, faDesktop, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { ManagePhotoConfigurationModal } from 'src/app/components/shared/modals/manage-photo-configuration/manage-photo-configuration.component';
 import { CameraConfiguration } from 'src/app/models/CameraConfiguration';
+import { AquariumLoadByIdAction, AquariumLoadSuccessAction } from 'src/app/store/aquarium/aquarium.actions';
 
 
 @Component({
@@ -21,7 +22,7 @@ import { CameraConfiguration } from 'src/app/models/CameraConfiguration';
     styleUrls: ['./device-detail-form.component.scss']
 })
 export class DeviceDetailFormComponent implements OnInit {
-    public editing:boolean = false;
+    public editing: boolean = false;
     public device: AquariumDevice;
     public disabled: boolean = false;
     public error: boolean;
@@ -36,21 +37,22 @@ export class DeviceDetailFormComponent implements OnInit {
     private componentLifeCycle$ = new Subject();
     pinging: boolean;
     faCheck = faCheckCircle;
-    public faDevice:IconDefinition = faDesktop;
+    public faDevice: IconDefinition = faDesktop;
 
 
 
     constructor(private _aquariumService: AquariumService,
         private notifier: NotifierService,
         private dialog: MatDialog,
+        private store: Store<AppState>
     ) {
 
     }
     ngOnInit() {
-        if(this.aquarium.device)
-            this.device = {...this.aquarium.device};
-            
-        
+        if (this.aquarium.device)
+            this.device = { ...this.aquarium.device };
+
+
         //if (!this.aquarium && this.deviceId) this.loadDevice(this.deviceId);
 
         console.log(this.device);
@@ -87,6 +89,9 @@ export class DeviceDetailFormComponent implements OnInit {
                 this.device = device;
                 this.enable();
                 this.editing = false;
+
+                this.aquarium.device = device;
+                this.store.dispatch(new AquariumLoadSuccessAction([this.aquarium]));
             },
             err => {
                 this.notifier.notify("error", "Could not create device");
@@ -101,6 +106,9 @@ export class DeviceDetailFormComponent implements OnInit {
                 this.device = device;
                 this.enable();
                 this.editing = false;
+                //Reload store after changes
+                this.aquarium.device = device;
+                this.store.dispatch(new AquariumLoadSuccessAction([this.aquarium]));
             },
             err => {
                 this.notifier.notify("error", "Could not update device");
@@ -120,6 +128,8 @@ export class DeviceDetailFormComponent implements OnInit {
                 (device: AquariumDevice) => {
                     this.createNewDevice();
                     this.enable();
+                    delete this.aquarium.device;
+                    this.store.dispatch(new AquariumLoadSuccessAction([this.aquarium]));
                 },
                 err => {
                     this.notifier.notify("error", "Could not delete device");
@@ -161,7 +171,7 @@ export class DeviceDetailFormComponent implements OnInit {
             width: "50%",
             data: this.device
         }).afterClosed().subscribe((device: AquariumDevice) => {
-            if(device)
+            if (device)
                 this.device.cameraConfiguration = device.cameraConfiguration;
         });
     }
@@ -177,8 +187,8 @@ export class DeviceDetailFormComponent implements OnInit {
     }
     clickCancelEditing() {
         this.editing = false;
-        if(this.aquarium.device)
-            this.device = {...this.aquarium.device};
+        if (this.aquarium.device)
+            this.device = { ...this.aquarium.device };
         else
             delete this.device;
     }

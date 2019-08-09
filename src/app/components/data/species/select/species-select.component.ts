@@ -8,6 +8,8 @@ import { takeUntil } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { ManageSpeciesModalComponent } from '../../../shared/modals/manage-species-modal/manage-species-modal.component';
+import { Fish } from 'src/app/models/Fish';
+import { SpeciesLoadAction } from 'src/app/store/species/species.actions';
 
 @Component({
     selector: 'species-select',
@@ -24,15 +26,22 @@ export class SpeciesSelectComponent {
 
     @Output() onChange = new EventEmitter();
     @Input() value: Species;
+    @Input() fish: Fish;
 
     constructor(private store: Store<AppState>,private dialog:MatDialog) {
     }
     ngOnInit() {
         this.selectControl.valueChanges.pipe(takeUntil(this.componentLifeCycle$)).subscribe(val => {
+            if(this.fish && val) //remove this check? (make fish input required?)
+                this.fish.speciesId = val.id;
             this.onChange.emit(val);
         });
+        var loading = false;
         this.species$.pipe(takeUntil(this.componentLifeCycle$)).subscribe(species => {
-            if (!species) return;
+            if (species.length == 0 && !loading) {
+                loading = true;
+                this.store.dispatch(new SpeciesLoadAction());
+            }
             this.availableSpecies = species;
         })
         this.selectControl.setValue(this.value);

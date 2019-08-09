@@ -2,7 +2,7 @@
 
 export const environment = {
   production: false,
-  urls: {
+  urls : {
     aquariumApi : "https://aquarium-api-dev.azurewebsites.net"
   },
   environmentTag: "DEV"

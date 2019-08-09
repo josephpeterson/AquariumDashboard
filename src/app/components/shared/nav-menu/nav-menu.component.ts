@@ -60,7 +60,7 @@ export class NavMenuComponent {
       }
     });
     this.connectionError$.pipe(takeUntil(this.componentLifecycle)).subscribe(err => {
-      if(err)
+      if(err && err.status == 401)
         this.router.navigate(['']);
     });
   }

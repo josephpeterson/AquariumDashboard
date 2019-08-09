@@ -7,6 +7,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { Fish } from 'src/app/models/Fish';
 import { Subject } from 'rxjs';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'manage-fish-modal',
@@ -15,8 +16,9 @@ import { Subject } from 'rxjs';
 })
 export class ManageFishModalComponent implements OnInit {
 
+  @Input() fish: Fish;
+  @Input() fishId: number;
   @Input() aquarium: Aquarium;
-  @Input() aquariumId: number;
 
   public selectedFishId;
   public addingFish;
@@ -25,37 +27,12 @@ export class ManageFishModalComponent implements OnInit {
 
   public componentLifecycle = new Subject();
 
-  constructor(private store: Store<AppState>) {
+  constructor(private store: Store<AppState>,private _dialogRef: MatDialogRef<ManageFishModalComponent>) {
   }
   ngOnInit() {
-    if (this.aquarium) {
-      this.applyAquarium(this.aquarium);
-    }
-    else if(this.aquariumId)
-      this.loadAquarium(this.aquariumId);
   }
 
-  loadAquarium(id) {
-    return;
-    this.store.dispatch(new AquariumLoadByIdAction(id));
-    this.aquarium$ = this.store.select(getAquariumById, id);
-    this.aquarium$.pipe(takeUntil(this.componentLifecycle)).subscribe(aq => {
-      if (aq)
-        this.applyAquarium(aq);
-    });
-  }
-  applyAquarium(aquarium: Aquarium) {
-
-  }
-  clickFish(fish: Fish) {
-    this.selectedFishId = fish.id;
-  }
-  clickAddFish() {
-    this.selectedFishId = undefined;
-    this.addingFish = true;
-  }
-  clickBack() {
-    this.selectedFishId = undefined;
-    this.addingFish = false;
+  public clickClose() {
+    this._dialogRef.close();
   }
 }

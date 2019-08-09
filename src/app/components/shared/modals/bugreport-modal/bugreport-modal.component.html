@@ -1,10 +1,31 @@
 <div class="bugreport-modal-component">
   <h1 mat-dialog-title>Report Bug</h1>
   <p>
-    Thank you for your time to submit feedback and we are sorry for any issues you have experienced. Our team of developers will take every inch of feedback into consideration.
+    Thank you for your time to submit feedback and we are sorry for any issues you have experienced. Our team of
+    developers will take every inch of feedback into consideration.
   </p>
   <form>
-    <textarea name="body" placeholder="Tell us what happened..." rows=10 class="w-100"></textarea>
+    <mat-form-field>
+      <mat-select placeholder="Error Type" class="mb-2" [(ngModel)]="bug.type" name="type">
+        <mat-option value=1>
+          UI Error
+        </mat-option>
+        <mat-option value=2>
+          Connection Error
+        </mat-option>
+        <mat-option value=3>
+          Account Error
+        </mat-option>
+        <mat-option value=4>
+          Text/Spelling Error
+        </mat-option>
+        <mat-option value=5>
+          Other
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <textarea name="body" [(ngModel)]="bug.body" placeholder="Tell us what happened..." rows=10 class="w-100"></textarea>
   </form>
   <mat-dialog-actions align="end">
     <button class="m-2 btn btn-danger" mat-dialog-close>Cancel</button>

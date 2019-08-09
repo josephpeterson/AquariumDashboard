@@ -4,11 +4,11 @@ import { MatTableDataSource, MatSort, MatPaginator, MatDialog } from '@angular/m
 import { Store } from '@ngrx/store';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
 import { AppState } from 'src/app/app.state';
-import { take } from 'rxjs/operators';
+import { take, takeUntil } from 'rxjs/operators';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { ManageSnapshotModal } from 'src/app/components/shared/modals/manage-snapshot-modal/manage-snapshot-modal.component';
 import * as moment from 'moment';
@@ -27,6 +27,8 @@ export class DashboardComponent implements OnInit {
   public aquarium$: Observable<Aquarium> = this.store.select(getSelectedAquarium);
   public aquarium: Aquarium;
 
+  private componentLifecycle$: Subject<DashboardComponent> = new Subject();
+
   constructor(
     public dialog: MatDialog,
     private store: Store<AppState>,
@@ -34,8 +36,12 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.aquarium$.pipe(take(1)).subscribe(aq => {
+    this.aquarium$.pipe(takeUntil(this.componentLifecycle$)).subscribe(aq => {
       this.aquarium = aq;
     });
+  }
+  ngOnDestroy() {
+    this.componentLifecycle$.next();
+    this.componentLifecycle$.unsubscribe();
   }
 }

@@ -14,7 +14,7 @@ import { faCheckCircle, faDesktop, IconDefinition } from '@fortawesome/free-soli
 import { ManagePhotoConfigurationModal } from 'src/app/components/shared/modals/manage-photo-configuration/manage-photo-configuration.component';
 import { CameraConfiguration } from 'src/app/models/CameraConfiguration';
 import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
-import { AttachmentUploaderComponent } from 'src/app/attachment-uploader/attachment-uploader.component';
+import { AttachmentUploaderComponent } from 'src/app/components/shared/attachment-uploader/attachment-uploader.component';
 import $ from 'jquery';
 
 @Component({

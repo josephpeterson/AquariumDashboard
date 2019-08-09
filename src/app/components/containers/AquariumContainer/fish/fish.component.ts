@@ -69,7 +69,6 @@ export class FishComponent implements OnInit {
       height: "70%",
       width: "60%",
     });
-    inst.componentInstance.loadAquarium(this.selectedAquariumId);
   }
 
   selectFish(fish: Fish) {
