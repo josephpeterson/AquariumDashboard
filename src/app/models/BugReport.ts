@@ -7,4 +7,5 @@ export class BugReport
   urlLocation: string
   date: Date
   logFile: string
+  type: string
 }
