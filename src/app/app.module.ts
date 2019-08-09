@@ -118,6 +118,7 @@ import { HomeComponent } from './components/routes/home/home.component';
 import { DeviceDetailViewComponent } from './components/data/device/device-detail-view/device-detail-view.component';
 import { BugReportModalComponent } from './components/shared/modals/bugreport-modal/bugreport-modal.component';
 import { BugReportButtonComponent } from './components/shared/bugreport-button/bugreport-button.component';
+import { SpeciesCardComponent } from './components/data/species/species-card/species-card.component';
 
 
 @NgModule({
@@ -169,6 +170,7 @@ import { BugReportButtonComponent } from './components/shared/bugreport-button/b
     SpeciesSelectComponent,
     SpeciesTableComponent,
     SpeciesDetailViewComponent,
+    SpeciesCardComponent,
 
     DeviceDetailFormComponent,
     DeviceDetailViewComponent,
