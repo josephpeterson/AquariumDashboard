@@ -4,9 +4,9 @@
 
         <img class="card-img-top" src="https://via.placeholder.com/140x100" alt="Fish Thumbnail">
         <div class="p-2">
-            <a [routerLink]="'/' + fish.aquariumId + '/fish/' + fish.id" class=" card-title">{{fish.name}}</a>
+            <a [routerLink]="'/fish/' + fish.id" class=" card-title">{{fish.name}}</a>
             <br>
-            <a [routerLink]="'/' + fish.aquariumId + '/fish/' + fish.id" class=" card-title">{{fish.species.name}}</a>
+            <a [routerLink]="'/fish/' + fish.id" class=" card-title">{{fish.species.name}}</a>
             <h6 class="card-subtitle mt-2 mb-2 text-muted">
                 {{getReadableDate(fish.date)}} days old
             </h6>
@@ -16,7 +16,7 @@
             <br>
             <button class="btn btn-link" (click)="clickFeedFish()">Feed</button>
             <a class="card-link"
-                [routerLink]="'/' + fish.aquariumId + '/fish/' + fish.id + '/operations'">More...</a>
+                [routerLink]="'/fish/' + fish.id + '/operations'">More...</a>
         </div>
     </div>
 </ng-container>

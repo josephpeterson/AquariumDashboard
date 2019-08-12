@@ -35,7 +35,8 @@
                     <li class="list-group-item">Species: <a
                             [routerLink]='["/species",fish.speciesId]'>{{fish.species.name}}</a>
                     </li>
-                    <li class="list-group-item">Aquarium: Aquarium name here</li>
+                    <li class="list-group-item">Aquarium: <a
+                            [routerLink]="'/' + fish.aquariumId">{{fish.aquarium.name}}</a></li>
                 </ul>
             </div>
             <div class="col">

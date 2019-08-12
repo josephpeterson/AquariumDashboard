@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
-import { AquariumSelectionAction, AquariumLoadByIdAction } from 'src/app/store/aquarium/aquarium.actions';
+import { AquariumSelectionAction, AquariumLoadByIdAction, AquariumLoadSuccessAction } from 'src/app/store/aquarium/aquarium.actions';
 import { Observable, Subject } from 'rxjs';
 import { getSelectedAquarium, isLoadingAquariums } from 'src/app/store/aquarium/aquarium.selector';
 import { Aquarium } from 'src/app/models/Aquarium';
@@ -19,7 +19,7 @@ import { Fish } from 'src/app/models/Fish';
 export class FishContainer {
   public componentLifeCycle = new Subject();
   public fish$ = new Subject<Fish>();
-  public error:string;
+  public error: string;
 
   constructor(private route: ActivatedRoute,
     private router: Router,
