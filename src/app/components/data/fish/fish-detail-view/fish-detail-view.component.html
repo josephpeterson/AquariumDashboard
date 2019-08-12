@@ -96,7 +96,7 @@
             </mat-form-field>
         </div>
 
-        <div class="row">
+        <div class="row m-2">
 
             <button *ngIf="!adding" [disabled]='updating$ | async' (click)="clickDelete()" class="m-2 btn btn-danger">
                 <fa-icon class="pr-1" [icon]="faTrash"></fa-icon>Delete

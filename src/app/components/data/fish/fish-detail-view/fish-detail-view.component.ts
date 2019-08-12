@@ -15,6 +15,8 @@ import { Router } from '@angular/router';
 import { ConfirmModalComponent } from '../../../shared/modals/confirm-modal/confirm-modal.component';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { Fish } from 'src/app/models/Fish';
+import { AquariumService } from 'src/app/services/aquarium.service';
+import { AquariumLoadSuccessAction } from 'src/app/store/aquarium/aquarium.actions';
 
 
 
@@ -29,6 +31,8 @@ export class FishDetailViewComponent implements OnInit {
 
 
     //public fish: Fish = new Fish();
+
+    public disabled: boolean;
 
     public exists = false;
     public editing = false;
@@ -51,10 +55,13 @@ export class FishDetailViewComponent implements OnInit {
     private _matchedSpecies: Species;
 
 
-    constructor(private store: Store<AppState>, private notifier: NotifierService, private dialog: MatDialog, private router: Router) {
+    constructor(private store: Store<AppState>, private notifier: NotifierService, private dialog: MatDialog, private router: Router,
+        private _aquariumService: AquariumService) {
 
     }
     ngOnInit() {
+        if (this.fish.aquarium && !this.aquarium) //maybe remove this logic
+            this.aquarium = this.fish.aquarium;
     }
 
     ngOnDestory() {
@@ -113,28 +120,20 @@ export class FishDetailViewComponent implements OnInit {
         });
     }
     clickDelete() {
+        this.disabled = true;
         var dialog = this.dialog.open(ConfirmModalComponent, {
         });
-        dialog.componentInstance.title = "Delete Species";
-        dialog.componentInstance.body = "Are you sure you want to delete this species? This action is permanent.";
+        dialog.componentInstance.title = "Delete Fish";
+        dialog.componentInstance.body = "Are you sure you want to delete this fish? The fish as well as any associated information will be permanently removed. This action is not recoverable.";
         dialog.afterClosed().pipe(take(1)).subscribe((confirm: boolean) => {
             if (confirm) {
-                var deleting = true;
-                this.exists = false;
-                this.store.dispatch(new SpeciesDeleteAction(this.species));
-                this.deleteError$.pipe(take(2)).subscribe(err => {
-                    if (err && deleting) {
-                        deleting = false;
-                        this.notifier.notify("error", "Unable to add new species");
-                        this.exists = true;
-                        console.log(err);
-                    }
-                })
-                this.deleting$.pipe(take(2)).subscribe(val => {
-                    if (!val && deleting) {
-                        this.notifier.notify("success", "Species was removed successfully");
-                        this.router.navigate(['']); //todo species listing?
-                    }
+                this._aquariumService.deleteFish(this.fish).subscribe(fish => {
+                    this.fish = fish;
+                    this.store.dispatch(new AquariumLoadSuccessAction([this.aquarium]));
+                    this.disabled = false;
+                }, err => {
+                    this.notifier.notify("error", "Could not delete fish");
+                    this.disabled = false;
                 });
             }
         });
@@ -157,7 +156,7 @@ export class FishDetailViewComponent implements OnInit {
     }
 
     getFishAge() {
-        return moment().diff(this.fish.date,"days");
+        return moment().diff(this.fish.date, "days");
     }
 }
 

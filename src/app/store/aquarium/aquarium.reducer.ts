@@ -71,6 +71,7 @@ export function aquariumReducer(state = initialState, action: AllAquariumActions
 	switch (action.type) {
 
 		case AquariumActions.Load:
+		case AquariumActions.LoadById:
 			return {
 				...state,
 				loading: true,

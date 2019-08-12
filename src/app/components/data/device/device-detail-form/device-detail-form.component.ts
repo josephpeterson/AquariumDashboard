@@ -51,11 +51,6 @@ export class DeviceDetailFormComponent implements OnInit {
     ngOnInit() {
         if (this.aquarium.device)
             this.device = { ...this.aquarium.device };
-
-
-        //if (!this.aquarium && this.deviceId) this.loadDevice(this.deviceId);
-
-        console.log(this.device);
     }
 
     loadDevice(id: number) {
@@ -83,6 +78,8 @@ export class DeviceDetailFormComponent implements OnInit {
     }
     clickCreateDevice() {
         this.disable();
+
+        this.cleanDeviceRequest(this.device);
         this._aquariumService.createAquariumDevice(this.device).subscribe(
             (device: AquariumDevice) => {
                 console.log("Created: ", device);
@@ -99,7 +96,21 @@ export class DeviceDetailFormComponent implements OnInit {
             }
         );
     }
+    private cleanDeviceRequest(device: AquariumDevice) {
+        //Clean IP address
+        device.address = device.address.replace(/http:\/\//g, "");
+        device.address = device.address.replace(/https:\/\//g, "");
+        if (!device.port) {
+            if (device.address.split(":").length > 1) {
+                device.port = device.address.split(":")[1];
+                device.address = device.address.split(":")[0];
+            }
+            else
+                device.port = "80";
+        }
+    }
     clickUpdateDevice() {
+        this.cleanDeviceRequest(this.device);
         this.disable();
         this._aquariumService.updateAquariumDevice(this.device).subscribe(
             (device: AquariumDevice) => {

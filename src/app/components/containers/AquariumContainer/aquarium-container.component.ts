@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { AquariumSelectionAction, AquariumLoadByIdAction } from 'src/app/store/aquarium/aquarium.actions';
 import { Observable, Subject } from 'rxjs';
-import { getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
+import { getSelectedAquarium, isLoadingAquariums } from 'src/app/store/aquarium/aquarium.selector';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { Title } from '@angular/platform-browser';
 import { takeUntil } from 'rxjs/operators';
@@ -16,6 +16,7 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class AquariumContainer {
   public aquarium$: Observable<Aquarium> = this.store.select(getSelectedAquarium);
+  public loading$: Observable<boolean> = this.store.select(isLoadingAquariums);
   public componentLifeCycle = new Subject();
 
   constructor(private route: ActivatedRoute,
@@ -24,9 +25,8 @@ export class AquariumContainer {
     private title: Title) { }
 
   ngOnInit() {
-    this.route.params.subscribe(p => {
-      this.load(p.aqId);
-    });
+    this.load(this.route.snapshot.params.aqId);
+
     this.aquarium$.pipe(takeUntil(this.componentLifeCycle)).subscribe(aq => {
       if(aq) this.title.setTitle(aq.name);
     });

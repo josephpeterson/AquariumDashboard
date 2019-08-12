@@ -6,7 +6,7 @@ import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
 import { Observable, Subject } from 'rxjs';
 import { Aquarium } from 'src/app/models/Aquarium';
-import { getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
+import { getSelectedAquarium, isLoadingAquariums } from 'src/app/store/aquarium/aquarium.selector';
 import { AppState } from 'src/app/app.state';
 import { take, takeUntil } from 'rxjs/operators';
 import { AquariumService } from 'src/app/services/aquarium.service';
@@ -25,7 +25,7 @@ export class DashboardComponent implements OnInit {
   faExclamationTriangle = faExclamationTriangle;
 
   public aquarium$: Observable<Aquarium> = this.store.select(getSelectedAquarium);
-  public aquarium: Aquarium;
+  public loading$: Observable<boolean> = this.store.select(isLoadingAquariums);
 
   private componentLifecycle$: Subject<DashboardComponent> = new Subject();
 
@@ -36,9 +36,6 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.aquarium$.pipe(takeUntil(this.componentLifecycle$)).subscribe(aq => {
-      this.aquarium = aq;
-    });
   }
   ngOnDestroy() {
     this.componentLifecycle$.next();

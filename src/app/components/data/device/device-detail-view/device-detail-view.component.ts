@@ -8,6 +8,8 @@ import { AquariumService } from 'src/app/services/aquarium.service';
 import { take } from 'rxjs/operators';
 import { ManageSnapshotModal } from 'src/app/components/shared/modals/manage-snapshot-modal/manage-snapshot-modal.component';
 import { MatDialog } from '@angular/material';
+import { ManageAquariumDeviceModalComponent } from 'src/app/components/shared/modals/manage-aquarium-device-modal/manage-aquarium-device-modal.component';
+import { Aquarium } from 'src/app/models/Aquarium';
 
 
 @Component({
@@ -17,7 +19,7 @@ import { MatDialog } from '@angular/material';
 })
 export class DeviceDetailViewComponent implements OnInit {
 
-    @Input() device: AquariumDevice;
+    @Input() aquarium: Aquarium;
     public latestSnapshot: AquariumSnapshot;
     public deviceStatus: number;
     public faDevice: IconDefinition = faDesktop;
@@ -42,15 +44,15 @@ export class DeviceDetailViewComponent implements OnInit {
     }
 
     public getLatestSnapshot() {
-        this._aquariumService.getLatestSnapshot(this.device.aquariumId).pipe(take(1)).subscribe(snapshot => {
+        this._aquariumService.getLatestSnapshot(this.aquarium.id).pipe(take(1)).subscribe(snapshot => {
             this.latestSnapshot = snapshot;
         }, (err) => {
-            
+
         });
     }
     public pingAquariumDevice() {
         this.deviceStatus = 1;
-        this._aquariumService.pingDevice(this.device.id).pipe(take(1)).subscribe(val => {
+        this._aquariumService.pingDevice(this.aquarium.device.id).pipe(take(1)).subscribe(val => {
             this.deviceStatus = 2;
         }, (err) => {
             this.deviceStatus = 0;
@@ -63,7 +65,7 @@ export class DeviceDetailViewComponent implements OnInit {
 
     public clickAddSnapshot() {
         var snapshot = new AquariumSnapshot();
-        snapshot.aquariumId = this.device.aquariumId;
+        snapshot.aquariumId = this.aquarium.id;
         snapshot.date = new Date();
         this.dialog.open(ManageSnapshotModal, {
             //width: "50%",
@@ -72,6 +74,12 @@ export class DeviceDetailViewComponent implements OnInit {
             if (snapshot) {
                 //add snapshot to table
             }
+        });
+    }
+    public clickManageDevice() {
+        this.dialog.open(ManageAquariumDeviceModalComponent, {
+            width: "60%",
+            data: this.aquarium
         });
     }
 }

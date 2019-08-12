@@ -1,6 +1,6 @@
 <ng-container *ngIf="aquarium$ | async as aquarium">
     <ng-container *ngIf="fishId else dashboard">
-        <fish-detail-view [fish]="fish"></fish-detail-view>
+        <fish-detail-view *ngIf="fish" [fish]="fish"></fish-detail-view>
         <button class="m-2 btn btn-dark" (click)='clickBack()'>Back</button>
     </ng-container>
     <ng-template #dashboard>

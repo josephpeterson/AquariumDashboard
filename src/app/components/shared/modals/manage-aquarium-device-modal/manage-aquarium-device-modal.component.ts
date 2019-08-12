@@ -17,10 +17,10 @@ import { MAT_DIALOG_DATA } from '@angular/material';
   styleUrls: ['./manage-aquarium-device-modal.component.scss']
 })
 export class ManageAquariumDeviceModalComponent {
-  public device: AquariumDevice;
-  @Input() deviceId: number;
+  
+  public aquarium:Aquarium;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
-    if(data) this.deviceId = data;
+  constructor(@Inject(MAT_DIALOG_DATA) data: Aquarium) {
+    this.aquarium = data;
   }
 }
