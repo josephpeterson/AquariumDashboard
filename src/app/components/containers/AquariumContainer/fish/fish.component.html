@@ -1,23 +1,17 @@
 <ng-container *ngIf="aquarium$ | async as aquarium">
-    <ng-container *ngIf="fishId else dashboard">
-        <fish-detail-view *ngIf="fish" [fish]="fish"></fish-detail-view>
-        <button class="m-2 btn btn-dark" (click)='clickBack()'>Back</button>
-    </ng-container>
-    <ng-template #dashboard>
-        <div class="empty-card" *ngIf="!aquarium.fish || aquarium.fish.length == 0 else hasFish">
-            <p>
-                You do not have any fish! Click to add new fish to your aquarium.
-            </p>
-            <div>
-                <fish-create-button [aquarium]="aquarium"></fish-create-button>
-            </div>
-        </div>
-        <ng-template #hasFish>
-            <fish-table-list [aquariumId]="aquarium.id" (rowClicked)="selectFish($event[1])"></fish-table-list>
+    <div class="empty-card" *ngIf="!aquarium.fish || aquarium.fish.length == 0 else hasFish">
+        <p>
+            You do not have any fish! Click to add new fish to your aquarium.
+        </p>
+        <div>
             <fish-create-button [aquarium]="aquarium"></fish-create-button>
+        </div>
+    </div>
+    <ng-template #hasFish>
+        <fish-table-list [aquariumId]="aquarium.id" (rowClicked)="selectFish($event[1])"></fish-table-list>
+        <fish-create-button [aquarium]="aquarium"></fish-create-button>
 
-        </ng-template>
-        <h4 class='mt-5'>Feeding History</h4>
-        <feeding-table-list class="m-3" [aquariumId]='aquarium.id' [fishId]='selectedFishId'></feeding-table-list>
     </ng-template>
+    <h4 class='mt-5'>Feeding History</h4>
+    <feeding-table-list class="m-3" [aquariumId]='aquarium.id' [fishId]='selectedFishId'></feeding-table-list>
 </ng-container>

@@ -1,0 +1,10 @@
+<nav-menu></nav-menu>
+<div class="container" *ngIf="fish$ | async as fish else unsuccessfull">
+    <fish-detail-form [fish]="fish"></fish-detail-form>
+</div>
+<ng-template #unsuccessfull>
+    <div class="container">
+        <div class="container" *ngIf="error">{{error}}</div>
+        <loading-container *ngIf="!error"></loading-container>
+    </div>
+</ng-template>

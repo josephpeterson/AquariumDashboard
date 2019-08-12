@@ -1,14 +1,23 @@
 <ng-container *ngIf="fish else loading">
-    <img class="card-img-top" src="https://via.placeholder.com/140x100" alt="Card image cap">
-    <div class="card-body">
-        <a [routerLink]="'/' + fish.aquariumId + '/fish/' + fish.id" class=" card-title">{{fish.name}}</a>
-        <h6 class="card-subtitle mb-2 text-muted">
-            {{getReadableDate(fish.date)}} days old
-        </h6>
-    </div>
-    <div class="card-footer">
-        <small class="text-muted">Last fed 4 days agoo..</small>
-        <a href="#" class="card-link">Feed</a>
+    <div class="mat-elevation-z8 rounded">
+
+
+        <img class="card-img-top" src="https://via.placeholder.com/140x100" alt="Fish Thumbnail">
+        <div class="p-2">
+            <a [routerLink]="'/' + fish.aquariumId + '/fish/' + fish.id" class=" card-title">{{fish.name}}</a>
+            <br>
+            <a [routerLink]="'/' + fish.aquariumId + '/fish/' + fish.id" class=" card-title">{{fish.species.name}}</a>
+            <h6 class="card-subtitle mt-2 mb-2 text-muted">
+                {{getReadableDate(fish.date)}} days old
+            </h6>
+        </div>
+        <div class="card-footer">
+            <small class="text-muted">Last fed {{getReadableDate(fish.date)}} days ago..</small>
+            <br>
+            <button class="btn btn-link" (click)="clickFeedFish()">Feed</button>
+            <a class="card-link"
+                [routerLink]="'/' + fish.aquariumId + '/fish/' + fish.id + '/operations'">More...</a>
+        </div>
     </div>
 </ng-container>
 <ng-template #loading>
@@ -18,7 +27,6 @@
                 <td>
                     <mat-progress-spinner class="mr-auto ml-auto align-middle" color="warn" mode="indeterminate">
                     </mat-progress-spinner>
-
                 </td>
             </tr>
         </table>

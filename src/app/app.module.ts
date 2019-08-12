@@ -68,7 +68,6 @@ import { SnapshotCarouselComponent } from './components/data/snapshot/carousel/s
 import { SnapshotTakeButtonComponent } from './components/data/snapshot/take-button/snapshot-take-button.component';
 import { SnapshotDeleteButtonComponent } from './components/data/snapshot/delete-button/snapshot-delete-button.component';
 import { FishTableListComponent } from './components/data/fish/table-list/fish-table-list.component';
-import { FishDetailFormComponent } from './components/data/fish/fish-detail-form/fish-detail-form.component';
 import { SpeciesSelectComponent } from './components/data/species/select/species-select.component';
 import { AquariumSelectComponent } from './components/data/aquarium/select/aquarium-select.component';
 import { ManageSpeciesModalComponent } from './components/shared/modals/manage-species-modal/manage-species-modal.component';
@@ -85,7 +84,7 @@ import { SpeciesDetailViewComponent } from './components/data/species/species-de
 import { ScraperModalComponent } from './components/shared/modals/scraper-modal/scraper-modal.component';
 import { AquariumTableComponent } from './components/data/aquarium/aquarium-table/aquarium-table.component';
 import { SelectAquariumModalComponent } from './components/shared/modals/select-aquarium-modal/select-aquarium-modal.component';
-import { FishDetailViewComponent } from './components/data/fish/fish-detail-view/fish-detail-view.component';
+import { FishDetailFormComponent } from './components/data/fish/fish-detail-form/fish-detail-form.component';
 import { FishEffects } from './store/fish/fish.effect';
 import { fishReducer } from './store/fish/fish.reducer';
 import { DeviceDetailFormComponent } from './components/data/device/device-detail-form/device-detail-form.component';
@@ -119,6 +118,10 @@ import { DeviceDetailViewComponent } from './components/data/device/device-detai
 import { BugReportModalComponent } from './components/shared/modals/bugreport-modal/bugreport-modal.component';
 import { BugReportButtonComponent } from './components/shared/bugreport-button/bugreport-button.component';
 import { SpeciesCardComponent } from './components/data/species/species-card/species-card.component';
+import { FishFeedModalComponent } from './components/shared/modals/fish-feed-modal/fish-feed-modal.component';
+import { FishAddFormComponent } from './components/data/fish/fish-add-form/fish-add-form.component';
+import { FishContainer } from './components/containers/FishContainer/fish-container.component';
+import { LoadingContainerComponent } from './components/shared/loading-container/loading-container.component';
 
 
 @NgModule({
@@ -127,6 +130,7 @@ import { SpeciesCardComponent } from './components/data/species/species-card/spe
     NavMenuComponent,
     FeedingListComponent,
     SpeciesContainer,
+    FishContainer,
 
     HomeComponent,
     LoginComponent,
@@ -135,6 +139,7 @@ import { SpeciesCardComponent } from './components/data/species/species-card/spe
     /* Misc. */
     AttachmentUploaderComponent,
     BugReportButtonComponent,
+    LoadingContainerComponent,
 
     /* Aquarium Container */
     AquariumContainer,
@@ -159,11 +164,11 @@ import { SpeciesCardComponent } from './components/data/species/species-card/spe
 
 
     FishTableListComponent,
-    FishDetailFormComponent,
+    FishAddFormComponent,
     FishInformationComponent,
     FishSelectComponent,
     FishCreateButtonComponent,
-    FishDetailViewComponent,
+    FishDetailFormComponent,
     FishCardComponent,
 
     SpeciesDetailFormComponent,
@@ -192,6 +197,7 @@ import { SpeciesCardComponent } from './components/data/species/species-card/spe
     /* Modals */
     ConfirmModalComponent,
     BugReportModalComponent,
+    FishFeedModalComponent,
     ErrorMessageModalComponent,
     MasterDashboardComponent,
     SettingsComponent,
@@ -211,6 +217,7 @@ import { SpeciesCardComponent } from './components/data/species/species-card/spe
     CreateAquariumModelComponent,
     ConfirmModalComponent,
     BugReportModalComponent,
+    FishFeedModalComponent,
     ErrorMessageModalComponent,
     ManageSpeciesModalComponent,
     ManageFishModalComponent,

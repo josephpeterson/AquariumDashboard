@@ -15,6 +15,7 @@ import { ConfirmModalComponent } from '../../../shared/modals/confirm-modal/conf
 import { Aquarium } from 'src/app/models/Aquarium';
 import { Fish } from 'src/app/models/Fish';
 import * as moment from 'moment';
+import { FishFeedModalComponent } from 'src/app/components/shared/modals/fish-feed-modal/fish-feed-modal.component';
 
 
 
@@ -61,99 +62,10 @@ export class FishCardComponent implements OnInit {
         this.componentLifecycle.next();
         this.componentLifecycle.unsubscribe();
     }
-
-    clickEdit() {
-        this.editing = true;
-    }
-    clickCancel() {
-        this.editing = false;
-    }
-    clickReset() {
-        //this.editing = true;
-        this.species = new Species(this._matchedSpecies);
-    }
-    clickSave() {
-        //this.editing = true;
-
-        var updating = true;
-        this.store.dispatch(new SpeciesUpdateAction(this.species));
-        this.updateError$.pipe(take(2)).subscribe(err => {
-            if (err && updating) {
-                updating = false;
-                this.notifier.notify("error", "Unable to update species");
-                console.log(err);
-            }
-        })
-        this.updating$.pipe(take(2)).subscribe(val => {
-            if (!val && updating) {
-                this.notifier.notify("success", "Species updated");
-                this.editing = false;
-            }
-        });
-    }
-    clickAdd() {
-        var adding = true;
-        this.store.dispatch(new SpeciesAddAction(this.species));
-        this.updateError$.pipe(take(2)).subscribe(err => {
-            if (err && adding) {
-                adding = false;
-                this.notifier.notify("error", "Unable to add new species");
-                console.log(err);
-            }
-        })
-        this.adding$.pipe(take(2)).subscribe(val => {
-            if (!val && adding) {
-                this.notifier.notify("success", "Species added");
-                this.editing = false;
-                this.adding = false;
-                this.added = true;
-                this.store.dispatch(new SpeciesLoadAction());
-                //this.router.navigate([val.id]);
-            }
-        });
-    }
-    clickDelete() {
-        var dialog = this.dialog.open(ConfirmModalComponent, {
-        });
-        dialog.componentInstance.title = "Delete Species";
-        dialog.componentInstance.body = "Are you sure you want to delete this species? This action is permanent.";
-        dialog.afterClosed().pipe(take(1)).subscribe((confirm: boolean) => {
-            if (confirm) {
-                var deleting = true;
-                this.exists = false;
-                this.store.dispatch(new SpeciesDeleteAction(this.species));
-                this.deleteError$.pipe(take(2)).subscribe(err => {
-                    if (err && deleting) {
-                        deleting = false;
-                        this.notifier.notify("error", "Unable to add new species");
-                        this.exists = true;
-                        console.log(err);
-                    }
-                })
-                this.deleting$.pipe(take(2)).subscribe(val => {
-                    if (!val && deleting) {
-                        this.notifier.notify("success", "Species was removed successfully");
-                        this.router.navigate(['']); //todo species listing?
-                    }
-                });
-            }
-        });
-    }
-    clickScrape() {
-        var dialog = this.dialog.open(ScraperModalComponent, {
-            width: "40%",
-            height: "40%"
-        });
-        dialog.componentInstance.originalSpecies = this.species;
-        dialog.afterClosed().pipe(take(1)).subscribe((species: Species) => {
-            for (var key in species) {
-                var val = species[key];
-                if (val) this.species[key] = val;
-            }
-        });
-    }
     clickFeedFish() {
-        
+        this.dialog.open(FishFeedModalComponent,{
+            data: this.fish
+        }); 
     }
 
     getFishAge()

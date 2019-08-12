@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material';
 import { ManageSpeciesModalComponent } from '../../../shared/modals/manage-species-modal/manage-species-modal.component';
 import { Fish } from 'src/app/models/Fish';
 import { SpeciesLoadAction } from 'src/app/store/species/species.actions';
+import { TypeCheckCompiler } from '@angular/compiler/src/view_compiler/type_check_compiler';
 
 @Component({
     selector: 'species-select',
@@ -25,7 +26,7 @@ export class SpeciesSelectComponent {
     public selectControl: FormControl = new FormControl();
 
     @Output() onChange = new EventEmitter();
-    @Input() value: Species;
+    //@Input() value: Species;
     @Input() fish: Fish;
 
     constructor(private store: Store<AppState>,private dialog:MatDialog) {
@@ -33,7 +34,10 @@ export class SpeciesSelectComponent {
     ngOnInit() {
         this.selectControl.valueChanges.pipe(takeUntil(this.componentLifeCycle$)).subscribe(val => {
             if(this.fish && val) //remove this check? (make fish input required?)
+            {
                 this.fish.speciesId = val.id;
+                this.fish.species = val;
+            }
             this.onChange.emit(val);
         });
         var loading = false;
@@ -43,8 +47,12 @@ export class SpeciesSelectComponent {
                 this.store.dispatch(new SpeciesLoadAction());
             }
             this.availableSpecies = species;
+            if(this.fish) {
+                var s = species.filter(s => s.id == this.fish.speciesId)[0];
+                this.selectControl.setValue(s);
+            }
         })
-        this.selectControl.setValue(this.value);
+        //this.selectControl.setValue(this.value);
     }
     ngOnDestory() {
         this.componentLifeCycle$.next();

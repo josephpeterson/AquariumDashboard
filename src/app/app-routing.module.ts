@@ -14,6 +14,7 @@ import { AuthGuard } from './guards/AuthGuard';
 import { LoginComponent } from './components/routes/login/login.component';
 import { SignupComponent } from './components/routes/signup/signup.component';
 import { HomeComponent } from './components/routes/home/home.component';
+import { FishContainer } from './components/containers/FishContainer/fish-container.component';
 
 const routes: Routes = [
   //{ path: '', component: AquariumSelectionComponent, pathMatch: 'full' },
@@ -54,10 +55,6 @@ const routes: Routes = [
         component: AquariumPhotosComponent
       },
       {
-        path: 'fish/:fishId',
-        component: AquariumFishComponent
-      },
-      {
         path: 'lighting',
         component: LightingComponent
       },
@@ -78,6 +75,10 @@ const routes: Routes = [
         component: DashboardComponent
       }
     ]
+  },
+  {
+    path: 'fish/:fishId',
+    component: FishContainer
   },
   {
     path: '',

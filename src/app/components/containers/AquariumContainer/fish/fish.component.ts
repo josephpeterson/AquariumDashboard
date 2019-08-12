@@ -44,23 +44,6 @@ export class FishComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.fishId = this.route.snapshot.params.fishId;
-
-    if (this.fishId) {
-      this.store.select(getFishById(this.fishId)).pipe(take(1)).subscribe(fish => {
-        if (!fish) this.store.dispatch(new FishLoadByFishIdAction(this.fishId));
-      });
-
-
-      this.fish$.pipe(take(2)).subscribe(fish => {
-        var list = fish.filter(f => f.id == this.fishId);
-        if (list.length > 0)
-          this.fish = list[0];
-      });
-      this.fishLoadError$.pipe(take(2)).subscribe(err => {
-        if (err) alert(err);
-      });
-    }
   }
 
   openManageFishModal() {
@@ -71,8 +54,7 @@ export class FishComponent implements OnInit {
   }
 
   selectFish(fish: Fish) {
-    var url = [fish.aquariumId, "fish", fish.id];
-    this.router.navigate(url);
+    this.router.navigateByUrl("/fish/" + fish.id);
   }
 
   clickBack() {
