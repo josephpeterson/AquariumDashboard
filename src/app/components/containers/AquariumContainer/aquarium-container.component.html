@@ -1,0 +1,7 @@
+<nav-menu></nav-menu>
+<div class="container">
+    <router-outlet *ngIf="aquarium$ | async else loading"></router-outlet>
+</div>
+<ng-template #loading>
+    <loading-container></loading-container>
+</ng-template>

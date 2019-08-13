@@ -11,7 +11,7 @@ import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'aquarium-container',
-  template: '<nav-menu></nav-menu><div class="container"><router-outlet *ngIf="aquarium$ | async"></router-outlet></div>',
+  templateUrl: './aquarium-container.component.html',
   //styleUrls: ['./nav-menu.component.scss']
 })
 export class AquariumContainer {
