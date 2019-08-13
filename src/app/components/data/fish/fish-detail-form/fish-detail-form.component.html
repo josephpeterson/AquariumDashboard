@@ -56,8 +56,20 @@
                 <h4>Health</h4>
             </div>
         </div>
+        <h4>Recent Photos</h4>
         <div class="row p-3">
-            <h4>Recent Photos</h4>
+
+            <div class="card-group">
+                <div *ngFor="let photo of fish.photos" class="card">
+                    <img [src]="getFishPhotoSource(photo.id)" class="card-img-top" alt="...">
+                    <div class="card-footer">
+                        <small class="text-muted">Last updated 3 mins ago</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <button class="btn btn-success" (click)="clickUploadPhoto()">Upload Photo</button>
         </div>
         <div class="row p-3">
             <h4>Tasks</h4>
@@ -69,6 +81,10 @@
         </feeding-table-list>
     </div>
     <ng-container *ngIf="editing" class="p-4">
+        <div class="m-2">
+            <h4>Thumbnail</h4>
+            <fish-photo-select [fish]="fish"></fish-photo-select>
+        </div>
         <mat-form-field class="m-2">
             <input [disabled]='updating$ | async' type="text" placeholder="Fish Name" matInput [(ngModel)]="fish.name">
         </mat-form-field>

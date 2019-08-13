@@ -113,6 +113,9 @@ export class AquariumService {
   public getApplicationLog(): Observable<string> {
     return this.http.get(this._url + "/v1/Settings/Log", { responseType: "text" });
   }
+  public deleteApplicationLog(): Observable<any> {
+    return this.http.get(this._url + "/v1/Settings/Log/Delete");
+  }
   public getCameraConfiguration(): Observable<CameraConfiguration> {
     return this.http.get<CameraConfiguration>(this._url + "/v1/Settings/CameraConfiguration");
   }
@@ -176,5 +179,28 @@ export class AquariumService {
   }
   pingDevice(deviceId: number) {
     return this.http.get(this._url + `/v1/Device/${deviceId}/Ping`);
+  }
+
+
+  public getFishPhotoPermalink(photoId: number): string {
+    return this._url + "/v1/Fish/Photo/" + photoId + "/small";
+  }
+  public uploadFishPhoto(fishId:number,uploadedPhoto: any): Observable<any> {
+    const url = this._url + "/v1/Fish/" + fishId + "/UploadPhoto";
+    let formData = new FormData();
+
+    var response = {
+      //...snapshot,
+      photoData: uploadedPhoto ? uploadedPhoto.file:null
+    }
+    console.log(response);
+    //response.date = snapshot.date.toISOString();
+    for(var key in response) formData.set(key,response[key]);
+
+    let options: any = {
+      observe: "response",
+      reportProgress: true,
+    };
+    return this.http.post<any>(url, formData,options);
   }
 }

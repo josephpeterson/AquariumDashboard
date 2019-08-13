@@ -17,6 +17,7 @@ import { Aquarium } from 'src/app/models/Aquarium';
 import { Fish } from 'src/app/models/Fish';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { AquariumLoadSuccessAction } from 'src/app/store/aquarium/aquarium.actions';
+import { FishPhotoModal } from 'src/app/components/shared/modals/fish-photo-modal/fish-photo-modal.component';
 
 
 
@@ -138,8 +139,23 @@ export class FishDetailFormComponent implements OnInit {
             }
         });
     }
+    clickUploadPhoto() {
+        var dialog = this.dialog.open(FishPhotoModal, {
+        });
+        dialog.componentInstance.fishId = this.fish.id;
+        //todo replace this by store
+        dialog.afterClosed().subscribe(photo => {
+            if (photo) {
+                this.fish.photos.push(photo);
+            }
+        });
+    }
     getFishAge() {
         return moment().diff(this.fish.date, "days");
+    }
+
+    getFishPhotoSource(photoId:number) {
+        return this._aquariumService.getFishPhotoPermalink(photoId);
     }
 }
 

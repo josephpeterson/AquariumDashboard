@@ -13,6 +13,7 @@ import { take, takeUntil } from 'rxjs/operators';
 import { Species } from 'src/app/models/Species';
 import { ManageSpeciesModalComponent } from '../../../shared/modals/manage-species-modal/manage-species-modal.component';
 import { ManageAquariumDeviceModalComponent } from 'src/app/components/shared/modals/manage-aquarium-device-modal/manage-aquarium-device-modal.component';
+import { AquariumService } from 'src/app/services/aquarium.service';
 
 
 @Component({
@@ -48,7 +49,8 @@ export class SettingsComponent implements OnInit {
 
 
 
-  constructor(public data: SettingsComponentData, public dialog: MatDialog, private router: Router) { }
+  constructor(private _aquariumService: AquariumService,private notifier: NotifierService,
+    public data: SettingsComponentData, public dialog: MatDialog, private router: Router) { }
 
   ngOnInit() {
     this.aquarium$.pipe(takeUntil(this.componentLifeCycle)).subscribe(aq => {
@@ -129,6 +131,12 @@ export class SettingsComponent implements OnInit {
       data: id
     });
   }
-
+  clickDeleteApplicationLog() {
+    this._aquariumService.deleteApplicationLog().subscribe(val => {
+      //if(val) this.notifier.notify('s',"Could not delete application log");
+    },err => {
+      if(err) this.notifier.notify('error',"Could not delete application log");
+    });
+  }
 }
 

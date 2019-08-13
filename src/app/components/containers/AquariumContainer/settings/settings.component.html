@@ -96,6 +96,7 @@
                 <label for="exampleFormControlTextarea1">Aquarium Service</label>
                 <textarea disabled class="form-control rounded-0" id="exampleFormControlTextarea1"
                     rows="10">{{applicationLog$ | async}}</textarea>
+                <button class="btn btn-danger" (click)="clickDeleteApplicationLog()">Delete Logs</button>
             </div>
         </div>
     </div>

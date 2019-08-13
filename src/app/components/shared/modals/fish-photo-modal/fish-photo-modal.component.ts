@@ -1,0 +1,37 @@
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { AquariumService } from 'src/app/services/aquarium.service';
+import { AttachmentUploaderComponent } from '../../attachment-uploader/attachment-uploader.component';
+import { NotifierService } from 'angular-notifier';
+import { MatDialogRef } from '@angular/material';
+import { FishFeedModalComponent } from '../fish-feed-modal/fish-feed-modal.component';
+
+@Component({
+  selector: 'fish-photo-modal',
+  templateUrl: './fish-photo-modal.component.html',
+  styleUrls: ['./fish-photo-modal.component.scss']
+})
+export class FishPhotoModal implements OnInit {
+  public loading: boolean;
+  public fishId: number;
+  @ViewChild(AttachmentUploaderComponent) attachmentComponent: AttachmentUploaderComponent;
+  constructor(private _aquariumService: AquariumService,
+    private notifier: NotifierService,
+    private _dialog: MatDialogRef<FishPhotoModal>) { }
+  ngOnInit() {
+  }
+
+  public clickSubmit() {
+    var attachment = this.attachmentComponent.getAttachment();
+    if (!attachment)
+      return false;
+    this.loading = true;
+    this._aquariumService.uploadFishPhoto(this.fishId, attachment).subscribe(val => {
+      this.loading = false;
+      this._dialog.close(val);
+      //todo dispatch to store that we done
+    },(err) => {
+      this.loading = false;
+      this.notifier.notify("error","Could not upload fish photo.");
+    });
+  }
+}

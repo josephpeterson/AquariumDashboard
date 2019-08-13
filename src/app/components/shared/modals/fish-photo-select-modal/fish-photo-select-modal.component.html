@@ -1,0 +1,14 @@
+<div class="bugreport-modal-component">
+  <h1 mat-dialog-title>Select Fish Photo</h1>
+  <div class="card-group">
+    <div *ngFor="let photo of fish.photos" class="card" (click)="selectPhoto(photo)">
+      <img [src]="getFishPhotoSource(photo.id)" class="card-img-top" alt="...">
+      <div class="card-footer">
+        <small class="text-muted">Last updated 3 mins ago</small>
+      </div>
+    </div>
+  </div>
+  <mat-dialog-actions align="end">
+    <button class="m-2 btn btn-danger" mat-dialog-close>Cancel</button>
+  </mat-dialog-actions>
+</div>

@@ -122,6 +122,9 @@ import { FishFeedModalComponent } from './components/shared/modals/fish-feed-mod
 import { FishAddFormComponent } from './components/data/fish/fish-add-form/fish-add-form.component';
 import { FishContainer } from './components/containers/FishContainer/fish-container.component';
 import { LoadingContainerComponent } from './components/shared/loading-container/loading-container.component';
+import { FishPhotoModal } from './components/shared/modals/fish-photo-modal/fish-photo-modal.component';
+import { FishPhotoSelectComponent } from './components/data/fish/photo-select/fish-photo-select.component';
+import { FishPhotoSelectModal } from './components/shared/modals/fish-photo-select-modal/fish-photo-select-modal.component';
 
 
 @NgModule({
@@ -167,6 +170,7 @@ import { LoadingContainerComponent } from './components/shared/loading-container
     FishAddFormComponent,
     FishInformationComponent,
     FishSelectComponent,
+    FishPhotoSelectComponent,
     FishCreateButtonComponent,
     FishDetailFormComponent,
     FishCardComponent,
@@ -208,6 +212,8 @@ import { LoadingContainerComponent } from './components/shared/loading-container
     ScraperModalComponent,
     PhotoExpandedModalComponent,
     ManagePhotoConfigurationModal,
+    FishPhotoModal,
+    FishPhotoSelectModal,
     ManageSnapshotModal,
     LoginModalComponent,
     //New components here
@@ -228,6 +234,8 @@ import { LoadingContainerComponent } from './components/shared/loading-container
     ManagePhotoConfigurationModal,
     ManageSnapshotModal,
     LoginModalComponent,
+    FishPhotoModal,
+    FishPhotoSelectModal,
   ],
 
   imports: [
