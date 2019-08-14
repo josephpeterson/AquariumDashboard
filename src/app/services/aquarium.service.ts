@@ -11,6 +11,7 @@ import { Species } from 'src/app/models/Species';
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
 import { CameraConfiguration } from 'src/app/models/CameraConfiguration';
 import { AquariumPhoto } from 'src/app/models/AquariumPhoto';
+import { FishPhoto } from '../models/FishPhoto';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -56,8 +57,8 @@ export class AquariumService {
   public takeSnapshot(aqId: number) {
     return this.http.get<AquariumSnapshot>(this._url + "/v1/Snapshot/" + aqId + "/Take/true");
   }
-  public getPhotoPermalink(photoId: number): string {
-    return this._url + "/v1/Snapshot/Photo/" + photoId + "/small";
+  public getPhotoPermalink(photoId: number,size:string = "small"): string {
+    return this._url + "/v1/Snapshot/Photo/" + photoId + "/" + size;
   }
   public getLatestSnapshot(aqId: number): Observable<AquariumSnapshot> {
 
@@ -182,8 +183,8 @@ export class AquariumService {
   }
 
 
-  public getFishPhotoPermalink(photoId: number): string {
-    return this._url + "/v1/Fish/Photo/" + photoId + "/small";
+  public getFishPhotoPermalink(photoId: number,size:string = "small"): string {
+    return this._url + "/v1/Fish/Photo/" + photoId + "/" + size;
   }
   public uploadFishPhoto(fishId:number,uploadedPhoto: any): Observable<any> {
     const url = this._url + "/v1/Fish/" + fishId + "/UploadPhoto";
@@ -202,5 +203,8 @@ export class AquariumService {
       reportProgress: true,
     };
     return this.http.post<any>(url, formData,options);
+  }
+  public deleteFishPhoto(fishPhoto: FishPhoto): Observable<any> {
+    return this.http.post<any>(this._url + "/v1/Fish/Photo/Delete", fishPhoto.id);
   }
 }

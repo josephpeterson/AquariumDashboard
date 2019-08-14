@@ -61,7 +61,7 @@
 
             <div class="card-group">
                 <div *ngFor="let photo of fish.photos" class="card">
-                    <img [src]="getFishPhotoSource(photo.id)" class="card-img-top" alt="...">
+                    <img [src]="getFishPhotoSource(photo.id)" class="card-img-top" alt="..." (click)="clickFishPhoto(photo)">
                     <div class="card-footer">
                         <small class="text-muted">Last updated 3 mins ago</small>
                     </div>

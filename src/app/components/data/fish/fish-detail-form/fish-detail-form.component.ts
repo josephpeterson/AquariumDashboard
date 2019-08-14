@@ -18,6 +18,8 @@ import { Fish } from 'src/app/models/Fish';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { AquariumLoadSuccessAction } from 'src/app/store/aquarium/aquarium.actions';
 import { FishPhotoModal } from 'src/app/components/shared/modals/fish-photo-modal/fish-photo-modal.component';
+import { FishPhoto } from 'src/app/models/FishPhoto';
+import { PhotoExpandedModalComponent } from 'src/app/components/shared/modals/photo-expanded-modal/photo-expanded-modal.component';
 
 
 
@@ -154,8 +156,14 @@ export class FishDetailFormComponent implements OnInit {
         return moment().diff(this.fish.date, "days");
     }
 
-    getFishPhotoSource(photoId:number) {
+    getFishPhotoSource(photoId: number) {
         return this._aquariumService.getFishPhotoPermalink(photoId);
+    }
+    public clickFishPhoto(photo: FishPhoto) {
+        var dialog = this.dialog.open(PhotoExpandedModalComponent, {
+            panelClass: "darkDialog",
+        });
+        dialog.componentInstance.fishPhoto = photo;
     }
 }
 
