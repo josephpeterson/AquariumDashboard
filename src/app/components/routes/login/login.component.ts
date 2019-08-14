@@ -4,6 +4,7 @@ import { LoginModalComponent } from '../../shared/modals/login-modal/login-modal
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'login-component',
@@ -12,9 +13,9 @@ import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
 })
 export class LoginComponent implements OnInit {
 
-  
-  constructor(private auth: AuthService,private router: Router) { }
-  
+
+  constructor(private auth: AuthService, private router: Router) { }
+
   public error: string;
   public password: string;
   public email: string;
@@ -31,11 +32,10 @@ export class LoginComponent implements OnInit {
     this.disabled = true;
     this.auth.login(this.email, this.password).subscribe(val => {
       this.router.navigateByUrl("dashboard");
-    },
-      err => {
-        this.disabled = false;
-        this.error = "Invalid login";
-      });
+    }, (err: HttpErrorResponse) => {
+      this.disabled = false;
+      this.error = err.statusText;
+    });
   }
 }
 

@@ -4,14 +4,15 @@ import { Fish } from 'src/app/models/Fish';
 import { Update } from '@ngrx/entity';
 
 export enum FishActions {
-  LoadFishByAquariumId = '[Fish] Load fish by AquariumId',
-  LoadFishByFishId = '[Fish] Load fish by FishId',
-  LoadFishSuccess = '[Fish] LoadFishSuccess',
-  LoadAllFishFail = '[Fish] LoadAllFishFail',
-
   AddFish = '[Fish] AddFish',
   AddFishSuccess = '[Fish] AddFishSuccess',
   AddFishFail = '[Fish] AddFishFail',
+
+  LoadFishById = '[Fish] Load fish by FishId',
+  LoadFishSuccess = '[Fish] LoadFishSuccess',
+  LoadFishFail = '[Fish] LoadAllFishFail',
+
+  
 
   UpdateFish = '[Fish] UpdateFish',
   UpdateFishSuccess = '[Fish] UpdateFishSuccess',
@@ -21,16 +22,14 @@ export enum FishActions {
   DeleteFishSuccess = '[Fish] DeleteFishSuccess',
   DeleteFishFail = '[Fish] DeleteFishFail',
 
+  SelectFish = '[Fish] SelectFish',
+
   Reset = '[Fish] Reset',
 }
 
-/* Loading */
-export class FishLoadByAquariumIdAction implements Action {
-  readonly type = FishActions.LoadFishByAquariumId
-  constructor(public payload: number) { }
-}
-export class FishLoadByFishIdAction implements Action {
-  readonly type = FishActions.LoadFishByFishId
+/* Retrieving */
+export class FishLoadByIdAction implements Action {
+  readonly type = FishActions.LoadFishById
   constructor(public payload: number) { }
 }
 export class FishLoadSuccessAction implements Action {
@@ -38,7 +37,7 @@ export class FishLoadSuccessAction implements Action {
   constructor(public payload: Fish[]) { }
 }
 export class FishLoadFailAction implements Action {
-  readonly type = FishActions.LoadAllFishFail
+  readonly type = FishActions.LoadFishFail
   constructor(public payload: HttpErrorResponse) { }
 }
 
@@ -84,12 +83,16 @@ export class FishDeleteFailAction implements Action {
   constructor(public payload: HttpErrorResponse) { }
 }
 
+export class FishSelectAction implements Action {
+  readonly type = FishActions.SelectFish
+  constructor(public payload: number) {
+  }
+}
 export class FishResetAction implements Action {
   readonly type = FishActions.Reset
 }
 export type AllFishActions =
-  FishLoadByAquariumIdAction |
-  FishLoadByFishIdAction |
+  FishLoadByIdAction |
   FishLoadSuccessAction |
   FishLoadFailAction |
 
@@ -104,5 +107,7 @@ export type AllFishActions =
   FishDeleteAction |
   FishDeleteSuccessAction |
   FishDeleteFailAction |
+
+  FishSelectAction |
 
   FishResetAction;

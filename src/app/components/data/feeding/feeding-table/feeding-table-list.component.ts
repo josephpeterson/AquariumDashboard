@@ -14,7 +14,7 @@ import { getAllSpecies } from 'src/app/store/species/species.selector';
 import { SpeciesLoadAction } from 'src/app/store/species/species.actions';
 import { AquariumFeeding } from 'src/app/models/AquariumFeeding';
 import { getAllFish, getFishById } from 'src/app/store/fish/fish.selector';
-import { FishLoadByFishIdAction } from 'src/app/store/fish/fish.actions';
+import { FishLoadByIdAction } from 'src/app/store/fish/fish.actions';
 
 @Component({
   selector: 'feeding-table-list',
@@ -83,7 +83,7 @@ export class FeedingTableListComponent {
   }
   setFishId(fishId: number) {
     this.store.select(getFishById(fishId)).pipe(take(2)).subscribe(fish => {
-      if (!fish) this.store.dispatch(new FishLoadByFishIdAction(fishId));
+      if (!fish) this.store.dispatch(new FishLoadByIdAction(fishId));
       else this.setFish(fish);
     });
   }

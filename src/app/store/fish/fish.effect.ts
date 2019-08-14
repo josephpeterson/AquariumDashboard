@@ -3,29 +3,19 @@ import { Effect, Actions, ofType } from '@ngrx/effects'
 import { map, catchError, mergeMap, switchMap } from 'rxjs/operators'
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { of } from 'rxjs'
-import { FishLoadByAquariumIdAction, FishActions, FishLoadSuccessAction, FishLoadFailAction, FishAddAction, FishAddSuccessAction, FishAddFailAction, FishUpdateAction, FishUpdateSuccessAction, FishUpdateFailAction, FishDeleteAction, FishDeleteSuccessAction, FishDeleteFailAction, FishLoadByFishIdAction } from './fish.actions';
+import { FishActions, FishLoadSuccessAction, FishLoadFailAction, FishAddAction, FishAddSuccessAction, FishAddFailAction, FishUpdateAction, FishUpdateSuccessAction, FishUpdateFailAction, FishDeleteAction, FishDeleteSuccessAction, FishDeleteFailAction, FishLoadByIdAction } from './fish.actions';
 import { Fish } from 'src/app/models/Fish';
 import { SpeciesLoadSuccessAction } from '../species/species.actions';
 
 @Injectable()
 export class FishEffects {
     constructor(private aquariumService: AquariumService,
-        private actions$: Actions) {
-
-    }
-
+        private actions$: Actions) {}
     @Effect()
-    loadFishByAquariumId$ = this.actions$.pipe(ofType<FishLoadByAquariumIdAction>(FishActions.LoadFishByAquariumId),
-        mergeMap((action: FishLoadByAquariumIdAction) => this.aquariumService.getFishByAquariumId(action.payload).pipe(
-            map((Fish: Fish[]) => new FishLoadSuccessAction(Fish)),
-            catchError(error => of(new FishLoadFailAction(error)))
-        )));
-    @Effect()
-    loadFishByFishId$ = this.actions$.pipe(ofType<FishLoadByFishIdAction>(FishActions.LoadFishByFishId),
-        mergeMap((action: FishLoadByFishIdAction) => this.aquariumService.getFishById(action.payload).pipe(
+    loadFishById$ = this.actions$.pipe(ofType<FishLoadByIdAction>(FishActions.LoadFishById),
+        mergeMap((action: FishLoadByIdAction) => this.aquariumService.getFishById(action.payload).pipe(
             switchMap((fish: Fish) => [
                 new FishLoadSuccessAction([fish]),
-                //new SpeciesLoadSuccessAction([fish.species]),
             ]),
             catchError(error => of(new FishLoadFailAction(error)))
         )));

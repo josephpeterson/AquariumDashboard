@@ -24,3 +24,9 @@ export const getFishUpdateError = createSelector(FishState, (state: FishReducer.
 export const isDeletingFish = createSelector(FishState, (state: FishReducer.FishState) => state.deleting);
 export const getFishWasDeleted = createSelector(FishState, (state: FishReducer.FishState) => state.deleted);
 export const getFishDeleteError = createSelector(FishState, (state: FishReducer.FishState) => state.deleteError);
+
+export const getSelectedFish = createSelector(FishState,
+    (state: FishReducer.FishState) => {
+        return state.entities[state.selectedFishId]
+    }
+);

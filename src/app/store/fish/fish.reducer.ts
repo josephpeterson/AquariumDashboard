@@ -8,6 +8,8 @@ export interface FishState extends EntityState<Fish> {
 	loaded: boolean
 	loadError: HttpErrorResponse
 
+	selectedFishId: number
+
 	creating: boolean
 	created: boolean
 	createError: HttpErrorResponse
@@ -25,6 +27,7 @@ export const adapter: EntityAdapter<Fish> = createEntityAdapter<Fish>();
 export const defaultFishState: FishState = {
 	ids: [],
 	entities: {},
+	selectedFishId: null,
 
 	loading: false,
 	loaded: false,
@@ -49,8 +52,7 @@ export function fishReducer(state = initialState, action: AllFishActions): FishS
 	switch (action.type) {
 
 		//Loading
-		case FishActions.LoadFishByAquariumId:
-		case FishActions.LoadFishByFishId:
+		case FishActions.LoadFishById:
 			return {
 				...state,
 				loading: true,
@@ -64,7 +66,7 @@ export function fishReducer(state = initialState, action: AllFishActions): FishS
 				loaded: true,
 				loadError: null
 			})
-		case FishActions.LoadAllFishFail:
+		case FishActions.LoadFishFail:
 			return {
 				...state,
 				loading: false,
@@ -138,12 +140,18 @@ export function fishReducer(state = initialState, action: AllFishActions): FishS
 				//deleted: false,
 				deleteError: action.payload,
 			}
-		case FishActions.LoadAllFishFail:
+		case FishActions.LoadFishFail:
 			return {
 				...state,
 				deleting: false,
 				//deleted: false,
 				deleteError: action.payload,
+			}
+
+		case FishActions.SelectFish:
+			return {
+				...state,
+				selectedFishId: action.payload
 			}
 
 		//Reset
