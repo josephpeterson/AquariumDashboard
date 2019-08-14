@@ -37,7 +37,7 @@
     </div>
     <div class="w-100"
         style="height:200px;background-color:#333;background-position:center center;background-size:contain;background-repeat:no-repeat;"
-        [style.background-image]="'url(' + aquariumService.getPhotoPermalink(snapshot.photoId) + ')'">
+        [style.background-image]="'url(' + aquariumService.getPhotoPermalink(snapshot.photoId,0.5) + ')'">
         <attachment-uploader></attachment-uploader>
     </div>
 </ng-template>

@@ -57,7 +57,7 @@ export class AquariumService {
   public takeSnapshot(aqId: number) {
     return this.http.get<AquariumSnapshot>(this._url + "/v1/Snapshot/" + aqId + "/Take/true");
   }
-  public getPhotoPermalink(photoId: number,size:string = "small"): string {
+  public getPhotoPermalink(photoId: number,size:any = "1"): string {
     return this._url + "/v1/Snapshot/Photo/" + photoId + "/" + size;
   }
   public getLatestSnapshot(aqId: number): Observable<AquariumSnapshot> {
@@ -183,7 +183,7 @@ export class AquariumService {
   }
 
 
-  public getFishPhotoPermalink(photoId: number,size:string = "small"): string {
+  public getFishPhotoPermalink(photoId: number,size:any = "1"): string {
     return this._url + "/v1/Fish/Photo/" + photoId + "/" + size;
   }
   public uploadFishPhoto(fishId:number,uploadedPhoto: any): Observable<any> {

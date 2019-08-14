@@ -24,6 +24,6 @@ export class FishPhotoSelectModal implements OnInit {
     this._dialog.close(photo);
   }
   public getFishPhotoSource(photoId) {
-    return this._aquariumService.getFishPhotoPermalink(photoId);
+    return this._aquariumService.getFishPhotoPermalink(photoId,"0.5");
   }
 }
