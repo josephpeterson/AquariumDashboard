@@ -1,6 +1,41 @@
 <nav-menu></nav-menu>
 <div class="container" *ngIf="fish$ | async as fish else unsuccessfull">
-    <fish-detail-form [fish]="fish"></fish-detail-form>
+    <div class="shadow mb-5 bg-white rounded fish-container-component">
+        <div class="row banner">
+            <div class="float-left">
+                <div class="thumbnail"></div>
+            </div>
+            <div class="col p-0">
+                <h1>{{fish.name}} <button class="btn btn-secondary edit float-right" [routerLink]='["edit"]'
+                        [routerLinkActiveOptions]='{ exact: true }' [routerLinkActive]='["hidden"]'>
+                        <fa-icon class="pr-1" [icon]="faEdit"></fa-icon>Edit Fish
+                    </button></h1>
+                <div class="navigation">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link" [routerLink]='["/fish/" + fish.id]'
+                                [routerLinkActiveOptions]='{ exact: true }' [routerLinkActive]='["active"]'>Overview</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [routerLink]='["/fish/" + fish.id + "/feeding"]'
+                                [routerLinkActiveOptions]='{ exact: true }' [routerLinkActive]='["active"]'>Feeding</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [routerLink]='["/fish/" + fish.id + "/photos"]'
+                                [routerLinkActiveOptions]='{ exact: true }' [routerLinkActive]='["active"]'>Photos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" [routerLink]='["/fish/" + fish.id + "/notes"]'
+                                [routerLinkActiveOptions]='{ exact: true }' [routerLinkActive]='["active"]'>Notes</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
 </div>
 <ng-template #unsuccessfull>
     <div class="container">

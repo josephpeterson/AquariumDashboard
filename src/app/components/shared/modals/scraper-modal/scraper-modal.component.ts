@@ -1,8 +1,7 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { ConnectionError } from 'src/app/models/ConnectionError';
+import { Component, OnInit, Input } from '@angular/core';
+import { Species } from 'src/app/models/Species';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { take } from 'rxjs/operators';
-import { Species } from 'src/app/models/Species';
 
 @Component({
   selector: 'scraper-modal',

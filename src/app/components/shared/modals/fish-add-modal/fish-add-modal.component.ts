@@ -10,13 +10,13 @@ import { Subject } from 'rxjs';
 import { MatDialogRef } from '@angular/material';
 
 @Component({
-  selector: 'manage-fish-modal',
-  templateUrl: './manage-fish-modal.component.html',
-  styleUrls: ['./manage-fish-modal.component.scss']
+  selector: 'fish-add-modal',
+  templateUrl: './fish-add-modal.component.html',
+  styleUrls: ['./fish-add-modal.component.scss']
 })
-export class ManageFishModalComponent implements OnInit {
+export class FishAddModalComponent implements OnInit {
 
-  @Input() fish: Fish;
+  @Input() fish: Fish = new Fish();
   @Input() fishId: number;
   @Input() aquarium: Aquarium;
 
@@ -27,7 +27,7 @@ export class ManageFishModalComponent implements OnInit {
 
   public componentLifecycle = new Subject();
 
-  constructor(private store: Store<AppState>,private _dialogRef: MatDialogRef<ManageFishModalComponent>) {
+  constructor(private store: Store<AppState>,private _dialogRef: MatDialogRef<FishAddModalComponent>) {
   }
   ngOnInit() {
   }

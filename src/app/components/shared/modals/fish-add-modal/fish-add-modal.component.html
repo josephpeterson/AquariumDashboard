@@ -1,0 +1,47 @@
+<div class="manage-aquarium-device-modal-component">
+  <h1 mat-dialog-title>Add Fish<div class="float-md-right">
+      <button mat-button [mat-dialog-close] style="font-weight:bold;font-size:20pt;">×</button>
+    </div>
+  </h1>
+
+  <mat-form-field class="m-2">
+    <input [disabled]='updating$ | async' type="text" placeholder="Fish Name" matInput [(ngModel)]="fish.name">
+  </mat-form-field>
+  <species-select class="m-2" [fish]="fish"></species-select>
+  <div class="row m-2">
+    <mat-form-field>
+      <mat-label>Gender</mat-label>
+      <mat-select [(ngModel)]="fish.gender">
+        <mat-option value=1>
+          Male
+        </mat-option>
+        <mat-option value=2>
+          Female
+        </mat-option>
+        <mat-option value=0>
+          Unknown
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="row m-2">
+    <mat-form-field class="w-100">
+      <textarea matInput [(ngModel)]="fish.description"
+        placeholder="Fish description, notes, attributes, features, etc..."></textarea>
+    </mat-form-field>
+  </div>
+
+  <div class="row m-2">
+
+    <button *ngIf="!adding" [disabled]='updating$ | async' (click)="clickDelete()" class="m-2 btn btn-danger">
+      <fa-icon class="pr-1" [icon]="faTrash"></fa-icon>Delete
+    </button>
+    <button *ngIf="!adding" [disabled]='updating$ | async' (click)="clickReset()"
+      class="m-2 btn btn-info">Reset</button>
+    <button *ngIf="!adding" [disabled]='updating$ | async' (click)="clickCancel()"
+      class="m-2 btn btn-danger">Cancel</button>
+    <button [disabled]='(updating$ | async) || (adding$ | async)' (click)="adding ? clickAdd():clickSave()"
+      class="m-2 btn btn-success">Save Changes</button>
+
+  </div>
+</div>

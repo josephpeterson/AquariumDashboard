@@ -3,7 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { getAllSpecies, isUpdatingSpecies, getSpeciesUpdateError, isCreatingSpecies, isDeletingSpecies, getSpeciesDeleteError } from 'src/app/store/species/species.selector';
-import { Subject } from 'rxjs';
+import { Subject, Observer, Observable } from 'rxjs';
 import { takeUntil, take } from 'rxjs/operators';
 import { Species } from 'src/app/models/Species';
 import { SpeciesLoadAction, SpeciesUpdateAction, SpeciesAddAction, SpeciesDeleteAction } from 'src/app/store/species/species.actions';
@@ -20,20 +20,22 @@ import { AquariumLoadSuccessAction } from 'src/app/store/aquarium/aquarium.actio
 import { FishPhotoModal } from 'src/app/components/shared/modals/fish-photo-modal/fish-photo-modal.component';
 import { FishPhoto } from 'src/app/models/FishPhoto';
 import { PhotoExpandedModalComponent } from 'src/app/components/shared/modals/photo-expanded-modal/photo-expanded-modal.component';
+import { FishUpdateAction, FishDeleteAction } from 'src/app/store/fish/fish.actions';
+import { isCreatingFish, isUpdatingFish, getFishUpdateError } from 'src/app/store/aquarium/aquarium.selector';
+import { getSelectedFish } from 'src/app/store/fish/fish.selector';
 
 
 
 @Component({
-    selector: 'fish-detail-form',
-    templateUrl: './fish-detail-form.component.html',
-    styleUrls: ['./fish-detail-form.component.scss']
+    selector: 'fish-edit-view',
+    templateUrl: './fish-edit-view.component.html',
+    styleUrls: ['./fish-edit-view.component.scss']
 })
-export class FishDetailFormComponent implements OnInit {
+export class FishEditViewComponent implements OnInit {
     @Input("fish") fish: Fish;
     @Input("aquarium") aquarium: Aquarium;
 
-
-    //public fish: Fish = new Fish();
+    public fish$: Observable<Fish> = this.store.select(getSelectedFish);
 
     public disabled: boolean;
 
@@ -45,17 +47,15 @@ export class FishDetailFormComponent implements OnInit {
     public species$ = this.store.select(getAllSpecies);
     public componentLifecycle = new Subject();
 
-    public updating$ = this.store.select(isUpdatingSpecies);
-    public adding$ = this.store.select(isCreatingSpecies);
-    public updateError$ = this.store.select(getSpeciesUpdateError);
+    public updating$ = this.store.select(isUpdatingFish);
+    public adding$ = this.store.select(isCreatingFish);
+    public updateError$ = this.store.select(getFishUpdateError);
 
     public deleting$ = this.store.select(isDeletingSpecies);
     public deleteError$ = this.store.select(getSpeciesDeleteError);
 
-    faEdit = faPenFancy;
     faAngleRight = faAngleRight;
     faTrash = faTrash;
-    private _matchedSpecies: Species;
 
 
     constructor(private store: Store<AppState>, private notifier: NotifierService, private dialog: MatDialog, private router: Router,
@@ -63,62 +63,37 @@ export class FishDetailFormComponent implements OnInit {
 
     }
     ngOnInit() {
-        if (this.fish.aquarium && !this.aquarium) //maybe remove this logic
-            this.aquarium = this.fish.aquarium;
-    }
 
+        this.fish$.pipe(takeUntil(this.componentLifecycle)).subscribe(fish => {
+            if (fish)
+                this.fish = { ...fish };
+        });
+    }
     ngOnDestory() {
         this.componentLifecycle.next();
         this.componentLifecycle.unsubscribe();
     }
 
-    clickEdit() {
-        this.editing = true;
-    }
-    clickCancel() {
-        this.editing = false;
-    }
+
+
+
     clickReset() {
-        //this.editing = true;
-        this.species = new Species(this._matchedSpecies);
+        this.fish$.pipe(take(1)).subscribe(fish => this.fish = { ...fish });
     }
     clickSave() {
-        //this.editing = true;
-
         var updating = true;
-        this.store.dispatch(new SpeciesUpdateAction(this.species));
+        this.store.dispatch(new FishUpdateAction(this.fish));
         this.updateError$.pipe(take(2)).subscribe(err => {
             if (err && updating) {
                 updating = false;
-                this.notifier.notify("error", "Unable to update species");
+                this.notifier.notify("error", "Unable to update fish");
                 console.log(err);
             }
         })
         this.updating$.pipe(take(2)).subscribe(val => {
             if (!val && updating) {
-                this.notifier.notify("success", "Species updated");
+                this.notifier.notify("success", "Fish updated");
                 this.editing = false;
-            }
-        });
-    }
-    clickAdd() {
-        var adding = true;
-        this.store.dispatch(new SpeciesAddAction(this.species));
-        this.updateError$.pipe(take(2)).subscribe(err => {
-            if (err && adding) {
-                adding = false;
-                this.notifier.notify("error", "Unable to add new species");
-                console.log(err);
-            }
-        })
-        this.adding$.pipe(take(2)).subscribe(val => {
-            if (!val && adding) {
-                this.notifier.notify("success", "Species added");
-                this.editing = false;
-                this.adding = false;
-                this.added = true;
-                this.store.dispatch(new SpeciesLoadAction());
-                //this.router.navigate([val.id]);
             }
         });
     }
@@ -130,14 +105,7 @@ export class FishDetailFormComponent implements OnInit {
         dialog.componentInstance.body = "Are you sure you want to delete this fish? The fish as well as any associated information will be permanently removed. This action is not recoverable.";
         dialog.afterClosed().pipe(take(1)).subscribe((confirm: boolean) => {
             if (confirm) {
-                this._aquariumService.deleteFish(this.fish).subscribe(fish => {
-                    this.fish = fish;
-                    this.store.dispatch(new AquariumLoadSuccessAction([this.aquarium]));
-                    this.disabled = false;
-                }, err => {
-                    this.notifier.notify("error", "Could not delete fish");
-                    this.disabled = false;
-                });
+                this.store.dispatch(new FishDeleteAction(this.fish));
             }
         });
     }
@@ -152,18 +120,8 @@ export class FishDetailFormComponent implements OnInit {
             }
         });
     }
-    getFishAge() {
-        return moment().diff(this.fish.date, "days");
-    }
-
     getFishPhotoSource(photoId: number) {
         return this._aquariumService.getFishPhotoPermalink(photoId);
-    }
-    public clickFishPhoto(photo: FishPhoto) {
-        var dialog = this.dialog.open(PhotoExpandedModalComponent, {
-            panelClass: "darkDialog",
-        });
-        dialog.componentInstance.fishPhoto = photo;
     }
 }
 

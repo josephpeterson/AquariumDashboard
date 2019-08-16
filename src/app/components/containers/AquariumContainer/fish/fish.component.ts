@@ -7,7 +7,6 @@ import { Aquarium } from 'src/app/models/Aquarium';
 import { getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
 import { AppState } from 'src/app/app.state';
 import { Store } from '@ngrx/store';
-import { ManageFishModalComponent } from '../../../shared/modals/manage-fish-modal/manage-fish-modal.component';
 import { getAllFish, getFishLoadError } from 'src/app/store/fish/fish.selector';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Location } from '@angular/common';

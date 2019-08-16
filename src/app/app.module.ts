@@ -75,7 +75,7 @@ import { SpeciesTableComponent } from './components/data/species/species-table/s
 import { SpeciesDetailFormComponent } from './components/data/species/species-detail-form/species-detail-form.component';
 import { FishInformationComponent } from './components/data/fish/fish-information/fish-information.component';
 import { FishSelectComponent } from './components/data/fish/select/fish-select.component';
-import { ManageFishModalComponent } from './components/shared/modals/manage-fish-modal/manage-fish-modal.component';
+import { FishAddModalComponent } from './components/shared/modals/fish-add-modal/fish-add-modal.component';
 import { FeedingTableListComponent } from './components/data/feeding/feeding-table/feeding-table-list.component';
 import { FeedingListComponent } from './components/containers/AquariumContainer/maintenance/feeding-list/feeding-list.component';
 import { FeedingDetailFormComponent } from './components/data/feeding/feeding-detail-form/feeding-detail-form.component';
@@ -84,7 +84,7 @@ import { SpeciesDetailViewComponent } from './components/data/species/species-de
 import { ScraperModalComponent } from './components/shared/modals/scraper-modal/scraper-modal.component';
 import { AquariumTableComponent } from './components/data/aquarium/aquarium-table/aquarium-table.component';
 import { SelectAquariumModalComponent } from './components/shared/modals/select-aquarium-modal/select-aquarium-modal.component';
-import { FishDetailFormComponent } from './components/data/fish/fish-detail-form/fish-detail-form.component';
+import { FishDetailViewComponent } from './components/containers/FishContainer/fish-detail-view/fish-detail-view.component';
 import { FishEffects } from './store/fish/fish.effect';
 import { fishReducer } from './store/fish/fish.reducer';
 import { DeviceDetailFormComponent } from './components/data/device/device-detail-form/device-detail-form.component';
@@ -125,6 +125,7 @@ import { LoadingContainerComponent } from './components/shared/loading-container
 import { FishPhotoModal } from './components/shared/modals/fish-photo-modal/fish-photo-modal.component';
 import { FishPhotoSelectComponent } from './components/data/fish/photo-select/fish-photo-select.component';
 import { FishPhotoSelectModal } from './components/shared/modals/fish-photo-select-modal/fish-photo-select-modal.component';
+import { FishEditViewComponent } from './components/containers/FishContainer/fish-edit-view/fish-edit-view.component';
 
 
 @NgModule({
@@ -172,7 +173,8 @@ import { FishPhotoSelectModal } from './components/shared/modals/fish-photo-sele
     FishSelectComponent,
     FishPhotoSelectComponent,
     FishCreateButtonComponent,
-    FishDetailFormComponent,
+    FishDetailViewComponent,
+    FishEditViewComponent,
     FishCardComponent,
 
     SpeciesDetailFormComponent,
@@ -207,7 +209,7 @@ import { FishPhotoSelectModal } from './components/shared/modals/fish-photo-sele
     SettingsComponent,
     TaskTableComponent,
     CreateAquariumModelComponent,
-    ManageFishModalComponent,
+    FishAddModalComponent,
     ManageSpeciesModalComponent,
     ScraperModalComponent,
     PhotoExpandedModalComponent,
@@ -226,7 +228,7 @@ import { FishPhotoSelectModal } from './components/shared/modals/fish-photo-sele
     FishFeedModalComponent,
     ErrorMessageModalComponent,
     ManageSpeciesModalComponent,
-    ManageFishModalComponent,
+    FishAddModalComponent,
     ManageAquariumDeviceModalComponent,
     SelectAquariumModalComponent,
     ScraperModalComponent,

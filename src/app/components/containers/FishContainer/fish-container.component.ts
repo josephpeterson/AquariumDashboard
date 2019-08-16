@@ -7,16 +7,20 @@ import { Title } from '@angular/platform-browser';
 import { takeUntil } from 'rxjs/operators';
 import { FishLoadByIdAction, FishSelectAction } from 'src/app/store/fish/fish.actions';
 import { getSelectedFish } from 'src/app/store/fish/fish.selector';
+import { faPenFancy } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'fish-container',
   templateUrl: './fish-container.component.html',
-  //styleUrls: ['./nav-menu.component.scss']
+  styleUrls: ['./fish-container.component.scss']
+
 })
 export class FishContainer {
   public componentLifeCycle = new Subject();
   public fish$ = this.store.select(getSelectedFish);
   public error: string;
+
+  public faEdit = faPenFancy;
 
   constructor(private route: ActivatedRoute,
     private store: Store<AppState>,

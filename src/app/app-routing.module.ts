@@ -15,6 +15,8 @@ import { LoginComponent } from './components/routes/login/login.component';
 import { SignupComponent } from './components/routes/signup/signup.component';
 import { HomeComponent } from './components/routes/home/home.component';
 import { FishContainer } from './components/containers/FishContainer/fish-container.component';
+import { FishDetailViewComponent } from './components/containers/FishContainer/fish-detail-view/fish-detail-view.component';
+import { FishEditViewComponent } from './components/containers/FishContainer/fish-edit-view/fish-edit-view.component';
 
 const routes: Routes = [
   //{ path: '', component: AquariumSelectionComponent, pathMatch: 'full' },
@@ -78,7 +80,25 @@ const routes: Routes = [
   },
   {
     path: 'fish/:fishId',
-    component: FishContainer
+    component: FishContainer,
+    children: [
+      {
+        path: 'feeding',
+        component: FishDetailViewComponent
+      },
+      {
+        path: 'photos',
+        component: FishDetailViewComponent
+      },
+      {
+        path: 'edit',
+        component: FishEditViewComponent
+      },
+      {
+        path: '',
+        component: FishDetailViewComponent
+      }
+    ]
   },
   {
     path: '',
