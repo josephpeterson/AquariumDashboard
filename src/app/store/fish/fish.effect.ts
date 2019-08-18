@@ -10,7 +10,7 @@ import { SpeciesLoadSuccessAction } from '../species/species.actions';
 @Injectable()
 export class FishEffects {
     constructor(private aquariumService: AquariumService,
-        private actions$: Actions) {}
+        private actions$: Actions) { }
     @Effect()
     loadFishById$ = this.actions$.pipe(ofType<FishLoadByIdAction>(FishActions.LoadFishById),
         mergeMap((action: FishLoadByIdAction) => this.aquariumService.getFishById(action.payload).pipe(
@@ -18,27 +18,21 @@ export class FishEffects {
                 new FishLoadSuccessAction([fish]),
             ]),
             catchError(error => of(new FishLoadFailAction(error)))
-        )));
+        ))
+    );
 
 
 
     @Effect()
-    createFish$ = this.actions$.pipe(
-        ofType<FishAddAction>(
-            FishActions.AddFish
-        ),
-        map((action: FishAddAction) => action.payload),
-        mergeMap((payload: Fish) =>
-            this.aquariumService.createFish(payload).pipe(
-                map(
-                    //We can either return a new AquariumLoadAction, OR just update our store
-                    (addedFish: Fish) =>
-                        new FishAddSuccessAction(addedFish)
-                ),
-                catchError(err => of(new FishAddFailAction(err)))
-            )
-        )
+    createFish$ = this.actions$.pipe(ofType<FishAddAction>(FishActions.AddFish),
+        mergeMap((action: FishAddAction) => this.aquariumService.createFish(action.payload).pipe(
+            switchMap((fish: Fish) => [
+                new FishAddSuccessAction(fish),
+            ]),
+            catchError(error => of(new FishAddFailAction(error)))
+        ))
     );
+
     @Effect()
     updateFish$ = this.actions$.pipe(
         ofType<FishUpdateAction>(

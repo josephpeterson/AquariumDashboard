@@ -126,6 +126,7 @@ import { FishPhotoModal } from './components/shared/modals/fish-photo-modal/fish
 import { FishPhotoSelectComponent } from './components/data/fish/photo-select/fish-photo-select.component';
 import { FishPhotoSelectModal } from './components/shared/modals/fish-photo-select-modal/fish-photo-select-modal.component';
 import { FishEditViewComponent } from './components/containers/FishContainer/fish-edit-view/fish-edit-view.component';
+import { FishAddPhotoButtonComponent } from './components/data/fish/add-photo-button/fish-add-photo-button.component';
 
 
 @NgModule({
@@ -176,6 +177,7 @@ import { FishEditViewComponent } from './components/containers/FishContainer/fis
     FishDetailViewComponent,
     FishEditViewComponent,
     FishCardComponent,
+    FishAddPhotoButtonComponent,
 
     SpeciesDetailFormComponent,
     SpeciesSelectComponent,

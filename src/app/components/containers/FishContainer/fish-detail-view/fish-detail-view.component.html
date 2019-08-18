@@ -32,17 +32,17 @@
     <div class="row p-3">
 
         <div class="card-group">
-            <div *ngFor="let photo of fish.photos" class="card">
-                <img [src]="getFishPhotoSource(photo.id)" class="card-img-top" alt="..."
-                    (click)="clickFishPhoto(photo)">
+            <div *ngFor="let photo of fish.photos" class="card fishPhoto" (click)="clickFishPhoto(photo)">
+                <img [src]="getFishPhotoSource(photo.id)" class="card-img-top" width=200px alt="..."
+                    >
                 <div class="card-footer">
-                    <small class="text-muted">Last updated 3 mins ago</small>
+                    <small class="text-muted">Uploaded {{getPhotoDate(photo.date)}}</small>
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
-        <button class="btn btn-success" (click)="clickUploadPhoto()">Upload Photo</button>
+        <fish-add-photo-button [fish]='fish'></fish-add-photo-button>
     </div>
     <div class="row p-3">
         <h4>Tasks</h4>

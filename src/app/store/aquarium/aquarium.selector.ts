@@ -44,10 +44,6 @@ export const getDeleteError = createSelector(AquariumsState, (state: AquariumRed
 //Fish support (maybe move this into it's own store at some point)
 
 
-/* Create */
-export const isCreatingFish = createSelector(AquariumsState, (state: AquariumReducer.AquariumsState) => state.addingFish);
-export const getFishWasCreated = createSelector(AquariumsState, (state: AquariumReducer.AquariumsState) => state.addedFish);
-export const getFishCreateError = createSelector(AquariumsState, (state: AquariumReducer.AquariumsState) => state.addFishError);
 
 /* Read */
 export const getAquariumFish = createSelector(AquariumsState, (state: AquariumReducer.AquariumsState) => state.entities[state.selectedAquariumId].fish);

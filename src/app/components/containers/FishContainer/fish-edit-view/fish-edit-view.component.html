@@ -37,7 +37,7 @@
         </button>
         <button *ngIf="!adding" [disabled]='updating$ | async' (click)="clickReset()"
             class="m-2 btn btn-info">Reset</button>
-        <button *ngIf="!adding" [disabled]='updating$ | async' (click)="clickCancel()"
+        <button *ngIf="!adding" [disabled]='updating$ | async' [routerLink]="['/fish/',fish.id]"
             class="m-2 btn btn-danger">Cancel</button>
         <button [disabled]='(updating$ | async) || (adding$ | async)' (click)="adding ? clickAdd():clickSave()"
             class="m-2 btn btn-success">Save Changes</button>

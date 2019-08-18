@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource, MatSort, MatPaginator, MatDialog } from '@angular/material';
 import { Store } from '@ngrx/store';
@@ -12,6 +12,7 @@ import { take, takeUntil } from 'rxjs/operators';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { ManageSnapshotModal } from 'src/app/components/shared/modals/manage-snapshot-modal/manage-snapshot-modal.component';
 import * as moment from 'moment';
+import { FishCreateButtonComponent } from 'src/app/components/data/fish/create-button/fish-create-button.component';
 
 @Component({
   selector: 'dashboard-page-component',
@@ -20,7 +21,7 @@ import * as moment from 'moment';
 })
 
 
-export class DashboardComponent implements OnInit {
+export class DashboardComponent {
 
   faExclamationTriangle = faExclamationTriangle;
 
@@ -35,8 +36,6 @@ export class DashboardComponent implements OnInit {
     private aquariumService: AquariumService
   ) { }
 
-  ngOnInit() {
-  }
   ngOnDestroy() {
     this.componentLifecycle$.next();
     this.componentLifecycle$.unsubscribe();

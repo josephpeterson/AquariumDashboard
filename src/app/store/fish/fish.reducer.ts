@@ -60,7 +60,7 @@ export function fishReducer(state = initialState, action: AllFishActions): FishS
 				//loadError: null,
 			}
 		case FishActions.LoadFishSuccess:
-			return adapter.addMany(action.payload, {
+			return adapter.upsertMany(action.payload, {
 				...state,
 				loading: false,
 				loaded: true,
@@ -79,15 +79,15 @@ export function fishReducer(state = initialState, action: AllFishActions): FishS
 				...state,
 				creating: true,
 				//created: false,
-				//createError: null,
+				createError: null,
 			}
 		case FishActions.AddFishSuccess:
-			return adapter.addOne(action.payload, {
-				...state,
+			var newState = adapter.addOne(action.payload, state);
+			return {
+				...newState,
 				creating: false,
 				created: true,
-				//createError: null,
-			})
+			}
 		case FishActions.AddFishFail:
 			return {
 				...state,

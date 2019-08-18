@@ -1,4 +1,10 @@
 .fish-photo-select {
+	height:150px;
+	width:150px;
+	border:1px solid gray;
+	margin:3px;
+	cursor: pointer;
+	user-select: none;
 	img {
 		float:left;
 	}

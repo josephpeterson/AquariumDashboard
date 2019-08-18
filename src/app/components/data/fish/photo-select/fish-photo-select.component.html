@@ -1,3 +1,5 @@
 <div class="fish-photo-select row" (click)="clickOpenSelect()">
-        <img [src]="getThumbnailSource()" height="70px">
+        <ng-container *ngIf="fish.thumbnailPhotoId != undefined">
+                <img [src]="getThumbnailSource()" height="70px">
+        </ng-container>
 </div>

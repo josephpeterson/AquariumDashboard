@@ -19,7 +19,10 @@
     .thumbnail {
         width:200px;
         height:200px;
-        background-color:gray;
+        background-position: center center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-color: #8D8D8D;
     }
     .navigation
     {

@@ -21,8 +21,7 @@ import { FishPhotoModal } from 'src/app/components/shared/modals/fish-photo-moda
 import { FishPhoto } from 'src/app/models/FishPhoto';
 import { PhotoExpandedModalComponent } from 'src/app/components/shared/modals/photo-expanded-modal/photo-expanded-modal.component';
 import { FishUpdateAction } from 'src/app/store/fish/fish.actions';
-import { isCreatingFish, isUpdatingFish, getFishUpdateError } from 'src/app/store/aquarium/aquarium.selector';
-import { getSelectedFish } from 'src/app/store/fish/fish.selector';
+import { getSelectedFish, isUpdatingFish, isCreatingFish, getFishUpdateError } from 'src/app/store/fish/fish.selector';
 
 
 
@@ -64,7 +63,6 @@ export class FishDetailViewComponent implements OnInit {
 
     }
     ngOnInit() {
-
     }
 
     ngOnDestory() {
@@ -141,17 +139,6 @@ export class FishDetailViewComponent implements OnInit {
             }
         });
     }
-    clickUploadPhoto() {
-        var dialog = this.dialog.open(FishPhotoModal, {
-        });
-        dialog.componentInstance.fishId = this.fish.id;
-        //todo replace this by store
-        dialog.afterClosed().subscribe(photo => {
-            if (photo) {
-                this.fish.photos.push(photo);
-            }
-        });
-    }
     getFishAge(fish: Fish) {
         return moment().diff(fish.date, "days");
     }
@@ -159,9 +146,14 @@ export class FishDetailViewComponent implements OnInit {
     getFishPhotoSource(photoId: number) {
         return this._aquariumService.getFishPhotoPermalink(photoId);
     }
+    getPhotoDate(photo: FishPhoto) {
+        return moment(photo.date).calendar();
+    }
     public clickFishPhoto(photo: FishPhoto) {
         var dialog = this.dialog.open(PhotoExpandedModalComponent, {
             panelClass: "darkDialog",
+            height: "95%",
+            width: "95%",
         });
         dialog.componentInstance.fishPhoto = photo;
     }

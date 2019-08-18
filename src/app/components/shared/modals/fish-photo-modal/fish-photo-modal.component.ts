@@ -4,6 +4,9 @@ import { AttachmentUploaderComponent } from '../../attachment-uploader/attachmen
 import { NotifierService } from 'angular-notifier';
 import { MatDialogRef } from '@angular/material';
 import { FishFeedModalComponent } from '../fish-feed-modal/fish-feed-modal.component';
+import { AppState } from 'src/app/app.state';
+import { Store } from '@ngrx/store';
+import { FishLoadByIdAction } from 'src/app/store/fish/fish.actions';
 
 @Component({
   selector: 'fish-photo-modal',
@@ -15,6 +18,7 @@ export class FishPhotoModal implements OnInit {
   public fishId: number;
   @ViewChild(AttachmentUploaderComponent) attachmentComponent: AttachmentUploaderComponent;
   constructor(private _aquariumService: AquariumService,
+    private store: Store<AppState>,
     private notifier: NotifierService,
     private _dialog: MatDialogRef<FishPhotoModal>) { }
   ngOnInit() {
@@ -28,7 +32,7 @@ export class FishPhotoModal implements OnInit {
     this._aquariumService.uploadFishPhoto(this.fishId, attachment).subscribe(val => {
       this.loading = false;
       this._dialog.close(val);
-      //todo dispatch to store that we done
+      this.store.dispatch(new FishLoadByIdAction(this.fishId));
     },(err) => {
       this.loading = false;
       this.notifier.notify("error","Could not upload fish photo.");

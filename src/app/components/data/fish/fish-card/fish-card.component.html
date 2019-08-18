@@ -1,8 +1,8 @@
 <ng-container *ngIf="fish else loading">
-    <div class="mat-elevation-z8 rounded">
+    <div class="fish-card-component mat-elevation-z8 rounded">
 
 
-        <img class="card-img-top" src="https://via.placeholder.com/140x100" alt="Fish Thumbnail">
+        <img class="card-img-top" [src]="getFishThumbnailSource(fish)" alt="Fish Thumbnail">
         <div class="p-2">
             <a [routerLink]="'/fish/' + fish.id" class=" card-title">{{fish.name}}</a>
             <br>
@@ -21,7 +21,7 @@
     </div>
 </ng-container>
 <ng-template #loading>
-    <div class="shadow p-3 mb-5 bg-white rounded d-flex flex-row text-center">
+    <div class="fish-card-component mat-elevation-z8 rounded d-flex flex-row text-center">
         <table style="width:100%;height:100%;">
             <tr>
                 <td>

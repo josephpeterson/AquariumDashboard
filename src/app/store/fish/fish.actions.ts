@@ -52,7 +52,7 @@ export class FishAddSuccessAction implements Action {
 }
 export class FishAddFailAction implements Action {
   readonly type = FishActions.AddFishFail
-  constructor(public payload: HttpErrorResponse) { }
+  constructor(public payload: HttpErrorResponse) {}
 }
 
 /* Updating Fish */

@@ -3,7 +3,7 @@
     <div class="shadow mb-5 bg-white rounded fish-container-component">
         <div class="row banner">
             <div class="float-left">
-                <div class="thumbnail"></div>
+                <div class="thumbnail" [ngStyle]="{'background-image': getFishThumbnailSource(fish)}"></div>
             </div>
             <div class="col p-0">
                 <h1>{{fish.name}} <button class="btn btn-secondary edit float-right" [routerLink]='["edit"]'

@@ -1,15 +1,10 @@
 import { Aquarium } from 'src/app/models/Aquarium';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { select, Store } from '@ngrx/store';
-import { getSelectedAquarium, isCreatingFish, getFishCreateError, getAquariumById, isDeletingFish, getFishDeleteError, getFishUpdateError, isUpdatingFish } from 'src/app/store/aquarium/aquarium.selector';
-import { FormControl } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
-import { getAllSpecies } from 'src/app/store/species/species.selector';
 import { Subject } from 'rxjs';
-import { takeUntil, take } from 'rxjs/operators';
-import { Species } from 'src/app/models/Species';
 import { Fish } from 'src/app/models/Fish';
-import { AquariumAddFishAction, AquariumLoadByIdAction, AquariumDeleteAction, AquariumDeleteFishAction, AquariumUpdateFishAction } from 'src/app/store/aquarium/aquarium.actions';
+import { AquariumLoadByIdAction } from 'src/app/store/aquarium/aquarium.actions';
 import { NotifierService } from 'angular-notifier';
 import { AquariumService } from 'src/app/services/aquarium.service';
 
@@ -50,7 +45,7 @@ export class FishAddFormComponent implements OnInit {
     clickUpdate() {
         var fish = this.fish;
 
-        this._aquariumService.updateFish(fish).subscribe(fish => {
+        this._aquariumService.updateFish(fish).subscribe(() => {
             this.notifier.notify("success", "Fish was updated.");
             this.actionSuccess();
         }, err => {
@@ -74,7 +69,7 @@ export class FishAddFormComponent implements OnInit {
     }
     clickDelete() {
         var fish = this.fish;
-        this._aquariumService.deleteFish(fish).subscribe(fish => {
+        this._aquariumService.deleteFish(fish).subscribe(() => {
             this.notifier.notify("success", "Fish deleted");
             this.actionSuccess();
         }, err => {

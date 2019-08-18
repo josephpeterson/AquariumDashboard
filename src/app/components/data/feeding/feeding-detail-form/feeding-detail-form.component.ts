@@ -1,7 +1,6 @@
 import { Aquarium } from 'src/app/models/Aquarium';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { getSelectedAquarium, isCreatingFish, getFishCreateError, getAquariumById, isDeletingFish, getFishDeleteError, getFishUpdateError, isUpdatingFish } from 'src/app/store/aquarium/aquarium.selector';
 import { FormControl } from '@angular/forms';
 import { AppState } from 'src/app/app.state';
 import { getAllSpecies } from 'src/app/store/species/species.selector';
@@ -11,6 +10,8 @@ import { Species } from 'src/app/models/Species';
 import { Fish } from 'src/app/models/Fish';
 import { AquariumAddFishAction, AquariumLoadByIdAction, AquariumDeleteAction, AquariumDeleteFishAction, AquariumUpdateFishAction } from 'src/app/store/aquarium/aquarium.actions';
 import { NotifierService } from 'angular-notifier';
+import { isCreatingFish, getFishCreateError } from 'src/app/store/fish/fish.selector';
+import { isDeletingFish, getFishDeleteError, isUpdatingFish, getFishUpdateError, getAquariumById } from 'src/app/store/aquarium/aquarium.selector';
 
 @Component({
     selector: 'feeding-detail-form',

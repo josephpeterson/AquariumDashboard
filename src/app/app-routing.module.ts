@@ -81,6 +81,7 @@ const routes: Routes = [
   {
     path: 'fish/:fishId',
     component: FishContainer,
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'feeding',

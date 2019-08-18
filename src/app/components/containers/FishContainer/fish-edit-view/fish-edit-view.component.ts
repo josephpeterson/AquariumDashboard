@@ -21,8 +21,7 @@ import { FishPhotoModal } from 'src/app/components/shared/modals/fish-photo-moda
 import { FishPhoto } from 'src/app/models/FishPhoto';
 import { PhotoExpandedModalComponent } from 'src/app/components/shared/modals/photo-expanded-modal/photo-expanded-modal.component';
 import { FishUpdateAction, FishDeleteAction } from 'src/app/store/fish/fish.actions';
-import { isCreatingFish, isUpdatingFish, getFishUpdateError } from 'src/app/store/aquarium/aquarium.selector';
-import { getSelectedFish } from 'src/app/store/fish/fish.selector';
+import { getSelectedFish, isUpdatingFish, isCreatingFish, getFishUpdateError } from 'src/app/store/fish/fish.selector';
 
 
 
@@ -81,6 +80,7 @@ export class FishEditViewComponent implements OnInit {
         this.fish$.pipe(take(1)).subscribe(fish => this.fish = { ...fish });
     }
     clickSave() {
+        console.log(this.fish);
         var updating = true;
         this.store.dispatch(new FishUpdateAction(this.fish));
         this.updateError$.pipe(take(2)).subscribe(err => {
@@ -106,17 +106,6 @@ export class FishEditViewComponent implements OnInit {
         dialog.afterClosed().pipe(take(1)).subscribe((confirm: boolean) => {
             if (confirm) {
                 this.store.dispatch(new FishDeleteAction(this.fish));
-            }
-        });
-    }
-    clickUploadPhoto() {
-        var dialog = this.dialog.open(FishPhotoModal, {
-        });
-        dialog.componentInstance.fishId = this.fish.id;
-        //todo replace this by store
-        dialog.afterClosed().subscribe(photo => {
-            if (photo) {
-                this.fish.photos.push(photo);
             }
         });
     }

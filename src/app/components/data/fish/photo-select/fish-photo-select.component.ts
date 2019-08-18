@@ -13,6 +13,7 @@ import { SpeciesLoadAction } from 'src/app/store/species/species.actions';
 import { TypeCheckCompiler } from '@angular/compiler/src/view_compiler/type_check_compiler';
 import { FishPhotoSelectModal } from 'src/app/components/shared/modals/fish-photo-select-modal/fish-photo-select-modal.component';
 import { AquariumService } from 'src/app/services/aquarium.service';
+import { FishPhoto } from 'src/app/models/FishPhoto';
 
 @Component({
     selector: 'fish-photo-select',
@@ -47,10 +48,11 @@ export class FishPhotoSelectComponent {
 
         });
         dialog.componentInstance.fish = this.fish;
-        dialog.afterClosed().subscribe(photoId => {
-            if(isNaN(photoId))
+        dialog.afterClosed().subscribe((photo:FishPhoto) => {
+            console.log(photo);
+            if(!photo)
                 return;
-            this.fish.thumbnailPhotoId = photoId;
+            this.fish.thumbnailPhotoId = photo.id;
         });
     }
 

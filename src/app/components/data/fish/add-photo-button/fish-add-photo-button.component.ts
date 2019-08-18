@@ -11,31 +11,23 @@ import { MatDialog } from '@angular/material';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { FishAddModalComponent } from 'src/app/components/shared/modals/fish-add-modal/fish-add-modal.component';
 import { Fish } from 'src/app/models/Fish';
+import { FishPhotoModal } from 'src/app/components/shared/modals/fish-photo-modal/fish-photo-modal.component';
 
 @Component({
-    selector: 'fish-create-button',
-    templateUrl: './fish-create-button.component.html',
-    styleUrls: ['./fish-create-button.component.scss']
+    selector: 'fish-add-photo-button',
+    templateUrl: './fish-add-photo-button.component.html',
+    styleUrls: ['./fish-add-photo-button.component.scss']
 })
-export class FishCreateButtonComponent implements OnInit {
-    @Input() aquarium: Aquarium;
+export class FishAddPhotoButtonComponent implements OnInit {
+    @Input() fish: Fish;
 
     ngOnInit() {
-        if (!this.aquarium)
-            this.store.select(getSelectedAquarium)
-                .pipe(take(1))
-                .subscribe(aq => this.aquarium = aq);
+
     }
-    clickCreateFish() {
-        var fish = new Fish();
-        fish.aquariumId = this.aquarium.id;
-        fish.date = new Date();
-        var inst = this.dialog.open(FishAddModalComponent, {
-            height: "70%",
-            width: "60%",
+    clickUploadPhoto() {
+        var dialog = this.dialog.open(FishPhotoModal, {
         });
-        inst.componentInstance.fish = fish;
-        //inst.componentInstance.clickAddFish();
+        dialog.componentInstance.fishId = this.fish.id;
     }
     constructor(private notifier: NotifierService, private store: Store<AppState>, private dialog: MatDialog) { }
 }
