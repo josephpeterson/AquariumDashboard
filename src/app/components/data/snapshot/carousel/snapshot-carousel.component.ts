@@ -17,6 +17,8 @@ import { PhotoExpandedModalComponent } from 'src/app/components/shared/modals/ph
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { AquariumPhoto } from 'src/app/models/AquariumPhoto';
 import { SnapshotTakeButtonComponent } from '../take-button/snapshot-take-button.component';
+import * as moment from 'moment';
+
 
 @Component({
   selector: 'snapshot-carousel',
@@ -88,7 +90,7 @@ export class SnapshotCarouselComponent implements OnInit {
     snapshots[this.selectedId].scrollIntoView({ behavior: "auto", block: "end", inline: "nearest" });
   }
   readableDate(dateString: string) {
-    return new Date(dateString).toLocaleTimeString('en-US');
+    return moment(dateString).calendar();    
   }
 
   generateChart() {

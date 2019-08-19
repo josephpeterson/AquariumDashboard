@@ -1,4 +1,23 @@
 .fish-card-component
 {
-    width:200px;
+    position: relative;
+    width:160px;
+
+    .card-img-top
+    {
+        width:160px;
+        height:160px;
+    }
+    .fish-species {
+        display: block;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+    .fish-name {
+        font-weight:bold;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
 }

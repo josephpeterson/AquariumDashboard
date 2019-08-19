@@ -1,13 +1,18 @@
-<div class="card species-card" style="width: 18rem;" *ngIf="species else loading">
+<div class="card species-card" *ngIf="species else loading">
 
     <div class="card-body p-0">
         <div class="float-left">
-            <img height="100px" class="mr-2" [src]="species.thumbnail" alt="Card image cap">
+            <a [routerLink]="'/species/' + species.id" class="btn btn-link">
+                <img height="100px" class="mr-2" [src]="species.thumbnail" alt="Card image cap">
+            </a>
         </div>
         <h5 class="card-title">
-            {{species.name}}
+            <a [routerLink]="'/species/' + species.id">
+                {{species.name}}
+            </a>
         </h5>
         <p class="description">Care Level: {{species.careLevel}}</p>
+        <p class="description">pH Range: {{species.phMin}}-{{species.phMax}}</p>
         <a [routerLink]="'/species/' + species.id" class="btn btn-link">More Details</a>
     </div>
 </div>

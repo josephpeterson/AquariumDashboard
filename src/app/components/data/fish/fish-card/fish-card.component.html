@@ -2,21 +2,17 @@
     <div class="fish-card-component mat-elevation-z8 rounded">
 
 
-        <img class="card-img-top" [src]="getFishThumbnailSource(fish)" alt="Fish Thumbnail">
+        <a [routerLink]="'/fish/' + fish.id" class=" card-title">
+
+            <img class="card-img-top" [src]="getFishThumbnailSource(fish)" alt="Fish Thumbnail">
+        </a>
         <div class="p-2">
-            <a [routerLink]="'/fish/' + fish.id" class=" card-title">{{fish.name}}</a>
+            <a [routerLink]="'/fish/' + fish.id" class=" card-title fish-name">{{fish.name}}</a>
             <br>
-            <a [routerLink]="'/fish/' + fish.id" class=" card-title">{{fish.species.name}}</a>
+            <a [routerLink]="'/fish/' + fish.id" class="text-muted card-title fish-species">{{fish.species.name}}</a>
             <h6 class="card-subtitle mt-2 mb-2 text-muted">
                 {{getReadableDate(fish.date)}} days old
             </h6>
-        </div>
-        <div class="card-footer">
-            <small class="text-muted">Last fed {{getReadableDate(fish.date)}} days ago..</small>
-            <br>
-            <button class="btn btn-link" (click)="clickFeedFish()">Feed</button>
-            <a class="card-link"
-                [routerLink]="'/fish/' + fish.id + '/operations'">More...</a>
         </div>
     </div>
 </ng-container>
