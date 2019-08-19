@@ -127,6 +127,10 @@ import { FishPhotoSelectComponent } from './components/data/fish/photo-select/fi
 import { FishPhotoSelectModal } from './components/shared/modals/fish-photo-select-modal/fish-photo-select-modal.component';
 import { FishEditViewComponent } from './components/containers/FishContainer/fish-edit-view/fish-edit-view.component';
 import { FishAddPhotoButtonComponent } from './components/data/fish/add-photo-button/fish-add-photo-button.component';
+import { SettingsContainer } from './components/containers/SettingsContainer/settings-container.component';
+import { SettingsNavBarComponent } from './components/containers/SettingsContainer/nav-bar/settings-nav-bar.component';
+import { SettingsLogsComponent } from './components/containers/SettingsContainer/logs/settings-logs.component';
+import { SettingsGeneralComponent } from './components/containers/SettingsContainer/general/settings-general.component';
 
 
 @NgModule({
@@ -136,10 +140,16 @@ import { FishAddPhotoButtonComponent } from './components/data/fish/add-photo-bu
     FeedingListComponent,
     SpeciesContainer,
     FishContainer,
-
+    
     HomeComponent,
     LoginComponent,
     SignupComponent,
+    
+    
+    SettingsContainer,
+    SettingsNavBarComponent,
+    SettingsLogsComponent,
+    SettingsGeneralComponent,
 
     /* Misc. */
     AttachmentUploaderComponent,

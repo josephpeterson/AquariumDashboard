@@ -90,7 +90,8 @@ export class SnapshotCarouselComponent implements OnInit {
     snapshots[this.selectedId].scrollIntoView({ behavior: "auto", block: "end", inline: "nearest" });
   }
   readableDate(dateString: string) {
-    return moment(dateString).calendar();    
+    console.log(dateString);
+    return moment(new Date(dateString)).calendar();    
   }
 
   generateChart() {

@@ -17,6 +17,9 @@ import { HomeComponent } from './components/routes/home/home.component';
 import { FishContainer } from './components/containers/FishContainer/fish-container.component';
 import { FishDetailViewComponent } from './components/containers/FishContainer/fish-detail-view/fish-detail-view.component';
 import { FishEditViewComponent } from './components/containers/FishContainer/fish-edit-view/fish-edit-view.component';
+import { SettingsContainer } from './components/containers/SettingsContainer/settings-container.component';
+import { SettingsGeneralComponent } from './components/containers/SettingsContainer/general/settings-general.component';
+import { SettingsLogsComponent } from './components/containers/SettingsContainer/logs/settings-logs.component';
 
 const routes: Routes = [
   //{ path: '', component: AquariumSelectionComponent, pathMatch: 'full' },
@@ -33,6 +36,21 @@ const routes: Routes = [
     path: 'dashboard',
     canActivate: [AuthGuard],
     component: MasterDashboardComponent
+  },
+  {
+    path: 'settings',
+    component: SettingsContainer,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'logs',
+        component: SettingsLogsComponent
+      },
+      {
+        path: '',
+        component: SettingsGeneralComponent
+      },
+    ]
   },
   {
     path: ':aqId',
@@ -101,6 +119,7 @@ const routes: Routes = [
       }
     ]
   },
+  
   {
     path: '',
     component: HomeComponent
