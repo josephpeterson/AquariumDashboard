@@ -45,10 +45,6 @@ export class SettingsComponent implements OnInit {
 
   private aquarium: Aquarium;
 
-  public applicationLog$: Observable<string> = this.data.applicationLog;
-
-
-
   constructor(private _aquariumService: AquariumService,private notifier: NotifierService,
     public data: SettingsComponentData, public dialog: MatDialog, private router: Router) { }
 
@@ -129,13 +125,6 @@ export class SettingsComponent implements OnInit {
     this.dialog.open(ManageAquariumDeviceModalComponent, {
       width: "60%",
       data: id
-    });
-  }
-  clickDeleteApplicationLog() {
-    this._aquariumService.deleteApplicationLog().subscribe(val => {
-      //if(val) this.notifier.notify('s',"Could not delete application log");
-    },err => {
-      if(err) this.notifier.notify('error',"Could not delete application log");
     });
   }
 }

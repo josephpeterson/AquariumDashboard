@@ -50,7 +50,6 @@ export class SettingsNavBarComponent {
   }
 
   public isAdministrator() {
-    console.log("This is your role:",this.user.role);
     return this.user.role == 'Administrator';
   }
 }

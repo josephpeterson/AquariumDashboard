@@ -87,19 +87,6 @@
             </div>
         </div>
     </div>
-    <div class="row m-2">
-        <div class="card w-100">
-            <div class="card-body">
-                <div class="card-title">
-                    <h3>Application Log</h3>
-                </div>
-                <label for="exampleFormControlTextarea1">Aquarium Service</label>
-                <textarea disabled class="form-control rounded-0" id="exampleFormControlTextarea1"
-                    rows="10">{{applicationLog$ | async}}</textarea>
-                <button class="btn btn-danger" (click)="clickDeleteApplicationLog()">Delete Logs</button>
-            </div>
-        </div>
-    </div>
 </ng-container>
 <ng-template #loading>
     <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
