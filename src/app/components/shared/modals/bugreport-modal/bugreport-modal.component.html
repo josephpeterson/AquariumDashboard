@@ -6,7 +6,7 @@
   </p>
   <form>
     <mat-form-field>
-      <mat-select placeholder="Error Type" class="mb-2" [(ngModel)]="bug.type" name="type">
+      <mat-select [disabled]='disabled' placeholder="Error Type" class="mb-2" [(ngModel)]="bug.type" name="type">
         <mat-option value=1>
           UI Error
         </mat-option>
@@ -25,10 +25,13 @@
       </mat-select>
     </mat-form-field>
 
-    <textarea name="body" [(ngModel)]="bug.body" placeholder="Tell us what happened..." rows=10 class="w-100"></textarea>
+    <textarea [disabled]='disabled' name="body" [(ngModel)]="bug.body" placeholder="Tell us what happened..." rows=10 class="w-100"></textarea>
   </form>
+  <div class="row">
+    <mat-error>{{error}}</mat-error>
+  </div>
   <mat-dialog-actions align="end">
-    <button class="m-2 btn btn-danger" mat-dialog-close>Cancel</button>
-    <button class="m-2 btn btn-success" [mat-dialog-close]="true">Submit</button>
+    <button [disabled]='disabled' class="m-2 btn btn-danger" mat-dialog-close>Cancel</button>
+    <button [disabled]='disabled' class="m-2 btn btn-success" (click)="clickSubmit()">Submit</button>
   </mat-dialog-actions>
 </div>

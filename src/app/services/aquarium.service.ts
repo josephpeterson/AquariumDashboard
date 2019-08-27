@@ -12,6 +12,7 @@ import { AquariumDevice } from 'src/app/models/AquariumDevice';
 import { CameraConfiguration } from 'src/app/models/CameraConfiguration';
 import { AquariumPhoto } from 'src/app/models/AquariumPhoto';
 import { FishPhoto } from '../models/FishPhoto';
+import { BugReport } from '../models/BugReport';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -181,6 +182,10 @@ export class AquariumService {
     return this.http.get(this._url + `/v1/Device/${deviceId}/Ping`);
   }
 
+  /* Bug Reports */
+  submitBugReport(report: BugReport): Observable<BugReport> {
+    return this.http.post<BugReport>(this._url + `/v1/Bug/Submit`, report);
+  }
 
   public getFishPhotoPermalink(photoId: number,size:any = "1"): string {
     return this._url + "/v1/Fish/Photo/" + photoId + "/" + size;

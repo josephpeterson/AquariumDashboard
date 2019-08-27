@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BugReport } from 'src/app/models/BugReport';
+import { AquariumService } from 'src/app/services/aquarium.service';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'bugreport-modal',
@@ -8,11 +10,26 @@ import { BugReport } from 'src/app/models/BugReport';
 })
 export class BugReportModalComponent implements OnInit {
 
-  constructor() { }
-
-  public body: string = "This is the default body";
   public bug: BugReport = new BugReport();
+  public error: string;
+  public disabled: boolean;
+
+  constructor(private _aquariumService: AquariumService,
+    private _self: MatDialogRef<BugReportModalComponent>) { }
 
   ngOnInit() {
+  }
+
+  public clickSubmit() {
+    delete this.error;
+    this.disabled = true;
+    this._aquariumService.submitBugReport(this.bug).subscribe(report => {
+      this.disabled = false;
+      this._self.close(report);
+    }, err => {
+      this.error = err.message;
+      this.disabled = false;
+    });
+    return true;
   }
 }
