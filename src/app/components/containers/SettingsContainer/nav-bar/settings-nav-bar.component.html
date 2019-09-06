@@ -3,18 +3,19 @@
   <div class="list-group">
     <a [routerLinkActive]='["active"]' [routerLink]='["/settings"]' [routerLinkActiveOptions]='{ exact: true }'
       class="       ">General</a>
-    <a [routerLinkActive]='["active"]' [routerLink]='["/settings","logs"]' class="       ">Profile</a>
-    <a [routerLinkActive]='["active"]' [routerLink]='["/settings","logs"]' class="       ">Privacy</a>
-    <a [routerLinkActive]='["active"]' [routerLink]='["/settings","logs"]' class="       ">Security</a>
+    <a [routerLinkActive]='["active"]' [routerLink]='["/settings","profile"]' class="       ">Profile</a>
+    <a [routerLinkActive]='["active"]' [routerLink]='["/settings","privacy"]' class="       ">Privacy</a>
+    <a [routerLinkActive]='["active"]' [routerLink]='["/settings","security"]' class="       ">Security</a>
   </div>
 
   <ng-container *ngIf="isAdministrator()">
     <h6 class="p-3 header">Administrative</h6>
     <div class="list-group">
+      <a [routerLinkActive]='["active"]' [routerLink]='["/settings","users"]' class="       ">Users</a>
       <a [routerLinkActive]='["active"]' [routerLink]='["/settings","logs"]' class="       ">Application
         Logs</a>
-      <a [routerLinkActive]='["active"]' [routerLink]='["/settings","logs"]' class="       ">Bug Tracker</a>
-      <a [routerLinkActive]='["active"]' [routerLink]='["/settings","logs"]' class="       ">Business
+      <a [routerLinkActive]='["active"]' [routerLink]='["/settings","bugs"]' class="       ">Bug Tracker</a>
+      <a [routerLinkActive]='["active"]' [routerLink]='["/settings","reports"]' class="       ">Business
         Reports</a>
     </div>
   </ng-container>

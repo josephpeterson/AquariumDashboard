@@ -129,8 +129,12 @@ import { FishEditViewComponent } from './components/containers/FishContainer/fis
 import { FishAddPhotoButtonComponent } from './components/data/fish/add-photo-button/fish-add-photo-button.component';
 import { SettingsContainer } from './components/containers/SettingsContainer/settings-container.component';
 import { SettingsNavBarComponent } from './components/containers/SettingsContainer/nav-bar/settings-nav-bar.component';
-import { SettingsLogsComponent } from './components/containers/SettingsContainer/logs/settings-logs.component';
+import { SettingsLogsComponent } from './components/containers/SettingsContainer/admin/logs/settings-logs.component';
 import { SettingsGeneralComponent } from './components/containers/SettingsContainer/general/settings-general.component';
+import { SettingsUsersComponent } from './components/containers/SettingsContainer/admin/users/settings-users.component';
+import { SettingsPrivacyComponent } from './components/containers/SettingsContainer/privacy/settings-privacy.component';
+import { SettingsSecurityComponent } from './components/containers/SettingsContainer/security/settings-security.component';
+import { SettingsProfileComponent } from './components/containers/SettingsContainer/profile/settings-profile.component';
 
 
 @NgModule({
@@ -149,7 +153,11 @@ import { SettingsGeneralComponent } from './components/containers/SettingsContai
     SettingsContainer,
     SettingsNavBarComponent,
     SettingsLogsComponent,
+    SettingsUsersComponent,
     SettingsGeneralComponent,
+    SettingsPrivacyComponent,
+    SettingsSecurityComponent,
+    SettingsProfileComponent,
 
     /* Misc. */
     AttachmentUploaderComponent,

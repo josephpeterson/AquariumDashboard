@@ -19,7 +19,11 @@ import { FishDetailViewComponent } from './components/containers/FishContainer/f
 import { FishEditViewComponent } from './components/containers/FishContainer/fish-edit-view/fish-edit-view.component';
 import { SettingsContainer } from './components/containers/SettingsContainer/settings-container.component';
 import { SettingsGeneralComponent } from './components/containers/SettingsContainer/general/settings-general.component';
-import { SettingsLogsComponent } from './components/containers/SettingsContainer/logs/settings-logs.component';
+import { SettingsLogsComponent } from './components/containers/SettingsContainer/admin/logs/settings-logs.component';
+import { SettingsUsersComponent } from './components/containers/SettingsContainer/admin/users/settings-users.component';
+import { SettingsSecurityComponent } from './components/containers/SettingsContainer/security/settings-security.component';
+import { SettingsPrivacyComponent } from './components/containers/SettingsContainer/privacy/settings-privacy.component';
+import { SettingsProfileComponent } from './components/containers/SettingsContainer/profile/settings-profile.component';
 
 const routes: Routes = [
   //{ path: '', component: AquariumSelectionComponent, pathMatch: 'full' },
@@ -43,11 +47,29 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       {
+        path: 'privacy',
+        component: SettingsPrivacyComponent
+      },
+      {
+        path: 'security',
+        component: SettingsSecurityComponent
+      },
+      {
+        path: 'profile',
+        component: SettingsProfileComponent
+      },
+
+      //Admin stuff
+      {
         path: 'logs',
         component: SettingsLogsComponent
       },
       {
-        path: '',
+        path: 'users',
+        component: SettingsUsersComponent
+      },
+      {
+        path: '**',
         component: SettingsGeneralComponent
       },
     ]
