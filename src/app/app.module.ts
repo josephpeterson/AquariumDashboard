@@ -135,6 +135,8 @@ import { SettingsUsersComponent } from './components/containers/SettingsContaine
 import { SettingsPrivacyComponent } from './components/containers/SettingsContainer/privacy/settings-privacy.component';
 import { SettingsSecurityComponent } from './components/containers/SettingsContainer/security/settings-security.component';
 import { SettingsProfileComponent } from './components/containers/SettingsContainer/profile/settings-profile.component';
+import { AdminService } from './services/admin.service';
+import { UsersTableComponent } from './components/containers/SettingsContainer/admin/users/users-table/users-table.component';
 
 
 @NgModule({
@@ -158,6 +160,9 @@ import { SettingsProfileComponent } from './components/containers/SettingsContai
     SettingsPrivacyComponent,
     SettingsSecurityComponent,
     SettingsProfileComponent,
+
+    /* Admin components */
+    UsersTableComponent,
 
     /* Misc. */
     AttachmentUploaderComponent,
@@ -309,6 +314,7 @@ import { SettingsProfileComponent } from './components/containers/SettingsContai
   providers: [
     AquariumService,
     AuthService,
+    AdminService,
     AuthGuard,
     //Providers for authenticaion
     { provide: HTTP_INTERCEPTORS, useClass: AquariumInterceptor, multi: true },

@@ -13,6 +13,7 @@ import { CameraConfiguration } from 'src/app/models/CameraConfiguration';
 import { AquariumPhoto } from 'src/app/models/AquariumPhoto';
 import { FishPhoto } from '../models/FishPhoto';
 import { BugReport } from '../models/BugReport';
+import { AquariumAccount } from '../models/AquariumAccount';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -35,6 +36,9 @@ export class AquariumService {
     this._url = environment.urls.aquariumApi;
   }
 
+  public getCurrentUser() {
+    return this.http.get<AquariumAccount>(this._url + "/v1/Current");
+  }
   public SendLightingConfiguration(config: LightingConfiguration) {
     return this.http.post<LightingConfiguration>(this._url + "/v1/lighting", config, httpOptions).toPromise()
       .then((data) => {
