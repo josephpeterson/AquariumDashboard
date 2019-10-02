@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { environment } from "../../environments/environment";
 import { AquariumAccount } from '../models/AquariumAccount';
+import { BugReport } from '../models/BugReport';
 
 
 const httpOptions = {
@@ -23,5 +24,8 @@ export class AdminService {
   }
   public getAllAquariumAccounts() {
     return this.http.get<AquariumAccount[]>(this._url + "/v1/admin/Users");
+  }
+  public getAllBugReports() {
+    return this.http.get<BugReport[]>(this._url + "/v1/admin/Bugs");
   }
 }

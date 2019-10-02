@@ -137,6 +137,8 @@ import { SettingsSecurityComponent } from './components/containers/SettingsConta
 import { SettingsProfileComponent } from './components/containers/SettingsContainer/profile/settings-profile.component';
 import { AdminService } from './services/admin.service';
 import { UsersTableComponent } from './components/containers/SettingsContainer/admin/users/users-table/users-table.component';
+import { BugsTableComponent } from './components/containers/SettingsContainer/admin/bugs/bugs-table/bugs-table.component';
+import { SettingsBugsComponent } from './components/containers/SettingsContainer/admin/bugs/settings-bugs.component';
 
 
 @NgModule({
@@ -154,8 +156,9 @@ import { UsersTableComponent } from './components/containers/SettingsContainer/a
     
     SettingsContainer,
     SettingsNavBarComponent,
-    SettingsLogsComponent,
     SettingsUsersComponent,
+    SettingsLogsComponent,
+    SettingsBugsComponent,
     SettingsGeneralComponent,
     SettingsPrivacyComponent,
     SettingsSecurityComponent,
@@ -163,6 +166,8 @@ import { UsersTableComponent } from './components/containers/SettingsContainer/a
 
     /* Admin components */
     UsersTableComponent,
+    BugsTableComponent,
+
 
     /* Misc. */
     AttachmentUploaderComponent,

@@ -24,6 +24,7 @@ import { SettingsUsersComponent } from './components/containers/SettingsContaine
 import { SettingsSecurityComponent } from './components/containers/SettingsContainer/security/settings-security.component';
 import { SettingsPrivacyComponent } from './components/containers/SettingsContainer/privacy/settings-privacy.component';
 import { SettingsProfileComponent } from './components/containers/SettingsContainer/profile/settings-profile.component';
+import { SettingsBugsComponent } from './components/containers/SettingsContainer/admin/bugs/settings-bugs.component';
 
 const routes: Routes = [
   //{ path: '', component: AquariumSelectionComponent, pathMatch: 'full' },
@@ -67,6 +68,10 @@ const routes: Routes = [
       {
         path: 'users',
         component: SettingsUsersComponent
+      },
+      {
+        path: 'bugs',
+        component: SettingsBugsComponent
       },
       {
         path: '**',
