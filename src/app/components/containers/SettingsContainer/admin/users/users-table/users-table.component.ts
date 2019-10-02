@@ -15,6 +15,9 @@ import { SpeciesLoadAction } from 'src/app/store/species/species.actions';
 import { AquariumAccount } from 'src/app/models/AquariumAccount';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { AdminService } from 'src/app/services/admin.service';
+import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
+import { faTrashAlt, faBan } from '@fortawesome/free-solid-svg-icons';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'users-table',
@@ -22,6 +25,10 @@ import { AdminService } from 'src/app/services/admin.service';
   styleUrls: ['./users-table.component.scss']
 })
 export class UsersTableComponent {
+
+
+  public icon_delete:IconDefinition = faBan;
+
 
   public loading: boolean;
   public aquarium$: Observable<Aquarium>;
@@ -36,7 +43,9 @@ export class UsersTableComponent {
     { name: 'id', label: "ID", visible: false },
     { name: 'username', label: 'Username', visible: true },
     { name: 'email', label: 'Email', visible: true },
+    { name: 'role', label: 'Role', visible: true },
     { name: 'seniorityDate', label: 'Signup Date', visible: true },
+    { name: 'operations', label: 'Operations', visible: true },
   ];
 
   @Input() aquariumId: number;
@@ -50,7 +59,7 @@ export class UsersTableComponent {
   public dataSource: MatTableDataSource<AquariumAccount> = new MatTableDataSource<AquariumAccount>();
   private componentLifecycle = new Subject();
 
-  constructor(private adminService: AdminService) {
+  constructor(private adminService: AdminService,private authService: AuthService) {
   }
   ngOnInit() {
     if (this.searchBox)
@@ -75,11 +84,10 @@ export class UsersTableComponent {
     this.dataSource.sort = this.sort;
   }
   toggleSelection(row) {
-    this.selection.clear();
     this.selection.toggle(row);
   }
   getSelectedItems() {
-    return this.selection.selected[0];
+    return this.selection.selected;
   }
   //Search Support
   bindSearchBox() {
@@ -92,7 +100,15 @@ export class UsersTableComponent {
   applyFilter() {
     this.dataSource.filter = this.getFilterString();
   }
-  rowClickHandler(event: MouseEvent, row: Fish) {
+  rowClickHandler(event: MouseEvent, row: AquariumAccount) {
+    if(this.isMyAccount(row)) return;
+
     this.rowClicked.emit([event, row]);
+    this.toggleSelection(row);
+  }
+
+  public isMyAccount(row: AquariumAccount) {
+    var id = this.authService.getUser().id;
+    return row.id == id;
   }
 }

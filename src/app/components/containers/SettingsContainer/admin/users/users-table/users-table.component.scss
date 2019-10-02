@@ -1,8 +1,15 @@
-.fish-table-list {
-  tr.mat-row {
-    cursor: pointer;
-  }
+.users-table {
   tr.mat-row:hover {
     background-color: #f0f0f0;
+  }
+
+  .currentUser {
+    color:#979797;
+  }
+  .operations {
+    display: none;
+  }
+  tr:hover .operations {
+    display: block;
   }
 }
