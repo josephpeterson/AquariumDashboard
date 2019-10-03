@@ -7,19 +7,19 @@
   <form>
     <mat-form-field>
       <mat-select [disabled]='disabled' placeholder="Error Type" class="mb-2" [(ngModel)]="bug.type" name="type">
-        <mat-option value=1>
+        <mat-option value="UI Error">
           UI Error
         </mat-option>
-        <mat-option value=2>
+        <mat-option value="Connection Error">
           Connection Error
         </mat-option>
-        <mat-option value=3>
+        <mat-option value="Account Error">
           Account Error
         </mat-option>
-        <mat-option value=4>
+        <mat-option value="Text/Spelling Error">
           Text/Spelling Error
         </mat-option>
-        <mat-option value=5>
+        <mat-option value="Other">
           Other
         </mat-option>
       </mat-select>

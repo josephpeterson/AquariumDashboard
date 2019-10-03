@@ -1,3 +1,7 @@
+<div *ngIf="!loading && error" class="alert alert-danger">
+  {{error.message}}
+  <fa-icon [icon]="icon_retry" class="float-right" (click)="loadBugReports()"></fa-icon>
+</div>
 <div class="users-table mat-elevation-z2">
   <div *ngIf="loading else notLoading">
     <mat-progress-spinner mode="indeterminate">
@@ -11,32 +15,18 @@
 
           </th>
           <td mat-cell *matCellDef="let row">
-            <mat-checkbox (change)="toggleSelection(row,$event)" [checked]="selection.isSelected(row)" *ngIf="!isMyAccount(row)">
+            <mat-checkbox (change)="toggleSelection(row,$event)" [checked]="selection.isSelected(row)"
+              *ngIf="!isMyAccount(row)">
             </mat-checkbox>
           </td>
         </ng-template>
         <ng-template #notSelect>
-          <td mat-cell *matCellDef="let element" (click)="rowClickHandler($event,element)">
-            <div [ngClass]="{'currentUser':isMyAccount(element)}">
-              <ng-container *ngIf="column.name == 'operations' && !isMyAccount(element) else date">
-                <span class="operations">
-                  <fa-icon class="addIcon mr-2" [icon]="icon_delete"></fa-icon>
-                </span>
-              </ng-container>
-              <ng-container *ngIf="column.name == 'seniorityDate' else reg" #date>
-                <span>{{element[column.name] | date: 'short'}}</span>
-              </ng-container>
-              <ng-template #reg>
-                <span>{{element[column.name]}}</span>
-
-              </ng-template>
-            </div>
+          <td mat-cell *matCellDef="let element" (click)="rowClickHandler($event,element)" [ngSwitch]="column.name">
+            <span *ngSwitchCase="'impactedUser'">{{element.impactedUser.username}}</span>
+            <span *ngSwitchCase="'date'">{{element[column.name] | date: 'short'}}</span>
+            <span *ngSwitchDefault>{{element[column.name]}}</span>
           </td>
           <th (click)="updateSort()" mat-header-cell *matHeaderCellDef mat-sort-header>{{column.label}}</th>
-
-          <td mat-cell *matCellDef="let element" (click)="rowClickHandler($event,element)">
-            <span>{{element[column.name]}}</span>
-          </td>
         </ng-template>
       </ng-container>
 

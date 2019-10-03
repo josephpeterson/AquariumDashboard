@@ -16,8 +16,9 @@ import { BugReport } from 'src/app/models/BugReport';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { AdminService } from 'src/app/services/admin.service';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-import { faTrashAlt, faBan } from '@fortawesome/free-solid-svg-icons';
+import { faTrashAlt, faBan, faRedo, faSync } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from 'src/app/services/auth.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'bugs-table',
@@ -28,9 +29,11 @@ export class BugsTableComponent {
 
 
   public icon_delete:IconDefinition = faBan;
+  public icon_retry:IconDefinition = faSync;
 
 
   public loading: boolean;
+  public error: HttpErrorResponse;
   public aquarium$: Observable<Aquarium>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -40,12 +43,14 @@ export class BugsTableComponent {
   //Columns
   public columns: Array<any> = [
     { name: 'select', visible: true },
-    { name: 'id', label: "ID", visible: false },
-    { name: 'username', label: 'Username', visible: true },
-    { name: 'email', label: 'Email', visible: true },
-    { name: 'role', label: 'Role', visible: true },
-    { name: 'seniorityDate', label: 'Signup Date', visible: true },
-    { name: 'operations', label: 'Operations', visible: true },
+    { name: 'id', label: "Report #", visible: true },
+    { name: 'title', label: "Overview", visible: false },
+    { name: 'body', label: 'Details', visible: true },
+    { name: 'type', label: 'Type', visible: true },
+    { name: 'urlLocation', label: 'Location', visible: true },
+    { name: 'impactedUser', label: 'Impacted User', visible: true },
+    { name: 'date', label: 'Reported Date', visible: true },
+    { name: 'status', label: 'Status', visible: true },
   ];
 
   @Input() aquariumId: number;
@@ -65,18 +70,19 @@ export class BugsTableComponent {
     if (this.searchBox)
       this.bindSearchBox();
 
-    this.loadUsers();
+    this.loadBugReports();
 
     this.dataSource.paginator = this.paginator;
   }
-  loadUsers() {
+  loadBugReports() {
     this.loading = true;
     this.adminService.getAllBugReports().subscribe(data => {
       this.dataSource.data = data;
       this.loading = false;
-    },err => {
-      console.log("Could not load bug reports:",err);
+    },(err: HttpErrorResponse) => {
       this.loading = false;
+      console.log("Could not load bug reports:",err);
+      this.error = err;
     });
   }
 

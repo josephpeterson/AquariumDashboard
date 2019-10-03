@@ -1,3 +1,5 @@
+import { AquariumAccount } from './AquariumAccount'
+
 export class BugReport
 {
   id: number //= Math.floor(Math.random() * 100);
@@ -8,4 +10,6 @@ export class BugReport
   date: Date
   logFile: string
   type: string
+
+  impactedUser: AquariumAccount
 }

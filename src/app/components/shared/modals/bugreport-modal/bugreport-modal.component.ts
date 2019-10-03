@@ -23,6 +23,9 @@ export class BugReportModalComponent implements OnInit {
   public clickSubmit() {
     delete this.error;
     this.disabled = true;
+
+    this.bug.urlLocation = window.location.href;
+    
     this._aquariumService.submitBugReport(this.bug).subscribe(report => {
       this.disabled = false;
       this._self.close(report);
