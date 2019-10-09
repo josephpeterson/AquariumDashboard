@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Subject } from 'rxjs';
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
-import { faDesktop, IconDefinition, faCheck, faThermometer, faPhotoVideo, faSpinner, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import { faDesktop, IconDefinition, faCheck, faThermometer, faPhotoVideo, faSpinner, faTimesCircle, faSync } from '@fortawesome/free-solid-svg-icons';
 import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
 import * as moment from 'moment';
 import { AquariumService } from 'src/app/services/aquarium.service';
@@ -28,6 +28,7 @@ export class DeviceDetailViewComponent implements OnInit {
     public faSpinner: IconDefinition = faSpinner;
     public faPhotoVideo: IconDefinition = faPhotoVideo
     public faThermometer: IconDefinition = faThermometer
+    public faRefresh: IconDefinition = faSync;
     private componentLifeCycle$ = new Subject();
 
     constructor(private _aquariumService: AquariumService,

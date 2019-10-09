@@ -186,6 +186,11 @@ export class AquariumService {
     return this.http.get(this._url + `/v1/Device/${deviceId}/Ping`);
   }
 
+  /* Profile Controller */
+  getUserProfile(userId: number) {
+    return this.http.get(this._url + `/v1/Profile/${userId}`);
+  }
+
   /* Bug Reports */
   submitBugReport(report: BugReport): Observable<BugReport> {
     return this.http.post<BugReport>(this._url + `/v1/Bug/Submit`, report);

@@ -13,6 +13,11 @@
                         <tr>
                             <td *ngIf="deviceStatus == 0">
                                 <fa-icon class="mr-2" style="color: indianred;" [icon]="faTimesCircle"></fa-icon>Offline
+                                <br>
+                                <button class="btn btn-secondary" (click)="pingAquariumDevice()">
+                                    <fa-icon class="mr-2" [icon]="faRefresh"></fa-icon>Reconnect
+                                </button>
+                                
                             </td>
                             <td *ngIf="deviceStatus == 1">
                                 <fa-icon class="mr-2" [icon]="faSpinner"></fa-icon>Connecting...

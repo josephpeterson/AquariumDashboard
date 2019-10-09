@@ -139,6 +139,7 @@ import { AdminService } from './services/admin.service';
 import { UsersTableComponent } from './components/containers/SettingsContainer/admin/users/users-table/users-table.component';
 import { BugsTableComponent } from './components/containers/SettingsContainer/admin/bugs/bugs-table/bugs-table.component';
 import { SettingsBugsComponent } from './components/containers/SettingsContainer/admin/bugs/settings-bugs.component';
+import { ProfileContainer } from './components/containers/ProfileContainer/profile-container.component';
 
 
 @NgModule({
@@ -181,6 +182,9 @@ import { SettingsBugsComponent } from './components/containers/SettingsContainer
     LightingComponent,
     AquariumParametersComponent,
     AquariumPhotosComponent,
+
+    /* Profile Container */
+    ProfileContainer,
 
     MaintenanceComponent,
     ParameterTabComponent,

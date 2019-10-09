@@ -25,6 +25,7 @@ import { SettingsSecurityComponent } from './components/containers/SettingsConta
 import { SettingsPrivacyComponent } from './components/containers/SettingsContainer/privacy/settings-privacy.component';
 import { SettingsProfileComponent } from './components/containers/SettingsContainer/profile/settings-profile.component';
 import { SettingsBugsComponent } from './components/containers/SettingsContainer/admin/bugs/settings-bugs.component';
+import { ProfileContainer } from './components/containers/ProfileContainer/profile-container.component';
 
 const routes: Routes = [
   //{ path: '', component: AquariumSelectionComponent, pathMatch: 'full' },
@@ -134,6 +135,30 @@ const routes: Routes = [
       },
       {
         path: 'photos',
+        component: FishDetailViewComponent
+      },
+      {
+        path: 'edit',
+        component: FishEditViewComponent
+      },
+      {
+        path: '',
+        component: FishDetailViewComponent
+      }
+    ]
+  },
+
+  {
+    path: 'p/:userId',
+    component: ProfileContainer,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'fish',
+        component: FishDetailViewComponent
+      },
+      {
+        path: 'aquariums',
         component: FishDetailViewComponent
       },
       {
