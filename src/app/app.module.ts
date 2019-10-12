@@ -147,10 +147,12 @@ import { FollowButtonComponent } from './components/containers/ProfileContainer/
 import { AquariumSectionComponent } from './components/containers/ProfileContainer/aquarium-section/aquarium-section.component';
 import { FishSectionComponent } from './components/containers/ProfileContainer/fish-section/fish-section.component';
 import { GeneralSectionComponent } from './components/containers/ProfileContainer/general-section/general-section.component';
-import { ProfileActivityPostComponent } from './components/containers/ProfileContainer/profile-activity-post/profile-activity-post.component';
 import { PhotoSectionComponent } from './components/containers/ProfileContainer/photo-section/photo-section.component';
 import { ProfileIconBadgeComponent } from './components/containers/ProfileContainer/profile-icon-badge/profile-icon-badge.component';
 import { SectionBannerComponent } from './components/containers/ProfileContainer/section-banner/section-banner.component';
+import { ProfileActivityPostComponent } from './components/containers/ProfileContainer/posts/profile-activity-post/profile-activity-post.component';
+import { CreateAquariumPostComponent } from './components/containers/ProfileContainer/posts/create-aquarium/create-aquarium-post.component';
+import { AquariumTestResultsPostComponent } from './components/containers/ProfileContainer/posts/aquarium-test-results/aquarium-test-results-post.component';
 
 
 @NgModule({
@@ -271,6 +273,8 @@ import { SectionBannerComponent } from './components/containers/ProfileContainer
     FishSectionComponent,
     GeneralSectionComponent,
     ProfileActivityPostComponent,
+    CreateAquariumPostComponent,
+    AquariumTestResultsPostComponent,
     PhotoSectionComponent,
     ProfileIconBadgeComponent,
     SectionBannerComponent

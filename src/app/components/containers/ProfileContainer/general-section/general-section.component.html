@@ -1,9 +1,10 @@
 <div class="pt-2">
-
-  <profile-activity-post [author]="profile"></profile-activity-post>
-  <profile-activity-post [author]="profile"></profile-activity-post>
   <h6 class="text-muted pb-2 border-bottom">Past Week</h6>
-  <profile-activity-post [author]="profile"></profile-activity-post>
-  <h6 class="text-muted pb-2 border-bottom">September 2019</h6>
-  <profile-activity-post [author]="profile"></profile-activity-post>
+  <div *ngFor="let activity of profile.activity; let i = index">
+    <ng-container [ngSwitch]="activity.activityType">
+      <create-aquarium-post *ngSwitchCase='ActivityTypes.CreateAquariumActivity' [author]="profile" [activity]="activity"></create-aquarium-post>
+      <aquarium-test-results-post *ngSwitchCase='ActivityTypes.CreateAquariumTestResults' [author]="profile" [activity]="activity"></aquarium-test-results-post>
+      <profile-activity-post *ngSwitchDefault [author]="profile" [activity]="activity"></profile-activity-post>
+    </ng-container>
+  </div>
 </div>

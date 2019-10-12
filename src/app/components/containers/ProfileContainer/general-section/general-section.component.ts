@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AquariumProfile } from 'src/app/models/AquariumProfile';
+import { ActivityTypes } from 'src/app/models/ActivityTypes';
 
 @Component({
   selector: 'general-section',
@@ -15,4 +16,5 @@ export class GeneralSectionComponent implements OnInit {
   ngOnInit() {
   }
 
+  public ActivityTypes = ActivityTypes;
 }
