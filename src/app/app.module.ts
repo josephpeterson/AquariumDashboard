@@ -140,6 +140,17 @@ import { UsersTableComponent } from './components/containers/SettingsContainer/a
 import { BugsTableComponent } from './components/containers/SettingsContainer/admin/bugs/bugs-table/bugs-table.component';
 import { SettingsBugsComponent } from './components/containers/SettingsContainer/admin/bugs/settings-bugs.component';
 import { ProfileContainer } from './components/containers/ProfileContainer/profile-container.component';
+import { ProfilePictureThumbnailComponent } from './components/containers/ProfileContainer/profile-picture-thumbnail/profile-picture-thumbnail.component';
+import { ProfileBannerComponent } from './components/containers/ProfileContainer/profile-banner/profile-banner.component';
+import { StarButtonComponent } from './components/containers/ProfileContainer/star-button/star-button.component';
+import { FollowButtonComponent } from './components/containers/ProfileContainer/follow-button/follow-button.component';
+import { AquariumSectionComponent } from './components/containers/ProfileContainer/aquarium-section/aquarium-section.component';
+import { FishSectionComponent } from './components/containers/ProfileContainer/fish-section/fish-section.component';
+import { GeneralSectionComponent } from './components/containers/ProfileContainer/general-section/general-section.component';
+import { ProfileActivityPostComponent } from './components/containers/ProfileContainer/profile-activity-post/profile-activity-post.component';
+import { PhotoSectionComponent } from './components/containers/ProfileContainer/photo-section/photo-section.component';
+import { ProfileIconBadgeComponent } from './components/containers/ProfileContainer/profile-icon-badge/profile-icon-badge.component';
+import { SectionBannerComponent } from './components/containers/ProfileContainer/section-banner/section-banner.component';
 
 
 @NgModule({
@@ -185,6 +196,7 @@ import { ProfileContainer } from './components/containers/ProfileContainer/profi
 
     /* Profile Container */
     ProfileContainer,
+    ProfilePictureThumbnailComponent,
 
     MaintenanceComponent,
     ParameterTabComponent,
@@ -252,6 +264,16 @@ import { ProfileContainer } from './components/containers/ProfileContainer/profi
     FishPhotoSelectModal,
     ManageSnapshotModal,
     LoginModalComponent,
+    ProfileBannerComponent,
+    StarButtonComponent,
+    FollowButtonComponent,
+    AquariumSectionComponent,
+    FishSectionComponent,
+    GeneralSectionComponent,
+    ProfileActivityPostComponent,
+    PhotoSectionComponent,
+    ProfileIconBadgeComponent,
+    SectionBannerComponent
     //New components here
   ],
   entryComponents: [

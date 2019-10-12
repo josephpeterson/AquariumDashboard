@@ -14,6 +14,7 @@ import { AquariumPhoto } from 'src/app/models/AquariumPhoto';
 import { FishPhoto } from '../models/FishPhoto';
 import { BugReport } from '../models/BugReport';
 import { AquariumAccount } from '../models/AquariumAccount';
+import { AquariumProfile } from '../models/AquariumProfile';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -219,5 +220,9 @@ export class AquariumService {
   }
   public deleteFishPhoto(fishPhoto: FishPhoto): Observable<any> {
     return this.http.post<any>(this._url + "/v1/Fish/Photo/Delete", fishPhoto.id);
+  }
+
+  public getAquariumProfile(profileId: number) {
+    return this.http.get<AquariumProfile>(this._url + `/v1/Profile/${profileId}`);
   }
 }

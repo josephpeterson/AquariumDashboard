@@ -1,0 +1,28 @@
+<div class="profile-section-banner">
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]='["/p/" + profile.id]' [routerLinkActiveOptions]='{ exact: true }'
+        [routerLinkActive]='["active"]'>Overview</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]='["/p/" + profile.id + "/feeding"]' [routerLinkActiveOptions]='{ exact: true }'
+        [routerLinkActive]='["active"]'>About</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" [routerLink]='["/p/" + profile.id + "/feeding"]' [routerLinkActiveOptions]='{ exact: true }'
+          [routerLinkActive]='["active"]'>Aquariums ({{getAquariumCount()}})</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" [routerLink]='["/p/" + profile.id + "/feeding"]' [routerLinkActiveOptions]='{ exact: true }'
+            [routerLinkActive]='["active"]'>Fish ({{getFishCount()}})</a>
+        </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]='["/p/" + profile.id + "/photos"]' [routerLinkActiveOptions]='{ exact: true }'
+        [routerLinkActive]='["active"]'>Photos</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link disabled" [routerLink]='["/p/" + profile.id + "/notes"]'
+        [routerLinkActiveOptions]='{ exact: true }' [routerLinkActive]='["active"]'>Notes</a>
+    </li>
+  </ul>
+</div>

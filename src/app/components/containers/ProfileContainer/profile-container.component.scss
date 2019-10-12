@@ -1,34 +1,4 @@
-.fish-container-component
-{
-    .hidden {
-        display: none;
-    }
-    padding:0px;
-
-    .banner
-    {
-        margin:0px;
-        width:100%;
-        height:200px;
-        position: relative;
-
-        h1 {
-            padding: 5px;
-        }
-    }
-    .thumbnail {
-        width:200px;
-        height:200px;
-        background-position: center center;
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-color: #8D8D8D;
-    }
-    .navigation
-    {
-        position: absolute;
-        bottom: 0px;
-        width:100%;
-        height:50px;
-    }
+.header {
+    background-color: #f7fbff;
+    padding:5px;
 }

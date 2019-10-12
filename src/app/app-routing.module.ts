@@ -32,10 +32,12 @@ const routes: Routes = [
 
   {
     path: 'species',
+    canActivate: [AuthGuard],
     component: SpeciesContainer
   },
   {
     path: 'species/:speciesId',
+    canActivate: [AuthGuard],
     component: SpeciesContainer
   },
   {
@@ -149,27 +151,9 @@ const routes: Routes = [
   },
 
   {
-    path: 'p/:userId',
+    path: 'p/:profileId',
     component: ProfileContainer,
     canActivate: [AuthGuard],
-    children: [
-      {
-        path: 'fish',
-        component: FishDetailViewComponent
-      },
-      {
-        path: 'aquariums',
-        component: FishDetailViewComponent
-      },
-      {
-        path: 'edit',
-        component: FishEditViewComponent
-      },
-      {
-        path: '',
-        component: FishDetailViewComponent
-      }
-    ]
   },
   
   {
