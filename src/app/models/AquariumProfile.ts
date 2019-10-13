@@ -2,6 +2,7 @@ import { AquariumAccount } from './AquariumAccount';
 import { Fish } from './Fish';
 import { Aquarium } from './Aquarium';
 import { Activity } from './Activity';
+import { AccountRelationship } from './AccountRelationship';
 
 export class AquariumProfile
 {
@@ -21,4 +22,5 @@ export class AquariumProfile
   public activity: Activity[];
   public fish: Fish[];
   public aquariums: Aquarium[];
+  public relationship: AccountRelationship;
 }
