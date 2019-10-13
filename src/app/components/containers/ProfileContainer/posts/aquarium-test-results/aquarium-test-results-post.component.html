@@ -1,18 +1,16 @@
-<div class="profile-activity-post">
+<div class="profile-activity-post" *ngIf="!loading">
   <div class="row m-2">
     <profile-icon-badge class="profile-icon-badge" [profile]="author"></profile-icon-badge>
     <div class="post-banner">
-      Created an <a [routerLink]="'/' + activity.key1">aquarium</a>
+      Tested an <a [routerLink]="'/' + activity.snapshot.aquarium.id">aquarium</a>
     </div>
   </div>
   <div class="content p-2 row ml-5" *ngIf="!loading">
-    <div class="float-left">
-      <img class="m-2" src="assets/aquarium-diagram.png" height=60px>
+    <div *ngIf="activity.snapshot as s">
+      <span>pH {{s.pH}}</span>
+      <span>Ammonia {{s.ammonia}}</span>
+      <span>Nitrate {{s.nitrate}}</span>
+      <span>Nitrite {{s.nitrite}}</span>
     </div>
-    <div>
-      <div><a [routerLink]="'/' + activity.key1">{{aquarium.name}}</a></div>
-      <div>{{aquarium.gallons}} Gallons</div>
-    </div>
-
   </div>
 </div>

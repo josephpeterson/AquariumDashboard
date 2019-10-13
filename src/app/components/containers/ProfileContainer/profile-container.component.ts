@@ -45,6 +45,7 @@ export class ProfileContainer {
     this._aquariumService.getAquariumProfile(profileId).pipe(take(1)).subscribe(profile => {
       this.loading = false;
       this.targetProfile$.next(profile);
+      console.log(profile);
     },(err:HttpErrorResponse) => {
       this.loading = false;
       this.error = err.message;

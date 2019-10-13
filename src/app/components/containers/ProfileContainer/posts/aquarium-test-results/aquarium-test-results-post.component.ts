@@ -24,8 +24,9 @@ export class AquariumTestResultsPostComponent implements OnInit {
   }
   loadActivityPost() {
     this.loading = true;
-    this.aquariumService.getSnapshots(this.activity.key1).subscribe(data => {
+    this.aquariumService.getAccountActivity(this.activity.id).subscribe(data => {
       this.loading = false;
+      this.activity = data;
     }, err => {
       this.loading = false;
     });

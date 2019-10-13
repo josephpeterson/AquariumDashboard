@@ -1,6 +1,7 @@
 import { AquariumAccount } from './AquariumAccount';
 import { Fish } from './Fish';
 import { Aquarium } from './Aquarium';
+import { Activity } from './Activity';
 
 export class AquariumProfile
 {
@@ -17,6 +18,7 @@ export class AquariumProfile
 
 
   public account: AquariumAccount;
+  public activity: Activity[];
   public fish: Fish[];
   public aquariums: Aquarium[];
 }

@@ -15,6 +15,7 @@ import { FishPhoto } from '../models/FishPhoto';
 import { BugReport } from '../models/BugReport';
 import { AquariumAccount } from '../models/AquariumAccount';
 import { AquariumProfile } from '../models/AquariumProfile';
+import { Activity } from '../models/Activity';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -224,5 +225,10 @@ export class AquariumService {
 
   public getAquariumProfile(profileId: number) {
     return this.http.get<AquariumProfile>(this._url + `/v1/Profile/${profileId}`);
+  }
+
+  /* Activity */
+  public getAccountActivity(activityId: number): Observable<Activity> {
+    return this.http.get<Activity>(this._url + `/v1/Activity/${activityId}`);
   }
 }
