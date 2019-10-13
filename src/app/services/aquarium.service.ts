@@ -16,6 +16,9 @@ import { BugReport } from '../models/BugReport';
 import { AquariumAccount } from '../models/AquariumAccount';
 import { AquariumProfile } from '../models/AquariumProfile';
 import { Activity } from '../models/Activity';
+import { AccountRelationship } from '../models/AccountRelationship';
+import { SearchOptions } from '../models/SearchOptions';
+import { SearchResult } from '../models/SearchResult';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -29,6 +32,7 @@ const httpOptions = {
   providedIn: "root"
 })
 export class AquariumService {
+  
 
   private _url: string;
 
@@ -230,5 +234,14 @@ export class AquariumService {
   /* Activity */
   public getAccountActivity(activityId: number): Observable<Activity> {
     return this.http.get<Activity>(this._url + `/v1/Activity/${activityId}`);
+  }
+
+  public upsertFollowUser(relationship: AccountRelationship): Observable<AccountRelationship> {
+    return this.http.post<AccountRelationship>(this._url + `/v1/Profile/Follow`,relationship);
+  }
+
+  /* Search */
+  performSearch(options: SearchOptions): Observable<SearchResult[]>  {
+    return this.http.post<SearchResult[]>(this._url + `/v1/Search`,options);
   }
 }

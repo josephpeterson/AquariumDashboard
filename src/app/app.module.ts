@@ -153,6 +153,7 @@ import { SectionBannerComponent } from './components/containers/ProfileContainer
 import { ProfileActivityPostComponent } from './components/containers/ProfileContainer/posts/profile-activity-post/profile-activity-post.component';
 import { CreateAquariumPostComponent } from './components/containers/ProfileContainer/posts/create-aquarium/create-aquarium-post.component';
 import { AquariumTestResultsPostComponent } from './components/containers/ProfileContainer/posts/aquarium-test-results/aquarium-test-results-post.component';
+import { SearchFormComponent } from './components/shared/nav-menu/search-form/search-form.component';
 
 
 @NgModule({
@@ -277,7 +278,8 @@ import { AquariumTestResultsPostComponent } from './components/containers/Profil
     AquariumTestResultsPostComponent,
     PhotoSectionComponent,
     ProfileIconBadgeComponent,
-    SectionBannerComponent
+    SectionBannerComponent,
+    SearchFormComponent
     //New components here
   ],
   entryComponents: [

@@ -4,11 +4,6 @@
     min-height:50px;
     position: relative;
 
-    .profile-icon-badge
-    {
-        position: absolute;
-    }
-
     .content {
         margin:5px;
         padding:5px;
@@ -17,6 +12,12 @@
         overflow: hidden;
         word-wrap: break-word;
         text-overflow: ellipsis;
+    }
+    .profile-icon-badge
+    {
+        position: absolute;
+        height:50px;
+        width:50px;
     }
     .post-banner
     {

@@ -1,1 +1,9 @@
-<button class="btn btn-primary"><fa-icon class="pr-1" [icon]="icon_userPlus"></fa-icon> Follow</button>
+<button class="btn btn-primary" *ngIf="relationship" (click)="clickButton()" [disabled]="loading">
+    <ng-container *ngIf="relationship.relationship == RelationshipTypes.Following else notFollowing">
+        <fa-icon class="pr-1" [icon]="icon_userMinus"></fa-icon> Unfollow
+    </ng-container>
+    <ng-template #notFollowing>
+        <fa-icon class="pr-1" [icon]="icon_userPlus"></fa-icon> Follow
+    </ng-template>
+
+</button>
