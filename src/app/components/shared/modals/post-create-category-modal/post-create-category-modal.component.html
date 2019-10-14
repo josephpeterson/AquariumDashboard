@@ -1,0 +1,11 @@
+<div class="post-create-category-modal-component">
+  <h3>Create Discussion Category</h3>
+  <div class="container alert alert-danger mt-2" *ngIf="error">{{error}}</div>
+  <mat-form-field>
+    <input matInput placeholder="Category Name" [(ngModel)]="category.name">
+  </mat-form-field>
+  <mat-dialog-actions align="end">
+    <button [disabled]='disabled' class="m-2 btn btn-danger" mat-dialog-close>Cancel</button>
+    <button [disabled]='disabled' class="m-2 btn btn-success" (click)="clickSubmit()">Submit</button>
+  </mat-dialog-actions>
+</div>

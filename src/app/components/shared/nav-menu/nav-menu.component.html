@@ -12,6 +12,7 @@
       </button>
 
       <search-form></search-form>
+      
 
       <!-- Aquarium Navigation -->
       <div class="d-sm-inline-flex flex-sm-row-reverse" [ngClass]='{"show": isExpanded}'>
@@ -54,7 +55,9 @@
             </li>
           </ng-container>
         -->
-
+          <li class="nav-item">
+            <button class="btn btn-link" [routerLink]="['/discussion']">Dicussion Board</button>
+          </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false">

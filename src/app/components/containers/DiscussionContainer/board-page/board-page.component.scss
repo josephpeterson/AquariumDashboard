@@ -1,0 +1,18 @@
+.board-page-container
+{
+    .thread {
+        clear:both; 
+        padding:10px;
+        font-size: 13px;
+        background-color:#fafcfd;
+        border-bottom:1px solid gray;
+        .board-thumbnail {
+            float:left;
+            padding-right:20px;
+        }
+        .title  {
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+    }
+}

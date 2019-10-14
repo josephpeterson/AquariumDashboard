@@ -40,6 +40,7 @@ export class AquariumContainer {
   selectAquarium(val) {
     var url = this.router.url;
     var path = url.split("/").splice(2);
+    console.log(val,path);
     this.router.navigate([val, ...path]);
   }
 

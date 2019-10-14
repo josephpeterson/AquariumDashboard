@@ -1,0 +1,13 @@
+<div *ngIf="categories$ | async as categories">
+  <div *ngFor="let category of categories">
+    <h3>{{category.name}}</h3>
+    <div *ngFor="let board of category.boards">
+      <a [routerLink]='["board",board.id]'>
+        {{board.title}}
+      </a>
+    </div>
+    <button class="btn btn-primary" (click)="clickNewBoard(category)">New Board...</button>
+  </div>
+</div>
+<hr>
+<button class="btn btn-primary" (click)="clickNewCategory()">New Category...</button>

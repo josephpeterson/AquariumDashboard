@@ -32,6 +32,10 @@ import { ProfilePhotosComponent } from './components/containers/ProfileContainer
 import { ProfileAquariumsComponent } from './components/containers/ProfileContainer/pages/profile-aquariums/profile-aquariums.component';
 import { ProfileManageComponent } from './components/containers/ProfileContainer/pages/profile-manage/profile-manage.component';
 import { ProfileOverviewComponent } from './components/containers/ProfileContainer/pages/profile-overview/profile-overview.component';
+import { DiscussionContainerComponent } from './components/containers/DiscussionContainer/discussion-container.component';
+import { MainPageComponent } from './components/containers/DiscussionContainer/main-page/main-page.component';
+import { BoardPageComponent } from './components/containers/DiscussionContainer/board-page/board-page.component';
+import { ThreadPageComponent } from './components/containers/DiscussionContainer/thread-page/thread-page.component';
 
 const routes: Routes = [
   //{ path: '', component: AquariumSelectionComponent, pathMatch: 'full' },
@@ -89,7 +93,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: ':aqId',
+    path: 'aquarium/:aqId',
     component: AquariumContainer,
     runGuardsAndResolvers: "always",
     canActivate: [AuthGuard],
@@ -184,6 +188,26 @@ const routes: Routes = [
       {
         path: '',
         component: ProfileOverviewComponent
+      }
+    ]
+  },
+
+  {
+    path: 'discussion',
+    component: DiscussionContainerComponent,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'board/:boardId',
+        component: BoardPageComponent
+      },
+      {
+        path: 'thread/:threadId',
+        component: ThreadPageComponent
+      },
+      {
+        path: '',
+        component: MainPageComponent
       }
     ]
   },

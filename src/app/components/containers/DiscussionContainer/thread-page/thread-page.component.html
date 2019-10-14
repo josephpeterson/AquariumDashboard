@@ -1,0 +1,9 @@
+<div class="container  profile-container" *ngIf="thread$ | async as thread else unsuccessfull">
+  {{thread.title}}
+</div>
+<ng-template #unsuccessfull>
+  <div class="container">
+    <div class="container alert alert-danger mt-2" *ngIf="threadLoadError$ | async as error">{{error}}</div>
+    <loading-container *ngIf="threadLoading$ | async"></loading-container>
+  </div>
+</ng-template>

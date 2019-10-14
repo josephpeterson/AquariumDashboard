@@ -162,6 +162,16 @@ import { ProfileManageComponent } from './components/containers/ProfileContainer
 import { ProfileReducer } from './store/profile/profile.reducer';
 import { ProfileEffects } from './store/profile/profile.effect';
 import { ProfileOverviewComponent } from './components/containers/ProfileContainer/pages/profile-overview/profile-overview.component';
+import { MainPageComponent } from './components/containers/DiscussionContainer/main-page/main-page.component';
+import { BoardPageComponent } from './components/containers/DiscussionContainer/board-page/board-page.component';
+import { ThreadPageComponent } from './components/containers/DiscussionContainer/thread-page/thread-page.component';
+import { DiscussionContainerComponent } from './components/containers/DiscussionContainer/discussion-container.component';
+import { PostReducer } from './store/post/post.reducer';
+import { PostEffects } from './store/post/post.effect';
+import { PostCreateCategoryModalComponent } from './components/shared/modals/post-create-category-modal/post-create-category-modal.component';
+import { PostCreateBoardModalComponent } from './components/shared/modals/post-create-board-modal/post-create-board-modal.component';
+import { PostCreateThreadModalComponent } from './components/shared/modals/post-create-thread-modal/post-create-thread-modal.component';
+import { DiscussionNavBarComponent } from './components/containers/DiscussionContainer/discussion-nav-bar/discussion-nav-bar.component';
 
 
 @NgModule({
@@ -293,7 +303,15 @@ import { ProfileOverviewComponent } from './components/containers/ProfileContain
     ProfileFishComponent,
     ProfilePhotosComponent,
     ProfileManageComponent,
-    ProfileOverviewComponent
+    ProfileOverviewComponent,
+    DiscussionContainerComponent,
+    MainPageComponent,
+    BoardPageComponent,
+    ThreadPageComponent,
+    PostCreateCategoryModalComponent,
+    PostCreateBoardModalComponent,
+    PostCreateThreadModalComponent,
+    DiscussionNavBarComponent
     //New components here
   ],
   entryComponents: [
@@ -314,6 +332,9 @@ import { ProfileOverviewComponent } from './components/containers/ProfileContain
     LoginModalComponent,
     FishPhotoModal,
     FishPhotoSelectModal,
+    PostCreateCategoryModalComponent,
+    PostCreateBoardModalComponent,
+    PostCreateThreadModalComponent
   ],
 
   imports: [
@@ -356,11 +377,12 @@ import { ProfileOverviewComponent } from './components/containers/ProfileContain
     StoreModule.forFeature('species', speciesReducer),
     StoreModule.forFeature('fish', fishReducer),
     StoreModule.forFeature('profile', ProfileReducer),
+    StoreModule.forFeature('post', PostReducer),
     StoreDevtoolsModule.instrument({
       maxAge: 25
     }),
     NotifierModule.withConfig(AquariumNotifierConfig),
-    EffectsModule.forRoot([AquariumEffects, SnapshotEffects, SpeciesEffects, FishEffects,ProfileEffects]),
+    EffectsModule.forRoot([AquariumEffects, SnapshotEffects, SpeciesEffects, FishEffects,ProfileEffects,PostEffects]),
     AppRoutingModule
   ],
   providers: [

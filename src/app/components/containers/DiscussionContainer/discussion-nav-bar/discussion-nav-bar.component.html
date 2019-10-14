@@ -1,0 +1,9 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a [routerLink]='["/discussion"]'>Discussion Board</a></li>
+    <li class="breadcrumb-item" *ngIf="selectedBoard$ | async as board"><a
+        [routerLink]='["/discussion/board",board.id]'>{{board.title}}</a></li>
+    <li class="breadcrumb-item" *ngIf="selectedThread$ | async as thread"><a
+        [routerLink]='["/discussion/thread",thread.id]'>{{thread.title}}</a></li>
+  </ol>
+</nav>
