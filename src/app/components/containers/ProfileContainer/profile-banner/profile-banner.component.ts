@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AquariumProfile } from 'src/app/models/AquariumProfile';
+import { AccountProfile } from 'src/app/models/AquariumProfile';
 
 @Component({
   selector: 'profile-banner',
@@ -8,7 +8,7 @@ import { AquariumProfile } from 'src/app/models/AquariumProfile';
 })
 export class ProfileBannerComponent implements OnInit {
 
-  @Input() public profile: AquariumProfile;
+  @Input() public profile: AccountProfile;
 
   constructor() { }
 

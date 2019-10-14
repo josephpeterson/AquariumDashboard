@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AquariumProfile } from 'src/app/models/AquariumProfile';
+import { AccountProfile } from 'src/app/models/AquariumProfile';
 import { ActivityTypes } from 'src/app/models/ActivityTypes';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { Activity } from 'src/app/models/Activity';
@@ -12,7 +12,7 @@ import { Aquarium } from 'src/app/models/Aquarium';
 })
 export class CreateAquariumPostComponent implements OnInit {
 
-  @Input() public author: AquariumProfile;
+  @Input() public author: AccountProfile;
   @Input() public activity: Activity;;
   public loading: boolean = false;
   public aquarium: Aquarium;

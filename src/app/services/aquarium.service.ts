@@ -14,7 +14,7 @@ import { AquariumPhoto } from 'src/app/models/AquariumPhoto';
 import { FishPhoto } from '../models/FishPhoto';
 import { BugReport } from '../models/BugReport';
 import { AquariumAccount } from '../models/AquariumAccount';
-import { AquariumProfile } from '../models/AquariumProfile';
+import { AccountProfile } from '../models/AquariumProfile';
 import { Activity } from '../models/Activity';
 import { AccountRelationship } from '../models/AccountRelationship';
 import { SearchOptions } from '../models/SearchOptions';
@@ -228,7 +228,7 @@ export class AquariumService {
   }
 
   public getAquariumProfile(profileId: number) {
-    return this.http.get<AquariumProfile>(this._url + `/v1/Profile/${profileId}`);
+    return this.http.get<AccountProfile>(this._url + `/v1/Profile/${profileId}`);
   }
 
   /* Activity */

@@ -4,7 +4,7 @@ import { Aquarium } from './Aquarium';
 import { Activity } from './Activity';
 import { AccountRelationship } from './AccountRelationship';
 
-export class AquariumProfile
+export class AccountProfile
 {
   id: number //= Math.floor(Math.random() * 100);
 

@@ -9,27 +9,27 @@
       Search Results
     </div>
     <div class="result" [ngClass]='result.type' *ngFor="let result of results">
-      <ng-container [ngSwitch]="result.type" *ngIf="result.data as d">
-        <a *ngSwitchCase="'Aquarium'" [routerLink]='["/" + d.id]'>
+      <ng-container [ngSwitch]="result.type" *ngIf="result.data as d" >
+        <a (click)="setSearchActive(false)" *ngSwitchCase="'Aquarium'" [routerLink]='["/" + d.id]'>
           {{d.name}}
         </a>
-        <a *ngSwitchCase="'Account'" [routerLink]='["/p/" + d.account.id]'>
+        <a (click)="setSearchActive(false)" *ngSwitchCase="'Account'" [routerLink]='["/p/" + d.account.id]'>
           <profile-icon-badge class="profile-icon-badge" [profile]="d.account"></profile-icon-badge>
           <div>
             {{d.account.username}} <follow-button [relationship]="d.relationship"></follow-button>
           </div>
         </a>
-        <a *ngSwitchCase="'Species'" [routerLink]='["/species",d.id]'>
+        <a (click)="setSearchActive(false)" *ngSwitchCase="'Species'" [routerLink]='["/species",d.id]'>
           <div>
             {{d.name}}
           </div>
         </a>
-        <a *ngSwitchCase="'Fish'" [routerLink]='["/fish",d.id]'>
+        <a (click)="setSearchActive(false)" *ngSwitchCase="'Fish'" [routerLink]='["/fish",d.id]'>
           <div>
               <profile-icon-badge class="profile-icon-badge" [profile]="d"></profile-icon-badge>{{d.name}}
           </div>
         </a>
-        <a *ngSwitchDefault>
+        <a (click)="setSearchActive(false)" *ngSwitchDefault>
           <div>
             {{d}}
           </div>

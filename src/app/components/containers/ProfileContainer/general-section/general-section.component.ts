@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AquariumProfile } from 'src/app/models/AquariumProfile';
+import { AccountProfile } from 'src/app/models/AquariumProfile';
 import { ActivityTypes } from 'src/app/models/ActivityTypes';
 
 @Component({
@@ -9,7 +9,7 @@ import { ActivityTypes } from 'src/app/models/ActivityTypes';
 })
 export class GeneralSectionComponent implements OnInit {
 
-  @Input() public profile: AquariumProfile;
+  @Input() public profile: AccountProfile;
 
   constructor() { }
 

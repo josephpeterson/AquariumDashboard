@@ -154,6 +154,14 @@ import { ProfileActivityPostComponent } from './components/containers/ProfileCon
 import { CreateAquariumPostComponent } from './components/containers/ProfileContainer/posts/create-aquarium/create-aquarium-post.component';
 import { AquariumTestResultsPostComponent } from './components/containers/ProfileContainer/posts/aquarium-test-results/aquarium-test-results-post.component';
 import { SearchFormComponent } from './components/shared/nav-menu/search-form/search-form.component';
+import { ProfileAboutComponent } from './components/containers/ProfileContainer/pages/profile-about/profile-about.component';
+import { ProfileAquariumsComponent } from './components/containers/ProfileContainer/pages/profile-aquariums/profile-aquariums.component';
+import { ProfileFishComponent } from './components/containers/ProfileContainer/pages/profile-fish/profile-fish.component';
+import { ProfilePhotosComponent } from './components/containers/ProfileContainer/pages/profile-photos/profile-photos.component';
+import { ProfileManageComponent } from './components/containers/ProfileContainer/pages/profile-manage/profile-manage.component';
+import { ProfileReducer } from './store/profile/profile.reducer';
+import { ProfileEffects } from './store/profile/profile.effect';
+import { ProfileOverviewComponent } from './components/containers/ProfileContainer/pages/profile-overview/profile-overview.component';
 
 
 @NgModule({
@@ -279,7 +287,13 @@ import { SearchFormComponent } from './components/shared/nav-menu/search-form/se
     PhotoSectionComponent,
     ProfileIconBadgeComponent,
     SectionBannerComponent,
-    SearchFormComponent
+    SearchFormComponent,
+    ProfileAboutComponent,
+    ProfileAquariumsComponent,
+    ProfileFishComponent,
+    ProfilePhotosComponent,
+    ProfileManageComponent,
+    ProfileOverviewComponent
     //New components here
   ],
   entryComponents: [
@@ -341,11 +355,12 @@ import { SearchFormComponent } from './components/shared/nav-menu/search-form/se
     StoreModule.forFeature('snapshots', snapshotReducer),
     StoreModule.forFeature('species', speciesReducer),
     StoreModule.forFeature('fish', fishReducer),
+    StoreModule.forFeature('profile', ProfileReducer),
     StoreDevtoolsModule.instrument({
       maxAge: 25
     }),
     NotifierModule.withConfig(AquariumNotifierConfig),
-    EffectsModule.forRoot([AquariumEffects, SnapshotEffects, SpeciesEffects, FishEffects]),
+    EffectsModule.forRoot([AquariumEffects, SnapshotEffects, SpeciesEffects, FishEffects,ProfileEffects]),
     AppRoutingModule
   ],
   providers: [

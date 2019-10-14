@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AquariumProfile } from 'src/app/models/AquariumProfile';
+import { AccountProfile } from 'src/app/models/AquariumProfile';
+import { faCog } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: "section-banner",
@@ -8,7 +9,8 @@ import { AquariumProfile } from 'src/app/models/AquariumProfile';
 })
 export class SectionBannerComponent implements OnInit {
 
-  @Input() public profile: AquariumProfile;
+  @Input() public profile: AccountProfile;
+  public faGear = faCog;
 
   constructor() { }
 

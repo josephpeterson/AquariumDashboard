@@ -26,6 +26,12 @@ import { SettingsPrivacyComponent } from './components/containers/SettingsContai
 import { SettingsProfileComponent } from './components/containers/SettingsContainer/profile/settings-profile.component';
 import { SettingsBugsComponent } from './components/containers/SettingsContainer/admin/bugs/settings-bugs.component';
 import { ProfileContainer } from './components/containers/ProfileContainer/profile-container.component';
+import { ProfileFishComponent } from './components/containers/ProfileContainer/pages/profile-fish/profile-fish.component';
+import { ProfileAboutComponent } from './components/containers/ProfileContainer/pages/profile-about/profile-about.component';
+import { ProfilePhotosComponent } from './components/containers/ProfileContainer/pages/profile-photos/profile-photos.component';
+import { ProfileAquariumsComponent } from './components/containers/ProfileContainer/pages/profile-aquariums/profile-aquariums.component';
+import { ProfileManageComponent } from './components/containers/ProfileContainer/pages/profile-manage/profile-manage.component';
+import { ProfileOverviewComponent } from './components/containers/ProfileContainer/pages/profile-overview/profile-overview.component';
 
 const routes: Routes = [
   //{ path: '', component: AquariumSelectionComponent, pathMatch: 'full' },
@@ -154,8 +160,34 @@ const routes: Routes = [
     path: 'p/:profileId',
     component: ProfileContainer,
     canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'aquariums',
+        component: ProfileAquariumsComponent
+      },
+      {
+        path: 'fish',
+        component: ProfileFishComponent
+      },
+      {
+        path: 'about',
+        component: ProfileAboutComponent
+      },
+      {
+        path: 'photos',
+        component: ProfilePhotosComponent
+      },
+      {
+        path: 'manage',
+        component: ProfileManageComponent
+      },
+      {
+        path: '',
+        component: ProfileOverviewComponent
+      }
+    ]
   },
-  
+
   {
     path: '',
     component: HomeComponent

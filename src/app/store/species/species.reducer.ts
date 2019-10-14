@@ -137,14 +137,6 @@ export function speciesReducer(state = initialState, action: AllSpeciesActions):
 				//deleted: false,
 				deleteError: action.payload,
 			}
-		case SpeciesActions.LoadAllSpeciesFail:
-			return {
-				...state,
-				deleting: false,
-				//deleted: false,
-				deleteError: action.payload,
-			}
-
 		//Reset
 		case SpeciesActions.Reset:
 			return {

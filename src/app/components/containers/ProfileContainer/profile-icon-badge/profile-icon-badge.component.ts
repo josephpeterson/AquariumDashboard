@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AquariumProfile } from 'src/app/models/AquariumProfile';
+import { AccountProfile } from 'src/app/models/AquariumProfile';
 
 @Component({
   selector: 'profile-icon-badge',
@@ -8,12 +8,11 @@ import { AquariumProfile } from 'src/app/models/AquariumProfile';
 })
 export class ProfileIconBadgeComponent implements OnInit {
 
-  @Input() public profile: AquariumProfile;
+  @Input() public profile: AccountProfile;
 
   constructor() { }
 
   ngOnInit() {
-    console.log(this.profile);
   }
 
   public getThumbnail():string {

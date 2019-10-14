@@ -1,34 +1,23 @@
 <nav-menu></nav-menu>
-<div class="container" *ngIf="targetProfile$ | async as targetProfile else unsuccessfull">
+<div class="container  profile-container" *ngIf="targetProfile$ | async as targetProfile else unsuccessfull">
     <div class="row header">
         <div class="col-2 p-0">
 
             <profile-picture-thumbnail [profile]="targetProfile"></profile-picture-thumbnail>
         </div>
-        <div class="col-10 p-0 pl-4">
+        <div class="col-10 p-0">
 
             <profile-banner [profile]="targetProfile"></profile-banner>
             <section-banner [profile]="targetProfile"></section-banner>
         </div>
     </div>
-    <div class="row">
-        <div class="col-8 p-0">
-            <h3>Activity</h3>
-            <general-section [profile]="targetProfile"></general-section>
-        </div>
-        <div class="col-4">
-            <h3>Aquariums</h3>
-            <aquarium-section></aquarium-section>
-
-            <br>
-            <h3>Photos</h3>
-            <photo-section></photo-section>
-        </div>
+    <div class="p-3">
+        <router-outlet></router-outlet>
     </div>
 </div>
 <ng-template #unsuccessfull>
     <div class="container">
-        <div class="container alert alert-danger mt-2" *ngIf="error">{{error}}</div>
-        <loading-container *ngIf="!error"></loading-container>
+        <div class="container alert alert-danger mt-2" *ngIf="profileLoadError$ | async as error">{{error}}</div>
+        <loading-container *ngIf="profileLoading$ | async"></loading-container>
     </div>
 </ng-template>
