@@ -1,26 +1,8 @@
 <div class="container  board-page-container" *ngIf="board$ | async as board else unsuccessfull">
     <h3>{{board.title}}</h3>
-    <div *ngFor="let thread of board.threads">
-        <div class="thread row">
-            <div class="col">
-                <div class="board-thumbnail">
-                    <fa-icon class="fa-3x" [icon]="icon_board"></fa-icon>
-                </div>
-                <a [routerLink]='["/discussion/thread",thread.id]' class="title">
-                    {{thread.title}}
-                </a>
-                <p>Started by <a [routerLink]='["/p",thread.author.id]'>{{thread.author.username}}</a></p>
-            </div>
-            <div class="col">
-                <div>2223 Posts</div>
-                <div>2223 Threads</div>
-            </div>
-            <div class="col">
-                Last Post
-            </div>
-        </div>
-
-    </div>
+<div *ngFor="let thread of board.threads">
+    <discussion-item [thread]='thread'></discussion-item>
+</div>    
     <button (click)="clickNewThread(board)">New Thread...</button>
 </div>
 <ng-template #unsuccessfull>

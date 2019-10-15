@@ -1,0 +1,25 @@
+<div class="thread row">
+  <div class="col">
+    <div class="board-thumbnail">
+      <fa-icon class="fa-3x" [icon]="icon_board"></fa-icon>
+    </div>
+    <a *ngIf="thread" [routerLink]='["/discussion/thread",thread.id]' class="title">
+      {{thread.title}}
+    </a>
+    <a *ngIf="board" [routerLink]='["/discussion/board",board.id]' class="title">
+      {{board.title}}
+    </a>
+    <p *ngIf="thread">Started by <a [routerLink]='["/p",thread.author.id]'>{{thread.author.username}}</a></p>
+    <p *ngIf="board">Check it out here</p>
+  </div>
+  <div *ngIf="thread" class="col">
+    <div>{{thread.postCount}} Replies</div>
+  </div>
+  <div *ngIf="board" class="col">
+      <div>{{board.postCount}} Posts</div>
+      <div>{{board.threadCount}} Threads</div>
+    </div>
+  <div class="col">
+    Last Post
+  </div>
+</div>

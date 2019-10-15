@@ -20,9 +20,7 @@ import { faClipboard } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./board-page.component.scss']
 })
 export class BoardPageComponent implements OnInit {
-  
-  public icon_board = faClipboard;
-  
+    
   public componentLifeCycle = new Subject();
   public board$ = this.store.select(getSelectedBoard);
   public boardLoadError$ = this.store.select(getPostLoadError);

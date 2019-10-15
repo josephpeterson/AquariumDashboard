@@ -172,6 +172,10 @@ import { PostCreateCategoryModalComponent } from './components/shared/modals/pos
 import { PostCreateBoardModalComponent } from './components/shared/modals/post-create-board-modal/post-create-board-modal.component';
 import { PostCreateThreadModalComponent } from './components/shared/modals/post-create-thread-modal/post-create-thread-modal.component';
 import { DiscussionNavBarComponent } from './components/containers/DiscussionContainer/discussion-nav-bar/discussion-nav-bar.component';
+import { DiscussionItemComponent } from './components/containers/DiscussionContainer/discussion-item/discussion-item.component';
+import { PostDeleteCategoryModalComponent } from './components/shared/modals/post-delete-category-modal/post-delete-category-modal.component';
+import { PostDeleteBoardModalComponent } from './components/shared/modals/post-delete-board-modal/post-delete-board-modal.component';
+import { PostDeleteThreadModalComponent } from './components/shared/modals/post-delete-thread-modal/post-delete-thread-modal.component';
 
 
 @NgModule({
@@ -311,7 +315,11 @@ import { DiscussionNavBarComponent } from './components/containers/DiscussionCon
     PostCreateCategoryModalComponent,
     PostCreateBoardModalComponent,
     PostCreateThreadModalComponent,
-    DiscussionNavBarComponent
+    DiscussionNavBarComponent,
+    DiscussionItemComponent,
+    PostDeleteCategoryModalComponent,
+    PostDeleteBoardModalComponent,
+    PostDeleteThreadModalComponent
     //New components here
   ],
   entryComponents: [
@@ -334,7 +342,10 @@ import { DiscussionNavBarComponent } from './components/containers/DiscussionCon
     FishPhotoSelectModal,
     PostCreateCategoryModalComponent,
     PostCreateBoardModalComponent,
-    PostCreateThreadModalComponent
+    PostCreateThreadModalComponent,
+    PostDeleteCategoryModalComponent,
+    PostDeleteBoardModalComponent,
+    PostDeleteThreadModalComponent
   ],
 
   imports: [

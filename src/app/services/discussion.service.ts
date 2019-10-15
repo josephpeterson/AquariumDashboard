@@ -10,7 +10,7 @@ import { PostThread } from '../models/PostThread';
   providedIn: "root"
 })
 export class DiscussionService {
-  
+
   private _url: string;
 
   constructor(private http: HttpClient) {
@@ -21,13 +21,13 @@ export class DiscussionService {
     return this.http.get<PostCategory[]>(this._url + "/v1/Post/Categories");
   }
   public createCategory(category: PostCategory): Observable<PostCategory> {
-    return this.http.post<PostCategory>(this._url + "/v1/Post/Category",category);
+    return this.http.post<PostCategory>(this._url + "/v1/Post/Category", category);
   }
   createBoard(board: PostBoard): Observable<PostBoard> {
-    return this.http.post<PostBoard>(this._url + "/v1/Post/Board",board);
+    return this.http.post<PostBoard>(this._url + "/v1/Post/Board", board);
   }
   createThread(thread: PostThread): Observable<PostThread> {
-    return this.http.post<PostThread>(this._url + "/v1/Post/Thread",thread);
+    return this.http.post<PostThread>(this._url + "/v1/Post/Thread", thread);
   }
 
   public getBoard(boardId: number): Observable<PostBoard> {
@@ -35,5 +35,8 @@ export class DiscussionService {
   }
   public getThread(threadId: number): Observable<PostThread> {
     return this.http.get<PostThread>(this._url + `/v1/Post/Thread/${threadId}`);
+  }
+  public deleteCategory(categoryId: number) {
+    return this.http.delete(this._url + `/v1/Post/Category/${categoryId}`);
   }
 }

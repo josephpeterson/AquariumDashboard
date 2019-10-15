@@ -1,13 +1,21 @@
 <div *ngIf="categories$ | async as categories">
   <div *ngFor="let category of categories">
-    <h3>{{category.name}}</h3>
+    <h3>{{category.name}}
+      <button class="float-right btn btn-danger" (click)="clickDeleteCategory(category)">
+        <fa-icon class="mr-1" [icon]="faMinus"></fa-icon> Remove
+      </button>
+
+    </h3>
     <div *ngFor="let board of category.boards">
-      <a [routerLink]='["board",board.id]'>
-        {{board.title}}
-      </a>
+      <discussion-item [board]='board'></discussion-item>
     </div>
-    <button class="btn btn-primary" (click)="clickNewBoard(category)">New Board...</button>
+    <button class="btn btn-primary" (click)="clickNewBoard(category)">
+        <fa-icon class="mr-1" [icon]="faPlus"></fa-icon> Board
+      </button>
+
   </div>
 </div>
 <hr>
-<button class="btn btn-primary" (click)="clickNewCategory()">New Category...</button>
+<button class="btn btn-primary" (click)="clickNewCategory()">
+  <fa-icon [icon]="faPlus"></fa-icon>
+</button>

@@ -39,7 +39,7 @@ export const getSelectedThread = createSelector(postState,
             var c = state.entities[cId];
             for (var i = 0; i < c.boards.length; i++) {
                 var b = c.boards[i];
-                if(b.threads) continue;
+                if(!b.threads) continue;
                 for(var j=0;j< b.threads.length;j++)
                 {
                     var t = b.threads[j];

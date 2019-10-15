@@ -11,6 +11,10 @@ import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
 import { PostCreateCategoryModalComponent } from 'src/app/components/shared/modals/post-create-category-modal/post-create-category-modal.component';
 import { PostCreateBoardModalComponent } from 'src/app/components/shared/modals/post-create-board-modal/post-create-board-modal.component';
 import { PostCategory } from 'src/app/models/PostCategory';
+import { faPlusSquare, faMinusSquare } from '@fortawesome/free-solid-svg-icons';
+import { PostDeleteCategoryModalComponent } from 'src/app/components/shared/modals/post-delete-category-modal/post-delete-category-modal.component';
+import { PostBoard } from 'src/app/models/PostBoard';
+import { PostDeleteBoardModalComponent } from 'src/app/components/shared/modals/post-delete-board-modal/post-delete-board-modal.component';
 
 @Component({
   selector: 'app-main-page',
@@ -18,6 +22,9 @@ import { PostCategory } from 'src/app/models/PostCategory';
   styleUrls: ['./main-page.component.scss']
 })
 export class MainPageComponent implements OnInit {
+
+  public faPlus = faPlusSquare;
+  public faMinus = faMinusSquare;
 
   public categories$ = this.store.select(getAllCategories);
 
@@ -41,6 +48,18 @@ export class MainPageComponent implements OnInit {
     this.dialog.open(PostCreateBoardModalComponent, {
       width: "50%",
       data:  category
+    });
+  }
+  public clickDeleteCategory(category: PostCategory) {
+    this.dialog.open(PostDeleteCategoryModalComponent, {
+      width: "50%",
+      data:  category
+    });
+  }
+  public clickDeleteBoard(board: PostBoard) {
+    this.dialog.open(PostDeleteBoardModalComponent, {
+      width: "50%",
+      data:  board
     });
   }
 }
