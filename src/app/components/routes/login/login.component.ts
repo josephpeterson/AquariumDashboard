@@ -31,7 +31,16 @@ export class LoginComponent implements OnInit {
   clickLogin() {
     this.disabled = true;
     this.auth.login(this.email, this.password).subscribe(val => {
-      this.router.navigateByUrl("dashboard");
+
+      //todo make this more scaleable
+      var previousRoute = localStorage["unauthorizedRoute"];
+      if (previousRoute)
+      {
+        delete localStorage["unauthorizedRoute"];
+        this.router.navigateByUrl(previousRoute)
+      }
+      else
+        this.router.navigateByUrl("dashboard");
     }, (err: HttpErrorResponse) => {
       this.disabled = false;
       this.error = err.statusText;

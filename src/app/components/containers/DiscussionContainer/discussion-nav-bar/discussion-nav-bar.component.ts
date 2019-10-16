@@ -7,6 +7,9 @@ import { AppState } from 'src/app/app.state';
 import { MatDialog } from '@angular/material';
 import { takeUntil } from 'rxjs/operators';
 import { PostSelectThreadAction, PostLoadThreadAction } from 'src/app/store/post/post.actions';
+import { Title } from '@angular/platform-browser';
+import { PostThread } from 'src/app/models/PostThread';
+import { PostBoard } from 'src/app/models/PostBoard';
 
 @Component({
   selector: 'discussion-nav-bar',
@@ -21,11 +24,34 @@ export class DiscussionNavBarComponent implements OnInit {
   public threadLoadError$ = this.store.select(getPostLoadError);
   public threadLoading$ = this.store.select(isLoadingPost);
 
+  public selectedThread: PostThread;
+  public selectedBoard: PostBoard;
+
   constructor(public route: ActivatedRoute,
     public store: Store<AppState>,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog,
+    private titleService: Title) { }
 
   ngOnInit() {
-
+    this.selectedThread$.pipe(takeUntil(this.componentLifeCycle)).subscribe(thread => {
+      this.selectedThread = thread;
+      this.updateTitle();
+    });
+    this.selectedBoard$.pipe(takeUntil(this.componentLifeCycle)).subscribe(board => {
+      this.selectedBoard = board;
+      this.updateTitle();
+    });
+  }
+  ngOnDestroy() {
+    this.componentLifeCycle.next();
+    this.componentLifeCycle.unsubscribe();
+  }
+  private updateTitle() {
+    if (this.selectedThread)
+      this.titleService.setTitle(this.selectedThread.title);
+    else if (this.selectedBoard)
+      this.titleService.setTitle(this.selectedBoard.title);
+    else
+      this.titleService.setTitle("Discussions");
   }
 }

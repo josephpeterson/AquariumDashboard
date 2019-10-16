@@ -13,7 +13,7 @@
       {{board.title}}
     </a>
     <p *ngIf="thread">Started by <a [routerLink]='["/p",thread.author.id]'>{{thread.author.username}}</a></p>
-    <p *ngIf="board">Check it out here</p>
+    <p *ngIf="board">{{board.description}}</p>
   </div>
   <div *ngIf="thread" class="col">
     <div>{{thread.postCount}} Replies</div>

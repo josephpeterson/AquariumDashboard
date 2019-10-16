@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material';
 import { DiscussionService } from 'src/app/services/discussion.service';
 import { SnapshotLoadByAquariumAction } from 'src/app/store/snapshot/snapshot.actions';
 import { Post } from 'src/app/models/Post';
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -57,6 +58,10 @@ export class ThreadPageComponent implements OnInit {
       //this.disabled = false;
       this.error = err.error;
     });
-    this.post =  new Post();
+    this.post = new Post();
+  }
+  ngOnDestroy() {
+    this.componentLifeCycle.next();
+    this.componentLifeCycle.unsubscribe();
   }
 }

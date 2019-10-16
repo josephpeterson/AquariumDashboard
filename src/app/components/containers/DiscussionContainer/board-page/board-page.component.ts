@@ -13,6 +13,7 @@ import { MatDialog } from '@angular/material';
 import { PostCreateThreadModalComponent } from 'src/app/components/shared/modals/post-create-thread-modal/post-create-thread-modal.component';
 import { PostBoard } from 'src/app/models/PostBoard';
 import { faClipboard } from '@fortawesome/free-solid-svg-icons';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-board-page',
@@ -41,5 +42,9 @@ export class BoardPageComponent implements OnInit {
     this.store.dispatch(new PostSelectThreadAction(null));
     this.store.dispatch(new PostSelectBoardAction(boardId));
     this.store.dispatch(new PostLoadBoardAction(boardId));
+  }
+  ngOnDestroy() {
+    this.componentLifeCycle.next();
+    this.componentLifeCycle.unsubscribe();
   }
 }

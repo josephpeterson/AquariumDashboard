@@ -6,6 +6,7 @@ export class PostBoard {
   authorId: number;
   categoryId: number;
   title: string;
+  description: string;
   type: string;
   privacy: number;
   timestamp: Date;
