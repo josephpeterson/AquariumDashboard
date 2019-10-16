@@ -1,3 +1,4 @@
+import { AquariumAccount } from './AquariumAccount';
 
 export class Post {
   
@@ -9,5 +10,6 @@ export class Post {
   type: string;
   privacy: number;
   timestamp: Date;
+  author: AquariumAccount
 }
 
