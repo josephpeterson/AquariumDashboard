@@ -1,0 +1,13 @@
+<div class="card post">
+  <div class="card-body p-2">
+    <profile-icon-badge class="profile-icon-badge" [profile]="post.author.profile"></profile-icon-badge>
+    <a [routerLink]="['/p',post.authorId]">{{post.author.username}}</a>
+    <div>
+      <post-timestamp [post]="post"></post-timestamp>
+    </div>
+    <div class="row">
+      <ckeditor disabled="true" [editor]="Editor" [data]="post.content"></ckeditor>
+    </div>
+  </div>
+
+</div>

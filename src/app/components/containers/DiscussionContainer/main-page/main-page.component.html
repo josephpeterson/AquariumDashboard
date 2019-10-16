@@ -1,22 +1,32 @@
-<button class="btn btn-primary" (click)="toggleEditing()">Manage...</button>
-<div *ngIf="categories$ | async as categories">
-  <div *ngFor="let category of categories">
-    <h3>{{category.name}}
-      <button class="float-right btn btn-danger" (click)="clickDeleteCategory(category)" *ngIf="editing">
-        <fa-icon class="mr-1" [icon]="faMinus"></fa-icon> Remove
-      </button>
-
-    </h3>
-    <div *ngFor="let board of category.boards">
-      <discussion-item [board]='board'></discussion-item>
-    </div>
-    <button class="btn btn-primary" (click)="clickNewBoard(category)" *ngIf="editing">
+<div *ngIf="!(categoriesLoading$ | async) && categories$ | async as categories else unsuccessfull">
+  <button class="btn btn-primary" (click)="toggleEditing()">Manage...</button>
+  <div>
+    <div *ngFor="let category of categories">
+      <h3 class="category">{{category.name}}
+        <button class="float-right btn btn-danger" (click)="clickDeleteCategory(category)" *ngIf="editing">
+          <fa-icon class="mr-1" [icon]="faMinus"></fa-icon> Remove
+        </button>
+      </h3>
+      <div *ngFor="let board of category.boards">
+        <discussion-item [board]='board'></discussion-item>
+      </div>
+      <div *ngIf="!category.boards.length">
+        <p class="text-muted">No boards in this category</p>
+      </div>
+      <button class="btn btn-primary" (click)="clickNewBoard(category)" *ngIf="editing">
         <fa-icon class="mr-1" [icon]="faPlus"></fa-icon> Board
       </button>
 
+    </div>
   </div>
+  <hr>
+  <button class="btn btn-primary" (click)="clickNewCategory()" *ngIf="editing">
+    <fa-icon [icon]="faPlus" class="pr-1"></fa-icon> Category
+  </button>
 </div>
-<hr>
-<button class="btn btn-primary" (click)="clickNewCategory()" *ngIf="editing">
-  <fa-icon [icon]="faPlus"></fa-icon>
-</button>
+<ng-template #unsuccessfull>
+  <div class="container">
+    <div class="container alert alert-danger mt-2" *ngIf="categoriesLoadError$ | async as error">{{error}}</div>
+    <loading-container *ngIf="categoriesLoading$ | async"></loading-container>
+  </div>
+</ng-template>

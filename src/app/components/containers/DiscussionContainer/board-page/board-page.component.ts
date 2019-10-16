@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { ProfileSelectAction, ProfileLoadAction } from 'src/app/store/profile/profile.actions';
 import { Subject } from 'rxjs';
-import { PostSelectBoardAction, PostLoadBoardAction, PostResetAction, PostSelectThreadAction } from 'src/app/store/post/post.actions';
+import { PostSelectBoardAction, PostLoadBoardAction, PostResetAction, PostSelectThreadAction, PostLoadBoardSuccessAction } from 'src/app/store/post/post.actions';
 import { AppState } from 'src/app/app.state';
 import { Store } from '@ngrx/store';
 import { getSelectedBoard, getPostLoadError, isLoadingPost } from 'src/app/store/post/post.selector';
@@ -20,15 +20,15 @@ import { faClipboard } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./board-page.component.scss']
 })
 export class BoardPageComponent implements OnInit {
-    
+
   public componentLifeCycle = new Subject();
   public board$ = this.store.select(getSelectedBoard);
   public boardLoadError$ = this.store.select(getPostLoadError);
   public boardLoading$ = this.store.select(isLoadingPost);
 
-  constructor(public  route: ActivatedRoute,
-      public store: Store<AppState>,
-      public dialog: MatDialog) { }
+  constructor(public route: ActivatedRoute,
+    public store: Store<AppState>,
+    public dialog: MatDialog) { }
 
   ngOnInit() {
 
@@ -42,12 +42,4 @@ export class BoardPageComponent implements OnInit {
     this.store.dispatch(new PostSelectBoardAction(boardId));
     this.store.dispatch(new PostLoadBoardAction(boardId));
   }
-
-  public clickNewThread(board: PostBoard) {
-    this.dialog.open(PostCreateThreadModalComponent, {
-      width: "50%",
-      data: board
-    });
-  }
-
 }

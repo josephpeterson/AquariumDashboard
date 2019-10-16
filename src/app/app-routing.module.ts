@@ -36,6 +36,8 @@ import { DiscussionContainerComponent } from './components/containers/Discussion
 import { MainPageComponent } from './components/containers/DiscussionContainer/main-page/main-page.component';
 import { BoardPageComponent } from './components/containers/DiscussionContainer/board-page/board-page.component';
 import { ThreadPageComponent } from './components/containers/DiscussionContainer/thread-page/thread-page.component';
+import { CreateThreadFormComponent } from './components/containers/DiscussionContainer/board-page/create-thread-form/create-thread-form.component';
+import { BoardDetailComponent } from './components/containers/DiscussionContainer/board-page/board-detail/board-detail.component';
 
 const routes: Routes = [
   //{ path: '', component: AquariumSelectionComponent, pathMatch: 'full' },
@@ -199,7 +201,16 @@ const routes: Routes = [
     children: [
       {
         path: 'board/:boardId',
-        component: BoardPageComponent
+        component: BoardPageComponent,
+        children: [
+          {
+            path: 'new',
+            component: CreateThreadFormComponent
+          },
+          {
+            path: '**',
+            component: BoardDetailComponent
+          }]
       },
       {
         path: 'thread/:threadId',

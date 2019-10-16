@@ -1,5 +1,14 @@
-<div class="container  profile-container" *ngIf="thread$ | async as thread else unsuccessfull">
-  {{thread.title}}
+<div class="container" *ngIf="thread$ | async as thread else unsuccessfull">
+  <thread-banner [thread]="thread"></thread-banner>
+  <discussion-post *ngFor="let post of thread.posts" [post]="post"></discussion-post>
+  <hr>
+  <div class="card p-3 post-reply">
+    <h4>Reply to Thread</h4>
+    <post-editor [post]="post"></post-editor>
+    <div class="row">
+      <button class="btn btn-primary" (click)="postReply(thread)">Post Reply</button>
+    </div>
+  </div>
 </div>
 <ng-template #unsuccessfull>
   <div class="container">

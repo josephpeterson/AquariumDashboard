@@ -1,0 +1,6 @@
+<h4>Start a Thread</h4>
+<input mat-input placeholder="Title" [(ngModel)]="thread.title">
+<post-editor [post]="post"></post-editor>
+<div class="" *ngIf="board$ | async as board">
+  <button [disabled]="disabled" class="btn btn-primary" (click)="clickSubmit(board)">Create Thread</button>
+</div>

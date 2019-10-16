@@ -27,13 +27,5 @@ export class DiscussionNavBarComponent implements OnInit {
 
   ngOnInit() {
 
-    this.route.params.pipe(takeUntil(this.componentLifeCycle)).subscribe(params => {
-      var threadId = params.threadId;
-      this.loadThread(threadId);
-    });
-  }
-  loadThread(threadId: any) {
-    this.store.dispatch(new PostSelectThreadAction(threadId));
-    this.store.dispatch(new PostLoadThreadAction(threadId));
   }
 }

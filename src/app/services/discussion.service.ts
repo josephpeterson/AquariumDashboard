@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { PostBoard } from '../models/PostBoard';
 import { PostThread } from '../models/PostThread';
+import { Post } from '../models/Post';
 
 @Injectable({
   providedIn: "root"
@@ -28,6 +29,9 @@ export class DiscussionService {
   }
   createThread(thread: PostThread): Observable<PostThread> {
     return this.http.post<PostThread>(this._url + "/v1/Post/Thread", thread);
+  }
+  createPost(post: Post): Observable<Post> {
+    return this.http.post<Post>(this._url + "/v1/Post/Post", post);
   }
 
   public getBoard(boardId: number): Observable<PostBoard> {

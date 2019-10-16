@@ -1,12 +1,18 @@
 .thread {
     clear:both; 
-    padding:10px;
+    padding:0px;;
     font-size: 13px;
     background-color:#fafcfd;
     border-bottom:1px solid gray;
     .board-thumbnail {
+        display:block;
         float:left;
         padding-right:20px;
+        padding-bottom:5px;
+        color:black;
+    }
+    .board-thumbnail.unread {
+        color:gold;
     }
     .title  {
         font-weight: bold;

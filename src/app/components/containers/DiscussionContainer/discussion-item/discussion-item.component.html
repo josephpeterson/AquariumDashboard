@@ -1,8 +1,11 @@
 <div class="thread row">
   <div class="col">
-    <div class="board-thumbnail">
+    <a *ngIf="thread" [routerLink]='["/discussion/thread",thread.id]' class="board-thumbnail">
       <fa-icon class="fa-3x" [icon]="icon_board"></fa-icon>
-    </div>
+    </a>
+    <a *ngIf="board" [routerLink]='["/discussion/board",board.id]' class="board-thumbnail">
+      <fa-icon class="fa-3x" [icon]="icon_board"></fa-icon>
+    </a>
     <a *ngIf="thread" [routerLink]='["/discussion/thread",thread.id]' class="title">
       {{thread.title}}
     </a>
@@ -16,9 +19,9 @@
     <div>{{thread.postCount}} Replies</div>
   </div>
   <div *ngIf="board" class="col">
-      <div>{{board.postCount}} Posts</div>
-      <div>{{board.threadCount}} Threads</div>
-    </div>
+    <div>{{board.postCount}} Posts</div>
+    <div>{{board.threadCount}} Threads</div>
+  </div>
   <div class="col">
     Last Post
   </div>

@@ -176,7 +176,14 @@ import { DiscussionItemComponent } from './components/containers/DiscussionConta
 import { PostDeleteCategoryModalComponent } from './components/shared/modals/post-delete-category-modal/post-delete-category-modal.component';
 import { PostDeleteBoardModalComponent } from './components/shared/modals/post-delete-board-modal/post-delete-board-modal.component';
 import { PostDeleteThreadModalComponent } from './components/shared/modals/post-delete-thread-modal/post-delete-thread-modal.component';
-
+import { PostEditorComponent } from './components/containers/DiscussionContainer/post-editor/post-editor.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { PostTimestampComponent } from './components/containers/DiscussionContainer/post-timestamp/post-timestamp.component';
+import { DiscussionPostComponent } from './components/containers/DiscussionContainer/discussion-post/discussion-post.component';
+import { CreateThreadFormComponent } from './components/containers/DiscussionContainer/board-page/create-thread-form/create-thread-form.component';
+import { BoardDetailComponent } from './components/containers/DiscussionContainer/board-page/board-detail/board-detail.component';
+import { PostAuthorBadgeComponent } from './components/containers/DiscussionContainer/discussion-post/post-author-badge/post-author-badge.component';
+import { ThreadBannerComponent } from './components/containers/DiscussionContainer/thread-page/thread-banner/thread-banner.component';
 
 @NgModule({
   declarations: [
@@ -185,12 +192,12 @@ import { PostDeleteThreadModalComponent } from './components/shared/modals/post-
     FeedingListComponent,
     SpeciesContainer,
     FishContainer,
-    
+
     HomeComponent,
     LoginComponent,
     SignupComponent,
-    
-    
+
+
     SettingsContainer,
     SettingsNavBarComponent,
     SettingsUsersComponent,
@@ -319,7 +326,14 @@ import { PostDeleteThreadModalComponent } from './components/shared/modals/post-
     DiscussionItemComponent,
     PostDeleteCategoryModalComponent,
     PostDeleteBoardModalComponent,
-    PostDeleteThreadModalComponent
+    PostDeleteThreadModalComponent,
+    PostEditorComponent,
+    PostTimestampComponent,
+    DiscussionPostComponent,
+    CreateThreadFormComponent,
+    BoardDetailComponent,
+    PostAuthorBadgeComponent,
+    ThreadBannerComponent
     //New components here
   ],
   entryComponents: [
@@ -381,6 +395,7 @@ import { PostDeleteThreadModalComponent } from './components/shared/modals/post-
 
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
+    CKEditorModule,
 
     StoreModule.forRoot({}),
     StoreModule.forFeature('aquariums', aquariumReducer),
@@ -393,7 +408,7 @@ import { PostDeleteThreadModalComponent } from './components/shared/modals/post-
       maxAge: 25
     }),
     NotifierModule.withConfig(AquariumNotifierConfig),
-    EffectsModule.forRoot([AquariumEffects, SnapshotEffects, SpeciesEffects, FishEffects,ProfileEffects,PostEffects]),
+    EffectsModule.forRoot([AquariumEffects, SnapshotEffects, SpeciesEffects, FishEffects, ProfileEffects, PostEffects]),
     AppRoutingModule
   ],
   providers: [

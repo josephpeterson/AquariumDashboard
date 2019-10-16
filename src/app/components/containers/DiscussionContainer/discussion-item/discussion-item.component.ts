@@ -18,5 +18,4 @@ export class DiscussionItemComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }
