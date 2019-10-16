@@ -1,7 +1,8 @@
+<button class="btn btn-primary" (click)="toggleEditing()">Manage...</button>
 <div *ngIf="categories$ | async as categories">
   <div *ngFor="let category of categories">
     <h3>{{category.name}}
-      <button class="float-right btn btn-danger" (click)="clickDeleteCategory(category)">
+      <button class="float-right btn btn-danger" (click)="clickDeleteCategory(category)" *ngIf="editing">
         <fa-icon class="mr-1" [icon]="faMinus"></fa-icon> Remove
       </button>
 
@@ -9,13 +10,13 @@
     <div *ngFor="let board of category.boards">
       <discussion-item [board]='board'></discussion-item>
     </div>
-    <button class="btn btn-primary" (click)="clickNewBoard(category)">
+    <button class="btn btn-primary" (click)="clickNewBoard(category)" *ngIf="editing">
         <fa-icon class="mr-1" [icon]="faPlus"></fa-icon> Board
       </button>
 
   </div>
 </div>
 <hr>
-<button class="btn btn-primary" (click)="clickNewCategory()">
+<button class="btn btn-primary" (click)="clickNewCategory()" *ngIf="editing">
   <fa-icon [icon]="faPlus"></fa-icon>
 </button>

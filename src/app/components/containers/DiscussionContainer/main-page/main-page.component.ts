@@ -27,6 +27,7 @@ export class MainPageComponent implements OnInit {
   public faMinus = faMinusSquare;
 
   public categories$ = this.store.select(getAllCategories);
+  public editing: boolean = false;
 
   constructor(public store: Store<AppState>,public dialog: MatDialog) { }
 
@@ -61,5 +62,9 @@ export class MainPageComponent implements OnInit {
       width: "50%",
       data:  board
     });
+  }
+  public toggleEditing() {
+    this.editing = !this.editing;
+    console.log(this.editing);
   }
 }
