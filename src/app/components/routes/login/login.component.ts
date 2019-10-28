@@ -37,8 +37,7 @@ export class LoginComponent implements OnInit {
 
       //todo make this more scaleable
       var previousRoute = localStorage["unauthorizedRoute"];
-      if (previousRoute)
-      {
+      if (previousRoute) {
         delete localStorage["unauthorizedRoute"];
         this.router.navigateByUrl(previousRoute)
       }
@@ -46,12 +45,16 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl("dashboard");
     }, (err: HttpErrorResponse) => {
       this.disabled = false;
-      this.error = err.statusText;
-    });
-  }
 
-  getTest() {
-    return environment.urls.aquariumApi
+      switch (err.status) {
+        case 401:
+          this.error = "Invalid login information";
+          break;
+        default:
+          console.log(err);
+          this.error = err.statusText;
+      }
+    });
   }
 }
 
