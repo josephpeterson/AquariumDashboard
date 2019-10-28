@@ -5,6 +5,9 @@ import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
 import { HttpErrorResponse } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+
+
 
 @Component({
   selector: 'login-component',
@@ -45,6 +48,10 @@ export class LoginComponent implements OnInit {
       this.disabled = false;
       this.error = err.statusText;
     });
+  }
+
+  getTest() {
+    return environment.urls.aquariumApi
   }
 }
 
