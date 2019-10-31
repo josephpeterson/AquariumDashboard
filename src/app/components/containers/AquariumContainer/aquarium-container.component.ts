@@ -8,6 +8,7 @@ import { getSelectedAquarium, isLoadingAquariums } from 'src/app/store/aquarium/
 import { Aquarium } from 'src/app/models/Aquarium';
 import { Title } from '@angular/platform-browser';
 import { takeUntil } from 'rxjs/operators';
+import { faHamburger, faBars } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'aquarium-container',
@@ -15,6 +16,10 @@ import { takeUntil } from 'rxjs/operators';
   //styleUrls: ['./nav-menu.component.scss']
 })
 export class AquariumContainer {
+
+  public faDrawer = faBars;
+  public opened: boolean = true;
+
   public aquarium$: Observable<Aquarium> = this.store.select(getSelectedAquarium);
   public loading$: Observable<boolean> = this.store.select(isLoadingAquariums);
   public componentLifeCycle = new Subject();

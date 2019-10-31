@@ -5,7 +5,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 //Material Imports
 import { MatTableModule } from '@angular/material/table';
-import { MatCheckboxModule, MatInputModule, MatSelectModule, MatDialogModule, MatButtonModule, MatNativeDateModule, MatAutocompleteModule } from '@angular/material';
+import { MatCheckboxModule, MatInputModule, MatSelectModule, MatDialogModule, MatButtonModule, MatNativeDateModule, MatAutocompleteModule, MatSidenav, MatSidenavModule } from '@angular/material';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSortModule } from '@angular/material/sort';
 import { MatMenuModule } from '@angular/material/menu';
@@ -24,8 +24,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 //Component declarations
-import { AppComponent } from './components/app-root/app.component';
-import { NavMenuComponent } from './components/shared/nav-menu/nav-menu.component';
 import { DashboardComponent } from './components/containers/AquariumContainer/dashboard/dashboard.component';
 
 
@@ -186,6 +184,9 @@ import { PostAuthorBadgeComponent } from './components/containers/DiscussionCont
 import { ThreadBannerComponent } from './components/containers/DiscussionContainer/thread-page/thread-banner/thread-banner.component';
 import { PasswordResetComponent } from './components/routes/passwordreset/password-reset.component';
 import { ForgotPasswordModalComponent } from './components/shared/modals/forgot-password-modal/forgot-password-modal.component';
+import { AquariumNavBarComponent } from './components/containers/AquariumContainer/aquarium-nav-bar/aquarium-nav-bar.component';
+import { AppComponent } from './components/containers/app.component';
+import { NavMenuComponent } from './components/shared/nav-menu/nav-menu.component';
 
 @NgModule({
   declarations: [
@@ -326,6 +327,7 @@ import { ForgotPasswordModalComponent } from './components/shared/modals/forgot-
     PostCreateBoardModalComponent,
     PostCreateThreadModalComponent,
     DiscussionNavBarComponent,
+    AquariumNavBarComponent,
     DiscussionItemComponent,
     PostDeleteCategoryModalComponent,
     PostDeleteBoardModalComponent,
@@ -372,6 +374,7 @@ import { ForgotPasswordModalComponent } from './components/shared/modals/forgot-
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
+    MatSidenavModule,
     MatProgressSpinnerModule,
     MatCardModule,
     MatTableModule,

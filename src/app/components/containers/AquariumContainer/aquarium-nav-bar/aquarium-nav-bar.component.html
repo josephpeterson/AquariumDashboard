@@ -1,0 +1,75 @@
+<div *ngIf="selectedAquarium$ | async as aquarium" class="aquarium-nav-bar">
+  <span>
+    <a class="nav-link" [routerLink]='["/aquarium",aquarium.id]' [routerLinkActiveOptions]='{ exact: true }'
+      [routerLinkActive]='["link-active"]'>
+      <fa-icon [icon]="faDashboard" class="mr-1"></fa-icon>Dashboard
+    </a>
+  </span>
+  <span>
+    <a class="nav-link" [routerLink]='["/aquarium",aquarium.id,"parameters"]'
+      [routerLinkActiveOptions]='{ exact: true }' [routerLinkActive]='["link-active"]'>
+      <fa-icon [icon]="faParameters" class="mr-1"></fa-icon>Parameters
+    </a>
+  </span>
+  <span>
+    <a class="nav-link" [routerLink]='["/aquarium",aquarium.id,"fish"]' [routerLinkActive]='["link-active"]'>
+      <fa-icon [icon]="faFish" class="mr-1"></fa-icon>Fish
+    </a>
+  </span>
+  <span>
+    <a class="nav-link" [routerLink]='["/aquarium",aquarium.id,"photos"]' [routerLinkActive]='["link-active"]'
+      [routerLinkActiveOptions]="{exact: false}">
+      <fa-icon [icon]="faPhotos" class="mr-1"></fa-icon>Photos
+    </a>
+  </span>
+  <span>
+    <a class="nav-link" [routerLink]='["/aquarium",aquarium.id,"maintenance"]' [routerLinkActive]='["link-active"]'
+      [routerLinkActiveOptions]="{exact: false}">
+      <fa-icon [icon]="faMaintenance" class="mr-1"></fa-icon>Maintenance
+    </a>
+  </span>
+  <span>
+    <a class="nav-link" [routerLink]='["/aquarium",aquarium.id,"settings"]' [routerLinkActive]='["link-active"]'>
+      <fa-icon [icon]="faSliders" class="mr-1"></fa-icon>Settings
+    </a>
+  </span>
+</div>
+
+<!--
+<ng-container *ngIf="aquarium$ | async as aquarium">
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]='["/aquarium/" + aquarium.id]' [routerLinkActiveOptions]='{ exact: true }'
+        [routerLinkActive]='["link-active"]'>
+        <fa-icon [icon]="faDashboard" class="mr-1"></fa-icon>Dashboard
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]='["/aquarium",aquarium.id,"parameters"]'
+        [routerLinkActiveOptions]='{ exact: true }' [routerLinkActive]='["link-active"]'>
+        <fa-icon [icon]="faParameters" class="mr-1"></fa-icon>Parameters
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]='["/aquarium",aquarium.id,"fish"]' [routerLinkActive]='["link-active"]'>
+        <fa-icon [icon]="faFish" class="mr-1"></fa-icon>Fish
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]='["/aquarium",aquarium.id,"photos"]' [routerLinkActive]='["link-active"]'
+        [routerLinkActiveOptions]="{exact: false}">
+        <fa-icon [icon]="faPhotos" class="mr-1"></fa-icon>Photos
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]='["/aquarium",aquarium.id,"maintenance"]'
+        [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]="{exact: false}">
+        <fa-icon [icon]="faMaintenance" class="mr-1"></fa-icon>Maintenance
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]='["/aquarium",aquarium.id,"settings"]' [routerLinkActive]='["link-active"]'>
+        <fa-icon [icon]="faSliders" class="mr-1"></fa-icon>Settings
+      </a>
+    </li>
+  </ng-container>
+  -->

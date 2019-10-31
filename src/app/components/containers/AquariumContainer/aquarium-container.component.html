@@ -1,7 +1,17 @@
-<nav-menu></nav-menu>
-<div class="container">
-    <router-outlet *ngIf="aquarium$ | async else loading"></router-outlet>
-</div>
-<ng-template #loading>
-    <loading-container></loading-container>
-</ng-template>
+<mat-sidenav-container class="example-container">
+    <mat-sidenav #sidenav mode="side" [(opened)]="opened">
+        <aquarium-nav-bar></aquarium-nav-bar>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <div class="container">
+            <button mat-button (click)="sidenav.toggle()">
+                <fa-icon class="" [icon]="faDrawer"></fa-icon>
+            </button>
+            <router-outlet *ngIf="aquarium$ | async else loading"></router-outlet>
+        </div>
+        <ng-template #loading>
+            <loading-container></loading-container>
+        </ng-template>
+    </mat-sidenav-content>
+</mat-sidenav-container>
