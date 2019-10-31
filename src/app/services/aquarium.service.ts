@@ -244,4 +244,9 @@ export class AquariumService {
   performSearch(options: SearchOptions): Observable<SearchResult[]>  {
     return this.http.post<SearchResult[]>(this._url + `/v1/Search`,options);
   }
+  public sendPasswordResetEmail(email: string): Observable<any>  {
+    return this.http.post(this._url + `/v1/Auth/PasswordReset/Attempt`,{
+      token: email
+    });
+  }
 }

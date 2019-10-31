@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef, MatDialog } from '@angular/material';
 import { LoginModalComponent } from '../../shared/modals/login-modal/login-modal.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
 import { HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { ForgotPasswordModalComponent } from '../../shared/modals/forgot-password-modal/forgot-password-modal.component';
 
 
 
@@ -17,7 +18,7 @@ import { environment } from 'src/environments/environment';
 export class LoginComponent implements OnInit {
 
 
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(private dialog: MatDialog,private auth: AuthService, private router: Router) { }
 
   public error: string;
   public password: string;
@@ -54,6 +55,14 @@ export class LoginComponent implements OnInit {
           console.log(err);
           this.error = err.statusText;
       }
+    });
+  }
+
+  forgotPassword() {
+    this.dialog.open(ForgotPasswordModalComponent, {
+      width: "50%",
+      data: this.email,
+      restoreFocus: false
     });
   }
 }

@@ -184,6 +184,8 @@ import { CreateThreadFormComponent } from './components/containers/DiscussionCon
 import { BoardDetailComponent } from './components/containers/DiscussionContainer/board-page/board-detail/board-detail.component';
 import { PostAuthorBadgeComponent } from './components/containers/DiscussionContainer/discussion-post/post-author-badge/post-author-badge.component';
 import { ThreadBannerComponent } from './components/containers/DiscussionContainer/thread-page/thread-banner/thread-banner.component';
+import { PasswordResetComponent } from './components/routes/passwordreset/password-reset.component';
+import { ForgotPasswordModalComponent } from './components/shared/modals/forgot-password-modal/forgot-password-modal.component';
 
 @NgModule({
   declarations: [
@@ -196,6 +198,7 @@ import { ThreadBannerComponent } from './components/containers/DiscussionContain
     HomeComponent,
     LoginComponent,
     SignupComponent,
+    PasswordResetComponent,
 
 
     SettingsContainer,
@@ -333,7 +336,8 @@ import { ThreadBannerComponent } from './components/containers/DiscussionContain
     CreateThreadFormComponent,
     BoardDetailComponent,
     PostAuthorBadgeComponent,
-    ThreadBannerComponent
+    ThreadBannerComponent,
+    ForgotPasswordModalComponent
     //New components here
   ],
   entryComponents: [
@@ -359,7 +363,8 @@ import { ThreadBannerComponent } from './components/containers/DiscussionContain
     PostCreateThreadModalComponent,
     PostDeleteCategoryModalComponent,
     PostDeleteBoardModalComponent,
-    PostDeleteThreadModalComponent
+    PostDeleteThreadModalComponent,
+    ForgotPasswordModalComponent
   ],
 
   imports: [

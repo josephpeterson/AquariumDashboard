@@ -73,6 +73,37 @@ export class AuthService {
     user.email = data["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"];
     return user;
   }
+
+
+
+  //Password
+  public resetPasswordHandshake(resetToken: string) {
+    var req = this.http.post(this._url + `/v1/Auth/PasswordReset/Upgrade`, {
+      token: resetToken
+    });
+    var a = new Subject<string>();
+    req.subscribe((response: TokenResponse) => {
+      a.next(response.token);
+    },
+      err => {
+        a.error(err);
+      });
+    return a;
+  }
+  public submitPasswordResetRequest(requestToken: string,newPassword:string) {
+    var req = this.http.post(this._url + `/v1/Auth/PasswordReset/Submit`, {
+      token: requestToken,
+      password: newPassword
+    });
+    var a = new Subject();
+    req.subscribe((response: AquariumAccount) => {
+      a.next(response);
+    },
+      err => {
+        a.error(err);
+      });
+    return a;
+  }
 }
 class TokenResponse {
   public token;

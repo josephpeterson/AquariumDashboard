@@ -38,6 +38,7 @@ import { BoardPageComponent } from './components/containers/DiscussionContainer/
 import { ThreadPageComponent } from './components/containers/DiscussionContainer/thread-page/thread-page.component';
 import { CreateThreadFormComponent } from './components/containers/DiscussionContainer/board-page/create-thread-form/create-thread-form.component';
 import { BoardDetailComponent } from './components/containers/DiscussionContainer/board-page/board-detail/board-detail.component';
+import { PasswordResetComponent } from './components/routes/passwordreset/password-reset.component';
 
 const routes: Routes = [
   //{ path: '', component: AquariumSelectionComponent, pathMatch: 'full' },
@@ -226,6 +227,10 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent
+  },
+  {
+    path: 'passwordreset/:resetToken',
+    component: PasswordResetComponent
   },
   { path: '**', redirectTo: "/" }
 ];

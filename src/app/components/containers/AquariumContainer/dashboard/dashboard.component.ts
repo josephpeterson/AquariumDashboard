@@ -23,6 +23,7 @@ import { FishCreateButtonComponent } from 'src/app/components/data/fish/create-b
 
 export class DashboardComponent {
 
+  public disableTest = false;
   faExclamationTriangle = faExclamationTriangle;
 
   public aquarium$: Observable<Aquarium> = this.store.select(getSelectedAquarium);
