@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
 
   forgotPassword() {
     this.dialog.open(ForgotPasswordModalComponent, {
-      width: "50%",
+      width: "30%",
       data: this.email,
       restoreFocus: false
     });
