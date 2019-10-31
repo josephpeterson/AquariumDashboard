@@ -71,7 +71,7 @@ export class NavMenuComponent {
       width: "60%",
     }).afterClosed().subscribe(aq => {
       if (aq){
-        this.router.navigate([aq.id]);
+        this.router.navigate(['aquarium',aq.id]);
       }
     });
   }

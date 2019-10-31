@@ -10,7 +10,7 @@
     </div>
     <div class="result" [ngClass]='result.type' *ngFor="let result of results">
       <ng-container [ngSwitch]="result.type" *ngIf="result.data as d" >
-        <a (click)="setSearchActive(false)" *ngSwitchCase="'Aquarium'" [routerLink]='["/" + d.id]'>
+        <a (click)="setSearchActive(false)" *ngSwitchCase="'Aquarium'" [routerLink]='["/aquarium/" + d.id]'>
           {{d.name}}
         </a>
         <a (click)="setSearchActive(false)" *ngSwitchCase="'Account'" [routerLink]='["/p/" + d.account.id]'>

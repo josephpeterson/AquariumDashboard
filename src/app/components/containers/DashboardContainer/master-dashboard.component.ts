@@ -62,7 +62,7 @@ export class MasterDashboardComponent implements OnInit {
     this.router.navigate(url);
   }
   clickAquarium(aquarium: Aquarium) {
-    var url = [aquarium.id];
+    var url = ["aquarium",aquarium.id];
     this.router.navigate(url);
   }
 

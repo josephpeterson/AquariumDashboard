@@ -1,4 +1,4 @@
-<div class="container" *ngIf="thread$ | async as thread else unsuccessfull">
+<div class="container" *ngIf="!(threadLoading$ | async) && thread$ | async as thread else unsuccessfull">
   <thread-banner [thread]="thread"></thread-banner>
   <discussion-post *ngFor="let post of thread.posts" [post]="post"></discussion-post>
   <hr>
