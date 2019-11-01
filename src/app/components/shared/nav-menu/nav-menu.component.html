@@ -2,9 +2,9 @@
 
   <nav class='navbar nav-spacer navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow'>
     <div class="container">
-        <button *ngIf="sidenav" mat-button (click)="sidenav.toggle()">
-            <fa-icon class="" [icon]="faDrawer"></fa-icon>
-          </button>
+      <button *ngIf="sidenav" mat-button (click)="sidenav.toggle()">
+        <fa-icon class="" [icon]="faDrawer"></fa-icon>
+      </button>
       <a class="navbar-brand" [routerLink]='["/dashboard"]'><img height="30px" class="mr-2"
           src="https://image.flaticon.com/icons/png/512/31/31267.png" />Dashboard</a>
 
@@ -16,7 +16,7 @@
       </button>
 
       <search-form></search-form>
-      
+
 
       <!-- Aquarium Navigation -->
       <div class="d-sm-inline-flex flex-sm-row-reverse" [ngClass]='{"show": isExpanded}'>
@@ -60,7 +60,10 @@
           </ng-container>
         -->
           <li class="nav-item">
-            <button class="btn btn-link" [routerLink]="['/discussion']">Dicussion Board</button>
+            <button class="btn btn-link" [routerLink]="['/species']">Species</button>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-link" [routerLink]="['/discussion']">Community</button>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"

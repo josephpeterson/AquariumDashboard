@@ -1,5 +1,16 @@
 <nav-menu></nav-menu>
-<div class="container" *ngIf="speciesId != -1">
+<div class="container" *ngIf="speciesId != -1 else all">
     <species-detail-view [speciesId]="speciesId"></species-detail-view>
     <button class="btn btn-primary" (click)="clickBack()">Back</button>
 </div>
+<ng-template #all>
+    <div class="container">
+        <h3 class="m-2 mt-4">Species</h3>
+        <species-table (rowClicked)="clickSpecies($event[1])"
+            [displayedColumns]="['name','fishCount','aquariumCount','price','careLevel']"></species-table>
+        <button mat-list-item type="button" class="mt-2 btn btn-primary btn-sm" routerLink="/species/add">
+            <fa-icon class="addIcon mr-2" [icon]="faCreate"></fa-icon>New Species...
+        </button>
+    </div>
+
+</ng-template>

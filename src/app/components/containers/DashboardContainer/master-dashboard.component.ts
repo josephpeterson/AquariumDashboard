@@ -56,11 +56,6 @@ export class MasterDashboardComponent implements OnInit {
     });
     //dialog.error = new ConnectionError(error);
   }
-
-  clickSpecies(species: Species) {
-    var url = ["species", species.id];
-    this.router.navigate(url);
-  }
   clickAquarium(aquarium: Aquarium) {
     var url = ["aquarium",aquarium.id];
     this.router.navigate(url);

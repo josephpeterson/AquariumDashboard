@@ -68,7 +68,6 @@ import { SnapshotDeleteButtonComponent } from './components/data/snapshot/delete
 import { FishTableListComponent } from './components/data/fish/table-list/fish-table-list.component';
 import { SpeciesSelectComponent } from './components/data/species/select/species-select.component';
 import { AquariumSelectComponent } from './components/data/aquarium/select/aquarium-select.component';
-import { ManageSpeciesModalComponent } from './components/shared/modals/manage-species-modal/manage-species-modal.component';
 import { SpeciesTableComponent } from './components/data/species/species-table/species-table.component';
 import { SpeciesDetailFormComponent } from './components/data/species/species-detail-form/species-detail-form.component';
 import { FishInformationComponent } from './components/data/fish/fish-information/fish-information.component';
@@ -187,6 +186,7 @@ import { ForgotPasswordModalComponent } from './components/shared/modals/forgot-
 import { AquariumNavBarComponent } from './components/containers/AquariumContainer/aquarium-nav-bar/aquarium-nav-bar.component';
 import { AppComponent } from './components/app-root/app.component';
 import { NavMenuComponent } from './components/shared/nav-menu/nav-menu.component';
+import { CreateSpeciesModalComponent } from './components/shared/modals/create-species-modal/create-species-modal.component';
 
 @NgModule({
   declarations: [
@@ -292,7 +292,7 @@ import { NavMenuComponent } from './components/shared/nav-menu/nav-menu.componen
     TaskTableComponent,
     CreateAquariumModelComponent,
     FishAddModalComponent,
-    ManageSpeciesModalComponent,
+    CreateSpeciesModalComponent,
     ScraperModalComponent,
     PhotoExpandedModalComponent,
     ManagePhotoConfigurationModal,
@@ -349,7 +349,7 @@ import { NavMenuComponent } from './components/shared/nav-menu/nav-menu.componen
     BugReportModalComponent,
     FishFeedModalComponent,
     ErrorMessageModalComponent,
-    ManageSpeciesModalComponent,
+    CreateSpeciesModalComponent,
     FishAddModalComponent,
     ManageAquariumDeviceModalComponent,
     SelectAquariumModalComponent,

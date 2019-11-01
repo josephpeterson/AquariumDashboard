@@ -76,7 +76,7 @@ export function speciesReducer(state = initialState, action: AllSpeciesActions):
 				...state,
 				creating: true,
 				//created: false,
-				//createError: null,
+				createError: null,
 			}
 		case SpeciesActions.AddSpeciesSuccess:
 			return adapter.addOne(action.payload, {

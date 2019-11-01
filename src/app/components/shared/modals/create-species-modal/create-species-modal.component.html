@@ -1,0 +1,27 @@
+<div class="create-species-modal-component">
+  <h1 mat-dialog-title>Create Species</h1>
+  <div *ngIf="!(adding$ | async)">
+    <small class="text-muted">Please enter the basic details about this fish species.</small>
+    <div class="row m-2">
+      <mat-form-field class="w-50">
+        <input type="text" placeholder="Species Name" aria-label="Number" matInput [(ngModel)]="species.name">
+      </mat-form-field>
+    </div>
+    <div class="row m-2" class="w-100">
+      <mat-form-field>
+        <textarea matInput [(ngModel)]="species.description"
+          placeholder="Fish description, notes, attributes, features, etc..."></textarea>
+      </mat-form-field>
+    </div>
+    <div class="row m-2">
+      <mat-form-field class="w-100">
+        <textarea matInput [(ngModel)]="species.website" placeholder="Website, url, wiki etc."></textarea>
+      </mat-form-field>
+    </div>
+  </div>
+  <mat-dialog-actions align="end">
+    <button [disabled]="adding$ | async" class="m-2 btn btn-dark" mat-dialog-close>Back</button>
+    <button [disabled]="adding$ | async" class="m-2 btn btn-success md-float-right" (click)='clickNewSpecies()'>Add
+      Species...</button>
+  </mat-dialog-actions>
+</div>

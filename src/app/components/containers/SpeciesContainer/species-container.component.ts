@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AppState } from 'src/app/app.state';
 import { Store } from '@ngrx/store';
 import {Location} from '@angular/common';
+import { Species } from 'src/app/models/Species';
 
 
 @Component({
@@ -18,6 +19,7 @@ export class SpeciesContainer implements OnInit {
     public dialog: MatDialog,
     public store: Store<AppState>,
     private route: ActivatedRoute,
+    private router: Router,
     private _location: Location
   ) { }
 
@@ -30,6 +32,10 @@ export class SpeciesContainer implements OnInit {
     });
   }
 
+  clickSpecies(species: Species) {
+    var url = ["species", species.id];
+    this.router.navigate(url);
+  }
   clickBack() {
     this._location.back();
   }

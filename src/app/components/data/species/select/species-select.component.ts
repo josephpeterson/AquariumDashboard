@@ -7,7 +7,7 @@ import { AppState } from 'src/app/app.state';
 import { takeUntil } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material';
-import { ManageSpeciesModalComponent } from '../../../shared/modals/manage-species-modal/manage-species-modal.component';
+import { CreateSpeciesModalComponent } from '../../../shared/modals/create-species-modal/create-species-modal.component';
 import { Fish } from 'src/app/models/Fish';
 import { SpeciesLoadAction } from 'src/app/store/species/species.actions';
 import { TypeCheckCompiler } from '@angular/compiler/src/view_compiler/type_check_compiler';
@@ -58,8 +58,8 @@ export class SpeciesSelectComponent {
         this.componentLifeCycle$.next();
         this.componentLifeCycle$.unsubscribe();
     }
-    openSpeciesManager() {
-        var dialog = this.dialog.open(ManageSpeciesModalComponent, {
+    openNewSpecies() {
+        var dialog = this.dialog.open(CreateSpeciesModalComponent, {
             //height: "80%",
             width: "60%"
           }).componentInstance;

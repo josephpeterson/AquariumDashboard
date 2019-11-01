@@ -11,7 +11,7 @@ import { Observable, Subject } from 'rxjs';
 import { NotifierService } from 'angular-notifier';
 import { take, takeUntil } from 'rxjs/operators';
 import { Species } from 'src/app/models/Species';
-import { ManageSpeciesModalComponent } from '../../../shared/modals/manage-species-modal/manage-species-modal.component';
+import { CreateSpeciesModalComponent } from '../../../shared/modals/create-species-modal/create-species-modal.component';
 import { ManageAquariumDeviceModalComponent } from 'src/app/components/shared/modals/manage-aquarium-device-modal/manage-aquarium-device-modal.component';
 import { AquariumService } from 'src/app/services/aquarium.service';
 
@@ -106,13 +106,13 @@ export class SettingsComponent implements OnInit {
   }
 
   speciesClickRow(species: Species) {
-    var dialog = this.dialog.open(ManageSpeciesModalComponent, {
+    var dialog = this.dialog.open(CreateSpeciesModalComponent, {
       width: "60%"
     }).componentInstance;
     dialog.selectedSpeciesId = species.id;
   }
   speciesClickNew() {
-    var dialog = this.dialog.open(ManageSpeciesModalComponent, {
+    var dialog = this.dialog.open(CreateSpeciesModalComponent, {
       width: "60%"
     }).componentInstance;
     dialog.addingSpecies = true;
