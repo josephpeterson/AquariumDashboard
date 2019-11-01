@@ -245,6 +245,7 @@ export class AquariumService {
     return this.http.post<SearchResult[]>(this._url + `/v1/Search`,options);
   }
   public sendPasswordResetEmail(email: string): Observable<any>  {
+    console.log(email);
     return this.http.post(this._url + `/v1/Auth/PasswordReset/Attempt`,{
       token: email
     });

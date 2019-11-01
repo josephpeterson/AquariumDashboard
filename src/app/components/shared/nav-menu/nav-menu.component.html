@@ -2,6 +2,9 @@
 
   <nav class='navbar nav-spacer navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow'>
     <div class="container">
+        <button *ngIf="sidenav" mat-button (click)="sidenav.toggle()">
+            <fa-icon class="" [icon]="faDrawer"></fa-icon>
+          </button>
       <a class="navbar-brand" [routerLink]='["/dashboard"]'><img height="30px" class="mr-2"
           src="https://image.flaticon.com/icons/png/512/31/31267.png" />Dashboard</a>
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
@@ -11,7 +11,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';
 import { AquariumAccount } from 'src/app/models/AquariumAccount';
-import { faSignOutAlt, faSlidersH, faPhotoVideo, faFish, faCogs, faChartLine, faNetworkWired } from '@fortawesome/free-solid-svg-icons';
+import { faSignOutAlt, faSlidersH, faPhotoVideo, faFish, faCogs, faChartLine, faNetworkWired, faBars } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'nav-menu',
@@ -35,6 +35,9 @@ export class NavMenuComponent {
   public faMaintenance = faCogs;
   public faDashboard = faChartLine;
   public faParameters = faNetworkWired;
+
+  @Input("sidenav") sidenav;
+  public faDrawer = faBars;
 
 
   constructor(private store: Store<AppState>,
@@ -63,6 +66,7 @@ export class NavMenuComponent {
       if(err && err.status == 401)
         this.router.navigate(['']);
     });
+
   }
 
   openAquariumSelection() {

@@ -1,13 +1,12 @@
+<nav-menu [sidenav]="sidenav"></nav-menu>
 <mat-sidenav-container class="example-container">
-    <mat-sidenav #sidenav mode="side" [(opened)]="opened">
+    <mat-sidenav #sidenav mode="side" [(opened)]="opened" [fixedInViewport]="1" [fixedTopGap]="60"
+    [fixedBottomGap]="0">
         <aquarium-nav-bar></aquarium-nav-bar>
     </mat-sidenav>
 
     <mat-sidenav-content>
         <div class="container">
-            <button mat-button (click)="sidenav.toggle()">
-                <fa-icon class="" [icon]="faDrawer"></fa-icon>
-            </button>
             <router-outlet *ngIf="aquarium$ | async else loading"></router-outlet>
         </div>
         <ng-template #loading>

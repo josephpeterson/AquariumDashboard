@@ -185,7 +185,7 @@ import { ThreadBannerComponent } from './components/containers/DiscussionContain
 import { PasswordResetComponent } from './components/routes/passwordreset/password-reset.component';
 import { ForgotPasswordModalComponent } from './components/shared/modals/forgot-password-modal/forgot-password-modal.component';
 import { AquariumNavBarComponent } from './components/containers/AquariumContainer/aquarium-nav-bar/aquarium-nav-bar.component';
-import { AppComponent } from './components/containers/app.component';
+import { AppComponent } from './components/app-root/app.component';
 import { NavMenuComponent } from './components/shared/nav-menu/nav-menu.component';
 
 @NgModule({
