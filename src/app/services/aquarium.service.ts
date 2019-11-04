@@ -43,7 +43,7 @@ export class AquariumService {
   }
 
   public getCurrentUser() {
-    return this.http.get<AquariumAccount>(this._url + "/v1/Current");
+    return this.http.get<AquariumAccount>(this._url + "/v1/Account/Current");
   }
   public SendLightingConfiguration(config: LightingConfiguration) {
     return this.http.post<LightingConfiguration>(this._url + "/v1/lighting", config, httpOptions).toPromise()

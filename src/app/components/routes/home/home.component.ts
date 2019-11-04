@@ -11,19 +11,23 @@ import { AquariumService } from 'src/app/services/aquarium.service';
 export class HomeComponent implements OnInit {
 
   public authorized: boolean = this.auth.isAuthenticated();
-  
-  constructor(private auth:AuthService,private router: Router,private aquariumService:AquariumService) {
+  public ready: boolean = false;
+
+  constructor(private auth: AuthService, private router: Router, private aquariumService: AquariumService) {
 
   }
   ngOnInit() {
-    if(this.auth.isAuthenticated()) {
+    if (this.auth.isAuthenticated()) {
       //Are we authorized
       this.aquariumService.getCurrentUser().subscribe(data => {
         this.router.navigate(["dashboard"]);
-      },err => {
-
+        this.ready = true;
+      }, err => {
+        this.ready = true;
       });
     }
+    else
+      this.ready = true;
   }
 }
 

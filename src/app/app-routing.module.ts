@@ -39,10 +39,12 @@ import { ThreadPageComponent } from './components/containers/DiscussionContainer
 import { CreateThreadFormComponent } from './components/containers/DiscussionContainer/board-page/create-thread-form/create-thread-form.component';
 import { BoardDetailComponent } from './components/containers/DiscussionContainer/board-page/board-detail/board-detail.component';
 import { PasswordResetComponent } from './components/routes/passwordreset/password-reset.component';
+import { CreateAquariumComponent } from './components/containers/AquariumContainer/create-aquarium/create-aquarium.component';
 
 const routes: Routes = [
   //{ path: '', component: AquariumSelectionComponent, pathMatch: 'full' },
 
+  //Species
   {
     path: 'species',
     canActivate: [AuthGuard],
@@ -53,11 +55,13 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     component: SpeciesContainer
   },
+  //Master Dashboard
   {
     path: 'dashboard',
     canActivate: [AuthGuard],
     component: MasterDashboardComponent
   },
+  //SettingsContainer
   {
     path: 'settings',
     component: SettingsContainer,
@@ -94,6 +98,13 @@ const routes: Routes = [
         component: SettingsGeneralComponent
       },
     ]
+  },
+  //Aquariums
+  {
+    path: 'aquarium/new',
+    component: CreateAquariumComponent,
+    runGuardsAndResolvers: "always",
+    canActivate: [AuthGuard],
   },
   {
     path: 'aquarium/:aqId',
@@ -137,6 +148,7 @@ const routes: Routes = [
         path: '',
         component: DashboardComponent
       }
+      
     ]
   },
   {

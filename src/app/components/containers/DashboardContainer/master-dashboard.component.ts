@@ -43,6 +43,7 @@ export class MasterDashboardComponent implements OnInit {
     this.store.dispatch(new AquariumListAction());
   }
 
+  //todo depcrecated
   displayCreateAquariumDialog() {
     var dialog = this.dialog.open(CreateAquariumModelComponent, {
       width: "40%"

@@ -187,6 +187,12 @@ import { AquariumNavBarComponent } from './components/containers/AquariumContain
 import { AppComponent } from './components/app-root/app.component';
 import { NavMenuComponent } from './components/shared/nav-menu/nav-menu.component';
 import { CreateSpeciesModalComponent } from './components/shared/modals/create-species-modal/create-species-modal.component';
+import { TemperatureHistogramComponent } from './components/containers/DashboardContainer/temperature-histogram/temperature-histogram.component';
+import { ProfileProgressionComponent } from './components/containers/AquariumContainer/dashboard/profile-progression/profile-progression.component';
+import { CreateAquariumComponent } from './components/containers/AquariumContainer/create-aquarium/create-aquarium.component';
+import { Ng5SliderModule } from 'ng5-slider';
+import { AutocompleteTypeComponent } from './components/shared/autocomplete-type/autocomplete-type.component';
+
 
 @NgModule({
   declarations: [
@@ -339,7 +345,11 @@ import { CreateSpeciesModalComponent } from './components/shared/modals/create-s
     BoardDetailComponent,
     PostAuthorBadgeComponent,
     ThreadBannerComponent,
-    ForgotPasswordModalComponent
+    ForgotPasswordModalComponent,
+    ProfileProgressionComponent,
+    TemperatureHistogramComponent,
+    CreateAquariumComponent,
+    AutocompleteTypeComponent
     //New components here
   ],
   entryComponents: [
@@ -400,6 +410,7 @@ import { CreateSpeciesModalComponent } from './components/shared/modals/create-s
     ReactiveFormsModule,
     ColorPickerModule,
     FontAwesomeModule,
+    Ng5SliderModule,
 
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
