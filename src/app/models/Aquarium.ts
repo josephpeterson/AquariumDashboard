@@ -2,6 +2,9 @@ import { CameraConfiguration } from './CameraConfiguration';
 import { Fish } from './Fish';
 import { AquariumFeeding } from './AquariumFeeding';
 import { AquariumDevice } from './AquariumDevice';
+import { Substrate } from './Substrate';
+import { Equipment } from './Equipment';
+import { AquariumPlan } from './AquariumPlan';
 
 export class Aquarium
 {
@@ -12,7 +15,12 @@ export class Aquarium
   type: string
   startDate: Date
   fish: Fish[]
+  waterSalinity: number
 
+  equipment: Equipment[]
+  substrate: Substrate
+  plan: AquariumPlan
+  
   feedings: AquariumFeeding[] | null
   device?: AquariumDevice | null
 }

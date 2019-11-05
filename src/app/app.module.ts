@@ -192,6 +192,8 @@ import { ProfileProgressionComponent } from './components/containers/AquariumCon
 import { CreateAquariumComponent } from './components/containers/AquariumContainer/create-aquarium/create-aquarium.component';
 import { Ng5SliderModule } from 'ng5-slider';
 import { AutocompleteTypeComponent } from './components/shared/autocomplete-type/autocomplete-type.component';
+import { EquipmentTableComponent } from './components/containers/AquariumContainer/create-aquarium/equipment-table/equipment-table.component';
+import { TypeSelectComponent } from './components/containers/AquariumContainer/create-aquarium/type-select/type-select.component';
 
 
 @NgModule({
@@ -349,7 +351,9 @@ import { AutocompleteTypeComponent } from './components/shared/autocomplete-type
     ProfileProgressionComponent,
     TemperatureHistogramComponent,
     CreateAquariumComponent,
-    AutocompleteTypeComponent
+    AutocompleteTypeComponent,
+    EquipmentTableComponent,
+    TypeSelectComponent
     //New components here
   ],
   entryComponents: [

@@ -1,87 +1,132 @@
 <nav-menu></nav-menu>
 <div class="container p-2">
   <h2>Create Aquarium</h2>
-  <p class="text-muted">Here you may create a new aquarium. Not all information is required but more information will
-    provide better help.</p>
-  <mat-form-field>
-    <input type="text" placeholder="Aquarium Name" matInput>
-  </mat-form-field>
-  <mat-form-field class="m-3">
-    <input matInput [matDatepicker]="picker1" placeholder="Start Date" [formControl]="date">
-    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-    <mat-datepicker #picker1></mat-datepicker>
-  </mat-form-field>
-  <p>What do you plan to do with the tank?</p>
-  <div class="row w-50">
-    <div class="col">
-      <div>
-        <mat-checkbox class="p-1">Add Fish</mat-checkbox>
+  <div class="card mb-3">
+    <div class="card-body">
+      <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+
+
+      <h5>General</h5>
+
+      <p class="text-muted">Here you may create a new aquarium. Not all information is required but more information
+        will
+        provide better help.</p>
+      <mat-form-field>
+        <input [disabled]="disabled" type="text" placeholder="Aquarium Name" matInput required [(ngModel)]="aquarium.name">
+      </mat-form-field>
+      <mat-form-field class="m-3">
+        <input [disabled]="disabled" matInput [matDatepicker]="picker1" placeholder="Start Date" [formControl]="date" required>
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+      <p class="text-muted">What do you plan to do with the tank?</p>
+      <div class="row w-50">
+        <div class="col">
+          <div>
+            <mat-checkbox [disabled]="disabled" [(ngModel)]='plan.fish' class="p-1">Add Fish</mat-checkbox>
+          </div>
+          <div>
+            <mat-checkbox [disabled]="disabled" [(ngModel)]='plan.planted' class="p-1">Grow Plants</mat-checkbox>
+          </div>
+          <div>
+            <mat-checkbox [disabled]="disabled" [(ngModel)]='plan.bottomless' class="p-1">Bottomless</mat-checkbox>
+          </div>
+          <div>
+            <mat-checkbox [disabled]="disabled" [(ngModel)]='plan.breeder' class="p-1">Breeding</mat-checkbox>
+          </div>
+        </div>
+        <div class="col">
+          <div>
+            <mat-checkbox [disabled]="disabled" [(ngModel)]='plan.largeFish' class="p-1">Large Fish</mat-checkbox>
+          </div>
+          <div>
+            <mat-checkbox [disabled]="disabled" [(ngModel)]='plan.pressurizedCo2' class="p-1">Pressurized CO<sup>2</sup></mat-checkbox>
+          </div>
+          <div>
+            <mat-checkbox [disabled]="disabled" [(ngModel)]='plan.highMaintence' class="p-1">High Maintence</mat-checkbox>
+          </div>
+        </div>
+        <div class="w-75">
+          <ng5-slider [disabled]="disabled" [(value)]="aquarium.waterSalinity" [options]="salinity_options"
+            [(ngModel)]="aquarium.waterSalinity"></ng5-slider>
+        </div>
       </div>
-      <div>
-        <mat-checkbox class="p-1">Grow Plants</mat-checkbox>
+
+
+      <h5>Tank</h5>
+      <p class="text-muted">Give us some information about your tank. Depending on the tank size, we might suggest a
+        certain
+        variety of fish or different routine maintence numbers.</p>
+      <mat-form-field>
+        <input [disabled]="disabled" type="number" matInput placeholder="Size (Gallons)" required [(ngModel)]="aquarium.gallons">
+      </mat-form-field>
+      <mat-form-field class="m-3">
+        <input [disabled]="disabled" type="text" matInput placeholder="Tank Type" [(ngModel)]="aquarium.type">
+      </mat-form-field>
+      <br>
+
+      <h5>Substrate</h5>
+      <p class="text-muted">The substrate is one of the most important components of an aquarium. This is where your
+        benefical bacteria will be growing. If you decide you want to include <b>plants</b> this is an even more
+        important
+        choice.</p>
+
+
+      <type-select placeholder="Substrate Type" [options]="Substrate_Types" [(control)]="substrateOption"></type-select>
+      <mat-checkbox [disabled]="disabled" [(ngModel)]='substrate.inert' class="p-1" [(ngModel)]="substrate.inert">Inert</mat-checkbox>
+      <br>
+      <mat-form-field>
+        <input [disabled]="disabled" type="text" matInput placeholder="Color" [(ngModel)]="substrate.color">
+      </mat-form-field>
+      <mat-form-field class="ml-3">
+        <input [disabled]="disabled" type="text" matInput placeholder="Height" [(ngModel)]="substrate.height">
+      </mat-form-field>
+      <h5>Lighting</h5>
+      <p class="text-muted">Lighting can be for viewing but significantly more important in <b>planted</b> tanks. Enter
+        details about your light and we will be able to provide you adequte lighting schedules to insure your plants
+        succeed.</p>
+
+
+
+      <!-- Light Input -->
+      <type-select placeholder="Light Type" [options]="Light_Types" [(control)]="lightOption"></type-select>
+
+
+
+
+      <h5>Additional Equipment</h5>
+      <p class="text-muted">Any additional equipment you may have placed in your tank. Things such as wavemakers,
+        pressurized CO2, etc. Driftwood, rocks, and stock should not be added here.</p>
+      <div class="row">
+        <div class="col">
+
+
+
+          <!-- Equipment Type -->
+          <type-select placeholder="Type" [options]="Equipment_Types" [(control)]="equipmentOption"></type-select>
+
+
+
+
+          <br>
+          <!-- Equipment ProductBrand -->
+          <type-select placeholder="Product Brand" [options]="[]" [(control)]="equipmentProductOption"></type-select>
+
+
+          <!-- Equipment SubBrand -->
+          <type-select class="m-3" placeholder="Sub Brand" [options]="[]" [(control)]="equipmentProductSubBrand"></type-select>
+
+
+          <button [disabled]="disabled" class="btn btn-info" (click)="clickAddEquipment()">Add</button>
+        </div>
+        <div class="col b-1">
+          <equipment-table [(equipment)]="equipment"></equipment-table>
+        </div>
       </div>
-      <div>
-        <mat-checkbox class="p-1">Bottomless</mat-checkbox>
-      </div>
-    </div>
-    <div class="col">
-      <div>
-        <mat-checkbox class="p-1">Large Fish</mat-checkbox>
-      </div>
-      <div>
-        <mat-checkbox class="p-1">Pressurized CO<sup>2</sup></mat-checkbox>
-      </div>
-      <div>
-        <mat-checkbox class="p-1">High Maintence</mat-checkbox>
-      </div>
-    </div>
-    <div class="w-75">
-      <ng5-slider [(value)]="salinity" [options]="salinity_options"></ng5-slider>
     </div>
   </div>
-
-
-  <h5>Tank</h5>
-  <p class="text-muted">Give us some information about your tank. Depending on the tank size, we might suggest a certain
-    variety of fish or different routine maintence numbers.</p>
-  <mat-form-field>
-    <input type="number" matInput placeholder="Size (Gallons)">
-  </mat-form-field>
-  <mat-form-field>
-    <input type="text" matInput placeholder="Tank Type">
-  </mat-form-field>
-  <br>
-
-  <h5>Substrate</h5>
-  <p class="text-muted">The substrate is one of the most important components of an aquarium. This is where your
-    benefical bacteria will be growing. If you decide you want to include <b>plants</b> this is an even more important
-    choice.</p>
-
-  <mat-form-field class="mr-2">
-    <mat-label>Substrate Type</mat-label>
-    <mat-select>
-      <mat-option *ngFor="let t of SubstrateTypes" [value]="t">{{t}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-checkbox class="p-1">Inert</mat-checkbox>
-  <br>
-  <mat-form-field>
-    <input type="text" matInput placeholder="Color">
-  </mat-form-field>
-  <mat-form-field class="ml-3">
-    <input type="text" matInput placeholder="Height">
-  </mat-form-field>
-  <h5>Lighting</h5>
-  <p class="text-muted">Lighting can be for viewing but significantly more important in <b>planted</b> tanks. Enter
-    details about your light and we will be able to provide you adequte lighting schedules to insure your plants
-    succeed.</p>
-  <mat-form-field>
-    <input type="text" matInput [formControl]="lightOption" [matAutocomplete]="auto" placeholder="Light">
-  </mat-form-field>
-  <mat-autocomplete #auto="matAutocomplete">
-    <mat-option *ngFor="let option of Light_Types" [value]="option">{{option}}</mat-option>
-  </mat-autocomplete>
-  <h5>Additional Equipment</h5>
-  <p class="text-muted">Any additional equipment you may have placed in your tank. Things such as wavemakers,
-    pressurized CO2, etc.</p>
+  <div class="w-100">
+    <button [disabled]="disabled" class="btn btn-danger" (click)="clickBack()">Cancel</button>
+    <button [disabled]="disabled" class="btn btn-success float-right" (click)="clickSubmit()">Create >></button>
+  </div>
 </div>
