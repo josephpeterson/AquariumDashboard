@@ -22,6 +22,9 @@ import { FishPhoto } from 'src/app/models/FishPhoto';
 import { PhotoExpandedModalComponent } from 'src/app/components/shared/modals/photo-expanded-modal/photo-expanded-modal.component';
 import { FishUpdateAction } from 'src/app/store/fish/fish.actions';
 import { getSelectedFish, isUpdatingFish, isCreatingFish, getFishUpdateError } from 'src/app/store/fish/fish.selector';
+import { FishBreedModalComponent } from 'src/app/components/shared/modals/fish-breed-modal/fish-breed-modal.component';
+import { FishTransferModalComponent } from 'src/app/components/shared/modals/fish-transfer-modal/fish-transfer-modal.component';
+import { FishDiseaseModalComponent } from 'src/app/components/shared/modals/fish-disease-modal/fish-disease-modal.component';
 
 
 
@@ -137,6 +140,18 @@ export class FishDetailViewComponent implements OnInit {
                     this.disabled = false;
                 });
             }
+        });
+    }
+    clickBreed() {
+        var dialog = this.dialog.open(FishBreedModalComponent, {
+        });
+    }
+    clickDiagnose() {
+        var dialog = this.dialog.open(FishDiseaseModalComponent, {
+        });
+    }
+    clickTransfer() {
+        var dialog = this.dialog.open(FishTransferModalComponent, {
         });
     }
     getFishAge(fish: Fish) {

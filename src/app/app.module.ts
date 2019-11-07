@@ -195,7 +195,10 @@ import { AutocompleteTypeComponent } from './components/shared/autocomplete-type
 import { EquipmentTableComponent } from './components/containers/AquariumContainer/create-aquarium/equipment-table/equipment-table.component';
 import { TypeSelectComponent } from './components/containers/AquariumContainer/create-aquarium/type-select/type-select.component';
 import { FishCardDetailedComponent } from './components/containers/FishContainer/fish-card-detailed/fish-card-detailed.component';
-
+import { FishTransferModalComponent } from './components/shared/modals/fish-transfer-modal/fish-transfer-modal.component';
+import { FishDiseaseModalComponent } from './components/shared/modals/fish-disease-modal/fish-disease-modal.component';
+import { FishBreedModalComponent } from './components/shared/modals/fish-breed-modal/fish-breed-modal.component';
+import { FishService } from './services/fish.service';
 
 @NgModule({
   declarations: [
@@ -239,6 +242,15 @@ import { FishCardDetailedComponent } from './components/containers/FishContainer
     AquariumParametersComponent,
     AquariumPhotosComponent,
 
+    AquariumSelectComponent,
+    AquariumTableComponent,
+    SelectAquariumModalComponent,
+    
+    DeviceDetailFormComponent,
+    DeviceDetailViewComponent,
+    ManageAquariumDeviceModalComponent,
+
+
     /* Profile Container */
     ProfileContainer,
     ProfilePictureThumbnailComponent,
@@ -267,6 +279,8 @@ import { FishCardDetailedComponent } from './components/containers/FishContainer
     FishEditViewComponent,
     FishCardComponent,
     FishAddPhotoButtonComponent,
+    FeedingTableListComponent,
+    FeedingDetailFormComponent,
 
     SpeciesDetailFormComponent,
     SpeciesSelectComponent,
@@ -274,41 +288,15 @@ import { FishCardDetailedComponent } from './components/containers/FishContainer
     SpeciesDetailViewComponent,
     SpeciesCardComponent,
 
-    DeviceDetailFormComponent,
-    DeviceDetailViewComponent,
-    ManageAquariumDeviceModalComponent,
-
-    AquariumSelectComponent,
-    AquariumTableComponent,
-    SelectAquariumModalComponent,
-
-
     TaskListComponent,
     TaskTabComponent,
     NotificationsListComponent,
 
-    FeedingTableListComponent,
-    FeedingDetailFormComponent,
+    
 
 
-    /* Modals */
-    ConfirmModalComponent,
-    BugReportModalComponent,
-    FishFeedModalComponent,
-    ErrorMessageModalComponent,
-    MasterDashboardComponent,
-    SettingsComponent,
-    TaskTableComponent,
-    CreateAquariumModelComponent,
-    FishAddModalComponent,
-    CreateSpeciesModalComponent,
-    ScraperModalComponent,
-    PhotoExpandedModalComponent,
-    ManagePhotoConfigurationModal,
-    FishPhotoModal,
-    FishPhotoSelectModal,
-    ManageSnapshotModal,
-    LoginModalComponent,
+
+
     ProfileBannerComponent,
     StarButtonComponent,
     FollowButtonComponent,
@@ -332,15 +320,11 @@ import { FishCardDetailedComponent } from './components/containers/FishContainer
     MainPageComponent,
     BoardPageComponent,
     ThreadPageComponent,
-    PostCreateCategoryModalComponent,
-    PostCreateBoardModalComponent,
-    PostCreateThreadModalComponent,
+
     DiscussionNavBarComponent,
     AquariumNavBarComponent,
     DiscussionItemComponent,
-    PostDeleteCategoryModalComponent,
-    PostDeleteBoardModalComponent,
-    PostDeleteThreadModalComponent,
+
     PostEditorComponent,
     PostTimestampComponent,
     DiscussionPostComponent,
@@ -348,7 +332,6 @@ import { FishCardDetailedComponent } from './components/containers/FishContainer
     BoardDetailComponent,
     PostAuthorBadgeComponent,
     ThreadBannerComponent,
-    ForgotPasswordModalComponent,
     ProfileProgressionComponent,
     TemperatureHistogramComponent,
     CreateAquariumComponent,
@@ -359,30 +342,33 @@ import { FishCardDetailedComponent } from './components/containers/FishContainer
     //New components here
   ],
   entryComponents: [
-    //Modal components here
-    CreateAquariumModelComponent,
     ConfirmModalComponent,
     BugReportModalComponent,
     FishFeedModalComponent,
     ErrorMessageModalComponent,
-    CreateSpeciesModalComponent,
+    MasterDashboardComponent,
+    SettingsComponent,
+    TaskTableComponent,
+    CreateAquariumModelComponent,
     FishAddModalComponent,
-    ManageAquariumDeviceModalComponent,
-    SelectAquariumModalComponent,
+    CreateSpeciesModalComponent,
     ScraperModalComponent,
     PhotoExpandedModalComponent,
     ManagePhotoConfigurationModal,
-    ManageSnapshotModal,
-    LoginModalComponent,
     FishPhotoModal,
     FishPhotoSelectModal,
+    FishDiseaseModalComponent,
+    FishBreedModalComponent,
+    FishTransferModalComponent,
+    ManageSnapshotModal,
+    LoginModalComponent,
     PostCreateCategoryModalComponent,
     PostCreateBoardModalComponent,
     PostCreateThreadModalComponent,
     PostDeleteCategoryModalComponent,
     PostDeleteBoardModalComponent,
     PostDeleteThreadModalComponent,
-    ForgotPasswordModalComponent
+    ForgotPasswordModalComponent,
   ],
 
   imports: [
@@ -438,6 +424,7 @@ import { FishCardDetailedComponent } from './components/containers/FishContainer
   ],
   providers: [
     AquariumService,
+    FishService,
     AuthService,
     AdminService,
     AuthGuard,
