@@ -1,0 +1,142 @@
+<ng-container *ngIf="fish else loadingOrError">
+  <div class="fish-card-component mat-elevation-z8 rounded">
+    <div class="row">
+      <div class="col-2">
+        <a [routerLink]="'/fish/' + fish.id">
+          <img class="card-img-top" [src]="getFishThumbnailSource(fish)" alt="Fish Thumbnail">
+        </a>
+        <div class="alert alert-warning m-1 p-2">
+          <fa-icon class="pr-1" [icon]="faExclamationTriangle"></fa-icon>Tasks (3)
+        </div>
+      </div>
+      <div class="col">
+        <div class="accordion m-2" id="accordionExample">
+          <div class="card">
+
+            <div class="card-header" id="headingGeneral">
+              <h5 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                  [attr.data-target]="'#collapseGeneral' + fish.id" aria-expanded="true"
+                  aria-controls="collapseGeneral">
+                  {{fish.name}}
+                </button>
+              </h5>
+            </div>
+            <div [attr.id]="'collapseGeneral' + fish.id" class="collapse show" aria-labelledby="headingOne"
+              data-parent="#accordionExample">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-6">
+                    <h6 class="card-subtitle mt-2 mb-2 text-muted">
+                      {{getReadableDate(fish.date)}} days old
+                    </h6>
+                  </div>
+                  <div class="col-6">
+                    <species-card [species]="fish.species"></species-card>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+
+
+            <div class="card-header" id="headingOne">
+              <h5 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                  [attr.data-target]="'#collapseOne' + fish.id" aria-expanded="true" aria-controls="collapseOne">
+                  Feed History
+                </button>
+              </h5>
+            </div>
+
+            <div [attr.id]="'collapseOne' + fish.id" class="collapse" aria-labelledby="headingOne"
+              data-parent="#accordionExample">
+              <div class="card-body">
+                <div class="p-2 row">
+                  <div class="col-6">
+                    <a [routerLink]="'/fish/' + fish.id" class=" card-title fish-name">{{fish.name}}</a>
+                    <br>
+
+                    <h6 class="card-subtitle mt-2 mb-2 text-muted">
+                      {{getReadableDate(fish.date)}} days old
+                    </h6>
+                  </div>
+                  <div class="col-6">
+                    <species-card [species]="fish.species"></species-card>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header" id="headingTwo">
+              <h5 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                  [attr.data-target]="'#collapseTwo' + fish.id" aria-expanded="false" aria-controls="collapseTwo">
+                  Disease History
+                </button>
+              </h5>
+            </div>
+            <div [attr.id]="'collapseTwo' + fish.id" class="collapse" aria-labelledby="headingTwo"
+              data-parent="#accordionExample">
+              <div class="card-body">
+                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf
+                moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
+                Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda
+                shoreditch et. Nihil anim keffiyeh helvetica, crafft beer labore wes anderson cred nesciunt sapiente ea
+                proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim
+                aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header" id="headingThree">
+              <h5 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                  [attr.data-target]="'#collapseThree' + fish.id" aria-expanded="false" aria-controls="collapseThree">
+                  Notes
+                </button>
+              </h5>
+            </div>
+            <div [attr.id]="'collapseThree' + fish.id" class="collapse" aria-labelledby="headingThree"
+              data-parent="#accordionExample">
+              <div class="card-body">
+                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf
+                moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
+                Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda
+                shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
+                proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim
+                aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</ng-container>
+<ng-template #loadingOrError>
+  <ng-container *ngIf="error else loading">
+    <div class="alert alert-danger">
+      {{error}}
+    </div>
+  </ng-container>
+  <ng-template #loading>
+    <div class="fish-card-component mat-elevation-z8 rounded d-flex flex-row text-center">
+      <table style="width:100%;height:100%;">
+        <tr>
+          <td>
+            <mat-progress-spinner class="mr-auto ml-auto align-middle" color="warn" mode="indeterminate">
+            </mat-progress-spinner>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </ng-template>
+
+</ng-template>

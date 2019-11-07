@@ -1,6 +1,6 @@
 import { select, Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
-import { AquariumListAction, AquariumSelectionAction, AquariumUpdateAction, AquariumDeleteAction, AquariumResetAction, AquariumLoadByIdAction } from 'src/app/store/aquarium/aquarium.actions';
+import { AquariumUpdateAction, AquariumDeleteAction, AquariumResetAction } from 'src/app/store/aquarium/aquarium.actions';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { Injectable } from '@angular/core';
 import { isLoadingAquariums, getConnectionError, getSelectedAquarium, isUpdatingAquarium, isDeletingAquarium, getDeleteError, getDidDelete, getDidUpdate } from 'src/app/store/aquarium/aquarium.selector';

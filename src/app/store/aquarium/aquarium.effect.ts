@@ -24,25 +24,10 @@ export class AquariumEffects {
         )));
     @Effect()
     loadAquariumDetailed$ = this.actions$.pipe(
-        ofType<AquariumSelectionAction>(AquariumActions.MakeSelection), map((action) => action.aquariumId),
-        mergeMap((aquariumId: number) =>
-            this.aquariumService.getAquariumById(aquariumId).pipe(
+        ofType<AquariumSelectionAction>(AquariumActions.MakeSelection), mergeMap((action) =>
+            this.aquariumService.getAquariumById(action.aquariumId).pipe(
                 map(
-                    //We can either return a new AquariumLoadAction, OR just update our store
-                    (detailedAquarium: Aquarium) => {
-                        return new AquariumLoadSuccessAction([detailedAquarium])
-                    }
-                ),
-                catchError(err => of(new AquariumLoadFailAction(err)))
-            )
-        )
-    );
-    @Effect()
-    loadAquariumById$ = this.actions$.pipe(
-        ofType<AquariumLoadByIdAction>(AquariumActions.LoadById), map((action) => action.payload),
-        mergeMap((aquariumId: number) =>
-            this.aquariumService.getAquariumById(aquariumId).pipe(
-                map(
+
                     //We can either return a new AquariumLoadAction, OR just update our store
                     (detailedAquarium: Aquarium) => {
                         return new AquariumLoadSuccessAction([detailedAquarium])

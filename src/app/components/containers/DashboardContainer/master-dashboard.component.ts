@@ -7,7 +7,7 @@ import { CreateAquariumModelComponent } from '../../shared/modals/create-aquariu
 import { take } from 'rxjs/operators';
 import { Species } from 'src/app/models/Species';
 import { Router } from '@angular/router';
-import { AquariumListAction, AquariumSelectionAction, AquariumUnSelectionAction } from 'src/app/store/aquarium/aquarium.actions';
+import { AquariumListAction, AquariumUnSelectionAction } from 'src/app/store/aquarium/aquarium.actions';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { getAllAquariums, isLoadingAquariums, getConnectionError } from 'src/app/store/aquarium/aquarium.selector';

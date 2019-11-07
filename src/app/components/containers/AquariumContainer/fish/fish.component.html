@@ -8,7 +8,7 @@
         </div>
     </div>
     <ng-template #hasFish>
-        <fish-table-list [aquariumId]="aquarium.id" (rowClicked)="selectFish($event[1])"></fish-table-list>
+        <fish-card-detailed *ngFor="let fish of aquarium.fish" [fishId]="fish.id" class="m-2"></fish-card-detailed>
         <fish-create-button [aquarium]="aquarium"></fish-create-button>
 
     </ng-template>

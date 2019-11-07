@@ -194,6 +194,7 @@ import { Ng5SliderModule } from 'ng5-slider';
 import { AutocompleteTypeComponent } from './components/shared/autocomplete-type/autocomplete-type.component';
 import { EquipmentTableComponent } from './components/containers/AquariumContainer/create-aquarium/equipment-table/equipment-table.component';
 import { TypeSelectComponent } from './components/containers/AquariumContainer/create-aquarium/type-select/type-select.component';
+import { FishCardDetailedComponent } from './components/containers/FishContainer/fish-card-detailed/fish-card-detailed.component';
 
 
 @NgModule({
@@ -353,7 +354,8 @@ import { TypeSelectComponent } from './components/containers/AquariumContainer/c
     CreateAquariumComponent,
     AutocompleteTypeComponent,
     EquipmentTableComponent,
-    TypeSelectComponent
+    TypeSelectComponent,
+    FishCardDetailedComponent
     //New components here
   ],
   entryComponents: [

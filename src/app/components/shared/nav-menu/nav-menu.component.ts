@@ -59,7 +59,7 @@ export class NavMenuComponent {
     this.route.params.subscribe(p => {
       if (p.aqId) {
         this.store.dispatch(new AquariumSelectionAction(p.aqId));
-        this.store.dispatch(new AquariumLoadByIdAction(p.aqId))
+        //this.store.dispatch(new AquariumLoadByIdAction(p.aqId))
       }
     });
     this.connectionError$.pipe(takeUntil(this.componentLifecycle)).subscribe(err => {
