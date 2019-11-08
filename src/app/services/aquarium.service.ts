@@ -19,6 +19,7 @@ import { Activity } from '../models/Activity';
 import { AccountRelationship } from '../models/AccountRelationship';
 import { SearchOptions } from '../models/SearchOptions';
 import { SearchResult } from '../models/SearchResult';
+import { PhotoContent } from '../models/PhotoContent';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -32,7 +33,7 @@ const httpOptions = {
   providedIn: "root"
 })
 export class AquariumService {
-  
+
 
   private _url: string;
 
@@ -68,9 +69,6 @@ export class AquariumService {
   public takeSnapshot(aqId: number) {
     return this.http.get<AquariumSnapshot>(this._url + "/v1/Snapshot/" + aqId + "/Take/true");
   }
-  public getPhotoPermalink(photoId: number,size:any = "1"): string {
-    return this._url + "/v1/Snapshot/Photo/" + photoId + "/" + size;
-  }
   public getLatestSnapshot(aqId: number): Observable<AquariumSnapshot> {
 
     return this.http.get<AquariumSnapshot>(this._url + "/v1/Snapshot/" + aqId + "/Latest");
@@ -78,26 +76,26 @@ export class AquariumService {
   public updateSnapshot(snapshot: AquariumSnapshot): Observable<AquariumSnapshot> {
     return this.http.post<AquariumSnapshot>(this._url + "/v1/Snapshot/Update", snapshot);
   }
-  public createSnapshot(snapshot: AquariumSnapshot,uploadedPhoto: any): Observable<any> {
-    console.log(snapshot,uploadedPhoto);
+  public createSnapshot(snapshot: AquariumSnapshot, uploadedPhoto: any): Observable<any> {
+    console.log(snapshot, uploadedPhoto);
     const url = this._url + "/v1/Snapshot/" + snapshot.aquariumId + "/Create";
     let formData = new FormData();
 
     var response = {
       ...snapshot,
-      snapshotImage: uploadedPhoto ? uploadedPhoto.file:null
+      snapshotImage: uploadedPhoto ? uploadedPhoto.file : null
     }
     console.log(response);
     response.date = snapshot.date.toISOString();
-    for(var key in response) formData.set(key,response[key]);
+    for (var key in response) formData.set(key, response[key]);
 
     let options: any = {
       observe: "response",
       reportProgress: true,
     };
 
-    console.log(url,formData);
-    return this.http.post<any>(url, formData,options);
+    console.log(url, formData);
+    return this.http.post<any>(url, formData, options);
   }
 
 
@@ -201,31 +199,25 @@ export class AquariumService {
   submitBugReport(report: BugReport): Observable<BugReport> {
     return this.http.post<BugReport>(this._url + `/v1/Bug/Submit`, report);
   }
-
-  public getFishPhotoPermalink(photoId: number,size:any = "1"): string {
-    return this._url + "/v1/Fish/Photo/" + photoId + "/" + size;
-  }
-  public uploadFishPhoto(fishId:number,uploadedPhoto: any): Observable<any> {
+  public uploadFishPhoto(fishId: number, uploadedPhoto: any): Observable<any> {
     const url = this._url + "/v1/Fish/" + fishId + "/UploadPhoto";
     let formData = new FormData();
 
     var response = {
       //...snapshot,
-      photoData: uploadedPhoto ? uploadedPhoto.file:null
+      photoData: uploadedPhoto ? uploadedPhoto.file : null
     }
     console.log(response);
     //response.date = snapshot.date.toISOString();
-    for(var key in response) formData.set(key,response[key]);
+    for (var key in response) formData.set(key, response[key]);
 
     let options: any = {
       observe: "response",
       reportProgress: true,
     };
-    return this.http.post<any>(url, formData,options);
+    return this.http.post<any>(url, formData, options);
   }
-  public deleteFishPhoto(fishPhoto: FishPhoto): Observable<any> {
-    return this.http.post<any>(this._url + "/v1/Fish/Photo/Delete", fishPhoto.id);
-  }
+
 
   public getAquariumProfile(profileId: number) {
     return this.http.get<AccountProfile>(this._url + `/v1/Profile/${profileId}`);
@@ -237,17 +229,30 @@ export class AquariumService {
   }
 
   public upsertFollowUser(relationship: AccountRelationship): Observable<AccountRelationship> {
-    return this.http.post<AccountRelationship>(this._url + `/v1/Profile/Follow`,relationship);
+    return this.http.post<AccountRelationship>(this._url + `/v1/Profile/Follow`, relationship);
   }
 
   /* Search */
-  performSearch(options: SearchOptions): Observable<SearchResult[]>  {
-    return this.http.post<SearchResult[]>(this._url + `/v1/Search`,options);
+  performSearch(options: SearchOptions): Observable<SearchResult[]> {
+    return this.http.post<SearchResult[]>(this._url + `/v1/Search`, options);
   }
-  public sendPasswordResetEmail(email: string): Observable<any>  {
+  public sendPasswordResetEmail(email: string): Observable<any> {
     console.log(email);
-    return this.http.post(this._url + `/v1/Auth/PasswordReset/Attempt`,{
+    return this.http.post(this._url + `/v1/Auth/PasswordReset/Attempt`, {
       token: email
     });
+  }
+
+  /* Photos */
+  public getPhotoPermalink(photoId: number, size: any = "1"): string {
+    return this._url + "/v1/Photo/" + photoId + "/" + size;
+  }
+  public deletePhoto(photo: PhotoContent): Observable<any> {
+    return this.http.delete<any>(this._url + `/v1/Photo/${photo.id}/Delete`);
+  }
+
+  /*Profile */
+  public updateAccountThumbnail(photo: PhotoContent): Observable<AccountProfile> {
+    return this.http.post<AccountProfile>(this._url + `/v1/Profile/UpdateThumbnail`,photo);
   }
 }

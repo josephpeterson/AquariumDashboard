@@ -1,12 +1,12 @@
 import { Aquarium } from './Aquarium';
 import { Fish } from './Fish';
+import { PhotoContent } from './PhotoContent';
 
 export class FishPhoto
 {
   id: number
-  aquariumId: number
   fishId: number
-  aquarium: Aquarium
+  photoId: number
   fish: Fish
-  date: Date
+  photo: PhotoContent
 }

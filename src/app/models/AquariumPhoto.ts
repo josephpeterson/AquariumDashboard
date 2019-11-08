@@ -1,4 +1,5 @@
 import { Aquarium } from './Aquarium';
+import { PhotoContent } from './PhotoContent';
 
 export class AquariumPhoto
 {
@@ -6,4 +7,5 @@ export class AquariumPhoto
   aquarium: Aquarium
   aquariumId: number
   date: Date
+  photo: PhotoContent
 }

@@ -13,7 +13,7 @@ import { Aquarium } from 'src/app/models/Aquarium';
 export class AquariumTestResultsPostComponent implements OnInit {
 
   @Input() public author: AccountProfile;
-  @Input() public activity: Activity;;
+  @Input() public activity: any;
   public loading: boolean = false;
   public aquarium: Aquarium;
 

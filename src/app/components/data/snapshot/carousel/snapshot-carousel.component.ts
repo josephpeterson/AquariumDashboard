@@ -40,9 +40,9 @@ export class SnapshotCarouselComponent implements OnInit {
   public data$: Observable<AquariumSnapshot[]> = this.store.select(getAllSnapshots);
   public aquarium$: Observable<Aquarium> = this.store.select(getSelectedAquarium);
 
-  @ViewChild(SnapshotTakeButtonComponent) takeButton: SnapshotTakeButtonComponent; 
+  @ViewChild(SnapshotTakeButtonComponent) takeButton: SnapshotTakeButtonComponent;
 
-  constructor(private store: Store<AppState>, private dialog: MatDialog,public aquariumService:AquariumService) { }
+  constructor(private store: Store<AppState>, private dialog: MatDialog, public aquariumService: AquariumService) { }
 
   ngOnInit() {
     this.data$.pipe(takeUntil(this.componentLifeCycle)).subscribe(data => {
@@ -90,8 +90,7 @@ export class SnapshotCarouselComponent implements OnInit {
     snapshots[this.selectedId].scrollIntoView({ behavior: "auto", block: "end", inline: "nearest" });
   }
   readableDate(dateString: string) {
-    console.log(dateString);
-    return moment(new Date(dateString)).calendar();    
+    return moment(new Date(dateString)).local().calendar();
   }
 
   generateChart() {
@@ -101,8 +100,10 @@ export class SnapshotCarouselComponent implements OnInit {
   clickExpandedImage(photo: AquariumPhoto) {
     var dialog = this.dialog.open(PhotoExpandedModalComponent, {
       panelClass: "darkDialog",
+      height: "95%",
+      width: "95%",
+      data: photo.photo
     });
-    dialog.componentInstance.aquariumPhoto = photo;
   }
 
   addNewSnapshot(snapshot: AquariumSnapshot) {

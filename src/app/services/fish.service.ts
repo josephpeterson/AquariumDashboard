@@ -42,6 +42,9 @@ export class FishService {
   public getFishById(fishId: number): Observable<Fish> {
     return this.http.get<Fish>(this._url + `/v1/Fish/${fishId}`);
   }
+  public getAllFish(): Observable<Fish[]> {
+    return this.http.get<Fish[]>(this._url + `/v1/Fish`);
+  }
   public updateFish(fish: Fish): Observable<Fish> {
     return this.http.post<Fish>(this._url + "/v1/Fish/Update", fish);
   }
@@ -50,5 +53,23 @@ export class FishService {
   }
   public deleteFish(fish: Fish): Observable<Fish> {
     return this.http.post<Fish>(this._url + "/v1/Fish/Delete", fish.id);
+  }
+  public uploadPhoto(fishId: number, uploadedPhoto: any): Observable<any> {
+    const url = this._url + "/v1/Fish/" + fishId + "/UploadPhoto";
+    let formData = new FormData();
+
+    var response = {
+      //...snapshot,
+      photoData: uploadedPhoto ? uploadedPhoto.file : null
+    }
+    console.log(response);
+    //response.date = snapshot.date.toISOString();
+    for (var key in response) formData.set(key, response[key]);
+
+    let options: any = {
+      observe: "response",
+      reportProgress: true,
+    };
+    return this.http.post<any>(url, formData, options);
   }
 }

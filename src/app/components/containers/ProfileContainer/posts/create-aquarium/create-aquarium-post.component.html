@@ -1,8 +1,8 @@
-<div class="profile-activity-post">
+<div class="profile-activity-post" *ngIf="aquarium">
   <div class="row m-2">
     <profile-icon-badge class="profile-icon-badge" [profile]="author"></profile-icon-badge>
     <div class="post-banner">
-      Created an <a [routerLink]="'/' + activity.key1">aquarium</a>
+      Created an <a  [routerLink]="'/aquarium/' + activity.key1">aquarium</a>
     </div>
   </div>
   <div class="content p-2 row ml-5" *ngIf="!loading">
@@ -10,7 +10,7 @@
       <img class="m-2" src="assets/aquarium-diagram.png" height=60px>
     </div>
     <div>
-      <div><a [routerLink]="'/' + activity.key1">{{aquarium.name}}</a></div>
+      <div><a [routerLink]="'/aquarium/' + activity.key1">{{aquarium.name}}</a></div>
       <div>{{aquarium.gallons}} Gallons</div>
     </div>
 

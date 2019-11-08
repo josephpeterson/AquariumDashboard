@@ -1,0 +1,30 @@
+<div class="bugreport-modal-component">
+  <h3>Set Photo
+    <div class="float-md-right">
+      <button mat-button [mat-dialog-close] style="font-weight:bold;font-size:20pt;">×</button>
+    </div>
+  </h3>
+
+  <div class="container alert alert-danger mt-2" *ngIf="error">{{error}}</div>
+
+
+  <div>
+    <label id="example-radio-group-label">Set this photo as:</label>
+    <mat-radio-group [disabled]="disabled" aria-labelledby="example-radio-group-label" class="example-radio-group"
+      [(ngModel)]="useSelection">
+      <mat-radio-button class="d-flex example-radio-button" value="0">Account Picture</mat-radio-button>
+      <mat-radio-button class="d-flex example-radio-button" value="1">Fish Thumbnail Picture</mat-radio-button>
+      <div *ngIf="useSelection == 1">
+        <fish-select></fish-select>
+      </div>
+      <mat-radio-button class="d-flex example-radio-button" value="2">Aquarium Snapshot Thumbnail Picture</mat-radio-button>
+      <div *ngIf="useSelection == 2">
+          select a snapshot
+        </div>
+    </mat-radio-group>
+  </div>
+  <mat-dialog-actions align="end">
+    <button [disabled]="disabled" class="m-2 btn btn-danger" mat-dialog-close>Cancel</button>
+    <button [disabled]="disabled" class="m-2 btn btn-success" (click)="clickSubmit()">Submit</button>
+  </mat-dialog-actions>
+</div>

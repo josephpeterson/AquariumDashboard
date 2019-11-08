@@ -5,7 +5,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 //Material Imports
 import { MatTableModule } from '@angular/material/table';
-import { MatCheckboxModule, MatInputModule, MatSelectModule, MatDialogModule, MatButtonModule, MatNativeDateModule, MatAutocompleteModule, MatSidenav, MatSidenavModule } from '@angular/material';
+import { MatCheckboxModule, MatInputModule, MatSelectModule, MatDialogModule, MatButtonModule, MatNativeDateModule, MatAutocompleteModule, MatSidenav, MatSidenavModule, MatRadioModule } from '@angular/material';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSortModule } from '@angular/material/sort';
 import { MatMenuModule } from '@angular/material/menu';
@@ -199,6 +199,7 @@ import { FishTransferModalComponent } from './components/shared/modals/fish-tran
 import { FishDiseaseModalComponent } from './components/shared/modals/fish-disease-modal/fish-disease-modal.component';
 import { FishBreedModalComponent } from './components/shared/modals/fish-breed-modal/fish-breed-modal.component';
 import { FishService } from './services/fish.service';
+import { PhotoApplyModalComponent } from './components/shared/modals/photo-apply-modal/photo-apply-modal.component';
 
 @NgModule({
   declarations: [
@@ -207,6 +208,9 @@ import { FishService } from './services/fish.service';
     FeedingListComponent,
     SpeciesContainer,
     FishContainer,
+    MasterDashboardComponent,
+    SettingsComponent,
+    TaskTableComponent,
 
     HomeComponent,
     LoginComponent,
@@ -244,11 +248,10 @@ import { FishService } from './services/fish.service';
 
     AquariumSelectComponent,
     AquariumTableComponent,
-    SelectAquariumModalComponent,
     
     DeviceDetailFormComponent,
     DeviceDetailViewComponent,
-    ManageAquariumDeviceModalComponent,
+    
 
 
     /* Profile Container */
@@ -338,17 +341,13 @@ import { FishService } from './services/fish.service';
     AutocompleteTypeComponent,
     EquipmentTableComponent,
     TypeSelectComponent,
-    FishCardDetailedComponent
-    //New components here
-  ],
-  entryComponents: [
+    FishCardDetailedComponent,
+
+    //Modals
     ConfirmModalComponent,
     BugReportModalComponent,
     FishFeedModalComponent,
     ErrorMessageModalComponent,
-    MasterDashboardComponent,
-    SettingsComponent,
-    TaskTableComponent,
     CreateAquariumModelComponent,
     FishAddModalComponent,
     CreateSpeciesModalComponent,
@@ -369,6 +368,38 @@ import { FishService } from './services/fish.service';
     PostDeleteBoardModalComponent,
     PostDeleteThreadModalComponent,
     ForgotPasswordModalComponent,
+    SelectAquariumModalComponent,
+    ManageAquariumDeviceModalComponent,
+    PhotoApplyModalComponent,
+  ],
+  entryComponents: [
+    ConfirmModalComponent,
+    BugReportModalComponent,
+    FishFeedModalComponent,
+    ErrorMessageModalComponent,
+    CreateAquariumModelComponent,
+    FishAddModalComponent,
+    CreateSpeciesModalComponent,
+    ScraperModalComponent,
+    PhotoExpandedModalComponent,
+    ManagePhotoConfigurationModal,
+    FishPhotoModal,
+    FishPhotoSelectModal,
+    FishDiseaseModalComponent,
+    FishBreedModalComponent,
+    FishTransferModalComponent,
+    ManageSnapshotModal,
+    LoginModalComponent,
+    PostCreateCategoryModalComponent,
+    PostCreateBoardModalComponent,
+    PostCreateThreadModalComponent,
+    PostDeleteCategoryModalComponent,
+    PostDeleteBoardModalComponent,
+    PostDeleteThreadModalComponent,
+    ForgotPasswordModalComponent,
+    SelectAquariumModalComponent,
+    ManageAquariumDeviceModalComponent,
+    PhotoApplyModalComponent
   ],
 
   imports: [
@@ -383,6 +414,7 @@ import { FishService } from './services/fish.service';
     MatTabsModule,
     MatCheckboxModule,
     MatInputModule,
+    MatRadioModule,
     MatSortModule,
     MatMenuModule,
     MatIconModule,

@@ -7,7 +7,7 @@
                     <ng-container *ngIf="photoSnapshots[selectedId] as current">
                         <div class="expandedImage"
                             [style.background-image]="'url(' + aquariumService.getPhotoPermalink(current.photoId,0.25) + ')'"
-                            (click)="clickExpandedImage(current.photo)">
+                            (click)="clickExpandedImage(current)">
 
                         </div>
                         <div class="banner">

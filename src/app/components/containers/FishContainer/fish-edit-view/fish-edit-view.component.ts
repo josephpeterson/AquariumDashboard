@@ -19,7 +19,6 @@ import { AquariumService } from 'src/app/services/aquarium.service';
 import { AquariumLoadSuccessAction } from 'src/app/store/aquarium/aquarium.actions';
 import { FishPhotoModal } from 'src/app/components/shared/modals/fish-photo-modal/fish-photo-modal.component';
 import { FishPhoto } from 'src/app/models/FishPhoto';
-import { PhotoExpandedModalComponent } from 'src/app/components/shared/modals/photo-expanded-modal/photo-expanded-modal.component';
 import { FishUpdateAction, FishDeleteAction } from 'src/app/store/fish/fish.actions';
 import { getSelectedFish, isUpdatingFish, isCreatingFish, getFishUpdateError } from 'src/app/store/fish/fish.selector';
 
@@ -110,7 +109,7 @@ export class FishEditViewComponent implements OnInit {
         });
     }
     getFishPhotoSource(photoId: number) {
-        return this._aquariumService.getFishPhotoPermalink(photoId);
+        return this._aquariumService.getPhotoPermalink(photoId);
     }
 }
 

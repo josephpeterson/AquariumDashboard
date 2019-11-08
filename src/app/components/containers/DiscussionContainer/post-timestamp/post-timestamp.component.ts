@@ -18,6 +18,6 @@ export class PostTimestampComponent implements OnInit {
   }
 
   public getTimestamp() {
-    return moment(new Date(this.post.timestamp)).calendar(); 
+    return moment(new Date(this.post.timestamp)).local().calendar(); 
   }
 }

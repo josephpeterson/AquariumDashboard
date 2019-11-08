@@ -57,6 +57,6 @@ export class FishPhotoSelectComponent {
     }
 
     public getThumbnailSource() {
-        return this._aquariumService.getFishPhotoPermalink(this.fish.thumbnailPhotoId,"0.25");
+        return this._aquariumService.getPhotoPermalink(this.fish.thumbnailPhotoId,"0.25");
     }
 }

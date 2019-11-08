@@ -11,10 +11,7 @@
         <h3 class="p-2">Fish</h3>
         <div class="container">
             <div class="row">
-                <div class="card-group">
-                    <fish-card class="card m-2" *ngFor="let fish of aquarium.fish" [fish]="fish"></fish-card>
-                </div>
-                <div class="empty-card" *ngIf="!aquarium.fish || aquarium.fish.length == 0">
+                <div class="empty-card" *ngIf="(!aquarium.fish || aquarium.fish.length == 0) else hasfish">
                     <p>
                         You do not have any fish! Click to add new fish to your aquarium.
                     </p>
@@ -22,9 +19,18 @@
                         <fish-create-button [aquarium]="aquarium"></fish-create-button>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <button class="btn btn-link mt-2" [routerLink]="['fish']" *ngIf="aquarium.fish.length">View All</button>
+                <ng-template #hasfish>
+                    <div class="card">
+                        <div class="card-group">
+                            <fish-card class="card m-2" *ngFor="let fish of aquarium.fish" [fish]="fish"></fish-card>
+                        </div>
+                    </div>
+                    <button class="btn btn-link mt-2" [routerLink]="['fish']">View
+                        All</button>
+
+                </ng-template>
+
+
             </div>
         </div>
 

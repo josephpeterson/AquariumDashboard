@@ -1,12 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { AquariumPhoto } from 'src/app/models/AquariumPhoto';
+import { Component, OnInit, Input, Inject } from '@angular/core';
 import { Subject } from 'rxjs';
-import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
-import { environment } from 'src/environments/environment';
 import { AquariumService } from 'src/app/services/aquarium.service';
-import { FishPhoto } from 'src/app/models/FishPhoto';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { NotifierService } from 'angular-notifier';
+import { PhotoContent } from 'src/app/models/PhotoContent';
+import { PhotoApplyModalComponent } from '../photo-apply-modal/photo-apply-modal.component';
 
 @Component({
   selector: 'photo-expanded-modal',
@@ -15,33 +13,33 @@ import { NotifierService } from 'angular-notifier';
 })
 export class PhotoExpandedModalComponent implements OnInit {
 
-  @Input() aquariumPhoto: AquariumPhoto;
-  @Input() fishPhoto: FishPhoto;
-  @Input() photoId: number;
-  public imageSrc: string;
   public componentLifecycle = new Subject();
 
-  constructor(private _aquariumService: AquariumService,
+  constructor(@Inject(MAT_DIALOG_DATA) public photo: PhotoContent,
+    private _aquariumService: AquariumService,
     private _dialog: MatDialogRef<PhotoExpandedModalComponent>,
+    private dialog: MatDialog,
     private _notifier: NotifierService) {
   }
   ngOnInit() {
-    if (this.aquariumPhoto) {
-      this.imageSrc = this._aquariumService.getPhotoPermalink(this.aquariumPhoto.id, "raw");
-    }
-    else if (this.fishPhoto)
-      this.imageSrc = this._aquariumService.getFishPhotoPermalink(this.fishPhoto.id, "raw");
+  }
+
+  public getPhotoPermalink() {
+    return this._aquariumService.getPhotoPermalink(this.photo.id, "raw");
   }
 
   public clickDelete() {
-    this._dialog.close();
-    if (this.fishPhoto) {
-      this._aquariumService.deleteFishPhoto(this.fishPhoto).subscribe(val => {
-        this._notifier.notify("success", "Fish photo was removed");
-      }, err => {
-        this._notifier.notify("error", "Error removing photo");
-        console.error(err);
-      });
-    }
+    this._aquariumService.deletePhoto(this.photo).subscribe(() => {
+      this._notifier.notify("success", "Photo was successfully removed");
+      this._dialog.close();
+    }, err => {
+      this._notifier.notify("error", "Error removing photo");
+      console.error(err);
+    });
+  }
+  public clickApplyPhoto() {
+    this.dialog.open(PhotoApplyModalComponent,{
+      data: this.photo
+    });
   }
 }

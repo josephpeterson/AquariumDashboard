@@ -9,7 +9,7 @@ export class AccountProfile
   id: number //= Math.floor(Math.random() * 100);
 
   public permalink: string;
-  public thumbnail: string;
+  public thumbnail: number;
   public stars: number;
   public biography: string;
 

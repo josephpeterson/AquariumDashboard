@@ -32,10 +32,10 @@ export class AquariumEffects {
                     (detailedAquarium: Aquarium) => {
                         return new AquariumLoadSuccessAction([detailedAquarium])
                     }
-                ),
-                catchError(err => of(new AquariumLoadFailAction(err)))
+                )
             )
-        )
+        ),
+        catchError(err => of(new AquariumLoadFailAction(err)))
     );
     @Effect()
     updateAquarium$ = this.actions$.pipe(

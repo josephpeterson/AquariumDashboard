@@ -158,19 +158,19 @@ export class FishDetailViewComponent implements OnInit {
         return moment().diff(fish.date, "days");
     }
 
-    getFishPhotoSource(photoId: number) {
-        return this._aquariumService.getFishPhotoPermalink(photoId);
+    getFishPhotoSource(photo: FishPhoto) {
+        return this._aquariumService.getPhotoPermalink(photo.photoId);
     }
     getPhotoDate(photo: FishPhoto) {
-        return moment(photo.date).calendar();
+        return moment(photo.photo.date).local().calendar();
     }
-    public clickFishPhoto(photo: FishPhoto) {
+    public clickFishPhoto(fishPhoto: FishPhoto) {
         var dialog = this.dialog.open(PhotoExpandedModalComponent, {
             panelClass: "darkDialog",
             height: "95%",
             width: "95%",
+            data: fishPhoto.photo
         });
-        dialog.componentInstance.fishPhoto = photo;
     }
 }
 

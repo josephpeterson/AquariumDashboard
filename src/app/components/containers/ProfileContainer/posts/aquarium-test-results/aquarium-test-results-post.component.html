@@ -1,8 +1,8 @@
-<div class="profile-activity-post" *ngIf="!loading">
+<div class="profile-activity-post" *ngIf="!loading && activity.snapshot">
   <div class="row m-2">
     <profile-icon-badge class="profile-icon-badge" [profile]="author"></profile-icon-badge>
-    <div class="post-banner">
-      Tested an <a [routerLink]="'/' + activity.snapshot.aquarium.id">aquarium</a>
+    <div class="post-banner" *ngIf="activity.snapshot.aquarium as aq">
+      Tested an <a [routerLink]="'/aquarium/' + aq.id">aquarium</a>
     </div>
   </div>
   <div class="content p-2 row ml-5" *ngIf="!loading">

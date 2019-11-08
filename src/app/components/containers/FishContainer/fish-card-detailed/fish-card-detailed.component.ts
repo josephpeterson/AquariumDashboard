@@ -38,7 +38,7 @@ export class FishCardDetailedComponent implements OnInit {
     });
   }
   getFishThumbnailSource(fish: Fish) {
-    var val = this.aquariumService.getFishPhotoPermalink(fish.thumbnailPhotoId, "1");
+    var val = this.aquariumService.getPhotoPermalink(fish.thumbnailPhotoId, "1");
     return val;
   }
   getFishAge() {

@@ -1,6 +1,8 @@
-<header>
+<header class="main-header">
 
-  <nav class='navbar nav-spacer navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow'>
+  <nav
+    class='navbar  fixed-top nav-spacer navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow'>
+
     <div class="container">
       <button *ngIf="sidenav" mat-button (click)="sidenav.toggle()">
         <fa-icon class="" [icon]="faDrawer"></fa-icon>
@@ -8,57 +10,22 @@
       <a class="navbar-brand" [routerLink]='["/dashboard"]'><img height="30px" class="mr-2"
           src="https://image.flaticon.com/icons/png/512/31/31267.png" />Dashboard</a>
 
-      <button *ngIf="aquarium$ | async as aquarium" class="btn nav-link"
-        (click)="openAquariumSelection()">{{aquarium.name}}</button>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse"
         aria-label="Toggle navigation" [attr.aria-expanded]="isExpanded" (click)="toggle()">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <search-form></search-form>
 
 
       <!-- Aquarium Navigation -->
-      <div class="d-sm-inline-flex flex-sm-row-reverse" [ngClass]='{"show": isExpanded}'>
-        <ul class="navbar-nav flex-grow">
-          <!--
-          <ng-container *ngIf="aquarium$ | async as aquarium">
-            <li class="nav-item">
-              <a class="nav-link" [routerLink]='["/" + aquarium.id]' [routerLinkActiveOptions]='{ exact: true }'
-                [routerLinkActive]='["link-active"]'>
-                <fa-icon [icon]="faDashboard" class="mr-1"></fa-icon>Dashboard
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" [routerLink]='["/" + aquarium.id + "/parameters"]'
-                [routerLinkActiveOptions]='{ exact: true }' [routerLinkActive]='["link-active"]'>
-                <fa-icon [icon]="faParameters" class="mr-1"></fa-icon>Parameters
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" [routerLink]='["/" + aquarium.id + "/fish"]' [routerLinkActive]='["link-active"]'>
-                <fa-icon [icon]="faFish" class="mr-1"></fa-icon>Fish
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" [routerLink]='["/" + aquarium.id + "/photos"]' [routerLinkActive]='["link-active"]'
-                [routerLinkActiveOptions]="{exact: false}">
-                <fa-icon [icon]="faPhotos" class="mr-1"></fa-icon>Photos
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" [routerLink]='["/" + aquarium.id + "/maintenance"]'
-                [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]="{exact: false}">
-                <fa-icon [icon]="faMaintenance" class="mr-1"></fa-icon>Maintenance
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" [routerLink]='["/" + aquarium.id + "/settings"]' [routerLinkActive]='["link-active"]'>
-                <fa-icon [icon]="faSliders" class="mr-1"></fa-icon>Settings
-              </a>
-            </li>
-          </ng-container>
-        -->
+      <div class="navbar-collapse" [ngClass]='{"show": isExpanded}'>
+
+        <!-- 
+        <button *ngIf="aquarium$ | async as aquarium" class="btn nav-link"
+          (click)="openAquariumSelection()">{{aquarium.name}}</button>
+          -->
+        <search-form class="flex-grow-1"></search-form>
+        <ul class="navbar-nav mr-auto">
           <li class="nav-item">
             <button class="btn btn-link" [routerLink]="['/species']">Species</button>
           </li>
