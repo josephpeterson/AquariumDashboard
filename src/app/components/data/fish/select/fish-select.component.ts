@@ -21,36 +21,20 @@ import { FishService } from 'src/app/services/fish.service';
     styleUrls: ['./fish-select.component.scss'],
 })
 export class FishSelectComponent {
-    public availableFish: Fish[] = [];
-
+    public availableFish: Fish[];
     public componentLifeCycle$ = new Subject();
-
-    public selectControl: FormControl = new FormControl();
-
-    @Output() onChange = new EventEmitter();
-    @Input() aquariumId: number;
-    @Input() value: Fish;
-
-    public aquarium$: Observable<Aquarium>;
-
-    constructor( private store: Store<AppState>,private dialog:MatDialog,
-        private fishService: FishService) {
+    @Input() public control: FormControl = new FormControl();
+    
+    constructor(private fishService: FishService) {
     }
     ngOnInit() {
 
         this.fishService.getAllFish().subscribe(res => this.availableFish = res,err => {
 
         });
-        this.selectControl.valueChanges.pipe(takeUntil(this.componentLifeCycle$)).subscribe(val => {
-            this.onChange.emit(val);
-        });
-        this.selectControl.setValue(this.value);
     }
     ngOnDestory() {
         this.componentLifeCycle$.next();
         this.componentLifeCycle$.unsubscribe();
-    }
-    openFishManager() {
-
     }
 }
