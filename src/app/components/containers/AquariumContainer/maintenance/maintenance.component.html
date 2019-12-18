@@ -1,9 +1,9 @@
 <div class="container">
   <mat-tab-group class="m-t-30" #tabber (selectedTabChange)="updateTabRoute();" style="overflow-y: none;">
     <mat-tab label="{{tab.label}}" *ngFor="let tab of tabs" [ngSwitch]="tab.tabId" >
-      <maintenance-parameters-tab *ngSwitchCase="'parameters'" [aquarium]="aquarium"></maintenance-parameters-tab>
-      <snapshot-table-list *ngSwitchCase="'notifications'" [aquariumId]="aquarium.id"></snapshot-table-list>
-      <feeding-list *ngSwitchCase="'feeding'"></feeding-list>
+      <water-change-list *ngSwitchCase="'water'"></water-change-list>
+      <dosing-list *ngSwitchCase="'dosing'"></dosing-list>
+      <equipment-list *ngSwitchCase="'equipment'"></equipment-list>
       <task-list *ngSwitchDefault></task-list>
     </mat-tab>
   </mat-tab-group>

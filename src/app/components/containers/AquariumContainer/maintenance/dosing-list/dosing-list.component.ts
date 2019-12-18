@@ -17,45 +17,21 @@ const FOOD_BRANDS = [
     "brand3",
 ]
 @Component({
-    selector: 'feeding-list',
-    templateUrl: './feeding-list.component.html',
-    styleUrls: ['./feeding-list.component.scss']
+    selector: 'dosing-list',
+    templateUrl: './dosing-list.component.html',
+    styleUrls: ['./dosing-list.component.scss']
 })
-export class FeedingListComponent implements OnInit {
-    public aquarium: Aquarium;
+export class DosingListComponent implements OnInit {
 
     public aquarium$ = this.store.pipe(select(getSelectedAquarium));
 
-    public newFeeding = {
-        foodBrand: new FormControl(),
-        foodName: new FormControl(),
-    }
-    public newFeedingFish = new FormControl()
-
-    public fish = ["fish1", "fish2", "fish3"]
-
-    public foodBrands = FOOD_BRANDS;
-
-    filteredOptions: Observable<string[]>;
 
 
     constructor(private store: Store<AppState>) {
-        this.aquarium$.subscribe(aq => {
-            if (!aq) return;
-            this.aquarium = aq;
-        })
+     
     }
     ngOnInit() {
-        this.filteredOptions = this.newFeeding.foodBrand.valueChanges
-            .pipe(
-                startWith(''),
-                map(value => this._filter(value))
-            );
+       
     }
-    private _filter(value: string): string[] {
-        const filterValue = value.toLowerCase();
-        return this.foodBrands.filter(option => option.toLowerCase().includes(filterValue));
-    }
-
-
+    
 }

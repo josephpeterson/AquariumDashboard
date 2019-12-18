@@ -7,6 +7,7 @@ import { AppState } from 'src/app/app.state';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { ActivatedRoute, Router } from '@angular/router';
 import { take } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'maintenance-page-component',
@@ -19,19 +20,21 @@ export class MaintenanceComponent implements OnInit {
     label: "Tasks",
     tabId: "tasks"
   }, {
-    label: "Feeding",
-    tabId: "feeding"
+    label: "Water Changes",
+    tabId: "water"
   },
   {
-    label: "Parameters",
-    tabId: "parameters"
+    label: "Nutrients",
+    tabId: "dosing"
   },
   {
-    label: "Notifications",
-    tabId: "notifications"
+    label: "Equipment",
+    tabId: "equipment"
   }
   ];
-  public aquarium$ = this.store.pipe(select(getSelectedAquarium));
+
+  public aquarium$: Observable<Aquarium> = this.store.select(getSelectedAquarium);
+
 
   public aquarium:Aquarium;
 
@@ -45,10 +48,7 @@ export class MaintenanceComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.aquarium$.pipe(take(1)).subscribe(aquarium => {
-      this.aquarium = aquarium;
-    });
-    this.route.params.pipe(take(1)).subscribe(p => this.setSelectedTab(p.tabId))
+    this.setSelectedTab(this.route.snapshot.params.tabId);
   }
   public setSelectedTab(tabId:string) {    
     var idx = this.tabs.map(t => t.tabId).indexOf(tabId);
@@ -56,6 +56,8 @@ export class MaintenanceComponent implements OnInit {
   }
   updateTabRoute() {
     var tab = this.tabs[this.tabber.selectedIndex];
-    this.router.navigate([this.aquarium.id,'maintenance',tab.tabId]);
+    var current = this.router.routerState.snapshot.url.split("/");
+    current.splice(3,current.length-3);
+    //this.router.navigate(current.concat(tab.tabId));
   }
 }

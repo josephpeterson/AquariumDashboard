@@ -11,46 +11,15 @@ import { ManageSnapshotModal } from 'src/app/components/shared/modals/manage-sna
 import { MatDialog } from '@angular/material';
 
 @Component({
-  selector: 'maintenance-parameters-tab',
-  templateUrl: './maintenance-parameters-tab.component.html',
-  styleUrls: ['./maintenance-parameters-tab.component.scss']
+  selector: 'equipment-list',
+  templateUrl: './equipment-list.component.html',
+  styleUrls: ['./equipment-list.component.scss']
 })
-export class ParameterTabComponent {
-  @Input() aquarium: Aquarium;
-  @ViewChild(SnapshotTableListComponent) snapshotTable: SnapshotTableListComponent;
+export class EquipmentListComponent {
 
-  public selectedSnapshots: AquariumSnapshot[] = [];
 
   constructor(private store: Store<AppState>,
     private dialog: MatDialog) {
 
-  }
-
-  selectSnapshot(data) {
-    this.selectedSnapshots = this.snapshotTable.getSelectedItems();
-  }
-
-  clickSnapshotRow(snapshot: AquariumSnapshot) {
-    this.dialog.open(ManageSnapshotModal, {
-      width: "50%",
-      data: snapshot
-    }).afterClosed().subscribe((snapshot: AquariumSnapshot) => {
-      if (snapshot) {
-        //update snapshot in table
-      }
-    });
-  }
-
-  clickAddSnapshot() {
-    var snapshot = new AquariumSnapshot();
-    snapshot.aquariumId = this.aquarium.id;
-    this.dialog.open(ManageSnapshotModal, {
-      width: "50%",
-      data: snapshot
-    }).afterClosed().subscribe((snapshot: AquariumSnapshot) => {
-      if (snapshot) {
-        //add snapshot to table
-      }
-    });
   }
 }

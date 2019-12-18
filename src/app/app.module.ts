@@ -59,7 +59,6 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 import { ConfirmModalComponent } from './components/shared/modals/confirm-modal/confirm-modal.component';
 import { NotifierModule } from 'angular-notifier';
 import { AquariumNotifierConfig } from './config/notifier';
-import { ParameterTabComponent } from './components/containers/AquariumContainer/maintenance/parameters-tab/maintenance-parameters-tab.component';
 import { NotificationsListComponent } from './components/containers/AquariumContainer/maintenance/notifications-list/notifications-list.component';
 import { TaskTabComponent } from './components/containers/AquariumContainer/maintenance/task-tab/task-list.component';
 import { SnapshotCarouselComponent } from './components/data/snapshot/carousel/snapshot-carousel.component';
@@ -74,7 +73,6 @@ import { FishInformationComponent } from './components/data/fish/fish-informatio
 import { FishSelectComponent } from './components/data/fish/select/fish-select.component';
 import { FishAddModalComponent } from './components/shared/modals/fish-add-modal/fish-add-modal.component';
 import { FeedingTableListComponent } from './components/data/feeding/feeding-table/feeding-table-list.component';
-import { FeedingListComponent } from './components/containers/AquariumContainer/maintenance/feeding-list/feeding-list.component';
 import { FeedingDetailFormComponent } from './components/data/feeding/feeding-detail-form/feeding-detail-form.component';
 import { AquariumContainer } from './components/containers/AquariumContainer/aquarium-container.component';
 import { SpeciesDetailViewComponent } from './components/data/species/species-detail-view/species-detail-view.component';
@@ -200,12 +198,14 @@ import { FishDiseaseModalComponent } from './components/shared/modals/fish-disea
 import { FishBreedModalComponent } from './components/shared/modals/fish-breed-modal/fish-breed-modal.component';
 import { FishService } from './services/fish.service';
 import { PhotoApplyModalComponent } from './components/shared/modals/photo-apply-modal/photo-apply-modal.component';
+import { EquipmentListComponent } from './components/containers/AquariumContainer/maintenance/equipment-list/equipment-list.component';
+import { WaterChangeListComponent } from './components/containers/AquariumContainer/maintenance/water-change-list/water-change-list.component';
+import { DosingListComponent } from './components/containers/AquariumContainer/maintenance/dosing-list/dosing-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
-    FeedingListComponent,
     SpeciesContainer,
     FishContainer,
     MasterDashboardComponent,
@@ -259,7 +259,11 @@ import { PhotoApplyModalComponent } from './components/shared/modals/photo-apply
     ProfilePictureThumbnailComponent,
 
     MaintenanceComponent,
-    ParameterTabComponent,
+    WaterChangeListComponent,
+    EquipmentListComponent,
+    TaskListComponent,
+    DosingListComponent,
+
 
     /* Data sources */
 
@@ -291,7 +295,6 @@ import { PhotoApplyModalComponent } from './components/shared/modals/photo-apply
     SpeciesDetailViewComponent,
     SpeciesCardComponent,
 
-    TaskListComponent,
     TaskTabComponent,
     NotificationsListComponent,
 
