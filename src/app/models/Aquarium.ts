@@ -5,6 +5,7 @@ import { AquariumDevice } from './AquariumDevice';
 import { Substrate } from './Substrate';
 import { Equipment } from './Equipment';
 import { AquariumPlan } from './AquariumPlan';
+import { AquariumSnapshot } from './AquariumSnapshot';
 
 export class Aquarium
 {
@@ -23,4 +24,5 @@ export class Aquarium
   
   feedings: AquariumFeeding[] | null
   device?: AquariumDevice | null
+  snapshots: AquariumSnapshot[]
 }

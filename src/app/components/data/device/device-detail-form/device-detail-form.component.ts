@@ -158,6 +158,7 @@ export class DeviceDetailFormComponent implements OnInit {
                 this.scanning = false;
             }, err => {
                 this.scanning = false;
+                this.notifier.notify("error", "Check Device Hardware Failed");
             })
     }
     clickPingDevice() {

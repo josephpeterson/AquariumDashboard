@@ -255,4 +255,10 @@ export class AquariumService {
   public updateAccountThumbnail(photo: PhotoContent): Observable<AccountProfile> {
     return this.http.post<AccountProfile>(this._url + `/v1/Profile/UpdateThumbnail`,photo);
   }
+
+
+  public getTemperatureHistogramAll() {
+    return this.http.get<Aquarium[]>(this._url + `/v1/Aquarium/TemperatureHistogram/All`);
+
+  }
 }
