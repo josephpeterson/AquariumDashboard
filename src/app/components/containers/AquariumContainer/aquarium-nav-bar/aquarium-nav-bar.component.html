@@ -5,6 +5,17 @@
       <fa-icon [icon]="faDashboard" class="mr-1"></fa-icon>Dashboard
     </a>
   </span>
+
+
+  <span>
+    <a class="nav-link" [routerLink]='["/aquarium",aquarium.id,"device"]' [routerLinkActiveOptions]='{ exact: true }'
+      [routerLinkActive]='["link-active"]'>
+      <fa-icon [icon]="faDevice" class="mr-1"></fa-icon>Device
+    </a>
+  </span>
+
+
+  
   <span>
     <a class="nav-link" [routerLink]='["/aquarium",aquarium.id,"parameters"]'
       [routerLinkActiveOptions]='{ exact: true }' [routerLinkActive]='["link-active"]'>

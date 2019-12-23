@@ -1,0 +1,44 @@
+<ng-container *ngIf="aquarium.device as device">
+  <p class="text-muted">These are the enabled peripherals/sensors that are currently enabled. Some may be
+    unavailable
+    depending on hardware installed on your device.</p>
+  <ul class="list-group w-50">
+    <li class="list-group-item" [ngClass]="{'list-group-item-success': device.enabledPhoto}">Photo
+      Module
+      <fa-icon *ngIf="device.enabledPhoto" class="float-md-right" [icon]="faCheck"></fa-icon>
+      <a *ngIf="device.enabledPhoto" class="float-md-right" (click)="clickManagePhotoModule()">Manage...</a>
+    </li>
+    <li class="list-group-item" [ngClass]="{'list-group-item-success': device.enabledTemperature}">
+      Temperature
+      Sensor
+      <fa-icon *ngIf="device.enabledTemperature" class="float-md-right" [icon]="faCheck"></fa-icon>
+    </li>
+    <li class="list-group-item" [ngClass]="{'list-group-item-success': device.enabledLighting}">LED
+      Controller
+
+      <fa-icon *ngIf="device.enabledLighting" class="float-md-right" [icon]="faCheck"></fa-icon>
+    </li>
+    <li class="list-group-item" [ngClass]="{'list-group-item-success': device.enabledPh}">Ph Sensor
+      <fa-icon *ngIf="device.enabledPh" class="float-md-right" [icon]="faCheck"></fa-icon>
+    </li>
+    <li class="list-group-item" [ngClass]="{'list-group-item-success': device.enabledNitrate}">
+      Nitrate/Nitrite
+      Sensor
+      <fa-icon *ngIf="device.enabledNitrate" class="float-md-right" [icon]="faCheck"></fa-icon>
+    </li>
+  </ul>
+  <div>
+
+    <button [disabled]="scanning" [class.btn-secondary]="!scanning" type="submit" class="m-2 btn " (click)="clickScanDeviceHardware()">
+      <ng-container *ngIf="scanning">
+        Scanning <mat-progress-spinner class="float-right ml-1 align-middle" color="warn" [diameter]="25" mode="indeterminate">
+        </mat-progress-spinner>
+      </ng-container>
+      <ng-container class="btn-secondary" *ngIf="!scanning">Scan Hardware</ng-container>
+    </button>
+    <button [disabled]="pinging" type="submit" class="m-2 btn btn-secondary" (click)="clickPingDevice()">
+      Test Connection
+    </button>
+
+  </div>
+</ng-container>

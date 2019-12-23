@@ -1,0 +1,58 @@
+<ng-container *ngIf="aquarium.device as device">
+  <div *ngIf="deviceInformation">
+    <div class="row">
+      <div class="col-sm">
+        Aquarium:
+      </div>
+      <div class="col-sm">
+        {{deviceInformation.aquarium ? deviceInformation.aquarium.name:"None"}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        Schedule: 
+      </div>
+      <div class="col-sm">
+        {{deviceInformation.schedule ? "yes":"no"}}
+      </div>
+    </div>
+    <div class="row">
+      <h6>Configuration</h6>
+      <code>{{deviceInformation.config}}</code>
+    </div>
+  </div>
+  <div>
+    <h6>Queue</h6>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">First</th>
+          <th scope="col">Last</th>
+          <th scope="col">Handle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>Larry</td>
+          <td>the Bird</td>
+          <td>@twitter</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <button (click)="clickGetDeviceInformation()">sadsa</button>
+</ng-container>

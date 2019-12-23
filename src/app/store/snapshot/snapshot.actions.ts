@@ -21,7 +21,7 @@ export enum SnapshotActions {
 
 export class SnapshotLoadByAquariumAction implements Action {
   readonly type = SnapshotActions.LoadByAquarium
-  constructor(public payload: number) { }
+  constructor(public payload: number,public offset: number,public count: number) { }
 }
 export class SnapshotLoadSuccessAction implements Action {
   readonly type = SnapshotActions.LoadSuccess

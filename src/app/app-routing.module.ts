@@ -40,6 +40,7 @@ import { CreateThreadFormComponent } from './components/containers/DiscussionCon
 import { BoardDetailComponent } from './components/containers/DiscussionContainer/board-page/board-detail/board-detail.component';
 import { PasswordResetComponent } from './components/routes/passwordreset/password-reset.component';
 import { CreateAquariumComponent } from './components/containers/AquariumContainer/create-aquarium/create-aquarium.component';
+import { AquariumDeviceComponent } from './components/containers/AquariumContainer/device/aquarium-device.component';
 
 const routes: Routes = [
   //{ path: '', component: AquariumSelectionComponent, pathMatch: 'full' },
@@ -127,6 +128,10 @@ const routes: Routes = [
       {
         path: 'photos',
         component: AquariumPhotosComponent
+      },
+      {
+        path: 'device',
+        component: AquariumDeviceComponent
       },
       {
         path: 'lighting',

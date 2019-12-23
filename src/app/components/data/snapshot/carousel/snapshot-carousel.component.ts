@@ -46,12 +46,12 @@ export class SnapshotCarouselComponent implements OnInit {
 
   ngOnInit() {
     this.data$.pipe(takeUntil(this.componentLifeCycle)).subscribe(data => {
-      var photos = data.filter(snapshot => (snapshot.
-        photo != null));
-      this.photoSnapshots = photos.sort((a, b) => b.id - a.id);
+      //var photos = data.filter(snapshot => (snapshot.
+       // photo != null));
+     this.photoSnapshots = data.sort((a, b) => b.id - a.id);
     });
     this.aquarium$.pipe(take(1)).subscribe(aq => {
-      this.store.dispatch(new SnapshotLoadByAquariumAction(aq.id));
+      this.store.dispatch(new SnapshotLoadByAquariumAction(aq.id,0,10));
       this.aquarium = aq;
     });
 
@@ -90,7 +90,8 @@ export class SnapshotCarouselComponent implements OnInit {
     snapshots[this.selectedId].scrollIntoView({ behavior: "auto", block: "end", inline: "nearest" });
   }
   readableDate(dateString: string) {
-    return moment(new Date(dateString)).local().calendar();
+    var d = moment.utc(dateString ).local().format('YYYY-MM-DD HH:mm:ss');
+    return moment(d).calendar();
   }
 
   generateChart() {

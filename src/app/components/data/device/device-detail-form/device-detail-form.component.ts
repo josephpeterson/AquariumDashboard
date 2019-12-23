@@ -38,6 +38,7 @@ export class DeviceDetailFormComponent implements OnInit {
     pinging: boolean;
     faCheck = faCheckCircle;
     public faDevice: IconDefinition = faDesktop;
+    deviceLog: string;
 
 
 
@@ -203,5 +204,13 @@ export class DeviceDetailFormComponent implements OnInit {
             this.device = { ...this.aquarium.device };
         else
             delete this.device;
+    }
+    clickGetDeviceLog() {
+        delete this.deviceLog;
+        this._aquariumService.getDeviceLog(this.device.id).subscribe(data => {
+            this.deviceLog = data;
+        },err => {
+            console.log(err);
+        });
     }
 }

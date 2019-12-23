@@ -201,6 +201,9 @@ import { PhotoApplyModalComponent } from './components/shared/modals/photo-apply
 import { EquipmentListComponent } from './components/containers/AquariumContainer/maintenance/equipment-list/equipment-list.component';
 import { WaterChangeListComponent } from './components/containers/AquariumContainer/maintenance/water-change-list/water-change-list.component';
 import { DosingListComponent } from './components/containers/AquariumContainer/maintenance/dosing-list/dosing-list.component';
+import { AquariumDeviceComponent } from './components/containers/AquariumContainer/device/aquarium-device.component';
+import { DevicePeripherialsComponent } from './components/containers/AquariumContainer/device/Peripherials/peripherials.component';
+import { DeviceInformationComponent } from './components/containers/AquariumContainer/device/information/device-information.component';
 
 @NgModule({
   declarations: [
@@ -245,6 +248,7 @@ import { DosingListComponent } from './components/containers/AquariumContainer/m
     LightingComponent,
     AquariumParametersComponent,
     AquariumPhotosComponent,
+    AquariumDeviceComponent,
 
     AquariumSelectComponent,
     AquariumTableComponent,
@@ -374,6 +378,8 @@ import { DosingListComponent } from './components/containers/AquariumContainer/m
     SelectAquariumModalComponent,
     ManageAquariumDeviceModalComponent,
     PhotoApplyModalComponent,
+    DevicePeripherialsComponent,
+    DeviceInformationComponent,
   ],
   entryComponents: [
     ConfirmModalComponent,

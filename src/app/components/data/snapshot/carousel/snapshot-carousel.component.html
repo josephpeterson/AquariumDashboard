@@ -1,8 +1,8 @@
 <div class="carousel shadow bg-white rounded" tabindex="0" (keydown.arrowup)="handleKey($event)"
     (keydown.arrowdown)="handleKey($event)">
     <ng-container *ngIf="!(loading$ | async) else loading">
-        <div class="d-flex flex-row" class="aquariumCarousel">
-            <ng-container *ngIf="photoSnapshots.length > 0 else noPhotos">
+        <div class="d-flex flex-row" class="aquariumCarousel" *ngIf="(data$ | async) as photoSnapshots">
+            <ng-container *ngIf="(photoSnapshots && photoSnapshots.length > 0) else noPhotos">
                 <div class="currentImage justify-content-end">
                     <ng-container *ngIf="photoSnapshots[selectedId] as current">
                         <div class="expandedImage"
@@ -42,10 +42,12 @@
         </div>
         <div>
             <snapshot-take-button (onPhotoTaken)="addNewSnapshot($event[0])"></snapshot-take-button>
-            <snapshot-delete-button *ngIf="photoSnapshots[selectedId] as current" [snapshot]="current">
-            </snapshot-delete-button>
-            <button routerLink="maintenance/parameters" class="m-2 btn btn-info float-right">View All
-                ({{photoSnapshots.length}})</button>
+            <ng-container *ngIf="(data$ | async) as data">
+                <snapshot-delete-button *ngIf="data[selectedId] as current" [snapshot]="current">
+                </snapshot-delete-button>
+                <button routerLink="maintenance/parameters" class="m-2 btn btn-info float-right">View All
+                    ({{data.length}})</button>
+            </ng-container>
         </div>
     </ng-container>
     <ng-template #loading>

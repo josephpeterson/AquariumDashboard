@@ -89,7 +89,7 @@ export class SnapshotTableListComponent implements OnInit {
 
   setAquarium(id: number) {
     this.aquariumId = id;
-    this.store.dispatch(new SnapshotLoadByAquariumAction(id));
+    this.store.dispatch(new SnapshotLoadByAquariumAction(id,0,10));
   }
 
   updateSort() {

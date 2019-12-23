@@ -33,7 +33,7 @@ const httpOptions = {
   providedIn: "root"
 })
 export class AquariumService {
-
+  
 
   private _url: string;
 
@@ -59,9 +59,12 @@ export class AquariumService {
 
 
   /* Snapshot */
-  public getSnapshots(aqId: number): Observable<AquariumSnapshot[]> {
+  public getSnapshots(aqId: number,offset:number,count: number): Observable<AquariumSnapshot[]> {
 
-    return this.http.get<AquariumSnapshot[]>(this._url + "/v1/Snapshot/" + aqId + "/All");
+    return this.http.post<AquariumSnapshot[]>(this._url + `/v1/Aquarium/${aqId}/Snapshots`,{
+      offset: offset,
+      max: count
+    });
   }
   public deleteSnapshot(snapshot: AquariumSnapshot) {
     return this.http.post<AquariumSnapshot>(this._url + "/v1/Snapshot/Delete", snapshot.id);
@@ -260,5 +263,13 @@ export class AquariumService {
   public getTemperatureHistogramAll() {
     return this.http.get<Aquarium[]>(this._url + `/v1/Aquarium/TemperatureHistogram/All`);
 
+  }
+
+
+  public getDeviceLog(deviceId:number) {
+    return this.http.post(this._url + `/v1/Device/${deviceId}/Log`,{},{ responseType: "text" });
+  }
+  public getDeviceInformation(deviceId: number) {
+    return this.http.post(this._url + `/v1/Device/${deviceId}/Information`,{});
   }
 }
