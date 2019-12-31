@@ -159,7 +159,7 @@ export class FishDetailViewComponent implements OnInit {
     }
 
     getFishPhotoSource(photo: FishPhoto) {
-        return this._aquariumService.getPhotoPermalink(photo.photoId);
+        return this._aquariumService.getPhotoPermalink(photo.photo);
     }
     getPhotoDate(photo: FishPhoto) {
         return moment(photo.photo.date).local().calendar();

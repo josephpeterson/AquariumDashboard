@@ -3,13 +3,15 @@ import { Fish } from './Fish';
 import { Aquarium } from './Aquarium';
 import { Activity } from './Activity';
 import { AccountRelationship } from './AccountRelationship';
+import { PhotoContent } from './PhotoContent';
 
 export class AccountProfile
 {
   id: number //= Math.floor(Math.random() * 100);
 
   public permalink: string;
-  public thumbnail: number;
+  public thumbnail: PhotoContent;
+  public thumbnailId: number;
   public stars: number;
   public biography: string;
 

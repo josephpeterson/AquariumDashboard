@@ -5,4 +5,5 @@ export class PhotoContent
 {
   id: number
   date: Date
+  filepath: string
 }

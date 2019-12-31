@@ -36,11 +36,13 @@ export class AquariumService {
   
 
   private _url: string;
+  private _cdn: string;
 
   public aquariumId: number;
 
   constructor(private http: HttpClient) {
     this._url = environment.urls.aquariumApi;
+    this._cdn = environment.urls.azureCDN;
   }
 
   public getCurrentUser() {
@@ -247,8 +249,20 @@ export class AquariumService {
   }
 
   /* Photos */
-  public getPhotoPermalink(photoId: number, size: any = "1"): string {
-    return this._url + "/v1/Photo/" + photoId + "/" + size;
+  public getPhotoPermalink(photo: PhotoContent,size: any = ""): string {
+
+    if(!photo)
+      return;
+    console.log(photo);
+    var path = photo.filepath.substring(2);
+    if(size && size != "1")
+    {
+      var p = path.split("/");
+      p.splice(1,0,size);
+      path = p.join("/");
+      //todo outsource this?
+    }
+    return this._cdn + path;
   }
   public deletePhoto(photo: PhotoContent): Observable<any> {
     return this.http.delete<any>(this._url + `/v1/Photo/${photo.id}/Delete`);

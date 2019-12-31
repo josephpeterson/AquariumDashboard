@@ -6,7 +6,7 @@
                 <div class="currentImage justify-content-end">
                     <ng-container *ngIf="photoSnapshots[selectedId] as current">
                         <div class="expandedImage"
-                            [style.background-image]="'url(' + aquariumService.getPhotoPermalink(current.photoId,0.25) + ')'"
+                            [style.background-image]="'url(' + aquariumService.getPhotoPermalink(current.photo,0.25) + ')'"
                             (click)="clickExpandedImage(current)">
 
                         </div>
@@ -22,7 +22,7 @@
                 </div>
                 <div class="scroll-area justify-content-start" #scroller>
                     <ng-container *ngFor="let snapshot of photoSnapshots;let i = index">
-                        <div [style.background-image]="'url(' + aquariumService.getPhotoPermalink(snapshot.photoId,0.25) + ')'"
+                        <div [style.background-image]="'url(' + aquariumService.getPhotoPermalink(snapshot.photo,0.25) + ')'"
                             [ngClass]="{'selected': selectedId === i }" class="content" (click)="setSelectedId(i)">
                         </div>
                     </ng-container>

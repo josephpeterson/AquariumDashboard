@@ -25,7 +25,7 @@ export class PhotoExpandedModalComponent implements OnInit {
   }
 
   public getPhotoPermalink() {
-    return this._aquariumService.getPhotoPermalink(this.photo.id, "raw");
+    return this._aquariumService.getPhotoPermalink(this.photo, "1");
   }
 
   public clickDelete() {

@@ -77,7 +77,7 @@ export class SnapshotTableListComponent implements OnInit {
           ...s,
           temperature: s.temperature,
           readableDate: moment(s.date).local().calendar(),
-          imageSrc: 'url(' + this._aquariumService.getPhotoPermalink(s.photoId) + ')'
+          //imageSrc: 'url(' + this._aquariumService.getPhotoPermalink(s.photoId) + ')'
         }
       });
     });

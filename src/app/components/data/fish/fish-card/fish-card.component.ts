@@ -76,7 +76,9 @@ export class FishCardComponent implements OnInit {
         return moment().diff(date, "days");
     }
     getFishThumbnailSource(fish: Fish) {
-        var val = this._aquariumService.getPhotoPermalink(fish.thumbnailPhotoId, "1");
+        if(!fish.thumbnail)
+            return "assets/avatarDefault.jpg"; //todo default fish thumbernail
+        var val = this._aquariumService.getPhotoPermalink(fish.thumbnail.photo, "1");
         return val;
     }
 }

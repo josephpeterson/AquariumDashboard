@@ -1,5 +1,6 @@
 import { Aquarium } from './Aquarium';
 import { AquariumPhoto } from './AquariumPhoto';
+import { PhotoContent } from './PhotoContent';
 
 var MockSnapshotImages:string[] =
 [
@@ -24,5 +25,5 @@ export class AquariumSnapshot
   temperature: number
   photoId: number
   manualEntry: boolean
-  photo: AquariumPhoto
+  photo: PhotoContent
 }

@@ -108,8 +108,5 @@ export class FishEditViewComponent implements OnInit {
             }
         });
     }
-    getFishPhotoSource(photoId: number) {
-        return this._aquariumService.getPhotoPermalink(photoId);
-    }
 }
 

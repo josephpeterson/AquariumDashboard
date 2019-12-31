@@ -66,7 +66,11 @@ export class FishContainer {
   }
 
   getFishThumbnailSource(fish: Fish) {
-    var val = "url(" + this._aquariumService.getPhotoPermalink(fish.thumbnailPhotoId, "1") + ")";
-    return val;
+
+    if(!fish.thumbnail)
+    return "assets/avatarDefault.jpg"; 
+    var val = fish.thumbnail.photo.filepath;
+    console.log(val);
+    return "url("  + val + ")";
   }
 }
