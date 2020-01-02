@@ -1,0 +1,24 @@
+<div class="card m-2">
+
+  <div class="card-body">
+    <div class="card-title">
+      <h3>Device Log</h3>
+    </div>
+    <a class="btn btn-secondary mb-2" data-toggle="collapse" href="#multiCollapseExample1" role="button"
+      aria-expanded="false" aria-controls="multiCollapseExample1" (click)="clickGetDeviceLog()">Get
+      Device Log</a>
+    <div class="flex collapse multi-collapse" id="multiCollapseExample1">
+      <h5>Filters</h5>
+      <div class="row">
+        <mat-checkbox *ngFor="let filter of filters" class="p-2" [(ngModel)]="filter.value">{{filter.name}}
+        </mat-checkbox>
+      </div>
+      <div class="card card-body " style="height:250px">
+        <code class="overflow-auto">
+          <small>
+            {{getFilteredLog()}}
+          </small>
+          </code>
+      </div>
+    </div>
+  </div>

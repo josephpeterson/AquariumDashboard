@@ -6,11 +6,4 @@
 
 <device-detail-form *ngIf="aquarium.device as device" [aquarium]="aquarium"></device-detail-form>
 
-<a class="btn btn-secondary mb-2" data-toggle="collapse" href="#multiCollapseExample1" role="button"
-    aria-expanded="false" aria-controls="multiCollapseExample1" (click)="clickGetDeviceLog()">Get
-    Device Log</a>
-<div class="flex collapse multi-collapse" id="multiCollapseExample1">
-    <div class="card card-body " style="height:250px">
-        <code class="overflow-auto">{{deviceLog}}</code>
-    </div>
-</div>
+<device-log [device]="aquarium.device"></device-log>

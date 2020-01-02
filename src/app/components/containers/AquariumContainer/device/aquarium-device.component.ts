@@ -24,14 +24,4 @@ export class AquariumDeviceComponent implements OnInit {
   ngOnInit() {
     this.store.select(getSelectedAquarium).pipe(take(1)).subscribe(aq => this.aquarium = aq);
   }
-
-
-  clickGetDeviceLog() {
-    delete this.deviceLog;
-    this.aquariumService.getDeviceLog(this.aquarium.device.id).subscribe(data => {
-      this.deviceLog = data;
-    }, err => {
-      console.log(err);
-    });
-  }
 }

@@ -204,10 +204,11 @@ import { AquariumDeviceComponent } from './components/containers/AquariumContain
 import { DevicePeripherialsComponent } from './components/containers/AquariumContainer/device/Peripherials/peripherials.component';
 import { DeviceInformationComponent } from './components/containers/AquariumContainer/device/information/device-information.component';
 import { PhotoCardComponent } from './components/data/photo/photo-card/photo-card.component';
-import { ScheduleBuilderComponent } from './components/data/device/schedule-builder/schedule-builder.component';
+import { ScheduleBuilderComponent } from './components/containers/AquariumContainer/device/schedule-builder/schedule-builder.component';
 import { CreateScheduleModalComponent } from './components/shared/modals/create-schedule-modal/create-schedule-modal.component';
 import { ScheduleTaskTableComponent } from './components/shared/modals/create-schedule-modal/schedule-task-table/schedule-task-table.component';
 import { FishPhotoSelectComponent } from './components/data/fish/photo-select/fish-photo-select.component';
+import { DeviceLogComponent } from './components/containers/AquariumContainer/device/device-log/device-log.component';
 
 @NgModule({
   declarations: [
@@ -384,6 +385,7 @@ import { FishPhotoSelectComponent } from './components/data/fish/photo-select/fi
     PhotoApplyModalComponent,
     DevicePeripherialsComponent,
     DeviceInformationComponent,
+    DeviceLogComponent,
     PhotoCardComponent,
     ScheduleBuilderComponent,
     CreateScheduleModalComponent,
