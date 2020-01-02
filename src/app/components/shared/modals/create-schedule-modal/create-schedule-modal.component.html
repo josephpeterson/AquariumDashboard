@@ -1,0 +1,16 @@
+<div class="">
+  <h4 class="justify-content-center">{{schedule.id ? "Edit Schedule":"Create Schedule"}}</h4>
+  <mat-form-field appearance="standard">
+    <mat-label>Schedule Name</mat-label>
+    <input matInput placeholder="Placeholder" [(ngModel)]="schedule.name">
+    <mat-hint>Name of the schedule</mat-hint>
+  </mat-form-field>
+
+  <h6 class="justify-content-center">Tasks</h6>
+  <schedule-task-table [(schedule)]="schedule"></schedule-task-table>  
+  <mat-dialog-actions align="end">
+    <button  [disabled]="disableInput" class="m-2 btn btn-danger" mat-dialog-close>Cancel</button>
+    <button  *ngIf="schedule.id" [disabled]="disableInput" class="m-2 btn btn-danger md-float-right" (click)='clickDeleteSchedule()'>Delete Schedule</button>
+    <button  [disabled]="disableInput" class="m-2 btn btn-success md-float-right" (click)='clickSaveSchedule()'>Save Schedule</button>
+  </mat-dialog-actions>
+</div>

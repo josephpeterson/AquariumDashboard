@@ -118,7 +118,6 @@ import { FishAddFormComponent } from './components/data/fish/fish-add-form/fish-
 import { FishContainer } from './components/containers/FishContainer/fish-container.component';
 import { LoadingContainerComponent } from './components/shared/loading-container/loading-container.component';
 import { FishPhotoModal } from './components/shared/modals/fish-photo-modal/fish-photo-modal.component';
-import { FishPhotoSelectComponent } from './components/data/fish/photo-select/fish-photo-select.component';
 import { FishPhotoSelectModal } from './components/shared/modals/fish-photo-select-modal/fish-photo-select-modal.component';
 import { FishEditViewComponent } from './components/containers/FishContainer/fish-edit-view/fish-edit-view.component';
 import { FishAddPhotoButtonComponent } from './components/data/fish/add-photo-button/fish-add-photo-button.component';
@@ -204,6 +203,11 @@ import { DosingListComponent } from './components/containers/AquariumContainer/m
 import { AquariumDeviceComponent } from './components/containers/AquariumContainer/device/aquarium-device.component';
 import { DevicePeripherialsComponent } from './components/containers/AquariumContainer/device/Peripherials/peripherials.component';
 import { DeviceInformationComponent } from './components/containers/AquariumContainer/device/information/device-information.component';
+import { PhotoCardComponent } from './components/data/photo/photo-card/photo-card.component';
+import { ScheduleBuilderComponent } from './components/data/device/schedule-builder/schedule-builder.component';
+import { CreateScheduleModalComponent } from './components/shared/modals/create-schedule-modal/create-schedule-modal.component';
+import { ScheduleTaskTableComponent } from './components/shared/modals/create-schedule-modal/schedule-task-table/schedule-task-table.component';
+import { FishPhotoSelectComponent } from './components/data/fish/photo-select/fish-photo-select.component';
 
 @NgModule({
   declarations: [
@@ -380,6 +384,10 @@ import { DeviceInformationComponent } from './components/containers/AquariumCont
     PhotoApplyModalComponent,
     DevicePeripherialsComponent,
     DeviceInformationComponent,
+    PhotoCardComponent,
+    ScheduleBuilderComponent,
+    CreateScheduleModalComponent,
+    ScheduleTaskTableComponent,
   ],
   entryComponents: [
     ConfirmModalComponent,
@@ -387,6 +395,7 @@ import { DeviceInformationComponent } from './components/containers/AquariumCont
     FishFeedModalComponent,
     ErrorMessageModalComponent,
     CreateAquariumModelComponent,
+    CreateScheduleModalComponent,
     FishAddModalComponent,
     CreateSpeciesModalComponent,
     ScraperModalComponent,

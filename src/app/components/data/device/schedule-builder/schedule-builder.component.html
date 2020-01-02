@@ -1,0 +1,64 @@
+<div class="card">
+
+  <div class="card-body">
+    <div class="card-title">
+      <h3>Schedule</h3>
+    </div>
+    <p class="text-muted">You may create a schedule to deploy to the pi here. You may preform automous events, timed
+      events
+      etc.</p>
+
+
+
+    <div *ngIf="schedule_list.length > 0 else noSchedules">
+      <h4>Schedules on Device</h4>
+      <ng-container *ngIf="device.scheduleAssignments.length > 0 else noDeployments">
+        <div *ngFor="let scheduleAssignment of device.scheduleAssignments">
+          <div class="text-danger row p-2">
+            <div class="col-2">
+
+              {{scheduleAssignment.schedule.name}}
+            </div>
+            <div class="col">
+              <button class="btn btn-danger" (click)="clickRemoveSchedule(scheduleAssignment.schedule)"
+                [disabled]="managingSchedules">
+                <fa-icon class="addIcon mr-2" [icon]="icon_delete"></fa-icon> Remove
+              </button>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #noDeployments>
+        <p class="p-2">No schedules have been deployed onto this device.</p>
+      </ng-template>
+      <mat-form-field>
+        <mat-label>Select Schedule</mat-label>
+        <mat-select [(ngModel)]="newScheduleDeployment">
+          <mat-option *ngFor="let schedule of schedule_list" [value]="schedule">
+            {{schedule.name}}
+
+
+            <fa-icon class="addIcon mr-2" [icon]="icon_edit" (click)="clickUpdateSchedule(schedule)"></fa-icon>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button class="btn btn-success pl-2" (click)="clickDeploySchedule()"
+        [disabled]="managingSchedules || !newScheduleDeployment">Deploy
+        Schedule</button>
+      <div class="row">
+        <button mat-list-item type="button" class="mt-2 btn btn-primary btn-sm" (click)="clickCreateSchedule()">
+          <fa-icon class="addIcon mr-2" [icon]="icon_create"></fa-icon>New Schedule...
+        </button>
+      </div>
+    </div>
+
+    <ng-template #noSchedules>
+      <div class="text-center m-0 d-flex flex-column justify-content-center">
+        <p class="p-2">You have no schedules! Create a schedule to deploy it to your device.</p>
+        <div>
+          <button class="btn btn-success" (click)="clickCreateSchedule()">Create a Schedule</button>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>

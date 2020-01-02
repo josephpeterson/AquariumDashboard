@@ -35,12 +35,8 @@
     <div class="row p-3">
 
         <div class="card-group">
-            <div *ngFor="let photo of fish.photos" class="card fishPhoto" (click)="clickFishPhoto(photo)">
-                <img [src]="getFishPhotoSource(photo)" class="card-img-top" width=200px alt="..."
-                    >
-                <div class="card-footer">
-                    <small class="text-muted">Uploaded {{getPhotoDate(photo)}}</small>
-                </div>
+            <div *ngFor="let photo of fish.photos">
+                <photo-card [photo]="photo.photo"></photo-card>
             </div>
         </div>
     </div>

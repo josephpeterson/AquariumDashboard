@@ -1,3 +1,7 @@
+<h3>Device Information</h3>
+<p class="text-muted">
+  This is what the pi is linked to currently.
+</p>
 <ng-container *ngIf="aquarium.device as device">
   <div *ngIf="deviceInformation">
     <div class="row">
@@ -10,7 +14,7 @@
     </div>
     <div class="row">
       <div class="col-sm">
-        Schedule: 
+        Schedule:
       </div>
       <div class="col-sm">
         {{deviceInformation.schedule ? "yes":"no"}}

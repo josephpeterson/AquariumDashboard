@@ -1,5 +1,6 @@
 import { Aquarium } from './Aquarium';
 import { CameraConfiguration } from './CameraConfiguration';
+import { DeviceScheduleAssignment } from './DeviceScheduleAssignment';
 
 export class AquariumDevice
 {
@@ -18,4 +19,6 @@ export class AquariumDevice
   cameraConfiguration: CameraConfiguration
   
   aquarium: Aquarium
+
+  scheduleAssignments: DeviceScheduleAssignment[]
 }

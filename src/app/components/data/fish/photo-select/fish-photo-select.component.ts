@@ -11,9 +11,9 @@ import { CreateSpeciesModalComponent } from '../../../shared/modals/create-speci
 import { Fish } from 'src/app/models/Fish';
 import { SpeciesLoadAction } from 'src/app/store/species/species.actions';
 import { TypeCheckCompiler } from '@angular/compiler/src/view_compiler/type_check_compiler';
-import { FishPhotoSelectModal } from 'src/app/components/shared/modals/fish-photo-select-modal/fish-photo-select-modal.component';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { FishPhoto } from 'src/app/models/FishPhoto';
+import { FishPhotoSelectModal } from 'src/app/components/shared/modals/fish-photo-select-modal/fish-photo-select-modal.component';
 
 @Component({
     selector: 'fish-photo-select',

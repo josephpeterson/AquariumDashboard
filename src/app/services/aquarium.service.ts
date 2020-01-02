@@ -20,6 +20,7 @@ import { AccountRelationship } from '../models/AccountRelationship';
 import { SearchOptions } from '../models/SearchOptions';
 import { SearchResult } from '../models/SearchResult';
 import { PhotoContent } from '../models/PhotoContent';
+import { DeviceSchedule } from '../models/DeviceSchedule';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -33,8 +34,6 @@ const httpOptions = {
   providedIn: "root"
 })
 export class AquariumService {
-  
-
   private _url: string;
   private _cdn: string;
 
@@ -253,7 +252,6 @@ export class AquariumService {
 
     if(!photo)
       return;
-    console.log(photo);
     var path = photo.filepath.substring(2);
     if(size && size != "1")
     {
@@ -285,5 +283,29 @@ export class AquariumService {
   }
   public getDeviceInformation(deviceId: number) {
     return this.http.post(this._url + `/v1/Device/${deviceId}/Information`,{});
+  }
+
+  /* Device Schedules */
+  public getDeviceScheduleTaskTypes() {
+    return this.http.get(this._url + `/v1/Schedule/Tasks`);
+  }
+  public getDeviceSchedules() {
+    return this.http.get(this._url + `/v1/Schedule`);
+  }
+  public createDeviceSchedule(deviceSchedule: DeviceSchedule) {
+    console.log(deviceSchedule);
+    return this.http.post(this._url + `/v1/Schedule/Add`,deviceSchedule);
+  }
+  public updateDeviceSchedule(deviceSchedule: DeviceSchedule) {
+    return this.http.post(this._url + `/v1/Schedule/Update`,deviceSchedule);
+  }
+  public deleteDeviceSchedule(deviceScheduleId: number) {
+    return this.http.delete(this._url + `/v1/Schedule/${deviceScheduleId}/Delete`);
+  }
+  public deploySchedule(deviceId: number, scheduleId: number) {
+    return this.http.post(this._url + `/v1/Device/${deviceId}/DeploySchedule/${scheduleId}`,{});
+  }
+  public removeSchedule(deviceId: number, scheduleId: number) {
+    return this.http.post(this._url + `/v1/Device/${deviceId}/RemoveSchedule/${scheduleId}`,{});
   }
 }

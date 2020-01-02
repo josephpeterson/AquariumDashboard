@@ -1,7 +1,9 @@
+<h3>Peripherials</h3>
+<p class="text-muted">These are the enabled peripherals/sensors that are currently enabled. Some may be
+  unavailable
+  depending on hardware installed on your device. These may be USB plug-ins, GPIO connections etc.</p>
 <ng-container *ngIf="aquarium.device as device">
-  <p class="text-muted">These are the enabled peripherals/sensors that are currently enabled. Some may be
-    unavailable
-    depending on hardware installed on your device.</p>
+
   <ul class="list-group w-50">
     <li class="list-group-item" [ngClass]="{'list-group-item-success': device.enabledPhoto}">Photo
       Module
@@ -29,9 +31,11 @@
   </ul>
   <div>
 
-    <button [disabled]="scanning" [class.btn-secondary]="!scanning" type="submit" class="m-2 btn " (click)="clickScanDeviceHardware()">
+    <button [disabled]="scanning" [class.btn-secondary]="!scanning" type="submit" class="m-2 btn "
+      (click)="clickScanDeviceHardware()">
       <ng-container *ngIf="scanning">
-        Scanning <mat-progress-spinner class="float-right ml-1 align-middle" color="warn" [diameter]="25" mode="indeterminate">
+        Scanning <mat-progress-spinner class="float-right ml-1 align-middle" color="warn" [diameter]="25"
+          mode="indeterminate">
         </mat-progress-spinner>
       </ng-container>
       <ng-container class="btn-secondary" *ngIf="!scanning">Scan Hardware</ng-container>
