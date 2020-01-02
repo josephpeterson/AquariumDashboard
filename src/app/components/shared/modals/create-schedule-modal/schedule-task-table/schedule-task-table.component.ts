@@ -3,6 +3,7 @@ import { DeviceScheduleTask } from 'src/app/models/DeviceScheduleTask';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { DeviceSchedule } from 'src/app/models/DeviceSchedule';
 import { AquariumService } from 'src/app/services/aquarium.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'schedule-task-table',
@@ -46,4 +47,11 @@ export class ScheduleTaskTableComponent implements OnInit {
 
   }
 
+
+  public parseInterval(interval: number) {
+    return moment.duration(interval*1000*60).asMinutes();
+  }
+  public parseDate(date: string) {
+    return moment(date).local().calendar(); 
+  }
 }

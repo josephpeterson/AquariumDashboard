@@ -1,25 +1,35 @@
-<table mat-table [dataSource]="schedule.tasks" *ngIf="schedule.tasks && schedule.tasks.length > 0">
+<table class="w-100" mat-table [dataSource]="schedule.tasks" *ngIf="schedule.tasks && schedule.tasks.length > 0">
   <ng-container matColumnDef="task">
     <th mat-header-cell *matHeaderCellDef> Task </th>
     <td mat-cell *matCellDef="let element"> {{element.taskId}} </td>
   </ng-container>
   <ng-container matColumnDef="startTime">
     <th mat-header-cell *matHeaderCellDef> Start Time </th>
-    <td mat-cell *matCellDef="let element"> {{element.startTime}} </td>
+    <td mat-cell *matCellDef="let element"> {{parseDate(element.startTime)}} </td>
   </ng-container>
   <ng-container matColumnDef="endTime">
     <th mat-header-cell *matHeaderCellDef> End Time </th>
-    <td mat-cell *matCellDef="let element"> {{element.endTime}} </td>
+    <td mat-cell *matCellDef="let element">
+      <ng-container *ngIf="element.endTime != null">
+        {{parseDate(element.endTime)}}
+      </ng-container>
+    </td>
+
   </ng-container>
   <ng-container matColumnDef="interval">
     <th mat-header-cell *matHeaderCellDef> Interval </th>
-    <td mat-cell *matCellDef="let element"> {{element.interval}} </td>
+    <td mat-cell *matCellDef="let element">
+      <ng-container *ngIf="element.interval > 0">
+
+        Repeat every {{parseInterval(element.interval)}} minutes
+      </ng-container>
+    </td>
   </ng-container>
   <ng-container matColumnDef="delete">
     <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let element">
       <button class="btn btn-danger" (click)="clickDeleteTask(element)">
-        <fa-icon class="addIcon mr-2" [icon]="icon_delete" ></fa-icon>
+        <fa-icon class="addIcon mr-2" [icon]="icon_delete"></fa-icon>
       </button>
     </td>
   </ng-container>
@@ -44,7 +54,7 @@
 
       <mat-form-field appearance="standard" class="pl-2">
         <mat-label>Start Time</mat-label>
-        <input type="time"  matInput placeholder="Placeholder" [(ngModel)]="newTask.startTime">
+        <input type="time" matInput placeholder="Placeholder" [(ngModel)]="newTask.startTime">
         <mat-icon matSuffix></mat-icon>
         <mat-hint>Start Time</mat-hint>
       </mat-form-field>
@@ -57,7 +67,7 @@
       <div class="col">
         <mat-form-field appearance="standard">
           <mat-label>End Time</mat-label>
-          <input type="time"  matInput placeholder="Placeholder" [(ngModel)]="newTask.endTime">
+          <input type="time" matInput placeholder="Placeholder" [(ngModel)]="newTask.endTime">
           <mat-icon matSuffix></mat-icon>
           <mat-hint>End Time</mat-hint>
         </mat-form-field>
