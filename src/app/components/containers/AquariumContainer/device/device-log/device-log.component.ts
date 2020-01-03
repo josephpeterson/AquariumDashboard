@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
@@ -13,6 +13,8 @@ import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 export class DeviceLogComponent implements OnInit {
 
   @Input("device") device: AquariumDevice;
+  @ViewChild("scrollWindow") private scrollContainer: ElementRef;
+
   deviceLog: any;
 
 
@@ -33,6 +35,7 @@ export class DeviceLogComponent implements OnInit {
       value: true
     }
   ]
+  clearingLog: boolean;
   
   constructor(public _aquariumService: AquariumService, public notifier: NotifierService) { }
 
@@ -45,9 +48,17 @@ export class DeviceLogComponent implements OnInit {
     delete this.deviceLog;
     this._aquariumService.getDeviceLog(this.device.id).subscribe(data => {
       this.deviceLog = data;
+      setTimeout(() => {
+        this.scrollToBottom();
+      },100);
     }, err => {
       console.log(err);
     });
+  }
+
+  scrollToBottom() {
+    this.scrollContainer.nativeElement.scrollTop = this.scrollContainer.nativeElement.scrollHeight;
+
   }
 
 
@@ -68,5 +79,17 @@ export class DeviceLogComponent implements OnInit {
     var matches = this.deviceLog.match(regex);
     if(matches)
       return matches.join("\n");
+  }
+
+  clickClearLog() {
+    this.clearingLog = true;
+    this._aquariumService.clearDeviceLog(this.device.id).subscribe(data => {
+      this.clearingLog = false;
+      delete this.deviceLog;
+      this.notifier.notify("success","Device log cleared");
+    }, err => {
+      console.log(err);
+      this.clearingLog = false;
+    });
   }
 }

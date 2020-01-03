@@ -281,6 +281,9 @@ export class AquariumService {
   public getDeviceLog(deviceId:number) {
     return this.http.post(this._url + `/v1/Device/${deviceId}/Log`,{},{ responseType: "text" });
   }
+  clearDeviceLog(deviceId: number) {
+    return this.http.post(this._url + `/v1/Device/${deviceId}/Log/Clear`,{},{ responseType: "text" });
+  }
   public getDeviceInformation(deviceId: number) {
     return this.http.post(this._url + `/v1/Device/${deviceId}/Information`,{});
   }
