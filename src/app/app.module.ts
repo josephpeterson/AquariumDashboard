@@ -209,6 +209,7 @@ import { CreateScheduleModalComponent } from './components/shared/modals/create-
 import { ScheduleTaskTableComponent } from './components/shared/modals/create-schedule-modal/schedule-task-table/schedule-task-table.component';
 import { FishPhotoSelectComponent } from './components/data/fish/photo-select/fish-photo-select.component';
 import { DeviceLogComponent } from './components/containers/AquariumContainer/device/device-log/device-log.component';
+import { DeviceScheduleStatusComponent } from './components/containers/AquariumContainer/device/schedule-status/schedule-status.component';
 
 @NgModule({
   declarations: [
@@ -385,6 +386,7 @@ import { DeviceLogComponent } from './components/containers/AquariumContainer/de
     PhotoApplyModalComponent,
     DevicePeripherialsComponent,
     DeviceInformationComponent,
+    DeviceScheduleStatusComponent,
     DeviceLogComponent,
     PhotoCardComponent,
     ScheduleBuilderComponent,

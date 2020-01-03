@@ -311,4 +311,7 @@ export class AquariumService {
   public removeSchedule(deviceId: number, scheduleId: number) {
     return this.http.post(this._url + `/v1/Device/${deviceId}/RemoveSchedule/${scheduleId}`,{});
   }
+  public getDeviceScheduleStatus(deviceId: number) {
+    return this.http.post(this._url + `/v1/Device/${deviceId}/Schedule/Status`,{});
+  }
 }

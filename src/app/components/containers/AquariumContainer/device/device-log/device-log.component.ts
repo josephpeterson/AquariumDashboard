@@ -25,6 +25,11 @@ export class DeviceLogComponent implements OnInit {
       value: false
     },
     {
+      name: "Debug",
+      match: "DEBUG",
+      value: false
+    },
+    {
       name: "Errors",
       match: "ERROR",
       value: true

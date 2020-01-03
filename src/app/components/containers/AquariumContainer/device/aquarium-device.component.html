@@ -1,9 +1,12 @@
-<h3 class="p-2">Device</h3>
-<device-detail-view *ngIf="aquarium.device as device" [aquarium]="aquarium"></device-detail-view>
-<device-peripherials [aquarium]="aquarium"></device-peripherials>
-<device-schedule-builder *ngIf="aquarium.device as device" [device]="device"></device-schedule-builder>
-<device-information [aquarium]="aquarium"></device-information>
+<ng-container *ngIf="aquarium.device as device">
+    <h3 class="p-2">Device</h3>
+    <device-detail-view [aquarium]="aquarium"></device-detail-view>
+    <device-peripherials [aquarium]="aquarium"></device-peripherials>
+    <device-schedule-status [device]="device"></device-schedule-status>
+    <device-schedule-builder [device]="device"></device-schedule-builder>
+    <device-information [aquarium]="aquarium"></device-information>
 
-<device-detail-form *ngIf="aquarium.device as device" [aquarium]="aquarium"></device-detail-form>
+    <device-detail-form [aquarium]="aquarium"></device-detail-form>
 
-<device-log [device]="aquarium.device"></device-log>
+    <device-log [device]="device"></device-log>
+</ng-container>
