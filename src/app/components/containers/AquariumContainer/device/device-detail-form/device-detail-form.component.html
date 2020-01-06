@@ -1,0 +1,70 @@
+<div class="card m-2">
+    <div class="card-body">
+        <div class="card-title">
+            <h3>Device Connection</h3>
+        </div>
+        <ng-container *ngIf="!device else hasDevice">
+            <small class="text-muted">You do not have an aquarium device! Connect to your aquarium monitoring device to
+                automatically retrieve information about your aquarium. Currently only supported by Raspberry
+                Pis.</small>
+                <div class="justify-content-center">
+                    <button type="submit" class="m-2 btn btn-success" (click)="clickConnectNewDevice()">Connect a
+                        Device</button>
+                </div>
+        </ng-container>
+        <ng-template #hasDevice>
+            <div class="row m-2">
+                <mat-form-field class="m-2">
+                    <input type="text" [disabled]="disabled" placeholder="Device Name" aria-label="Number" matInput
+                        [(ngModel)]="device.name" name="name">
+                </mat-form-field>
+                <mat-form-field class="m-2">
+                    <mat-label>Type</mat-label>
+                    <mat-select [(ngModel)]="device.type" name="type" [disabled]="disabled">
+                        <mat-option value=1>
+                            Raspberry Pi
+                        </mat-option>
+                        <mat-option value=0>
+                            Other
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="row m-2">
+                <mat-form-field class="m-2">
+                    <input type="text" [disabled]="disabled" placeholder="Address (0.0.0.0)" aria-label="Number"
+                        matInput [(ngModel)]="device.address" name="address">
+                </mat-form-field>
+                <mat-form-field class="m-2">
+                    <input type="text" [disabled]="disabled" placeholder="Port" aria-label="Number" matInput
+                        [(ngModel)]="device.port" name="port">
+                </mat-form-field>
+            </div>
+            <div class="row m-2">
+                <mat-form-field class="m-2 w-100">
+                    <input type="text" [disabled]="disabled" placeholder="Private Key (Config. Property)"
+                        aria-label="Number" matInput [(ngModel)]="device.privateKey" name="privateKey">
+                </mat-form-field>
+            </div>
+            <mat-error *ngIf="error">All fields are required.</mat-error>
+
+            <ng-container *ngIf="!disabled">
+                <button type="submit" class="m-2 btn btn-danger" *ngIf="device.id" (click)='clickDeleteDevice()'>Delete
+                    Device</button>
+                <div class="float-md-right">
+                    <button type="submit" class="m-2 btn btn-danger" (click)='clickCancelEditing()'>Cancel</button>
+                    <button type="submit" class="m-2 btn btn-primary" *ngIf="device.id"
+                        (click)="clickUpdateDevice()">Update
+                        Device</button>
+                    <button type="submit" class="m-2 btn btn-success" *ngIf="!device.id"
+                        (click)="clickCreateDevice()">Add
+                        Device</button>
+                </div>
+            </ng-container>
+            <div *ngIf="disabled" class="float-md-right">
+                <button type="submit" class="m-2 btn btn-secondary" 
+                    (click)="clickEditDevice()">Modify...</button>
+            </div>
+        </ng-template>
+    </div>
+</div>

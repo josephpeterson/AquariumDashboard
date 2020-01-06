@@ -82,8 +82,7 @@ import { SelectAquariumModalComponent } from './components/shared/modals/select-
 import { FishDetailViewComponent } from './components/containers/FishContainer/fish-detail-view/fish-detail-view.component';
 import { FishEffects } from './store/fish/fish.effect';
 import { fishReducer } from './store/fish/fish.reducer';
-import { DeviceDetailFormComponent } from './components/data/device/device-detail-form/device-detail-form.component';
-import { ManageAquariumDeviceModalComponent } from './components/shared/modals/manage-aquarium-device-modal/manage-aquarium-device-modal.component';
+import { DeviceDetailFormComponent } from './components/containers/AquariumContainer/device/device-detail-form/device-detail-form.component';
 import { PhotoExpandedModalComponent } from './components/shared/modals/photo-expanded-modal/photo-expanded-modal.component';
 import { FishCreateButtonComponent } from './components/data/fish/create-button/fish-create-button.component';
 import { SnapshotTableListComponent } from './components/data/snapshot/table-list/snapshot-table-list.component';
@@ -382,7 +381,6 @@ import { DeviceScheduleStatusComponent } from './components/containers/AquariumC
     PostDeleteThreadModalComponent,
     ForgotPasswordModalComponent,
     SelectAquariumModalComponent,
-    ManageAquariumDeviceModalComponent,
     PhotoApplyModalComponent,
     DevicePeripherialsComponent,
     DeviceInformationComponent,
@@ -420,7 +418,6 @@ import { DeviceScheduleStatusComponent } from './components/containers/AquariumC
     PostDeleteThreadModalComponent,
     ForgotPasswordModalComponent,
     SelectAquariumModalComponent,
-    ManageAquariumDeviceModalComponent,
     PhotoApplyModalComponent
   ],
 

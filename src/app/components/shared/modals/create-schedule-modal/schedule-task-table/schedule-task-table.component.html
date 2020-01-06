@@ -5,14 +5,15 @@
   </ng-container>
   <ng-container matColumnDef="startTime">
     <th mat-header-cell *matHeaderCellDef> Start Time </th>
-    <td mat-cell *matCellDef="let element"> {{parseDate(element.startTime)}} </td>
+    <td mat-cell *matCellDef="let element">
+      <input type="time" [(ngModel)]="element.startTime">
+      
+    </td>
   </ng-container>
   <ng-container matColumnDef="endTime">
     <th mat-header-cell *matHeaderCellDef> End Time </th>
     <td mat-cell *matCellDef="let element">
-      <ng-container *ngIf="element.endTime != null">
-        {{parseDate(element.endTime)}}
-      </ng-container>
+        <input type="date" [ngModel]="element.endTime">
     </td>
 
   </ng-container>
@@ -20,7 +21,6 @@
     <th mat-header-cell *matHeaderCellDef> Interval </th>
     <td mat-cell *matCellDef="let element">
       <ng-container *ngIf="element.interval > 0">
-
         Repeat every {{parseInterval(element.interval)}} minutes
       </ng-container>
     </td>

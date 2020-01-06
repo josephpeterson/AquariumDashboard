@@ -8,7 +8,6 @@ import { AquariumService } from 'src/app/services/aquarium.service';
 import { take } from 'rxjs/operators';
 import { ManageSnapshotModal } from 'src/app/components/shared/modals/manage-snapshot-modal/manage-snapshot-modal.component';
 import { MatDialog } from '@angular/material';
-import { ManageAquariumDeviceModalComponent } from 'src/app/components/shared/modals/manage-aquarium-device-modal/manage-aquarium-device-modal.component';
 import { Aquarium } from 'src/app/models/Aquarium';
 
 
@@ -75,12 +74,6 @@ export class DeviceDetailViewComponent implements OnInit {
             if (snapshot) {
                 //add snapshot to table
             }
-        });
-    }
-    public clickManageDevice() {
-        this.dialog.open(ManageAquariumDeviceModalComponent, {
-            width: "60%",
-            data: this.aquarium
         });
     }
 }

@@ -5,6 +5,9 @@
 @import "~ng-pick-datetime/assets/style/picker.min.css";
 
 
+body {
+    background-color: #fafafa;
+}
 .mat-progress-spinner circle, .mat-spinner circle {
     stroke: #859BD3 !important;
 }

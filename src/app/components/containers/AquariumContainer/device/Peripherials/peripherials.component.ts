@@ -4,6 +4,8 @@ import { AquariumService } from 'src/app/services/aquarium.service';
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
 import { NotifierService } from 'angular-notifier';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { MatDialog } from '@angular/material';
+import { ManagePhotoConfigurationModal } from 'src/app/components/shared/modals/manage-photo-configuration/manage-photo-configuration.component';
 
 @Component({
   selector: 'device-peripherials',
@@ -19,7 +21,9 @@ export class DevicePeripherialsComponent implements OnInit {
   pinging: boolean;
 
 
-  constructor(public _aquariumService: AquariumService,public notifier:NotifierService) { }
+  constructor(public _aquariumService: AquariumService,
+    public notifier: NotifierService,
+    public dialog: MatDialog) { }
 
   ngOnInit() {
   }
@@ -39,12 +43,21 @@ export class DevicePeripherialsComponent implements OnInit {
   clickPingDevice() {
     this.pinging = true;
     this._aquariumService.pingDevice(this.aquarium.device.id).subscribe(
-        () => {
-            this.pinging = false;
-            this.notifier.notify("success", "Connection to device was successfull");
-        }, err => {
-            this.pinging = false;
-            this.notifier.notify("error", "Could not connect to device");
-        })
-}
+      () => {
+        this.pinging = false;
+        this.notifier.notify("success", "Connection to device was successfull");
+      }, err => {
+        this.pinging = false;
+        this.notifier.notify("error", "Could not connect to device");
+      })
+  }
+  clickManagePhotoModule() {
+    this.dialog.open(ManagePhotoConfigurationModal, {
+      width: "50%",
+      data: this.aquarium.device
+    }).afterClosed().subscribe((device: AquariumDevice) => {
+      if (device)
+        this.aquarium.device.cameraConfiguration = device.cameraConfiguration;
+    });
+  }
 }

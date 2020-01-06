@@ -12,7 +12,6 @@ import { NotifierService } from 'angular-notifier';
 import { take, takeUntil } from 'rxjs/operators';
 import { Species } from 'src/app/models/Species';
 import { CreateSpeciesModalComponent } from '../../../shared/modals/create-species-modal/create-species-modal.component';
-import { ManageAquariumDeviceModalComponent } from 'src/app/components/shared/modals/manage-aquarium-device-modal/manage-aquarium-device-modal.component';
 import { AquariumService } from 'src/app/services/aquarium.service';
 
 
@@ -118,14 +117,5 @@ export class SettingsComponent implements OnInit {
     dialog.addingSpecies = true;
   }
 
-  deviceClickManage() {
-    var id = null;
-    if (this.aquarium.device)
-      id = this.aquarium.device.id;
-    this.dialog.open(ManageAquariumDeviceModalComponent, {
-      width: "60%",
-      data: id
-    });
-  }
 }
 
