@@ -41,6 +41,7 @@ export class ScheduleTaskTableComponent implements OnInit {
   }
 
   public clickAddTask() {
+    console.log(this.newTask);
     this.schedule.tasks = this.schedule.tasks.concat([this.newTask]);
     this.newTask = new DeviceScheduleTask();
     this.addingTask = true;

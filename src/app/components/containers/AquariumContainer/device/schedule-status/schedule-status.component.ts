@@ -6,6 +6,7 @@ import { NotifierService } from 'angular-notifier';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { DeviceScheduleState } from 'src/app/models/DeviceScheduleState';
 import * as moment from 'moment';
+import { DeviceScheduleTask } from 'src/app/models/DeviceScheduleTask';
 
 @Component({
   selector: 'device-schedule-status',
@@ -20,6 +21,7 @@ export class DeviceScheduleStatusComponent implements OnInit {
   faCheck = faCheckCircle;
   pinging: boolean;
   scheduleState: DeviceScheduleState;
+  performingTask: boolean;
 
 
   constructor(public _aquariumService: AquariumService, public notifier: NotifierService) { }
@@ -38,7 +40,19 @@ export class DeviceScheduleStatusComponent implements OnInit {
         this.notifier.notify("error", "Could not retrieve device information");
       })
   }
+  clickPerformTask(task: DeviceScheduleTask) {
+    this.performingTask = true;
+    this._aquariumService.performScheduleTask(this.device.id,task).subscribe(
+      (data) => {
+        this.performingTask = false;
+        this.notifier.notify("success", "Task was performed successfully!");
+      }, err => {
+        this.performingTask = false;
+        this.notifier.notify("error", "Could not perform task on device");
+      })
+  }
   public readableDuration(timespan: string) {
     return moment.duration(timespan).humanize();
   }
+  
 }

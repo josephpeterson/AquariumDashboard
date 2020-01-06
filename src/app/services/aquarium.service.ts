@@ -21,6 +21,7 @@ import { SearchOptions } from '../models/SearchOptions';
 import { SearchResult } from '../models/SearchResult';
 import { PhotoContent } from '../models/PhotoContent';
 import { DeviceSchedule } from '../models/DeviceSchedule';
+import { DeviceScheduleTask } from '../models/DeviceScheduleTask';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -313,5 +314,8 @@ export class AquariumService {
   }
   public getDeviceScheduleStatus(deviceId: number) {
     return this.http.post(this._url + `/v1/Device/${deviceId}/Schedule/Status`,{});
+  }
+  performScheduleTask(deviceId: number,deviceScheduleTask: DeviceScheduleTask) {
+    return this.http.post(this._url + `/v1/Device/${deviceId}/Schedule/PerformTask`,deviceScheduleTask);
   }
 }
