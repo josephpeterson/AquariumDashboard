@@ -8,7 +8,7 @@ import { DashboardComponent } from './components/containers/AquariumContainer/da
 import { AquariumContainer } from './components/containers/AquariumContainer/aquarium-container.component';
 import { MaintenanceComponent } from './components/containers/AquariumContainer/maintenance/maintenance.component';
 import { AquariumParametersComponent } from './components/containers/AquariumContainer/parameters/aquarium-parameters.component';
-import { AquariumPhotosComponent } from './components/containers/AquariumContainer/photos/aquarium-photos.component';
+import { AquariumPhotosContainerComponent } from './components/containers/AquariumContainer/photos/aquarium-photos-container.component';
 import { SpeciesContainer } from './components/containers/SpeciesContainer/species-container.component';
 import { AuthGuard } from './guards/AuthGuard';
 import { LoginComponent } from './components/routes/login/login.component';
@@ -41,6 +41,8 @@ import { BoardDetailComponent } from './components/containers/DiscussionContaine
 import { PasswordResetComponent } from './components/routes/passwordreset/password-reset.component';
 import { CreateAquariumComponent } from './components/containers/AquariumContainer/create-aquarium/create-aquarium.component';
 import { AquariumDeviceComponent } from './components/containers/AquariumContainer/device/aquarium-device.component';
+import { ParametersSnapshotListComponent } from './components/containers/AquariumContainer/parameters/snapshots/parameters-snapshot-list.component';
+import { ParametersWaterTestsListComponent } from './components/containers/AquariumContainer/parameters/water-tests/parameters-water-tests-list.component';
 
 const routes: Routes = [
   //{ path: '', component: AquariumSelectionComponent, pathMatch: 'full' },
@@ -123,11 +125,24 @@ const routes: Routes = [
       },
       {
         path: 'parameters',
-        component: AquariumParametersComponent
+        component: AquariumParametersComponent,
+        children: [
+          {
+            path: 'water',
+            component: ParametersWaterTestsListComponent
+          },
+          {
+            path: 'snapshots',
+            component: ParametersSnapshotListComponent
+          },
+          {
+            path: '',
+            component: ParametersWaterTestsListComponent
+          }]
       },
       {
         path: 'photos',
-        component: AquariumPhotosComponent
+        component: AquariumPhotosContainerComponent
       },
       {
         path: 'device',
@@ -153,7 +168,7 @@ const routes: Routes = [
         path: '',
         component: DashboardComponent
       }
-      
+
     ]
   },
   {

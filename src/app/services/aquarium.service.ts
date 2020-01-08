@@ -61,9 +61,9 @@ export class AquariumService {
 
 
   /* Snapshot */
-  public getSnapshots(aqId: number,offset:number,count: number): Observable<AquariumSnapshot[]> {
+  public getSnapshots(aqId: number, offset: number, count: number): Observable<AquariumSnapshot[]> {
 
-    return this.http.post<AquariumSnapshot[]>(this._url + `/v1/Aquarium/${aqId}/Snapshots`,{
+    return this.http.post<AquariumSnapshot[]>(this._url + `/v1/Aquarium/${aqId}/Snapshots`, {
       offset: offset,
       max: count
     });
@@ -102,6 +102,12 @@ export class AquariumService {
     console.log(url, formData);
     return this.http.post<any>(url, formData, options);
   }
+  public deleteAllSnapshots(aqId: number) {
+    return this.http.delete(this._url + `/v1/Aquarium/${aqId}/Snapshots`);
+  }
+  deleteSnapshots(snapshotIds: number[]) {
+    return this.http.post(this._url + `/v1/Snapshot/DeleteMultiple`,snapshotIds);
+  }
 
 
 
@@ -126,10 +132,10 @@ export class AquariumService {
 
   /* Settings */
   public getApplicationLog(): Observable<string> {
-    return this.http.get(this._url + "/v1/Settings/Log", { responseType: "text" });
+    return this.http.get(this._url + "/v1/Admin/ApplicationLog", { responseType: "text" });
   }
   public deleteApplicationLog(): Observable<any> {
-    return this.http.get(this._url + "/v1/Settings/Log/Delete");
+    return this.http.delete(this._url + "/v1/Admin/ApplicationLog");
   }
   public getCameraConfiguration(): Observable<CameraConfiguration> {
     return this.http.get<CameraConfiguration>(this._url + "/v1/Settings/CameraConfiguration");
@@ -249,15 +255,14 @@ export class AquariumService {
   }
 
   /* Photos */
-  public getPhotoPermalink(photo: PhotoContent,size: any = ""): string {
+  public getPhotoPermalink(photo: PhotoContent, size: any = ""): string {
 
-    if(!photo)
+    if (!photo)
       return;
     var path = photo.filepath.substring(2);
-    if(size && size != "1")
-    {
+    if (size && size != "1") {
       var p = path.split("/");
-      p.splice(1,0,size);
+      p.splice(1, 0, size);
       path = p.join("/");
       //todo outsource this?
     }
@@ -269,7 +274,7 @@ export class AquariumService {
 
   /*Profile */
   public updateAccountThumbnail(photo: PhotoContent): Observable<AccountProfile> {
-    return this.http.post<AccountProfile>(this._url + `/v1/Profile/UpdateThumbnail`,photo);
+    return this.http.post<AccountProfile>(this._url + `/v1/Profile/UpdateThumbnail`, photo);
   }
 
 
@@ -279,14 +284,14 @@ export class AquariumService {
   }
 
 
-  public getDeviceLog(deviceId:number) {
-    return this.http.post(this._url + `/v1/Device/${deviceId}/Log`,{},{ responseType: "text" });
+  public getDeviceLog(deviceId: number) {
+    return this.http.post(this._url + `/v1/Device/${deviceId}/Log`, {}, { responseType: "text" });
   }
   clearDeviceLog(deviceId: number) {
-    return this.http.post(this._url + `/v1/Device/${deviceId}/Log/Clear`,{},{ responseType: "text" });
+    return this.http.post(this._url + `/v1/Device/${deviceId}/Log/Clear`, {}, { responseType: "text" });
   }
   public getDeviceInformation(deviceId: number) {
-    return this.http.post(this._url + `/v1/Device/${deviceId}/Information`,{});
+    return this.http.post(this._url + `/v1/Device/${deviceId}/Information`, {});
   }
 
   /* Device Schedules */
@@ -298,24 +303,28 @@ export class AquariumService {
   }
   public createDeviceSchedule(deviceSchedule: DeviceSchedule) {
     console.log(deviceSchedule);
-    return this.http.post(this._url + `/v1/Schedule/Add`,deviceSchedule);
+    return this.http.post(this._url + `/v1/Schedule/Add`, deviceSchedule);
   }
   public updateDeviceSchedule(deviceSchedule: DeviceSchedule) {
-    return this.http.post(this._url + `/v1/Schedule/Update`,deviceSchedule);
+    return this.http.post(this._url + `/v1/Schedule/Update`, deviceSchedule);
   }
   public deleteDeviceSchedule(deviceScheduleId: number) {
     return this.http.delete(this._url + `/v1/Schedule/${deviceScheduleId}/Delete`);
   }
   public deploySchedule(deviceId: number, scheduleId: number) {
-    return this.http.post(this._url + `/v1/Device/${deviceId}/DeploySchedule/${scheduleId}`,{});
+    return this.http.post(this._url + `/v1/Device/${deviceId}/DeploySchedule/${scheduleId}`, {});
   }
   public removeSchedule(deviceId: number, scheduleId: number) {
-    return this.http.post(this._url + `/v1/Device/${deviceId}/RemoveSchedule/${scheduleId}`,{});
+    return this.http.post(this._url + `/v1/Device/${deviceId}/RemoveSchedule/${scheduleId}`, {});
   }
   public getDeviceScheduleStatus(deviceId: number) {
-    return this.http.post(this._url + `/v1/Device/${deviceId}/Schedule/Status`,{});
+    return this.http.post(this._url + `/v1/Device/${deviceId}/Schedule/Status`, {});
   }
-  performScheduleTask(deviceId: number,deviceScheduleTask: DeviceScheduleTask) {
-    return this.http.post(this._url + `/v1/Device/${deviceId}/Schedule/PerformTask`,deviceScheduleTask);
+  performScheduleTask(deviceId: number, deviceScheduleTask: DeviceScheduleTask) {
+    return this.http.post(this._url + `/v1/Device/${deviceId}/Schedule/PerformTask`, deviceScheduleTask);
+  }
+
+  public getAquariumPhotos(id: number) {
+    return this.http.get<AquariumPhoto[]>(this._url + `/v1/Photo/Aquarium/${id}`);
   }
 }

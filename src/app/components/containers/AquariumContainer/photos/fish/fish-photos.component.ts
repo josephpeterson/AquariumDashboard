@@ -8,11 +8,11 @@ import { getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
 import { take } from 'rxjs/operators';
 
 @Component({
-  selector: 'aquarium-photos',
-  templateUrl: './aquarium-photos.component.html',
-  styleUrls: ['./aquarium-photos.component.scss']
+  selector: 'fish-photos',
+  templateUrl: './fish-photos.component.html',
+  styleUrls: ['./fish-photos.component.scss']
 })
-export class AquariumPhotosComponent implements OnInit {
+export class FishPhotosComponent implements OnInit {
 
   public aquarium: Aquarium;
 

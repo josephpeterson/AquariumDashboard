@@ -97,7 +97,7 @@ import { SnapshotDetailChartComponent } from './components/data/snapshot/snapsho
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { FishCardComponent } from './components/data/fish/fish-card/fish-card.component';
 import { AquariumParametersComponent } from './components/containers/AquariumContainer/parameters/aquarium-parameters.component';
-import { AquariumPhotosComponent } from './components/containers/AquariumContainer/photos/aquarium-photos.component';
+import { AquariumPhotosContainerComponent } from './components/containers/AquariumContainer/photos/aquarium-photos-container.component';
 import { SpeciesContainer } from './components/containers/SpeciesContainer/species-container.component';
 import { AquariumInterceptor } from './services/aquarium.interceptor';
 import { LoginModalComponent } from './components/shared/modals/login-modal/login-modal.component';
@@ -209,6 +209,12 @@ import { ScheduleTaskTableComponent } from './components/shared/modals/create-sc
 import { FishPhotoSelectComponent } from './components/data/fish/photo-select/fish-photo-select.component';
 import { DeviceLogComponent } from './components/containers/AquariumContainer/device/device-log/device-log.component';
 import { DeviceScheduleStatusComponent } from './components/containers/AquariumContainer/device/schedule-status/schedule-status.component';
+import { ParametersSnapshotListComponent } from './components/containers/AquariumContainer/parameters/snapshots/parameters-snapshot-list.component';
+import { ParametersWaterTestsListComponent } from './components/containers/AquariumContainer/parameters/water-tests/parameters-water-tests-list.component';
+import { ApplicationLogViewComponent } from './components/shared/application-log-view/application-log-view.component';
+import { SnapshotPhotosComponent } from './components/containers/AquariumContainer/photos/snapshot/snapshot-photos.component';
+import { FishPhotosComponent } from './components/containers/AquariumContainer/photos/fish/fish-photos.component';
+import { AquariumPhotosComponent } from './components/containers/AquariumContainer/photos/aquarium/aquarium-photos.component';
 
 @NgModule({
   declarations: [
@@ -252,15 +258,22 @@ import { DeviceScheduleStatusComponent } from './components/containers/AquariumC
     FishComponent,
     LightingComponent,
     AquariumParametersComponent,
+    ParametersSnapshotListComponent,
+    ParametersWaterTestsListComponent,
+
+    AquariumPhotosContainerComponent,
     AquariumPhotosComponent,
+    SnapshotPhotosComponent,
+    FishPhotosComponent,
+
     AquariumDeviceComponent,
 
     AquariumSelectComponent,
     AquariumTableComponent,
-    
+
     DeviceDetailFormComponent,
     DeviceDetailViewComponent,
-    
+
 
 
     /* Profile Container */
@@ -307,7 +320,7 @@ import { DeviceScheduleStatusComponent } from './components/containers/AquariumC
     TaskTabComponent,
     NotificationsListComponent,
 
-    
+
 
 
 
@@ -390,6 +403,8 @@ import { DeviceScheduleStatusComponent } from './components/containers/AquariumC
     ScheduleBuilderComponent,
     CreateScheduleModalComponent,
     ScheduleTaskTableComponent,
+
+    ApplicationLogViewComponent,
   ],
   entryComponents: [
     ConfirmModalComponent,

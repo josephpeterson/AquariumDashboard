@@ -17,6 +17,7 @@ import { SnapshotLoadByAquariumAction } from 'src/app/store/snapshot/snapshot.ac
 import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
 import * as moment from 'moment';
 import { AquariumService } from 'src/app/services/aquarium.service';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
   selector: 'snapshot-table-list',
@@ -58,7 +59,8 @@ export class SnapshotTableListComponent implements OnInit {
   public dataSource: MatTableDataSource<AquariumSnapshot> = new MatTableDataSource<AquariumSnapshot>();
   private componentLifeCycle$ = new Subject();
 
-  constructor(private store: Store<AppState>,private _aquariumService:AquariumService) {
+  constructor(private store: Store<AppState>, private _aquariumService: AquariumService,
+    private notifier: NotifierService) {
   }
   ngOnInit() {
     if (this.searchBox)
@@ -89,7 +91,7 @@ export class SnapshotTableListComponent implements OnInit {
 
   setAquarium(id: number) {
     this.aquariumId = id;
-    this.store.dispatch(new SnapshotLoadByAquariumAction(id,0,10));
+    this.store.dispatch(new SnapshotLoadByAquariumAction(id, 0, 10));
   }
 
   updateSort() {
@@ -115,5 +117,18 @@ export class SnapshotTableListComponent implements OnInit {
   }
   rowClickHandler(event: MouseEvent, row: Fish) {
     this.rowClicked.emit([event, row]);
+  }
+
+
+  public clickDeleteSelectedSnapshots() {
+    var snapshotIds = this.getSelectedItems().map(s => s.id);
+
+    this._aquariumService.deleteSnapshots(snapshotIds).subscribe(res => {
+      this.notifier.notify("success", `${snapshotIds.length} snapshots deleted`);
+      var newList = this.dataSource.data.filter(s => snapshotIds.indexOf(s.id) == -1);
+      this.dataSource.data = newList;
+    }, err => {
+      this.notifier.notify("error", "Could not delete selected snapshots");
+    });
   }
 }

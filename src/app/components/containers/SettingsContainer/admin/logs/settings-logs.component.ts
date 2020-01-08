@@ -22,16 +22,17 @@ import { NotifierService } from 'angular-notifier';
 })
 
 
-export class SettingsLogsComponent {
+export class SettingsLogsComponent implements OnInit {
 
   faExclamationTriangle = faExclamationTriangle;
 
   public aquarium$: Observable<Aquarium> = this.store.select(getSelectedAquarium);
-  public loading$: Observable<boolean> = this.store.select(isLoadingAquariums);
 
   private componentLifecycle$: Subject<SettingsLogsComponent> = new Subject();
 
   public aquariumApiLog$ = this._aquariumService.getApplicationLog();
+  public deleting: boolean;
+  public refreshing: boolean;
 
   constructor(
     public dialog: MatDialog,
@@ -40,16 +41,36 @@ export class SettingsLogsComponent {
     private notifier: NotifierService
   ) { }
 
+  ngOnInit() {
+    this.clickGetApplicationLog();
+  }
+
   ngOnDestroy() {
     this.componentLifecycle$.next();
     this.componentLifecycle$.unsubscribe();
   }
 
   clickDeleteApplicationLog() {
+    this.deleting = true;
     this._aquariumService.deleteApplicationLog().subscribe(val => {
-      
-    },err => {
-      if(err) this.notifier.notify('error',"Could not delete application log");
+      this.deleting = false;
+      this.notifier.notify('success', "Application log was deleted successfully");
+    }, err => {
+      this.notifier.notify('error', "Could not delete application log");
+      this.deleting = false;
+      console.log(err);
+    });
+  }
+  clickGetApplicationLog() {
+    this.refreshing = true;
+    this.aquariumApiLog$ = this._aquariumService.getApplicationLog();
+
+    this.aquariumApiLog$.subscribe(data => {
+      this.refreshing = false;
+    }, err => {
+      this.refreshing = false;
+      this.notifier.notify("error", "An error occured while retrieving the application log file");
+      console.log(err);
     });
   }
 }

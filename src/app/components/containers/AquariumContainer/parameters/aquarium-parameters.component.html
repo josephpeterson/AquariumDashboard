@@ -1,13 +1,12 @@
 <ul class="nav nav-tabs">
 	<li class="nav-item">
-		<a class="nav-link active">Water Tests</a>
+		<a class="nav-link" [routerLink]="['water']" [routerLinkActive]='["active"]'>Water Tests</a>
 	</li>
 	<li class="nav-item">
-		<a class="nav-link">Snapshot List</a>
+		<a class="nav-link" [routerLink]="['snapshots']" [routerLinkActive]='["active"]'>Snapshot List</a>
 	</li>
 	<li class="nav-item">
 		<a class="nav-link disabled" href="#">Quality</a>
 	</li>
 </ul>
-<snapshot-table-list [aquariumId]="aquarium.id"></snapshot-table-list>
-<button class="btn btn-success mt-2" (click)="clickAddSnapshot()">Insert Parameters</button>
+<router-outlet></router-outlet>

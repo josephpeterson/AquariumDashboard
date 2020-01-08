@@ -1,0 +1,6 @@
+<snapshot-table-list [aquariumId]="aquarium.id"></snapshot-table-list>
+<button class="btn btn-success mt-2" (click)="clickAddSnapshot()">Insert Parameters</button>
+<button class="btn btn-danger mt-2" (click)="clickDeleteAllSnapshots()" [disabled]="deletingAllSnapshots">Delete All Snapshots
+	<mat-progress-spinner *ngIf="deletingAllSnapshots" class="float-right ml-1 align-middle" color="warn" [diameter]="25" mode="indeterminate">
+	</mat-progress-spinner>
+</button>

@@ -1,15 +1,17 @@
-<div class="p-5">
+<div class="mt-2">
     <h3>Application Logs</h3>
     <p>This page is only available to administrators and developers. This page shows all available logs regarding the
         aquarium monitor infastructure. You may clear/delete/archive logs here.</p>
-    <div class="card w-100">
-        <div class="card-body">
-            <div class="card-title">
-                <h3>Aquarium API</h3>
-            </div>
-            <textarea disabled class="form-control rounded-0" id="exampleFormControlTextarea1"
-                rows="10">{{aquariumApiLog$ | async}}</textarea>
-            <button class="btn btn-danger mt-2" (click)="clickDeleteApplicationLog()">Delete Logs</button>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="card-title">
+            <h3>Aquarium API</h3>
+        </div>
+        <div class="flex">
+            <application-log-view [log]="aquariumApiLog$ | async"></application-log-view>
+            <button [disabled]="deleting" class="btn btn-danger m-2" (click)="clickDeleteApplicationLog()">Delete Logs</button>
+            <button [disabled]="refreshing" class="btn btn-primary m-2" (click)="clickGetApplicationLog()">Refresh</button>
         </div>
     </div>
 </div>
