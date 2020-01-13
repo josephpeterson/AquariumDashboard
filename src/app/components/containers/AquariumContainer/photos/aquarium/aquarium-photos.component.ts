@@ -7,6 +7,8 @@ import { AppState } from 'src/app/app.state';
 import { getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
 import { take } from 'rxjs/operators';
 import { AquariumPhoto } from 'src/app/models/AquariumPhoto';
+import { PaginationSliver } from 'src/app/models/PaginationSliver';
+import { PhotoExpandedModalComponent } from 'src/app/components/shared/modals/photo-expanded-modal/photo-expanded-modal.component';
 
 @Component({
   selector: 'aquarium-photos',
@@ -16,13 +18,18 @@ import { AquariumPhoto } from 'src/app/models/AquariumPhoto';
 export class AquariumPhotosComponent implements OnInit {
 
   public aquarium: Aquarium;
-  public photos: AquariumPhoto[];
+  public photos: AquariumPhoto[] = [];
+  public completed: boolean = false;
+  public loading: boolean;
+  public pagination: PaginationSliver = new PaginationSliver();
 
   constructor(public aquariumService: AquariumService,
     public dialog: MatDialog,
     public store: Store<AppState>
   ) { }
   ngOnInit() {
+    this.pagination.descending = true;
+
     this.store.select(getSelectedAquarium).pipe(take(1)).subscribe(aq => {
       this.aquarium = aq
 
@@ -31,13 +38,30 @@ export class AquariumPhotosComponent implements OnInit {
   }
 
   loadAquariumPhotos() {
-    this.aquariumService.getAquariumPhotos(this.aquarium.id).subscribe((data:AquariumPhoto[]) => {
-      this.photos = data;
+    this.loading = true;
+    this.aquariumService.getAquariumPhotos(this.aquarium.id, this.pagination).subscribe((data: AquariumPhoto[]) => {
+      this.loading = false;
+      if (data.length == 0) {
+        this.completed = true;
+      }
+      this.photos = this.photos.concat(data);
       console.log(data);
-    },err => {
-      
+    }, err => {
+      this.loading = false;
       console.log(err);
     })
+  }
+  clickLoadMore() {
+    this.pagination.start += this.pagination.count;
+    this.loadAquariumPhotos();
+  }
+  clickExpandedImage(photo: AquariumPhoto) {
+    var dialog = this.dialog.open(PhotoExpandedModalComponent, {
+      panelClass: "darkDialog",
+      height: "95%",
+      width: "95%",
+      data: photo.photo
+    });
   }
   getPhotoPermalink(photo) {
     return this.aquariumService.getPhotoPermalink(photo, "1");

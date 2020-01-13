@@ -22,6 +22,7 @@ import { SearchResult } from '../models/SearchResult';
 import { PhotoContent } from '../models/PhotoContent';
 import { DeviceSchedule } from '../models/DeviceSchedule';
 import { DeviceScheduleTask } from '../models/DeviceScheduleTask';
+import { PaginationSliver } from '../models/PaginationSliver';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -324,7 +325,7 @@ export class AquariumService {
     return this.http.post(this._url + `/v1/Device/${deviceId}/Schedule/PerformTask`, deviceScheduleTask);
   }
 
-  public getAquariumPhotos(id: number) {
-    return this.http.get<AquariumPhoto[]>(this._url + `/v1/Photo/Aquarium/${id}`);
+  public getAquariumPhotos(id: number,pagination: PaginationSliver) {
+    return this.http.post<AquariumPhoto[]>(this._url + `/v1/Photo/Aquarium/${id}`,pagination);
   }
 }
