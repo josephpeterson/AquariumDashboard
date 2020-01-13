@@ -328,4 +328,10 @@ export class AquariumService {
   public getAquariumPhotos(id: number,pagination: PaginationSliver) {
     return this.http.post<AquariumPhoto[]>(this._url + `/v1/Photo/Aquarium/${id}`,pagination);
   }
+  public getAquariumSnapshotPhotos(id: number,pagination: PaginationSliver) {
+    return this.http.post<AquariumSnapshot[]>(this._url + `/v1/Photo/Aquarium/${id}/Snapshot`,pagination);
+  }
+  public getAquariumFishPhotos(id: number,pagination: PaginationSliver) {
+    return this.http.post<FishPhoto[]>(this._url + `/v1/Photo/Aquarium/${id}/Fish`,pagination);
+  }
 }

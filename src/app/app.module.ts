@@ -215,6 +215,7 @@ import { ApplicationLogViewComponent } from './components/shared/application-log
 import { SnapshotPhotosComponent } from './components/containers/AquariumContainer/photos/snapshot/snapshot-photos.component';
 import { FishPhotosComponent } from './components/containers/AquariumContainer/photos/fish/fish-photos.component';
 import { AquariumPhotosComponent } from './components/containers/AquariumContainer/photos/aquarium/aquarium-photos.component';
+import { PhotoPaginator } from './components/shared/photo-paginator/photo-paginator.component';
 
 @NgModule({
   declarations: [
@@ -251,6 +252,7 @@ import { AquariumPhotosComponent } from './components/containers/AquariumContain
     AttachmentUploaderComponent,
     BugReportButtonComponent,
     LoadingContainerComponent,
+    PhotoPaginator,
 
     /* Aquarium Container */
     AquariumContainer,

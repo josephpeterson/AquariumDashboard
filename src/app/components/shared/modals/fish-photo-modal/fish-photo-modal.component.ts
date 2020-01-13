@@ -33,9 +33,9 @@ export class FishPhotoModal implements OnInit {
       this.loading = false;
       this._dialog.close(val);
       this.store.dispatch(new FishLoadByIdAction(this.fishId));
-    },(err) => {
+    }, (err) => {
       this.loading = false;
-      this.notifier.notify("error","Could not upload fish photo.");
+      this.notifier.notify("error", "Could not upload fish photo.");
     });
   }
 }
