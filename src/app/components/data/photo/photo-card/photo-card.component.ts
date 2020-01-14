@@ -29,9 +29,7 @@ export class PhotoCardComponent implements OnInit {
   }
   expandPhoto() {
     var dialog = this.dialog.open(PhotoExpandedModalComponent, {
-      panelClass: "darkDialog",
-      height: "95%",
-      width: "95%",
+      panelClass: "expanded-photo-dialog",
       data: this.photo 
     });
   }

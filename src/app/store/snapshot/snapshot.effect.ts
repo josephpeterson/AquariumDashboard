@@ -21,7 +21,7 @@ export class SnapshotEffects {
         )));
     @Effect()
     deleteSnapshot$ = this.actions$.pipe(ofType<SnapshotDeleteAction>(SnapshotActions.Delete),
-        mergeMap((action: SnapshotDeleteAction) => this.aquariumService.deleteSnapshot(action.payload).pipe(
+        mergeMap((action: SnapshotDeleteAction) => this.aquariumService.deleteSnapshots([action.payload.id]).pipe(
             map(() => new SnapshotDeleteSuccessAction(action.payload)),
             catchError(error => of(new SnapshotDeleteFailedAction(error)))
         )));

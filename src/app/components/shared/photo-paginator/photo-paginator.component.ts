@@ -43,7 +43,7 @@ export class PhotoPaginator implements OnInit {
     this.loading = true;
     this.source.bind(this.aquariumService)(this.aquarium.id, this.pagination).subscribe((data: AquariumPhoto[]) => {
       this.loading = false;
-      if (data.length == 0) {
+      if (data.length < this.pagination.count) {
         this.completed = true;
       }
       this.photos = this.photos.concat(data);
@@ -59,10 +59,8 @@ export class PhotoPaginator implements OnInit {
   }
   clickExpandedImage(photo: AquariumPhoto) {
     var dialog = this.dialog.open(PhotoExpandedModalComponent, {
-      panelClass: "darkDialog",
-      height: "95%",
-      width: "95%",
-      data: photo.photo
+      panelClass: "expanded-photo-dialog",
+      data: photo.photo,
     });
   }
   getPhotoPermalink(photo) {

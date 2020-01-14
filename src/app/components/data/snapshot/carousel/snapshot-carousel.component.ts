@@ -100,9 +100,7 @@ export class SnapshotCarouselComponent implements OnInit {
 
   clickExpandedImage(photo: AquariumPhoto) {
     var dialog = this.dialog.open(PhotoExpandedModalComponent, {
-      panelClass: "darkDialog",
-      height: "95%",
-      width: "95%",
+      panelClass: "expanded-photo-dialog",
       data: photo.photo
     });
   }

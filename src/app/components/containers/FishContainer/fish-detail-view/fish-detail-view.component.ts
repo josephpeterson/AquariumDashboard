@@ -166,9 +166,7 @@ export class FishDetailViewComponent implements OnInit {
     }
     public clickFishPhoto(fishPhoto: FishPhoto) {
         var dialog = this.dialog.open(PhotoExpandedModalComponent, {
-            panelClass: "darkDialog",
-            height: "95%",
-            width: "95%",
+            panelClass: "expanded-photo-dialog",
             data: fishPhoto.photo
         });
     }

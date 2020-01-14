@@ -1,10 +1,11 @@
-import { Component, OnInit, Input, Inject } from '@angular/core';
+import { Component, OnInit, Input, Inject, SimpleChanges, ElementRef, ViewChild } from '@angular/core';
 import { Subject } from 'rxjs';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { NotifierService } from 'angular-notifier';
 import { PhotoContent } from 'src/app/models/PhotoContent';
 import { PhotoApplyModalComponent } from '../photo-apply-modal/photo-apply-modal.component';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'photo-expanded-modal',
@@ -14,6 +15,10 @@ import { PhotoApplyModalComponent } from '../photo-apply-modal/photo-apply-modal
 export class PhotoExpandedModalComponent implements OnInit {
 
   public componentLifecycle = new Subject();
+  public faTrash = faTrash;
+  @ViewChild("photo") photoElement: ElementRef<HTMLImageElement>;
+
+
 
   constructor(@Inject(MAT_DIALOG_DATA) public photo: PhotoContent,
     private _aquariumService: AquariumService,
@@ -27,7 +32,6 @@ export class PhotoExpandedModalComponent implements OnInit {
   public getPhotoPermalink() {
     return this._aquariumService.getPhotoPermalink(this.photo, "1");
   }
-
   public clickDelete() {
     this._aquariumService.deletePhoto(this.photo).subscribe(() => {
       this._notifier.notify("success", "Photo was successfully removed");
@@ -38,8 +42,15 @@ export class PhotoExpandedModalComponent implements OnInit {
     });
   }
   public clickApplyPhoto() {
-    this.dialog.open(PhotoApplyModalComponent,{
+    this.dialog.open(PhotoApplyModalComponent, {
       data: this.photo
     });
+  }
+  public imageReady(evt) {
+    var img = evt.target
+    var w = img.width + "px";
+      var h = img.height + "px";
+      this._dialog.updateSize(w, h);
+      console.log(w,h);
   }
 }
