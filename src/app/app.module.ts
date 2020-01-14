@@ -216,6 +216,9 @@ import { SnapshotPhotosComponent } from './components/containers/AquariumContain
 import { FishPhotosComponent } from './components/containers/AquariumContainer/photos/fish/fish-photos.component';
 import { AquariumPhotosComponent } from './components/containers/AquariumContainer/photos/aquarium/aquarium-photos.component';
 import { PhotoPaginator } from './components/shared/photo-paginator/photo-paginator.component';
+import { SettingsNotificationsComponent } from './components/containers/SettingsContainer/admin/notifications/settings-notifications.component';
+import { NotificationsTableComponent } from './components/containers/SettingsContainer/admin/notifications/notifications-table/notifications-table.component';
+import { CreateNotificationModalComponent } from './components/shared/modals/create-notification-modal/create-notification-modal.component';
 
 @NgModule({
   declarations: [
@@ -242,9 +245,11 @@ import { PhotoPaginator } from './components/shared/photo-paginator/photo-pagina
     SettingsPrivacyComponent,
     SettingsSecurityComponent,
     SettingsProfileComponent,
+    SettingsNotificationsComponent,
 
     /* Admin components */
     UsersTableComponent,
+    NotificationsTableComponent,
     BugsTableComponent,
 
 
@@ -405,6 +410,7 @@ import { PhotoPaginator } from './components/shared/photo-paginator/photo-pagina
     ScheduleBuilderComponent,
     CreateScheduleModalComponent,
     ScheduleTaskTableComponent,
+    CreateNotificationModalComponent,
 
     ApplicationLogViewComponent,
   ],
@@ -435,7 +441,8 @@ import { PhotoPaginator } from './components/shared/photo-paginator/photo-pagina
     PostDeleteThreadModalComponent,
     ForgotPasswordModalComponent,
     SelectAquariumModalComponent,
-    PhotoApplyModalComponent
+    PhotoApplyModalComponent,
+    CreateNotificationModalComponent
   ],
 
   imports: [

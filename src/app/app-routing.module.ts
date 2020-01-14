@@ -43,6 +43,7 @@ import { CreateAquariumComponent } from './components/containers/AquariumContain
 import { AquariumDeviceComponent } from './components/containers/AquariumContainer/device/aquarium-device.component';
 import { ParametersSnapshotListComponent } from './components/containers/AquariumContainer/parameters/snapshots/parameters-snapshot-list.component';
 import { ParametersWaterTestsListComponent } from './components/containers/AquariumContainer/parameters/water-tests/parameters-water-tests-list.component';
+import { SettingsNotificationsComponent } from './components/containers/SettingsContainer/admin/notifications/settings-notifications.component';
 
 const routes: Routes = [
   //{ path: '', component: AquariumSelectionComponent, pathMatch: 'full' },
@@ -91,6 +92,10 @@ const routes: Routes = [
       {
         path: 'users',
         component: SettingsUsersComponent
+      },
+      {
+        path: 'notifications',
+        component: SettingsNotificationsComponent
       },
       {
         path: 'bugs',

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AccountProfile } from 'src/app/models/AquariumProfile';
-import { ActivityTypes } from 'src/app/models/ActivityTypes';
+import { ActivityTypes } from 'src/app/models/types/ActivityTypes';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { Activity } from 'src/app/models/Activity';
 import { Aquarium } from 'src/app/models/Aquarium';

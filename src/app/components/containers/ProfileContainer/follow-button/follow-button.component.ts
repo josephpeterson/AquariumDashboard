@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { faStar, faUserPlus, faUserMinus } from '@fortawesome/free-solid-svg-icons';
 import { AccountRelationship } from '../../../../models/AccountRelationship';
-import { RelationshipTypes } from 'src/app/models/RelationshipTypes';
+import { RelationshipTypes } from 'src/app/models/types/RelationshipTypes';
 import { AquariumService } from 'src/app/services/aquarium.service';
 
 @Component({

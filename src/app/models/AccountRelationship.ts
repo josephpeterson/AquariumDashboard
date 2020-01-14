@@ -2,7 +2,7 @@ import { CameraConfiguration } from './CameraConfiguration';
 import { Fish } from './Fish';
 import { AquariumFeeding } from './AquariumFeeding';
 import { AquariumDevice } from './AquariumDevice';
-import { RelationshipTypes } from './RelationshipTypes';
+import { RelationshipTypes } from './types/RelationshipTypes';
 
 export class AccountRelationship
 {

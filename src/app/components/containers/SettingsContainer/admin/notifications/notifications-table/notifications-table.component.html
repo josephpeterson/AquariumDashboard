@@ -1,0 +1,49 @@
+<div *ngIf="!loading && error" class="alert alert-danger">
+  {{error.message}}
+  <fa-icon [icon]="icon_retry" class="float-right" (click)="loadBugReports()"></fa-icon>
+</div>
+<div class="users-table mat-elevation-z2">
+  <div *ngIf="loading else notLoading">
+    <mat-progress-spinner mode="indeterminate">
+    </mat-progress-spinner>
+  </div>
+  <ng-template #notLoading>
+    <table class="w-100" *ngIf="!loading" [dataSource]="dataSource" mat-table matSort>
+      <ng-container *ngFor="let column of columns" matColumnDef="{{column.name}}">
+        <ng-template [ngIf]="column.name == 'select'" [ngIfElse]="notSelect">
+          <th mat-header-cell *matHeaderCellDef>
+
+          </th>
+          <td mat-cell *matCellDef="let row">
+            <mat-checkbox (change)="toggleSelection(row,$event)" [checked]="selection.isSelected(row)">
+            </mat-checkbox>
+          </td>
+        </ng-template>
+        <ng-template #notSelect>
+          <td mat-cell *matCellDef="let element" (click)="rowClickHandler($event,element)" [ngSwitch]="column.name">
+            <span *ngSwitchCase="'type'">{{readableNotificationType(element.type)}}</span>
+            <span *ngSwitchCase="'dispatcher'">{{element.dispatcher.username}}</span>
+            <span *ngSwitchCase="'date'">{{readableDate(element.date)}}</span>
+            <span *ngSwitchCase="'expireDate'">{{readableDate(element.expireDate)}}</span>
+            <span *ngSwitchCase="'notified'">{{element.notifications.length}} users</span>
+            <span *ngSwitchDefault>{{element[column.name]}}</span>
+          </td>
+          <th (click)="updateSort()" mat-header-cell *matHeaderCellDef mat-sort-header>{{column.label}}</th>
+        </ng-template>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <ng-container *ngIf="getSelectedItems().length > 0">
+      <div class="float-left mt-2 ml-2">
+        <button class="btn btn-danger" (click)="clickDismissNotifications()" [disabled]="disabled">
+          <fa-icon class="addIcon mr-2" [icon]="icon_delete"></fa-icon> Dismiss
+        </button>
+      </div>
+    </ng-container>
+
+  </ng-template>
+  <mat-paginator [pageSizeOptions]="[10, 20, 5]" showFirstLastButtons></mat-paginator>
+</div>

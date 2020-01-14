@@ -1,0 +1,41 @@
+<div>
+  <h1 mat-dialog-title>Dispatch Notification</h1>
+  <p>
+    Dispatch new notification to all or selected users.
+  </p>
+
+
+  <label id="example-radio-group-label">Select an audience:</label>
+  <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+    [(ngModel)]="audienceSelection">
+    <mat-radio-button class="example-radio-button" [value]="0">
+      All Users
+    </mat-radio-button>
+    <mat-radio-button class="example-radio-button" [value]="1">
+
+      Select Users
+    </mat-radio-button>
+    <ng-container *ngIf="audienceSelection == 1">
+      <span>pick users here</span>
+    </ng-container>
+  </mat-radio-group>
+
+  <mat-form-field>
+    <mat-select [disabled]='disabled' placeholder="Notification Type" class="mb-2" [(ngModel)]="notification.type" name="type">
+      <mat-option *ngFor="let type of notificationTypes | keyvalue" [value]="type.value">
+        {{type.key}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+
+
+
+  <div class="row">
+    <mat-error>{{error}}</mat-error>
+  </div>
+  <mat-dialog-actions align="end">
+    <button [disabled]='disabled' class="m-2 btn btn-danger" mat-dialog-close>Cancel</button>
+    <button [disabled]='disabled' class="m-2 btn btn-success" (click)="clickSubmit()">Send</button>
+  </mat-dialog-actions>
+</div>
