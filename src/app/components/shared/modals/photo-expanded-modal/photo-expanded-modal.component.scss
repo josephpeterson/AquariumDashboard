@@ -3,6 +3,8 @@
     position: relative;
     
     img {
+        min-width:250px;
+        min-height:200px;
         max-height:100%;
         max-width:100%;
         display: block;

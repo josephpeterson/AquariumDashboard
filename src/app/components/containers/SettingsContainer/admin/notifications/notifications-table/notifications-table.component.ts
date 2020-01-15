@@ -127,4 +127,18 @@ export class NotificationsTableComponent {
       console.log(err);
     });
   }
+  public clickDeleteNotifications() {
+    var notifications = this.getSelectedItems();
+    var ids = notifications.map(n => n.id);
+
+    this.disabled = true;
+    this.adminService.deleteDispatchedNotifications(ids).subscribe(data => {
+      this.disabled = false;
+      this.loadNotifications();
+    },err => {
+      this.disabled = false;
+      this.error = err.message;
+      console.log(err);
+    });
+  }
 }

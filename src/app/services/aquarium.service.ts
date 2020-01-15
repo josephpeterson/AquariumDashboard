@@ -334,4 +334,10 @@ export class AquariumService {
   public getAquariumFishPhotos(id: number,pagination: PaginationSliver) {
     return this.http.post<FishPhoto[]>(this._url + `/v1/Photo/Aquarium/${id}/Fish`,pagination);
   }
+  public getNotifications() {
+    return this.http.get(this._url + `/v1/Account/Notifications`);
+  }
+  public dismissNotifications(notifIds: number[]) {
+    return this.http.post(this._url + `/v1/Account/Notifications/Dismiss`,notifIds);
+  }  
 }

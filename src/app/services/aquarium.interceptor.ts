@@ -18,6 +18,7 @@ export class AquariumInterceptor implements HttpInterceptor {
         Authorization: `Bearer ${token}`
       }
     })
+    console.log("INTERCEPTED");
     return next.handle(request);
   }
 }

@@ -4,8 +4,8 @@
         <input #fileInput type="file" hidden [fileUploadInputFor]= "fileUploadQueue">
     </div>
     <div style="width: 500px">
-        <mat-file-upload-queue #fileUploadQueue [fileAlias]="'file'">
-            <mat-file-upload [file]="fileUploadQueue.files[0]" [id]="0" *ngIf="fileUploadQueue.files.length > 0">
+        <mat-file-upload-queue #fileUploadQueue [fileAlias]="'file'" >
+            <mat-file-upload [file]="fileUploadQueue.files[0]" [id]="0" *ngIf="fileUploadQueue.files.length > 0" (onUpload)="clickUpload($event)">
             </mat-file-upload>
         </mat-file-upload-queue>
     </div>

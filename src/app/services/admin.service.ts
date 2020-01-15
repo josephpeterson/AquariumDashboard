@@ -18,6 +18,7 @@ const httpOptions = {
   providedIn: "root"
 })
 export class AdminService {
+  
   private _url: string;
   
   constructor(private http: HttpClient) {
@@ -37,5 +38,8 @@ export class AdminService {
   }
   public dismissDispatchedNotifications(ids: number[]) {
     return this.http.post<DispatchedNotification[]>(this._url + "/v1/admin/Notification/Dismiss",ids);
+  }
+  public deleteDispatchedNotifications(ids: number[]) {
+    return this.http.post(this._url + "/v1/admin/Notification/Delete",ids);
   }
 }

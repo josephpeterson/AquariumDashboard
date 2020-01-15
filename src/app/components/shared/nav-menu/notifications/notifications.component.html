@@ -1,0 +1,28 @@
+<button class="btn btn-link notifications-drawer-button" (click)="clickToggleOpen()" [class.active]="open">
+  <fa-icon [icon]="faBell" ></fa-icon>
+  <ng-container *ngIf="getUndismissedNotifications() as notifs">
+    <span class="badge ml-1 badge-danger" *ngIf="notifs.length > 0">
+      {{notifs.length}}
+    </span>
+  </ng-container>
+</button>
+<div class="notifications-container container" [class.active]="open">
+
+  <mat-progress-spinner *ngIf="loading" color="warn" mode="indeterminate" [diameter]="25"></mat-progress-spinner>
+  <div *ngFor="let n of notifications" class="row notification" (click)="clickNotification(n)" [class.unread]="!n.dismissed">
+    <ng-container [ngSwitch]="n.source.type">
+      <div *ngSwitchCase="0">
+        <h1>Test Notification
+          <span class="text-muted justify-content-right timestamp">
+            {{readableDate(n.source.date)}}
+          </span>
+        </h1>
+        <p>This was a test notification sent to you. This was nothing more than to test our notification system.</p>
+      </div>
+      <div *ngSwitchDefault>
+        <h1>Unknown</h1>
+        <p>{{JSON.stringify(n)}}</p>
+      </div>
+    </ng-container>
+  </div>
+</div>

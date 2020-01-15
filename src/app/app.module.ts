@@ -219,6 +219,7 @@ import { PhotoPaginator } from './components/shared/photo-paginator/photo-pagina
 import { SettingsNotificationsComponent } from './components/containers/SettingsContainer/admin/notifications/settings-notifications.component';
 import { NotificationsTableComponent } from './components/containers/SettingsContainer/admin/notifications/notifications-table/notifications-table.component';
 import { CreateNotificationModalComponent } from './components/shared/modals/create-notification-modal/create-notification-modal.component';
+import { NavMenuNotificationsComponent } from './components/shared/nav-menu/notifications/notifications.component';
 
 @NgModule({
   declarations: [
@@ -413,6 +414,8 @@ import { CreateNotificationModalComponent } from './components/shared/modals/cre
     CreateNotificationModalComponent,
 
     ApplicationLogViewComponent,
+
+    NavMenuNotificationsComponent,
   ],
   entryComponents: [
     ConfirmModalComponent,

@@ -1,5 +1,5 @@
 import * as moment from 'moment';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { getAllSpecies, isUpdatingSpecies, getSpeciesUpdateError, isCreatingSpecies, isDeletingSpecies, getSpeciesDeleteError } from 'src/app/store/species/species.selector';
@@ -20,11 +20,12 @@ import { AquariumLoadSuccessAction } from 'src/app/store/aquarium/aquarium.actio
 import { FishPhotoModal } from 'src/app/components/shared/modals/fish-photo-modal/fish-photo-modal.component';
 import { FishPhoto } from 'src/app/models/FishPhoto';
 import { PhotoExpandedModalComponent } from 'src/app/components/shared/modals/photo-expanded-modal/photo-expanded-modal.component';
-import { FishUpdateAction } from 'src/app/store/fish/fish.actions';
+import { FishUpdateAction, FishLoadByIdAction } from 'src/app/store/fish/fish.actions';
 import { getSelectedFish, isUpdatingFish, isCreatingFish, getFishUpdateError } from 'src/app/store/fish/fish.selector';
 import { FishBreedModalComponent } from 'src/app/components/shared/modals/fish-breed-modal/fish-breed-modal.component';
 import { FishTransferModalComponent } from 'src/app/components/shared/modals/fish-transfer-modal/fish-transfer-modal.component';
 import { FishDiseaseModalComponent } from 'src/app/components/shared/modals/fish-disease-modal/fish-disease-modal.component';
+import { AttachmentUploaderComponent } from 'src/app/components/shared/attachment-uploader/attachment-uploader.component';
 
 
 
@@ -36,6 +37,8 @@ import { FishDiseaseModalComponent } from 'src/app/components/shared/modals/fish
 export class FishDetailViewComponent implements OnInit {
     @Input("fish") fish: Fish;
     @Input("aquarium") aquarium: Aquarium;
+
+    @ViewChild(AttachmentUploaderComponent) attachmentComponent: AttachmentUploaderComponent;
 
     public fish$: Observable<Fish> = this.store.select(getSelectedFish);
 
@@ -59,6 +62,7 @@ export class FishDetailViewComponent implements OnInit {
     faAngleRight = faAngleRight;
     faTrash = faTrash;
     private _matchedSpecies: Species;
+    uploadingPhoto: boolean;
 
 
     constructor(private store: Store<AppState>, private notifier: NotifierService, private dialog: MatDialog, private router: Router,
@@ -168,6 +172,20 @@ export class FishDetailViewComponent implements OnInit {
         var dialog = this.dialog.open(PhotoExpandedModalComponent, {
             panelClass: "expanded-photo-dialog",
             data: fishPhoto.photo
+        });
+    }
+    public clickUploadFishPhoto(fishId: number) {
+        var attachment = this.attachmentComponent.getAttachment();
+        if (!attachment)
+            return false;
+        this.uploadingPhoto = true;
+        this._aquariumService.uploadFishPhoto(fishId, attachment).subscribe(val => {
+            this.uploadingPhoto = false;
+            this.store.dispatch(new FishLoadByIdAction(fishId));
+            this.attachmentComponent.clearAttachment();
+        }, (err) => {
+            this.uploadingPhoto = false;
+            this.notifier.notify("error", "Could not upload fish photo.");
         });
     }
 }
