@@ -220,6 +220,8 @@ import { SettingsNotificationsComponent } from './components/containers/Settings
 import { NotificationsTableComponent } from './components/containers/SettingsContainer/admin/notifications/notifications-table/notifications-table.component';
 import { CreateNotificationModalComponent } from './components/shared/modals/create-notification-modal/create-notification-modal.component';
 import { NavMenuNotificationsComponent } from './components/shared/nav-menu/notifications/notifications.component';
+import { WaterChangeComponent } from './components/containers/AquariumContainer/parameters/water-change/water-change.component';
+import { WaterDoseComponent } from './components/containers/AquariumContainer/parameters/water-dose/water-dose.component';
 
 @NgModule({
   declarations: [
@@ -416,6 +418,10 @@ import { NavMenuNotificationsComponent } from './components/shared/nav-menu/noti
     ApplicationLogViewComponent,
 
     NavMenuNotificationsComponent,
+
+    WaterChangeComponent,
+
+    WaterDoseComponent,
   ],
   entryComponents: [
     ConfirmModalComponent,

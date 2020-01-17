@@ -23,6 +23,8 @@ import { PhotoContent } from '../models/PhotoContent';
 import { DeviceSchedule } from '../models/DeviceSchedule';
 import { DeviceScheduleTask } from '../models/DeviceScheduleTask';
 import { PaginationSliver } from '../models/PaginationSliver';
+import { WaterChange } from '../models/WaterChange';
+import { WaterDosing } from '../models/WaterDosing';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -340,4 +342,31 @@ export class AquariumService {
   public dismissNotifications(notifIds: number[]) {
     return this.http.post(this._url + `/v1/Account/Notifications/Dismiss`,notifIds);
   }  
+
+  /* Water Changes */
+  public getWaterChangesByAquarium(aquariumId: number) {
+    return this.http.get<WaterChange[]>(this._url + `/v1/Aquarium/${aquariumId}/Water/Change`);
+  }
+  public addWaterChange(aquariumId: number,waterChange: WaterChange) {
+    return this.http.post<WaterChange>(this._url + `/v1/Aquarium/${aquariumId}/Water/Change`,waterChange);
+  }
+  public updateWaterChange(aquariumId: number,waterChange: WaterChange) {
+    return this.http.put<WaterChange>(this._url + `/v1/Aquarium/${aquariumId}/Water/Change`,waterChange);
+  }
+  public deleteWaterChanges(aquariumId: number,waterChangeIds: number[]) {
+    return this.http.post(this._url + `/v1/Aquarium/${aquariumId}/Water/Change/Delete`,waterChangeIds);
+  }
+  /* Water Dosings */
+  public getWaterDosesByAquarium(aquariumId: number) {
+    return this.http.get<WaterDosing[]>(this._url + `/v1/Aquarium/${aquariumId}/Water/Dose`);
+  }
+  public addWaterDosing(aquariumId: number,waterDosing: WaterDosing) {
+    return this.http.post<WaterDosing>(this._url + `/v1/Aquarium/${aquariumId}/Water/Dose`,waterDosing);
+  }
+  public updateWaterDosing(aquariumId: number,waterDosing: WaterDosing) {
+    return this.http.put<WaterDosing>(this._url + `/v1/Aquarium/${aquariumId}/Water/Dose`,waterDosing);
+  }
+  public deleteWaterDosings(aquariumId: number,waterDosingIds: number[]) {
+    return this.http.post(this._url + `/v1/Aquarium/${aquariumId}/Water/Dose/Delete`,waterDosingIds);
+  }
 }
