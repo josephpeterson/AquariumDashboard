@@ -222,6 +222,7 @@ import { CreateNotificationModalComponent } from './components/shared/modals/cre
 import { NavMenuNotificationsComponent } from './components/shared/nav-menu/notifications/notifications.component';
 import { WaterChangeComponent } from './components/containers/AquariumContainer/parameters/water-change/water-change.component';
 import { WaterDoseComponent } from './components/containers/AquariumContainer/parameters/water-dose/water-dose.component';
+import { WaterChangeTableComponent } from './components/containers/AquariumContainer/parameters/water-change-table/water-change-table.component';
 
 @NgModule({
   declarations: [
@@ -422,6 +423,8 @@ import { WaterDoseComponent } from './components/containers/AquariumContainer/pa
     WaterChangeComponent,
 
     WaterDoseComponent,
+
+    WaterChangeTableComponent,
   ],
   entryComponents: [
     ConfirmModalComponent,

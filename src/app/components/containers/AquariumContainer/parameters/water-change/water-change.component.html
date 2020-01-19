@@ -1,7 +1,15 @@
-<div>
-  <mat-form-field>
-    <input [disabled]="disabled" type="number" placeholder="Amount (Gallons)" matInput required [(ngModel)]="waterChange.gallons">
-  </mat-form-field>
-  <mat-checkbox [disabled]="disabled" [(ngModel)]='waterChange.additive' class="p-1">Additive</mat-checkbox>
+<div class="row">
+  <div class="col">
+
+
+    <mat-form-field>
+      <input [disabled]="disabled" type="number" placeholder="Amount (Gallons)" matInput required [(ngModel)]="waterChange.gallons">
+    </mat-form-field>
+  </div>
+  <div class="col">
+    <mat-checkbox [disabled]="disabled" [(ngModel)]='waterChange.additive' class="p-1">Additive</mat-checkbox>
+  </div>
+</div>
+<div class="row">
   <button class="btn btn-success" (click)="clickSubmit()">Add Water Change</button>
 </div>
