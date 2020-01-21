@@ -224,6 +224,7 @@ import { WaterChangeComponent } from './components/containers/AquariumContainer/
 import { WaterDoseComponent } from './components/containers/AquariumContainer/parameters/water-dose/water-dose.component';
 import { WaterChangeTableComponent } from './components/containers/AquariumContainer/parameters/water-change-table/water-change-table.component';
 import { StandardTableComponent } from './components/shared/standard-table/standard-table.component';
+import { VisualAquariumComponent } from './components/shared/visual-aquarium/visual-aquarium.component';
 
 @NgModule({
   declarations: [
@@ -428,6 +429,8 @@ import { StandardTableComponent } from './components/shared/standard-table/stand
     WaterChangeTableComponent,
 
     StandardTableComponent,
+
+    VisualAquariumComponent,
   ],
   entryComponents: [
     ConfirmModalComponent,

@@ -1,0 +1,10 @@
+<div class="visual-aquarium">
+<div class="water" [style.height]="getWaterLevel()">
+  <div class="added" *ngIf="options.waterAdded" [style.height]="(options.waterAdded / aquarium.gallons*100) + '%'">
+
+  </div>
+  <div class="removed" *ngIf="options.waterRemoved" [style.height]="(options.waterRemoved / aquarium.gallons*100) + '%'">
+
+  </div>
+</div>
+</div>

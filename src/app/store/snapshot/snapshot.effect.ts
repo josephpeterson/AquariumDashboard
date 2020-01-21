@@ -16,7 +16,7 @@ export class SnapshotEffects {
     @Effect()
     loadSnapshotsByAquarium$ = this.actions$.pipe(ofType<SnapshotLoadByAquariumAction>(SnapshotActions.LoadByAquarium),
         mergeMap((action: SnapshotLoadByAquariumAction) => this.aquariumService.getSnapshots(action.payload,action.offset,action.count).pipe(
-            map((snapshots: AquariumSnapshot[]) => new SnapshotLoadSuccessAction(snapshots)),
+            map((snapshots: AquariumSnapshot[]) => new SnapshotLoadSuccessAction(snapshots.filter(s => s.photo != null))),
             catchError(error => of(new SnapshotLoadFailedAction(error)))
         )));
     @Effect()

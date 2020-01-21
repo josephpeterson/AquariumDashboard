@@ -3,11 +3,19 @@
 
 
     <mat-form-field>
-      <input [disabled]="disabled" type="number" placeholder="Amount (Gallons)" matInput required [(ngModel)]="waterChange.gallons">
+      <input [disabled]="disabled" type="number" placeholder="Amount Added (Gallons)" matInput required
+        [(ngModel)]="waterChange.gallonsAdded">
     </mat-form-field>
+
   </div>
   <div class="col">
-    <mat-checkbox [disabled]="disabled" [(ngModel)]='waterChange.additive' class="p-1">Additive</mat-checkbox>
+    <mat-form-field>
+      <input [disabled]="disabled" type="number" placeholder="Amount Removed (Gallons)" matInput required
+        [(ngModel)]="waterChange.gallonsRemoved">
+    </mat-form-field>
+  </div>
+  <div class="col p-2">
+    <visual-aquarium [aquarium]="aquarium" [options]="getAquariumVisual()"></visual-aquarium>
   </div>
 </div>
 <div class="row">

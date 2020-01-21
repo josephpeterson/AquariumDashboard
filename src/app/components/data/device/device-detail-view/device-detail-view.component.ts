@@ -44,8 +44,11 @@ export class DeviceDetailViewComponent implements OnInit {
     }
 
     public getLatestSnapshot() {
-        this._aquariumService.getLatestSnapshot(this.aquarium.id).pipe(take(1)).subscribe(snapshot => {
-            this.latestSnapshot = snapshot;
+        this._aquariumService.getSnapshots(this.aquarium.id, 0, 1).subscribe(snapshot => {
+            if (snapshot.length > 0)
+                this.latestSnapshot = snapshot[0];
+            else
+                delete this.latestSnapshot
         }, (err) => {
 
         });

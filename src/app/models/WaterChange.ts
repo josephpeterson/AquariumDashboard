@@ -4,8 +4,8 @@ export class WaterChange
 {
   id: number
   aquariumId: number
-  additive: boolean
-  gallons: number
+  gallonsAdded: number
+  gallonsRemoved: number
   color: string
   date: Date
 

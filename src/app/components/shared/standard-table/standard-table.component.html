@@ -14,7 +14,15 @@
       <th (click)="updateSort()" mat-header-cell *matHeaderCellDef mat-sort-header>{{column.name}}</th>
 
       <td mat-cell *matCellDef="let element" (click)="rowClickHandler($event,element)">
-        <span>{{element[column.name]}}</span>
+        <ng-container *ngIf="column.property == 'date' else notDate">
+          <span>{{readableDate(element[column.name])}}</span>
+        </ng-container>
+        <ng-template #notDate>
+          <span *ngIf="column.value else none">{{column.value(column,element)}}</span>
+          <ng-template #none>
+            <span>{{element[column.property]}}</span>
+          </ng-template>
+        </ng-template>
       </td>
     </ng-template>
   </ng-container>

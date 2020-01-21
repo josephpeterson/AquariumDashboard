@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatSort, MatTableDataSource } from '@angular/material';
 import { constructor } from 'q';
+import * as moment from 'moment';
 
 @Component({
   selector: 'standard-table',
@@ -19,7 +20,7 @@ export class StandardTableComponent implements OnInit {
   public loading: boolean = false;
 
   @Input("columns") public columns: Array<any> = [
-    { name: 'select', visible: true },
+    { property: 'select', name: 'select', visible: true, value: (column, element) => element[column.property] },
   ];
   @Input() public callback: Function;
 
@@ -32,17 +33,18 @@ export class StandardTableComponent implements OnInit {
     this.loadDataSource();
   }
   loadDataSource() {
-    if(!this.callback)
+    if (!this.callback)
       return;
     this.loading = true;
     this.callback().subscribe(data => {
       this.dataSource = data;
       this.loading = false;
+      console.log(data);
     },
-    (err: HttpErrorResponse) => {
-      console.error(err);
-      this.loading = false;
-    });
+      (err: HttpErrorResponse) => {
+        console.error(err);
+        this.loading = false;
+      });
   }
   public toggleSelection(row) {
     this.selection.toggle(row);
@@ -55,5 +57,9 @@ export class StandardTableComponent implements OnInit {
   }
   public updateSort() {
     this.dataSource.sort = this.sort;
+  }
+  readableDate(dateString: string) {
+    var d = moment.utc(dateString).local().format('YYYY-MM-DD HH:mm:ss');
+    return moment(d).calendar();
   }
 }

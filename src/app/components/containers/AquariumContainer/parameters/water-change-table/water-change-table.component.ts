@@ -14,9 +14,24 @@ export class WaterChangeTableComponent implements OnInit {
   @Input() aquarium: Aquarium;
 
   public columns: Array<any> = [
-    { name: 'select', visible: true },
-    { name: 'amount', visible: true },
-    { name: 'date', visible: true },
+    { property: 'select', name: 'select', visible: true },
+    {
+      property: 'gallonsAdded',
+      name: 'Gallons Added', visible: true, value: (column, element) => {
+        var gallons = element.gallonsAdded;
+        var percentage = Math.round(gallons/this.aquarium.gallons * 100)
+        return `${gallons} (${percentage}%)`
+      }
+    },
+    {
+      property: 'gallonsRemoved',
+      name: 'Gallons Removed', visible: true, value: (column, element) => {
+        var gallons = element.gallonsRemoved;
+        var percentage = Math.round(gallons/this.aquarium.gallons * 100)
+        return `${gallons} (${percentage}%)`
+      }
+    },
+    { property: 'date', name: 'Date', visible: true },
   ];
 
 

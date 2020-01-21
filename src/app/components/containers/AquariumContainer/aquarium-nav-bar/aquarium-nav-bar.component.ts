@@ -12,7 +12,7 @@ import { PostThread } from 'src/app/models/PostThread';
 import { PostBoard } from 'src/app/models/PostBoard';
 import { getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
 import { Aquarium } from 'src/app/models/Aquarium';
-import { faSignOutAlt, faSlidersH, faPhotoVideo, faFish, faCogs, faChartLine, faNetworkWired, faDesktop } from '@fortawesome/free-solid-svg-icons';
+import { faSignOutAlt, faSlidersH, faPhotoVideo, faFish, faCogs, faChartLine, faNetworkWired, faDesktop, faWater } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'aquarium-nav-bar',
@@ -28,7 +28,7 @@ export class AquariumNavBarComponent implements OnInit {
   public faMaintenance = faCogs;
   public faDashboard = faChartLine;
   public faDevice = faDesktop;
-  public faParameters = faNetworkWired;
+  public faParameters = faWater;
   
   public componentLifeCycle = new Subject();
   public selectedAquarium$ = this.store.select(getSelectedAquarium);

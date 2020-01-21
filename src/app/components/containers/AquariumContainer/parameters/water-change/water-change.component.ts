@@ -3,6 +3,7 @@ import { WaterChange } from 'src/app/models/WaterChange';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { NotifierService } from 'angular-notifier';
 import { Aquarium } from 'src/app/models/Aquarium';
+import { VisualAquariumComponentOptions } from 'src/app/components/shared/visual-aquarium/visual-aquarium.component';
 
 @Component({
   selector: 'water-change',
@@ -33,5 +34,12 @@ export class WaterChangeComponent implements OnInit {
       this.disabled = false;
       console.error(err);
     });
+  }
+  public getAquariumVisual() {
+    var options = new VisualAquariumComponentOptions();
+    options.waterAdded = this.waterChange.gallonsAdded;
+    options.waterRemoved = this.waterChange.gallonsRemoved;
+    options.waterLevel = this.aquarium.gallons/2;
+    return options;
   }
 }
