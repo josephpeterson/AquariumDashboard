@@ -30,13 +30,16 @@
                             </td>
                         </tr>
                     </table>
-                    <div class="card-title" *ngIf="latestSnapshot.temperature != undefined ||
-                    latestSnapshot.ph != undefined ||
-                    latestSnapshot.ammonia != undefined ||
-                    latestSnapshot.nitrate != undefined ||
-                    latestSnapshot.nitrite != undefined">
-                        <h4 class="m-1">Parameters</h4>
-                    </div>
+                    <ng-container *ngIf="latestSnapshot">
+                        <div class="card-title" *ngIf="latestSnapshot.temperature != undefined ||
+                        latestSnapshot.ph != undefined ||
+                        latestSnapshot.ammonia != undefined ||
+                        latestSnapshot.nitrate != undefined ||
+                        latestSnapshot.nitrite != undefined">
+                            <h4 class="m-1">Parameters</h4>
+                        </div>
+                    </ng-container>
+
                     <table *ngIf="latestSnapshot">
                         <tr *ngIf="latestSnapshot.temperature != undefined">
                             <td>Temperature: </td>

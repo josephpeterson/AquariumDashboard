@@ -8,6 +8,7 @@ import { getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
 import { take } from 'rxjs/operators';
 import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
 import { ManageSnapshotModal } from 'src/app/components/shared/modals/manage-snapshot-modal/manage-snapshot-modal.component';
+import { WaterChange } from 'src/app/models/WaterChange';
 
 @Component({
   selector: 'aquarium-parameters',
@@ -40,5 +41,4 @@ export class AquariumParametersComponent implements OnInit {
       }
     });
   }
-
 }

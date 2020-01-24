@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { WaterChange } from 'src/app/models/WaterChange';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { NotifierService } from 'angular-notifier';
@@ -16,6 +16,9 @@ export class WaterChangeComponent implements OnInit {
   public waterChange: WaterChange = new WaterChange();
   public disabled: boolean;
 
+  @Output() success = new EventEmitter();
+
+
   constructor(
     private _aquariumService: AquariumService,
     private notifier: NotifierService
@@ -29,6 +32,9 @@ export class WaterChangeComponent implements OnInit {
       this.disabled = false;
       this.waterChange = new WaterChange();
       this.notifier.notify("success","Water change successfully added (" + data.id + ")");
+
+      this.success.emit(data);
+
     },
     err => {
       this.disabled = false;
