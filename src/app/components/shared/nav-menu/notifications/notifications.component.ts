@@ -4,6 +4,9 @@ import { AquariumService } from 'src/app/services/aquarium.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Notification } from 'src/app/models/Notification';
 import * as moment from 'moment';
+import { NotificationTypes } from 'src/app/models/types/NotificationTypes';
+import { MatDialog } from '@angular/material';
+import { ConfirmModalComponent } from '../../modals/confirm-modal/confirm-modal.component';
 
 @Component({
   selector: 'nav-menu-notifications',
@@ -18,21 +21,24 @@ export class NavMenuNotificationsComponent implements OnInit {
   public faBell = faBell;
   public open: boolean;
   public notifications: Notification[] = [];
+  public types = NotificationTypes;
   public loading: boolean;
 
   private interval: number = 30;
 
   constructor(private _aquariumService: AquariumService,
-    private _eref: ElementRef) { }
+    private _eref: ElementRef,
+    private dialog: MatDialog) { }
 
   ngOnInit() {
     this.loadNotifications();
+    console.log(this.types.TestNotification);
   }
 
   public onClick(event) {
     if (!this._eref.nativeElement.contains(event.target) && this.open) // or some similar check
       this.clickToggleOpen();
-   }
+  }
   public clickToggleOpen() {
     this.open = !this.open;
 
@@ -77,10 +83,31 @@ export class NavMenuNotificationsComponent implements OnInit {
     }, this.interval * 1000);
   }
   public clickNotification(n: Notification) {
-
+    var d = this.dialog.open(ConfirmModalComponent, {
+      data: {
+        title: n.source.title,
+        body: n.source.body
+      }
+    }).componentInstance;
+    d.title = n.source.title;
+    d.body = n.source.body;
   }
   readableDate(dateString: string) {
-    var d = moment.utc(dateString ).local().format('YYYY-MM-DD HH:mm:ss');
+    var d = moment.utc(dateString).local().format('YYYY-MM-DD HH:mm:ss');
     return moment(d).calendar();
+  }
+  public parseDynamicTitle(n: Notification) {
+    var con = n.source.title;
+    if (!con) return;
+
+    return con.replace(/{target.name}/gi, n.target.username)
+      .replace(/{dispatcher.name}/gi, n.source.dispatcher.username);
+  }
+  public parseDynamicContent(n: Notification) {
+    var con = n.source.subtitle;
+    if (!con) return;
+
+    return con.replace(/{target.name}/gi, n.target.username)
+      .replace(/{dispatcher.name}/gi, n.source.dispatcher.username);
   }
 }

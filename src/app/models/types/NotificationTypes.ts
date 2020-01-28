@@ -1,3 +1,4 @@
 export enum NotificationTypes {
-    "Test Notification" = 0,
+    TestNotification = 0,
+    DeviceLogin = 1001,
 }

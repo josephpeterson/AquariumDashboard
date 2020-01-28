@@ -28,6 +28,19 @@
     </mat-select>
   </mat-form-field>
 
+  <mat-form-field class="d-flex">
+    <input matInput  placeholder="Custom Title" [(ngModel)]="notification.title">
+  </mat-form-field>
+  <mat-form-field class="d-flex">
+    <input matInput  placeholder="Custom Subtitle" [(ngModel)]="notification.subtitle">
+  </mat-form-field>
+
+
+  <mat-form-field class="d-flex w-100">
+    <textarea matInput  placeholder="Custom body" [(ngModel)]="notification.body"></textarea>
+  </mat-form-field>
+
+
 
 
 

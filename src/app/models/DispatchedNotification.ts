@@ -8,4 +8,7 @@ export class DispatchedNotification {
   expireDate: Date;
   notifications: Notification[];
   dispatcher: AquariumAccount;
+  title: string;
+  subtitle: string;
+  body: string;
 }
