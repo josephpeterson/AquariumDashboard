@@ -32,3 +32,24 @@
     max-width: 100%;
   }
 }
+.photo-paginator {
+  .photo-card {
+    
+    position:relative;
+    border:3px solid transparent;
+    width:200px;
+    .mat-checkbox {
+      position:absolute;
+      top:0px;
+      right:0px;
+      color:white;
+    }
+    /deep/ .mat-checkbox-frame { 
+      border-color: white 
+  }
+  }
+  .photo-card.checked {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-color: goldenrod;
+  }
+}

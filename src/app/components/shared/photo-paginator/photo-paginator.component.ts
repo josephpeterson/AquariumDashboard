@@ -9,6 +9,10 @@ import { take } from 'rxjs/operators';
 import { AquariumPhoto } from 'src/app/models/AquariumPhoto';
 import { PaginationSliver } from 'src/app/models/PaginationSliver';
 import { PhotoExpandedModalComponent } from 'src/app/components/shared/modals/photo-expanded-modal/photo-expanded-modal.component';
+import { PhotoContent } from 'src/app/models/PhotoContent';
+import { NotifierService } from 'angular-notifier';
+import { HttpErrorResponse } from '@angular/common/http';
+import { PhotoTimelapseOptions } from 'src/app/models/PhotoTimelapseOptions';
 
 @Component({
   selector: 'photo-paginator',
@@ -23,10 +27,14 @@ export class PhotoPaginator implements OnInit {
   public loading: boolean;
   public pagination: PaginationSliver = new PaginationSliver();
 
+  public selection: PhotoContent[] = [];
+  public selecting: boolean = false;
+
   @Input("source") source;
 
   constructor(public aquariumService: AquariumService,
     public dialog: MatDialog,
+    public notifier: NotifierService,
     public store: Store<AppState>
   ) { }
   ngOnInit() {
@@ -65,5 +73,45 @@ export class PhotoPaginator implements OnInit {
   }
   getPhotoPermalink(photo) {
     return this.aquariumService.getPhotoPermalink(photo, "1");
+  }
+
+
+  public toggleSelection(photo: PhotoContent) {
+    console.log("wat");
+    this.setSelected(photo, !this.isSelected(photo));
+  }
+  public setSelected(photo: PhotoContent, selected: boolean) {
+
+    if (!selected && this.isSelected(photo))
+      this.selection.splice(this.selection.indexOf(photo), 1);
+    else if (selected)
+      this.selection.push(photo);
+  }
+  public isSelected(photo: PhotoContent) {
+    return this.selection.indexOf(photo) != -1;
+  }
+  public toggleSelecting() {
+    this.selecting = !this.selecting;
+    if (!this.selecting)
+      this.clearSelection();
+  }
+  public clearSelection() {
+    this.selection = [];
+  }
+
+  public clickCreateTimelapse() {
+    var ids = this.selection.map(p => p.id);
+    this.notifier.notify("warning", `Generating timelapse from ${ids.length} images...`);
+
+    this.aquariumService.createPhotoTimelapse(ids, new PhotoTimelapseOptions()).subscribe((data:PhotoContent) => {
+      console.log(data);
+      var dialog = this.dialog.open(PhotoExpandedModalComponent, {
+        panelClass: "expanded-photo-dialog",
+        data: data
+      });
+    }, (err: HttpErrorResponse) => {
+      this.notifier.notify("error", `Could not generate timelapse. Unknown error occured`);
+      console.error(err);
+    })
   }
 }

@@ -49,8 +49,21 @@ export class PhotoExpandedModalComponent implements OnInit {
   public imageReady(evt) {
     var img = evt.target
     var w = img.width + "px";
-      var h = img.height + "px";
-      this._dialog.updateSize(w, h);
-      console.log(w,h);
+    var h = img.height + "px";
+    this._dialog.updateSize(w, h);
+    console.log(w, h);
+  }
+
+  public getPhotoType() {
+
+    var ext = this.photo.filepath.split('.').pop();
+
+    switch (ext) {
+      case "avi":
+      case "mp4":
+        return "video";
+      default:
+        return "img";
+    }
   }
 }

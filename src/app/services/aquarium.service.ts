@@ -25,6 +25,7 @@ import { DeviceScheduleTask } from '../models/DeviceScheduleTask';
 import { PaginationSliver } from '../models/PaginationSliver';
 import { WaterChange } from '../models/WaterChange';
 import { WaterDosing } from '../models/WaterDosing';
+import { PhotoTimelapseOptions } from '../models/PhotoTimelapseOptions';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -368,5 +369,13 @@ export class AquariumService {
   }
   public deleteWaterDosings(aquariumId: number,waterDosingIds: number[]) {
     return this.http.post(this._url + `/v1/Aquarium/${aquariumId}/Water/Dose/Delete`,waterDosingIds);
+  }
+
+
+  public createPhotoTimelapse(snapshotIds: number[],options: PhotoTimelapseOptions) {
+    return this.http.post<PhotoContent>(this._url + `/v1/Photo/Timelapse`,{
+      snapshotIds: snapshotIds,
+      options: options
+    });
   }
 }
