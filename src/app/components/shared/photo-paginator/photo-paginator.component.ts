@@ -13,6 +13,7 @@ import { PhotoContent } from 'src/app/models/PhotoContent';
 import { NotifierService } from 'angular-notifier';
 import { HttpErrorResponse } from '@angular/common/http';
 import { PhotoTimelapseOptions } from 'src/app/models/PhotoTimelapseOptions';
+import { CreateTimelapseModalComponent } from '../modals/create-timelapse-modal/create-timelapse-modal.component';
 
 @Component({
   selector: 'photo-paginator',
@@ -100,18 +101,8 @@ export class PhotoPaginator implements OnInit {
   }
 
   public clickCreateTimelapse() {
-    var ids = this.selection.map(p => p.id);
-    this.notifier.notify("warning", `Generating timelapse from ${ids.length} images...`);
-
-    this.aquariumService.createPhotoTimelapse(ids, new PhotoTimelapseOptions()).subscribe((data:PhotoContent) => {
-      console.log(data);
-      var dialog = this.dialog.open(PhotoExpandedModalComponent, {
-        panelClass: "expanded-photo-dialog",
-        data: data
-      });
-    }, (err: HttpErrorResponse) => {
-      this.notifier.notify("error", `Could not generate timelapse. Unknown error occured`);
-      console.error(err);
-    })
+    this.dialog.open(CreateTimelapseModalComponent,{
+      data: this.selection
+    });
   }
 }

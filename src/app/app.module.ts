@@ -225,6 +225,7 @@ import { WaterDoseComponent } from './components/containers/AquariumContainer/pa
 import { WaterChangeTableComponent } from './components/containers/AquariumContainer/parameters/water-change-table/water-change-table.component';
 import { StandardTableComponent } from './components/shared/standard-table/standard-table.component';
 import { VisualAquariumComponent } from './components/shared/visual-aquarium/visual-aquarium.component';
+import { CreateTimelapseModalComponent } from './components/shared/modals/create-timelapse-modal/create-timelapse-modal.component';
 
 @NgModule({
   declarations: [
@@ -431,6 +432,8 @@ import { VisualAquariumComponent } from './components/shared/visual-aquarium/vis
     StandardTableComponent,
 
     VisualAquariumComponent,
+
+    CreateTimelapseModalComponent,
   ],
   entryComponents: [
     ConfirmModalComponent,
@@ -460,7 +463,8 @@ import { VisualAquariumComponent } from './components/shared/visual-aquarium/vis
     ForgotPasswordModalComponent,
     SelectAquariumModalComponent,
     PhotoApplyModalComponent,
-    CreateNotificationModalComponent
+    CreateNotificationModalComponent,
+    CreateTimelapseModalComponent
   ],
 
   imports: [
