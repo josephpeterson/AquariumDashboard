@@ -43,8 +43,7 @@ export class ApplicationLogViewComponent implements OnInit {
   }
 
   ngAfterViewChecked() {
-    if(!this._startBottom)
-    {
+    if (!this._startBottom) {
       this._startBottom = true;
       this.scrollToBottom();
     }
@@ -68,6 +67,11 @@ export class ApplicationLogViewComponent implements OnInit {
     }
     if (!appliedFilters.length)
       return;
+
+    //All filters are on
+    if (appliedFilters.map(f => f.value).length == this.filters.length) {
+      return this.log;
+    }
     var filterstr = appliedFilters.join("|");
     var reg = '^.*(\\|(' + filterstr + ').*$)';
     var regex = new RegExp(reg, 'gm');
