@@ -86,7 +86,6 @@ export class AquariumService {
     return this.http.post<AquariumSnapshot>(this._url + "/v1/Snapshot/Update", snapshot);
   }
   public createSnapshot(snapshot: AquariumSnapshot, uploadedPhoto: any): Observable<any> {
-    console.log(snapshot, uploadedPhoto);
     const url = this._url + "/v1/Snapshot/" + snapshot.aquariumId + "/Create";
     let formData = new FormData();
 
@@ -94,7 +93,6 @@ export class AquariumService {
       ...snapshot,
       snapshotImage: uploadedPhoto ? uploadedPhoto.file : null
     }
-    console.log(response);
     response.date = snapshot.date.toISOString();
     for (var key in response) formData.set(key, response[key]);
 
@@ -103,7 +101,6 @@ export class AquariumService {
       reportProgress: true,
     };
 
-    console.log(url, formData);
     return this.http.post<any>(url, formData, options);
   }
   public deleteAllSnapshots(aqId: number) {
@@ -222,7 +219,6 @@ export class AquariumService {
       //...snapshot,
       photoData: uploadedPhoto ? uploadedPhoto.file : null
     }
-    console.log(response);
     //response.date = snapshot.date.toISOString();
     for (var key in response) formData.set(key, response[key]);
 
@@ -252,7 +248,6 @@ export class AquariumService {
     return this.http.post<SearchResult[]>(this._url + `/v1/Search`, options);
   }
   public sendPasswordResetEmail(email: string): Observable<any> {
-    console.log(email);
     return this.http.post(this._url + `/v1/Auth/PasswordReset/Attempt`, {
       token: email
     });

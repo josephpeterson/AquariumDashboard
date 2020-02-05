@@ -1,41 +1,53 @@
-<h2>Timelapse Options</h2>
-<div class="row">
-  <div class="col">
-    <mat-form-field class="m-2">
-      <input [disabled]="disabled" type="number" placeholder="Width" matInput required
-        [(ngModel)]="timelapseOptions.width">
-    </mat-form-field>
-
-  </div>
-  <div class="col">
-    <mat-form-field class="m-2">
-      <input [disabled]="disabled" type="number" placeholder="Height" matInput required
-        [(ngModel)]="timelapseOptions.height">
-    </mat-form-field>
-  </div>
+<div class="container">
 
 
-</div>
-<div class="row">
-  <div class="col">
-    <mat-form-field class="m-2">
-      <input [disabled]="disabled" type="number" placeholder="Framerate" matInput required
-        [(ngModel)]="timelapseOptions.framerate">
-    </mat-form-field>
+  <h2>Timelapse Options</h2>
+  <div class="row">
+    <div class="col">
+      <mat-form-field class="m-2">
+        <input [disabled]="disabled" type="number" placeholder="Width" matInput required
+          [(ngModel)]="timelapseOptions.width">
+      </mat-form-field>
+
+    </div>
+    <div class="col">
+      <mat-form-field class="m-2">
+        <input [disabled]="disabled" type="number" placeholder="Height" matInput required
+          [(ngModel)]="timelapseOptions.height">
+      </mat-form-field>
+    </div>
+
+
   </div>
-  <div class="col">
-    <mat-form-field>
-      <mat-label>File Type</mat-label>
-      <mat-select [(value)]="timelapseOptions.fileType">
-        <mat-option>None</mat-option>
-        <mat-option value="avi">AVI</mat-option>
-        <mat-option value="gif">GIF</mat-option>
-        <mat-option value="mp4">mp4</mat-option>
-      </mat-select>
-    </mat-form-field>
+  <div class="row">
+    <div class="col">
+      <mat-form-field class="m-2">
+        <input [disabled]="disabled" type="number" placeholder="Framerate" matInput required
+          [(ngModel)]="timelapseOptions.framerate">
+      </mat-form-field>
+    </div>
+    <div class="col">
+      <mat-form-field>
+        <mat-label>File Type</mat-label>
+        <mat-select [(value)]="timelapseOptions.fileType">
+          <mat-option>None</mat-option>
+          <mat-option value="avi">AVI</mat-option>
+          <mat-option value="gif">GIF</mat-option>
+          <mat-option value="mp4">mp4</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
   </div>
-</div>
-<div class="row">
-  <button class="btn btn-success" (click)="clickSubmit()">Create
-    Timelapse</button>
+  <div class="row">
+    <h5>Preview</h5>
+
+  </div>
+  <div class="d-block justify-content-center">
+
+    <img draggable=false [src]="getPhotoPermalink(getCurrentPreview())" width="100%">
+  </div>
+  <div class="row">
+    <button class="btn btn-success" (click)="clickSubmit()">Create
+      Timelapse</button>
+  </div>
 </div>

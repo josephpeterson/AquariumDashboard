@@ -14,22 +14,23 @@ import { NotifierService } from 'angular-notifier';
 import { HttpErrorResponse } from '@angular/common/http';
 import { PhotoTimelapseOptions } from 'src/app/models/PhotoTimelapseOptions';
 import { CreateTimelapseModalComponent } from '../modals/create-timelapse-modal/create-timelapse-modal.component';
+import { PhotoSelection } from '../../providers/PhotoSelection';
 
 @Component({
   selector: 'photo-paginator',
   templateUrl: './photo-paginator.component.html',
   styleUrls: ['./photo-paginator.component.scss']
 })
-export class PhotoPaginator implements OnInit {
+export class PhotoPaginator extends PhotoSelection implements OnInit {
 
   public aquarium: Aquarium;
-  public photos: AquariumPhoto[] = [];
+  public photos: any[] = [];
   public completed: boolean = false;
   public loading: boolean;
   public pagination: PaginationSliver = new PaginationSliver();
 
-  public selection: PhotoContent[] = [];
-  public selecting: boolean = false;
+
+
 
   @Input("source") source;
 
@@ -37,7 +38,9 @@ export class PhotoPaginator implements OnInit {
     public dialog: MatDialog,
     public notifier: NotifierService,
     public store: Store<AppState>
-  ) { }
+  ) {
+    super();
+  }
   ngOnInit() {
     this.pagination.descending = true;
 
@@ -46,11 +49,13 @@ export class PhotoPaginator implements OnInit {
 
       this.loadAquariumPhotos();
     });
+
   }
+
 
   loadAquariumPhotos() {
     this.loading = true;
-    this.source.bind(this.aquariumService)(this.aquarium.id, this.pagination).subscribe((data: AquariumPhoto[]) => {
+    this.source.bind(this.aquariumService)(this.aquarium.id, this.pagination).subscribe((data: any[]) => {
       this.loading = false;
       if (data.length < this.pagination.count) {
         this.completed = true;
@@ -76,33 +81,19 @@ export class PhotoPaginator implements OnInit {
     return this.aquariumService.getPhotoPermalink(photo, "1");
   }
 
-
-  public toggleSelection(photo: PhotoContent) {
-    console.log("wat");
-    this.setSelected(photo, !this.isSelected(photo));
-  }
-  public setSelected(photo: PhotoContent, selected: boolean) {
-
-    if (!selected && this.isSelected(photo))
-      this.selection.splice(this.selection.indexOf(photo), 1);
-    else if (selected)
-      this.selection.push(photo);
-  }
-  public isSelected(photo: PhotoContent) {
-    return this.selection.indexOf(photo) != -1;
-  }
-  public toggleSelecting() {
-    this.selecting = !this.selecting;
-    if (!this.selecting)
-      this.clearSelection();
-  }
-  public clearSelection() {
-    this.selection = [];
-  }
-
   public clickCreateTimelapse() {
-    this.dialog.open(CreateTimelapseModalComponent,{
-      data: this.selection
+    var photos: PhotoContent[] = this.selection.map(p => p.photo);
+
+    
+    photos.sort(
+      (a,b) => 
+      +new Date(a.date) - +new Date(b.date)
+    );
+    console.log(photos);
+
+    this.dialog.open(CreateTimelapseModalComponent, {
+      width: "50%",
+      data: photos
     });
   }
 }

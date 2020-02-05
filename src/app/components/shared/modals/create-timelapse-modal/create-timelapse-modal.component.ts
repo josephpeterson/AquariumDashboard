@@ -18,6 +18,9 @@ export class CreateTimelapseModalComponent implements OnInit {
   public timelapsePhotos: PhotoContent[]
   public timelapseOptions: PhotoTimelapseOptions = new PhotoTimelapseOptions();
 
+  public previewId: number = 0;
+  private _tick;
+
   constructor(@Inject(MAT_DIALOG_DATA) photos,
     private _dialogRef: MatDialogRef<CreateTimelapseModalComponent>,
     private aquariumService: AquariumService,
@@ -28,9 +31,27 @@ export class CreateTimelapseModalComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.startAnimatedPreview();
+
   }
 
+  public startAnimatedPreview() {
+    clearTimeout(this._tick);
 
+    var callback = () => {
+      this.previewId++;
+      if (this.previewId >= this.timelapsePhotos.length)
+        this.previewId = 0;
+      this._tick = setTimeout(callback, 1000 / this.timelapseOptions.framerate);
+    }
+    callback();
+  }
+  public stopAnimatedPreview() {
+    clearTimeout(this._tick);
+  }
+  public getCurrentPreview() {
+    return this.timelapsePhotos[this.previewId];
+  }
   public clickSubmit() {
     var ids = this.timelapsePhotos.map(pc => pc.id);
 
@@ -45,5 +66,9 @@ export class CreateTimelapseModalComponent implements OnInit {
       this.notifier.notify("error", `Could not generate timelapse. Unknown error occured`);
       console.error(err);
     })
+  }
+
+  getPhotoPermalink(photo) {
+    return this.aquariumService.getPhotoPermalink(photo, "0.25");
   }
 }

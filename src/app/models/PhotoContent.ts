@@ -4,6 +4,6 @@ import { Fish } from './Fish';
 export class PhotoContent
 {
   id: number
-  date: Date
+  date: string
   filepath: string
 }

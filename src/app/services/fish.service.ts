@@ -62,7 +62,6 @@ export class FishService {
       //...snapshot,
       photoData: uploadedPhoto ? uploadedPhoto.file : null
     }
-    console.log(response);
     //response.date = snapshot.date.toISOString();
     for (var key in response) formData.set(key, response[key]);
 

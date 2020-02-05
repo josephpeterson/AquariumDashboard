@@ -19,6 +19,10 @@
             {{deviceInformation.aquarium ? deviceInformation.aquarium.name:"None"}}
           </div>
         </div>
+        <h4>Camera Configuration</h4>
+        <div class="row">
+          <div *ngIf="deviceInformation.aquarium" [innerHTML]="parseCameraConfiguration()"></div>
+        </div>
         <h5>Schedules on Device</h5>
         <table class="w-100">
           <th>
