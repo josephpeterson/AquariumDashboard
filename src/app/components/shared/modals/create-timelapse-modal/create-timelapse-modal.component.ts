@@ -15,6 +15,7 @@ import { NotifierService } from 'angular-notifier';
 })
 export class CreateTimelapseModalComponent implements OnInit {
 
+  public disabled: boolean = false;
   public timelapsePhotos: PhotoContent[]
   public timelapseOptions: PhotoTimelapseOptions = new PhotoTimelapseOptions();
 

@@ -35,13 +35,19 @@ export class ApplicationLogViewComponent implements OnInit {
   ]
   clearingLog: boolean;
 
+  private _startBottom: boolean = false;
+
   constructor() { }
 
   ngOnInit() {
   }
 
   ngAfterViewChecked() {
-    this.scrollToBottom();
+    if(!this._startBottom)
+    {
+      this._startBottom = true;
+      this.scrollToBottom();
+    }
   }
   ngOnChanges(changes: SimpleChanges) {
     //setTimeout(() => this.scrollToBottom(), 100);
