@@ -135,6 +135,7 @@ export class CreateAquariumComponent implements OnInit {
 
 
 const Substrate_Types = [
+  "None",
   "Sand",
   "Dirt",
   "Gravel",

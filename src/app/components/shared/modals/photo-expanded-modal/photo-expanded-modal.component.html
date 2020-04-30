@@ -10,6 +10,7 @@
       <img [src]="getPhotoPermalink()" #photo (load)="imageReady($event)">
     </ng-container>
     <div class="banner bottom">
+      <button class="m-2 mb-3 btn btn-link text-white" (click)="clickMoreInfo()">More Info</button>
       <button class="m-2 mb-3 btn btn-link text-white" (click)="clickApplyPhoto()">Set As...</button>
       <button class="m-2 mb-3 btn btn-link text-white" (click)="clickDelete()">
         <fa-icon class="pr-1" [icon]="faTrash"></fa-icon>Delete

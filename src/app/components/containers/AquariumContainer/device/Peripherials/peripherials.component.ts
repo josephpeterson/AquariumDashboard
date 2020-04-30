@@ -57,7 +57,9 @@ export class DevicePeripherialsComponent implements OnInit {
       data: this.aquarium.device
     }).afterClosed().subscribe((device: AquariumDevice) => {
       if (device)
+      {
         this.aquarium.device.cameraConfiguration = device.cameraConfiguration;
+      }
     });
   }
 }

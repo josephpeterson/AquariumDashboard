@@ -146,7 +146,7 @@ const routes: Routes = [
           }]
       },
       {
-        path: 'photos',
+        path: 'photos/:photoId',
         component: AquariumPhotosContainerComponent
       },
       {

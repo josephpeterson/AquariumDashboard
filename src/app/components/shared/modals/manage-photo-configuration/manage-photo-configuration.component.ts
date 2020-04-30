@@ -15,8 +15,8 @@ export class ManagePhotoConfigurationModal implements OnInit {
   public updating: boolean = false;
   public device: AquariumDevice;
 
-  constructor(@Inject(MAT_DIALOG_DATA) device, private _aquariumService: AquariumService, private notifier: NotifierService, private dialogRef: MatDialogRef<ManagePhotoConfigurationModal>) {
-    this.device = device;
+  constructor(@Inject(MAT_DIALOG_DATA) data, private _aquariumService: AquariumService, private notifier: NotifierService, private dialogRef: MatDialogRef<ManagePhotoConfigurationModal>) {
+    this.device = {...data};
   }
 
   ngOnInit() {

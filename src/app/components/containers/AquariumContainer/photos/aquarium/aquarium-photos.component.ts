@@ -9,6 +9,7 @@ import { take } from 'rxjs/operators';
 import { AquariumPhoto } from 'src/app/models/AquariumPhoto';
 import { PaginationSliver } from 'src/app/models/PaginationSliver';
 import { PhotoExpandedModalComponent } from 'src/app/components/shared/modals/photo-expanded-modal/photo-expanded-modal.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'aquarium-photos',
@@ -24,10 +25,15 @@ export class AquariumPhotosComponent implements OnInit {
   public pagination: PaginationSliver = new PaginationSliver();
 
   constructor(public aquariumService: AquariumService,
+    public route: ActivatedRoute,
     public dialog: MatDialog,
     public store: Store<AppState>
   ) { }
   ngOnInit() {
+
+    var photoId = this.route.snapshot.params.photoId;
+
+
     this.pagination.descending = true;
 
     this.store.select(getSelectedAquarium).pipe(take(1)).subscribe(aq => {
