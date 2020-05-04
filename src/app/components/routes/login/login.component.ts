@@ -51,6 +51,12 @@ export class LoginComponent implements OnInit {
         case 401:
           this.error = "Invalid login information";
           break;
+        case 0:
+          this.error = "Server currently unavailable. Please try again later.";
+          break;
+        case 404:
+          this.error = "Could not find page. Invalid request.";
+          break;
         default:
           console.log(err);
           this.error = err.statusText;

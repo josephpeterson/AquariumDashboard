@@ -4,7 +4,9 @@ import { AquariumService } from 'src/app/services/aquarium.service';
 import { DeviceSchedule } from 'src/app/models/DeviceSchedule';
 import { NotifierService } from 'angular-notifier';
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef, MatDialog } from '@angular/material';
+import { CreateScheduleTaskModalComponent } from '../create-schedule-task-modal/create-schedule-task-modal.component';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'create-schedule-modal',
@@ -15,6 +17,7 @@ export class CreateScheduleModalComponent implements OnInit {
 
   @Input("schedule_list") scheduleList: DeviceSchedule[];
   @Input("addingSchedule") addingSchedule;
+  public icon_create = faPlus;
 
 
 
@@ -26,6 +29,7 @@ export class CreateScheduleModalComponent implements OnInit {
 
   constructor(private _aquariumService: AquariumService,
     private _notifier: NotifierService,
+    private _dialog: MatDialog,
     private _dialogRef: MatDialogRef<CreateScheduleModalComponent>) { }
 
   ngOnInit() {
@@ -78,5 +82,14 @@ export class CreateScheduleModalComponent implements OnInit {
       this._notifier.notify("error", "Could not delete device schedule...");
       console.error(err);
     });
+  }
+
+  public clickAddTask() {
+    var dialog = this._dialog.open(CreateScheduleTaskModalComponent, {
+      data: this.schedule
+    });
+    dialog.afterClosed().subscribe((schedule: DeviceSchedule) => {
+      //Dont do anything?
+      })
   }
 }

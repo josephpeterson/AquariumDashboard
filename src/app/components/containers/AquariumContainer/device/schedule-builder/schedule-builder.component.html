@@ -1,29 +1,32 @@
-<div class="card m-2">
-
-  <div class="card-body">
-    <div class="card-title">
-      <h3>Schedule</h3>
-    </div>
-    <p class="text-muted">You may create a schedule to deploy to the pi here. You may preform automous events, timed
-      events
-      etc.</p>
+<h3 class="pt-5">Schedules</h3>
+<p class="text-muted">You may create a schedule to deploy to the pi here. You may preform automous events, timed
+  events
+  etc.</p>
 
 
-
-    <div *ngIf="schedule_list.length > 0 else noSchedules">
-      <h4>Schedules on Device</h4>
+<div class="row">
+  <div class="col-sm">
+    <h6>On Device</h6>
+    <div class="schedule-list">
       <ng-container *ngIf="device.scheduleAssignments.length > 0 else noDeployments">
         <div *ngFor="let scheduleAssignment of device.scheduleAssignments">
-          <div class="text-danger row p-2">
-            <div class="col-2">
+          <div class="schedule list-group-item">
+            <div class="row">
 
-              {{scheduleAssignment.schedule.name}}
-            </div>
-            <div class="col">
-              <button class="btn btn-danger" (click)="clickRemoveSchedule(scheduleAssignment.schedule)"
-                [disabled]="managingSchedules">
-                <fa-icon class="addIcon mr-2" [icon]="icon_delete"></fa-icon> Remove
-              </button>
+              <div class="col">
+                {{scheduleAssignment.schedule.name}}
+                <div class="time">8am - 4pm</div>
+              </div>
+              <div class="operations col">
+                <button class="float-right bg-transparent border-0"
+                  (click)="clickUpdateSchedule(scheduleAssignment.schedule)">
+                  <fa-icon size="1x" [styles]="iconStyle" [icon]="icon_edit"></fa-icon>
+                </button>
+                <button class="float-right bg-transparent border-0"
+                  (click)="clickRemoveSchedule(scheduleAssignment.schedule)" [disabled]="managingSchedules">
+                  <fa-icon size="1x" [styles]="iconStyle" [icon]="icon_delete"></fa-icon>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -31,34 +34,17 @@
       <ng-template #noDeployments>
         <p class="p-2">No schedules have been deployed onto this device.</p>
       </ng-template>
-      <mat-form-field>
-        <mat-label>Select Schedule</mat-label>
-        <mat-select [(ngModel)]="newScheduleDeployment">
-          <mat-option *ngFor="let schedule of schedule_list" [value]="schedule">
-            {{schedule.name}}
-
-
-            <fa-icon class="addIcon mr-2" [icon]="icon_edit" (click)="clickUpdateSchedule(schedule)"></fa-icon>
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <button class="btn btn-success pl-2" (click)="clickDeploySchedule()"
-        [disabled]="managingSchedules || !newScheduleDeployment">Deploy
-        Schedule</button>
-      <div class="row">
-        <button mat-list-item type="button" class="mt-2 btn btn-primary btn-sm" (click)="clickCreateSchedule()">
-          <fa-icon class="addIcon mr-2" [icon]="icon_create"></fa-icon>New Schedule...
-        </button>
-      </div>
     </div>
-
-    <ng-template #noSchedules>
-      <div class="text-center m-0 d-flex flex-column justify-content-center">
-        <p class="p-2">You have no schedules! Create a schedule to deploy it to your device.</p>
-        <div>
-          <button class="btn btn-success" (click)="clickCreateSchedule()">Create a Schedule</button>
-        </div>
-      </div>
-    </ng-template>
   </div>
+  <div class="col-sm">
+    <device-schedule-status [device]="device"></device-schedule-status>
+  </div>
+</div>
+<div class="row p-3">
+  <button mat-list-item type="button" class="mt-2 btn btn-primary btn-sm" (click)="clickAddSchedule()">
+    <fa-icon class="icon_add mr-2" [icon]="icon_create"></fa-icon>Add Schedule
+  </button>
+  <button mat-list-item type="button" class="ml-3 mt-2 btn btn-primary btn-sm" (click)="clickCreateSchedule()">
+    <fa-icon class="addIcon mr-2" [icon]="icon_create"></fa-icon>Create Schedule...
+  </button>
 </div>

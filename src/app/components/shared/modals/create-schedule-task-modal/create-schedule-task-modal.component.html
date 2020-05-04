@@ -1,0 +1,67 @@
+<div class="">
+  <h4 class="justify-content-center">Add Task</h4>
+
+  <ng-container *ngIf="!loading else loadingArea">
+
+
+    <div class="row">
+      <div class="col">
+        <mat-form-field>
+          <mat-label>Task</mat-label>
+          <mat-select [(ngModel)]="newTask.taskId">
+            <mat-option *ngFor="let task of taskTypes" [value]="task.id">
+              {{task.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+
+        <mat-form-field appearance="standard" class="pl-2">
+          <mat-label>Start Time</mat-label>
+          <input type="time" matInput placeholder="Placeholder" [(ngModel)]="startTime" value="08:00">
+          <mat-icon matSuffix></mat-icon>
+          <mat-hint>Start Time</mat-hint>
+        </mat-form-field>
+
+      </div>
+    </div>
+    <div class="row">
+      <mat-checkbox [(ngModel)]='addTaskRepeating' class="pl-2">Repeat</mat-checkbox>
+
+    </div>
+    <ng-container *ngIf="addTaskRepeating">
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="standard">
+            <mat-label>End Time</mat-label>
+            <input type="time" matInput placeholder="Placeholder" [(ngModel)]="endTime" [min]="startTime">
+            <mat-icon matSuffix></mat-icon>
+            <mat-hint>End Time</mat-hint>
+          </mat-form-field>
+          <mat-form-field appearance="standard" class="pl-2">
+            <mat-label>Interval</mat-label>
+            <input matInput placeholder="Placeholder" [(ngModel)]="newTask.interval" type="time" type="number">
+            <mat-icon matSuffix></mat-icon>
+            <mat-hint>Time between successions</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+    </ng-container>
+
+
+
+    <mat-dialog-actions align="end">
+      <button [disabled]="disableInput" class="m-2 btn btn-danger" mat-dialog-close>Cancel</button>
+      <button [disabled]="disableInput" class="m-2 btn btn-success md-float-right"
+        (click)='clickFinishTask()'>Finish</button>
+    </mat-dialog-actions>
+  </ng-container>
+  <ng-template #loadingArea>
+    <div *ngIf="loading else notLoading" class="p-5">
+      <mat-progress-spinner class="mr-auto ml-auto" color="warn" mode="indeterminate">
+      </mat-progress-spinner>
+    </div>
+
+  </ng-template>
+
+</div>

@@ -4,6 +4,6 @@ export class DeviceScheduleTask
   scheduleId: number
   startTime: Date | null
   endTime: Date | null
-  interval: number | null
+  interval: number | null = 30
   taskId: number
 }

@@ -13,8 +13,9 @@ import * as moment from 'moment';
 export class ScheduleTaskTableComponent implements OnInit {
 
   public icon_delete = faTrash;
+  public loading: boolean = false;
 
-  public taskTypes: number[] = [];
+  public taskTypes: any[] = [];
   public addTaskRepeating: boolean = false;
   addingTask: boolean = true;
   public newTask: DeviceScheduleTask = new DeviceScheduleTask();
@@ -50,9 +51,29 @@ export class ScheduleTaskTableComponent implements OnInit {
 
 
   public parseInterval(interval: number) {
-    return moment.duration(interval*1000*60).asMinutes();
+    return moment.duration(interval * 1000 * 60).asMinutes();
   }
   public parseDate(date: string) {
-    return moment(date).local().calendar(); 
+    return moment(date).local().calendar();
+  }
+
+  public dateToStrTime(date: string) {
+    var d = new Date(date);
+    var offset = d.getTimezoneOffset()/60;
+    var hours = (d.getHours() - offset).toString();
+    var minutes = d.getMinutes().toString();
+
+    if (hours.length < 2)
+      hours = "0" + hours;
+    if (minutes.length < 2)
+      minutes = "0" + minutes;
+    var str = hours + ":" + minutes;
+    return str;
+  }
+  public getTaskName(taskId: number) {
+    var task = this.taskTypes[taskId];
+    if (task)
+      return task.name;
+    return "";
   }
 }

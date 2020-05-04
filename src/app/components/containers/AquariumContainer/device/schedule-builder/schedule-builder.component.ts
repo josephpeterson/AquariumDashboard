@@ -8,6 +8,7 @@ import { DeviceScheduleAssignment } from 'src/app/models/DeviceScheduleAssignmen
 import { MatDialog } from '@angular/material';
 import { CreateScheduleModalComponent } from 'src/app/components/shared/modals/create-schedule-modal/create-schedule-modal.component';
 import { AquariumDeviceComponent } from 'src/app/components/containers/AquariumContainer/device/aquarium-device.component';
+import { SelectScheduleModalComponent } from 'src/app/components/shared/modals/select-schedule-modal/select-schedule-modal.component';
 
 @Component({
   selector: 'device-schedule-builder',
@@ -21,6 +22,7 @@ export class ScheduleBuilderComponent implements OnInit {
   public icon_delete = faTrash;
   public icon_edit = faPenFancy;
   public icon_create = faPlus;
+  public iconStyle = { 'stroke': '#9ed2da', 'color': '#9ed2da' };
 
 
   public schedule_list: DeviceSchedule[] = [];
@@ -98,6 +100,37 @@ export class ScheduleBuilderComponent implements OnInit {
     dialog.afterClosed().subscribe(d => {
       this.loadScheduleList();
       this.reloadDeviceSchedules();
+    });
+  }
+
+  public clickAddSchedule() {
+    var dialog = this._dialog.open(SelectScheduleModalComponent, {
+      data: this.device
+    });
+    dialog.afterClosed().subscribe((schedule: DeviceSchedule) => {
+      console.log(schedule);
+      if (!schedule)
+        return; //cancel button
+
+
+        this._notifier.notify("warning", `Deploying '${schedule.name}' schedule...`);
+      this._aquariumService.deploySchedule(this.device.id, schedule.id).subscribe((data: DeviceScheduleAssignment[]) => {
+        this._notifier.notify("success", `Schedule '${schedule.name}' deployed to device!`);
+        console.log(data);
+        this.device.scheduleAssignments = data;
+        //this.managingSchedules = false;
+        //this.loadScheduleList();
+        //this.reloadDeviceSchedules();
+
+      }, err => {
+        this._notifier.notify("error", "Could not deploy schedule to device");
+        console.error(err);
+        //this.managingSchedules = false;
+
+      })
+
+
+      
     });
   }
 

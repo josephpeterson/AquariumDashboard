@@ -226,6 +226,8 @@ import { WaterChangeTableComponent } from './components/containers/AquariumConta
 import { StandardTableComponent } from './components/shared/standard-table/standard-table.component';
 import { VisualAquariumComponent } from './components/shared/visual-aquarium/visual-aquarium.component';
 import { CreateTimelapseModalComponent } from './components/shared/modals/create-timelapse-modal/create-timelapse-modal.component';
+import { SelectScheduleModalComponent } from './components/shared/modals/select-schedule-modal/select-schedule-modal.component';
+import { CreateScheduleTaskModalComponent } from './components/shared/modals/create-schedule-task-modal/create-schedule-task-modal.component';
 
 @NgModule({
   declarations: [
@@ -418,6 +420,8 @@ import { CreateTimelapseModalComponent } from './components/shared/modals/create
     CreateScheduleModalComponent,
     ScheduleTaskTableComponent,
     CreateNotificationModalComponent,
+    SelectScheduleModalComponent,
+    CreateScheduleTaskModalComponent,
 
     ApplicationLogViewComponent,
 
@@ -464,7 +468,9 @@ import { CreateTimelapseModalComponent } from './components/shared/modals/create
     SelectAquariumModalComponent,
     PhotoApplyModalComponent,
     CreateNotificationModalComponent,
-    CreateTimelapseModalComponent
+    CreateTimelapseModalComponent,
+    SelectScheduleModalComponent,
+    CreateScheduleTaskModalComponent
   ],
 
   imports: [

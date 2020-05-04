@@ -8,6 +8,12 @@
 
   <h6 class="justify-content-center">Tasks</h6>
   <schedule-task-table [(schedule)]="schedule"></schedule-task-table>  
+
+
+  <button mat-list-item type="button" class="mt-2 btn btn-primary btn-sm" (click)="clickAddTask()">
+    <fa-icon class="addIcon mr-2" [icon]="icon_create"></fa-icon>New Task...
+  </button>
+
   <mat-dialog-actions align="end">
     <button  [disabled]="disableInput" class="m-2 btn btn-danger" mat-dialog-close>Cancel</button>
     <button  *ngIf="schedule.id" [disabled]="disableInput" class="m-2 btn btn-danger md-float-right" (click)='clickDeleteSchedule()'>Delete Schedule</button>
