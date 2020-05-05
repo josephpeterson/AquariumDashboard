@@ -62,7 +62,11 @@ export class CreateScheduleTaskModalComponent implements OnInit {
   }
 
   private strToDate(str:string) {
-    var a = moment("1/1/2000 " + str).format('MMMM Do YYYY, h:mm a');
-    return a;
+    var d = new Date();
+    var hours = parseInt(str.split(":")[0]);
+    var minutes = parseInt(str.split(":")[1]);
+    d.setHours(hours);
+    d.setMinutes(minutes);
+    return d;
   }
 }
