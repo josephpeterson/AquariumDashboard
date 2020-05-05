@@ -64,7 +64,7 @@ export class DeviceDetailViewComponent implements OnInit {
 
     public getSnapshotAge(): string {
         if(this.latestSnapshot)
-            return moment(this.latestSnapshot.date).local().calendar();
+            return moment.utc(this.latestSnapshot.date).local().calendar();
     }
 
     public clickAddSnapshot() {
