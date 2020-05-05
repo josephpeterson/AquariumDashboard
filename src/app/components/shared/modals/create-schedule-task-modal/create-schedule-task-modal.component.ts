@@ -5,6 +5,7 @@ import { DeviceSchedule } from 'src/app/models/DeviceSchedule';
 import { NotifierService } from 'angular-notifier';
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import * as moment from 'moment';
 
 @Component({
   selector: 'create-schedule-modal',
@@ -60,12 +61,8 @@ export class CreateScheduleTaskModalComponent implements OnInit {
     this._self.close(this.newTask);
   }
 
-  private strToDate(str:string):Date {
-    var d = new Date();
-    var hours = parseInt(str.split(":")[0]);
-    var minutes = parseInt(str.split(":")[1]);
-    d.setHours(hours);
-    d.setMinutes(minutes);
-    return d;
+  private strToDate(str:string) {
+    var a = moment("1/1/2000 " + str).format('MMMM Do YYYY, h:mm a');
+    return a;
   }
 }

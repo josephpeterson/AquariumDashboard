@@ -15,7 +15,9 @@ export class ScheduleTaskTableComponent implements OnInit {
   public icon_delete = faTrash;
   public loading: boolean = false;
 
-  public taskTypes: any[] = [];
+  public taskTypes: any[] = []; 
+  public startTimes: any[] = []; 
+  public endTimes: any[] = []; 
   public addTaskRepeating: boolean = false;
   addingTask: boolean = true;
   public newTask: DeviceScheduleTask = new DeviceScheduleTask();
@@ -30,6 +32,11 @@ export class ScheduleTaskTableComponent implements OnInit {
     this._aquariumService.getDeviceScheduleTaskTypes().subscribe((data: any) => {
       this.taskTypes = data;
     })
+
+    this.schedule.tasks.forEach((t,i) => {
+      this.startTimes[i] = this.dateToStrTime(t.startTime);
+      this.endTimes[i] = this.dateToStrTime(t.endTime);
+    });
   }
 
 
@@ -57,11 +64,19 @@ export class ScheduleTaskTableComponent implements OnInit {
     return moment(date).local().calendar();
   }
 
-  public dateToStrTime(date: string) {
-    var d = new Date(date);
-    var offset = d.getTimezoneOffset()/60;
-    var hours = (d.getHours() - offset).toString();
-    var minutes = d.getMinutes().toString();
+  
+  public getTaskName(taskId: number) {
+    var task = this.taskTypes[taskId];
+    if (task)
+      return task.name;
+    return "";
+  }
+  /* Time utilities */
+  public dateToStrTime(date) {
+    var d = moment.utc(date).local();
+
+    var hours = d.hour().toString();
+    var minutes = d.minute().toString();
 
     if (hours.length < 2)
       hours = "0" + hours;
@@ -70,10 +85,15 @@ export class ScheduleTaskTableComponent implements OnInit {
     var str = hours + ":" + minutes;
     return str;
   }
-  public getTaskName(taskId: number) {
-    var task = this.taskTypes[taskId];
-    if (task)
-      return task.name;
-    return "";
+  private strToDate(str:string) {
+    var a = moment("1/1/2000 " + str).format('MMMM Do YYYY, h:mm a');
+    return a;
+  }
+  //Bind to time stuff...
+  public updateTasks() {
+    this.schedule.tasks.forEach((t,i) => {
+      t.startTime = this.strToDate(this.startTimes[i]);
+      t.endTime = this.strToDate(this.endTimes[i]);
+    });
   }
 }
