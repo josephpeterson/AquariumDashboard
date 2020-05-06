@@ -30,6 +30,7 @@ export class SnapshotCarouselComponent implements OnInit {
   @ViewChild("scroller") scroller;
 
   selectedId: number = 0;
+  loadCount: number = 500;
 
   public aquarium: Aquarium;
   public componentLifeCycle = new Subject();
@@ -51,7 +52,7 @@ export class SnapshotCarouselComponent implements OnInit {
      this.photoSnapshots = data.sort((a, b) => b.id - a.id);
     });
     this.aquarium$.pipe(take(1)).subscribe(aq => {
-      this.store.dispatch(new SnapshotLoadByAquariumAction(aq.id,0,10));
+      this.store.dispatch(new SnapshotLoadByAquariumAction(aq.id,0,this.loadCount));
       this.aquarium = aq;
     });
 
@@ -81,7 +82,9 @@ export class SnapshotCarouselComponent implements OnInit {
     if (id < 0)
       id = this.photoSnapshots.length - 1;
     else if (id >= this.photoSnapshots.length)
+    {
       id = 0;
+    }
     this.selectedId = id;
   }
   propagate(num: number) {
