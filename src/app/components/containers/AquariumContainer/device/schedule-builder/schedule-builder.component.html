@@ -15,7 +15,8 @@
 
               <div class="col">
                 {{scheduleAssignment.schedule.name}}
-                <div class="time">8am - 4pm</div>
+                <div class="time">
+                  {{getEarliestTask(scheduleAssignment.schedule)}} - {{getLatestTask(scheduleAssignment.schedule)}}</div>
               </div>
               <div class="operations col">
                 <button class="float-right bg-transparent border-0"

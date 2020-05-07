@@ -44,10 +44,17 @@ import { AquariumDeviceComponent } from './components/containers/AquariumContain
 import { ParametersSnapshotListComponent } from './components/containers/AquariumContainer/parameters/snapshots/parameters-snapshot-list.component';
 import { ParametersWaterTestsListComponent } from './components/containers/AquariumContainer/parameters/water-tests/parameters-water-tests-list.component';
 import { SettingsNotificationsComponent } from './components/containers/SettingsContainer/admin/notifications/settings-notifications.component';
+import { AquariumsContainer } from './components/containers/AquariumsContainer/aquariums-container.component';
 
 const routes: Routes = [
   //{ path: '', component: AquariumSelectionComponent, pathMatch: 'full' },
 
+  //Aquariums
+  {
+    path: 'aquariums',
+    canActivate: [AuthGuard],
+    component: AquariumsContainer
+  },
   //Species
   {
     path: 'species',
@@ -146,7 +153,7 @@ const routes: Routes = [
           }]
       },
       {
-        path: 'photos/:photoId',
+        path: 'photos',
         component: AquariumPhotosContainerComponent
       },
       {

@@ -373,4 +373,10 @@ export class AquariumService {
       options: options
     });
   }
+
+
+  /* New navigation menu */
+  public getAquariumsOverview() {
+    return this.http.get<Aquarium[]>(this._url + `/v1/Aquariums/All`);
+  }
 }

@@ -30,7 +30,9 @@ export class AquariumContainer {
     private title: Title) { }
 
   ngOnInit() {
-    //this.load(this.route.snapshot.params.aqId);
+    this.route.params.pipe(takeUntil(this.componentLifeCycle)).subscribe(p => {
+      this.load(p.aqId);
+    })
 
     this.aquarium$.pipe(takeUntil(this.componentLifeCycle)).subscribe(aq => {
       if(aq) this.title.setTitle(aq.name);

@@ -179,7 +179,7 @@ import { PostAuthorBadgeComponent } from './components/containers/DiscussionCont
 import { ThreadBannerComponent } from './components/containers/DiscussionContainer/thread-page/thread-banner/thread-banner.component';
 import { PasswordResetComponent } from './components/routes/passwordreset/password-reset.component';
 import { ForgotPasswordModalComponent } from './components/shared/modals/forgot-password-modal/forgot-password-modal.component';
-import { AquariumNavBarComponent } from './components/containers/AquariumContainer/aquarium-nav-bar/aquarium-nav-bar.component';
+import { AquariumNavBarComponent } from './components/shared/aquarium-nav-bar/aquarium-nav-bar.component';
 import { AppComponent } from './components/app-root/app.component';
 import { NavMenuComponent } from './components/shared/nav-menu/nav-menu.component';
 import { CreateSpeciesModalComponent } from './components/shared/modals/create-species-modal/create-species-modal.component';
@@ -228,6 +228,9 @@ import { VisualAquariumComponent } from './components/shared/visual-aquarium/vis
 import { CreateTimelapseModalComponent } from './components/shared/modals/create-timelapse-modal/create-timelapse-modal.component';
 import { SelectScheduleModalComponent } from './components/shared/modals/select-schedule-modal/select-schedule-modal.component';
 import { CreateScheduleTaskModalComponent } from './components/shared/modals/create-schedule-task-modal/create-schedule-task-modal.component';
+import { SideBarComponent } from './components/shared/side-bar/side-bar.component';
+import { AquariumsContainer } from './components/containers/AquariumsContainer/aquariums-container.component';
+import { CalendarContainerComponent } from './components/containers/calendar-container/calendar-container.component';
 
 @NgModule({
   declarations: [
@@ -238,6 +241,11 @@ import { CreateScheduleTaskModalComponent } from './components/shared/modals/cre
     MasterDashboardComponent,
     SettingsComponent,
     TaskTableComponent,
+
+
+    /* New navigation */
+    AquariumsContainer,
+
 
     HomeComponent,
     LoginComponent,
@@ -367,6 +375,7 @@ import { CreateScheduleTaskModalComponent } from './components/shared/modals/cre
 
     DiscussionNavBarComponent,
     AquariumNavBarComponent,
+    SideBarComponent,
     DiscussionItemComponent,
 
     PostEditorComponent,
@@ -438,6 +447,8 @@ import { CreateScheduleTaskModalComponent } from './components/shared/modals/cre
     VisualAquariumComponent,
 
     CreateTimelapseModalComponent,
+
+    CalendarContainerComponent,
   ],
   entryComponents: [
     ConfirmModalComponent,

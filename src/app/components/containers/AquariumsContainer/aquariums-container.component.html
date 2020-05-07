@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="row">
+        <ng-container *ngFor="let aquarium of aquariums$ | async">
+            <div class="card w-100 m-3">
+                <div class="card-body">
+                    <div class="card-subtitle mb-2 text-muted float-right">
+                        <h6>Age - 245 days</h6>
+                        <h6>{{aquarium.gallons}} Gallons</h6>
+                    </div>
+                    <h3 class="card-title">{{aquarium.name}}</h3>
+                    <hr>
+                    <h5>Device</h5>
+                    <div class="mt-2"></div>
+                    <h5>Fish</h5>
+                    <div class="mt-2"></div>
+                    <h5>Photos</h5>
+                    <div class="mt-2"></div>
+                    <a href="#" class="card-link">View More</a>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>

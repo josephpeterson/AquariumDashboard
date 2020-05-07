@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material';
 import { CreateScheduleModalComponent } from 'src/app/components/shared/modals/create-schedule-modal/create-schedule-modal.component';
 import { AquariumDeviceComponent } from 'src/app/components/containers/AquariumContainer/device/aquarium-device.component';
 import { SelectScheduleModalComponent } from 'src/app/components/shared/modals/select-schedule-modal/select-schedule-modal.component';
+import * as moment from 'moment';
 
 @Component({
   selector: 'device-schedule-builder',
@@ -113,7 +114,7 @@ export class ScheduleBuilderComponent implements OnInit {
         return; //cancel button
 
 
-        this._notifier.notify("warning", `Deploying '${schedule.name}' schedule...`);
+      this._notifier.notify("warning", `Deploying '${schedule.name}' schedule...`);
       this._aquariumService.deploySchedule(this.device.id, schedule.id).subscribe((data: DeviceScheduleAssignment[]) => {
         this._notifier.notify("success", `Schedule '${schedule.name}' deployed to device!`);
         console.log(data);
@@ -130,8 +131,28 @@ export class ScheduleBuilderComponent implements OnInit {
       })
 
 
-      
+
     });
   }
 
+  public getEarliestTask(schedule:DeviceSchedule) {
+    var task = schedule.tasks.sort((a, b) => {
+      var timeA = new Date(a.startTime);
+      var timeB = new Date(b.startTime);
+      return (timeA > timeB) ? 1 : -1;
+    })[0];
+    if (task) {
+      return moment.utc(task.startTime).local().format('HH:mm');
+    }
+  }
+  public getLatestTask(schedule:DeviceSchedule) {
+    var task = schedule.tasks.sort((a, b) => {
+      var timeA = new Date(a.endTime);
+      var timeB = new Date(b.endTime);
+      return (timeA < timeB) ? 1 : -1;
+    })[0];
+    if (task) {
+      return moment.utc(task.endTime).local().format('hh:mm A');
+    }
+  }
 }

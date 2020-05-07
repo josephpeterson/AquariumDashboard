@@ -5,6 +5,7 @@ import { AppState } from 'src/app/app.state';
 import { Store } from '@ngrx/store';
 import {Location} from '@angular/common';
 import { Species } from 'src/app/models/Species';
+import { AquariumUnSelectionAction } from 'src/app/store/aquarium/aquarium.actions';
 
 
 @Component({
@@ -24,6 +25,7 @@ export class SpeciesContainer implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.store.dispatch(new AquariumUnSelectionAction());
     this.route.params.subscribe(p => {
       if(p.speciesId)
       {

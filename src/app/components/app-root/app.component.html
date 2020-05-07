@@ -1,2 +1,11 @@
-<router-outlet></router-outlet>
+<mat-sidenav-container class="example-container">
+    <mat-sidenav #sidenav mode="side" [(opened)]="sidebarOpened" [fixedInViewport]="1" [fixedTopGap]="60" [fixedBottomGap]="0">
+        <side-bar></side-bar>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <nav-menu [sidenav]="sidenav"></nav-menu>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>
 <notifier-container></notifier-container>

@@ -1,16 +1,6 @@
-<nav-menu [sidenav]="sidenav"></nav-menu>
-<mat-sidenav-container class="example-container">
-    <mat-sidenav #sidenav mode="side" [(opened)]="opened" [fixedInViewport]="1" [fixedTopGap]="60"
-    [fixedBottomGap]="0">
-        <aquarium-nav-bar></aquarium-nav-bar>
-    </mat-sidenav>
-
-    <mat-sidenav-content>
-        <div class="container">
-            <router-outlet *ngIf="aquarium$ | async else loading"></router-outlet>
-        </div>
-        <ng-template #loading>
-            <loading-container></loading-container>
-        </ng-template>
-    </mat-sidenav-content>
-</mat-sidenav-container>
+<div class="container">
+    <router-outlet *ngIf="aquarium$ | async else loading"></router-outlet>
+</div>
+<ng-template #loading>
+    <loading-container></loading-container>
+</ng-template>
