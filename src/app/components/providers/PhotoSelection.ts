@@ -1,20 +1,3 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Aquarium } from 'src/app/models/Aquarium';
-import { AquariumService } from 'src/app/services/aquarium.service';
-import { MatDialog } from '@angular/material';
-import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/app.state';
-import { getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
-import { take } from 'rxjs/operators';
-import { AquariumPhoto } from 'src/app/models/AquariumPhoto';
-import { PaginationSliver } from 'src/app/models/PaginationSliver';
-import { PhotoExpandedModalComponent } from 'src/app/components/shared/modals/photo-expanded-modal/photo-expanded-modal.component';
-import { PhotoContent } from 'src/app/models/PhotoContent';
-import { NotifierService } from 'angular-notifier';
-import { HttpErrorResponse } from '@angular/common/http';
-import { PhotoTimelapseOptions } from 'src/app/models/PhotoTimelapseOptions';
-import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
-import { FishPhoto } from 'src/app/models/FishPhoto';
 
 export class PhotoSelection  {
 

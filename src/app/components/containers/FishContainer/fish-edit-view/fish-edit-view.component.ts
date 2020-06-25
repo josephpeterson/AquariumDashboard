@@ -1,26 +1,18 @@
-import * as moment from 'moment';
 import { Component, OnInit, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
-import { getAllSpecies, isUpdatingSpecies, getSpeciesUpdateError, isCreatingSpecies, isDeletingSpecies, getSpeciesDeleteError } from 'src/app/store/species/species.selector';
-import { Subject, Observer, Observable } from 'rxjs';
+import { getAllSpecies, isDeletingSpecies, getSpeciesDeleteError } from 'src/app/store/species/species.selector';
+import { Subject, Observable } from 'rxjs';
 import { takeUntil, take } from 'rxjs/operators';
 import { Species } from 'src/app/models/Species';
-import { SpeciesLoadAction, SpeciesUpdateAction, SpeciesAddAction, SpeciesDeleteAction } from 'src/app/store/species/species.actions';
-import { faPenFancy, faPen, faTrash, faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { NotifierService } from 'angular-notifier';
 import { MatDialog } from '@angular/material';
-import { ScraperModalComponent } from '../../../shared/modals/scraper-modal/scraper-modal.component';
-import { Router } from '@angular/router';
-import { ConfirmModalComponent } from '../../../shared/modals/confirm-modal/confirm-modal.component';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { Fish } from 'src/app/models/Fish';
-import { AquariumService } from 'src/app/services/aquarium.service';
-import { AquariumLoadSuccessAction } from 'src/app/store/aquarium/aquarium.actions';
-import { FishPhotoModal } from 'src/app/components/shared/modals/fish-photo-modal/fish-photo-modal.component';
-import { FishPhoto } from 'src/app/models/FishPhoto';
 import { FishUpdateAction, FishDeleteAction } from 'src/app/store/fish/fish.actions';
 import { getSelectedFish, isUpdatingFish, isCreatingFish, getFishUpdateError } from 'src/app/store/fish/fish.selector';
+import { ConfirmModalComponent } from 'src/app/modules/SharedModule/modals/confirm-modal/confirm-modal.component';
 
 
 
@@ -56,8 +48,7 @@ export class FishEditViewComponent implements OnInit {
     faTrash = faTrash;
 
 
-    constructor(private store: Store<AppState>, private notifier: NotifierService, private dialog: MatDialog, private router: Router,
-        private _aquariumService: AquariumService) {
+    constructor(private store: Store<AppState>, private notifier: NotifierService, private dialog: MatDialog) {
 
     }
     ngOnInit() {

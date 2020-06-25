@@ -8,7 +8,7 @@ import { getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
 import { take } from 'rxjs/operators';
 import { AquariumPhoto } from 'src/app/models/AquariumPhoto';
 import { PaginationSliver } from 'src/app/models/PaginationSliver';
-import { PhotoExpandedModalComponent } from 'src/app/components/shared/modals/photo-expanded-modal/photo-expanded-modal.component';
+import { PhotoExpandedModalComponent } from 'src/app/modules/SharedModule/modals/photo-expanded-modal/photo-expanded-modal.component';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

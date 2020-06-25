@@ -3,7 +3,7 @@ import { WaterChange } from 'src/app/models/WaterChange';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { NotifierService } from 'angular-notifier';
 import { Aquarium } from 'src/app/models/Aquarium';
-import { VisualAquariumComponentOptions } from 'src/app/components/shared/visual-aquarium/visual-aquarium.component';
+import { VisualAquariumComponentOptions } from 'src/app/modules/SharedModule/visual-aquarium/visual-aquarium.component';
 
 @Component({
   selector: 'water-change',

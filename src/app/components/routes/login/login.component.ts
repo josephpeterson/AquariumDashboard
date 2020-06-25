@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialogRef, MatDialog } from '@angular/material';
-import { LoginModalComponent } from '../../shared/modals/login-modal/login-modal.component';
+import { MatDialog } from '@angular/material';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
 import { HttpErrorResponse } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
-import { ForgotPasswordModalComponent } from '../../shared/modals/forgot-password-modal/forgot-password-modal.component';
+import { ForgotPasswordModalComponent } from 'src/app/modules/SharedModule/modals/forgot-password-modal/forgot-password-modal.component';
 
 
 
@@ -34,7 +32,7 @@ export class LoginComponent implements OnInit {
 
   clickLogin() {
     this.disabled = true;
-    this.auth.login(this.email, this.password).subscribe(val => {
+    this.auth.login(this.email, this.password).subscribe(() => {
 
       //todo make this more scaleable
       var previousRoute = localStorage["unauthorizedRoute"];

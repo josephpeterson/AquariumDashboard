@@ -2,30 +2,28 @@ import * as moment from 'moment';
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
-import { getAllSpecies, isUpdatingSpecies, getSpeciesUpdateError, isCreatingSpecies, isDeletingSpecies, getSpeciesDeleteError } from 'src/app/store/species/species.selector';
-import { Subject, Observer, Observable } from 'rxjs';
-import { takeUntil, take } from 'rxjs/operators';
+import { getAllSpecies, isDeletingSpecies, getSpeciesDeleteError } from 'src/app/store/species/species.selector';
+import { Subject, Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { Species } from 'src/app/models/Species';
-import { SpeciesLoadAction, SpeciesUpdateAction, SpeciesAddAction, SpeciesDeleteAction } from 'src/app/store/species/species.actions';
-import { faPenFancy, faPen, faTrash, faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { SpeciesLoadAction, SpeciesAddAction } from 'src/app/store/species/species.actions';
+import { faTrash, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { NotifierService } from 'angular-notifier';
 import { MatDialog } from '@angular/material';
-import { ScraperModalComponent } from '../../../shared/modals/scraper-modal/scraper-modal.component';
 import { Router } from '@angular/router';
-import { ConfirmModalComponent } from '../../../shared/modals/confirm-modal/confirm-modal.component';
+import { ConfirmModalComponent } from 'src/app/modules/SharedModule/modals/confirm-modal/confirm-modal.component';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { Fish } from 'src/app/models/Fish';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { AquariumLoadSuccessAction } from 'src/app/store/aquarium/aquarium.actions';
-import { FishPhotoModal } from 'src/app/components/shared/modals/fish-photo-modal/fish-photo-modal.component';
 import { FishPhoto } from 'src/app/models/FishPhoto';
-import { PhotoExpandedModalComponent } from 'src/app/components/shared/modals/photo-expanded-modal/photo-expanded-modal.component';
+import { PhotoExpandedModalComponent } from 'src/app/modules/SharedModule/modals/photo-expanded-modal/photo-expanded-modal.component';
 import { FishUpdateAction, FishLoadByIdAction } from 'src/app/store/fish/fish.actions';
 import { getSelectedFish, isUpdatingFish, isCreatingFish, getFishUpdateError } from 'src/app/store/fish/fish.selector';
-import { FishBreedModalComponent } from 'src/app/components/shared/modals/fish-breed-modal/fish-breed-modal.component';
-import { FishTransferModalComponent } from 'src/app/components/shared/modals/fish-transfer-modal/fish-transfer-modal.component';
-import { FishDiseaseModalComponent } from 'src/app/components/shared/modals/fish-disease-modal/fish-disease-modal.component';
-import { AttachmentUploaderComponent } from 'src/app/components/shared/attachment-uploader/attachment-uploader.component';
+import { FishBreedModalComponent } from 'src/app/modules/SharedModule/modals/fish-breed-modal/fish-breed-modal.component';
+import { FishTransferModalComponent } from 'src/app/modules/SharedModule/modals/fish-transfer-modal/fish-transfer-modal.component';
+import { FishDiseaseModalComponent } from 'src/app/modules/SharedModule/modals/fish-disease-modal/fish-disease-modal.component';
+import { AttachmentUploaderComponent } from 'src/app/modules/SharedModule/attachment-uploader/attachment-uploader.component';
 
 
 
@@ -65,8 +63,7 @@ export class FishDetailViewComponent implements OnInit {
     uploadingPhoto: boolean;
 
 
-    constructor(private store: Store<AppState>, private notifier: NotifierService, private dialog: MatDialog, private router: Router,
-        private _aquariumService: AquariumService) {
+    constructor(private store: Store<AppState>, private notifier: NotifierService, private dialog: MatDialog, private _aquariumService: AquariumService) {
 
     }
     ngOnInit() {
@@ -139,7 +136,7 @@ export class FishDetailViewComponent implements OnInit {
                     this.fish = fish;
                     this.store.dispatch(new AquariumLoadSuccessAction([this.aquarium]));
                     this.disabled = false;
-                }, err => {
+                }, () => {
                     this.notifier.notify("error", "Could not delete fish");
                     this.disabled = false;
                 });
@@ -147,16 +144,10 @@ export class FishDetailViewComponent implements OnInit {
         });
     }
     clickBreed() {
-        var dialog = this.dialog.open(FishBreedModalComponent, {
-        });
     }
     clickDiagnose() {
-        var dialog = this.dialog.open(FishDiseaseModalComponent, {
-        });
     }
     clickTransfer() {
-        var dialog = this.dialog.open(FishTransferModalComponent, {
-        });
     }
     getFishAge(fish: Fish) {
         return moment().diff(fish.date, "days");
@@ -169,21 +160,17 @@ export class FishDetailViewComponent implements OnInit {
         return moment(photo.photo.date).local().calendar();
     }
     public clickFishPhoto(fishPhoto: FishPhoto) {
-        var dialog = this.dialog.open(PhotoExpandedModalComponent, {
-            panelClass: "expanded-photo-dialog",
-            data: fishPhoto.photo
-        });
     }
     public clickUploadFishPhoto(fishId: number) {
         var attachment = this.attachmentComponent.getAttachment();
         if (!attachment)
             return false;
         this.uploadingPhoto = true;
-        this._aquariumService.uploadFishPhoto(fishId, attachment).subscribe(val => {
+        this._aquariumService.uploadFishPhoto(fishId, attachment).subscribe(() => {
             this.uploadingPhoto = false;
             this.store.dispatch(new FishLoadByIdAction(fishId));
             this.attachmentComponent.clearAttachment();
-        }, (err) => {
+        }, () => {
             this.uploadingPhoto = false;
             this.notifier.notify("error", "Could not upload fish photo.");
         });

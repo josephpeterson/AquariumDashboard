@@ -10,9 +10,9 @@ import { getSelectedAquarium, isLoadingAquariums } from 'src/app/store/aquarium/
 import { AppState } from 'src/app/app.state';
 import { take, takeUntil } from 'rxjs/operators';
 import { AquariumService } from 'src/app/services/aquarium.service';
-import { ManageSnapshotModal } from 'src/app/components/shared/modals/manage-snapshot-modal/manage-snapshot-modal.component';
+import { ManageSnapshotModal } from 'src/app/modules/SharedModule/modals/manage-snapshot-modal/manage-snapshot-modal.component';
 import * as moment from 'moment';
-import { FishCreateButtonComponent } from 'src/app/components/data/fish/create-button/fish-create-button.component';
+import { FishCreateButtonComponent } from 'src/app/modules/SharedModule/data/fish/create-button/fish-create-button.component';
 
 @Component({
   selector: 'dashboard-page-component',

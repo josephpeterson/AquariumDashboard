@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material';
-import { LoginModalComponent } from '../../shared/modals/login-modal/login-modal.component';
 import { AuthService } from 'src/app/services/auth.service';
-import { Router, Route, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
-import { HttpErrorResponse } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
 import { AquariumAccount } from 'src/app/models/AquariumAccount';
 
 
@@ -47,7 +43,7 @@ export class PasswordResetComponent implements OnInit {
   submitRequest() {
     this.disabled = true;
     this.auth.submitPasswordResetRequest(this.requestToken,this.password).subscribe((res:AquariumAccount) => {
-      this.auth.login(res.username,this.password).subscribe(res => {
+      this.auth.login(res.username,this.password).subscribe(() => {
         this.router.navigateByUrl("/");
       },err => {
         console.error(err);

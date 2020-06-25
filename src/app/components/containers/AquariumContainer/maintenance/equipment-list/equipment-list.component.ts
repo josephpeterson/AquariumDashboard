@@ -6,8 +6,8 @@ import { getAllSnapshots, isLoadingSnapshots, isDeletingSnapshot, isTakingSnapsh
 import { AppState } from 'src/app/app.state';
 import { SnapshotResetAction, SnapshotLoadByAquariumAction, SnapshotDeleteAction } from 'src/app/store/snapshot/snapshot.actions';
 import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
-import { SnapshotTableListComponent } from 'src/app/components/data/snapshot/table-list/snapshot-table-list.component';
-import { ManageSnapshotModal } from 'src/app/components/shared/modals/manage-snapshot-modal/manage-snapshot-modal.component';
+import { SnapshotTableListComponent } from 'src/app/modules/SharedModule/data/snapshot/table-list/snapshot-table-list.component';
+import { ManageSnapshotModal } from 'src/app/modules/SharedModule/modals/manage-snapshot-modal/manage-snapshot-modal.component';
 import { MatDialog } from '@angular/material';
 
 @Component({

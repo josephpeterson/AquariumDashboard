@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { ErrorMessageModalComponent } from '../../shared/modals/error-message-modal/error-message-modal.component';
-import { ConnectionError } from 'src/app/models/ConnectionError';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { CreateAquariumModelComponent } from '../../shared/modals/create-aquarium-modal/create-aquarium-modal.component';
 import { take } from 'rxjs/operators';
 import { Species } from 'src/app/models/Species';
 import { Router } from '@angular/router';
@@ -12,8 +9,9 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { getAllAquariums, isLoadingAquariums, getConnectionError } from 'src/app/store/aquarium/aquarium.selector';
 import { Aquarium } from 'src/app/models/Aquarium';
-import { LoginModalComponent } from '../../shared/modals/login-modal/login-modal.component';
 import { AuthService } from 'src/app/services/auth.service';
+import { CreateAquariumModelComponent } from 'src/app/modules/SharedModule/modals/create-aquarium-modal/create-aquarium-modal.component';
+import { LoginModalComponent } from 'src/app/modules/SharedModule/modals/login-modal/login-modal.component';
 
 @Component({
   selector: 'master-dashboard-component',

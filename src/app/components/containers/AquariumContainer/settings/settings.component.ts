@@ -3,7 +3,6 @@ import { MatDialog } from '@angular/material';
 import { FormControl } from '@angular/forms';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { SettingsComponentData } from './settings.component.data';
-import { ConfirmModalComponent } from '../../../shared/modals/confirm-modal/confirm-modal.component';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { CameraConfiguration, CameraExposureModes } from 'src/app/models/CameraConfiguration';
@@ -11,8 +10,9 @@ import { Observable, Subject } from 'rxjs';
 import { NotifierService } from 'angular-notifier';
 import { take, takeUntil } from 'rxjs/operators';
 import { Species } from 'src/app/models/Species';
-import { CreateSpeciesModalComponent } from '../../../shared/modals/create-species-modal/create-species-modal.component';
 import { AquariumService } from 'src/app/services/aquarium.service';
+import { ConfirmModalComponent } from 'src/app/modules/SharedModule/modals/confirm-modal/confirm-modal.component';
+import { CreateSpeciesModalComponent } from 'src/app/modules/SharedModule/modals/create-species-modal/create-species-modal.component';
 
 
 @Component({
