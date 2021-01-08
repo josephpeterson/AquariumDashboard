@@ -86,7 +86,6 @@ import { PhotoCardComponent } from './data/photo/photo-card/photo-card.component
 import { EquipmentTableComponent } from './equipment-table/equipment-table.component';
 import { TaskListComponent } from './task-list/task-list.component';
 import { TaskTableComponent } from './task-table/task-table.component';
-import { SpeciesSelectComponent } from './data/species/select/species-select.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { FishService } from 'src/app/services/fish.service';
@@ -95,6 +94,7 @@ import { AdminService } from 'src/app/services/admin.service';
 import { AuthGuard } from 'src/app/guards/AuthGuard';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AquariumInterceptor } from 'src/app/services/aquarium.interceptor';
+import { SpeciesSelectComponent } from './species-select/species-select.component';
 import { FishPhotosComponent } from 'src/app/components/containers/AquariumContainer/photos/fish/fish-photos.component';
 
 
@@ -194,6 +194,7 @@ var modals = [
     SpeciesTableComponent,
     SpeciesDetailFormComponent,
     FishInformationComponent,
+    FishPhotosComponent,
     FishSelectComponent,
     FeedingTableListComponent,
     FeedingDetailFormComponent,
@@ -224,11 +225,11 @@ var modals = [
     EquipmentTableComponent,
     TaskListComponent,
     TaskTableComponent,
-    FishPhotosComponent,
     
     
     /* Form Components */
     SpeciesSelectComponent,
+    SpeciesTableComponent,
     PageNotFoundComponent,
 
     ...modals,
@@ -252,6 +253,7 @@ var modals = [
     FishAddPhotoButtonComponent,
     FeedingTableListComponent,
     FishPhotoSelectComponent,
+    FishPhotosComponent,
     ProfileIconBadgeComponent,
     VisualAquariumComponent,
     StandardTableComponent,
@@ -263,7 +265,6 @@ var modals = [
     TaskTableComponent,
     FishCardDetailedComponent,
     SnapshotTableListComponent,
-    FishPhotosComponent,
 
     /* Form Components */
     SpeciesSelectComponent,

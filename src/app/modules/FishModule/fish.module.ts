@@ -8,20 +8,60 @@ import { AdminService } from '../../services/admin.service';
 import { AuthGuard } from '../../guards/AuthGuard';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AquariumInterceptor } from '../../services/aquarium.interceptor';
-import { MatDatepickerModule } from '@angular/material';
+import { MatAutocompleteModule, MatButtonModule, MatCardModule, MatCheckboxModule, MatDatepickerModule, MatDialogModule, MatFormFieldModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule, MatPaginatorModule, MatProgressSpinnerModule, MatRadioModule, MatSelectModule, MatSidenavModule, MatSliderModule, MatSortModule, MatTableModule, MatTabsModule, MatToolbarModule } from '@angular/material';
 import { FishContainer } from '../../components/containers/FishContainer/fish-container.component';
 import { FishPhotosComponent } from '../../components/containers/AquariumContainer/photos/fish/fish-photos.component';
 import { FishDetailViewComponent } from '../../components/containers/FishContainer/fish-detail-view/fish-detail-view.component';
 import { FishEditViewComponent } from '../../components/containers/FishContainer/fish-edit-view/fish-edit-view.component';
+import { SharedModule } from '../SharedModule/shared.module';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ColorPickerModule } from 'ngx-color-picker';
+import { FishRoutes } from './fish-routing.module';
+import { MatFileUploadModule } from 'angular-material-fileupload';
+import { Ng5SliderModule } from 'ng5-slider';
 
 
 @NgModule({
   imports: [
+    CommonModule,
+    SharedModule,
+    ColorPickerModule,
+    FontAwesomeModule,
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
+    FishRoutes, //<-- import
 
+    MatSidenavModule,
+    MatProgressSpinnerModule,
+    MatCardModule,
+    MatTableModule,
+    MatTabsModule,
+    MatCheckboxModule,
+    MatInputModule,
+    MatRadioModule,
+    MatSortModule,
+    MatMenuModule,
+    MatIconModule,
+    MatListModule,
+    MatToolbarModule,
+    MatFormFieldModule,
+    MatPaginatorModule,
+    MatSelectModule,
+    MatDialogModule,
+    MatSliderModule,
+    MatButtonModule,
+    MatDatepickerModule,
+    MatAutocompleteModule,
+    MatNativeDateModule,
+    MatFileUploadModule,
+    Ng5SliderModule,
   ],
   declarations: [
     FishContainer,
-    FishPhotosComponent,
     FishDetailViewComponent,
     FishEditViewComponent,
   ],

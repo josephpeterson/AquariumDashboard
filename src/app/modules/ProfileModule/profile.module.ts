@@ -29,12 +29,51 @@ import { ProfilePhotosComponent } from '../../components/containers/ProfileConta
 import { ProfileManageComponent } from '../../components/containers/ProfileContainer/pages/profile-manage/profile-manage.component';
 import { ProfileOverviewComponent } from '../../components/containers/ProfileContainer/pages/profile-overview/profile-overview.component';
 import { ProfileProgressionComponent } from '../../components/containers/AquariumContainer/dashboard/profile-progression/profile-progression.component';
+import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSidenavModule, MatProgressSpinnerModule, MatCardModule, MatTableModule, MatTabsModule, MatCheckboxModule, MatInputModule, MatRadioModule, MatSortModule, MatMenuModule, MatIconModule, MatListModule, MatToolbarModule, MatFormFieldModule, MatPaginatorModule, MatSelectModule, MatDialogModule, MatSliderModule, MatButtonModule, MatDatepickerModule, MatAutocompleteModule, MatNativeDateModule } from '@angular/material';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MatFileUploadModule } from 'angular-material-fileupload';
+import { Ng5SliderModule } from 'ng5-slider';
+import { ColorPickerModule } from 'ngx-color-picker';
+import { ProfileRoutes } from './profile-routing.module';
 
 
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
+    ColorPickerModule,
+    FontAwesomeModule,
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ProfileRoutes, //<-- import
+
+    MatSidenavModule,
+    MatProgressSpinnerModule,
+    MatCardModule,
+    MatTableModule,
+    MatTabsModule,
+    MatCheckboxModule,
+    MatInputModule,
+    MatRadioModule,
+    MatSortModule,
+    MatMenuModule,
+    MatIconModule,
+    MatListModule,
+    MatToolbarModule,
+    MatFormFieldModule,
+    MatPaginatorModule,
+    MatSelectModule,
+    MatDialogModule,
+    MatSliderModule,
+    MatButtonModule,
+    MatDatepickerModule,
+    MatAutocompleteModule,
+    MatNativeDateModule,
+    MatFileUploadModule,
+    Ng5SliderModule,
   ],
   declarations: [
     ProfileContainer,
