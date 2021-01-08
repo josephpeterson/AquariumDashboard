@@ -1,4 +1,4 @@
-<div class="aquarium-nav-bar" *ngIf="user$ | async">
+<div class="aquarium-nav-bar" *ngIf="(user$ | async) as user">
   <span>
     <a class="nav-link" [routerLink]='["/dashboard"]' [routerLinkActiveOptions]='{ exact: true }'
       [routerLinkActive]='["link-active"]'>

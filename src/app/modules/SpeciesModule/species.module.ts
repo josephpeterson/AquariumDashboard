@@ -20,6 +20,7 @@ import { ColorPickerModule } from 'ngx-color-picker';
 import { SpeciesRoutes } from './species-routing.module';
 import { TemperatureHistogramComponent } from './temperature-histogram/temperature-histogram.component';
 import { SpeciesContainer } from './SpeciesContainer/species-container.component';
+import { SpeciesProductCard } from './SpeciesProductCard/species-product-card.component';
 
 
 @NgModule({
@@ -62,6 +63,7 @@ import { SpeciesContainer } from './SpeciesContainer/species-container.component
   ],
   declarations: [
     SpeciesContainer,
+    SpeciesProductCard,
     TemperatureHistogramComponent,
   ],
   providers: [
