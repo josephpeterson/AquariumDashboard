@@ -1,5 +1,5 @@
 <mat-sidenav-container class="example-container">
-    <mat-sidenav #sidenav mode="side" [(opened)]="sidebarOpened" [fixedInViewport]="1" [fixedTopGap]="60" [fixedBottomGap]="0">
+    <mat-sidenav *ngIf="user$ | async" #sidenav mode="side" [(opened)]="sidebarOpened" [fixedInViewport]="1" [fixedTopGap]="60" [fixedBottomGap]="0">
         <side-bar></side-bar>
     </mat-sidenav>
 
