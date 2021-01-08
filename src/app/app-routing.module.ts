@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MasterDashboardComponent } from './components/containers/DashboardContainer/master-dashboard.component';
 import { SpeciesContainer } from './components/containers/SpeciesContainer/species-container.component';
 import { AuthGuard } from './guards/AuthGuard';
 import { HomeComponent } from './components/routes/home/home.component';
 import { PasswordResetComponent } from './components/routes/passwordreset/password-reset.component';
 import { PageNotFoundComponent } from './modules/SharedModule/page-not-found/page-not-found.component';
+import { LoginComponent } from './components/routes/login/login.component';
 
 const routes: Routes = [
   {
@@ -31,11 +31,14 @@ const routes: Routes = [
   //Master Dashboard
   {
     path: 'dashboard',
-    canActivate: [AuthGuard],
-    component: MasterDashboardComponent
+    loadChildren: './modules/OverviewModule/overview.module#OverviewModule',
   },
 
 
+  {
+    path: 'login',
+    component: LoginComponent
+  },
   {
     path: 'settings',
     loadChildren: './modules/SettingsModule/settings.module#SettingsModule',

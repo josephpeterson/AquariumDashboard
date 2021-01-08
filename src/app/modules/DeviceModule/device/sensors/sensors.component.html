@@ -1,0 +1,10 @@
+<h3 class="pt-5">Sensors</h3>
+<p class="text-muted">These are all of the sensors the device is currently equipped with.</p>
+<ng-container *ngIf="aquarium.device as device">
+  <ul class="list-group w-50">
+    <li class="list-group-item">
+      Float Sensor [Pin: 40]
+      <a class="float-md-right" (click)="clickManagePhotoModule()">Manage...</a>
+    </li>
+  </ul>
+</ng-container>

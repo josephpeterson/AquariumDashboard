@@ -26,6 +26,7 @@ import { AdminService } from 'src/app/services/admin.service';
 import { AuthGuard } from 'src/app/guards/AuthGuard';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AquariumInterceptor } from 'src/app/services/aquarium.interceptor';
+import { DeviceSensorsComponent } from './device/sensors/sensors.component';
 
 
 @NgModule({
@@ -71,6 +72,7 @@ import { AquariumInterceptor } from 'src/app/services/aquarium.interceptor';
     DeviceLogComponent,
     DeviceInformationComponent,
     DevicePeripherialsComponent,
+    DeviceSensorsComponent,
     ScheduleBuilderComponent,
     DeviceScheduleStatusComponent,
   ],

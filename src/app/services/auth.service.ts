@@ -5,6 +5,9 @@ import { Observable, Subject } from 'rxjs';
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { AquariumAccount } from '../models/AquariumAccount';
 import { SignupRequest } from '../models/SignupRequest';
+import { Store } from "@ngrx/store";
+import { AppState } from "../app.state";
+import { AuthSetAuthenticatedUserAction } from "../store/auth/auth.actions";
 
 @Injectable({
   providedIn: "root"
@@ -16,9 +19,11 @@ export class AuthService {
   public aquariumId: number;
   private jwtHelper: JwtHelperService;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+    private store: Store<AppState>) {
     this._url = environment.urls.aquariumApi;
     this.jwtHelper = new JwtHelperService();
+
   }
 
   public storeToken(token) {
@@ -28,6 +33,7 @@ export class AuthService {
     return localStorage["aquariumapitoken"];
   }
   public clearToken() {
+    this.store.dispatch(new AuthSetAuthenticatedUserAction(null));
     return delete localStorage["aquariumapitoken"];
   }
   public isAuthenticated() {
@@ -64,13 +70,19 @@ export class AuthService {
     return a;
   }
   public getUser(): AquariumAccount {
+    
     var data = this.jwtHelper.decodeToken(this.getToken());
 
+    if(!data) return;
+
+    
     var user = new AquariumAccount();
     user.id = data["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"];
     user.username = data["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"];
     user.role = data["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
     user.email = data["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"];
+    
+    this.store.dispatch(new AuthSetAuthenticatedUserAction(user));
     return user;
   }
 

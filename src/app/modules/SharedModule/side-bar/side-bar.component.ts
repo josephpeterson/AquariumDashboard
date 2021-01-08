@@ -14,6 +14,9 @@ import { getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { faSignOutAlt, faSlidersH, faPhotoVideo, faFish, faCogs, faChartLine, faNetworkWired, faDesktop, faWater, faUser, faBook, faCalendar } from '@fortawesome/free-solid-svg-icons';
 import { AquariumService } from 'src/app/services/aquarium.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { AquariumAccount } from 'src/app/models/AquariumAccount';
+import { getAuthenticatedUser } from 'src/app/store/auth/auth.selector';
 
 @Component({
   selector: 'side-bar',
@@ -42,15 +45,21 @@ export class SideBarComponent implements OnInit {
 
 
   public aquariums: Aquarium[];
+  public user: AquariumAccount;
+
+  public user$ = this.store.select(getAuthenticatedUser);
+
+
 
   constructor(public route: ActivatedRoute,
     public store: Store<AppState>,
     public dialog: MatDialog,
     private titleService: Title,
-    private _aquariumService: AquariumService) { }
+    private _aquariumService: AquariumService,
+    private auth: AuthService) { }
 
   ngOnInit() {
-   
+ 
   }
  
   ngOnDestroy() {

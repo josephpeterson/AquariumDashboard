@@ -11,6 +11,7 @@ import { takeUntil } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';
 import { AquariumAccount } from 'src/app/models/AquariumAccount';
 import { faSignOutAlt, faSlidersH, faPhotoVideo, faFish, faCogs, faChartLine, faNetworkWired, faBars } from '@fortawesome/free-solid-svg-icons';
+import { getAuthenticatedUser } from 'src/app/store/auth/auth.selector';
 
 @Component({
   selector: 'nav-menu',
@@ -25,7 +26,7 @@ export class NavMenuComponent {
   public connectionError$ = this.store.select(getConnectionError);
 
   private componentLifecycle = new Subject();
-  public user: AquariumAccount;
+  public user$ = this.store.select(getAuthenticatedUser);
 
   public faLogout = faSignOutAlt;
   public faSliders = faSlidersH;
@@ -50,10 +51,6 @@ export class NavMenuComponent {
   }
 
   ngOnInit() {
-    //Are we authorized?
-    var user = this.auth.getUser();
-    if(user) 
-      this.user = user;
 
     this.route.params.subscribe(p => {
       if (p.aqId) {
@@ -77,7 +74,6 @@ export class NavMenuComponent {
 
   clickLogout() {
     this.auth.clearToken(); 
-    this.router.navigate(["/login"]);
-    delete this.user;
+    this.router.navigate(["/"]);
   }
 }

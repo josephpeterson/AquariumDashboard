@@ -30,6 +30,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.12.0",
     "@ngrx/effects": "^7.4.0",
     "@ngrx/entity": "^7.4.0",
+    "@ngrx/schematics": "^10.1.2",
     "@ngrx/store": "^7.4.0",
     "@ngrx/store-devtools": "^7.4.0",
     "amazing-time-picker": "^1.8.0",

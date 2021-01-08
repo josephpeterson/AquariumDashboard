@@ -1,8 +1,0 @@
-<div class="container">
-  <h3 class="m-2">Aquariums</h3>
-  <aquarium-table (rowClicked)="clickAquarium($event[1])"></aquarium-table>
-  <button mat-list-item type="button" class="mt-2 btn btn-primary btn-sm" routerLink="/aquarium/new">
-    <fa-icon class="addIcon mr-2" [icon]="faCreate"></fa-icon>New Aquarium...
-  </button>
-  <temperature-histogram></temperature-histogram>
-</div>

@@ -35,7 +35,6 @@ import { aquariumReducer } from './store/aquarium/aquarium.reducer';
 import { snapshotReducer } from './store/snapshot/snapshot.reducer';
 import { speciesReducer } from './store/species/species.reducer';
 
-import { MasterDashboardComponent } from './components/containers/DashboardContainer/master-dashboard.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -64,11 +63,11 @@ import { PostEffects } from './store/post/post.effect';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { PasswordResetComponent } from './components/routes/passwordreset/password-reset.component';
 import { AppComponent } from './components/app-root/app.component';
-import { TemperatureHistogramComponent } from './components/containers/DashboardContainer/temperature-histogram/temperature-histogram.component';
 import { Ng5SliderModule } from 'ng5-slider';
 import { FishService } from './services/fish.service';
 import { CalendarContainerComponent } from './components/containers/calendar-container/calendar-container.component';
 import { SharedModule } from './modules/SharedModule/shared.module';
+import { AuthReducer } from './store/auth/auth.reducer';
 
 
 
@@ -81,7 +80,6 @@ import { SharedModule } from './modules/SharedModule/shared.module';
   declarations: [
     AppComponent,
     SpeciesContainer,
-    MasterDashboardComponent,
 
     /* Not logged in */
     HomeComponent,
@@ -89,7 +87,6 @@ import { SharedModule } from './modules/SharedModule/shared.module';
     SignupComponent,
     PasswordResetComponent,
 
-    TemperatureHistogramComponent,
     
     CalendarContainerComponent,
 
@@ -145,11 +142,12 @@ import { SharedModule } from './modules/SharedModule/shared.module';
     StoreModule.forFeature('fish', fishReducer),
     StoreModule.forFeature('profile', ProfileReducer),
     StoreModule.forFeature('post', PostReducer),
+    StoreModule.forFeature('auth', AuthReducer),
     StoreDevtoolsModule.instrument({
       maxAge: 25
     }),
     NotifierModule.withConfig(AquariumNotifierConfig),
-    EffectsModule.forRoot([AquariumEffects, SnapshotEffects, SpeciesEffects, FishEffects, ProfileEffects, PostEffects])
+    EffectsModule.forRoot([AquariumEffects, SnapshotEffects, SpeciesEffects, FishEffects, ProfileEffects, PostEffects]),
   ],
   providers: [
     AquariumService,

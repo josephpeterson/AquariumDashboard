@@ -30,7 +30,9 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": [ "./node_modules/jquery/dist/jquery.min.js"],
+            "scripts": [
+              "./node_modules/jquery/dist/jquery.min.js"
+            ],
             "es5BrowserSupport": true
           },
           "configurations": {
@@ -153,5 +155,8 @@
       }
     }
   },
-  "defaultProject": "AquariumDashboard"
+  "defaultProject": "AquariumDashboard",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }
