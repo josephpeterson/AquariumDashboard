@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import {Location} from '@angular/common';
 import { Species } from 'src/app/models/Species';
 import { AquariumUnSelectionAction } from 'src/app/store/aquarium/aquarium.actions';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -15,6 +16,8 @@ import { AquariumUnSelectionAction } from 'src/app/store/aquarium/aquarium.actio
 })
 export class SpeciesContainer implements OnInit {
   public speciesId: number = -1;
+
+  public faCreate = faPlus;
 
   constructor(
     public dialog: MatDialog,

@@ -46,7 +46,6 @@ import { fishReducer } from './store/fish/fish.reducer';
 import { MatFileUploadModule } from 'angular-material-fileupload';
 
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
-import { SpeciesContainer } from './components/containers/SpeciesContainer/species-container.component';
 import { AquariumInterceptor } from './services/aquarium.interceptor';
 import { AquariumService } from './services/aquarium.service';
 import { AuthGuard } from './guards/AuthGuard';
@@ -79,7 +78,6 @@ import { AuthReducer } from './store/auth/auth.reducer';
 @NgModule({
   declarations: [
     AppComponent,
-    SpeciesContainer,
 
     /* Not logged in */
     HomeComponent,

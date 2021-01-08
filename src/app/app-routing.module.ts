@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SpeciesContainer } from './components/containers/SpeciesContainer/species-container.component';
+import { SpeciesContainer } from './modules/SpeciesModule/SpeciesContainer/species-container.component';
 import { AuthGuard } from './guards/AuthGuard';
 import { HomeComponent } from './components/routes/home/home.component';
 import { PasswordResetComponent } from './components/routes/passwordreset/password-reset.component';
@@ -20,13 +20,7 @@ const routes: Routes = [
   //Species
   {
     path: 'species',
-    canActivate: [AuthGuard],
-    component: SpeciesContainer
-  },
-  {
-    path: 'species/:speciesId',
-    canActivate: [AuthGuard],
-    component: SpeciesContainer
+    loadChildren: './modules/SpeciesModule/species.module#SpeciesModule',
   },
   //Master Dashboard
   {
