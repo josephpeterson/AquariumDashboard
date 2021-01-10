@@ -1,0 +1,41 @@
+<div #form class="omni-search-form" [ngClass]="active ? 'active':''">
+  <input #searchInput class="p-0" placeholder="Search..." (click)="setSearchActive(true)"
+     (keyup)="queueSearch()" />
+  <button #searchButton (focus)="setSearchActive(true)" (click)="queueSearch()" class="btn btn-primary pt-0 pb-0">
+    <fa-icon [icon]="icon_glass"></fa-icon>
+  </button>
+  <div class="row results" (click)="$event.preventDefault()">
+    <div class="header">
+      Search Results
+    </div>
+    <div class="result" [ngClass]='result.type' *ngFor="let result of results">
+      <ng-container [ngSwitch]="result.type" *ngIf="result.data as d" >
+        <a (click)="setSearchActive(false)" *ngSwitchCase="'Aquarium'" [routerLink]='["/aquarium/" + d.id]'>
+          {{d.name}}
+        </a>
+        <a (click)="setSearchActive(false)" *ngSwitchCase="'Account'" [routerLink]='["/p/" + d.account.id]'>
+          <profile-icon-badge class="profile-icon-badge" [profile]="d.account"></profile-icon-badge>
+          <div>
+            {{d.account.username}} <follow-button [relationship]="d.relationship"></follow-button>
+          </div>
+        </a>
+        <a (click)="setSearchActive(false)" *ngSwitchCase="'Species'" [routerLink]='["/species",d.id]'>
+          <div>
+            {{d.name}}
+          </div>
+        </a>
+        <a (click)="setSearchActive(false)" *ngSwitchCase="'Fish'" [routerLink]='["/fish",d.id]'>
+          <div>
+              <profile-icon-badge class="profile-icon-badge" [profile]="d"></profile-icon-badge>{{d.name}}
+          </div>
+        </a>
+        <a (click)="setSearchActive(false)" *ngSwitchDefault>
+          <div>
+            {{d}}
+          </div>
+        </a>
+      </ng-container>
+
+    </div>
+  </div>
+</div>

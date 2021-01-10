@@ -1,13 +1,17 @@
-table {
-    width: 100%;
-}
-.mat-column-select {
-  overflow: initial;
-}
-th.mat-sort-header-sorted {
-  color: black;
-}
+.speciesCard {
+    max-width:120px;
+    float:left;
+    margin:1em;
+    font-size: 14px;
 
-.red-number{
-  color: red;
+    .title {
+        display: block;
+        width:100%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        font-weight: bold;
+    }
+    .footer {
+    }
 }

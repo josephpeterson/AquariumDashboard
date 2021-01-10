@@ -1,17 +1,17 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { CreateAquariumComponent } from '../../components/containers/AquariumContainer/create-aquarium/create-aquarium.component';
+import { CreateAquariumComponent } from './create-aquarium/create-aquarium.component';
 import { AuthGuard } from '../../guards/AuthGuard';
-import { AquariumContainer } from '../../components/containers/AquariumContainer/aquarium-container.component';
-import { DashboardComponent } from '../../components/containers/AquariumContainer/dashboard/dashboard.component';
-import { AquariumParametersComponent } from '../../components/containers/AquariumContainer/parameters/aquarium-parameters.component';
-import { ParametersWaterTestsListComponent } from '../../components/containers/AquariumContainer/parameters/water-tests/parameters-water-tests-list.component';
-import { ParametersSnapshotListComponent } from '../../components/containers/AquariumContainer/parameters/snapshots/parameters-snapshot-list.component';
-import { AquariumPhotosContainerComponent } from '../../components/containers/AquariumContainer/photos/aquarium-photos-container.component';
-import { LightingComponent } from '../../components/containers/AquariumContainer/lighting/lighting.component';
-import { SettingsComponent } from '../../components/containers/AquariumContainer/settings/settings.component';
-import { MaintenanceComponent } from '../../components/containers/AquariumContainer/maintenance/maintenance.component';
+import { AquariumContainer } from './AquariumContainer/aquarium-container.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { AquariumParametersComponent } from './parameters/aquarium-parameters.component';
+import { ParametersWaterTestsListComponent } from './parameters/water-tests/parameters-water-tests-list.component';
+import { ParametersSnapshotListComponent } from './parameters/snapshots/parameters-snapshot-list.component';
+import { AquariumPhotosContainerComponent } from './photos/aquarium-photos-container.component';
+import { LightingComponent } from './lighting/lighting.component';
+import { SettingsComponent } from './settings/settings.component';
+import { MaintenanceComponent } from './maintenance/maintenance.component';
 import { PageNotFoundComponent } from '../SharedModule/page-not-found/page-not-found.component';
 import { AquariumsContainer } from './AquariumsContainer/aquariums-container.component';
 

@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SpeciesContainer } from './modules/SpeciesModule/SpeciesContainer/species-container.component';
 import { AuthGuard } from './guards/AuthGuard';
-import { HomeComponent } from './components/routes/home/home.component';
-import { PasswordResetComponent } from './components/routes/passwordreset/password-reset.component';
+import { HomeComponent } from './components/home/home.component';
+import { PasswordResetComponent } from './components/passwordreset/password-reset.component';
 import { PageNotFoundComponent } from './modules/SharedModule/page-not-found/page-not-found.component';
-import { LoginComponent } from './components/routes/login/login.component';
+import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
   {
@@ -53,6 +53,10 @@ const routes: Routes = [
   {
     path: 'aquarium',
     loadChildren: './modules/AquariumModule/aquarium.module#AquariumModule',
+  },
+  {
+    path: 'calendar',
+    loadChildren: './modules/CalendarModule/calendar.module#CalendarModule',
   },
   { path: '**', component: PageNotFoundComponent } /* Needs to be last */
 ];

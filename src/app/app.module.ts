@@ -50,9 +50,9 @@ import { AquariumInterceptor } from './services/aquarium.interceptor';
 import { AquariumService } from './services/aquarium.service';
 import { AuthGuard } from './guards/AuthGuard';
 import { AuthService } from './services/auth.service';
-import { LoginComponent } from './components/routes/login/login.component';
-import { SignupComponent } from './components/routes/signup/signup.component';
-import { HomeComponent } from './components/routes/home/home.component';
+import { LoginComponent } from './components/login/login.component';
+import { SignupComponent } from './components/signup/signup.component';
+import { HomeComponent } from './components/home/home.component';
 
 import { AdminService } from './services/admin.service';
 import { ProfileReducer } from './store/profile/profile.reducer';
@@ -60,11 +60,10 @@ import { ProfileEffects } from './store/profile/profile.effect';
 import { PostReducer } from './store/post/post.reducer';
 import { PostEffects } from './store/post/post.effect';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-import { PasswordResetComponent } from './components/routes/passwordreset/password-reset.component';
+import { PasswordResetComponent } from './components/passwordreset/password-reset.component';
 import { AppComponent } from './components/app-root/app.component';
 import { Ng5SliderModule } from 'ng5-slider';
 import { FishService } from './services/fish.service';
-import { CalendarContainerComponent } from './components/containers/calendar-container/calendar-container.component';
 import { SharedModule } from './modules/SharedModule/shared.module';
 import { AuthReducer } from './store/auth/auth.reducer';
 
@@ -84,11 +83,6 @@ import { AuthReducer } from './store/auth/auth.reducer';
     LoginComponent,
     SignupComponent,
     PasswordResetComponent,
-
-    
-    CalendarContainerComponent,
-
-
   ],
   entryComponents: [
   ],

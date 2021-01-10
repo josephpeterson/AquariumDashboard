@@ -2,13 +2,13 @@ import { ModuleWithProviders } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from '../../guards/AuthGuard';
-import { ProfileContainer } from '../../components/containers/ProfileContainer/profile-container.component';
-import { ProfileAquariumsComponent } from '../../components/containers/ProfileContainer/pages/profile-aquariums/profile-aquariums.component';
-import { ProfileFishComponent } from '../../components/containers/ProfileContainer/pages/profile-fish/profile-fish.component';
-import { ProfileAboutComponent } from '../../components/containers/ProfileContainer/pages/profile-about/profile-about.component';
-import { ProfilePhotosComponent } from '../../components/containers/ProfileContainer/pages/profile-photos/profile-photos.component';
-import { ProfileManageComponent } from '../../components/containers/ProfileContainer/pages/profile-manage/profile-manage.component';
-import { ProfileOverviewComponent } from '../../components/containers/ProfileContainer/pages/profile-overview/profile-overview.component';
+import { ProfileContainer } from './ProfileContainer/profile-container.component';
+import { ProfileAquariumsComponent } from './pages/profile-aquariums/profile-aquariums.component';
+import { ProfileFishComponent } from './pages/profile-fish/profile-fish.component';
+import { ProfileAboutComponent } from './pages/profile-about/profile-about.component';
+import { ProfilePhotosComponent } from './pages/profile-photos/profile-photos.component';
+import { ProfileManageComponent } from './pages/profile-manage/profile-manage.component';
+import { ProfileOverviewComponent } from './pages/profile-overview/profile-overview.component';
 
 const secondaryRoutes: Routes = [
     {

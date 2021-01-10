@@ -2,9 +2,9 @@ import { ModuleWithProviders } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from '../../guards/AuthGuard';
-import { FishContainer } from '../../components/containers/FishContainer/fish-container.component';
-import { FishDetailViewComponent } from '../../components/containers/FishContainer/fish-detail-view/fish-detail-view.component';
-import { FishEditViewComponent } from '../../components/containers/FishContainer/fish-edit-view/fish-edit-view.component';
+import { FishContainer } from './FishContainer/fish-container.component';
+import { FishDetailViewComponent } from '../SharedModule/fish-detail-view/fish-detail-view.component';
+import { FishEditViewComponent } from './fish-edit-view/fish-edit-view.component';
 
 const secondaryRoutes: Routes = [
     {

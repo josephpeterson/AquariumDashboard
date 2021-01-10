@@ -1,0 +1,88 @@
+.omni-search-form
+{
+    height:36px;
+    max-width:500px;
+    width:400px;
+    position: relative;
+    white-space: nowrap;
+    
+    button,input  {
+        border:1px solid lightgray;
+        height:100%;
+        outline: none;
+    }
+    button  {
+        background-color:inherit;
+        vertical-align: initial;
+        border-left:none;
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+    }
+    input  {
+        border-top-left-radius: .25rem;
+        border-bottom-left-radius: .25rem;
+        text-indent: 10px;
+        width:90%;
+        border-right:none;
+    }
+
+    .results
+    {
+        display: none;;
+        margin:0px;
+        position: relative;
+        border:1px solid darkgray;
+        border-top:none;
+        background-color:white;
+        min-height: 300px;
+    }
+}
+.omni-search-form.active {
+    .results
+    {
+        display: block;
+    }
+    input
+    {
+        border-color: #007bff;
+    }
+    
+    button {
+    background-color:#007bff;
+    border-color: #007bff;
+    }
+}
+
+.result
+{
+    a {
+        display: block;
+        position: relative;
+    }
+    .profile-icon-badge
+    {
+        position: absolute;
+        left:0px;
+        height:35px;
+        width:35px;
+    }
+    height:46px;
+    border-bottom:1px solid #EFEFEF;
+    padding: 3px;
+    text-indent: 40px;
+}
+.result.Aquarium  {
+    color:red;
+}
+.header {
+    background: #f5f6f7;
+    border-bottom: 1px solid #e9eaed;
+    border-top: 1px solid #e9eaed;
+    line-height: 16px;
+    padding: 2px 7px 1px;
+    text-transform: uppercase;
+    font-family: Helvetica, Arial, sans-serif;
+    color:darkgray;
+    padding:2px;
+    font-size: 11pt;;
+}

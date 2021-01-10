@@ -43,8 +43,8 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { NavMenuNotificationsComponent } from './nav-menu/notifications/notifications.component';
 import { SearchFormComponent } from './nav-menu/search-form/search-form.component';
-import { ProfileIconBadgeComponent } from 'src/app/components/containers/ProfileContainer/profile-icon-badge/profile-icon-badge.component';
-import { FollowButtonComponent } from 'src/app/components/containers/ProfileContainer/follow-button/follow-button.component';
+import { ProfileIconBadgeComponent } from 'src/app/modules/SharedModule/profile-icon-badge/profile-icon-badge.component';
+import { FollowButtonComponent } from 'src/app/modules/SharedModule/follow-button/follow-button.component';
 import { BugReportButtonComponent } from './bugreport-button/bugreport-button.component';
 import { LoadingContainerComponent } from './loading-container/loading-container.component';
 import { ScheduleTaskTableComponent } from './schedule-task-table/schedule-task-table.component';
@@ -74,7 +74,7 @@ import { FishAddPhotoButtonComponent } from './data/fish/add-photo-button/fish-a
 import { AutocompleteTypeComponent } from './autocomplete-type/autocomplete-type.component';
 import { AquariumNavBarComponent } from './aquarium-nav-bar/aquarium-nav-bar.component';
 import { FishPhotoSelectComponent } from './data/fish/photo-select/fish-photo-select.component';
-import { FishCardDetailedComponent } from 'src/app/components/containers/FishContainer/fish-card-detailed/fish-card-detailed.component';
+import { FishCardDetailedComponent } from 'src/app/modules/SharedModule/fish-card-detailed/fish-card-detailed.component';
 import { ApplicationLogViewComponent } from './application-log-view/application-log-view.component';
 import { PhotoPaginator } from './photo-paginator/photo-paginator.component';
 import { StandardTableComponent } from './standard-table/standard-table.component';
@@ -95,7 +95,8 @@ import { AuthGuard } from 'src/app/guards/AuthGuard';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AquariumInterceptor } from 'src/app/services/aquarium.interceptor';
 import { SpeciesSelectComponent } from './species-select/species-select.component';
-import { FishPhotosComponent } from 'src/app/components/containers/AquariumContainer/photos/fish/fish-photos.component';
+import { FishPhotosComponent } from 'src/app/modules/SharedModule/fish-photos/fish-photos.component';
+import { GenericSelectComponent } from './form/generic-select/generic-select.component';
 
 
 
@@ -231,6 +232,7 @@ var modals = [
     SpeciesSelectComponent,
     SpeciesTableComponent,
     PageNotFoundComponent,
+    GenericSelectComponent,
 
     ...modals,
   ],
@@ -269,6 +271,8 @@ var modals = [
     /* Form Components */
     SpeciesSelectComponent,
     TypeSelectComponent,
+    GenericSelectComponent,
+
 
 
     ...modals,

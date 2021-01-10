@@ -1,0 +1,17 @@
+<div class="jumbotron">
+    <h1 class="display-4">Species</h1>
+    <div class="container">
+        <species-search-form></species-search-form>
+    </div>
+</div>
+<div *ngIf="(loading$ | async)" class="p-5">
+    <mat-progress-spinner class="mr-auto ml-auto" color="warn" mode="indeterminate">
+    </mat-progress-spinner>
+</div>
+<div class="d-flex speciesMasterList">
+    <species-search-refiner></species-search-refiner>
+    <div *ngIf="!(loading$ | async)">
+        <species-product-card *ngFor="let species of species$ | async" [species]="species">
+        </species-product-card>
+    </div>
+</div>

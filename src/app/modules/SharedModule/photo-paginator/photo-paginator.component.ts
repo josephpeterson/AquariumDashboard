@@ -13,7 +13,7 @@ import { NotifierService } from 'angular-notifier';
 import { HttpErrorResponse } from '@angular/common/http';
 import { PhotoTimelapseOptions } from 'src/app/models/PhotoTimelapseOptions';
 import { CreateTimelapseModalComponent } from '../modals/create-timelapse-modal/create-timelapse-modal.component';
-import { PhotoSelection } from 'src/app/components/providers/PhotoSelection';
+import { PhotoSelection } from 'src/app/providers/PhotoSelection';
 import { PhotoExpandedModalComponent } from '../modals/photo-expanded-modal/photo-expanded-modal.component';
 
 @Component({

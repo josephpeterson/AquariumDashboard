@@ -21,6 +21,9 @@ import { SpeciesRoutes } from './species-routing.module';
 import { TemperatureHistogramComponent } from './temperature-histogram/temperature-histogram.component';
 import { SpeciesContainer } from './SpeciesContainer/species-container.component';
 import { SpeciesProductCard } from './SpeciesProductCard/species-product-card.component';
+import { SpeciesMasterListComponent } from './SpeciesMasterList/species-master-list.component';
+import { SpeciesSearchRefinerComponent } from './SpeciesSearchRefiner/species-search-refiner.component';
+import { SpeciesSearchFormComponent } from './SpeciesSearchForm/species-search-form.component';
 
 
 @NgModule({
@@ -63,7 +66,10 @@ import { SpeciesProductCard } from './SpeciesProductCard/species-product-card.co
   ],
   declarations: [
     SpeciesContainer,
+    SpeciesMasterListComponent,
     SpeciesProductCard,
+    SpeciesSearchRefinerComponent,
+    SpeciesSearchFormComponent,
     TemperatureHistogramComponent,
   ],
   providers: [

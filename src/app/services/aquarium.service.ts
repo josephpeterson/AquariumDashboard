@@ -379,4 +379,9 @@ export class AquariumService {
   public getAquariumsOverview() {
     return this.http.get<Aquarium[]>(this._url + `/v1/Aquariums/All`);
   }
+
+  /* Form Components */
+  public getSelectOptionsByType(selectType: string) {
+    return this.http.get<any[]>(this._url + `/v1/Form/Select/${selectType}`);
+  }
 }

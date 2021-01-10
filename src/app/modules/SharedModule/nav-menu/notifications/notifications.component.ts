@@ -7,6 +7,7 @@ import * as moment from 'moment';
 import { NotificationTypes } from 'src/app/models/types/NotificationTypes';
 import { MatDialog } from '@angular/material';
 import { ConfirmModalComponent } from '../../modals/confirm-modal/confirm-modal.component';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'nav-menu-notifications',
@@ -23,6 +24,9 @@ export class NavMenuNotificationsComponent implements OnInit {
   public notifications: Notification[] = [];
   public types = NotificationTypes;
   public loading: boolean;
+  public componentLifeCycle$ = new Subject();
+
+  public notificationTick;
 
   private interval: number = 30;
 
@@ -69,6 +73,7 @@ export class NavMenuNotificationsComponent implements OnInit {
   }
 
   public loadNotifications() {
+    clearInterval(this.notificationTick);
     this.loading = true;
     this._aquariumService.getNotifications().subscribe((notifications: Notification[]) => {
       this.loading = false;
@@ -76,9 +81,9 @@ export class NavMenuNotificationsComponent implements OnInit {
     },
       (err: HttpErrorResponse) => {
         this.loading = false;
-        console.error(err);
+        //console.error(err);
       });
-    setTimeout(() => {
+    this.notificationTick = setTimeout(() => {
       this.loadNotifications();
     }, this.interval * 1000);
   }
@@ -110,4 +115,8 @@ export class NavMenuNotificationsComponent implements OnInit {
     return con.replace(/{target.name}/gi, n.target.username)
       .replace(/{dispatcher.name}/gi, n.source.dispatcher.username);
   }
+  ngOnDestory() {
+    this.componentLifeCycle$.next();
+    this.componentLifeCycle$.unsubscribe();
+}
 }

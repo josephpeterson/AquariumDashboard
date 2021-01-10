@@ -10,11 +10,13 @@ import { faPlus, faStar } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
-  selector: 'species-product-card',
-  templateUrl: './species-product-card.component.html',
-  styleUrls: ['./species-product-card.component.scss']
+  selector: 'species-search-refiner',
+  templateUrl: './species-search-refiner.component.html',
+  styleUrls: ['./species-search-refiner.component.scss']
 })
-export class SpeciesProductCard implements OnInit {
+export class SpeciesSearchRefinerComponent implements OnInit {
+
+  public foods = [];
   public speciesId: number = -1;
 
   public faCreate = faPlus;

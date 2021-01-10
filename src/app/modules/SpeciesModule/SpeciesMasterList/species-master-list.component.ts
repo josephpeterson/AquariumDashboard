@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppState } from 'src/app/app.state';
@@ -6,23 +6,25 @@ import { Store } from '@ngrx/store';
 import {Location} from '@angular/common';
 import { Species } from 'src/app/models/Species';
 import { AquariumUnSelectionAction } from 'src/app/store/aquarium/aquarium.actions';
-import { faPlus, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { SpeciesMasterListComponentData } from './species-master-list.component.data';
 
 
 @Component({
-  selector: 'species-product-card',
-  templateUrl: './species-product-card.component.html',
-  styleUrls: ['./species-product-card.component.scss']
+  selector: 'species-master-list',
+  templateUrl: './species-master-list.component.html',
+  styleUrls: ['./species-master-list.component.scss']
 })
-export class SpeciesProductCard implements OnInit {
+export class SpeciesMasterListComponent implements OnInit {
   public speciesId: number = -1;
 
   public faCreate = faPlus;
-  public faStar = faStar;
 
-  @Input() species: Species;
+  public loading$ = this.dataSource.loading$;
+  public species$ = this.dataSource.species$;
 
   constructor(
+    private dataSource: SpeciesMasterListComponentData,
     public dialog: MatDialog,
     public store: Store<AppState>,
     private route: ActivatedRoute,
@@ -31,7 +33,6 @@ export class SpeciesProductCard implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.store.dispatch(new AquariumUnSelectionAction());
     this.route.params.subscribe(p => {
       if(p.speciesId)
       {
