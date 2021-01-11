@@ -1,7 +1,7 @@
 import { ModuleWithProviders } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AquariumDeviceComponent } from './device/aquarium-device.component';
+import { AquariumDeviceComponent } from './DeviceContainer/aquarium-device.component';
 import { AuthGuard } from 'src/app/guards/AuthGuard';
 
 const secondaryRoutes: Routes = [
