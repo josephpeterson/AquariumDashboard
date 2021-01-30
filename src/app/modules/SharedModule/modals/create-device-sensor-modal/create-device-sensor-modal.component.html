@@ -23,19 +23,19 @@
 
 			</div>
 			<div class="row">
-				<label>Sensor polarity</label>
 				<mat-radio-group aria-labelledby="example-radio-group-label" [(ngModel)]="newDeviceSensor.polarity">
 					<mat-radio-button [value]="0" class="ml-2">
-						Normal
+						Input
 					</mat-radio-button>
 					<mat-radio-button [value]="1" class="ml-2">
-						Reversed
+						Output
 					</mat-radio-button>
 				</mat-radio-group>
 			</div>
 			<div class="row">
 				<button class="m-2 btn btn-danger" mat-dialog-close>Cancel</button>
-				<button class="m-2 btn btn-success" (click)="clickCreateSensor()">Create</button>
+				<button *ngIf="newDeviceSensor.id" class="m-2 btn btn-success" (click)="clickEditSensor()">Save</button>
+				<button *ngIf="!newDeviceSensor.id" class="m-2 btn btn-success" (click)="clickCreateSensor()">Create</button>
 			</div>
 		</div>
 	</div>

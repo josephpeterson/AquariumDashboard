@@ -5,7 +5,7 @@ export class DeviceSensor
   id: number //= Math.floor(Math.random() * 100);
   name: string
   type: string
-  polarity: number
+  polarity: number = 0
   pin: GpioPinTypes
   value: any
 }

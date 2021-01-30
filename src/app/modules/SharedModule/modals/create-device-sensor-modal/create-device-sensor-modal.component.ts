@@ -31,7 +31,13 @@ export class CreateDeviceSensorModalComponent implements OnInit {
   ngOnInit() {
   }
   isPortDisabled(portType: GpioPinTypes) {
-    return portType == GpioPinTypes.pwr3V || portType == GpioPinTypes.pwr5V || portType == GpioPinTypes.Ground
+    //check if port is in use
+    var used = false;
+    this.device.sensors.forEach(s => {
+      if (s.pin == portType)
+        used = true;
+    });
+    return used || portType == GpioPinTypes.pwr3V || portType == GpioPinTypes.pwr5V || portType == GpioPinTypes.Ground
   }
   clickGpioPort(port: GpioPinTypes) {
     if (this.isPortDisabled(port))
@@ -44,7 +50,18 @@ export class CreateDeviceSensorModalComponent implements OnInit {
     this._aquariumService.createDeviceSensor(this.device.id, this.newDeviceSensor).subscribe(res => {
       this.loading = false;
       this._self.close(this.newDeviceSensor);
-    }, (err:HttpErrorResponse) => {
+    }, (err: HttpErrorResponse) => {
+      this.loading = false;
+      this.error = err.message;
+    });
+  }
+  clickEditSensor() {
+    this.loading = true;
+    delete this.error;
+    this._aquariumService.updateDeviceSensor(this.device.id, this.newDeviceSensor).subscribe(res => {
+      this.loading = false;
+      this._self.close(this.newDeviceSensor);
+    }, (err: HttpErrorResponse) => {
       this.loading = false;
       this.error = err.message;
     });

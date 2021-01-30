@@ -2,16 +2,19 @@
 <p class="text-muted">View the current auto top off status.</p>
 <ng-container *ngIf="!loading else loadingContainer">
   <ng-container *ngIf="atoStatus else noStatus">
-    <ng-container *ngIf="atoStatus.enabled else notEnabled">
+    <ng-container *ngIf="atoStatus.enabled == true">
       <ng-container *ngIf="atoStatus.pumpRunning else standard">
         <div class="card p-2">
           <h5>Running...</h5>
           <ul class="list-group w-50">
             <li class="list-group-item">
-              Start Time: 5:50pm
+              Id: {{atoStatus.id}}
             </li>
             <li class="list-group-item">
-              Estimated End Time: 6:50pm
+              Start Time: {{parseDate(atoStatus.startTime)}}
+            </li>
+            <li class="list-group-item">
+              Estimated End Time: {{parseDate(atoStatus.estimatedEndTime)}}
             </li>
             <li class="list-group-item">
               ATO Pump: Running
@@ -24,27 +27,41 @@
             <mat-progress-bar></mat-progress-bar>
           </div>
         </div>
+        <button class="mt-2 btn btn-danger" (click)="clickStopATO()">Stop</button>
+
       </ng-container>
     </ng-container>
     <ng-template #standard>
-      
+      <div class="alert alert-info alert-dismissible fade show" role="alert" *ngIf="atoStatus.nextRunTime">
+        <p>ATO is currently scheduled to run next at: {{parseDate(atoStatus.nextRunTime)}}</p>
+      </div>
+      <button class="mt-2 btn btn-success" (click)="clickRunATO()">Run ATO...</button>
 
 
-      <p class="text-muted">{{atoStatus.updatedAt}}</p>
+      <p class="text-muted">Last Updated at {{parseDate(atoStatus.updatedAt)}}
+        <button class="mt-2 btn btn-link" (click)="clickRefresh()">
+          <fa-icon [icon]="faRedo"></fa-icon>
+        </button>
+      </p>
     </ng-template>
   </ng-container>
 </ng-container>
 <ng-template #noStatus>
   <p>No auto top off status available for this device.</p>
 </ng-template>
+
+
+
 <ng-template #loadingContainer>
   <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
 </ng-template>
+
 <ng-template #notEnabled>
   <div class="alert alert-info alert-dismissible fade show" role="alert" *ngIf="atoRecommended">
     <p>ATO is not enabled on this device. You must have two sensors equiped (ATO float sensor & Pump relay sensor).</p>
   </div>
 </ng-template>
+
 <ng-template #recommended>
   <div class="alert alert-info alert-dismissible fade show" role="alert" *ngIf="atoRecommended">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">

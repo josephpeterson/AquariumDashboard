@@ -109,7 +109,7 @@ export class AquariumService {
     return this.http.delete(this._url + `/v1/Aquarium/${aqId}/Snapshots`);
   }
   deleteSnapshots(snapshotIds: number[]) {
-    return this.http.post(this._url + `/v1/Snapshot/DeleteMultiple`,snapshotIds);
+    return this.http.post(this._url + `/v1/Snapshot/DeleteMultiple`, snapshotIds);
   }
 
 
@@ -325,52 +325,52 @@ export class AquariumService {
     return this.http.post(this._url + `/v1/Device/${deviceId}/Schedule/PerformTask`, deviceScheduleTask);
   }
 
-  public getAquariumPhotos(id: number,pagination: PaginationSliver) {
-    return this.http.post<AquariumPhoto[]>(this._url + `/v1/Photo/Aquarium/${id}`,pagination);
+  public getAquariumPhotos(id: number, pagination: PaginationSliver) {
+    return this.http.post<AquariumPhoto[]>(this._url + `/v1/Photo/Aquarium/${id}`, pagination);
   }
-  public getAquariumSnapshotPhotos(id: number,pagination: PaginationSliver) {
-    return this.http.post<AquariumSnapshot[]>(this._url + `/v1/Photo/Aquarium/${id}/Snapshot`,pagination);
+  public getAquariumSnapshotPhotos(id: number, pagination: PaginationSliver) {
+    return this.http.post<AquariumSnapshot[]>(this._url + `/v1/Photo/Aquarium/${id}/Snapshot`, pagination);
   }
-  public getAquariumFishPhotos(id: number,pagination: PaginationSliver) {
-    return this.http.post<FishPhoto[]>(this._url + `/v1/Photo/Aquarium/${id}/Fish`,pagination);
+  public getAquariumFishPhotos(id: number, pagination: PaginationSliver) {
+    return this.http.post<FishPhoto[]>(this._url + `/v1/Photo/Aquarium/${id}/Fish`, pagination);
   }
   public getNotifications() {
     return this.http.get(this._url + `/v1/Account/Notifications`);
   }
   public dismissNotifications(notifIds: number[]) {
-    return this.http.post(this._url + `/v1/Account/Notifications/Dismiss`,notifIds);
-  }  
+    return this.http.post(this._url + `/v1/Account/Notifications/Dismiss`, notifIds);
+  }
 
   /* Water Changes */
   public getWaterChangesByAquarium(aquariumId: number) {
     return this.http.get<WaterChange[]>(this._url + `/v1/Aquarium/${aquariumId}/Water/Change`);
   }
-  public addWaterChange(aquariumId: number,waterChange: WaterChange) {
-    return this.http.post<WaterChange>(this._url + `/v1/Aquarium/${aquariumId}/Water/Change`,waterChange);
+  public addWaterChange(aquariumId: number, waterChange: WaterChange) {
+    return this.http.post<WaterChange>(this._url + `/v1/Aquarium/${aquariumId}/Water/Change`, waterChange);
   }
-  public updateWaterChange(aquariumId: number,waterChange: WaterChange) {
-    return this.http.put<WaterChange>(this._url + `/v1/Aquarium/${aquariumId}/Water/Change`,waterChange);
+  public updateWaterChange(aquariumId: number, waterChange: WaterChange) {
+    return this.http.put<WaterChange>(this._url + `/v1/Aquarium/${aquariumId}/Water/Change`, waterChange);
   }
-  public deleteWaterChanges(aquariumId: number,waterChangeIds: number[]) {
-    return this.http.post(this._url + `/v1/Aquarium/${aquariumId}/Water/Change/Delete`,waterChangeIds);
+  public deleteWaterChanges(aquariumId: number, waterChangeIds: number[]) {
+    return this.http.post(this._url + `/v1/Aquarium/${aquariumId}/Water/Change/Delete`, waterChangeIds);
   }
   /* Water Dosings */
   public getWaterDosesByAquarium(aquariumId: number) {
     return this.http.get<WaterDosing[]>(this._url + `/v1/Aquarium/${aquariumId}/Water/Dose`);
   }
-  public addWaterDosing(aquariumId: number,waterDosing: WaterDosing) {
-    return this.http.post<WaterDosing>(this._url + `/v1/Aquarium/${aquariumId}/Water/Dose`,waterDosing);
+  public addWaterDosing(aquariumId: number, waterDosing: WaterDosing) {
+    return this.http.post<WaterDosing>(this._url + `/v1/Aquarium/${aquariumId}/Water/Dose`, waterDosing);
   }
-  public updateWaterDosing(aquariumId: number,waterDosing: WaterDosing) {
-    return this.http.put<WaterDosing>(this._url + `/v1/Aquarium/${aquariumId}/Water/Dose`,waterDosing);
+  public updateWaterDosing(aquariumId: number, waterDosing: WaterDosing) {
+    return this.http.put<WaterDosing>(this._url + `/v1/Aquarium/${aquariumId}/Water/Dose`, waterDosing);
   }
-  public deleteWaterDosings(aquariumId: number,waterDosingIds: number[]) {
-    return this.http.post(this._url + `/v1/Aquarium/${aquariumId}/Water/Dose/Delete`,waterDosingIds);
+  public deleteWaterDosings(aquariumId: number, waterDosingIds: number[]) {
+    return this.http.post(this._url + `/v1/Aquarium/${aquariumId}/Water/Dose/Delete`, waterDosingIds);
   }
 
 
-  public createPhotoTimelapse(snapshotIds: number[],options: PhotoTimelapseOptions) {
-    return this.http.post<PhotoContent>(this._url + `/v1/Photo/Timelapse`,{
+  public createPhotoTimelapse(snapshotIds: number[], options: PhotoTimelapseOptions) {
+    return this.http.post<PhotoContent>(this._url + `/v1/Photo/Timelapse`, {
       snapshotIds: snapshotIds,
       options: options
     });
@@ -393,15 +393,24 @@ export class AquariumService {
   public getDeviceATOStatus(deviceId: number) {
     return this.http.get<ATOStatus>(this._url + `/v1/Device/${deviceId}/ATO`);
   }
-
-  public createDeviceSensor(deviceId:number,deviceSensor: DeviceSensor) {
-    console.log(deviceSensor);
-    return this.http.post<DeviceSensor>(this._url + `/v1/Device/${deviceId}/Sensor/Create`,deviceSensor);
+  public runDeviceATO(deviceId: number,maxRuntime: number) {
+    return this.http.post<ATOStatus>(this._url + `/v1/Device/${deviceId}/ATO`,maxRuntime);
   }
-  public getDeviceSensors(deviceId:number) {
+  public stopDeviceATO(deviceId: number) {
+    return this.http.post<ATOStatus>(this._url + `/v1/Device/${deviceId}/ATO/Stop`,null);
+  }
+
+  public createDeviceSensor(deviceId: number, deviceSensor: DeviceSensor) {
+    console.log(deviceSensor);
+    return this.http.post<DeviceSensor>(this._url + `/v1/Device/${deviceId}/Sensor/Create`, deviceSensor);
+  }
+  public getDeviceSensors(deviceId: number) {
     return this.http.get<DeviceSensor[]>(this._url + `/v1/Device/${deviceId}/Sensors`);
   }
-  public removeDeviceSensor(deviceId:number,deviceSensor: DeviceSensor) {
-    return this.http.post<DeviceSensor>(this._url + `/v1/Device/${deviceId}/Sensor/Remove`,deviceSensor);
+  public removeDeviceSensor(deviceId: number, deviceSensor: DeviceSensor) {
+    return this.http.post<DeviceSensor>(this._url + `/v1/Device/${deviceId}/Sensor/Remove`, deviceSensor);
+  }
+  public updateDeviceSensor(deviceId: number, deviceSensor: DeviceSensor) {
+    return this.http.put<DeviceSensor>(this._url + `/v1/Device/${deviceId}/Sensor/Update`, deviceSensor);
   }
 }

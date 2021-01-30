@@ -75,6 +75,24 @@ export class DeviceSensorsComponent implements OnInit {
       this.disabledIds.splice(this.disabledIds.indexOf(deviceSensor.id), 1);
     });
   }
+  clickEditSensor(deviceSensor: DeviceSensor) {
+    if (this.disabledIds.indexOf(deviceSensor.id) != -1)
+      return;
+    this.disabledIds.push(deviceSensor.id);
+    delete this.error;
+
+    var dialog = this.dialog.open(CreateDeviceSensorModalComponent, {
+      width: "40%",
+    });
+    dialog.componentInstance.device = this.device;
+    dialog.componentInstance.newDeviceSensor = deviceSensor;
+    dialog.afterClosed().pipe(take(1)).subscribe((sensor) => {
+      this.disabledIds.splice(this.disabledIds.indexOf(deviceSensor.id), 1);
+      if (sensor) {
+        this.sensors.splice(this.sensors.indexOf(deviceSensor), 1, sensor);
+      }
+    });
+  }
   getSensorReadableType(types, type: number) {
     for (var i = 0; i < types.length; i++) {
       var t = types[i];

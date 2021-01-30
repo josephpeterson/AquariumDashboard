@@ -11,7 +11,7 @@
   <ng-container *ngIf="!loading else loadingTemplate">
     <ul class="list-group w-50">
       <li *ngFor="let s of sensors" class="list-group-item">
-        <h5>{{s.name}}</h5>
+        <h5>{{s.name}} ({{s.polarity ? "Output":"Input"}})</h5>
         <div>
           Type: {{getSensorReadableType(types,s.type)}}
         </div>
@@ -20,7 +20,7 @@
           <fa-icon [icon]="faTrash" (click)="clickRemoveSensor(s)"></fa-icon>
         </button>
         <button class="float-md-right btn btn-secondary mr-2" [disabled]="disabledIds.indexOf(s.id) != -1">
-          <fa-icon [icon]="faEdit" (click)="clickRemoveSensor(s)"></fa-icon>
+          <fa-icon [icon]="faEdit" (click)="clickEditSensor(s)"></fa-icon>
         </button>
       </li>
     </ul>
