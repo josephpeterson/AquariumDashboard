@@ -18,15 +18,12 @@
                     <input type="text" [disabled]="disabled" placeholder="Device Name" aria-label="Number" matInput
                         [(ngModel)]="device.name" name="name">
                 </mat-form-field>
-                <mat-form-field class="m-2">
-                    <mat-label>Type</mat-label>
-                    <mat-select [(ngModel)]="device.type" name="type" [disabled]="disabled">
-                        <mat-option value=1>
-                            Raspberry Pi
-                        </mat-option>
-                        <mat-option value=0>
-                            Other
-                        </mat-option>
+                <br>
+                <mat-form-field appearance="fill">
+                    <mat-label>Raspberry Pi Model</mat-label>
+                    <mat-select [disabled]="disabled" [(ngModel)]="device.type">
+                        <mat-option *ngFor="let rpi of raspberryPiModels" [value]="rpi.name">{{rpi.name}}</mat-option>
+                        <mat-option value="">Other</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>

@@ -8,7 +8,7 @@
   <div class="col-sm">
     <h6>On Device</h6>
     <div class="schedule-list">
-      <ng-container *ngIf="device.scheduleAssignments.length > 0 else noDeployments">
+      <ng-container *ngIf="device.scheduleAssignments && device.scheduleAssignments.length > 0 else noDeployments">
         <div *ngFor="let scheduleAssignment of device.scheduleAssignments">
           <div class="schedule list-group-item">
             <div class="row">

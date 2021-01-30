@@ -1,0 +1,65 @@
+<h4 class="justify-content-center">Add Sensor</h4>
+<ng-container *ngIf="!loading else loadingTemplate">
+	<div *ngIf="error" class="alert alert-danger">
+		<p class="error">{{error}}</p>
+	</div>
+	<div class="" *ngIf="getGpioConfiguration(device.type) else unsupported">
+		<mat-form-field class="m-2">
+			<input type="text" placeholder="Sensor Name" matInput [(ngModel)]="newDeviceSensor.name" name="name">
+		</mat-form-field>
+		<p class="text-muted" *ngIf="device.type">Your device model is current set to {{device.type}}.</p>
+		<div class="container">
+			<p>Select a pin location for the sensor. Based on your selected RaspberryPi configuration, this is your
+				Gpio arrangement.</p>
+			<div class="row" *ngFor="let row of getGpioConfiguration(device.type)">
+				<div class="gpioPort" *ngFor="let gpio of row" (click)="clickGpioPort(gpio)"
+					[class.ground]="gpio == GpioPinTypes.Ground" [class.selected]="gpio == newDeviceSensor.pin"
+					[class.pwr5V]="gpio == GpioPinTypes.pwr5V" [class.pwr3V]="gpio == GpioPinTypes.pwr3V"
+					[class.disabled]="isPortDisabled(gpio)">
+				</div>
+			</div>
+			<div class="row">
+				<generic-select label="Sensor Type" selectType="DeviceSensorTypes" [(inputModel)]="newDeviceSensor.type"></generic-select>
+
+			</div>
+			<div class="row">
+				<label>Sensor polarity</label>
+				<mat-radio-group aria-labelledby="example-radio-group-label" [(ngModel)]="newDeviceSensor.polarity">
+					<mat-radio-button [value]="0" class="ml-2">
+						Normal
+					</mat-radio-button>
+					<mat-radio-button [value]="1" class="ml-2">
+						Reversed
+					</mat-radio-button>
+				</mat-radio-group>
+			</div>
+			<div class="row">
+				<button class="m-2 btn btn-danger" mat-dialog-close>Cancel</button>
+				<button class="m-2 btn btn-success" (click)="clickCreateSensor()">Create</button>
+			</div>
+		</div>
+	</div>
+</ng-container>
+<ng-template #unsupported>
+	<div class="container alert alert-danger mt-2">
+		Unfortunately this device type is not supported. Please go to your aquarium device settings page to select a
+		supported device.
+		<br>
+		<br>
+		Current device type: {{device.type}}
+	</div>
+	<button class="m-2 btn btn-danger" mat-dialog-close>Close</button>
+</ng-template>
+<ng-template #loadingTemplate>
+	<div class="shadow p-3 mb-5 bg-white rounded d-flex flex-row text-center">
+		<table style="width:100%;height:100%;">
+			<tr>
+				<td>
+					<mat-progress-spinner class="mr-auto ml-auto align-middle" color="warn" mode="indeterminate">
+					</mat-progress-spinner>
+
+				</td>
+			</tr>
+		</table>
+	</div>
+</ng-template>

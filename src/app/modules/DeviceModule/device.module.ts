@@ -13,7 +13,7 @@ import { AppModule } from 'src/app/app.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterModule } from '@angular/router';
-import { MatSidenavModule, MatProgressSpinnerModule, MatCardModule, MatTableModule, MatTabsModule, MatCheckboxModule, MatInputModule, MatRadioModule, MatSortModule, MatMenuModule, MatIconModule, MatListModule, MatToolbarModule, MatFormFieldModule, MatPaginatorModule, MatSelectModule, MatDialogModule, MatSliderModule, MatButtonModule, MatDatepickerModule, MatAutocompleteModule, MatNativeDateModule } from '@angular/material';
+import { MatSidenavModule, MatProgressSpinnerModule, MatCardModule, MatTableModule, MatTabsModule, MatCheckboxModule, MatInputModule, MatRadioModule, MatSortModule, MatMenuModule, MatIconModule, MatListModule, MatToolbarModule, MatFormFieldModule, MatPaginatorModule, MatSelectModule, MatDialogModule, MatSliderModule, MatButtonModule, MatDatepickerModule, MatAutocompleteModule, MatNativeDateModule, MatProgressBarModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFileUploadModule } from 'angular-material-fileupload';
 import { Ng5SliderModule } from 'ng5-slider';
@@ -27,6 +27,7 @@ import { AuthGuard } from 'src/app/guards/AuthGuard';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AquariumInterceptor } from 'src/app/services/aquarium.interceptor';
 import { DeviceSensorsComponent } from './sensors/sensors.component';
+import { DeviceATOStatusComponent } from './ato-status/ato-status.component';
 
 
 @NgModule({
@@ -63,6 +64,7 @@ import { DeviceSensorsComponent } from './sensors/sensors.component';
     MatAutocompleteModule,
     MatNativeDateModule,
     MatFileUploadModule,
+    MatProgressBarModule,
     Ng5SliderModule,
     DeviceRoutes //<-- import
   ],
@@ -75,6 +77,7 @@ import { DeviceSensorsComponent } from './sensors/sensors.component';
     DeviceSensorsComponent,
     ScheduleBuilderComponent,
     DeviceScheduleStatusComponent,
+    DeviceATOStatusComponent
   ],
   exports: [
     DeviceDetailFormComponent

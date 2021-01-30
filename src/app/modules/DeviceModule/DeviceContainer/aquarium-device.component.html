@@ -1,9 +1,10 @@
-<ng-container *ngIf="aquarium.device as device else noDevice">
+<ng-container *ngIf="device as d else noDevice">
     <h3 class="p-2">Device</h3>
     <device-detail-view [aquarium]="aquarium"></device-detail-view>
     <device-schedule-builder [device]="device"></device-schedule-builder>
     <device-peripherials [aquarium]="aquarium"></device-peripherials>
-    <device-sensors [aquarium]="aquarium"></device-sensors>
+    <device-ato-status [aquarium]="aquarium"></device-ato-status>
+    <device-sensors [device]="device"></device-sensors>
     <device-information [aquarium]="aquarium"></device-information>
 
     <device-detail-form [aquarium]="aquarium"></device-detail-form>

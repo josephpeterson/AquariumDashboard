@@ -97,6 +97,7 @@ import { AquariumInterceptor } from 'src/app/services/aquarium.interceptor';
 import { SpeciesSelectComponent } from './species-select/species-select.component';
 import { FishPhotosComponent } from 'src/app/modules/SharedModule/fish-photos/fish-photos.component';
 import { GenericSelectComponent } from './form/generic-select/generic-select.component';
+import { CreateDeviceSensorModalComponent } from './modals/create-device-sensor-modal/create-device-sensor-modal.component';
 
 
 
@@ -131,7 +132,8 @@ var modals = [
   CreateNotificationModalComponent,
   CreateTimelapseModalComponent,
   SelectScheduleModalComponent,
-  CreateScheduleTaskModalComponent
+  CreateScheduleTaskModalComponent,
+  CreateDeviceSensorModalComponent
 ]
 @NgModule({
   imports: [

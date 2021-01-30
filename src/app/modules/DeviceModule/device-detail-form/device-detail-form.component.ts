@@ -12,6 +12,7 @@ import { take } from 'rxjs/operators';
 import { faCheckCircle, faDesktop, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { AquariumLoadSuccessAction } from 'src/app/store/aquarium/aquarium.actions';
 import { HttpErrorResponse } from '@angular/common/http';
+import { RaspberryPiModels } from 'src/app/models/types/RaspberyPiModels';
 
 
 @Component({
@@ -39,6 +40,10 @@ export class DeviceDetailFormComponent implements OnInit {
     faCheck = faCheckCircle;
     public faDevice: IconDefinition = faDesktop;
     deviceLog: string;
+
+
+    public raspberryPiModels = RaspberryPiModels;
+
 
 
 

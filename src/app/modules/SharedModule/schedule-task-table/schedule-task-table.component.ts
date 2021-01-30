@@ -15,9 +15,9 @@ export class ScheduleTaskTableComponent implements OnInit {
   public icon_delete = faTrash;
   public loading: boolean = false;
 
-  public taskTypes: any[] = []; 
-  public startTimes: any[] = []; 
-  public endTimes: any[] = []; 
+  public taskTypes: any[] = [];
+  public startTimes: any[] = [];
+  public endTimes: any[] = [];
   public addTaskRepeating: boolean = false;
   addingTask: boolean = true;
   public newTask: DeviceScheduleTask = new DeviceScheduleTask();
@@ -33,7 +33,7 @@ export class ScheduleTaskTableComponent implements OnInit {
       this.taskTypes = data;
     })
 
-    this.schedule.tasks.forEach((t,i) => {
+    this.schedule.tasks.forEach((t, i) => {
       this.startTimes[i] = this.dateToStrTime(t.startTime);
       this.endTimes[i] = this.dateToStrTime(t.endTime);
     });
@@ -64,7 +64,7 @@ export class ScheduleTaskTableComponent implements OnInit {
     return moment(date).local().calendar();
   }
 
-  
+
   public getTaskName(taskId: number) {
     var task = this.taskTypes[taskId];
     if (task)
@@ -85,7 +85,7 @@ export class ScheduleTaskTableComponent implements OnInit {
     var str = hours + ":" + minutes;
     return str;
   }
-  private strToDate(str:string) {
+  private strToDate(str: string) {
     var d = new Date();
     var hours = parseInt(str.split(":")[0]);
     var minutes = parseInt(str.split(":")[1]);
@@ -95,9 +95,18 @@ export class ScheduleTaskTableComponent implements OnInit {
   }
   //Bind to time stuff...
   public updateTasks() {
-    this.schedule.tasks.forEach((t,i) => {
+    this.schedule.tasks.forEach((t, i) => {
       t.startTime = this.strToDate(this.startTimes[i]);
       t.endTime = this.strToDate(this.endTimes[i]);
     });
+  }
+
+  public toggleRepeat(task: DeviceScheduleTask,value) {
+    if (value)
+      task.interval = 5;
+    else
+      task.interval = null;
+
+    console.log(task.interval);
   }
 }

@@ -26,6 +26,8 @@ import { PaginationSliver } from '../models/PaginationSliver';
 import { WaterChange } from '../models/WaterChange';
 import { WaterDosing } from '../models/WaterDosing';
 import { PhotoTimelapseOptions } from '../models/PhotoTimelapseOptions';
+import { ATOStatus } from "../models/ATOStatus";
+import { DeviceSensor } from "../models/DeviceSensor";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -383,5 +385,23 @@ export class AquariumService {
   /* Form Components */
   public getSelectOptionsByType(selectType: string) {
     return this.http.get<any[]>(this._url + `/v1/Form/Select/${selectType}`);
+  }
+
+
+  /* Device ATO Status */
+  /* Form Components */
+  public getDeviceATOStatus(deviceId: number) {
+    return this.http.get<ATOStatus>(this._url + `/v1/Device/${deviceId}/ATO`);
+  }
+
+  public createDeviceSensor(deviceId:number,deviceSensor: DeviceSensor) {
+    console.log(deviceSensor);
+    return this.http.post<DeviceSensor>(this._url + `/v1/Device/${deviceId}/Sensor/Create`,deviceSensor);
+  }
+  public getDeviceSensors(deviceId:number) {
+    return this.http.get<DeviceSensor[]>(this._url + `/v1/Device/${deviceId}/Sensors`);
+  }
+  public removeDeviceSensor(deviceId:number,deviceSensor: DeviceSensor) {
+    return this.http.post<DeviceSensor>(this._url + `/v1/Device/${deviceId}/Sensor/Remove`,deviceSensor);
   }
 }

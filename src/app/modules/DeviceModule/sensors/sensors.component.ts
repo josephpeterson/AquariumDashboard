@@ -3,9 +3,13 @@ import { Aquarium } from 'src/app/models/Aquarium';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
 import { NotifierService } from 'angular-notifier';
-import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { faCheckCircle, faEdit, faSync, faTrash, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { MatDialog } from '@angular/material';
-import { ManagePhotoConfigurationModal } from 'src/app/modules/SharedModule/modals/manage-photo-configuration/manage-photo-configuration.component';
+import { CreateDeviceSensorModalComponent } from '../../SharedModule/modals/create-device-sensor-modal/create-device-sensor-modal.component';
+import { take } from 'rxjs/operators';
+import { DeviceSensor } from 'src/app/models/DeviceSensor';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'device-sensors',
@@ -14,11 +18,22 @@ import { ManagePhotoConfigurationModal } from 'src/app/modules/SharedModule/moda
 })
 export class DeviceSensorsComponent implements OnInit {
 
-  @Input("aquarium") public aquarium: Aquarium;
-  scanning: boolean;
+  @Input("device") public device: AquariumDevice;
 
+  public loading: boolean = false;
+  public error: string;
+  public sensors: DeviceSensor[];
+  public disabledIds: number[] = [];
+
+
+  public faRefresh: IconDefinition = faSync;
+  public faTrash: IconDefinition = faTrash;
+  public faEdit: IconDefinition = faEdit;
   faCheck = faCheckCircle;
-  pinging: boolean;
+
+
+  public readableTypes = new Subject();
+
 
 
   constructor(public _aquariumService: AquariumService,
@@ -26,40 +41,58 @@ export class DeviceSensorsComponent implements OnInit {
     public dialog: MatDialog) { }
 
   ngOnInit() {
+    this.loadDeviceSensors();
+
+    this._aquariumService.getSelectOptionsByType("DeviceSensorTypes").subscribe((data: any[]) => {
+      this.readableTypes.next(data);
+    });
   }
 
-  clickScanDeviceHardware() {
-    this.scanning = true;
-    this._aquariumService.scanDeviceHardware(this.aquarium.device.id).subscribe(
-      (device: AquariumDevice) => {
-        console.log(device);
-        this.aquarium.device = device;
-        this.scanning = false;
-      }, err => {
-        this.scanning = false;
-        this.notifier.notify("error", "Check Device Hardware Failed");
-      })
+  clickAddSensor() {
+    var dialog = this.dialog.open(CreateDeviceSensorModalComponent, {
+      width: "40%",
+    });
+    dialog.componentInstance.device = this.device;
+    dialog.afterClosed().pipe(take(1)).subscribe((sensor) => {
+      //this.data.load(); //Shouldn't have to do this if we just add to the store
+      //this.loadDeviceSensors();
+      if (sensor)
+        this.sensors.push(sensor);
+    });
+    //dialog.error = new ConnectionError(error);
   }
-  clickPingDevice() {
-    this.pinging = true;
-    this._aquariumService.pingDevice(this.aquarium.device.id).subscribe(
-      () => {
-        this.pinging = false;
-        this.notifier.notify("success", "Connection to device was successfull");
-      }, err => {
-        this.pinging = false;
-        this.notifier.notify("error", "Could not connect to device");
-      })
+  clickRemoveSensor(deviceSensor: DeviceSensor) {
+    if (this.disabledIds.indexOf(deviceSensor.id) != -1)
+      return;
+
+    this.disabledIds.push(deviceSensor.id);
+    delete this.error;
+    this._aquariumService.removeDeviceSensor(this.device.id, deviceSensor).subscribe(res => {
+      this.disabledIds.splice(this.disabledIds.indexOf(deviceSensor.id), 1);
+      this.sensors.splice(this.sensors.indexOf(deviceSensor), 1);
+    }, (err: HttpErrorResponse) => {
+      this.error = err.message;
+      this.disabledIds.splice(this.disabledIds.indexOf(deviceSensor.id), 1);
+    });
   }
-  clickManagePhotoModule() {
-    this.dialog.open(ManagePhotoConfigurationModal, {
-      width: "50%",
-      data: this.aquarium.device
-    }).afterClosed().subscribe((device: AquariumDevice) => {
-      if (device)
-      {
-        this.aquarium.device.cameraConfiguration = device.cameraConfiguration;
-      }
+  getSensorReadableType(types, type: number) {
+    for (var i = 0; i < types.length; i++) {
+      var t = types[i];
+      if (t.value == type)
+        return t.key;
+    }
+    return "Unknown";
+  }
+  loadDeviceSensors() {
+    this.loading = true;
+    delete this.error;
+    this._aquariumService.getDeviceSensors(this.device.id).subscribe((res: DeviceSensor[]) => {
+      this.loading = false;
+      this.sensors = res;
+      console.log(res);
+    }, (err: HttpErrorResponse) => {
+      this.loading = false;
+      this.error = err.message;
     });
   }
 }

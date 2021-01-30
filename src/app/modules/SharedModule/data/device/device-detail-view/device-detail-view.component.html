@@ -4,7 +4,7 @@
             <div class="card mb-2 overview">
                 <div class="card-body">
                     <div class="card-title">
-                        <a class="btn" href="#" role="button" [routerLink]="['device']">
+                        <a class="btn" href="#" role="button" [routerLink]="['/aquarium/',aquarium.id,'device']">
                             <h4>
                                 <fa-icon class="mr-2" [icon]="faDevice"></fa-icon>
                                 {{aquarium.device.name}}

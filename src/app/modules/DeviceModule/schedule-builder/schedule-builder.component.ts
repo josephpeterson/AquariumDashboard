@@ -43,7 +43,7 @@ export class ScheduleBuilderComponent implements OnInit {
     this._aquariumService.getDeviceSchedules().subscribe((data: DeviceSchedule[]) => {
       this.schedule_list = data;
     }, err => {
-
+      
     })
   }
   public reloadDeviceSchedules() {

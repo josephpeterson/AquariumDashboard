@@ -88,8 +88,9 @@ export class CreateScheduleModalComponent implements OnInit {
     var dialog = this._dialog.open(CreateScheduleTaskModalComponent, {
       data: this.schedule
     });
-    dialog.afterClosed().subscribe((schedule: DeviceSchedule) => {
+    dialog.afterClosed().subscribe((task: DeviceScheduleTask) => {
       //Dont do anything?
+      console.log(this.schedule.tasks);
       })
   }
 }

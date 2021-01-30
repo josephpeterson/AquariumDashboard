@@ -26,6 +26,10 @@ export class GenericSelectComponent {
 
     public selectControl: FormControl = new FormControl();
 
+
+    @Input() inputModel: string;
+    @Output() inputModelChange = new EventEmitter<string>();
+
     @Output() onChange = new EventEmitter();
     //@Input() value: Species;
     @Input() selectType: string;
