@@ -34,7 +34,7 @@ export class CreateDeviceSensorModalComponent implements OnInit {
     //check if port is in use
     var used = false;
     this.device.sensors.forEach(s => {
-      if (s.pin == portType)
+      if (s.pin == portType && s.id != this.newDeviceSensor.id)
         used = true;
     });
     return used || portType == GpioPinTypes.pwr3V || portType == GpioPinTypes.pwr5V || portType == GpioPinTypes.Ground
@@ -42,11 +42,13 @@ export class CreateDeviceSensorModalComponent implements OnInit {
   clickGpioPort(port: GpioPinTypes) {
     if (this.isPortDisabled(port))
       return;
-    this.newDeviceSensor.pin = port;
+    this.newDeviceSensor.pin = this.getGpioConfiguration(this.device.type).indexOf(port) + 1;
   }
   clickCreateSensor() {
     this.loading = true;
     delete this.error;
+
+
     this._aquariumService.createDeviceSensor(this.device.id, this.newDeviceSensor).subscribe(res => {
       this.loading = false;
       this._self.close(this.newDeviceSensor);
@@ -71,6 +73,25 @@ export class CreateDeviceSensorModalComponent implements OnInit {
       var m = RaspberryPiModels[i];
       if (m.name == model)
         return m.gpioConfiguration;
+    }
+    return;
+  }
+  isSelected(gpio: GpioPinTypes) {
+    return this.getGpioConfiguration(this.device.type).indexOf(gpio) == this.newDeviceSensor.pin-1;
+  }
+  getGpioRow2(model: string) {
+    for (var i = 0; i < RaspberryPiModels.length; i++) {
+      var m = RaspberryPiModels[i];
+      if (m.name == model)
+        return m.gpioConfiguration.filter((x, i) => i % 2 == 0);
+    }
+    return;
+  }
+  getGpioRow1(model: string) {
+    for (var i = 0; i < RaspberryPiModels.length; i++) {
+      var m = RaspberryPiModels[i];
+      if (m.name == model)
+        return m.gpioConfiguration.filter((x, i) => i % 2 == 1);
     }
     return;
   }

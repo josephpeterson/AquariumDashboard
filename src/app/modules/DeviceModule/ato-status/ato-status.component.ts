@@ -9,6 +9,7 @@ import { ManagePhotoConfigurationModal } from 'src/app/modules/SharedModule/moda
 import { ATOStatus } from 'src/app/models/ATOStatus';
 import { HttpErrorResponse } from '@angular/common/http';
 import * as moment from 'moment';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'device-ato-status',
@@ -27,6 +28,9 @@ export class DeviceATOStatusComponent implements OnInit {
   public atoStatus: ATOStatus;
   public loading: boolean = false;
 
+  public currentATOProgress:number;
+  public updateTick;
+
 
   public atoRecommended: boolean = true;
 
@@ -35,7 +39,11 @@ export class DeviceATOStatusComponent implements OnInit {
     public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.loadStatus();
+    this.loadStatus()
+    this.updateTick = setInterval(() => this.updateATOProgress(),100);
+  }
+  ngOnDestroy(): void {
+    clearInterval(this.updateTick);
   }
   public loadStatus() {
     this.loading = true;
@@ -50,6 +58,18 @@ export class DeviceATOStatusComponent implements OnInit {
   }
   public parseDate(date: string) {
     return moment(date).local().calendar();
+  }
+  public updateATOProgress() {
+    var ato = this.atoStatus;
+    if(!ato)
+      return;
+    var start = Date.parse(ato.startTime);
+    var estEnd = Date.parse(ato.estimatedEndTime);
+    var current = Date.now();
+
+    var totalMs = ato.maxRuntime * 60 * 1000;
+    var passedMs = current-start;
+    this.currentATOProgress = Math.floor(passedMs / totalMs * 10000)/100;
   }
   public clickRunATO() {
     this.loading = true;

@@ -4,31 +4,43 @@
   <ng-container *ngIf="atoStatus else noStatus">
     <ng-container *ngIf="atoStatus.enabled == true">
       <ng-container *ngIf="atoStatus.pumpRunning else standard">
-        <div class="card p-2">
-          <h5>Running...</h5>
-          <ul class="list-group w-50">
-            <li class="list-group-item">
-              Id: {{atoStatus.id}}
-            </li>
-            <li class="list-group-item">
-              Start Time: {{parseDate(atoStatus.startTime)}}
-            </li>
-            <li class="list-group-item">
-              Estimated End Time: {{parseDate(atoStatus.estimatedEndTime)}}
-            </li>
-            <li class="list-group-item">
-              ATO Pump: Running
-            </li>
-            <li class="list-group-item">
-              Water Level: {{atoStatus.sensorValue}}
-            </li>
-          </ul>
-          <div class="m-3">
-            <mat-progress-bar></mat-progress-bar>
+        <div class="card">
+          <div class="card-header">
+            <h5>Running...</h5>
+            <p class="text-muted">Auto top off is currently running</p>
+          </div>
+          <div class="card-body">
+
+            <div class="row">
+              <ul class="list-group w-50">
+                <li class="list-group-item">
+                  Id: {{atoStatus.id}}
+                </li>
+                <li class="list-group-item">
+                  Start Time: {{parseDate(atoStatus.startTime)}}
+                </li>
+                <li class="list-group-item">
+                  Estimated End Time: {{parseDate(atoStatus.estimatedEndTime)}}
+                </li>
+                <li class="list-group-item">
+                  ATO Pump: Running
+                </li>
+                <li class="list-group-item">
+                  Water Level: {{atoStatus.sensorValue}}
+                </li>
+              </ul>
+            </div>
+            <div class="row m-3">
+              <mat-progress-bar [value]="currentATOProgress"></mat-progress-bar>
+            </div>
+            <div class="row">
+              <button class="mt-2 btn btn-danger" (click)="clickStopATO()">Stop</button>
+            </div>
+            <div class="row">
+              <ng-container *ngTemplateOutlet="timestamp"></ng-container>
+            </div>
           </div>
         </div>
-        <button class="mt-2 btn btn-danger" (click)="clickStopATO()">Stop</button>
-
       </ng-container>
     </ng-container>
     <ng-template #standard>
@@ -48,6 +60,13 @@
 </ng-container>
 <ng-template #noStatus>
   <p>No auto top off status available for this device.</p>
+</ng-template>
+<ng-template #timestamp>
+  <p class="text-muted">Last Updated at {{parseDate(atoStatus.updatedAt)}}
+    <button class="mt-2 btn btn-link" (click)="clickRefresh()">
+      <fa-icon [icon]="faRedo"></fa-icon>
+    </button>
+  </p>
 </ng-template>
 
 
