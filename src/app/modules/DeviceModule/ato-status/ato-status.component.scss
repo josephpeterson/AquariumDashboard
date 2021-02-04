@@ -1,0 +1,22 @@
+.header {
+    small {
+        color:limegreen;
+        font-size:10pt;
+        margin-left:3px;
+    }
+    small.disabled {
+        color:indianred;
+    }
+}
+.atoHistory {
+    font-size:10pt;
+    word-wrap: none;
+    white-space: nowrap;
+
+    th {
+        color: gray;
+    }
+    thead {
+        border-botom:1px solid gray;
+    }
+}

@@ -1,0 +1,12 @@
+<div>
+
+	<h4 class="justify-content-center">Run Auto Top Off</h4>
+	<p class="text-muted">Are you sure you would like to perform an auto top off?</p>
+	<div class="row">
+		<input type="text" placeholder="Max Runtime (min)"  [(ngModel)]="runtime">
+	</div>
+	<mat-dialog-actions>
+		<button class="m-2 btn btn-danger" mat-dialog-close>Cancel</button>
+		<button class="m-2 btn btn-success" [mat-dialog-close]="{run: true, runtime: runtime}">Confirm</button>
+	</mat-dialog-actions>
+</div>

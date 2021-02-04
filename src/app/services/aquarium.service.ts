@@ -393,13 +393,20 @@ export class AquariumService {
   public getDeviceATOStatus(deviceId: number) {
     return this.http.get<ATOStatus>(this._url + `/v1/Device/${deviceId}/ATO`);
   }
-  public runDeviceATO(deviceId: number,maxRuntime: number) {
-    return this.http.post<ATOStatus>(this._url + `/v1/Device/${deviceId}/ATO`,maxRuntime);
+  public runDeviceATO(deviceId: number, maxRuntime: number) {
+    return this.http.post<ATOStatus>(this._url + `/v1/Device/${deviceId}/ATO`, maxRuntime);
   }
   public stopDeviceATO(deviceId: number) {
-    return this.http.post<ATOStatus>(this._url + `/v1/Device/${deviceId}/ATO/Stop`,null);
+    return this.http.post<ATOStatus>(this._url + `/v1/Device/${deviceId}/ATO/Stop`, null);
+  }
+  public getDeviceATOHistory(deviceId: number, pagination: PaginationSliver) {
+    return this.http.post<ATOStatus[]>(this._url + `/v1/Device/${deviceId}/ATO/History`, pagination);
   }
 
+
+
+
+  /* Device Sensors */
   public createDeviceSensor(deviceId: number, deviceSensor: DeviceSensor) {
     console.log(deviceSensor);
     return this.http.post<DeviceSensor>(this._url + `/v1/Device/${deviceId}/Sensor/Create`, deviceSensor);

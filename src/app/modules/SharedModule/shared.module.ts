@@ -98,6 +98,7 @@ import { SpeciesSelectComponent } from './species-select/species-select.componen
 import { FishPhotosComponent } from 'src/app/modules/SharedModule/fish-photos/fish-photos.component';
 import { GenericSelectComponent } from './form/generic-select/generic-select.component';
 import { CreateDeviceSensorModalComponent } from './modals/create-device-sensor-modal/create-device-sensor-modal.component';
+import { RunATOModalComponent } from './modals/run-ato-modal/run-ato-modal.component';
 
 
 
@@ -133,7 +134,8 @@ var modals = [
   CreateTimelapseModalComponent,
   SelectScheduleModalComponent,
   CreateScheduleTaskModalComponent,
-  CreateDeviceSensorModalComponent
+  CreateDeviceSensorModalComponent,
+  RunATOModalComponent
 ]
 @NgModule({
   imports: [
