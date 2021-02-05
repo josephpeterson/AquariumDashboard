@@ -82,6 +82,9 @@ export class NavMenuNotificationsComponent implements OnInit {
       (err: HttpErrorResponse) => {
         this.loading = false;
         //console.error(err);
+
+        //todo: dont just clear the interval
+        clearInterval(this.notificationTick);
       });
     this.notificationTick = setTimeout(() => {
       this.loadNotifications();
