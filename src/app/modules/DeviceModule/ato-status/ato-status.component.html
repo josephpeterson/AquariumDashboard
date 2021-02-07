@@ -1,53 +1,20 @@
 <h3 class="pt-5 header">
   Auto Top Off
-  <small *ngIf="atoStatus && atoStatus.enabled">
+  <small *ngIf="!loading && atoStatus && atoStatus.enabled">
     <fa-icon [icon]="faCheck" class="mr-1"></fa-icon>Enabled
   </small>
-  <small *ngIf="atoStatus && !atoStatus.enabled" class="disabled">
+  <small *ngIf="!loading && atoStatus && !atoStatus.enabled" class="disabled">
     <fa-icon [icon]="faTimes" class="mr-1"></fa-icon>Disabled
   </small>
   <small *ngIf="loading">
     <fa-icon [icon]="faSpinner" class="mr-1"></fa-icon>Loading
   </small>
 </h3>
-<p class="text-muted">View the current auto top off status.</p>
+<p class="text-muted content">View the current auto top off status. You can trigger an auto top off here.</p>
 
 
 
 
-
-<div class="row">
-  <p class="text-muted" *ngIf="atoStatus">Last Updated at {{parseDate(atoStatus.updatedAt)}}
-    <button class="mt-2 btn btn-link" (click)="clickRefresh()">
-      <fa-icon [icon]="faRedo"></fa-icon>
-    </button>
-  </p>
-</div>
-<div class="row" *ngIf="atoHistory">
-  <div class="card p-3 w-100">
-    <table class="atoHistory">
-      <thead>
-        <tr>
-          <th>Start Time</th>
-          <th>End Time</th>
-          <th>End Reason</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let ato of atoHistory">
-          <td>{{parseDateHistory(ato.startTime)}}</td>
-          <td>
-            {{parseDateHistory(ato.endTime)}}
-            <small class="text-muted">
-              ({{computeTimeDifference(ato)}}s)
-            </small>
-          </td>
-          <td>{{ato.endReason}}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
 
 
 <ng-container *ngIf="atoStatus else noStatus">
@@ -93,26 +60,74 @@
     </ng-container>
   </ng-container>
   <ng-template #standard>
-    <div class="alert alert-info alert-dismissible fade show" role="alert" *ngIf="atoStatus.nextRunTime">
+    <div class="alert alert-info alert-dismissible fade show" role="alert" *ngIf="atoStatus.nextRunTime else checkATO">
       <p>ATO is currently scheduled to run next at: {{parseDate(atoStatus.nextRunTime)}}</p>
     </div>
-
-
-
-
-
-
-
-    <button class="mt-2 btn btn-success" (click)="clickRunATO()">Run ATO...</button>
-
-
-    <p class="text-muted">Last Updated at {{parseDate(atoStatus.updatedAt)}}
-      <button class="mt-2 btn btn-link" (click)="clickRefresh()">
-        <fa-icon [icon]="faRedo"></fa-icon>
-      </button>
-    </p>
+    <ng-template #checkATO>
+      <div class="alert alert-info alert-dismissible fade show" role="alert" *ngIf="atoStatus.floatSensorValue == 1">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <p>
+    
+          We've detected that your water level is low! In order to maintain stable aquarium parameters we recommend
+          topping
+          off your aquarium with more water.
+        </p>
+        <hr>
+        <button class="btn btn-success" (click)="clickRunATO()">Run ATO</button>
+      </div>
+    </ng-template>
+    <p>Sensor Value: {{atoStatus.floatSensorValue}}</p>
+    <p>Pump: {{atoStatus.floatSensor.name}}</p>
+    <p>Float Sensor: {{atoStatus.pumpRelaySensor.name}}</p>
   </ng-template>
 </ng-container>
+
+<!-- Update Timestamp -->
+<div *ngIf="atoStatus">
+  <div class="text-muted">Last Updated at {{parseDate(atoStatus.updatedAt)}}
+    <button class="btn btn-link" (click)="clickRefresh()">
+      <fa-icon [icon]="faRedo"></fa-icon>
+    </button>
+  </div>
+</div>
+
+<p>
+  <button class="btn btn-success" (click)="clickRunATO()">Run ATO</button>
+</p>
+
+
+<!-- History -->
+<div class="row" *ngIf="atoHistory">
+  <div class="col-md-8">
+    <div class="card p-3 w-100">
+      <h4>History</h4>
+      <table class="atoHistory">
+        <thead>
+          <tr>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>End Reason</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ato of atoHistory">
+            <td>{{parseDateHistory(ato.startTime)}}</td>
+            <td>
+              {{parseDateHistory(ato.actualEndTime,true)}}
+              <small class="text-muted">
+                ({{computeTimeDifference(ato)}}s)
+              </small>
+            </td>
+            <td>{{ato.endReason}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
 
 
 
@@ -130,18 +145,3 @@
   </div>
 </ng-template>
 
-<ng-template #recommended>
-  <div class="alert alert-info alert-dismissible fade show" role="alert" *ngIf="atoRecommended">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-    <p>
-
-      We've detected that your water level is low! In order to maintain stable aquarium parameters we recommend
-      topping
-      off your aquarium with more water.
-    </p>
-    <hr>
-    <button class="btn btn-success">Run ATO</button>
-  </div>
-</ng-template>

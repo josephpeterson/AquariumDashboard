@@ -1,6 +1,4 @@
-<div class="container">
-    <router-outlet *ngIf="aquarium$ | async else loading"></router-outlet>
-</div>
+<router-outlet *ngIf="aquarium$ | async else loading"></router-outlet>
 <ng-template #loading>
     <loading-container></loading-container>
 </ng-template>

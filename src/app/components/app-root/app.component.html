@@ -1,11 +1,21 @@
-<mat-sidenav-container >
-    <mat-sidenav *ngIf="user$ | async" #sidenav mode="side" [(opened)]="sidebarOpened" [fixedInViewport]="1" [fixedTopGap]="60" >
-        <side-bar></side-bar>
-    </mat-sidenav>
 
-    <mat-sidenav-content >
-        <nav-menu></nav-menu>
-        <router-outlet></router-outlet>
-    </mat-sidenav-content>
-</mat-sidenav-container>
-<notifier-container></notifier-container>
+<nav-menu></nav-menu>
+<ng-container *ngIf="user$ | async else notlogged">
+    <div class="container-fluid">
+        <div class="row">
+            <side-bar></side-bar>
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                <div
+                    class="justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+                    <router-outlet></router-outlet>
+                </div>
+            </main>
+
+        </div>
+    </div>
+    <notifier-container></notifier-container>
+</ng-container>
+<ng-template #notlogged>
+    <router-outlet></router-outlet>
+
+</ng-template>

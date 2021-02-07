@@ -72,8 +72,15 @@ export class DeviceATOStatusComponent implements OnInit {
   public parseDate(date: string) {
     return moment(date).local().calendar();
   }
-  public parseDateHistory(date: string) {
+  public parseDateHistory(date: string,timeOnly:boolean = false) {
+    if(timeOnly)
+    {
+      return moment(date).local().format('h:mm a');
+    }
     return moment(date).local().calendar();
+  }
+  public readableDuration(timespan: string) {
+    return moment.duration(timespan).humanize();
   }
   public computeTimeDifference(atoStatus:ATOStatus) {
     var actual = moment(atoStatus.actualEndTime);

@@ -1,5 +1,7 @@
-<ng-container *ngIf="device as d else noDevice">
-    <h3 class="p-2">Device</h3>
+<div *ngIf="device as d else noDevice"
+    class="justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+    <h1 class="bd-title">Device</h1>
+    <p class="lead">Manage your aquarium device, perform auto top off and look at device schedule status.</p>
     <device-detail-view [aquarium]="aquarium"></device-detail-view>
     <device-schedule-builder [device]="device"></device-schedule-builder>
     <device-peripherials [aquarium]="aquarium"></device-peripherials>
@@ -10,7 +12,8 @@
     <device-detail-form [aquarium]="aquarium"></device-detail-form>
 
     <device-log [device]="device"></device-log>
-</ng-container>
+</div>
+
 <ng-template #noDevice>
     <device-detail-form [aquarium]="aquarium"></device-detail-form>
 </ng-template>

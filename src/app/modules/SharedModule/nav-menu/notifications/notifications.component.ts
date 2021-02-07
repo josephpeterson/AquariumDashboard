@@ -24,6 +24,7 @@ export class NavMenuNotificationsComponent implements OnInit {
   public notifications: Notification[] = [];
   public types = NotificationTypes;
   public loading: boolean;
+  public error: boolean;
   public componentLifeCycle$ = new Subject();
 
   public notificationTick;
@@ -73,6 +74,8 @@ export class NavMenuNotificationsComponent implements OnInit {
   }
 
   public loadNotifications() {
+    if(this.error)
+      return;
     clearInterval(this.notificationTick);
     this.loading = true;
     this._aquariumService.getNotifications().subscribe((notifications: Notification[]) => {
@@ -82,6 +85,7 @@ export class NavMenuNotificationsComponent implements OnInit {
       (err: HttpErrorResponse) => {
         this.loading = false;
         //console.error(err);
+        this.error = true;
 
         //todo: dont just clear the interval
         clearInterval(this.notificationTick);
