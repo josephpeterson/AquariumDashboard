@@ -73,10 +73,13 @@ export class DeviceATOStatusComponent implements OnInit {
     return moment(date).local().calendar();
   }
   public parseDateHistory(date: string,timeOnly:boolean = false) {
+    if(!date)
+      return "--:--";
     if(timeOnly)
     {
       return moment(date).local().format('h:mm a');
     }
+    
     return moment(date).local().calendar();
   }
   public readableDuration(timespan: string) {
@@ -87,6 +90,12 @@ export class DeviceATOStatusComponent implements OnInit {
     var est = moment(atoStatus.estimatedEndTime);
     var s = moment.duration(actual.diff(est)).asSeconds();
     return Math.ceil(s);
+  }
+  public getRunTime(atoStatus:ATOStatus) {
+    var actual = moment(atoStatus.startTime);
+    var end = moment(atoStatus.actualEndTime);
+    var s = moment.duration(actual.diff(end)).humanize();
+    return s;
   }
   public updateATOProgress() {
     var ato = this.atoStatus;

@@ -29,7 +29,6 @@ export class AquariumDeviceComponent implements OnInit {
     this.aquarium$.pipe(take(1)).subscribe(aq => {
       this.aquarium = aq
       this.aquariumService.getAquariumDeviceById(aq.device.id).pipe(take(1)).subscribe(d => {
-        console.log(d);
         this.device = d;
         d.aquarium = aq;
       });

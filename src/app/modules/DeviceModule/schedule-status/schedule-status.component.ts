@@ -6,7 +6,7 @@ import { NotifierService } from 'angular-notifier';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { DeviceScheduleState } from 'src/app/models/DeviceScheduleState';
 import * as moment from 'moment';
-import { DeviceScheduleTask } from 'src/app/models/DeviceScheduleTask';
+import { DeviceScheduleTask, DeviceScheduleTaskTypes } from 'src/app/models/DeviceScheduleTask';
 
 @Component({
   selector: 'device-schedule-status',
@@ -48,11 +48,23 @@ export class DeviceScheduleStatusComponent implements OnInit {
         this.notifier.notify("success", "Task was performed successfully!");
       }, err => {
         this.performingTask = false;
-        this.notifier.notify("error", "Could not perform task on device");
+        this.notifier.notify("error", "Task: " + err.error);
       })
   }
-  public readableDuration(timespan: string) {
-    return moment.duration(timespan).humanize();
+  public readableDuration(task: DeviceScheduleTask) {
+    var d = moment(task.startTime).diff(moment());
+    return moment.duration(d).humanize();
+  }
+  public readableDate(date: string) {
+    return moment(date).local().calendar();
+  }
+  public getTaskNameFromId(taskId: number) {
+    var types = DeviceScheduleTaskTypes;
+    for (var name in types) {
+      if(DeviceScheduleTaskTypes[name] == `${taskId}`)
+        return name;
+    }
+    return DeviceScheduleTaskTypes.Unknown;
   }
   
 }

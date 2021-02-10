@@ -42,7 +42,7 @@
                 ATO Pump: Running
               </li>
               <li class="list-group-item">
-                Water Level: {{atoStatus.sensorValue}}
+                Water Level: {{atoStatus.floatSensorValue ? "Low":"High"}}
               </li>
             </ul>
           </div>
@@ -69,7 +69,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
         <p>
-    
+
           We've detected that your water level is low! In order to maintain stable aquarium parameters we recommend
           topping
           off your aquarium with more water.
@@ -100,7 +100,7 @@
 
 <!-- History -->
 <div class="row" *ngIf="atoHistory">
-  <div class="col-md-8">
+  <div class="col-md-10">
     <div class="card p-3 w-100">
       <h4>History</h4>
       <table class="atoHistory">
@@ -109,18 +109,27 @@
             <th>Start Time</th>
             <th>End Time</th>
             <th>End Reason</th>
+            <th>Run Time</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let ato of atoHistory">
-            <td>{{parseDateHistory(ato.startTime)}}</td>
+          <tr *ngFor="let ato of atoHistory" [class.running]="!ato.completed">
+            <td>{{parseDate(ato.startTime)}}</td>
             <td>
-              {{parseDateHistory(ato.actualEndTime,true)}}
-              <small class="text-muted">
-                ({{computeTimeDifference(ato)}}s)
-              </small>
+              <ng-container *ngIf="ato.actualEndTime else invalid">
+                {{parseDateHistory(ato.actualEndTime,true)}}
+                <small class="text-muted">
+                  ({{computeTimeDifference(ato)}}s)
+                </small>
+              </ng-container>
+              
+              
             </td>
-            <td>{{ato.endReason}}</td>
+            <td>{{ato.endReason}}
+            </td>
+            <td class="text-muted" *ngIf="ato.actualEndTime else invalid">
+              {{getRunTime(ato)}}
+            </td>
           </tr>
         </tbody>
       </table>
@@ -129,7 +138,9 @@
 
 </div>
 
-
+<ng-template #invalid>
+  <span class="text-muted">--:--</span>
+</ng-template>
 
 
 
@@ -144,4 +155,3 @@
     <p>ATO is not enabled on this device. You must have two sensors equiped (ATO float sensor & Pump relay sensor).</p>
   </div>
 </ng-template>
-

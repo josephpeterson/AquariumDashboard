@@ -7,3 +7,8 @@ export class DeviceScheduleTask
   interval: number | null = 30
   taskId: number
 }
+export enum DeviceScheduleTaskTypes {
+  Unknown = 0,
+  Snapshot = 1,
+  StartATO = 2,
+}

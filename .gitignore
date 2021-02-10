@@ -2,3 +2,4 @@
 node_modules/*
 dist2/*
 dist/*
+src/environments/environment.ts
