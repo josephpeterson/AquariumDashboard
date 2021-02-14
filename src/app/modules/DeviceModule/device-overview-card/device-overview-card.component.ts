@@ -11,7 +11,6 @@ import { Aquarium } from 'src/app/models/Aquarium';
 import { DeviceScheduleTask, DeviceScheduleTaskTypes } from 'src/app/models/DeviceScheduleTask';
 import { NotifierService } from 'angular-notifier';
 import { DeviceScheduleState } from 'src/app/models/DeviceScheduleState';
-import { AquariumMethods } from 'src/app/global-methods';
 
 @Component({
     selector: 'device-overview-card',
