@@ -60,8 +60,13 @@ export class ScheduleTaskTableComponent implements OnInit {
   public parseInterval(interval: number) {
     return moment.duration(interval * 1000 * 60).asMinutes();
   }
-  public parseDate(date: string) {
-    return moment(date).local().calendar();
+  public parseDateFromUtc(date: string, timeOnly: boolean = false) {
+    if (!date)
+      return "--:--";
+    var mdate = moment.utc(date).local();
+    if (timeOnly)
+      return mdate.format('h:mm a');
+    return mdate.calendar();
   }
 
 

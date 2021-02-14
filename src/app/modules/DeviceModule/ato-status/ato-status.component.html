@@ -35,10 +35,10 @@
                 Id: {{atoStatus.id}}
               </li>
               <li class="list-group-item">
-                Start Time: {{parseDate(atoStatus.startTime)}}
+                Start Time: {{parseDateFromUtc(atoStatus.startTime)}}
               </li>
               <li class="list-group-item">
-                Estimated End Time: {{parseDate(atoStatus.estimatedEndTime)}}
+                Estimated End Time: {{parseDateFromUtc(atoStatus.estimatedEndTime)}}
               </li>
               <li class="list-group-item">
                 ATO Pump: Running
@@ -69,7 +69,7 @@
             <div class="col-md-8">
               <div class="alert alert-info alert-dismissible fade show" role="alert"
                 *ngIf="atoStatus.nextRunTime else checkATO">
-                <p>ATO is currently scheduled to run next at: {{parseDate(atoStatus.nextRunTime)}}</p>
+                <p>Auto top off is scheduled to run <b>{{parseDate(atoStatus.nextRunTime)}} <small>({{parseDuration(atoStatus.nextRunTime)}})</small></b>. If the float sensor is reading a low water level, the pump will turn on and begin the ATO process.</p>
               </div>
               <ng-template #checkATO>
                 <div class="alert alert-info alert-dismissible fade show" role="alert" *ngIf="isRunnable(atoStatus)">
@@ -125,10 +125,10 @@
         </thead>
         <tbody>
           <tr *ngFor="let ato of atoHistory" [class.running]="!ato.completed">
-            <td>{{parseDate(ato.startTime)}}</td>
+            <td>{{parseDateFromUtc(ato.startTime)}}</td>
             <td>
               <ng-container *ngIf="ato.actualEndTime else invalid">
-                {{parseDateHistory(ato.actualEndTime,true)}}
+                {{parseDateFromUtc(ato.actualEndTime,true)}}
                 <small class="text-muted">
                   ({{computeTimeDifference(ato)}}s)
                 </small>

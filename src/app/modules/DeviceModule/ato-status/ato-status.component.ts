@@ -13,6 +13,7 @@ import { Subject } from 'rxjs';
 import { RunATOModalComponent } from '../../SharedModule/modals/run-ato-modal/run-ato-modal.component';
 import { PaginationSliver } from 'src/app/models/PaginationSliver';
 import { GpioPinValue } from 'src/app/models/types/GpioPinValue';
+import { DeviceScheduleTask } from 'src/app/models/DeviceScheduleTask';
 
 @Component({
   selector: 'device-ato-status',
@@ -39,7 +40,7 @@ export class DeviceATOStatusComponent implements OnInit {
 
   public currentATOProgress: number;
   public updateTick;
-  public pagination:PaginationSliver = new PaginationSliver();
+  public pagination: PaginationSliver = new PaginationSliver();
 
 
   public atoRecommended: boolean = true;
@@ -70,29 +71,30 @@ export class DeviceATOStatusComponent implements OnInit {
       this.loading = false;
     })
   }
+  //parse date from utc
+  public parseDateFromUtc(date: string, timeOnly: boolean = false) {
+    if (!date)
+      return "--:--";
+    var mdate = moment.utc(date).local();
+    if (timeOnly)
+      return mdate.format('h:mm a');
+    return mdate.calendar();
+  }
   public parseDate(date: string) {
     return moment(date).local().calendar();
   }
-  public parseDateHistory(date: string,timeOnly:boolean = false) {
-    if(!date)
-      return "--:--";
-    if(timeOnly)
-    {
-      return moment(date).local().format('h:mm a');
-    }
-    
-    return moment(date).local().calendar();
+  public parseDuration(date: string) {
+    var actual = moment.utc(date);
+    var end = moment();
+    return moment.duration(actual.diff(end)).humanize();
   }
-  public readableDuration(timespan: string) {
-    return moment.duration(timespan).humanize();
-  }
-  public computeTimeDifference(atoStatus:ATOStatus) {
+  public computeTimeDifference(atoStatus: ATOStatus) {
     var actual = moment(atoStatus.actualEndTime);
     var est = moment(atoStatus.estimatedEndTime);
     var s = moment.duration(actual.diff(est)).asSeconds();
     return Math.ceil(s);
   }
-  public getRunTime(atoStatus:ATOStatus) {
+  public getRunTime(atoStatus: ATOStatus) {
     var actual = moment(atoStatus.startTime);
     var end = moment(atoStatus.actualEndTime);
     var s = moment.duration(actual.diff(end)).humanize();
@@ -139,7 +141,8 @@ export class DeviceATOStatusComponent implements OnInit {
     this.loadATOHistory();
   }
   public loadATOHistory() {
-    this._aquariumService.getDeviceATOHistory(this.aquarium.device.id,this.pagination).subscribe(atoHistory => {
+    this._aquariumService.getDeviceATOHistory(this.aquarium.device.id, this.pagination).subscribe(atoHistory => {
+      atoHistory = [atoHistory[0]]
       this.atoHistory = atoHistory;
       //this.loading = false;
     }, (err: HttpErrorResponse) => {
@@ -147,7 +150,7 @@ export class DeviceATOStatusComponent implements OnInit {
     })
   }
   public isRunnable(ato: ATOStatus) {
-    if(!ato)
+    if (!ato)
       return false;
     return ato.floatSensorValue == GpioPinValue.High;
   }
