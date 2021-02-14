@@ -142,7 +142,6 @@ export class DeviceATOStatusComponent implements OnInit {
   }
   public loadATOHistory() {
     this._aquariumService.getDeviceATOHistory(this.aquarium.device.id, this.pagination).subscribe(atoHistory => {
-      atoHistory = [atoHistory[0]]
       this.atoHistory = atoHistory;
       //this.loading = false;
     }, (err: HttpErrorResponse) => {
