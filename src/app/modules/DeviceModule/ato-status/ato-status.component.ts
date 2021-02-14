@@ -12,6 +12,7 @@ import * as moment from 'moment';
 import { Subject } from 'rxjs';
 import { RunATOModalComponent } from '../../SharedModule/modals/run-ato-modal/run-ato-modal.component';
 import { PaginationSliver } from 'src/app/models/PaginationSliver';
+import { GpioPinValue } from 'src/app/models/types/GpioPinValue';
 
 @Component({
   selector: 'device-ato-status',
@@ -135,6 +136,7 @@ export class DeviceATOStatusComponent implements OnInit {
   }
   public clickRefresh() {
     this.loadStatus();
+    this.loadATOHistory();
   }
   public loadATOHistory() {
     this._aquariumService.getDeviceATOHistory(this.aquarium.device.id,this.pagination).subscribe(atoHistory => {
@@ -143,5 +145,10 @@ export class DeviceATOStatusComponent implements OnInit {
     }, (err: HttpErrorResponse) => {
       //this.loading = false;
     })
+  }
+  public isRunnable(ato: ATOStatus) {
+    if(!ato)
+      return false;
+    return ato.floatSensorValue == GpioPinValue.High;
   }
 }

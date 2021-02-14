@@ -272,6 +272,8 @@ var modals = [
     FishCardDetailedComponent,
     SnapshotTableListComponent,
 
+
+
     /* Form Components */
     SpeciesSelectComponent,
     TypeSelectComponent,

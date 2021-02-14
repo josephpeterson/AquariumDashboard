@@ -28,6 +28,9 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AquariumInterceptor } from 'src/app/services/aquarium.interceptor';
 import { DeviceSensorsComponent } from './sensors/sensors.component';
 import { DeviceATOStatusComponent } from './ato-status/ato-status.component';
+import { DeviceSensorCardComponent } from './device-sensor-card/device-sensor-card.component';
+import { DeviceOverviewCardComponent } from './device-overview-card/device-overview-card.component';
+import { DeviceSnapshotCarouselComponent } from './device-snapshot-carousel/device-snapshot-carousel.component';
 
 
 @NgModule({
@@ -72,12 +75,15 @@ import { DeviceATOStatusComponent } from './ato-status/ato-status.component';
     AquariumDeviceComponent,
     DeviceDetailFormComponent,
     DeviceLogComponent,
+    DeviceOverviewCardComponent,
+    DeviceSensorCardComponent,
     DeviceInformationComponent,
     DevicePeripherialsComponent,
     DeviceSensorsComponent,
     ScheduleBuilderComponent,
     DeviceScheduleStatusComponent,
-    DeviceATOStatusComponent
+    DeviceATOStatusComponent,
+    DeviceSnapshotCarouselComponent,
   ],
   exports: [
     DeviceDetailFormComponent

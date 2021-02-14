@@ -1,12 +1,50 @@
 <div *ngIf="device as d else noDevice"
     class="justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-    <h1 class="bd-title">Device</h1>
-    <p class="lead">Manage your aquarium device, perform auto top off and look at device schedule status.</p>
-    <device-detail-view [aquarium]="aquarium"></device-detail-view>
-    <device-schedule-builder [device]="device"></device-schedule-builder>
-    <device-peripherials [aquarium]="aquarium"></device-peripherials>
-    <device-ato-status [aquarium]="aquarium"></device-ato-status>
-    <device-sensors [device]="device"></device-sensors>
+    <div>
+        <h1 class="display-4">Device</h1>
+        <p class="lead">
+            Manage your aquarium device, perform auto top off and look at device schedule status.
+        </p>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <device-overview-card [aquarium]="aquarium"></device-overview-card>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <device-snapshot-carousel></device-snapshot-carousel>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <device-schedule-builder [device]="device"></device-schedule-builder>
+        </div>
+    </div>
+    <!-- <device-peripherials [aquarium]="aquarium"></device-peripherials> -->
+
+
+    <div class="card mb-4">
+        <div class="card-body">
+
+            <device-ato-status [aquarium]="aquarium"></device-ato-status>
+        </div>
+    </div>
+    <div class="card mb-4">
+        <div class="card-body">
+
+            <device-sensors [device]="device"></device-sensors>
+        </div>
+    </div>
     <device-information [aquarium]="aquarium"></device-information>
 
     <device-detail-form [aquarium]="aquarium"></device-detail-form>

@@ -1,0 +1,18 @@
+.device-detail-view
+{
+    .overview
+    {
+        h4
+        {
+            font-size: 14pt;
+        }
+    }
+}
+small.online {
+    color:limegreen;
+    font-size:10pt;
+    margin-left:3px;
+}
+small.disabled {
+    color:indianred;
+}

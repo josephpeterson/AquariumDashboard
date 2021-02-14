@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { DeviceSchedule } from 'src/app/models/DeviceSchedule';
-import { faTrash, faPenFancy, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faPenFancy, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import { NotifierService } from 'angular-notifier';
 import { DeviceScheduleAssignment } from 'src/app/models/DeviceScheduleAssignment';
 import { MatDialog } from '@angular/material';
@@ -20,6 +20,7 @@ export class ScheduleBuilderComponent implements OnInit {
   @Input("device") device: AquariumDevice;
 
   public icon_delete = faTrash;
+  public icon_remove = faMinus;
   public icon_edit = faPenFancy;
   public icon_create = faPlus;
   public iconStyle = { 'stroke': '#9ed2da', 'color': '#9ed2da' };
@@ -141,17 +142,25 @@ export class ScheduleBuilderComponent implements OnInit {
       return (timeA > timeB) ? 1 : -1;
     })[0];
     if (task) {
-      return moment.utc(task.startTime).local().format('HH:mm');
+      return moment.utc(task.startTime).local().format('HH:mm a');
     }
   }
-  public getLatestTask(schedule:DeviceSchedule) {
+  public getEndTime(schedule:DeviceSchedule) {
+    var interval = false;
     var task = schedule.tasks.sort((a, b) => {
+      if(a.interval != null || b.interval != null)
+        interval = true;
       var timeA = new Date(a.endTime);
       var timeB = new Date(b.endTime);
       return (timeA < timeB) ? 1 : -1;
     })[0];
-    if (task) {
-      return moment.utc(task.endTime).local().format('hh:mm A');
+    if (task && interval) {
+      return moment.utc(task.endTime).local().format('hh:mm a');
     }
+    return "";
+  }
+  public getScheduleTimeSpan(schedule:DeviceSchedule) {
+    var str = this.getEarliestTask(schedule);
+    return str + this.getEndTime(schedule); //todo
   }
 }

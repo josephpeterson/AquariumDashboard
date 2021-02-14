@@ -1,11 +1,20 @@
-<h3 class="pt-5">Sensors</h3>
+<div class="row">
+  <div class="col-md-8">
+    <h3>
+      Sensors
+    </h3>
+    <p class="text-muted">These are all of the sensors the device is currently equipped with.</p>
+    <hr>
+  </div>
+</div>
 <div *ngIf="error" class="alert alert-danger">
   <p class="error">{{error}}</p>
   <button class="btn btn-secondary" (click)="loadDeviceSensors()">
     <fa-icon class="mr-2" [icon]="faRefresh"></fa-icon>Refresh
   </button>
 </div>
-<p class="text-muted">These are all of the sensors the device is currently equipped with.</p>
+
+
 <div *ngIf="(readableTypes | async) as types">
 
   <ng-container *ngIf="!loading else loadingTemplate">

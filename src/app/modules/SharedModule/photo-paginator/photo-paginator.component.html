@@ -1,38 +1,52 @@
-<div class="row" class="photo-paginator">
+<div class="photo-paginator">
+  <div class="row">
+    <div class="col-lg-12">
+      <button (click)="toggleSelecting()" class="btn btn-secondary" *ngIf="!selecting"> Select...</button>
+      <ng-container *ngIf="selecting">
+        <span>{{selection.length}} photos selected</span>
+        <button (click)="toggleSelecting()" class="btn btn-danger"> Cancel</button>
+        <button (click)="clickCreateTimelapse()" class="btn btn-info">Timelapse...</button>
+      </ng-container>
+    </div>
+  </div>
 
   <div class="row">
-    <button (click)="toggleSelecting()" class="btn btn-secondary" *ngIf="!selecting"> Select...</button>
-    <ng-container *ngIf="selecting">
-      <span>{{selection.length}} photos selected</span>
-      <button (click)="toggleSelecting()" class="btn btn-danger"> Cancel</button>
-      <button (click)="clickCreateTimelapse()" class="btn btn-info">Timelapse...</button>
-    </ng-container>
-  </div>
-
-  <ng-container *ngFor="let aqPhoto of photos">
-    <div [class.checked]="isSelected(aqPhoto)" (click)="selecting ? toggleSelection(aqPhoto):clickExpandedImage(aqPhoto)" class="m-1 rounded float-left photo-card">
-      <mat-checkbox disabled=true class="m-2" *ngIf="selecting" [checked]="isSelected(aqPhoto)"></mat-checkbox>
-      <img draggable=false [src]="getPhotoPermalink(aqPhoto.photo)" width="100%">
+    <div class="col-lg-12">
+      <ng-container *ngFor="let aqPhoto of photos">
+        <div [class.checked]="isSelected(aqPhoto)"
+          (click)="selecting ? toggleSelection(aqPhoto):clickExpandedImage(aqPhoto)"
+          class="m-1 rounded float-left photo-card">
+          <mat-checkbox disabled=true class="m-2" *ngIf="selecting" [checked]="isSelected(aqPhoto)"></mat-checkbox>
+          <img draggable=false [src]="getPhotoPermalink(aqPhoto.photo)" width="100%">
+        </div>
+      </ng-container>
+      <div *ngIf="photos.length == 0">
+        <div class="text-muted justify-content-center">
+          No Photos
+        </div>
+      </div>
     </div>
-  </ng-container>
-
-
-  <div *ngIf="photos.length == 0">
-    <div class="text-muted justify-content-center">
-      No Photos
+  </div>
+  <div class="row">
+    <div class="col-lg-12" *ngIf="loading">
+      <div class="container">
+        <loading-container></loading-container>
+      </div>
+    </div>
+    
+  </div>
+  <div class="row" *ngIf="!loading">
+    <div class="col-lg-12">
+      <button class="btn btn-link w-100" (click)="clickLoadMore()" *ngIf="!completed">Load More</button>
     </div>
   </div>
 </div>
-<div class="row justify-content-center" *ngIf="loading">
-  <loading-container></loading-container>
-</div>
+
+
 <div class="row" [style.display]="'none'">
   <input class="m-2 mat-input" type="number" placeholder="Start Index" [(ngModel)]="pagination.start">
   <input class="m-2 mat-input" type="number" placeholder="Count" [(ngModel)]="pagination.count">
   <mat-checkbox class="m-2" [(ngModel)]="pagination.descending">Descending
   </mat-checkbox>
   <button class="btn btn-info" (click)="loadAquariumPhotos()">Refresh</button>
-</div>
-<div class="row" *ngIf="!loading">
-  <button class="btn btn-link w-100" (click)="clickLoadMore()" *ngIf="!completed">Load More</button>
 </div>

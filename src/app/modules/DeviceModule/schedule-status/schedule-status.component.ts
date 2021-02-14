@@ -58,13 +58,6 @@ export class DeviceScheduleStatusComponent implements OnInit {
   public readableDate(date: string) {
     return moment(date).local().calendar();
   }
-  public getTaskNameFromId(taskId: number) {
-    var types = DeviceScheduleTaskTypes;
-    for (var name in types) {
-      if(DeviceScheduleTaskTypes[name] == `${taskId}`)
-        return name;
-    }
-    return DeviceScheduleTaskTypes.Unknown;
-  }
+  public getTaskNameFromId = DeviceScheduleTask.getTaskNameFromId;
   
 }
