@@ -1,9 +1,11 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DeviceScheduleTask } from 'src/app/models/DeviceScheduleTask';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { DeviceSchedule } from 'src/app/models/DeviceSchedule';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import * as moment from 'moment';
+import { CreateScheduleTaskModalComponent } from '../modals/create-schedule-task-modal/create-schedule-task-modal.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'schedule-task-table',
@@ -13,6 +15,8 @@ import * as moment from 'moment';
 export class ScheduleTaskTableComponent implements OnInit {
 
   public icon_delete = faTrash;
+  public icon_create = faPlus;
+
   public loading: boolean = false;
 
   public taskTypes: any[] = [];
@@ -26,19 +30,25 @@ export class ScheduleTaskTableComponent implements OnInit {
   @Input("schedule") public schedule: DeviceSchedule;
 
 
-  constructor(private _aquariumService: AquariumService) { }
+  constructor(private _aquariumService: AquariumService,
+    private _dialog: MatDialog,
+  ) { }
 
   ngOnInit() {
     this._aquariumService.getDeviceScheduleTaskTypes().subscribe((data: any) => {
       this.taskTypes = data;
     })
 
+    this.convertTimestamps();
+  }
+
+
+  private convertTimestamps() {
     this.schedule.tasks.forEach((t, i) => {
       this.startTimes[i] = this.dateToStrTime(t.startTime);
       this.endTimes[i] = this.dateToStrTime(t.endTime);
     });
   }
-
 
   public clickDeleteTask(task: DeviceScheduleTask) {
     var tasks = this.schedule.tasks;
@@ -49,26 +59,24 @@ export class ScheduleTaskTableComponent implements OnInit {
   }
 
   public clickAddTask() {
-    console.log(this.newTask);
-    this.schedule.tasks = this.schedule.tasks.concat([this.newTask]);
-    this.newTask = new DeviceScheduleTask();
-    this.addingTask = true;
-
+    var dialog = this._dialog.open(CreateScheduleTaskModalComponent, {
+      data: this.schedule
+    });
+    dialog.afterClosed().subscribe((task: DeviceScheduleTask) => {
+      //Dont do anything?
+      if (task) {
+        this.schedule.tasks.push(task);
+        console.log(task);
+      }
+      console.log(this.schedule.tasks);
+      this.convertTimestamps();
+    })
   }
 
 
   public parseInterval(interval: number) {
     return moment.duration(interval * 1000 * 60).asMinutes();
   }
-  public parseDateFromUtc(date: string, timeOnly: boolean = false) {
-    if (!date)
-      return "--:--";
-    var mdate = moment.utc(date).local();
-    if (timeOnly)
-      return mdate.format('h:mm a');
-    return mdate.calendar();
-  }
-
 
   public getTaskName(taskId: number) {
     var task = this.taskTypes[taskId];
@@ -106,12 +114,24 @@ export class ScheduleTaskTableComponent implements OnInit {
     });
   }
 
-  public toggleRepeat(task: DeviceScheduleTask,value) {
+  public toggleRepeat(task: DeviceScheduleTask, value) {
     if (value)
       task.interval = 5;
     else
       task.interval = null;
 
     console.log(task.interval);
+  }
+  public getAllTasks() {
+    this.schedule.tasks = this.schedule.tasks.sort((a, b) => {
+      var aT = new Date(a.startTime);
+      var bT = new Date(b.startTime);
+      var aTotal = aT.getHours() * 60 + aT.getMinutes();
+      var bTotal = bT.getHours() * 60 + bT.getMinutes();
+      return aTotal < bTotal ? -1 : 0;
+    });
+
+    this.convertTimestamps();
+    return this.schedule.tasks;
   }
 }

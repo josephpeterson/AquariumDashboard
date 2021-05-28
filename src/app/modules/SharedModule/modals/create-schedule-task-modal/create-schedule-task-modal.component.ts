@@ -18,8 +18,7 @@ export class CreateScheduleTaskModalComponent implements OnInit {
 
   public newTask:DeviceScheduleTask = new DeviceScheduleTask();
   
-  public schedule:DeviceSchedule;
-
+  public addTaskRepeating:boolean;
 
   public startTime:string;
   public endTime:string;
@@ -27,17 +26,12 @@ export class CreateScheduleTaskModalComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) private data,
     private _self: MatDialogRef<CreateScheduleTaskModalComponent>,
     private _aquariumService: AquariumService) {
-    this.schedule = data;
     this.startTime = "08:00";
     this.endTime = "00:00";
   }
-
-
   ngOnInit() {
-    
     this.loadTaskTypes();
   }
-
   loadTaskTypes() {
     this.loading = true;
     this._aquariumService.getDeviceScheduleTaskTypes().subscribe((data: any) => {
@@ -47,26 +41,20 @@ export class CreateScheduleTaskModalComponent implements OnInit {
     })
   }
   public clickFinishTask() {
-    
-    var startDate = this.strToDate(this.startTime);
-    var endDate = this.strToDate(this.endTime);
-
-    console.log(startDate,endDate);
-
+    function strToDate(str:string) {
+      var d = new Date();
+      var hours = parseInt(str.split(":")[0]);
+      var minutes = parseInt(str.split(":")[1]);
+      d.setHours(hours);
+      d.setMinutes(minutes);
+      return d;
+    }
+    var startDate = strToDate(this.startTime);
+    var endDate = strToDate(this.endTime);
     this.newTask.startTime = startDate;
     this.newTask.endTime = endDate;
-
-    this.schedule.tasks.push(this.newTask);
-
+    if(!this.addTaskRepeating)
+      delete this.newTask.interval;
     this._self.close(this.newTask);
-  }
-
-  private strToDate(str:string) {
-    var d = new Date();
-    var hours = parseInt(str.split(":")[0]);
-    var minutes = parseInt(str.split(":")[1]);
-    d.setHours(hours);
-    d.setMinutes(minutes);
-    return d;
   }
 }

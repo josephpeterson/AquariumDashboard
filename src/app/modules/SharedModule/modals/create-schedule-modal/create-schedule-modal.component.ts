@@ -83,14 +83,4 @@ export class CreateScheduleModalComponent implements OnInit {
       console.error(err);
     });
   }
-
-  public clickAddTask() {
-    var dialog = this._dialog.open(CreateScheduleTaskModalComponent, {
-      data: this.schedule
-    });
-    dialog.afterClosed().subscribe((task: DeviceScheduleTask) => {
-      //Dont do anything?
-      console.log(this.schedule.tasks);
-      })
-  }
 }

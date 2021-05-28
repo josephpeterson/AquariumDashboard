@@ -1,15 +1,15 @@
 <ul class="list-group">
-  <li class="list-group-item" *ngFor="let task of schedule.tasks">
+  <li class="list-group-item" *ngFor="let task of getAllTasks()">
     <div class="row">
       <div class="col-10">
-        <b>{{getTaskName(task.taskId)}}</b>
+        <b>{{getTaskName(task.taskId) ? getTaskName(task.taskId):"----------"}}</b>
         Start: <input type="time" [(ngModel)]="startTimes[schedule.tasks.indexOf(task)]"
           (ngModelChange)="updateTasks()">
         <mat-checkbox [checked]="task.interval != null" class="p-1" (change)="toggleRepeat(task,$event.checked)">Repeat
         </mat-checkbox>
         <ng-container *ngIf="task.interval != null">
           Every <input type="number" [(ngModel)]="task.interval" min=1> minutes
-          End: <input type="time" [(ngModel)]="startTimes[schedule.tasks.indexOf(task)]"
+          End: <input type="time" [(ngModel)]="endTimes[schedule.tasks.indexOf(task)]"
             (ngModelChange)="updateTasks()">
         </ng-container>
       </div>
@@ -21,3 +21,6 @@
     </div>
   </li>
 </ul>
+<button mat-list-item type="button" class="mt-2 btn btn-primary btn-sm" (click)="clickAddTask()">
+  <fa-icon class="addIcon mr-2" [icon]="icon_create"></fa-icon>New Task...
+</button>
