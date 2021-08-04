@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NotifierService } from 'angular-notifier';
+
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { IconDefinition, faBug } from '@fortawesome/free-solid-svg-icons';

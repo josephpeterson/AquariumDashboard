@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
-import { NotifierService } from 'angular-notifier';
+
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -20,7 +20,7 @@ export class DeviceInformationComponent implements OnInit {
   deviceInformation: any;
 
 
-  constructor(public _aquariumService: AquariumService, public notifier: NotifierService) { }
+  constructor(public _aquariumService: AquariumService, public notifier: NotificationService) { }
 
   ngOnInit() {
   }

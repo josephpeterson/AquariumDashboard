@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { NotifierService } from 'angular-notifier';
+
 import { Subject } from 'rxjs';
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
 import { AppState } from 'src/app/app.state';
@@ -45,7 +45,7 @@ export class SnapshotDetailChartComponent implements OnInit {
 
 
     constructor(public aquariumService: AquariumService,
-        private notifier: NotifierService,
+        private notifier: NotificationService,
         private dialog: MatDialog,
     ) {
 

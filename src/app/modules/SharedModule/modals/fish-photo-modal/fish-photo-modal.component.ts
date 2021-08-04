@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { AttachmentUploaderComponent } from '../../attachment-uploader/attachment-uploader.component';
-import { NotifierService } from 'angular-notifier';
+
 import { MatDialogRef } from '@angular/material';
 import { FishFeedModalComponent } from '../fish-feed-modal/fish-feed-modal.component';
 import { AppState } from 'src/app/app.state';
@@ -19,7 +19,7 @@ export class FishPhotoModal implements OnInit {
   @ViewChild(AttachmentUploaderComponent) attachmentComponent: AttachmentUploaderComponent;
   constructor(private _aquariumService: AquariumService,
     private store: Store<AppState>,
-    private notifier: NotifierService,
+    private notifier: NotificationService,
     private _dialog: MatDialogRef<FishPhotoModal>) { }
   ngOnInit() {
   }

@@ -3,7 +3,7 @@ import { ConnectionError } from 'src/app/models/ConnectionError';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
-import { NotifierService } from 'angular-notifier';
+
 import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
@@ -25,7 +25,7 @@ export class ManageSnapshotModal implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) snapshot,
     public _aquariumService: AquariumService,
-    private notifier: NotifierService,
+    private notifier: NotificationService,
     private dialogRef: MatDialogRef<ManageSnapshotModal>,
     private store: Store<AppState>) {
     this.snapshot = snapshot;

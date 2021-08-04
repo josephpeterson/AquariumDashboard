@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
-import { NotifierService } from 'angular-notifier';
+
 import { faCheckCircle, faEdit, faSync, faTrash, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { MatDialog } from '@angular/material';
 import { CreateDeviceSensorModalComponent } from '../../SharedModule/modals/create-device-sensor-modal/create-device-sensor-modal.component';
@@ -37,7 +37,7 @@ export class DeviceSensorsComponent implements OnInit {
 
 
   constructor(public _aquariumService: AquariumService,
-    public notifier: NotifierService,
+    public notifier: NotificationService,
     public dialog: MatDialog) { }
 
   ngOnInit() {

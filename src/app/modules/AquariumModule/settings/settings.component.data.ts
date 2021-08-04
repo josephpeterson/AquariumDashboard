@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 import { isLoadingAquariums, getConnectionError, getSelectedAquarium, isUpdatingAquarium, isDeletingAquarium, getDeleteError, getDidDelete, getDidUpdate } from 'src/app/store/aquarium/aquarium.selector';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { CameraConfiguration } from 'src/app/models/CameraConfiguration';
-import { NotifierService } from 'angular-notifier';
+
 import { take } from 'rxjs/operators';
 @Injectable({
   providedIn: "root"
@@ -25,7 +25,7 @@ export class SettingsComponentData {
 
   public cameraConfiguration = this.service.getCameraConfiguration();
 
-  constructor(private store: Store<AppState>,private service: AquariumService,public notifier: NotifierService){
+  constructor(private store: Store<AppState>,private service: AquariumService,public notifier: NotificationService){
   }
 
   isDetailed(aq) {

@@ -3,7 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material';
 import { CreateScheduleModalComponent } from '../create-schedule-modal/create-schedule-modal.component';
 import { PhotoExpandedModalComponent } from '../photo-expanded-modal/photo-expanded-modal.component';
 import { HttpErrorResponse } from '@angular/common/http';
-import { NotifierService } from 'angular-notifier';
+
 import { PhotoContent } from 'src/app/models/PhotoContent';
 import { PhotoTimelapseOptions } from 'src/app/models/PhotoTimelapseOptions';
 import { AquariumService } from 'src/app/services/aquarium.service';
@@ -25,7 +25,7 @@ export class CreateTimelapseModalComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) photos,
     private _dialogRef: MatDialogRef<CreateTimelapseModalComponent>,
     private aquariumService: AquariumService,
-    private notifier: NotifierService,
+    private notifier: NotificationService,
     private dialog: MatDialog
   ) {
     this.timelapsePhotos = photos;

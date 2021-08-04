@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { WaterChange } from 'src/app/models/WaterChange';
 import { AquariumService } from 'src/app/services/aquarium.service';
-import { NotifierService } from 'angular-notifier';
+
 import { Aquarium } from 'src/app/models/Aquarium';
 import { VisualAquariumComponentOptions } from 'src/app/modules/SharedModule/visual-aquarium/visual-aquarium.component';
 
@@ -21,7 +21,7 @@ export class WaterChangeComponent implements OnInit {
 
   constructor(
     private _aquariumService: AquariumService,
-    private notifier: NotifierService
+    private notifier: NotificationService
   ) { }
 
   ngOnInit() {

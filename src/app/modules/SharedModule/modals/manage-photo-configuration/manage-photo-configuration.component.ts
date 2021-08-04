@@ -3,7 +3,7 @@ import { ConnectionError } from 'src/app/models/ConnectionError';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
-import { NotifierService } from 'angular-notifier';
+
 
 @Component({
   selector: 'manage-photo-configuration',
@@ -15,7 +15,7 @@ export class ManagePhotoConfigurationModal implements OnInit {
   public updating: boolean = false;
   public device: AquariumDevice;
 
-  constructor(@Inject(MAT_DIALOG_DATA) data, private _aquariumService: AquariumService, private notifier: NotifierService, private dialogRef: MatDialogRef<ManagePhotoConfigurationModal>) {
+  constructor(@Inject(MAT_DIALOG_DATA) data, private _aquariumService: AquariumService, private notifier: NotificationService, private dialogRef: MatDialogRef<ManagePhotoConfigurationModal>) {
     this.device = {...data};
   }
 

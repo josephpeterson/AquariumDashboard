@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { NotifierService } from 'angular-notifier';
+
 import { take } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
@@ -47,6 +47,6 @@ export class SnapshotTakeButtonComponent implements OnInit {
             this.onPhotoTaken.emit(val);
         });
     }
-    constructor(private notifier: NotifierService, private store: Store<AppState>) { }
+    constructor(private notifier: NotificationService, private store: Store<AppState>) { }
 }
 

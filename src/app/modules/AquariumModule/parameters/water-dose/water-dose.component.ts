@@ -2,7 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { WaterDosing } from 'src/app/models/WaterDosing';
 import { AquariumService } from 'src/app/services/aquarium.service';
-import { NotifierService } from 'angular-notifier';
+import { NotificationService } from 'src/app/services/notification.service';
+
 
 @Component({
   selector: 'water-dose',
@@ -17,7 +18,7 @@ export class WaterDoseComponent implements OnInit {
 
   constructor(
     private _aquariumService: AquariumService,
-    private notifier: NotifierService
+    private notifier: NotificationService
   ) { }
 
   ngOnInit() {

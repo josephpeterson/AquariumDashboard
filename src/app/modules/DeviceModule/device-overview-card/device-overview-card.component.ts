@@ -9,7 +9,7 @@ import { take } from 'rxjs/operators';
 import { MatDialog } from '@angular/material';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { DeviceScheduleTask, DeviceScheduleTaskTypes } from 'src/app/models/DeviceScheduleTask';
-import { NotifierService } from 'angular-notifier';
+
 import { DeviceScheduleState } from 'src/app/models/DeviceScheduleState';
 
 @Component({
@@ -39,7 +39,7 @@ export class DeviceOverviewCardComponent implements OnInit {
     scheduleState: DeviceScheduleState = new DeviceScheduleState();
 
     constructor(private _aquariumService: AquariumService,
-        private _notifier: NotifierService,
+        private _notifier: NotificationService,
         private dialog: MatDialog) {
 
     }

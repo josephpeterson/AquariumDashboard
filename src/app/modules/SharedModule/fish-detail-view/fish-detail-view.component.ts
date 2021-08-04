@@ -8,7 +8,7 @@ import { take } from 'rxjs/operators';
 import { Species } from 'src/app/models/Species';
 import { SpeciesLoadAction, SpeciesAddAction } from 'src/app/store/species/species.actions';
 import { faTrash, faAngleRight } from '@fortawesome/free-solid-svg-icons';
-import { NotifierService } from 'angular-notifier';
+
 import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
 import { ConfirmModalComponent } from 'src/app/modules/SharedModule/modals/confirm-modal/confirm-modal.component';
@@ -63,7 +63,7 @@ export class FishDetailViewComponent implements OnInit {
     uploadingPhoto: boolean;
 
 
-    constructor(private store: Store<AppState>, private notifier: NotifierService, private dialog: MatDialog, private _aquariumService: AquariumService) {
+    constructor(private store: Store<AppState>, private notifier: NotificationService, private dialog: MatDialog, private _aquariumService: AquariumService) {
 
     }
     ngOnInit() {

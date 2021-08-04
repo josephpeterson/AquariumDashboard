@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { NotifierService } from 'angular-notifier';
+
 import { take } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
@@ -36,6 +36,6 @@ export class SnapshotDeleteButtonComponent
         this.notifier.notify("error","Could not delete snapshot");
         console.log(error.message,error);
     }
-    constructor(private notifier: NotifierService,private store: Store<AppState>) {}
+    constructor(private notifier: NotificationService,private store: Store<AppState>) {}
 }
 

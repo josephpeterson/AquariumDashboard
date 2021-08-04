@@ -9,7 +9,7 @@ import { take } from 'rxjs/operators';
 import { AquariumPhoto } from 'src/app/models/AquariumPhoto';
 import { PaginationSliver } from 'src/app/models/PaginationSliver';
 import { PhotoContent } from 'src/app/models/PhotoContent';
-import { NotifierService } from 'angular-notifier';
+
 import { HttpErrorResponse } from '@angular/common/http';
 import { PhotoTimelapseOptions } from 'src/app/models/PhotoTimelapseOptions';
 import { CreateTimelapseModalComponent } from '../modals/create-timelapse-modal/create-timelapse-modal.component';
@@ -36,7 +36,7 @@ export class PhotoPaginator extends PhotoSelection implements OnInit {
 
   constructor(public aquariumService: AquariumService,
     public dialog: MatDialog,
-    public notifier: NotifierService,
+    public notifier: NotificationService,
     public store: Store<AppState>
   ) {
     super();

@@ -1,12 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DeviceScheduleTask } from 'src/app/models/DeviceScheduleTask';
 import { DeviceSchedule } from 'src/app/models/DeviceSchedule';
-import { NotifierService } from 'angular-notifier';
+
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
 import { MatDialogRef, MatDialog } from '@angular/material';
 import { CreateScheduleTaskModalComponent } from '../create-schedule-task-modal/create-schedule-task-modal.component';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { AquariumService } from 'src/app/services/aquarium.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'create-schedule-modal',
@@ -28,7 +29,7 @@ export class CreateScheduleModalComponent implements OnInit {
 
 
   constructor(private _aquariumService: AquariumService,
-    private _notifier: NotifierService,
+    private _notifier: NotificationService,
     private _dialog: MatDialog,
     private _dialogRef: MatDialogRef<CreateScheduleModalComponent>) { }
 

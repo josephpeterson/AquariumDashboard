@@ -13,7 +13,8 @@ import { AquariumService } from 'src/app/services/aquarium.service';
 import { ManageSnapshotModal } from 'src/app/modules/SharedModule/modals/manage-snapshot-modal/manage-snapshot-modal.component';
 import * as moment from 'moment';
 import { FishCreateButtonComponent } from 'src/app/modules/SharedModule/data/fish/create-button/fish-create-button.component';
-import { NotifierService } from 'angular-notifier';
+
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'settings-logs',
@@ -38,7 +39,7 @@ export class SettingsLogsComponent implements OnInit {
     public dialog: MatDialog,
     private store: Store<AppState>,
     private _aquariumService: AquariumService,
-    private notifier: NotifierService
+    private notifier: NotificationService
   ) { }
 
   ngOnInit() {

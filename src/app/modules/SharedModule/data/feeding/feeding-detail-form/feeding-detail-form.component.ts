@@ -1,7 +1,6 @@
 import { Aquarium } from 'src/app/models/Aquarium';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { FormControl } from '@angular/forms';
 import { AppState } from 'src/app/app.state';
 import { getAllSpecies } from 'src/app/store/species/species.selector';
 import { Subject } from 'rxjs';
@@ -9,9 +8,10 @@ import { takeUntil, take } from 'rxjs/operators';
 import { Species } from 'src/app/models/Species';
 import { Fish } from 'src/app/models/Fish';
 import { AquariumAddFishAction, AquariumLoadByIdAction, AquariumDeleteAction, AquariumDeleteFishAction, AquariumUpdateFishAction } from 'src/app/store/aquarium/aquarium.actions';
-import { NotifierService } from 'angular-notifier';
+
 import { isCreatingFish, getFishCreateError } from 'src/app/store/fish/fish.selector';
 import { isDeletingFish, getFishDeleteError, isUpdatingFish, getFishUpdateError, getAquariumById } from 'src/app/store/aquarium/aquarium.selector';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
     selector: 'feeding-detail-form',
@@ -45,7 +45,7 @@ export class FeedingDetailFormComponent implements OnInit {
 
     public newFish: Fish = new Fish();
 
-    constructor(private store: Store<AppState>, private notifier: NotifierService) {
+    constructor(private store: Store<AppState>, private notifier: NotificationService) {
         this.fish.date = new Date(); //default date
     }
     ngOnInit() {

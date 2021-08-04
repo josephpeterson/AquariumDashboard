@@ -3,7 +3,7 @@ import { AquariumDevice } from 'src/app/models/AquariumDevice';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { DeviceSchedule } from 'src/app/models/DeviceSchedule';
 import { faTrash, faPenFancy, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
-import { NotifierService } from 'angular-notifier';
+
 import { DeviceScheduleAssignment } from 'src/app/models/DeviceScheduleAssignment';
 import { MatDialog } from '@angular/material';
 import * as moment from 'moment';
@@ -33,7 +33,7 @@ export class ScheduleBuilderComponent implements OnInit {
   managingSchedules: boolean;
 
   constructor(private _aquariumService: AquariumService,
-    private _notifier: NotifierService,
+    private _notifier: NotificationService,
     private _dialog: MatDialog) { }
 
   ngOnInit() {

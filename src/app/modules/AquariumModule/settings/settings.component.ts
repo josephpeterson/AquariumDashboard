@@ -7,7 +7,7 @@ import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { CameraConfiguration, CameraExposureModes } from 'src/app/models/CameraConfiguration';
 import { Observable, Subject } from 'rxjs';
-import { NotifierService } from 'angular-notifier';
+
 import { take, takeUntil } from 'rxjs/operators';
 import { Species } from 'src/app/models/Species';
 import { AquariumService } from 'src/app/services/aquarium.service';
@@ -44,7 +44,7 @@ export class SettingsComponent implements OnInit {
 
   private aquarium: Aquarium;
 
-  constructor(private _aquariumService: AquariumService,private notifier: NotifierService,
+  constructor(private _aquariumService: AquariumService,private notifier: NotificationService,
     public data: SettingsComponentData, public dialog: MatDialog, private router: Router) { }
 
   ngOnInit() {

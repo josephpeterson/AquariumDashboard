@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Inject, SimpleChanges, ElementRef, ViewChild } from '@angular/core';
 import { Subject } from 'rxjs';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
-import { NotifierService } from 'angular-notifier';
+
 import { PhotoApplyModalComponent } from '../photo-apply-modal/photo-apply-modal.component';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { PhotoContent } from 'src/app/models/PhotoContent';
@@ -24,7 +24,7 @@ export class PhotoExpandedModalComponent implements OnInit {
     private _aquariumService: AquariumService,
     private _dialog: MatDialogRef<PhotoExpandedModalComponent>,
     private dialog: MatDialog,
-    private _notifier: NotifierService) {
+    private _notifier: NotificationService) {
   }
   ngOnInit() {
   }

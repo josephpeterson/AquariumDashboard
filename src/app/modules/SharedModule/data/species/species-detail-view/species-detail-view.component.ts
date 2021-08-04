@@ -7,11 +7,12 @@ import { takeUntil, take } from 'rxjs/operators';
 import { Species } from 'src/app/models/Species';
 import { SpeciesLoadAction, SpeciesUpdateAction, SpeciesAddAction, SpeciesDeleteAction } from 'src/app/store/species/species.actions';
 import { faPenFancy, faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { NotifierService } from 'angular-notifier';
+
 import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
 import { ConfirmModalComponent } from '../../../modals/confirm-modal/confirm-modal.component';
 import { ScraperModalComponent } from '../../../modals/scraper-modal/scraper-modal.component';
+import { NotificationService } from 'src/app/services/notification.service';
 
 
 @Component({
@@ -41,7 +42,7 @@ export class SpeciesDetailViewComponent implements OnInit {
     private _matchedSpecies: Species;
 
 
-    constructor(private store: Store<AppState>, private notifier: NotifierService, private dialog: MatDialog, private router: Router) {
+    constructor(private store: Store<AppState>, private notifier: NotificationService, private dialog: MatDialog, private router: Router) {
 
     }
     ngOnInit() {

@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
-import { NotifierService } from 'angular-notifier';
+
 import { faCaretLeft, faCaretRight, faCheck, faCheckCircle, faRedo, faSpinner, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { MatDialog } from '@angular/material';
 import { ManagePhotoConfigurationModal } from 'src/app/modules/SharedModule/modals/manage-photo-configuration/manage-photo-configuration.component';
@@ -49,7 +49,7 @@ export class DeviceATOStatusComponent implements OnInit {
   public faCaretRight = faCaretRight;
 
   constructor(public _aquariumService: AquariumService,
-    public notifier: NotifierService,
+    public notifier: NotificationService,
     public dialog: MatDialog) { }
 
   ngOnInit() {

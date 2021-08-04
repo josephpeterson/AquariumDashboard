@@ -3,7 +3,7 @@ import { BugReport } from 'src/app/models/BugReport';
 import { Fish } from 'src/app/models/Fish';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { AquariumService } from 'src/app/services/aquarium.service';
-import { NotifierService } from 'angular-notifier';
+
 import { ManagePhotoConfigurationModal } from '../manage-photo-configuration/manage-photo-configuration.component';
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
 
@@ -17,7 +17,7 @@ export class FishFeedModalComponent implements OnInit {
   public updating: boolean = false;
   public fish: Fish;
 
-  constructor(@Inject(MAT_DIALOG_DATA) fish:Fish, private _aquariumService: AquariumService, private notifier: NotifierService, private dialogRef: MatDialogRef<ManagePhotoConfigurationModal>) {
+  constructor(@Inject(MAT_DIALOG_DATA) fish:Fish, private _aquariumService: AquariumService, private notifier: NotificationService, private dialogRef: MatDialogRef<ManagePhotoConfigurationModal>) {
     this.fish = fish;
   }
 

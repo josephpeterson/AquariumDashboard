@@ -10,7 +10,7 @@ import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
 import { ManageSnapshotModal } from 'src/app/modules/SharedModule/modals/manage-snapshot-modal/manage-snapshot-modal.component';
 import { ConfirmModalComponent } from 'src/app/modules/SharedModule/modals/confirm-modal/confirm-modal.component';
 import { AquariumLoadSuccessAction } from 'src/app/store/aquarium/aquarium.actions';
-import { NotifierService } from 'angular-notifier';
+
 
 @Component({
   selector: 'parameters-snapshot-list',
@@ -25,7 +25,7 @@ export class ParametersSnapshotListComponent implements OnInit {
   constructor(public aquariumService: AquariumService,
     public dialog: MatDialog,
     public store: Store<AppState>,
-    public notifier: NotifierService
+    public notifier: NotificationService
   ) { }
 
   ngOnInit() {

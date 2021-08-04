@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { WaterChange } from 'src/app/models/WaterChange';
 import { AquariumService } from 'src/app/services/aquarium.service';
-import { NotifierService } from 'angular-notifier';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { VisualAquariumComponentOptions } from 'src/app/modules/SharedModule/visual-aquarium/visual-aquarium.component';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -21,7 +20,6 @@ export class DateFilterSelectorComponent implements OnInit {
 
   constructor(
     private _aquariumService: AquariumService,
-    private notifier: NotifierService
   ) {
     const today = new Date();
 

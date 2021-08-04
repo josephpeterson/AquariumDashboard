@@ -6,7 +6,7 @@ import { Subject, Observable } from 'rxjs';
 import { takeUntil, take } from 'rxjs/operators';
 import { Species } from 'src/app/models/Species';
 import { faTrash, faAngleRight } from '@fortawesome/free-solid-svg-icons';
-import { NotifierService } from 'angular-notifier';
+
 import { MatDialog } from '@angular/material';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { Fish } from 'src/app/models/Fish';
@@ -48,7 +48,7 @@ export class FishEditViewComponent implements OnInit {
     faTrash = faTrash;
 
 
-    constructor(private store: Store<AppState>, private notifier: NotifierService, private dialog: MatDialog) {
+    constructor(private store: Store<AppState>, private notifier: NotificationService, private dialog: MatDialog) {
 
     }
     ngOnInit() {

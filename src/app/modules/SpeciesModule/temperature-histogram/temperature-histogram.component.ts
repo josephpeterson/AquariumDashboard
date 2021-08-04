@@ -1,7 +1,8 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js';
 import { AquariumService } from 'src/app/services/aquarium.service';
-import { NotifierService } from 'angular-notifier';
+import { NotificationService } from 'src/app/services/notification.service';
+
 
 @Component({
   selector: 'temperature-histogram',
@@ -30,7 +31,7 @@ export class TemperatureHistogramComponent implements OnInit {
 
 
   constructor(public aquariumService: AquariumService,
-    public notifier: NotifierService) { }
+    public notifier: NotificationService) { }
 
 
   createChart() {

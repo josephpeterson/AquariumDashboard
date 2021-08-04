@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { NotifierService } from 'angular-notifier';
+
 import { take } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
@@ -28,6 +28,6 @@ export class FishAddPhotoButtonComponent implements OnInit {
         });
         dialog.componentInstance.fishId = this.fish.id;
     }
-    constructor(private notifier: NotifierService, private store: Store<AppState>, private dialog: MatDialog) { }
+    constructor(private notifier: NotificationService, private store: Store<AppState>, private dialog: MatDialog) { }
 }
 

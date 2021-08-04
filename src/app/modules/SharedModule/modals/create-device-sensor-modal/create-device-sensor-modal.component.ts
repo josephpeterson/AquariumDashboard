@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
 import { DeviceScheduleTask } from 'src/app/models/DeviceScheduleTask';
 import { DeviceSchedule } from 'src/app/models/DeviceSchedule';
-import { NotifierService } from 'angular-notifier';
+
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import * as moment from 'moment';

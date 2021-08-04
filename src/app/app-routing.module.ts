@@ -20,12 +20,12 @@ const routes: Routes = [
   //Species
   {
     path: 'species',
-    loadChildren: './modules/SpeciesModule/species.module#SpeciesModule',
+    loadChildren: () => import('./modules/SpeciesModule/species.module').then(m => m.SpeciesModule),
   },
   //Master Dashboard
   {
     path: 'dashboard',
-    loadChildren: './modules/OverviewModule/overview.module#OverviewModule',
+    loadChildren: () => import('./modules/OverviewModule/overview.module').then(m => m.OverviewModule),
   },
 
 
@@ -35,28 +35,28 @@ const routes: Routes = [
   },
   {
     path: 'settings',
-    loadChildren: './modules/SettingsModule/settings.module#SettingsModule',
+    loadChildren: () => import('./modules/SettingsModule/settings.module').then(m => m.SettingsModule),
   },
   {
     path: 'fish',
-    loadChildren: './modules/FishModule/fish.module#FishModule',
+    loadChildren: () => import('./modules/FishModule/fish.module').then(m => m.FishModule),
   },
   {
     path: 'p',
-    loadChildren: './modules/ProfileModule/profile.module#ProfileModule',
+    loadChildren: () => import('./modules/ProfileModule/profile.module').then(m => m.ProfileModule),
   },
 
   {
     path: 'discussion',
-    loadChildren: './modules/DiscussionModule/discussion.module#DiscussionModule',
+    loadChildren: () => import('./modules/DiscussionModule/discussion.module').then(m => m.DiscussionModule),
   },
   {
     path: 'aquarium',
-    loadChildren: './modules/AquariumModule/aquarium.module#AquariumModule',
+    loadChildren: () => import('./modules/AquariumModule/aquarium.module').then(m => m.AquariumModule),
   },
   {
     path: 'calendar',
-    loadChildren: './modules/CalendarModule/calendar.module#CalendarModule',
+    loadChildren: () => import('./modules/CalendarModule/calendar.module').then(m => m.CalendarModule),
   },
   { path: '**', component: PageNotFoundComponent } /* Needs to be last */
 ];

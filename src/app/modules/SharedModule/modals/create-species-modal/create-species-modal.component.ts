@@ -3,7 +3,7 @@ import { ConnectionError } from 'src/app/models/ConnectionError';
 import { Species } from 'src/app/models/Species';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
-import { NotifierService } from 'angular-notifier';
+
 import { SpeciesAddAction } from 'src/app/store/species/species.actions';
 import { take, takeUntil } from 'rxjs/operators';
 import { getSpeciesCreateError, isCreatingSpecies } from 'src/app/store/species/species.selector';
@@ -26,7 +26,7 @@ export class CreateSpeciesModalComponent implements OnInit {
   public componentLifeCycle = new Subject();
 
 
-  constructor(private store: Store<AppState>,private _dialog: MatDialogRef<CreateSpeciesModalComponent>, private notifier: NotifierService) { }
+  constructor(private store: Store<AppState>,private _dialog: MatDialogRef<CreateSpeciesModalComponent>, private notifier: NotificationService) { }
   ngOnInit() {
 
   }

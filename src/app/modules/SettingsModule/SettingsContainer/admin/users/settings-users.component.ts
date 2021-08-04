@@ -20,7 +20,7 @@ import { Aquarium } from 'src/app/models/Aquarium';
 import { getSelectedAquarium, isLoadingAquariums } from 'src/app/store/aquarium/aquarium.selector';
 import { AppState } from 'src/app/app.state';
 import { AquariumService } from 'src/app/services/aquarium.service';
-import { NotifierService } from 'angular-notifier';
+
 import { AquariumAccount } from 'src/app/models/AquariumAccount';
 
 @Component({
@@ -46,7 +46,7 @@ export class SettingsUsersComponent {
     public dialog: MatDialog,
     private store: Store<AppState>,
     private _aquariumService: AquariumService,
-    private notifier: NotifierService
+    private notifier: NotificationService
   ) { }
 
   ngOnDestroy() {

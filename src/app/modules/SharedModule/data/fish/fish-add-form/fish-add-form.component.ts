@@ -5,7 +5,7 @@ import { AppState } from 'src/app/app.state';
 import { Subject } from 'rxjs';
 import { Fish } from 'src/app/models/Fish';
 import { AquariumLoadByIdAction } from 'src/app/store/aquarium/aquarium.actions';
-import { NotifierService } from 'angular-notifier';
+
 import { AquariumService } from 'src/app/services/aquarium.service';
 
 @Component({
@@ -25,7 +25,7 @@ export class FishAddFormComponent implements OnInit {
     public componentLifecycle = new Subject();
 
 
-    constructor(private store: Store<AppState>, private notifier: NotifierService,
+    constructor(private store: Store<AppState>, private notifier: NotificationService,
         private _aquariumService: AquariumService) {
     }
     ngOnInit() {

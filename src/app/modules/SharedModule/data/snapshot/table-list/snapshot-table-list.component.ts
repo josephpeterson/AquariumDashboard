@@ -17,7 +17,7 @@ import { SnapshotLoadByAquariumAction } from 'src/app/store/snapshot/snapshot.ac
 import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
 import * as moment from 'moment';
 import { AquariumService } from 'src/app/services/aquarium.service';
-import { NotifierService } from 'angular-notifier';
+
 
 @Component({
   selector: 'snapshot-table-list',
@@ -60,7 +60,7 @@ export class SnapshotTableListComponent implements OnInit {
   private componentLifeCycle$ = new Subject();
 
   constructor(private store: Store<AppState>, private _aquariumService: AquariumService,
-    private notifier: NotifierService) {
+    private notifier: NotificationService) {
   }
   ngOnInit() {
     if (this.searchBox)

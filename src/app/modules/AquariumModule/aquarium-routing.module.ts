@@ -64,7 +64,7 @@ const secondaryRoutes: Routes = [
             },
             {
                 path: 'device',
-                loadChildren: '../DeviceModule/device.module#DeviceModule',
+                loadChildren: () => import('../DeviceModule/device.module').then(m => m.DeviceModule),
             },
             {
                 path: 'lighting',

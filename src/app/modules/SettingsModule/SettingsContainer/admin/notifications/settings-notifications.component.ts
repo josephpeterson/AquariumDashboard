@@ -20,7 +20,7 @@ import { Aquarium } from 'src/app/models/Aquarium';
 import { getSelectedAquarium, isLoadingAquariums } from 'src/app/store/aquarium/aquarium.selector';
 import { AppState } from 'src/app/app.state';
 import { AquariumService } from 'src/app/services/aquarium.service';
-import { NotifierService } from 'angular-notifier';
+
 import { AquariumAccount } from 'src/app/models/AquariumAccount';
 import { CreateNotificationModalComponent } from 'src/app/modules/SharedModule/modals/create-notification-modal/create-notification-modal.component';
 import { NotificationsTableComponent } from './notifications-table/notifications-table.component';
@@ -49,7 +49,7 @@ export class SettingsNotificationsComponent {
     public dialog: MatDialog,
     private store: Store<AppState>,
     private _aquariumService: AquariumService,
-    private notifier: NotifierService,
+    private notifier: NotificationService,
     private ref: ChangeDetectorRef
   ) { }
 

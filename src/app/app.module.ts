@@ -66,6 +66,7 @@ import { Ng5SliderModule } from 'ng5-slider';
 import { FishService } from './services/fish.service';
 import { SharedModule } from './modules/SharedModule/shared.module';
 import { AuthReducer } from './store/auth/auth.reducer';
+import { NotificationService } from './services/notification.service';
 
 
 
@@ -147,6 +148,7 @@ import { AuthReducer } from './store/auth/auth.reducer';
     AuthService,
     AdminService,
     AuthGuard,
+    NotificationService,
     //Providers for authenticaion
     { provide: HTTP_INTERCEPTORS, useClass: AquariumInterceptor, multi: true },
     //{ provide: 'OAuth.Environment', useValue: environment.environmentTag },

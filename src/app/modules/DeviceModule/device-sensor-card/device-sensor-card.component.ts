@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AquariumService } from 'src/app/services/aquarium.service';
-import { NotifierService } from 'angular-notifier';
+
 import { DeviceSensor } from 'src/app/models/DeviceSensor';
 import { faChargingStation, faTrash } from '@fortawesome/free-solid-svg-icons';
 
@@ -15,7 +15,7 @@ export class DeviceSensorCardComponent implements OnInit {
 
   public faChargingStation = faChargingStation;
 
-  constructor(public _aquariumService: AquariumService, public notifier: NotifierService) { }
+  constructor(public _aquariumService: AquariumService, public notifier: NotificationService) { }
 
   ngOnInit() {
   }

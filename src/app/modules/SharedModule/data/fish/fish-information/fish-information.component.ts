@@ -5,7 +5,7 @@ import { getAllSpecies, getSpeciesCreateError, getSpeciesUpdateError, isCreating
 import { Subject } from 'rxjs';
 import { takeUntil, take } from 'rxjs/operators';
 import { Species } from 'src/app/models/Species';
-import { NotifierService } from 'angular-notifier';
+
 import { SpeciesAddAction, SpeciesUpdateAction, SpeciesDeleteAction } from 'src/app/store/species/species.actions';
 import { Fish } from 'src/app/models/Fish';
 
@@ -38,7 +38,7 @@ export class FishInformationComponent implements OnInit {
     public componentLifecycle = new Subject();
 
 
-    constructor(private store: Store<AppState>, private notifier: NotifierService) {
+    constructor(private store: Store<AppState>, private notifier: NotificationService) {
 
     }
     ngOnInit() {
