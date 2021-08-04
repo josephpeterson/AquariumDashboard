@@ -11,6 +11,7 @@ import { SnapshotDeleteSuccessAction, SnapshotTakeSuccessAction } from 'src/app/
 import { SnapshotDetailComponent } from '../../data/snapshot/snapshot-detail-form/snapshot-detail-form.component';
 import { SnapshotDetailChartComponent } from '../../data/snapshot/snapshot-detail-chart/snapshot-detail-chart.component';
 import { AttachmentUploaderComponent } from '../../attachment-uploader/attachment-uploader.component';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'manage-snapshot-modal',
@@ -35,9 +36,9 @@ export class ManageSnapshotModal implements OnInit {
     console.log(this.snapshot);
   }
 
-  @ViewChild(SnapshotDetailComponent) snapshotForm: SnapshotDetailComponent;
-  @ViewChild(SnapshotDetailChartComponent) snapshotChartForm: SnapshotDetailChartComponent;
-  @ViewChild(AttachmentUploaderComponent) attachmentUploader: AttachmentUploaderComponent;
+  @ViewChild(SnapshotDetailComponent,{static: false}) snapshotForm: SnapshotDetailComponent;
+  @ViewChild(SnapshotDetailChartComponent,{static: false}) snapshotChartForm: SnapshotDetailChartComponent;
+  @ViewChild(AttachmentUploaderComponent,{static: false}) attachmentUploader: AttachmentUploaderComponent;
 
 
   clickUpdateSnapshot() {

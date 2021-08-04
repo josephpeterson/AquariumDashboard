@@ -1,6 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js';
 import { AquariumService } from 'src/app/services/aquarium.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 
 @Component({
@@ -24,7 +25,7 @@ export class TemperatureHistogramComponent implements OnInit {
     //labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
     //datasets: []
   }
-  @ViewChild('canvas') canvas: ElementRef<HTMLCanvasElement>;
+  @ViewChild('canvas',{static: false}) canvas: ElementRef<HTMLCanvasElement>;
   ctx: CanvasRenderingContext2D;
   chart: Chart;
 

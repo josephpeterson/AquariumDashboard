@@ -15,8 +15,8 @@ export class SelectScheduleModalComponent implements OnInit {
   public dataSource: MatTableDataSource<DeviceSchedule> = new MatTableDataSource<DeviceSchedule>();
 
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator,{static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort,{static: false}) sort: MatSort;
   public columns: Array<any> = [
     { name: 'select', visible: false },
     { name: 'id', label: "ID", visible: false },

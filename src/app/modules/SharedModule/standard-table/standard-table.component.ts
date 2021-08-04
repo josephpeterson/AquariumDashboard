@@ -6,7 +6,6 @@ import { AquariumService } from 'src/app/services/aquarium.service';
 import { Observable } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatSort, MatTableDataSource } from '@angular/material';
-import { constructor } from 'q';
 import * as moment from 'moment';
 
 @Component({
@@ -25,7 +24,7 @@ export class StandardTableComponent implements OnInit {
   @Input() public callback: Function;
 
   private selection: SelectionModel<any> = new SelectionModel<WaterChange>(true, []);
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatSort,{static: false}) sort: MatSort;
 
   constructor() { }
 

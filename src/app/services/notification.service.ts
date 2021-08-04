@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 //import { NotifierService } from 'angular-notifier';
-class NotifierService {}
-
 @Injectable({
   providedIn: "root"
 })
 export class NotificationService {
   public aquariumId: number;
 
-  constructor(private notifier: NotifierService) {
+  private notifier;
+
+  constructor() {
     
   }
 

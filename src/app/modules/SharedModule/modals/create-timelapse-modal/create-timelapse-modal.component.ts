@@ -7,6 +7,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { PhotoContent } from 'src/app/models/PhotoContent';
 import { PhotoTimelapseOptions } from 'src/app/models/PhotoTimelapseOptions';
 import { AquariumService } from 'src/app/services/aquarium.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-create-timelapse-modal',

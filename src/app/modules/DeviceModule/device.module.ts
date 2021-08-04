@@ -31,6 +31,7 @@ import { DeviceATOStatusComponent } from './ato-status/ato-status.component';
 import { DeviceSensorCardComponent } from './device-sensor-card/device-sensor-card.component';
 import { DeviceOverviewCardComponent } from './device-overview-card/device-overview-card.component';
 import { DeviceSnapshotCarouselComponent } from './device-snapshot-carousel/device-snapshot-carousel.component';
+import { NotificationService } from 'src/app/services/notification.service';
 
 
 @NgModule({
@@ -90,6 +91,7 @@ import { DeviceSnapshotCarouselComponent } from './device-snapshot-carousel/devi
   ],
   providers: [
     AquariumService,
+    NotificationService,
     FishService,
     AuthService,
     AdminService,

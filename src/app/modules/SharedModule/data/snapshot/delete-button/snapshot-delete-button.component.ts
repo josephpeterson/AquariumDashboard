@@ -9,6 +9,7 @@ import { getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
 import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
 import { HttpErrorResponse } from '@angular/common/http';
 import { faTrashAlt, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
     selector: 'snapshot-delete-button',

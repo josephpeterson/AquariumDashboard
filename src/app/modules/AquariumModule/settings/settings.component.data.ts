@@ -8,6 +8,7 @@ import { AquariumService } from 'src/app/services/aquarium.service';
 import { CameraConfiguration } from 'src/app/models/CameraConfiguration';
 
 import { take } from 'rxjs/operators';
+import { NotificationService } from 'src/app/services/notification.service';
 @Injectable({
   providedIn: "root"
 })

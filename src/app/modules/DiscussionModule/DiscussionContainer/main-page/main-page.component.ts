@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { constructor } from 'q';
-import { store } from '@angular/core/src/render3';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { PostLoadCategoriesFailAction, PostLoadCategoriesAction, PostResetAction, PostSelectBoardAction, PostSelectThreadAction } from 'src/app/store/post/post.actions';

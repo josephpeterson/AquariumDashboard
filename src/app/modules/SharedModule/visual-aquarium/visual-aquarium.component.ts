@@ -1,6 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Aquarium } from 'src/app/models/Aquarium';
 
+
+export class VisualAquariumComponentOptions {
+  public waterAdded: number;
+  public waterRemoved: number;
+  public waterLevel: number;
+}
 @Component({
   selector: 'visual-aquarium',
   templateUrl: './visual-aquarium.component.html',
@@ -23,9 +29,4 @@ export class VisualAquariumComponent implements OnInit {
     return percentage;
   }
 
-}
-export class VisualAquariumComponentOptions {
-  public waterAdded: number;
-  public waterRemoved: number;
-  public waterLevel: number;
 }

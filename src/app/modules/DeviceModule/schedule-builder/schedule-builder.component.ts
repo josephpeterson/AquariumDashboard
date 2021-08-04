@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material';
 import * as moment from 'moment';
 import { CreateScheduleModalComponent } from 'src/app/modules/SharedModule/modals/create-schedule-modal/create-schedule-modal.component';
 import { SelectScheduleModalComponent } from 'src/app/modules/SharedModule/modals/select-schedule-modal/select-schedule-modal.component';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'device-schedule-builder',

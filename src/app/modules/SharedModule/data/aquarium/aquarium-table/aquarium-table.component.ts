@@ -24,8 +24,8 @@ export class AquariumTableComponent {
   public loading$: Observable<Boolean> = this.store.select(isLoadingAquariums);
   public aquariums$: Observable<Aquarium[]> = this.store.select(getAllAquariums);
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator,{static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort,{static: false}) sort: MatSort;
   private selection: SelectionModel<Aquarium> = new SelectionModel<Aquarium>(true, []);
 
 

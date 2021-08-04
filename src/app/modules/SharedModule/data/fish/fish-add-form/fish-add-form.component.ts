@@ -7,6 +7,7 @@ import { Fish } from 'src/app/models/Fish';
 import { AquariumLoadByIdAction } from 'src/app/store/aquarium/aquarium.actions';
 
 import { AquariumService } from 'src/app/services/aquarium.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
     selector: 'fish-add-form',

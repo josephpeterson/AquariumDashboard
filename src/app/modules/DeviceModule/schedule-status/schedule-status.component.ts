@@ -7,6 +7,7 @@ import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { DeviceScheduleState } from 'src/app/models/DeviceScheduleState';
 import * as moment from 'moment';
 import { DeviceScheduleTask, DeviceScheduleTaskTypes } from 'src/app/models/DeviceScheduleTask';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'device-schedule-status',

@@ -8,6 +8,7 @@ import { Species } from 'src/app/models/Species';
 
 import { SpeciesAddAction, SpeciesUpdateAction, SpeciesDeleteAction } from 'src/app/store/species/species.actions';
 import { Fish } from 'src/app/models/Fish';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
     selector: 'fish-information',

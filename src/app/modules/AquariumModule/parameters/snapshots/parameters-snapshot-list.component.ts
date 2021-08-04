@@ -10,6 +10,7 @@ import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
 import { ManageSnapshotModal } from 'src/app/modules/SharedModule/modals/manage-snapshot-modal/manage-snapshot-modal.component';
 import { ConfirmModalComponent } from 'src/app/modules/SharedModule/modals/confirm-modal/confirm-modal.component';
 import { AquariumLoadSuccessAction } from 'src/app/store/aquarium/aquarium.actions';
+import { NotificationService } from 'src/app/services/notification.service';
 
 
 @Component({

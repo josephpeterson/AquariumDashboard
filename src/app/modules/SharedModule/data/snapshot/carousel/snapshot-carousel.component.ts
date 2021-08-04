@@ -27,7 +27,7 @@ import { PhotoExpandedModalComponent } from '../../../modals/photo-expanded-moda
 })
 export class SnapshotCarouselComponent implements OnInit {
 
-  @ViewChild("scroller") scroller;
+  @ViewChild("scroller",{static: false}) scroller;
 
   selectedId: number = 0;
   loadCount: number = 500;
@@ -41,7 +41,7 @@ export class SnapshotCarouselComponent implements OnInit {
   public data$: Observable<AquariumSnapshot[]> = this.store.select(getAllSnapshots);
   public aquarium$: Observable<Aquarium> = this.store.select(getSelectedAquarium);
 
-  @ViewChild(SnapshotTakeButtonComponent) takeButton: SnapshotTakeButtonComponent;
+  @ViewChild(SnapshotTakeButtonComponent,{static: false}) takeButton: SnapshotTakeButtonComponent;
 
   constructor(private store: Store<AppState>, private dialog: MatDialog, public aquariumService: AquariumService) { }
 

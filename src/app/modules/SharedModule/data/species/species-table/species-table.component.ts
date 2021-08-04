@@ -15,8 +15,8 @@ export class SpeciesTableComponent {
 
   public loading$ = this.dataSource.loading$;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator,{static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort,{static: false}) sort: MatSort;
   private selection: SelectionModel<Species> = new SelectionModel<Species>(true, []);
 
   //Columns

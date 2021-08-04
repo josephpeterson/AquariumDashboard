@@ -17,6 +17,7 @@ import { SnapshotLoadByAquariumAction } from 'src/app/store/snapshot/snapshot.ac
 import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
 import * as moment from 'moment';
 import { AquariumService } from 'src/app/services/aquarium.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 
 @Component({
@@ -29,8 +30,8 @@ export class SnapshotTableListComponent implements OnInit {
   public loading$: Observable<Boolean> = this.store.select(isLoadingSnapshots);
   public snapshots$: Observable<AquariumSnapshot[]> = this.store.select(getAllSnapshots);
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator,{static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort,{static: false}) sort: MatSort;
   private selection: SelectionModel<AquariumSnapshot> = new SelectionModel<AquariumSnapshot>(true, []);
 
   //Columns

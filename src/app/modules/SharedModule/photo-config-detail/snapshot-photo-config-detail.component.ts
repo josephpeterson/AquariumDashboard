@@ -11,6 +11,7 @@ import { CameraConfiguration, CameraExposureModes } from 'src/app/models/CameraC
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
 import { MAT_DIALOG_DATA } from '@angular/material';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
     selector: 'snapshot-photo-config-detail',

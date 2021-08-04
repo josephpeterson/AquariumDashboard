@@ -13,8 +13,8 @@ import $ from 'jquery';
 })
 export class SearchFormComponent implements OnInit {
 
-  @ViewChild("searchInput") searchInput: ElementRef;
-  @ViewChild("form") searchForm: ElementRef;
+  @ViewChild("searchInput",{static: false}) searchInput: ElementRef;
+  @ViewChild("form",{static: false}) searchForm: ElementRef;
 
   public icon_glass = faSearch;
   public active: boolean;

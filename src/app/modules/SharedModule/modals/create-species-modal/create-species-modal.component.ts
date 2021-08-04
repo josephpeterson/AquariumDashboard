@@ -9,6 +9,7 @@ import { take, takeUntil } from 'rxjs/operators';
 import { getSpeciesCreateError, isCreatingSpecies } from 'src/app/store/species/species.selector';
 import { MatDialogRef } from '@angular/material';
 import { Subject } from 'rxjs';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'create-species-modal',

@@ -22,6 +22,7 @@ import { AppState } from 'src/app/app.state';
 import { AquariumService } from 'src/app/services/aquarium.service';
 
 import { AquariumAccount } from 'src/app/models/AquariumAccount';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'settings-bugs',

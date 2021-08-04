@@ -24,6 +24,7 @@ import { FishBreedModalComponent } from 'src/app/modules/SharedModule/modals/fis
 import { FishTransferModalComponent } from 'src/app/modules/SharedModule/modals/fish-transfer-modal/fish-transfer-modal.component';
 import { FishDiseaseModalComponent } from 'src/app/modules/SharedModule/modals/fish-disease-modal/fish-disease-modal.component';
 import { AttachmentUploaderComponent } from 'src/app/modules/SharedModule/attachment-uploader/attachment-uploader.component';
+import { NotificationService } from 'src/app/services/notification.service';
 
 
 
@@ -36,7 +37,7 @@ export class FishDetailViewComponent implements OnInit {
     @Input("fish") fish: Fish;
     @Input("aquarium") aquarium: Aquarium;
 
-    @ViewChild(AttachmentUploaderComponent) attachmentComponent: AttachmentUploaderComponent;
+    @ViewChild(AttachmentUploaderComponent,{static: false}) attachmentComponent: AttachmentUploaderComponent;
 
     public fish$: Observable<Fish> = this.store.select(getSelectedFish);
 

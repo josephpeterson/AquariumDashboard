@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { Fish } from 'src/app/models/Fish';
 import { FishAddModalComponent } from '../../../modals/fish-add-modal/fish-add-modal.component';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
     selector: 'fish-create-button',
@@ -37,6 +38,6 @@ export class FishCreateButtonComponent implements OnInit {
         inst.componentInstance.fish = fish;
         //inst.componentInstance.clickAddFish();
     }
-    constructor(private notifier: NotificationService, private store: Store<AppState>, private dialog: MatDialog) { }
+    constructor(private store: Store<AppState>, private dialog: MatDialog) { }
 }
 

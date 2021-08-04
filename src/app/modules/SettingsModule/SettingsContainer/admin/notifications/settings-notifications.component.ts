@@ -24,6 +24,7 @@ import { AquariumService } from 'src/app/services/aquarium.service';
 import { AquariumAccount } from 'src/app/models/AquariumAccount';
 import { CreateNotificationModalComponent } from 'src/app/modules/SharedModule/modals/create-notification-modal/create-notification-modal.component';
 import { NotificationsTableComponent } from './notifications-table/notifications-table.component';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'settings-notifications',
@@ -43,7 +44,7 @@ export class SettingsNotificationsComponent {
   private componentLifecycle$: Subject<SettingsNotificationsComponent> = new Subject();
 
 
-  @ViewChild(NotificationsTableComponent) notificationTable: NotificationsTableComponent;
+  @ViewChild(NotificationsTableComponent,{static: false}) notificationTable: NotificationsTableComponent;
 
   constructor(
     public dialog: MatDialog,

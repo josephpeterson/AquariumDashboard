@@ -13,6 +13,7 @@ import { faCheckCircle, faDesktop, IconDefinition } from '@fortawesome/free-soli
 import { AquariumLoadSuccessAction } from 'src/app/store/aquarium/aquarium.actions';
 import { HttpErrorResponse } from '@angular/common/http';
 import { RaspberryPiModels } from 'src/app/models/types/RaspberyPiModels';
+import { NotificationService } from 'src/app/services/notification.service';
 
 
 @Component({
@@ -34,7 +35,7 @@ export class DeviceDetailFormComponent implements OnInit {
     //@Input() deviceId: number;
     @Output() public onSuccess = new EventEmitter();
 
-    @ViewChild("form") form: ElementRef;
+    @ViewChild("form",{static: false}) form: ElementRef;
     private componentLifeCycle$ = new Subject();
     pinging: boolean;
     faCheck = faCheckCircle;

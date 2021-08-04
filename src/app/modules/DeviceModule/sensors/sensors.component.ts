@@ -10,6 +10,7 @@ import { take } from 'rxjs/operators';
 import { DeviceSensor } from 'src/app/models/DeviceSensor';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'device-sensors',

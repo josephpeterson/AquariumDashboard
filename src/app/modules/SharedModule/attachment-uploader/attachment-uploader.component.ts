@@ -9,8 +9,8 @@ import { MatFileUploadQueue, MatFileUpload } from 'angular-material-fileupload';
 })
 export class AttachmentUploaderComponent {
 
-  @ViewChild("fileInput") filePicker: ElementRef;
-  @ViewChild("fileUploadQueue") fileUploadQueue: MatFileUploadQueue;
+  @ViewChild("fileInput",{static: false}) filePicker: ElementRef;
+  @ViewChild("fileUploadQueue",{static: false}) fileUploadQueue: MatFileUploadQueue;
   @Output() ready = new EventEmitter();
 
 

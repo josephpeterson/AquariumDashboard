@@ -6,6 +6,7 @@ import { PhotoApplyModalComponent } from '../photo-apply-modal/photo-apply-modal
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { PhotoContent } from 'src/app/models/PhotoContent';
 import { AquariumService } from 'src/app/services/aquarium.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'photo-expanded-modal',
@@ -16,7 +17,7 @@ export class PhotoExpandedModalComponent implements OnInit {
 
   public componentLifecycle = new Subject();
   public faTrash = faTrash;
-  @ViewChild("photo") photoElement: ElementRef<HTMLImageElement>;
+  @ViewChild("photo",{static: false}) photoElement: ElementRef<HTMLImageElement>;
 
 
 

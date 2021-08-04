@@ -43,6 +43,7 @@ import { EquipmentListComponent } from './maintenance/equipment-list/equipment-l
 import { DosingListComponent } from './maintenance/dosing-list/dosing-list.component';
 import { TaskTabComponent } from './maintenance/task-tab/task-list.component';
 import { NotificationsListComponent } from './maintenance/notifications-list/notifications-list.component';
+import { NotificationService } from 'src/app/services/notification.service';
 
 
 @NgModule({
@@ -115,6 +116,7 @@ import { NotificationsListComponent } from './maintenance/notifications-list/not
   ],
   providers: [
     AquariumService,
+    NotificationService,
     FishService,
     AuthService,
     AdminService,

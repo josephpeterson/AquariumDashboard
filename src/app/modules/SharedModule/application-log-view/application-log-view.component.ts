@@ -8,7 +8,7 @@ import { Component, OnInit, Input, ViewChild, ElementRef, SimpleChanges } from '
 export class ApplicationLogViewComponent implements OnInit {
 
   @Input("log") log: string;
-  @ViewChild("scrollWindow") private scrollContainer: ElementRef;
+  @ViewChild("scrollWindow", { static: false }) private scrollContainer: ElementRef;
 
 
   public filters = [

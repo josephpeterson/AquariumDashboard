@@ -7,6 +7,7 @@ import { FishFeedModalComponent } from '../fish-feed-modal/fish-feed-modal.compo
 import { AppState } from 'src/app/app.state';
 import { Store } from '@ngrx/store';
 import { FishLoadByIdAction } from 'src/app/store/fish/fish.actions';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'fish-photo-modal',
@@ -16,7 +17,7 @@ import { FishLoadByIdAction } from 'src/app/store/fish/fish.actions';
 export class FishPhotoModal implements OnInit {
   public loading: boolean;
   public fishId: number;
-  @ViewChild(AttachmentUploaderComponent) attachmentComponent: AttachmentUploaderComponent;
+  @ViewChild(AttachmentUploaderComponent,{static: false}) attachmentComponent: AttachmentUploaderComponent;
   constructor(private _aquariumService: AquariumService,
     private store: Store<AppState>,
     private notifier: NotificationService,

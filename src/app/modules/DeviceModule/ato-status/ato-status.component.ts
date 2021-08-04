@@ -14,6 +14,7 @@ import { RunATOModalComponent } from '../../SharedModule/modals/run-ato-modal/ru
 import { PaginationSliver } from 'src/app/models/PaginationSliver';
 import { GpioPinValue } from 'src/app/models/types/GpioPinValue';
 import { DeviceScheduleTask } from 'src/app/models/DeviceScheduleTask';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'device-ato-status',

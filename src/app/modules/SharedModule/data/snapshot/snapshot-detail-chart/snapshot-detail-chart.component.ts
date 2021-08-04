@@ -14,6 +14,7 @@ import { CameraConfiguration } from 'src/app/models/CameraConfiguration';
 import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
 import $ from 'jquery';
 import { AttachmentUploaderComponent } from '../../../attachment-uploader/attachment-uploader.component';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
     selector: 'snapshot-detail-chart',
@@ -32,14 +33,14 @@ export class SnapshotDetailChartComponent implements OnInit {
     //@Input() deviceId: number;
     @Output() public onSuccess = new EventEmitter();
 
-    @ViewChild("form") form: ElementRef;
+    @ViewChild("form",{static: false}) form: ElementRef;
     private componentLifeCycle$ = new Subject();
     pinging: boolean;
     faCheck = faCheckCircle;
     public faDevice: IconDefinition = faDesktop;
 
-    @ViewChild(AttachmentUploaderComponent) attachmentComponent: AttachmentUploaderComponent;
-    @ViewChild("phColumn") phColumn: ElementRef;
+    @ViewChild(AttachmentUploaderComponent,{static: false}) attachmentComponent: AttachmentUploaderComponent;
+    @ViewChild("phColumn",{static: false}) phColumn: ElementRef;
 
 
 

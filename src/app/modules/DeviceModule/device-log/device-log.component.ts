@@ -4,6 +4,7 @@ import { AquariumService } from 'src/app/services/aquarium.service';
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
 
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'device-log',
@@ -13,7 +14,7 @@ import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 export class DeviceLogComponent implements OnInit {
 
   @Input("device") device: AquariumDevice;
-  @ViewChild("scrollWindow") private scrollContainer: ElementRef;
+  @ViewChild("scrollWindow",{static: false}) private scrollContainer: ElementRef;
 
   deviceLog: any;
 

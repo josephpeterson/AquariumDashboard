@@ -7,6 +7,7 @@ import { isTakingSnapshot, getDidTake, getTakeError } from 'src/app/store/snapsh
 import { SnapshotTakeAction } from 'src/app/store/snapshot/snapshot.actions';
 import { getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
 import { faCamera, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
     selector: 'snapshot-take-button',

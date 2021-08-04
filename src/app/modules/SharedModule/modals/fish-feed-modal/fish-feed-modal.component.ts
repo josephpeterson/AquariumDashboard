@@ -6,6 +6,7 @@ import { AquariumService } from 'src/app/services/aquarium.service';
 
 import { ManagePhotoConfigurationModal } from '../manage-photo-configuration/manage-photo-configuration.component';
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'fish-feed-modal',
@@ -17,7 +18,10 @@ export class FishFeedModalComponent implements OnInit {
   public updating: boolean = false;
   public fish: Fish;
 
-  constructor(@Inject(MAT_DIALOG_DATA) fish:Fish, private _aquariumService: AquariumService, private notifier: NotificationService, private dialogRef: MatDialogRef<ManagePhotoConfigurationModal>) {
+  constructor(@Inject(MAT_DIALOG_DATA) fish:Fish,
+   private _aquariumService: AquariumService,
+    private notifier: NotificationService,
+     private dialogRef: MatDialogRef<ManagePhotoConfigurationModal>) {
     this.fish = fish;
   }
 

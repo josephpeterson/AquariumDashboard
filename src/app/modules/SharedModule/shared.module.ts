@@ -100,6 +100,7 @@ import { GenericSelectComponent } from './form/generic-select/generic-select.com
 import { CreateDeviceSensorModalComponent } from './modals/create-device-sensor-modal/create-device-sensor-modal.component';
 import { RunATOModalComponent } from './modals/run-ato-modal/run-ato-modal.component';
 import { DateFilterSelectorComponent } from './date-filter-selector/date-filter-selector.component';
+import { WaterParameterCard } from './water-parameter-card/water-parameter-card.component';
 
 
 
@@ -232,6 +233,10 @@ var modals = [
     TaskListComponent,
     TaskTableComponent,
 
+
+    /* Water Parameters */
+    WaterParameterCard,
+
     /* Form Components */
     DateFilterSelectorComponent,
     SpeciesSelectComponent,
@@ -272,6 +277,9 @@ var modals = [
     TaskTableComponent,
     FishCardDetailedComponent,
     SnapshotTableListComponent,
+
+    /* Water Parameters */
+    WaterParameterCard,
     
     
     /* Form Components */

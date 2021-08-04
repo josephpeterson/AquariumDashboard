@@ -15,6 +15,7 @@ import { PhotoTimelapseOptions } from 'src/app/models/PhotoTimelapseOptions';
 import { CreateTimelapseModalComponent } from '../modals/create-timelapse-modal/create-timelapse-modal.component';
 import { PhotoSelection } from 'src/app/providers/PhotoSelection';
 import { PhotoExpandedModalComponent } from '../modals/photo-expanded-modal/photo-expanded-modal.component';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'photo-paginator',

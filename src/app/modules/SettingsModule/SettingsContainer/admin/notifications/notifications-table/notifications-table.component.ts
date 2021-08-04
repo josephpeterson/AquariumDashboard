@@ -31,8 +31,8 @@ export class NotificationsTableComponent {
   public error: HttpErrorResponse;
   public aquarium$: Observable<Aquarium>;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator,{static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort,{static: false}) sort: MatSort;
   private selection: SelectionModel<BugReport> = new SelectionModel<BugReport>(true, []);
 
   //Columns

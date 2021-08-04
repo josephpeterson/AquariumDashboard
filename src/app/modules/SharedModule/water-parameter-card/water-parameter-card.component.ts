@@ -34,8 +34,8 @@ export class WaterParameterCard implements OnInit {
   public alakinityValues = {
 
   }
-  @ViewChild('alkalinityChart') canvas: ElementRef<HTMLCanvasElement>;
-  @ViewChild('chartContainer') chartContainer: ElementRef<HTMLDivElement>;
+  @ViewChild('alkalinityChart',{static: true}) canvas: ElementRef<HTMLCanvasElement>;
+  @ViewChild('chartContainer',{static: true}) chartContainer: ElementRef<HTMLDivElement>;
   ctx: CanvasRenderingContext2D;
 
 

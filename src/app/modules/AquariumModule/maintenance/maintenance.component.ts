@@ -38,7 +38,7 @@ export class MaintenanceComponent implements OnInit {
 
   public aquarium:Aquarium;
 
-  @ViewChild("tabber") tabber: MatTabGroup
+  @ViewChild("tabber",{static: false}) tabber: MatTabGroup
 
   constructor(private store: Store<AppState>,
     public dialog: MatDialog,
