@@ -1,6 +1,6 @@
-import { NotifierOptions } from 'angular-notifier';
+//import { NotifierOptions } from 'angular-notifier';
 
-let AquariumNotifierConfig: NotifierOptions = {
+let AquariumNotifierConfig = {
     position: {
         horizontal: {
             position: 'right',

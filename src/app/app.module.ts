@@ -39,7 +39,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
-import { NotifierModule } from 'angular-notifier';
+//import { NotifierModule } from 'angular-notifier';
 import { AquariumNotifierConfig } from './config/notifier';
 import { FishEffects } from './store/fish/fish.effect';
 import { fishReducer } from './store/fish/fish.reducer';
@@ -139,7 +139,7 @@ import { NotificationService } from './services/notification.service';
     StoreDevtoolsModule.instrument({
       maxAge: 25
     }),
-    NotifierModule.withConfig(AquariumNotifierConfig),
+    //NotifierModule.withConfig(AquariumNotifierConfig),
     EffectsModule.forRoot([AquariumEffects, SnapshotEffects, SpeciesEffects, FishEffects, ProfileEffects, PostEffects]),
   ],
   providers: [
