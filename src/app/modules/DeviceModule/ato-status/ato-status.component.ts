@@ -3,7 +3,7 @@ import { Aquarium } from 'src/app/models/Aquarium';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
 import { NotifierService } from 'angular-notifier';
-import { faCheck, faCheckCircle, faRedo, faSpinner, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faCaretLeft, faCaretRight, faCheck, faCheckCircle, faRedo, faSpinner, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { MatDialog } from '@angular/material';
 import { ManagePhotoConfigurationModal } from 'src/app/modules/SharedModule/modals/manage-photo-configuration/manage-photo-configuration.component';
 import { ATOStatus } from 'src/app/models/ATOStatus';
@@ -44,6 +44,9 @@ export class DeviceATOStatusComponent implements OnInit {
 
 
   public atoRecommended: boolean = true;
+
+  public faCaretLeft = faCaretLeft;
+  public faCaretRight = faCaretRight;
 
   constructor(public _aquariumService: AquariumService,
     public notifier: NotifierService,
@@ -152,5 +155,28 @@ export class DeviceATOStatusComponent implements OnInit {
     if (!ato)
       return false;
     return ato.floatSensorValue == GpioPinValue.High;
+  }
+  public loadForward() {
+    var add = 5;
+    var max = 5;
+    this.pagination.count += add;
+    if (this.pagination.count > max)
+    {
+      this.pagination.start += this.pagination.count-max;
+      this.pagination.count = max;
+    }
+      this.loadATOHistory();
+  }
+  public loadBackward() {
+    var sub = 5;
+    this.pagination.start -= sub;
+    if (this.pagination.start < 0)
+      this.pagination.start = 0;
+    this.loadATOHistory();
+  }
+  public getPageNumber() {
+    var perPage = 5;
+    var current = this.pagination.start;
+    return 1 + current/perPage;
   }
 }

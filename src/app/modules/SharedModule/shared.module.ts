@@ -99,6 +99,7 @@ import { FishPhotosComponent } from 'src/app/modules/SharedModule/fish-photos/fi
 import { GenericSelectComponent } from './form/generic-select/generic-select.component';
 import { CreateDeviceSensorModalComponent } from './modals/create-device-sensor-modal/create-device-sensor-modal.component';
 import { RunATOModalComponent } from './modals/run-ato-modal/run-ato-modal.component';
+import { DateFilterSelectorComponent } from './date-filter-selector/date-filter-selector.component';
 
 
 
@@ -169,8 +170,8 @@ var modals = [
     MatSliderModule,
     MatButtonModule,
     MatDatepickerModule,
-    MatAutocompleteModule,
     MatNativeDateModule,
+    MatAutocompleteModule,
     MatFileUploadModule,
 
     /* Misc. */
@@ -230,9 +231,9 @@ var modals = [
     EquipmentTableComponent,
     TaskListComponent,
     TaskTableComponent,
-    
-    
+
     /* Form Components */
+    DateFilterSelectorComponent,
     SpeciesSelectComponent,
     SpeciesTableComponent,
     PageNotFoundComponent,
@@ -271,14 +272,14 @@ var modals = [
     TaskTableComponent,
     FishCardDetailedComponent,
     SnapshotTableListComponent,
-
-
-
+    
+    
     /* Form Components */
     SpeciesSelectComponent,
     TypeSelectComponent,
     GenericSelectComponent,
-
+    DateFilterSelectorComponent,
+    
 
 
     ...modals,
@@ -296,7 +297,7 @@ var modals = [
     { provide: HTTP_INTERCEPTORS, useClass: AquariumInterceptor, multi: true },
     //{ provide: 'OAuth.Environment', useValue: environment.environmentTag },
     //{ provide: 'OAuth.ClientName', useValue: environment.appName },
-    MatDatepickerModule
+    MatDatepickerModule,
   ],
 })
 export class SharedModule { }

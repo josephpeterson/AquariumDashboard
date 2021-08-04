@@ -69,7 +69,9 @@
             <div class="col-md-8">
               <div class="alert alert-info alert-dismissible fade show" role="alert"
                 *ngIf="atoStatus.nextRunTime else checkATO">
-                <p>Auto top off is scheduled to run <b>{{parseDate(atoStatus.nextRunTime)}} <small>({{parseDuration(atoStatus.nextRunTime)}})</small></b>. If the float sensor is reading a low water level, the pump will turn on and begin the ATO process.</p>
+                <p>Auto top off is scheduled to run <b>{{parseDate(atoStatus.nextRunTime)}}
+                    <small>({{parseDuration(atoStatus.nextRunTime)}})</small></b>. If the float sensor is reading a low
+                  water level, the pump will turn on and begin the ATO process.</p>
               </div>
               <ng-template #checkATO>
                 <div class="alert alert-info alert-dismissible fade show" role="alert" *ngIf="isRunnable(atoStatus)">
@@ -88,7 +90,8 @@
                 </div>
               </ng-template>
               <p>
-                <button [disabled]="!isRunnable(atoStatus)" class="btn btn-success" (click)="clickRunATO()">Run...</button>
+                <button [disabled]="!isRunnable(atoStatus)" class="btn btn-success"
+                  (click)="clickRunATO()">Run...</button>
               </p>
             </div>
             <div class="col-sm-4 ml-auto">
@@ -145,7 +148,13 @@
         </tbody>
       </table>
       <div>
-        <button class="btn btn-link">See More...</button>
+        <button class="btn btn-link" (click)="loadBackward()" [disabled]="this.pagination.start == 0">
+          <fa-icon [icon]="faCaretLeft" class="mr-1"></fa-icon>
+        </button>
+        Page: {{getPageNumber()}}
+        <button class="btn btn-link" (click)="loadForward()">
+          <fa-icon [icon]="faCaretRight" class="mr-1"></fa-icon>
+        </button>
       </div>
     </div>
   </div>

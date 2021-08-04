@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { Aquarium } from 'src/app/models/Aquarium';
@@ -9,6 +9,15 @@ import { take } from 'rxjs/operators';
 import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
 import { ManageSnapshotModal } from 'src/app/modules/SharedModule/modals/manage-snapshot-modal/manage-snapshot-modal.component';
 import { WaterChange } from 'src/app/models/WaterChange';
+import Chart from 'chart.js';
+import * as moment from 'moment';
+import { fromEventPattern, Observable, Subject } from 'rxjs';
+import { faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ATOStatus } from 'src/app/models/ATOStatus';
+import { PaginationSliver } from 'src/app/models/PaginationSliver';
+import { FormControl } from '@angular/forms';
+
 
 @Component({
   selector: 'aquarium-parameters',
@@ -18,6 +27,10 @@ import { WaterChange } from 'src/app/models/WaterChange';
 export class AquariumParametersComponent implements OnInit {
 
   public aquarium: Aquarium;
+  public pagination: PaginationSliver = new PaginationSliver();
+  public waterATOData$: Subject<any> = new Subject();
+  public selectedDateFilter = new FormControl();
+
 
   constructor(public aquariumService: AquariumService,
     public dialog: MatDialog,
@@ -26,6 +39,12 @@ export class AquariumParametersComponent implements OnInit {
 
   ngOnInit() {
     this.store.select(getSelectedAquarium).pipe(take(1)).subscribe(aq => this.aquarium = aq);
+    this.loadWaterATOData();
+    this.waterATOData$.next();
+
+    this.selectedDateFilter.valueChanges.subscribe(v => {
+      this.updateFilteredDate();
+    });
   }
 
   clickAddSnapshot() {
@@ -40,5 +59,48 @@ export class AquariumParametersComponent implements OnInit {
         //add snapshot to table
       }
     });
+  }
+
+  public loadWaterATOData() {
+    this.pagination.descending = true;
+    this.pagination.count = 100;
+    this.pagination.startDate = moment().utc().subtract(60,'d').format();
+    this.aquariumService.getDeviceATOHistory(this.aquarium.device.id, this.pagination).subscribe((atoHistory: ATOStatus[]) => {
+
+
+
+      function computeDuration(atoStatus: ATOStatus) {
+        var actual = moment(atoStatus.actualEndTime);
+        var est = moment(atoStatus.startTime);
+        var s = moment.duration(actual.diff(est)).asSeconds();
+        return Math.ceil(s);
+      }
+      //Create data for graph
+      var data = [];
+      atoHistory.forEach(h => {
+        //did it complete?
+        if(h.actualEndTime == undefined)
+          return;
+
+        data.push({
+          x: moment.utc(h.startTime).local().toDate(),
+          y: computeDuration(h) * h.mlPerSec
+        })
+      })
+      this.waterATOData$.next(data);
+      //this.loading = false;
+    }, (err: HttpErrorResponse) => {
+      //this.loading = false;
+    })
+  }
+  public updateFilteredDate() {
+    var date = this.selectedDateFilter.value;
+    if(!date) {
+      console.error("Invalid filtered date selected")
+      return;
+    }
+    console.log("Have new date:",date);
+
+    this.pagination.startDate = moment(date).utc().format();
   }
 }
