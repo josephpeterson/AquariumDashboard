@@ -38,7 +38,7 @@ import { MatProgressSpinnerModule, MatSidenavModule, MatCardModule, MatTableModu
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatFileUploadModule } from 'angular-material-fileupload';
+//import { MatFileUploadModule } from 'angular-material-fileupload';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { NavMenuNotificationsComponent } from './nav-menu/notifications/notifications.component';
@@ -173,7 +173,7 @@ var modals = [
     MatDatepickerModule,
     MatNativeDateModule,
     MatAutocompleteModule,
-    MatFileUploadModule,
+    //MatFileUploadModule,
 
     /* Misc. */
     OwlDateTimeModule,

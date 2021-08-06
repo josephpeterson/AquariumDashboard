@@ -12,7 +12,6 @@ import { AquariumInterceptor } from '../../services/aquarium.interceptor';
 import { MatDatepickerModule, MatFormFieldModule, MatSidenavModule, MatProgressSpinnerModule, MatCardModule, MatTableModule, MatTabsModule, MatCheckboxModule, MatInputModule, MatRadioModule, MatSortModule, MatMenuModule, MatIconModule, MatListModule, MatToolbarModule, MatPaginatorModule, MatSelectModule, MatDialogModule, MatSliderModule, MatButtonModule, MatAutocompleteModule, MatNativeDateModule } from '@angular/material';
 import { SharedModule } from '../SharedModule/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatFileUploadModule } from 'angular-material-fileupload';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterModule } from '@angular/router';
 import { Ng5SliderModule } from 'ng5-slider';
@@ -56,7 +55,6 @@ import { TemperatureHistogramComponent } from './temperature-histogram/temperatu
     MatDatepickerModule,
     MatAutocompleteModule,
     MatNativeDateModule,
-    MatFileUploadModule,
     Ng5SliderModule,
     OverviewRoutes //<-- import
   ],

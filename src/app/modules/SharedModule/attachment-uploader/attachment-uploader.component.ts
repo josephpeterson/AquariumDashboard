@@ -1,5 +1,5 @@
 import { Input, Component, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
-import { MatFileUploadQueue, MatFileUpload } from 'angular-material-fileupload';
+//import { MatFileUploadQueue, MatFileUpload } from 'angular-material-fileupload';
 
 
 @Component({
@@ -8,23 +8,25 @@ import { MatFileUploadQueue, MatFileUpload } from 'angular-material-fileupload';
   styleUrls: ['./attachment-uploader.component.scss']
 })
 export class AttachmentUploaderComponent {
-
-  @ViewChild("fileInput",{static: false}) filePicker: ElementRef;
-  @ViewChild("fileUploadQueue",{static: false}) fileUploadQueue: MatFileUploadQueue;
-  @Output() ready = new EventEmitter();
-
-
-  public openFilePicker() {
-    this.filePicker.nativeElement.click();
-  }
-  public getAttachment():MatFileUpload {
-    return this.fileUploadQueue.fileUploads.first;
-  }
-  public clearAttachment() {
-    this.fileUploadQueue.fileUploads.first.remove();
-  }
-
-  public clickUpload(event) {
-    this.ready.emit(event);
-  }
+  
+    @ViewChild("fileInput",{static: false}) filePicker: ElementRef;
+    @ViewChild("fileUploadQueue",{static: false}) fileUploadQueue //: MatFileUploadQueue;
+    @Output() ready = new EventEmitter();
+  
+  
+    public openFilePicker() {
+      this.filePicker.nativeElement.click();
+    }
+    public getAttachment() //:MatFileUpload
+     {
+      return this.fileUploadQueue.fileUploads.first;
+    }
+    public clearAttachment() {
+      this.fileUploadQueue.fileUploads.first.remove();
+    }
+  
+    public clickUpload(event) {
+      this.ready.emit(event);
+    }
+    
 }

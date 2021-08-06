@@ -43,7 +43,6 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 import { AquariumNotifierConfig } from './config/notifier';
 import { FishEffects } from './store/fish/fish.effect';
 import { fishReducer } from './store/fish/fish.reducer';
-import { MatFileUploadModule } from 'angular-material-fileupload';
 
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { AquariumInterceptor } from './services/aquarium.interceptor';
@@ -118,7 +117,6 @@ import { NotificationService } from './services/notification.service';
     MatDatepickerModule,
     MatAutocompleteModule,
     MatNativeDateModule,
-    MatFileUploadModule,
     ReactiveFormsModule,
     ColorPickerModule,
     FontAwesomeModule,

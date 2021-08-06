@@ -33,7 +33,6 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSidenavModule, MatProgressSpinnerModule, MatCardModule, MatTableModule, MatTabsModule, MatCheckboxModule, MatInputModule, MatRadioModule, MatSortModule, MatMenuModule, MatIconModule, MatListModule, MatToolbarModule, MatFormFieldModule, MatPaginatorModule, MatSelectModule, MatDialogModule, MatSliderModule, MatButtonModule, MatDatepickerModule, MatAutocompleteModule, MatNativeDateModule } from '@angular/material';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { MatFileUploadModule } from 'angular-material-fileupload';
 import { Ng5SliderModule } from 'ng5-slider';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { ProfileRoutes } from './profile-routing.module';
@@ -72,7 +71,6 @@ import { ProfileRoutes } from './profile-routing.module';
     MatDatepickerModule,
     MatAutocompleteModule,
     MatNativeDateModule,
-    MatFileUploadModule,
     Ng5SliderModule,
   ],
   declarations: [

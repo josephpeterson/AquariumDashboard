@@ -19,7 +19,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { FishRoutes } from './fish-routing.module';
-import { MatFileUploadModule } from 'angular-material-fileupload';
 import { Ng5SliderModule } from 'ng5-slider';
 
 
@@ -56,7 +55,6 @@ import { Ng5SliderModule } from 'ng5-slider';
     MatDatepickerModule,
     MatAutocompleteModule,
     MatNativeDateModule,
-    MatFileUploadModule,
     Ng5SliderModule,
   ],
   declarations: [

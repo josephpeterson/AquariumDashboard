@@ -29,7 +29,6 @@ import { SharedModule } from '../SharedModule/shared.module';
 import { AppModule } from '../../app.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatFileUploadModule } from 'angular-material-fileupload';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterModule } from '@angular/router';
 import { Ng5SliderModule } from 'ng5-slider';
@@ -81,7 +80,6 @@ import { NotificationService } from 'src/app/services/notification.service';
     MatDatepickerModule,
     MatAutocompleteModule,
     MatNativeDateModule,
-    MatFileUploadModule,
     Ng5SliderModule,
     AquariumRoutes //<-- import
   ],

@@ -15,7 +15,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterModule } from '@angular/router';
 import { MatSidenavModule, MatProgressSpinnerModule, MatCardModule, MatTableModule, MatTabsModule, MatCheckboxModule, MatInputModule, MatRadioModule, MatSortModule, MatMenuModule, MatIconModule, MatListModule, MatToolbarModule, MatFormFieldModule, MatPaginatorModule, MatSelectModule, MatDialogModule, MatSliderModule, MatButtonModule, MatDatepickerModule, MatAutocompleteModule, MatNativeDateModule, MatProgressBarModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatFileUploadModule } from 'angular-material-fileupload';
 import { Ng5SliderModule } from 'ng5-slider';
 import { DeviceDetailFormComponent } from './device-detail-form/device-detail-form.component';
 import { DeviceLogComponent } from './device-log/device-log.component';
@@ -67,7 +66,6 @@ import { NotificationService } from 'src/app/services/notification.service';
     MatDatepickerModule,
     MatAutocompleteModule,
     MatNativeDateModule,
-    MatFileUploadModule,
     MatProgressBarModule,
     Ng5SliderModule,
     DeviceRoutes //<-- import
