@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { Aquarium } from 'src/app/models/Aquarium';
@@ -8,11 +8,8 @@ import { getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
 import { take } from 'rxjs/operators';
 import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
 import { ManageSnapshotModal } from 'src/app/modules/SharedModule/modals/manage-snapshot-modal/manage-snapshot-modal.component';
-import { WaterChange } from 'src/app/models/WaterChange';
-import Chart from 'chart.js';
 import * as moment from 'moment';
-import { fromEventPattern, Observable, Subject } from 'rxjs';
-import { faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons';
+import { Subject } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ATOStatus } from 'src/app/models/ATOStatus';
 import { PaginationSliver } from 'src/app/models/PaginationSliver';

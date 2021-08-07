@@ -33,8 +33,8 @@ export class UsersTableComponent {
   public loading: boolean;
   public aquarium$: Observable<Aquarium>;
 
-  @ViewChild(MatPaginator,{static: false}) paginator: MatPaginator;
-  @ViewChild(MatSort,{static: false}) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   private selection: SelectionModel<AquariumAccount> = new SelectionModel<AquariumAccount>(true, []);
 
   //Columns

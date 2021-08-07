@@ -17,7 +17,7 @@ import { NotificationService } from 'src/app/services/notification.service';
 export class FishPhotoModal implements OnInit {
   public loading: boolean;
   public fishId: number;
-  @ViewChild(AttachmentUploaderComponent,{static: false}) attachmentComponent: AttachmentUploaderComponent;
+  @ViewChild(AttachmentUploaderComponent) attachmentComponent: AttachmentUploaderComponent;
   constructor(private _aquariumService: AquariumService,
     private store: Store<AppState>,
     private notifier: NotificationService,

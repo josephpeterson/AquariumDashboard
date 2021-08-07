@@ -35,7 +35,7 @@ export class DeviceDetailFormComponent implements OnInit {
     //@Input() deviceId: number;
     @Output() public onSuccess = new EventEmitter();
 
-    @ViewChild("form",{static: false}) form: ElementRef;
+    @ViewChild("form") form: ElementRef;
     private componentLifeCycle$ = new Subject();
     pinging: boolean;
     faCheck = faCheckCircle;

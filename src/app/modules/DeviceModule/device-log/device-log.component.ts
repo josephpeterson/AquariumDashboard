@@ -14,7 +14,7 @@ import { NotificationService } from 'src/app/services/notification.service';
 export class DeviceLogComponent implements OnInit {
 
   @Input("device") device: AquariumDevice;
-  @ViewChild("scrollWindow",{static: false}) private scrollContainer: ElementRef;
+  @ViewChild("scrollWindow") private scrollContainer: ElementRef;
 
   deviceLog: any;
 

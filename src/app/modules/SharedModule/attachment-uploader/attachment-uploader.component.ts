@@ -9,8 +9,8 @@ import { Input, Component, ViewChild, ElementRef, Output, EventEmitter } from '@
 })
 export class AttachmentUploaderComponent {
   
-    @ViewChild("fileInput",{static: false}) filePicker: ElementRef;
-    @ViewChild("fileUploadQueue",{static: false}) fileUploadQueue //: MatFileUploadQueue;
+    @ViewChild("fileInput") filePicker: ElementRef;
+    @ViewChild("fileUploadQueue") fileUploadQueue //: MatFileUploadQueue;
     @Output() ready = new EventEmitter();
   
   

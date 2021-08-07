@@ -36,8 +36,8 @@ export class BugsTableComponent {
   public error: HttpErrorResponse;
   public aquarium$: Observable<Aquarium>;
 
-  @ViewChild(MatPaginator,{static: false}) paginator: MatPaginator;
-  @ViewChild(MatSort,{static: false}) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   private selection: SelectionModel<BugReport> = new SelectionModel<BugReport>(true, []);
 
   //Columns

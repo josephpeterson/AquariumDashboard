@@ -27,7 +27,7 @@ import { PhotoExpandedModalComponent } from '../../SharedModule/modals/photo-exp
 //This replaces the deprecated snapshot carousel
 export class DeviceSnapshotCarouselComponent implements OnInit {
 
-  @ViewChild("scroller",{static: false}) scroller;
+  @ViewChild("scroller") scroller;
 
   selectedId: number = 0;
   loadCount: number = 500;

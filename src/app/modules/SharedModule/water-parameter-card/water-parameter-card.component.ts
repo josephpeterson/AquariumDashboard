@@ -76,7 +76,7 @@ export class WaterParameterCard implements OnInit {
     this.chartContainer.nativeElement.style.width = (420 + (this.expanded ? 150 : 0)) + "px";
     this.chartContainer.nativeElement.style.height = "230px";
     this.canvas.nativeElement.width = this.canvas.nativeElement.offsetWidth;
-    this.canvas.nativeElement.height = 230;
+    this.canvas.nativeElement.height = this.canvas.nativeElement.offsetHeight;
 
 
 
@@ -110,7 +110,6 @@ export class WaterParameterCard implements OnInit {
       type: 'line',
       data: chartData,
       options: {
-        maintainAspectRatio: false,
         legend: {
           display: false,
         },

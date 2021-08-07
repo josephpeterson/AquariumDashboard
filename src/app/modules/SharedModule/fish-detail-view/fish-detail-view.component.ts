@@ -37,7 +37,7 @@ export class FishDetailViewComponent implements OnInit {
     @Input("fish") fish: Fish;
     @Input("aquarium") aquarium: Aquarium;
 
-    @ViewChild(AttachmentUploaderComponent,{static: false}) attachmentComponent: AttachmentUploaderComponent;
+    @ViewChild(AttachmentUploaderComponent) attachmentComponent: AttachmentUploaderComponent;
 
     public fish$: Observable<Fish> = this.store.select(getSelectedFish);
 

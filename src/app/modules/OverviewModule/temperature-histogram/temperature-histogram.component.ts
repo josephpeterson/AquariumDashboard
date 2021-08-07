@@ -25,7 +25,7 @@ export class TemperatureHistogramComponent implements OnInit {
     //labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
     //datasets: []
   }
-  @ViewChild('canvas',{static: false}) canvas: ElementRef<HTMLCanvasElement>;
+  @ViewChild('canvas') canvas: ElementRef<HTMLCanvasElement>;
   ctx: CanvasRenderingContext2D;
   chart: Chart;
 

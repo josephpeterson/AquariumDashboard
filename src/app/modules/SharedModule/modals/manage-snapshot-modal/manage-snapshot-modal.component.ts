@@ -36,9 +36,9 @@ export class ManageSnapshotModal implements OnInit {
     console.log(this.snapshot);
   }
 
-  @ViewChild(SnapshotDetailComponent,{static: false}) snapshotForm: SnapshotDetailComponent;
-  @ViewChild(SnapshotDetailChartComponent,{static: false}) snapshotChartForm: SnapshotDetailChartComponent;
-  @ViewChild(AttachmentUploaderComponent,{static: false}) attachmentUploader: AttachmentUploaderComponent;
+  @ViewChild(SnapshotDetailComponent) snapshotForm: SnapshotDetailComponent;
+  @ViewChild(SnapshotDetailChartComponent) snapshotChartForm: SnapshotDetailChartComponent;
+  @ViewChild(AttachmentUploaderComponent) attachmentUploader: AttachmentUploaderComponent;
 
 
   clickUpdateSnapshot() {

@@ -33,13 +33,13 @@ export class SnapshotDetailComponent implements OnInit {
     //@Input() deviceId: number;
     @Output() public onSuccess = new EventEmitter();
 
-    @ViewChild("form",{static: false}) form: ElementRef;
+    @ViewChild("form") form: ElementRef;
     private componentLifeCycle$ = new Subject();
     pinging: boolean;
     faCheck = faCheckCircle;
     public faDevice:IconDefinition = faDesktop;
 
-    @ViewChild(AttachmentUploaderComponent,{static: false}) attachmentComponent: AttachmentUploaderComponent;
+    @ViewChild(AttachmentUploaderComponent) attachmentComponent: AttachmentUploaderComponent;
 
 
 

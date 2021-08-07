@@ -30,8 +30,8 @@ export class SnapshotTableListComponent implements OnInit {
   public loading$: Observable<Boolean> = this.store.select(isLoadingSnapshots);
   public snapshots$: Observable<AquariumSnapshot[]> = this.store.select(getAllSnapshots);
 
-  @ViewChild(MatPaginator,{static: false}) paginator: MatPaginator;
-  @ViewChild(MatSort,{static: false}) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   private selection: SelectionModel<AquariumSnapshot> = new SelectionModel<AquariumSnapshot>(true, []);
 
   //Columns

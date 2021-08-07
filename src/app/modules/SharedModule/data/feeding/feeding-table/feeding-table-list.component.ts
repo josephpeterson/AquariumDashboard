@@ -27,8 +27,8 @@ export class FeedingTableListComponent {
   public aquarium$: Observable<Aquarium>;
   public species$: Observable<Species[]> = this.store.select(getAllSpecies);
 
-  @ViewChild(MatPaginator,{static: false}) paginator: MatPaginator;
-  @ViewChild(MatSort,{static: false}) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   private selection: SelectionModel<FeedingTableItem> = new SelectionModel<FeedingTableItem>(true, []);
 
   //Columns

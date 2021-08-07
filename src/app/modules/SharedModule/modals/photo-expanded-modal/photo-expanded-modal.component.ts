@@ -17,7 +17,7 @@ export class PhotoExpandedModalComponent implements OnInit {
 
   public componentLifecycle = new Subject();
   public faTrash = faTrash;
-  @ViewChild("photo",{static: false}) photoElement: ElementRef<HTMLImageElement>;
+  @ViewChild("photo") photoElement: ElementRef<HTMLImageElement>;
 
 
 

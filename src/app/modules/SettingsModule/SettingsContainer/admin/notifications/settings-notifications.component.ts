@@ -44,7 +44,7 @@ export class SettingsNotificationsComponent {
   private componentLifecycle$: Subject<SettingsNotificationsComponent> = new Subject();
 
 
-  @ViewChild(NotificationsTableComponent,{static: false}) notificationTable: NotificationsTableComponent;
+  @ViewChild(NotificationsTableComponent) notificationTable: NotificationsTableComponent;
 
   constructor(
     public dialog: MatDialog,

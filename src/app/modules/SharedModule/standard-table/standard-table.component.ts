@@ -24,7 +24,7 @@ export class StandardTableComponent implements OnInit {
   @Input() public callback: Function;
 
   private selection: SelectionModel<any> = new SelectionModel<WaterChange>(true, []);
-  @ViewChild(MatSort,{static: false}) sort: MatSort;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor() { }
 
