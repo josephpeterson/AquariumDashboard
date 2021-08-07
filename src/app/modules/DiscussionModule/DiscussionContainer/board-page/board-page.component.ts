@@ -9,7 +9,7 @@ import { Store } from '@ngrx/store';
 import { getSelectedBoard, getPostLoadError, isLoadingPost } from 'src/app/store/post/post.selector';
 import { PostThread } from 'src/app/models/PostThread';
 import { PostCreateBoardModalComponent } from 'src/app/modules/SharedModule/modals/post-create-board-modal/post-create-board-modal.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { PostCreateThreadModalComponent } from 'src/app/modules/SharedModule/modals/post-create-thread-modal/post-create-thread-modal.component';
 import { PostBoard } from 'src/app/models/PostBoard';
 import { faClipboard } from '@fortawesome/free-solid-svg-icons';

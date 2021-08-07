@@ -6,7 +6,7 @@ import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
 import * as moment from 'moment';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { take } from 'rxjs/operators';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { DeviceScheduleTask, DeviceScheduleTaskTypes } from 'src/app/models/DeviceScheduleTask';
 

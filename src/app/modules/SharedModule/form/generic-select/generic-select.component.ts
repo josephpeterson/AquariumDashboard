@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 import { AppState } from 'src/app/app.state';
 import { takeUntil } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { CreateSpeciesModalComponent } from '../../modals/create-species-modal/create-species-modal.component';
 import { Fish } from 'src/app/models/Fish';
 import { SpeciesLoadAction } from 'src/app/store/species/species.actions';

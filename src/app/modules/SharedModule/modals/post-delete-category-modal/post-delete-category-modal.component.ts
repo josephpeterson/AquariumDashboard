@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { PostCategory } from 'src/app/models/PostCategory';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';

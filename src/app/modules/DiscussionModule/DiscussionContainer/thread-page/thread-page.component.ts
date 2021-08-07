@@ -7,7 +7,7 @@ import { AppState } from 'src/app/app.state';
 import { takeUntil } from 'rxjs/operators';
 import { PostSelectThreadAction, PostLoadThreadAction } from 'src/app/store/post/post.actions';
 import { PostThread } from 'src/app/models/PostThread';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { DiscussionService } from 'src/app/services/discussion.service';
 import { SnapshotLoadByAquariumAction } from 'src/app/store/snapshot/snapshot.actions';
 import { Post } from 'src/app/models/Post';

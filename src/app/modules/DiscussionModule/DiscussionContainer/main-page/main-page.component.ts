@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { PostLoadCategoriesFailAction, PostLoadCategoriesAction, PostResetAction, PostSelectBoardAction, PostSelectThreadAction } from 'src/app/store/post/post.actions';
 import { getAllCategories, getPostLoadError, isLoadingPost } from 'src/app/store/post/post.selector';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { ManageSnapshotModal } from 'src/app/modules/SharedModule/modals/manage-snapshot-modal/manage-snapshot-modal.component';
 import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
 import { PostCreateCategoryModalComponent } from 'src/app/modules/SharedModule/modals/post-create-category-modal/post-create-category-modal.component';

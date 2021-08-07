@@ -25,7 +25,10 @@ import { NotificationsTableComponent } from './SettingsContainer/admin/notificat
 import { BugsTableComponent } from './SettingsContainer/admin/bugs/bugs-table/bugs-table.component';
 import { RouterModule } from '@angular/router';
 import { SettingsRoutes } from './settings-routing.module';
-import { MatProgressSpinnerModule, MatTableModule, MatCheckboxModule, MatPaginatorModule } from '@angular/material';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTableModule } from '@angular/material/table';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 

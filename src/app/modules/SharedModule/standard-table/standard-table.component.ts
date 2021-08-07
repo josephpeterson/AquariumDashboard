@@ -5,7 +5,8 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { Observable } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
-import { MatSort, MatTableDataSource } from '@angular/material';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import * as moment from 'moment';
 
 @Component({

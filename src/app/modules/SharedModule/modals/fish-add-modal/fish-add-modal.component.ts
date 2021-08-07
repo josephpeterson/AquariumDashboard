@@ -6,7 +6,7 @@ import { takeUntil, take } from 'rxjs/operators';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { Fish } from 'src/app/models/Fish';
 import { Subject } from 'rxjs';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef } from '@angular/material/dialog';
 import { FishAddAction } from 'src/app/store/fish/fish.actions';
 import { isCreatingFish, getFishCreateError } from 'src/app/store/fish/fish.selector';
 

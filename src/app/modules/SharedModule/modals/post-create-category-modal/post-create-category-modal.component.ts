@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { DiscussionService } from 'src/app/services/discussion.service';
 import { PostCategory } from 'src/app/models/PostCategory';
 import { PostLoadCategoriesSuccessAction, PostLoadCategoriesAction } from 'src/app/store/post/post.actions';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-post-create-category-modal',

@@ -7,7 +7,7 @@ import { AppState } from 'src/app/app.state';
 import { SpeciesAddAction } from 'src/app/store/species/species.actions';
 import { take, takeUntil } from 'rxjs/operators';
 import { getSpeciesCreateError, isCreatingSpecies } from 'src/app/store/species/species.selector';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
 import { NotificationService } from 'src/app/services/notification.service';
 

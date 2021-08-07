@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BugReport } from 'src/app/models/BugReport';
 import { AquariumService } from 'src/app/services/aquarium.service';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef } from '@angular/material/dialog';
 import { DispatchedNotification } from 'src/app/models/DispatchedNotification';
 import { NotificationDispatchRequest } from 'src/app/models/NotificationDispatchRequest';
 import { NotificationTypes } from 'src/app/models/types/NotificationTypes';

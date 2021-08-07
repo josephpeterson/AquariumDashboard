@@ -5,7 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Notification } from 'src/app/models/Notification';
 import * as moment from 'moment';
 import { NotificationTypes } from 'src/app/models/types/NotificationTypes';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { ConfirmModalComponent } from '../../modals/confirm-modal/confirm-modal.component';
 import { Subject } from 'rxjs';
 

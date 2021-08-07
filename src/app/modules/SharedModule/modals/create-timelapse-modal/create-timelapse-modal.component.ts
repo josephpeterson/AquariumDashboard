@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { CreateScheduleModalComponent } from '../create-schedule-modal/create-schedule-modal.component';
 import { PhotoExpandedModalComponent } from '../photo-expanded-modal/photo-expanded-modal.component';
 import { HttpErrorResponse } from '@angular/common/http';

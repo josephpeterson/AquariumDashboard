@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MatTabGroup, MatTabChangeEvent } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatTabGroup, MatTabChangeEvent } from '@angular/material/tabs';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { Store, select } from '@ngrx/store';
 import { getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';

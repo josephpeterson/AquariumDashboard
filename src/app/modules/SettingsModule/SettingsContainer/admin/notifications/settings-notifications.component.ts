@@ -12,7 +12,7 @@ const ELEMENT_DATA = [
 ];
 
 import { Component, ChangeDetectorRef, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { Observable, Subject } from 'rxjs';

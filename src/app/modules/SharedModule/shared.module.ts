@@ -34,12 +34,32 @@ import { CreateNotificationModalComponent } from './modals/create-notification-m
 import { CreateTimelapseModalComponent } from './modals/create-timelapse-modal/create-timelapse-modal.component';
 import { SelectScheduleModalComponent } from './modals/select-schedule-modal/select-schedule-modal.component';
 import { CreateScheduleTaskModalComponent } from './modals/create-schedule-task-modal/create-schedule-task-modal.component';
-import { MatProgressSpinnerModule, MatSidenavModule, MatCardModule, MatTableModule, MatTabsModule, MatCheckboxModule, MatInputModule, MatRadioModule, MatSortModule, MatMenuModule, MatIconModule, MatListModule, MatToolbarModule, MatFormFieldModule, MatPaginatorModule, MatSelectModule, MatDialogModule, MatSliderModule, MatButtonModule, MatDatepickerModule, MatAutocompleteModule, MatNativeDateModule } from '@angular/material';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 //import { MatFileUploadModule } from 'angular-material-fileupload';
-import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { NavMenuNotificationsComponent } from './nav-menu/notifications/notifications.component';
 import { SearchFormComponent } from './nav-menu/search-form/search-form.component';
@@ -178,9 +198,6 @@ var modals = [
     MatSnackBarModule,
     //MatFileUploadModule,
 
-    /* Misc. */
-    OwlDateTimeModule,
-    OwlNativeDateTimeModule,
 
   ],
   declarations: [

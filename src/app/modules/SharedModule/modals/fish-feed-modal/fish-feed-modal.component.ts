@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { BugReport } from 'src/app/models/BugReport';
 import { Fish } from 'src/app/models/Fish';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AquariumService } from 'src/app/services/aquarium.service';
 
 import { ManagePhotoConfigurationModal } from '../manage-photo-configuration/manage-photo-configuration.component';

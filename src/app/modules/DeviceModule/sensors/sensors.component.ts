@@ -4,7 +4,7 @@ import { AquariumService } from 'src/app/services/aquarium.service';
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
 
 import { faCheckCircle, faEdit, faSync, faTrash, IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { CreateDeviceSensorModalComponent } from '../../SharedModule/modals/create-device-sensor-modal/create-device-sensor-modal.component';
 import { take } from 'rxjs/operators';
 import { DeviceSensor } from 'src/app/models/DeviceSensor';

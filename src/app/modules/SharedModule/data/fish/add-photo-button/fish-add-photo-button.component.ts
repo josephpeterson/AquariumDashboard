@@ -7,7 +7,7 @@ import { isTakingSnapshot, getDidTake, getTakeError } from 'src/app/store/snapsh
 import { SnapshotTakeAction } from 'src/app/store/snapshot/snapshot.actions';
 import { getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
 import { faCamera, IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { Fish } from 'src/app/models/Fish';
 import { FishPhotoModal } from '../../../modals/fish-photo-modal/fish-photo-modal.component';

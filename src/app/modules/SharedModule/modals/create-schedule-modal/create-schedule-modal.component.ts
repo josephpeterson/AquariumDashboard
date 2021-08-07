@@ -3,7 +3,7 @@ import { DeviceScheduleTask } from 'src/app/models/DeviceScheduleTask';
 import { DeviceSchedule } from 'src/app/models/DeviceSchedule';
 
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
-import { MatDialogRef, MatDialog } from '@angular/material';
+import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { CreateScheduleTaskModalComponent } from '../create-schedule-task-modal/create-schedule-task-modal.component';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { AquariumService } from 'src/app/services/aquarium.service';

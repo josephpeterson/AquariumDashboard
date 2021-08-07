@@ -1,6 +1,7 @@
 import { Fish } from 'src/app/models/Fish';
 import { Component, ViewChild, Input, Output } from '@angular/core';
-import { MatPaginator, MatSort } from '@angular/material';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { SelectionModel } from '@angular/cdk/collections';
 import { EventEmitter } from '@angular/core';
 import { SpeciesTableComponentData } from './species-table.component.data';

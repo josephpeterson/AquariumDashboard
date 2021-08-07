@@ -6,7 +6,7 @@ import { AquariumDevice } from 'src/app/models/AquariumDevice';
 import { AppState } from 'src/app/app.state';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { Aquarium } from 'src/app/models/Aquarium';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { ConfirmModalComponent } from 'src/app/modules/SharedModule/modals/confirm-modal/confirm-modal.component';
 import { take } from 'rxjs/operators';
 import { faCheckCircle, faDesktop, IconDefinition } from '@fortawesome/free-solid-svg-icons';

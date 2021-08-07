@@ -8,7 +8,7 @@ import { SnapshotResetAction, SnapshotLoadByAquariumAction, SnapshotDeleteAction
 import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
 import { SnapshotTableListComponent } from 'src/app/modules/SharedModule/data/snapshot/table-list/snapshot-table-list.component';
 import { ManageSnapshotModal } from 'src/app/modules/SharedModule/modals/manage-snapshot-modal/manage-snapshot-modal.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'equipment-list',

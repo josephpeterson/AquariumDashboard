@@ -5,7 +5,7 @@ import { DeviceSchedule } from 'src/app/models/DeviceSchedule';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import * as moment from 'moment';
 import { CreateScheduleTaskModalComponent } from '../modals/create-schedule-task-modal/create-schedule-task-modal.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'schedule-task-table',

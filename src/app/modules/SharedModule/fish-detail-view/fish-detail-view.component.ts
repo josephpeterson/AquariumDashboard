@@ -9,7 +9,7 @@ import { Species } from 'src/app/models/Species';
 import { SpeciesLoadAction, SpeciesAddAction } from 'src/app/store/species/species.actions';
 import { faTrash, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ConfirmModalComponent } from 'src/app/modules/SharedModule/modals/confirm-modal/confirm-modal.component';
 import { Aquarium } from 'src/app/models/Aquarium';

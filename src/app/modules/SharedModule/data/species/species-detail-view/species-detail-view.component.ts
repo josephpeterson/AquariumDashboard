@@ -8,7 +8,7 @@ import { Species } from 'src/app/models/Species';
 import { SpeciesLoadAction, SpeciesUpdateAction, SpeciesAddAction, SpeciesDeleteAction } from 'src/app/store/species/species.actions';
 import { faPenFancy, faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ConfirmModalComponent } from '../../../modals/confirm-modal/confirm-modal.component';
 import { ScraperModalComponent } from '../../../modals/scraper-modal/scraper-modal.component';

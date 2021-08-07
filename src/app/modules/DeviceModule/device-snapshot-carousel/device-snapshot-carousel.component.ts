@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
 import { Observable, Subject } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { isLoadingSnapshots, getAllSnapshots } from 'src/app/store/snapshot/snapshot.selector';

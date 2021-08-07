@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { AttachmentUploaderComponent } from '../../attachment-uploader/attachment-uploader.component';
 
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef } from '@angular/material/dialog';
 import { FishFeedModalComponent } from '../fish-feed-modal/fish-feed-modal.component';
 import { AppState } from 'src/app/app.state';
 import { Store } from '@ngrx/store';

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Inject, SimpleChanges, ElementRef, ViewChild } from '@angular/core';
 import { Subject } from 'rxjs';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 
 import { PhotoApplyModalComponent } from '../photo-apply-modal/photo-apply-modal.component';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';

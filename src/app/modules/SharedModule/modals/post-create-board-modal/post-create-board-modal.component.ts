@@ -3,7 +3,7 @@ import { AppState } from 'src/app/app.state';
 import { Store } from '@ngrx/store';
 import { DiscussionService } from 'src/app/services/discussion.service';
 import { PostLoadCategoriesSuccessAction, PostLoadCategoriesAction } from 'src/app/store/post/post.actions';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PostBoard } from 'src/app/models/PostBoard';
 import { PostCategory } from 'src/app/models/PostCategory';
 

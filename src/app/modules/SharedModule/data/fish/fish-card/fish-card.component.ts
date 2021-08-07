@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 import { Species } from 'src/app/models/Species';
 import { faPenFancy, faTrash, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { Fish } from 'src/app/models/Fish';

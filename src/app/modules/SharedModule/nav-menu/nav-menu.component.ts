@@ -5,7 +5,7 @@ import { AppState } from 'src/app/app.state';
 import { AquariumSelectionAction, AquariumLoadByIdAction, AquariumUnSelectionAction } from 'src/app/store/aquarium/aquarium.actions';
 import { isLoadingAquariums, getSelectedAquarium, getConnectionError } from 'src/app/store/aquarium/aquarium.selector';
 import { Aquarium } from 'src/app/models/Aquarium';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';

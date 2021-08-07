@@ -4,7 +4,7 @@ import { getSelectedThread, getPostLoadError, isLoadingPost, getSelectedBoard } 
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { takeUntil } from 'rxjs/operators';
 import { PostSelectThreadAction, PostLoadThreadAction } from 'src/app/store/post/post.actions';
 import { Title } from '@angular/platform-browser';

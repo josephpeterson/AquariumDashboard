@@ -10,7 +10,7 @@ import { Title } from '@angular/platform-browser';
 import { take, takeUntil } from 'rxjs/operators';
 import { faHamburger, faBars, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { CreateAquariumModelComponent } from '../../SharedModule/modals/create-aquarium-modal/create-aquarium-modal.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 
 /*
 

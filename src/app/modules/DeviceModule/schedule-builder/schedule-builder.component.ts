@@ -5,7 +5,7 @@ import { DeviceSchedule } from 'src/app/models/DeviceSchedule';
 import { faTrash, faPenFancy, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 
 import { DeviceScheduleAssignment } from 'src/app/models/DeviceScheduleAssignment';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import * as moment from 'moment';
 import { CreateScheduleModalComponent } from 'src/app/modules/SharedModule/modals/create-schedule-modal/create-schedule-modal.component';
 import { SelectScheduleModalComponent } from 'src/app/modules/SharedModule/modals/select-schedule-modal/select-schedule-modal.component';

@@ -1,6 +1,9 @@
 import { Component, OnInit, Inject, ViewChild, Input } from '@angular/core';
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
-import { MAT_DIALOG_DATA, MatPaginator, MatSort, MatTableDataSource, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { DeviceSchedule } from 'src/app/models/DeviceSchedule';
 import { AquariumService } from 'src/app/services/aquarium.service';
 

@@ -3,7 +3,7 @@ import { DeviceScheduleTask } from 'src/app/models/DeviceScheduleTask';
 import { DeviceSchedule } from 'src/app/models/DeviceSchedule';
 
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import * as moment from 'moment';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { GpioPinTypes } from '../../../../models/GpioPinTypes';

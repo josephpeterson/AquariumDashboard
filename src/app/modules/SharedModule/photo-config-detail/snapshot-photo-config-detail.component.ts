@@ -10,7 +10,7 @@ import { faCamera, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { CameraConfiguration, CameraExposureModes } from 'src/app/models/CameraConfiguration';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
-import { MAT_DIALOG_DATA } from '@angular/material';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({

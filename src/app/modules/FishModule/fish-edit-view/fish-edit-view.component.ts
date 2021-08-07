@@ -7,7 +7,7 @@ import { takeUntil, take } from 'rxjs/operators';
 import { Species } from 'src/app/models/Species';
 import { faTrash, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { Fish } from 'src/app/models/Fish';
 import { FishUpdateAction, FishDeleteAction } from 'src/app/store/fish/fish.actions';

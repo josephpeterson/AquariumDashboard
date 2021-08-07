@@ -5,10 +5,12 @@
     </div>
 </ng-container>
 <ng-template #formArea>
+    <!-- 
     <mat-form-field class="m-2">
         <input aria-label="Date" matInput [(ngModel)]="snapshot.date" [owlDateTimeTrigger]="dtPicker1" [owlDateTime]="dtPicker1">
         <owl-date-time #dtPicker1></owl-date-time>
     </mat-form-field>
+-->
     <mat-form-field class="m-2">
         <input type="text" placeholder="Temperature (C)" aria-label="Temperature" matInput
             [(ngModel)]="snapshot.temperature" name="temperature">

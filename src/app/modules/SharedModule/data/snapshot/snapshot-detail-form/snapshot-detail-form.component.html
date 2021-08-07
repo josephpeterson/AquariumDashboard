@@ -7,11 +7,13 @@
 <ng-template #formArea>
     <div class="row m-2">
         <div class="col">
+            <!-- 
             <mat-form-field class="m-2">
                 <input aria-label="Date" matInput [(ngModel)]="snapshot.date" [owlDateTimeTrigger]="dtPicker1"
                     [owlDateTime]="dtPicker1">
                 <owl-date-time #dtPicker1></owl-date-time>
             </mat-form-field>
+            -->
             <mat-form-field class="m-2">
                 <input type="text" placeholder="pH Level" aria-label="ph" matInput [(ngModel)]="snapshot.ph" name="ph">
             </mat-form-field>

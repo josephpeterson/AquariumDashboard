@@ -10,7 +10,7 @@ import { getAllSpecies } from 'src/app/store/species/species.selector';
 import { SpeciesTableComponentData } from '../../species/species-table/species-table.component.data';
 import { AppState } from 'src/app/app.state';
 import { Store } from '@ngrx/store';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource } from '@angular/material/table';
 import { AquariumListAction } from 'src/app/store/aquarium/aquarium.actions';
 import { takeUntil } from 'rxjs/operators';
 

@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { PhotoContent } from 'src/app/models/PhotoContent';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import * as moment from 'moment';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { PhotoExpandedModalComponent } from '../../../modals/photo-expanded-modal/photo-expanded-modal.component';
 
 @Component({
