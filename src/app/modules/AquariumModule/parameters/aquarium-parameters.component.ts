@@ -84,7 +84,7 @@ export class AquariumParametersComponent implements OnInit {
 
         data.push({
           x: moment.utc(h.startTime).local().toDate(),
-          y: computeDuration(h) * h.mlPerSec
+          y: (computeDuration(h) * h.mlPerSec) / 3785 //gallons
         })
       })
       this.waterATOData$.next(data);
