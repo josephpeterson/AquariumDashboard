@@ -1,25 +1,27 @@
 import { Injectable } from '@angular/core';
-//import { NotifierService } from 'angular-notifier';
+import { MatSnackBar } from '@angular/material';
+import { NotificationDialogComponent } from '../modules/SharedModule/notification-dialog/notification-dialog.component';
 @Injectable({
   providedIn: "root"
 })
 export class NotificationService {
   public aquariumId: number;
 
-  private notifier;
 
-  constructor() {
+  constructor(private _snackBar: MatSnackBar) {
     
   }
 
   public notify(level:string,body:string) {
-    if(this.notifier)
-    {
-      //this.notifier.notify(level,body);
-    }
-    else
-    {
-      console.warn(level,body);
-    }
+    this._snackBar.openFromComponent(NotificationDialogComponent, {
+      data: {
+        body: body,
+        level: level
+      },
+      panelClass: ["notification",level],
+      horizontalPosition: "right",
+      verticalPosition: "top",
+      duration: 5000,
+    });
   }
 }

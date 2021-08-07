@@ -12,6 +12,21 @@ body,.mat-drawer-container {
     stroke: #859BD3 !important;
 }
 
+/* For snackbar notifications */
+.cdk-overlay-container {
+    position: fixed;
+    z-index: 10000;
+}
+.notification.success {
+    background-color: limegreen;
+    color: white;
+}
+.notification.error {
+    background-color: indianred;
+}
+.notification.warning {
+    background-color: gold;
+}
 
 .empty-card
 {

@@ -71,7 +71,7 @@ import { DeviceDetailViewComponent } from './data/device/device-detail-view/devi
 import { SpeciesCardComponent } from './data/species/species-card/species-card.component';
 import { FishAddFormComponent } from './data/fish/fish-add-form/fish-add-form.component';
 import { FishAddPhotoButtonComponent } from './data/fish/add-photo-button/fish-add-photo-button.component';
-import { AutocompleteTypeComponent } from './autocomplete-type/autocomplete-type.component';
+import { AutocompleteTypeComponent } from './form/autocomplete-type/autocomplete-type.component';
 import { AquariumNavBarComponent } from './aquarium-nav-bar/aquarium-nav-bar.component';
 import { FishPhotoSelectComponent } from './data/fish/photo-select/fish-photo-select.component';
 import { FishCardDetailedComponent } from 'src/app/modules/SharedModule/fish-card-detailed/fish-card-detailed.component';
@@ -80,7 +80,7 @@ import { PhotoPaginator } from './photo-paginator/photo-paginator.component';
 import { StandardTableComponent } from './standard-table/standard-table.component';
 import { VisualAquariumComponent } from './visual-aquarium/visual-aquarium.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
-import { TypeSelectComponent } from './type-select/type-select.component';
+import { TypeSelectComponent } from './form/type-select/type-select.component';
 import { SnapshotPhotoConfigDetail } from './photo-config-detail/snapshot-photo-config-detail.component';
 import { PhotoCardComponent } from './data/photo/photo-card/photo-card.component';
 import { EquipmentTableComponent } from './equipment-table/equipment-table.component';
@@ -94,14 +94,15 @@ import { AdminService } from 'src/app/services/admin.service';
 import { AuthGuard } from 'src/app/guards/AuthGuard';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AquariumInterceptor } from 'src/app/services/aquarium.interceptor';
-import { SpeciesSelectComponent } from './species-select/species-select.component';
+import { SpeciesSelectComponent } from './form/species-select/species-select.component';
 import { FishPhotosComponent } from 'src/app/modules/SharedModule/fish-photos/fish-photos.component';
 import { GenericSelectComponent } from './form/generic-select/generic-select.component';
 import { CreateDeviceSensorModalComponent } from './modals/create-device-sensor-modal/create-device-sensor-modal.component';
 import { RunATOModalComponent } from './modals/run-ato-modal/run-ato-modal.component';
-import { DateFilterSelectorComponent } from './date-filter-selector/date-filter-selector.component';
+import { DateFilterSelectorComponent } from './form/date-filter-selector/date-filter-selector.component';
 import { WaterParameterCard } from './water-parameter-card/water-parameter-card.component';
-
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { NotificationDialogComponent } from './notification-dialog/notification-dialog.component';
 
 
 var modals = [
@@ -137,7 +138,8 @@ var modals = [
   SelectScheduleModalComponent,
   CreateScheduleTaskModalComponent,
   CreateDeviceSensorModalComponent,
-  RunATOModalComponent
+  RunATOModalComponent,
+  NotificationDialogComponent
 ]
 @NgModule({
   imports: [
@@ -173,6 +175,7 @@ var modals = [
     MatDatepickerModule,
     MatNativeDateModule,
     MatAutocompleteModule,
+    MatSnackBarModule,
     //MatFileUploadModule,
 
     /* Misc. */
