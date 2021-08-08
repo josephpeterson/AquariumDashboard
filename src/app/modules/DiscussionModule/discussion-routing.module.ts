@@ -43,4 +43,4 @@ const secondaryRoutes: Routes = [
 //that's where you register top level application routes). In any other module, you 
 //must call the RouterModule.forChild method to register additional routes.
 
-export const DiscussionRoutes: ModuleWithProviders = RouterModule.forChild(secondaryRoutes)
+export const DiscussionRoutes: ModuleWithProviders<any> = RouterModule.forChild(secondaryRoutes)

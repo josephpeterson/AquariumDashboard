@@ -16,4 +16,4 @@ const secondaryRoutes: Routes = [
 //that's where you register top level application routes). In any other module, you 
 //must call the RouterModule.forChild method to register additional routes.
 
-export const CalendarRoutes: ModuleWithProviders = RouterModule.forChild(secondaryRoutes)
+export const CalendarRoutes: ModuleWithProviders<any> = RouterModule.forChild(secondaryRoutes)

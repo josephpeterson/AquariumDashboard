@@ -14,6 +14,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { MaintenanceComponent } from './maintenance/maintenance.component';
 import { PageNotFoundComponent } from '../SharedModule/page-not-found/page-not-found.component';
 import { AquariumsContainer } from './AquariumsContainer/aquariums-container.component';
+import { AquariumModule } from './aquarium.module';
 
 const secondaryRoutes: Routes = [
     {
@@ -96,4 +97,4 @@ const secondaryRoutes: Routes = [
 //that's where you register top level application routes). In any other module, you 
 //must call the RouterModule.forChild method to register additional routes.
 
-export const AquariumRoutes: ModuleWithProviders = RouterModule.forChild(secondaryRoutes)
+export const AquariumRoutes: ModuleWithProviders<AquariumModule> = RouterModule.forChild(secondaryRoutes)
