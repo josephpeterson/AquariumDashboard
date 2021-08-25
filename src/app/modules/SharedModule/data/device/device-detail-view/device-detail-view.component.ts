@@ -8,7 +8,7 @@ import { AquariumService } from 'src/app/services/aquarium.service';
 import { take } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { Aquarium } from 'src/app/models/Aquarium';
-import { ManageSnapshotModal } from '../../../modals/manage-snapshot-modal/manage-snapshot-modal.component';
+import { CreateWaterParameterModalComponent } from '../../../modals/create-water-parameter-modal/create-water-parameter-modal.component';
 
 
 @Component({
@@ -68,12 +68,9 @@ export class DeviceDetailViewComponent implements OnInit {
     }
 
     public clickAddSnapshot() {
-        var snapshot = new AquariumSnapshot();
-        snapshot.aquariumId = this.aquarium.id;
-        snapshot.startTime = new Date();
-        this.dialog.open(ManageSnapshotModal, {
+        this.dialog.open(CreateWaterParameterModalComponent, {
             //width: "50%",
-            data: snapshot
+            data: this.aquarium
         }).afterClosed().subscribe((snapshot: AquariumSnapshot) => {
             if (snapshot) {
                 //add snapshot to table

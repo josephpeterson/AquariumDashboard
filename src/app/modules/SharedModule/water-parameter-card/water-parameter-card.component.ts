@@ -10,7 +10,7 @@ import Chart from 'chart.js';
 
 import { faCaretRight, faCaretLeft, faInfo, faInfoCircle, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
-import { ManageSnapshotModal } from '../modals/manage-snapshot-modal/manage-snapshot-modal.component';
+import { CreateWaterParameterModalComponent } from '../modals/create-water-parameter-modal/create-water-parameter-modal.component';
 
 @Component({
   selector: 'water-parameter-card',
@@ -55,19 +55,6 @@ export class WaterParameterCard implements OnInit {
     this.createGraph();
   }
 
-  clickAddSnapshot() {
-    var snapshot = new AquariumSnapshot();
-    snapshot.aquariumId = this.aquarium.id;
-    snapshot.startTime = new Date();
-    this.dialog.open(ManageSnapshotModal, {
-      //width: "50%",
-      data: snapshot
-    }).afterClosed().subscribe((snapshot: AquariumSnapshot) => {
-      if (snapshot) {
-        //add snapshot to table
-      }
-    });
-  }
   toggleExpansion() {
     this.expanded = !this.expanded;
     this.createGraph();
@@ -90,6 +77,7 @@ export class WaterParameterCard implements OnInit {
 
 
     if (this.data == null) {
+      /*
       console.log(`Generating test data for graph ${this.label}`);
       this.data = [];
       for (var i = 0; i < 7; i++) {
@@ -100,6 +88,7 @@ export class WaterParameterCard implements OnInit {
           y: Math.floor(Math.random() * 150) / 10
         });
       }
+      */
     }
 
     var labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];

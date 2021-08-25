@@ -7,10 +7,10 @@ import { AppState } from 'src/app/app.state';
 import { getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
 import { take } from 'rxjs/operators';
 import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
-import { ManageSnapshotModal } from 'src/app/modules/SharedModule/modals/manage-snapshot-modal/manage-snapshot-modal.component';
 import { ConfirmModalComponent } from 'src/app/modules/SharedModule/modals/confirm-modal/confirm-modal.component';
 import { AquariumLoadSuccessAction } from 'src/app/store/aquarium/aquarium.actions';
 import { NotificationService } from 'src/app/services/notification.service';
+import { CreateWaterParameterModalComponent } from 'src/app/modules/SharedModule/modals/create-water-parameter-modal/create-water-parameter-modal.component';
 
 
 @Component({
@@ -34,12 +34,9 @@ export class ParametersSnapshotListComponent implements OnInit {
   }
 
   clickAddSnapshot() {
-    var snapshot = new AquariumSnapshot();
-    snapshot.aquariumId = this.aquarium.id;
-    snapshot.startTime = new Date();
-    this.dialog.open(ManageSnapshotModal, {
+    this.dialog.open(CreateWaterParameterModalComponent, {
       //width: "50%",
-      data: snapshot
+      data: this.aquarium
     }).afterClosed().subscribe((snapshot: AquariumSnapshot) => {
       if (snapshot) {
         //add snapshot to table

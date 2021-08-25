@@ -12,7 +12,6 @@ import { PhotoContent } from 'src/app/models/PhotoContent';
 
 import { HttpErrorResponse } from '@angular/common/http';
 import { PhotoTimelapseOptions } from 'src/app/models/PhotoTimelapseOptions';
-import { CreateTimelapseModalComponent } from '../modals/create-timelapse-modal/create-timelapse-modal.component';
 import { PhotoSelection } from 'src/app/providers/PhotoSelection';
 import { PhotoExpandedModalComponent } from '../modals/photo-expanded-modal/photo-expanded-modal.component';
 import { NotificationService } from 'src/app/services/notification.service';
@@ -92,9 +91,12 @@ export class PhotoPaginator extends PhotoSelection implements OnInit {
     );
     console.log(photos);
 
+
+    /*
     this.dialog.open(CreateTimelapseModalComponent, {
       width: "50%",
       data: photos
     });
+    */
   }
 }

@@ -19,7 +19,6 @@ import { FishPhotoSelectModal } from './modals/fish-photo-select-modal/fish-phot
 import { FishDiseaseModalComponent } from './modals/fish-disease-modal/fish-disease-modal.component';
 import { FishBreedModalComponent } from './modals/fish-breed-modal/fish-breed-modal.component';
 import { FishTransferModalComponent } from './modals/fish-transfer-modal/fish-transfer-modal.component';
-import { ManageSnapshotModal } from './modals/manage-snapshot-modal/manage-snapshot-modal.component';
 import { LoginModalComponent } from './modals/login-modal/login-modal.component';
 import { PostCreateCategoryModalComponent } from './modals/post-create-category-modal/post-create-category-modal.component';
 import { PostCreateBoardModalComponent } from './modals/post-create-board-modal/post-create-board-modal.component';
@@ -31,7 +30,6 @@ import { ForgotPasswordModalComponent } from './modals/forgot-password-modal/for
 import { SelectAquariumModalComponent } from './modals/select-aquarium-modal/select-aquarium-modal.component';
 import { PhotoApplyModalComponent } from './modals/photo-apply-modal/photo-apply-modal.component';
 import { CreateNotificationModalComponent } from './modals/create-notification-modal/create-notification-modal.component';
-import { CreateTimelapseModalComponent } from './modals/create-timelapse-modal/create-timelapse-modal.component';
 import { SelectScheduleModalComponent } from './modals/select-schedule-modal/select-schedule-modal.component';
 import { CreateScheduleTaskModalComponent } from './modals/create-schedule-task-modal/create-schedule-task-modal.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -83,7 +81,6 @@ import { SpeciesDetailViewComponent } from './data/species/species-detail-view/s
 import { AquariumTableComponent } from './data/aquarium/aquarium-table/aquarium-table.component';
 import { FishCreateButtonComponent } from './data/fish/create-button/fish-create-button.component';
 import { SnapshotTableListComponent } from './data/snapshot/table-list/snapshot-table-list.component';
-import { SnapshotDetailComponent } from './data/snapshot/snapshot-detail-form/snapshot-detail-form.component';
 import { AttachmentUploaderComponent } from './attachment-uploader/attachment-uploader.component';
 import { SnapshotDetailChartComponent } from './data/snapshot/snapshot-detail-chart/snapshot-detail-chart.component';
 import { FishCardComponent } from './data/fish/fish-card/fish-card.component';
@@ -143,7 +140,6 @@ var modals = [
   FishDiseaseModalComponent,
   FishBreedModalComponent,
   FishTransferModalComponent,
-  ManageSnapshotModal,
   LoginModalComponent,
   PostCreateCategoryModalComponent,
   PostCreateBoardModalComponent,
@@ -155,7 +151,6 @@ var modals = [
   SelectAquariumModalComponent,
   PhotoApplyModalComponent,
   CreateNotificationModalComponent,
-  CreateTimelapseModalComponent,
   SelectScheduleModalComponent,
   CreateScheduleTaskModalComponent,
   CreateDeviceSensorModalComponent,
@@ -231,7 +226,6 @@ var modals = [
     AquariumTableComponent,
     FishCreateButtonComponent,
     SnapshotTableListComponent,
-    SnapshotDetailComponent,
     AttachmentUploaderComponent,
     SnapshotDetailChartComponent,
     FishCardComponent,

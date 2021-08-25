@@ -13,9 +13,10 @@ import * as moment from 'moment';
 })
 export class DateFilterSelectorComponent implements OnInit {
   
-  campaignOne: FormGroup;
-
+  
   public days:number = 7;
+
+  @Input("hasEnd") public hasEnd = true;
 
   @Input("range") public range = new FormGroup({
     start: new FormControl(),
@@ -33,7 +34,7 @@ export class DateFilterSelectorComponent implements OnInit {
 
     const end = moment(today).subtract(30,'d').toDate();
 
-    this.campaignOne = new FormGroup({
+    this.range = new FormGroup({
       start: new FormControl(end),
       end: new FormControl(today)
     });

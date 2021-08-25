@@ -7,7 +7,6 @@ import { AppState } from 'src/app/app.state';
 import { getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
 import { take } from 'rxjs/operators';
 import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
-import { ManageSnapshotModal } from 'src/app/modules/SharedModule/modals/manage-snapshot-modal/manage-snapshot-modal.component';
 import * as moment from 'moment';
 import { Subject } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -53,21 +52,6 @@ export class AquariumParametersComponent implements OnInit {
 
     this.addWaterParameter();
   }
-
-  clickAddSnapshot() {
-    var snapshot = new AquariumSnapshot();
-    snapshot.aquariumId = this.aquarium.id;
-    snapshot.startTime = new Date();
-    this.dialog.open(ManageSnapshotModal, {
-      //width: "50%",
-      data: snapshot
-    }).afterClosed().subscribe((snapshot: AquariumSnapshot) => {
-      if (snapshot) {
-        //add snapshot to table
-      }
-    });
-  }
-
   public loadWaterATOData() {
     this.pagination.descending = true;
     this.pagination.count = 100;
@@ -134,10 +118,11 @@ export class AquariumParametersComponent implements OnInit {
       //this.loading = false;
     }, (err: HttpErrorResponse) => {
       //this.loading = false;
+
+      this.notificationService.notify("error","Could not load water parameters for aquarium");
     })
   }
   public addWaterParameter() {
-    console.log("adding water parameter...");
     this.dialog.open(CreateWaterParameterModalComponent, {
       width: "50%",
       data: this.aquarium,
@@ -147,10 +132,6 @@ export class AquariumParametersComponent implements OnInit {
       this.notificationService.notify("success",`New water parameter added (id: ${newParameter.id})`)
       this.updateFilteredDate();
     });
-
-    var snapshot = new AquariumSnapshot();
-    snapshot.startTime
-    this.aquariumService.createSnapshot(snapshot, null);
   }
 
 

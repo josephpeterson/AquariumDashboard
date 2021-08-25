@@ -5,18 +5,9 @@
     </div>
 </ng-container>
 <ng-template #formArea>
-    <!-- 
-    <mat-form-field class="m-2">
-        <input aria-label="Date" matInput [(ngModel)]="snapshot.date" [owlDateTimeTrigger]="dtPicker1" [owlDateTime]="dtPicker1">
-        <owl-date-time #dtPicker1></owl-date-time>
-    </mat-form-field>
--->
-    <mat-form-field class="m-2">
-        <input type="text" placeholder="Temperature (C)" aria-label="Temperature" matInput
-            [(ngModel)]="snapshot.temperature" name="temperature">
-    </mat-form-field>
-    <div class="row chart">
-        <div class="col ph" id="phColumn">
+    <!-- Chart -->
+    <div class="row chart p-0 m-0">
+        <div class="col  p-0 ph" id="phColumn">
             <div class="">pH</div>
             <span class="chart-item" (click)="clickPhRow($event)">6.0</span>
             <span class="chart-item" (click)="clickPhRow($event)">6.4</span>
@@ -26,7 +17,7 @@
             <span class="chart-item" (click)="clickPhRow($event)">7.2</span>
             <span class="chart-item" (click)="clickPhRow($event)">7.6</span>
         </div>
-        <div class="col high-ph" id="highPhColumn">
+        <div class="col  p-0 high-ph" id="highPhColumn">
             <div>High Range<br>pH</div>
             <span class="chart-item" (click)="clickPhRow($event)">7.4</span>
             <span class="chart-item" (click)="clickPhRow($event)">7.8</span>
@@ -35,7 +26,7 @@
             <span class="chart-item" (click)="clickPhRow($event)">8.4</span>
             <span class="chart-item" (click)="clickPhRow($event)">8.8</span>
         </div>
-        <div class="col ammonia" id="ammoniaColumn">
+        <div class="col  p-0 ammonia" id="ammoniaColumn">
             <div>Ammonia</div>
             <span class="chart-item" (click)="clickAmmoniaRow($event)">0 ppm</span>
             <span class="chart-item" (click)="clickAmmoniaRow($event)">0.25 ppm</span>
@@ -45,7 +36,7 @@
             <span class="chart-item" (click)="clickAmmoniaRow($event)">4.0 ppm</span>
             <span class="chart-item" (click)="clickAmmoniaRow($event)">8.0 ppm</span>
         </div>
-        <div class="col nitrite" id="nitriteColumn">
+        <div class="col p-0  nitrite" id="nitriteColumn">
             <div>Nitrite</div>
             <span class="chart-item" (click)="clickNitriteRow($event)">0 ppm</span>
             <span class="chart-item" (click)="clickNitriteRow($event)">0.25 ppm</span>
@@ -54,7 +45,7 @@
             <span class="chart-item" (click)="clickNitriteRow($event)">2.0 ppm</span>
             <span class="chart-item" (click)="clickNitriteRow($event)">5.0 ppm</span>
         </div>
-        <div class="col nitrate" id="nitrateColumn">
+        <div class="col p-0  nitrate" id="nitrateColumn">
             <div>Nitrate</div>
             <span class="chart-item" (click)="clickNitrateRow($event)">0 ppm</span>
             <span class="chart-item" (click)="clickNitrateRow($event)">5.0 ppm</span>

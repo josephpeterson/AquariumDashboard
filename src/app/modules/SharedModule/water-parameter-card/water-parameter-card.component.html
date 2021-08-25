@@ -7,10 +7,10 @@
                         <h5>
                             {{this.label}}
                             <button *ngIf="addClicked" class="p-1 btn btn-link" (click)="addClicked()">
-                                <fa-icon [icon]="faPlus" ></fa-icon>
+                                <fa-icon [icon]="faPlus"></fa-icon>
                             </button>
                             <button *ngIf="info" class="p-1 btn btn-link" (click)="toggleInfoBox()">
-                                <fa-icon [icon]="faInfo" ></fa-icon>
+                                <fa-icon [icon]="faInfo"></fa-icon>
                             </button>
                             <div class="float-right">
                                 <button class="btn btn-link" (click)="toggleExpansion()">
@@ -26,9 +26,18 @@
                     <div class="m-1 alert alert-info" *ngIf="info && infoBox">
                         {{info}}
                     </div>
-                    <canvas #alkalinityChart class="bg-gray"></canvas>
+                    <canvas #alkalinityChart class="bg-gray" [class.d-none]="!this.data || this.data.length == 0"></canvas>
+                    <ng-container *ngIf="this.data && this.data.length > 0 else noData">
+
+                    </ng-container>
+                    <ng-template #noData>
+                        <div class="card-body w-100">
+                            <h4>No data available</h4>
+                        </div>
+                    </ng-template>
                 </div>
             </div>
         </div>
+
     </div>
 </div>

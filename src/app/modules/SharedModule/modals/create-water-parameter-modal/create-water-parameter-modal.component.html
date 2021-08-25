@@ -18,31 +18,39 @@
       Enter the results from your test kit here. Accurate test results helps provide the best information and forcasting
       for your aquarium.
     </p>
-    <hr class="m-0">
 
-    <div class="row">
-      <div class="col-md-6">
-        <ul class="nav nav-pills nav-justified p-1">
-          <li class="nav-item">
-            <a class="nav-link active" [aria-current]="chartView ? 'page':''" (click)="clickSwitchView(0)">Chart View</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [aria-current]="chartView ? 'page':''" (click)="clickSwitchView(1)">Manual Entry</a>
-          </li>
-        </ul>
+    <!-- Basic Parameters Tabs -->
+    <h6>Basic Parameters</h6>
+    <div class="row pl-3 mb-1 ">
+      <div class="col-xs-4">
+        <input [(ngModel)]="snapshot.startTime" [matDatepicker]="picker" class="form-control">
+        <mat-datepicker #picker></mat-datepicker>
+      </div>
+      <div class="col-xs-2">
+        <fa-icon [icon]="faArrowDown" class="m-2 p-2" (click)="picker.open()"></fa-icon>
       </div>
     </div>
-    <snapshot-detail-chart [snapshot]="snapshot" *ngIf="chartView" #snapshotForm></snapshot-detail-chart>
-    <snapshot-detail-form [snapshot]="snapshot" *ngIf="!chartView" #snapshotForm></snapshot-detail-form>
-    <ng-container *ngIf="snapshot.photoId != undefined else upload">
-      <div class="snapshotPhoto"
-        [style.background-image]="'url(' + _aquariumService.getPhotoPermalink(snapshot.photoId) + ')'">
 
+    <!-- Parameter Entry  -->
+    <div class="row">
+      <div class="col-lg-3">
+
+        <input [(ngModel)]="snapshot.temperature" type="text" class="mb-1 form-control" placeholder="Temperature (C)">
+
+        <input [(ngModel)]="snapshot.ph" type="text" class="mb-1 form-control" placeholder="Ph (ppm)">
+        <input [(ngModel)]="snapshot.nitrite" type="text" class="mb-1 form-control" placeholder="Nitrite (ppm)">
+        <input [(ngModel)]="snapshot.nitrate" type="text" class="mb-1 form-control" placeholder="Nitrate (ppm)">
+        <input [(ngModel)]="snapshot.ammonia" type="text" class="mb-1 form-control" placeholder="Ammonia (ppm)">
+        <h6>Reef Parameters</h6>
+        <input [(ngModel)]="snapshot.salinity" type="text" class="mb-1 form-control" placeholder="Salinity (ppm)">
+        <input [(ngModel)]="snapshot.alkalinity" type="text" class="mb-1 form-control" placeholder="Alkalinity (dkH)">
+        <input [(ngModel)]="snapshot.calcium" type="text" class="mb-1 form-control" placeholder="Calcium (ppm)">
+        <input [(ngModel)]="snapshot.magnesium" type="text" class="mb-1 form-control" placeholder="Magneseium (ppm)">
       </div>
-    </ng-container>
-    <ng-template #upload>
-      <attachment-uploader></attachment-uploader>
-    </ng-template>
+      <div class="col-lg-9">
+        <snapshot-detail-chart [snapshot]="snapshot" *ngIf="chartView" #snapshotForm></snapshot-detail-chart>
+      </div>
+    </div>
   </ng-template>
   <mat-dialog-actions align="end">
     <button type="submit" class="m-2 btn btn-danger" [mat-dialog-close]>Cancel</button>

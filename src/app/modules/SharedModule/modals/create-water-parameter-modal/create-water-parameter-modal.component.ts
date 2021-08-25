@@ -8,11 +8,12 @@ import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { SnapshotDeleteSuccessAction, SnapshotTakeSuccessAction } from 'src/app/store/snapshot/snapshot.actions';
-import { SnapshotDetailComponent } from '../../data/snapshot/snapshot-detail-form/snapshot-detail-form.component';
 import { SnapshotDetailChartComponent } from '../../data/snapshot/snapshot-detail-chart/snapshot-detail-chart.component';
 import { AttachmentUploaderComponent } from '../../attachment-uploader/attachment-uploader.component';
 import { NotificationService } from 'src/app/services/notification.service';
-import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarAlt, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { Aquarium } from 'src/app/models/Aquarium';
+import * as moment from 'moment';
 
 @Component({
   selector: 'create-water-parameter-modal',
@@ -24,22 +25,31 @@ export class CreateWaterParameterModalComponent implements OnInit {
 
   public updating: boolean = false;
   public snapshot: AquariumSnapshot;
+  public aquarium: Aquarium;
   public chartView: boolean = true;
   public faInfoCircle = faInfoCircle;
+  public faArrowDown = faCalendarAlt;
 
-  constructor(@Inject(MAT_DIALOG_DATA) snapshot,
+  constructor(@Inject(MAT_DIALOG_DATA) aquarium: Aquarium,
     public _aquariumService: AquariumService,
     private notifier: NotificationService,
     private dialogRef: MatDialogRef<CreateWaterParameterModalComponent>,
     private store: Store<AppState>) {
-    this.snapshot = snapshot;
+    this.aquarium = aquarium;
   }
 
   ngOnInit() {
     console.log(this.snapshot);
+
+    if(!this.snapshot)
+    {
+      var s = new AquariumSnapshot();
+      s.startTime = moment().toDate();
+      this.snapshot = s;
+    }
+
   }
 
-  @ViewChild(SnapshotDetailComponent) snapshotForm: SnapshotDetailComponent;
   @ViewChild(SnapshotDetailChartComponent) snapshotChartForm: SnapshotDetailChartComponent;
   @ViewChild(AttachmentUploaderComponent) attachmentUploader: AttachmentUploaderComponent;
 
@@ -54,11 +64,8 @@ export class CreateWaterParameterModalComponent implements OnInit {
     );
   }
   clickCreateSnapshot() {
-    var attachment = this.attachmentUploader.getAttachment();
-    this.snapshot = (this.chartView ? this.snapshotChartForm:this.snapshotForm).snapshot;
     this.updating = true;
-
-    this._aquariumService.createSnapshot(this.snapshot, attachment).subscribe(
+    this._aquariumService.createSnapshot(this.aquarium.id,this.snapshot, null).subscribe(
       (snapshot: AquariumSnapshot) => {
         this.snapshot = snapshot;
         this.dialogRef.close(this.snapshot);
@@ -81,7 +88,7 @@ export class CreateWaterParameterModalComponent implements OnInit {
     );
   }
   clickSwitchView(val: number) {
-    if(val == 0)
+    if (val == 0)
       this.chartView = true;
     else
       this.chartView = false;

@@ -5,16 +5,17 @@ import { Subject } from 'rxjs';
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
 import { AppState } from 'src/app/app.state';
 import { AquariumService } from 'src/app/services/aquarium.service';
-import { FormGroup, FormBuilder, Form } from '@angular/forms';
+import { FormGroup, FormBuilder, Form, FormControl } from '@angular/forms';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { MatDialog } from '@angular/material/dialog';
 import { take } from 'rxjs/operators';
-import { faCheckCircle, faDesktop, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { faArrowDown, faCalendar, faCalendarAlt, faCheckCircle, faDesktop, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { CameraConfiguration } from 'src/app/models/CameraConfiguration';
 import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
 import $ from 'jquery';
 import { AttachmentUploaderComponent } from '../../../attachment-uploader/attachment-uploader.component';
 import { NotificationService } from 'src/app/services/notification.service';
+import * as moment from 'moment';
 
 @Component({
     selector: 'snapshot-detail-chart',
@@ -26,6 +27,8 @@ export class SnapshotDetailChartComponent implements OnInit {
     public device: AquariumDevice;
     public disabled: boolean = false;
     public error: boolean;
+
+    public faArrowDown = faCalendarAlt;
 
     public scanning: boolean = false;
 

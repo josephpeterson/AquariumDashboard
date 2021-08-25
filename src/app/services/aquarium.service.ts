@@ -88,8 +88,8 @@ export class AquariumService {
   public updateSnapshot(snapshot: AquariumSnapshot): Observable<AquariumSnapshot> {
     return this.http.post<AquariumSnapshot>(this._url + "/v1/Snapshot/Update", snapshot);
   }
-  public createSnapshot(snapshot: AquariumSnapshot, uploadedPhoto: any): Observable<any> {
-    const url = this._url + "/v1/Snapshot/" + snapshot.aquariumId + "/Create";
+  public createSnapshot(aquariumId: number,snapshot: AquariumSnapshot, uploadedPhoto: any): Observable<any> {
+    const url = this._url + "/v1/Snapshot/" + aquariumId + "/Create";
     let formData = new FormData();
 
     var response = {
