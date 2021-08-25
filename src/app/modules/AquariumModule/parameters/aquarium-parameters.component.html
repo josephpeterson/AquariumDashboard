@@ -1,15 +1,17 @@
 <div class="row">
 	<div class="col-sm-4">
-		<h1>Water Parameters</h1>
+		<h1 class="m-1">Water Parameters</h1>
 	</div>
-	<div class="col">
-		<date-filter-selector [(control)]="selectedDateFilter"></date-filter-selector>
+	<div class="col m-2">
+		<date-filter-selector [(range)]="dateRange" (updated)="updateFilteredDate()"></date-filter-selector>
 	</div>
 </div>
 <div class="ato_parameters">
 	<div class="container-fluid p-0">
 		<div class="row align-items-start">
-			<water-parameter-card chartColor="rgb(100, 100, 192)" label="Water ATO" [data]="waterATOData$ | async"
+			<water-parameter-card chartColor="rgb(100, 100, 192)" label="Water ATO" [data]="waterATOData$ | async" 
+			[addClicked]="addWaterATOData"
+			info="This graph represents the amount of water added to your tank over time. The amount added should stay relatively consistent but may change depending on the season."
 				yLabel="gallons"></water-parameter-card>
 		</div>
 	</div>
@@ -25,9 +27,23 @@
 	<div class="container-fluid p-0">
 		<div class="row align-items-start">
 
-			<water-parameter-card chartColor="rgb(192, 100, 100)" label="Alkalinity"></water-parameter-card>
-			<water-parameter-card chartColor="rgb(100, 192, 100)" label="Magnesium"></water-parameter-card>
-			<water-parameter-card chartColor="rgb(100, 100, 192)" label="Calcium"></water-parameter-card>
+			<water-parameter-card 
+				[addClicked]="addWaterParameter"
+				[data]="waterAlkalinityData$ | async"
+				label="Alkalinity">
+			</water-parameter-card>
+			<water-parameter-card 
+				chartColor="rgb(192, 100, 100)"
+				[addClicked]="addWaterParameter"
+				[data]="waterMagnesiumData$ | async"
+				label="Magnesium">
+			</water-parameter-card>
+			<water-parameter-card 
+			chartColor="rgb(100, 100, 192)"
+				[addClicked]="addWaterParameter"
+				[data]="waterCalciumData$ | async"
+				label="Calcium">
+			</water-parameter-card>
 		</div>
 	</div>
 </div>

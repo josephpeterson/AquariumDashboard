@@ -12,23 +12,25 @@ import { SnapshotDetailComponent } from '../../data/snapshot/snapshot-detail-for
 import { SnapshotDetailChartComponent } from '../../data/snapshot/snapshot-detail-chart/snapshot-detail-chart.component';
 import { AttachmentUploaderComponent } from '../../attachment-uploader/attachment-uploader.component';
 import { NotificationService } from 'src/app/services/notification.service';
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: 'manage-snapshot-modal',
-  templateUrl: './manage-snapshot-modal.component.html',
-  styleUrls: ['./manage-snapshot-modal.component.scss']
+  selector: 'create-water-parameter-modal',
+  templateUrl: './create-water-parameter-modal.component.html',
+  styleUrls: ['./create-water-parameter-modal.component.scss']
 })
 /* todo Obsolete */
-export class ManageSnapshotModal implements OnInit {
+export class CreateWaterParameterModalComponent implements OnInit {
 
   public updating: boolean = false;
   public snapshot: AquariumSnapshot;
   public chartView: boolean = true;
+  public faInfoCircle = faInfoCircle;
 
   constructor(@Inject(MAT_DIALOG_DATA) snapshot,
     public _aquariumService: AquariumService,
     private notifier: NotificationService,
-    private dialogRef: MatDialogRef<ManageSnapshotModal>,
+    private dialogRef: MatDialogRef<CreateWaterParameterModalComponent>,
     private store: Store<AppState>) {
     this.snapshot = snapshot;
   }
@@ -78,7 +80,10 @@ export class ManageSnapshotModal implements OnInit {
       (err) => this.handleErr
     );
   }
-  clickSwitchView() {
-    this.chartView = !this.chartView;
+  clickSwitchView(val: number) {
+    if(val == 0)
+      this.chartView = true;
+    else
+      this.chartView = false;
   }
 }

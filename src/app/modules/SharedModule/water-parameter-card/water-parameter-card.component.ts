@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -8,7 +8,7 @@ import { getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
 import { take } from 'rxjs/operators';
 import Chart from 'chart.js';
 
-import { faCaretRight, faCaretLeft } from '@fortawesome/free-solid-svg-icons';
+import { faCaretRight, faCaretLeft, faInfo, faInfoCircle, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
 import { ManageSnapshotModal } from '../modals/manage-snapshot-modal/manage-snapshot-modal.component';
 
@@ -22,13 +22,19 @@ export class WaterParameterCard implements OnInit {
   public aquarium: Aquarium;
   public faCaretRight = faCaretRight;
   public faCaretLeft = faCaretLeft;
+  public faInfo = faInfoCircle;
+  public faPlus = faPlus;
   public expanded: boolean = false;
+  public infoBox: boolean = false;
   public chart;
 
   @Input("label") public label;
+  @Input("info") public info;
   @Input("yLabel") public yLabel;
   @Input("data") public data;
   @Input("chartColor") public chartColor;
+
+  @Input() public addClicked;
 
 
   public alakinityValues = {
@@ -52,7 +58,7 @@ export class WaterParameterCard implements OnInit {
   clickAddSnapshot() {
     var snapshot = new AquariumSnapshot();
     snapshot.aquariumId = this.aquarium.id;
-    snapshot.date = new Date();
+    snapshot.startTime = new Date();
     this.dialog.open(ManageSnapshotModal, {
       //width: "50%",
       data: snapshot
@@ -67,13 +73,16 @@ export class WaterParameterCard implements OnInit {
     this.createGraph();
 
   }
+  toggleInfoBox() {
+    this.infoBox = !this.infoBox;
+  }
 
 
   public createGraph() {
     if (this.chart)
       this.chart.destroy();
 
-    this.chartContainer.nativeElement.style.width = (420 + (this.expanded ? 150 : 0)) + "px";
+    this.chartContainer.nativeElement.style.width = (420 + (this.expanded ? 250 : 0)) + "px";
     this.chartContainer.nativeElement.style.height = "230px";
     this.canvas.nativeElement.width = this.canvas.nativeElement.offsetWidth;
     this.canvas.nativeElement.height = this.canvas.nativeElement.offsetHeight;
@@ -92,8 +101,6 @@ export class WaterParameterCard implements OnInit {
         });
       }
     }
-    else
-      console.log("Data",this.data);
 
     var labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
     var chartData = {
@@ -110,6 +117,7 @@ export class WaterParameterCard implements OnInit {
       type: 'line',
       data: chartData,
       options: {
+        maintainAspectRatio: false,
         legend: {
           display: false,
         },
@@ -131,4 +139,7 @@ export class WaterParameterCard implements OnInit {
     });
 
   }
+  ngOnChanges() {
+    this.createGraph();
+}
 }

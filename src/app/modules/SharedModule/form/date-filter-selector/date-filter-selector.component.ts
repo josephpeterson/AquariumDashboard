@@ -16,7 +16,15 @@ export class DateFilterSelectorComponent implements OnInit {
   campaignOne: FormGroup;
 
   public days:number = 7;
-  @Input("control") inputControl = new FormControl();
+
+  @Input("range") public range = new FormGroup({
+    start: new FormControl(),
+    end: new FormControl()
+  });
+  @Input("maxDate") public maxDate = new Date();
+
+  @Output() public updated = new EventEmitter();
+
 
   constructor(
     private _aquariumService: AquariumService,
@@ -36,7 +44,12 @@ export class DateFilterSelectorComponent implements OnInit {
   public openPicker() {
    
   }
-
+  public onClose() {
+    this.updated.emit({
+      startDate: this.range.value.start,
+      endDate: this.range.value.end,
+    });
+  }
 
   
 }

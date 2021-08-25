@@ -10,6 +10,7 @@ import { SettingsUsersComponent } from './SettingsContainer/admin/users/settings
 import { SettingsNotificationsComponent } from './SettingsContainer/admin/notifications/settings-notifications.component';
 import { SettingsBugsComponent } from './SettingsContainer/admin/bugs/settings-bugs.component';
 import { SettingsGeneralComponent } from './SettingsContainer/general/settings-general.component';
+import { SettingsModule } from './settings.module';
 
 const secondaryRoutes: Routes = [
     {
@@ -60,4 +61,4 @@ const secondaryRoutes: Routes = [
 //that's where you register top level application routes). In any other module, you 
 //must call the RouterModule.forChild method to register additional routes.
 
-export const SettingsRoutes: ModuleWithProviders<any> = RouterModule.forChild(secondaryRoutes)
+export const SettingsRoutes: ModuleWithProviders<SettingsModule> = RouterModule.forChild(secondaryRoutes)

@@ -64,13 +64,13 @@ export class DeviceDetailViewComponent implements OnInit {
 
     public getSnapshotAge(): string {
         if(this.latestSnapshot)
-            return moment.utc(this.latestSnapshot.date).local().calendar();
+            return moment.utc(this.latestSnapshot.startTime).local().calendar();
     }
 
     public clickAddSnapshot() {
         var snapshot = new AquariumSnapshot();
         snapshot.aquariumId = this.aquarium.id;
-        snapshot.date = new Date();
+        snapshot.startTime = new Date();
         this.dialog.open(ManageSnapshotModal, {
             //width: "50%",
             data: snapshot

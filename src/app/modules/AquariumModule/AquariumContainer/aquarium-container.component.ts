@@ -36,7 +36,6 @@ export class AquariumContainer {
 
     this.aquarium$.pipe(takeUntil(this.componentLifeCycle)).subscribe(aq => {
       if(aq) this.title.setTitle(aq.name);
-      console.log(aq);
     });
   }
 

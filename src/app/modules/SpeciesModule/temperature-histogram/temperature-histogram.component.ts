@@ -73,7 +73,7 @@ export class TemperatureHistogramComponent implements OnInit {
       data.forEach(aq => {
         this.chartData.data = this.chartData.data.concat(aq.snapshots.map(s => {
           return {
-            x: new Date(s.date),
+            x: new Date(s.startTime),
             y: s.temperature
           }
         }))
@@ -114,7 +114,7 @@ export class TemperatureHistogramComponent implements OnInit {
 
                 data: aq.snapshots.map(s => {
                   return {
-                    x: s.date,
+                    x: s.startTime,
                     y: s.temperature
                   }
                 })

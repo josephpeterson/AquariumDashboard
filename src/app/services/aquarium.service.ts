@@ -67,6 +67,7 @@ export class AquariumService {
 
 
   /* Snapshot */
+  //deprecated obsolete
   public getSnapshots(aqId: number, offset: number, count: number): Observable<AquariumSnapshot[]> {
 
     return this.http.post<AquariumSnapshot[]>(this._url + `/v1/Aquarium/${aqId}/Snapshots`, {
@@ -95,7 +96,7 @@ export class AquariumService {
       ...snapshot,
       snapshotImage: uploadedPhoto ? uploadedPhoto.file : null
     }
-    response.date = snapshot.date.toISOString();
+    response.startTime = snapshot.startTime.toISOString();
     for (var key in response) formData.set(key, response[key]);
 
     let options: any = {
@@ -342,6 +343,12 @@ export class AquariumService {
   }
 
   /* Water Changes */
+  public getWaterParameters(aquariumId: number, pagination: PaginationSliver) {
+    return this.http.post<AquariumSnapshot[]>(this._url + `/v1/Water/${aquariumId}/Parameters`, pagination);
+  }
+  public addWaterParameters(aquariumId: number, parameters: AquariumSnapshot) {
+    return this.http.post<AquariumSnapshot[]>(this._url + `/v1/Water/${aquariumId}/Parameters/Add`, parameters);
+  }
   public getWaterChangesByAquarium(aquariumId: number) {
     return this.http.get<WaterChange[]>(this._url + `/v1/Aquarium/${aquariumId}/Water/Change`);
   }

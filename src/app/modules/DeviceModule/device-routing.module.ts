@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AquariumDeviceComponent } from './DeviceContainer/aquarium-device.component';
 import { AuthGuard } from 'src/app/guards/AuthGuard';
+import { DeviceModule } from './device.module';
 
 const secondaryRoutes: Routes = [
     {
@@ -17,4 +18,4 @@ const secondaryRoutes: Routes = [
 //that's where you register top level application routes). In any other module, you 
 //must call the RouterModule.forChild method to register additional routes.
 
-export const DeviceRoutes: ModuleWithProviders<any> = RouterModule.forChild(secondaryRoutes)
+export const DeviceRoutes: ModuleWithProviders<DeviceModule> = RouterModule.forChild(secondaryRoutes)

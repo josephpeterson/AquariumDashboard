@@ -8,6 +8,7 @@ import { CreateThreadFormComponent } from './DiscussionContainer/board-page/crea
 import { BoardDetailComponent } from './DiscussionContainer/board-page/board-detail/board-detail.component';
 import { ThreadPageComponent } from './DiscussionContainer/thread-page/thread-page.component';
 import { MainPageComponent } from './DiscussionContainer/main-page/main-page.component';
+import { DiscussionModule } from './discussion.module';
 
 const secondaryRoutes: Routes = [
     {
@@ -43,4 +44,4 @@ const secondaryRoutes: Routes = [
 //that's where you register top level application routes). In any other module, you 
 //must call the RouterModule.forChild method to register additional routes.
 
-export const DiscussionRoutes: ModuleWithProviders<any> = RouterModule.forChild(secondaryRoutes)
+export const DiscussionRoutes: ModuleWithProviders<DiscussionModule> = RouterModule.forChild(secondaryRoutes)

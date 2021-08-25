@@ -1,4 +1,4 @@
-<div class="col-lg-12" [ngClass]="{'col-lg-12' : expanded}">
+<div class="col-lg-12">
     <div class="card mr-1">
         <div class="card-body w-100">
             <div class="card-title">
@@ -6,9 +6,15 @@
                     <div class="col ">
                         <h5>
                             {{this.label}}
+                            <button *ngIf="addClicked" class="p-1 btn btn-link" (click)="addClicked()">
+                                <fa-icon [icon]="faPlus" ></fa-icon>
+                            </button>
+                            <button *ngIf="info" class="p-1 btn btn-link" (click)="toggleInfoBox()">
+                                <fa-icon [icon]="faInfo" ></fa-icon>
+                            </button>
                             <div class="float-right">
                                 <button class="btn btn-link" (click)="toggleExpansion()">
-                                    <fa-icon [icon]="expanded ? faCaretLeft:faCaretRight" class="mr-1"></fa-icon>
+                                    <fa-icon [icon]="expanded ? faCaretLeft:faCaretRight"></fa-icon>
                                 </button>
                             </div>
                         </h5>
@@ -17,6 +23,9 @@
 
                 </div>
                 <div #chartContainer class="row">
+                    <div class="m-1 alert alert-info" *ngIf="info && infoBox">
+                        {{info}}
+                    </div>
                     <canvas #alkalinityChart class="bg-gray"></canvas>
                 </div>
             </div>

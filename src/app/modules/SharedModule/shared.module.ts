@@ -123,6 +123,7 @@ import { DateFilterSelectorComponent } from './form/date-filter-selector/date-fi
 import { WaterParameterCard } from './water-parameter-card/water-parameter-card.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { NotificationDialogComponent } from './notification-dialog/notification-dialog.component';
+import { CreateWaterParameterModalComponent } from './modals/create-water-parameter-modal/create-water-parameter-modal.component';
 
 
 var modals = [
@@ -158,6 +159,7 @@ var modals = [
   SelectScheduleModalComponent,
   CreateScheduleTaskModalComponent,
   CreateDeviceSensorModalComponent,
+  CreateWaterParameterModalComponent,
   RunATOModalComponent,
   NotificationDialogComponent
 ]

@@ -17,11 +17,15 @@ export class AquariumSnapshot
   id: number //= Math.floor(Math.random() * 100);
   aquarium: Aquarium
   aquariumId: number
-  date: any
+  startTime: any
   ammonia: number
   nitrite: number
   nitrate: number
   ph: number
+  salinity: number
+  calcium: number
+  magnesium: number
+  alkalinity: number
   temperature: number
   photoId: number
   manualEntry: boolean

@@ -36,7 +36,7 @@ export class ParametersSnapshotListComponent implements OnInit {
   clickAddSnapshot() {
     var snapshot = new AquariumSnapshot();
     snapshot.aquariumId = this.aquarium.id;
-    snapshot.date = new Date();
+    snapshot.startTime = new Date();
     this.dialog.open(ManageSnapshotModal, {
       //width: "50%",
       data: snapshot

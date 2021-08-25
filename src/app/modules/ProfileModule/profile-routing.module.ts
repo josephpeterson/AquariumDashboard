@@ -9,6 +9,7 @@ import { ProfileAboutComponent } from './pages/profile-about/profile-about.compo
 import { ProfilePhotosComponent } from './pages/profile-photos/profile-photos.component';
 import { ProfileManageComponent } from './pages/profile-manage/profile-manage.component';
 import { ProfileOverviewComponent } from './pages/profile-overview/profile-overview.component';
+import { ProfileModule } from './profile.module';
 
 const secondaryRoutes: Routes = [
     {
@@ -54,4 +55,4 @@ const secondaryRoutes: Routes = [
 //that's where you register top level application routes). In any other module, you 
 //must call the RouterModule.forChild method to register additional routes.
 
-export const ProfileRoutes: ModuleWithProviders<any> = RouterModule.forChild(secondaryRoutes)
+export const ProfileRoutes: ModuleWithProviders<ProfileModule> = RouterModule.forChild(secondaryRoutes)

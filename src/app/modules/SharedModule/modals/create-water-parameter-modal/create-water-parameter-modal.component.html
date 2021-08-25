@@ -1,0 +1,60 @@
+<div class="create-water-parameter-modal">
+  <ng-container *ngIf="updating else notUpdating">
+    <div class="text-center m-0 d-flex flex-column justify-content-center">
+      <mat-progress-spinner mode="indeterminate" class="align-self-center">
+      </mat-progress-spinner>
+    </div>
+  </ng-container>
+  <ng-template #notUpdating>
+    <div class="card-title">
+      <h3>Water Parameter
+        <button class="btn btn-secondary float-right shadow-none">
+          <fa-icon [icon]="faInfoCircle" class="mr-1"></fa-icon>
+          Help
+        </button>
+      </h3>
+    </div>
+    <p class="card-text text-muted">
+      Enter the results from your test kit here. Accurate test results helps provide the best information and forcasting
+      for your aquarium.
+    </p>
+    <hr class="m-0">
+
+    <div class="row">
+      <div class="col-md-6">
+        <ul class="nav nav-pills nav-justified p-1">
+          <li class="nav-item">
+            <a class="nav-link active" [aria-current]="chartView ? 'page':''" (click)="clickSwitchView(0)">Chart View</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [aria-current]="chartView ? 'page':''" (click)="clickSwitchView(1)">Manual Entry</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <snapshot-detail-chart [snapshot]="snapshot" *ngIf="chartView" #snapshotForm></snapshot-detail-chart>
+    <snapshot-detail-form [snapshot]="snapshot" *ngIf="!chartView" #snapshotForm></snapshot-detail-form>
+    <ng-container *ngIf="snapshot.photoId != undefined else upload">
+      <div class="snapshotPhoto"
+        [style.background-image]="'url(' + _aquariumService.getPhotoPermalink(snapshot.photoId) + ')'">
+
+      </div>
+    </ng-container>
+    <ng-template #upload>
+      <attachment-uploader></attachment-uploader>
+    </ng-template>
+  </ng-template>
+  <mat-dialog-actions align="end">
+    <button type="submit" class="m-2 btn btn-danger" [mat-dialog-close]>Cancel</button>
+    <ng-container *ngIf="snapshot.id != undefined else create">
+      <button type="submit" class="m-2 btn btn-danger" (click)='clickDeleteSnapshot()'>Delete
+        Snapshot</button>
+      <button type="submit" class="m-2 btn btn-primary" (click)="clickUpdateSnapshot()">Update
+        Snapshot</button>
+    </ng-container>
+    <ng-template #create>
+      <button type="submit" class="m-2 btn btn-success" (click)="clickCreateSnapshot()">Create
+        Snapshot</button>
+    </ng-template>
+  </mat-dialog-actions>
+</div>
