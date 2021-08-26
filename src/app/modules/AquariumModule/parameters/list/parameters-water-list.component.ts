@@ -10,11 +10,11 @@ import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
 import { CreateWaterParameterModalComponent } from 'src/app/modules/SharedModule/modals/create-water-parameter-modal/create-water-parameter-modal.component';
 
 @Component({
-  selector: 'parameters-water-tests-list',
-  templateUrl: './parameters-water-tests-list.component.html',
-  styleUrls: ['./parameters-water-tests-list.component.scss']
+  selector: 'parameters-water-list',
+  templateUrl: './parameters-water-list.component.html',
+  styleUrls: ['./parameters-water-list.component.scss']
 })
-export class ParametersWaterTestsListComponent implements OnInit {
+export class ParametersWaterListComponent implements OnInit {
 
   public aquarium: Aquarium;
 
@@ -25,12 +25,10 @@ export class ParametersWaterTestsListComponent implements OnInit {
 
   ngOnInit() {
     this.store.select(getSelectedAquarium).pipe(take(1)).subscribe(aq => this.aquarium = aq);
-
   }
 
   clickAddSnapshot() {
     this.dialog.open(CreateWaterParameterModalComponent, {
-      //width: "50%",
       data: this.aquarium
     }).afterClosed().subscribe((snapshot: AquariumSnapshot) => {
       if (snapshot) {

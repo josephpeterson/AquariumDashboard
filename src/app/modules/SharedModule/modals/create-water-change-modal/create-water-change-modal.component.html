@@ -1,0 +1,42 @@
+<div class="card-title">
+  <h3>Water Change
+    <button class="btn btn-secondary float-right shadow-none">
+      <fa-icon [icon]="faInfoCircle" class="mr-1"></fa-icon>
+      Help
+    </button>
+  </h3>
+</div>
+<p class="card-text text-muted">
+  Enter the amount of water removed and added to your aquarium.
+</p>
+
+<div class="row" *ngIf="waterChange">
+  <div class="col">
+
+
+    <mat-form-field>
+      <input [disabled]="disabled" type="number" placeholder="Water added (G)" matInput 
+        [(ngModel)]="waterChange.gallonsAdded">
+    </mat-form-field>
+    <mat-form-field>
+      <input [disabled]="disabled" type="number" placeholder="Water removed (G)" matInput 
+        [(ngModel)]="waterChange.gallonsRemoved">
+    </mat-form-field>
+  </div>
+  <div class="col p-2">
+    <h6 class="text-muted">Preview</h6>
+    <visual-aquarium [aquarium]="aquarium" [options]="getAquariumVisual()"></visual-aquarium>
+  </div>
+</div>
+<div>
+  <mat-dialog-actions align="end">
+    <button class="m-2 btn btn-danger" [mat-dialog-close]>Cancel</button>
+    <ng-container *ngIf="waterChange.id != undefined else create">
+      <button class="m-2 btn btn-danger" (click)='clickDeleteSnapshot()'>Delete</button>
+      <button type="submit" class="m-2 btn btn-primary" (click)="clickSubmit()">Update Water Change</button>
+    </ng-container>
+    <ng-template #create>
+      <button type="submit" class="m-2 btn btn-success" (click)="clickSubmit()">Add Water Change</button>
+    </ng-template>
+  </mat-dialog-actions>
+</div>

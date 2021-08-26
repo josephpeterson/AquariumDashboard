@@ -1,6 +1,9 @@
 import { GpioPinValue } from "./types/GpioPinValue";
 
 export class ATOStatus {
+  id: number;
+  aquariumId: number;
+  deviceId: number;
   sensorValue: string;
   pumpRunning: boolean;
   mlPerSec: number;

@@ -1,0 +1,66 @@
+<h5 class="mt-2 mb-2">Water</h5>
+<div class="container-fluid p-0">
+	<div class="row align-items-start">
+		<water-parameter-card class="mt-2" chartColor="rgb(100, 100, 192)" label="Auto Top Off"
+			[data]="waterATOData$ | async"
+			info="This graph represents the amount of water added to your tank over time. The amount added should stay relatively consistent but may change depending on the season."
+			yLabel="gallons"></water-parameter-card>
+
+		<water-parameter-card class="mt-2" chartColor="rgb(100, 100, 192)" label="Water Changes"
+			[data]="waterChangeData$ | async" [addClicked]="addWaterChangeData"
+			info="This graph represents the amount of water added to your tank over time. The amount added should stay relatively consistent but may change depending on the season."
+			yLabel="gallons"></water-parameter-card>
+
+		<water-parameter-card class="mt-2" chartColor="rgb(100, 100, 192)" label="Water Dosing"
+			[data]="waterDosingData$ | async" [addClicked]="addWaterDoseData"
+			info="This graph represents the amount of water added to your tank over time. The amount added should stay relatively consistent but may change depending on the season."
+			yLabel="gallons"></water-parameter-card>
+
+		<!-- 
+<water-change [aquarium]="aquarium"></water-change>
+					<water-dose [aquarium]="aquarium"></water-dose>
+					-->
+
+	</div>
+</div>
+
+
+<h5 class="mt-4 mb-2">Basic Parameters</h5>
+<div class="container-fluid p-0 mb-2">
+	<div class="row align-items-start">
+		<water-parameter-card class="mt-2" chartColor="rgb(100, 100, 192)" [addClicked]="addWaterParameter"
+			[data]="waterPhData$ | async" label="Ph">
+		</water-parameter-card>
+		<water-parameter-card class="mt-2" [addClicked]="addWaterParameter" [data]="waterNitrateData$ | async"
+			label="Nitrate">
+		</water-parameter-card>
+		<water-parameter-card class="mt-2" chartColor="rgb(192, 100, 100)" [addClicked]="addWaterParameter"
+			[data]="waterNitriteData$ | async" label="Nitrite">
+		</water-parameter-card>
+
+	</div>
+</div>
+
+
+
+
+
+<h5 class="mt-4 mb-2">Reef Parameters</h5>
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+	<p>These parameters are associated with reef tanks. Your tank is specified as a reef tank so you will see
+		these
+		parameters. Refer here to learn about the following: todolink</p>
+</div>
+<div class="container-fluid p-0 mb-2">
+	<div class="row align-items-start">
+		<water-parameter-card class="mt-2" [addClicked]="addWaterParameter" [data]="waterAlkalinityData$ | async"
+			label="Alkalinity">
+		</water-parameter-card>
+		<water-parameter-card class="mt-2" chartColor="rgb(192, 100, 100)" [addClicked]="addWaterParameter"
+			[data]="waterMagnesiumData$ | async" label="Magnesium">
+		</water-parameter-card>
+		<water-parameter-card class="mt-2" chartColor="rgb(100, 100, 192)" [addClicked]="addWaterParameter"
+			[data]="waterCalciumData$ | async" label="Calcium">
+		</water-parameter-card>
+	</div>
+</div>

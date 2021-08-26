@@ -73,6 +73,8 @@ import { FishService } from './services/fish.service';
 import { SharedModule } from './modules/SharedModule/shared.module';
 import { AuthReducer } from './store/auth/auth.reducer';
 import { NotificationService } from './services/notification.service';
+import { ParameterEffects } from './store/parameter/parameter.effect';
+import { parameterReducer } from './store/parameter/parameter.reducer';
 
 
 
@@ -139,11 +141,12 @@ import { NotificationService } from './services/notification.service';
     StoreModule.forFeature('profile', ProfileReducer),
     StoreModule.forFeature('post', PostReducer),
     StoreModule.forFeature('auth', AuthReducer),
+    StoreModule.forFeature('parameter', parameterReducer),
     StoreDevtoolsModule.instrument({
       maxAge: 25
     }),
     //NotifierModule.withConfig(AquariumNotifierConfig),
-    EffectsModule.forRoot([AquariumEffects, SnapshotEffects, SpeciesEffects, FishEffects, ProfileEffects, PostEffects]),
+    EffectsModule.forRoot([AquariumEffects, SnapshotEffects, SpeciesEffects, FishEffects, ProfileEffects, PostEffects,ParameterEffects]),
   ],
   providers: [
     AquariumService,

@@ -349,8 +349,11 @@ export class AquariumService {
   public addWaterParameters(aquariumId: number, parameters: AquariumSnapshot) {
     return this.http.post<AquariumSnapshot[]>(this._url + `/v1/Water/${aquariumId}/Parameters/Add`, parameters);
   }
-  public getWaterChangesByAquarium(aquariumId: number) {
-    return this.http.get<WaterChange[]>(this._url + `/v1/Aquarium/${aquariumId}/Water/Change`);
+  public getWaterChangesByAquarium(aquariumId: number,pagination: PaginationSliver) {
+    return this.http.post<WaterChange[]>(this._url + `/v1/Water/${aquariumId}/Change`,pagination);
+  }
+  public getWaterATOsByAquarium(aquariumId: number, pagination: PaginationSliver) {
+    return this.http.post<ATOStatus[]>(this._url + `/v1/Water/${aquariumId}/ATOStatuses`,pagination);
   }
   public addWaterChange(aquariumId: number, waterChange: WaterChange) {
     return this.http.post<WaterChange>(this._url + `/v1/Aquarium/${aquariumId}/Water/Change`, waterChange);
@@ -362,8 +365,8 @@ export class AquariumService {
     return this.http.post(this._url + `/v1/Aquarium/${aquariumId}/Water/Change/Delete`, waterChangeIds);
   }
   /* Water Dosings */
-  public getWaterDosesByAquarium(aquariumId: number) {
-    return this.http.get<WaterDosing[]>(this._url + `/v1/Aquarium/${aquariumId}/Water/Dose`);
+  public getWaterDosesByAquarium(aquariumId: number,pagination: PaginationSliver) {
+    return this.http.post<WaterDosing[]>(this._url + `/v1/Water/${aquariumId}/Dose`,pagination);
   }
   public addWaterDosing(aquariumId: number, waterDosing: WaterDosing) {
     return this.http.post<WaterDosing>(this._url + `/v1/Aquarium/${aquariumId}/Water/Dose`, waterDosing);

@@ -121,6 +121,8 @@ import { WaterParameterCard } from './water-parameter-card/water-parameter-card.
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { NotificationDialogComponent } from './notification-dialog/notification-dialog.component';
 import { CreateWaterParameterModalComponent } from './modals/create-water-parameter-modal/create-water-parameter-modal.component';
+import { CreateWaterChangeModalComponent } from './modals/create-water-change-modal/create-water-change-modal.component';
+import { CreateWaterDoseModalComponent } from './modals/create-water-dose-modal/create-water-dose-modal.component';
 
 
 var modals = [
@@ -155,6 +157,8 @@ var modals = [
   CreateScheduleTaskModalComponent,
   CreateDeviceSensorModalComponent,
   CreateWaterParameterModalComponent,
+  CreateWaterChangeModalComponent,
+  CreateWaterDoseModalComponent,
   RunATOModalComponent,
   NotificationDialogComponent
 ]

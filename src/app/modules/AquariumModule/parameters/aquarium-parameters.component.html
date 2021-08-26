@@ -1,83 +1,30 @@
 <div class="row">
-	<div class="col-sm-4">
-		<h1 class="m-1">Water Parameters</h1>
+	<div class="col-lg-8">
+		<h1 class="display-4">Water Parameters</h1>
+		<p class="lead">
+			Manage your aquarium device, perform auto top off and look at device schedule status.
+		</p>
 	</div>
-	<div class="col m-2">
+
+	<div class="col-lg-2 m-2">
 		<date-filter-selector [(range)]="dateRange" (updated)="updateFilteredDate()"></date-filter-selector>
 	</div>
 </div>
-<div class="ato_parameters">
-	<div class="container-fluid p-0">
-		<div class="row align-items-start">
-			<water-parameter-card chartColor="rgb(100, 100, 192)" label="Water ATO" [data]="waterATOData$ | async" 
-			[addClicked]="addWaterATOData"
-			info="This graph represents the amount of water added to your tank over time. The amount added should stay relatively consistent but may change depending on the season."
-				yLabel="gallons"></water-parameter-card>
-		</div>
-	</div>
-</div>
-<hr>
-
-<div class="reef_parameters">
-	<div class="alert alert-info alert-dismissible fade show" role="alert">
-		<p>These parameters are associated with reef tanks. Your tank is specified as a reef tank so you will see
-			these
-			parameters. Refer here to learn about the following: todolink</p>
-	</div>
-	<div class="container-fluid p-0">
-		<div class="row align-items-start">
-
-			<water-parameter-card 
-				[addClicked]="addWaterParameter"
-				[data]="waterAlkalinityData$ | async"
-				label="Alkalinity">
-			</water-parameter-card>
-			<water-parameter-card 
-				chartColor="rgb(192, 100, 100)"
-				[addClicked]="addWaterParameter"
-				[data]="waterMagnesiumData$ | async"
-				label="Magnesium">
-			</water-parameter-card>
-			<water-parameter-card 
-			chartColor="rgb(100, 100, 192)"
-				[addClicked]="addWaterParameter"
-				[data]="waterCalciumData$ | async"
-				label="Calcium">
-			</water-parameter-card>
-		</div>
-	</div>
-</div>
+<!-- Tab Area -->
 <div class="row">
-	<div class="col">
-		<div class="card">
-			<div class="card-body">
-				<div class="card-title">
-					<h3>Perform Water Change</h3>
-				</div>
-				<water-change [aquarium]="aquarium"></water-change>
-			</div>
-		</div>
-	</div>
-	<div class="col">
-		<div class="card">
-			<div class="card-body">
-				<div class="card-title">
-					<h3>Insert Dosing</h3>
-				</div>
-				<water-dose [aquarium]="aquarium"></water-dose>
-			</div>
-		</div>
-	</div>
+	<ul class="nav nav-tabs w-100">
+		<li class="nav-item">
+			<a class="nav-link" aria-current="page" [routerLink]="['overview']" [routerLinkActive]='["active"]' >Overview</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" [routerLink]="['list']" [routerLinkActive]='["active"]' >List</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true" [routerLink]="['analysis']" [routerLinkActive]='["active"]'>Analysis</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" [routerLink]="['settings']" [routerLinkActive]='["active"]'>Settings</a>
+		</li>
+	</ul>
 </div>
-<ul class="nav nav-tabs">
-	<li class="nav-item">
-		<a class="nav-link" [routerLink]="['water']" [routerLinkActive]='["active"]'>Water Changes</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link" [routerLink]="['snapshots']" [routerLinkActive]='["active"]'>Parameters</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link" [routerLink]="['snapshots']" [routerLinkActive]='["active"]'>Dosing</a>
-	</li>
-</ul>
 <router-outlet></router-outlet>

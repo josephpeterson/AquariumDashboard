@@ -1,0 +1,41 @@
+<div class="card-title">
+  <h3>Water Dosing
+    <button class="btn btn-secondary float-right shadow-none">
+      <fa-icon [icon]="faInfoCircle" class="mr-1"></fa-icon>
+      Help
+    </button>
+  </h3>
+</div>
+<p class="card-text text-muted">
+  Enter the type of product and the amount dosed to your aquarium.
+</p>
+
+<div class="row" *ngIf="waterDose">
+  <div class="col-lg-4">
+    <mat-form-field class="m-1">
+      <input [disabled]="disabled" type="number" placeholder="Amount (Gallons)" matInput required
+        [(ngModel)]="waterDose.amount">
+    </mat-form-field>
+    <mat-form-field class="m-1">
+      <input [disabled]="disabled" type="text" placeholder="Type" matInput required [(ngModel)]="waterDose.type">
+    </mat-form-field>
+    <mat-form-field class="m-1">
+      <input [disabled]="disabled" type="text" placeholder="Brand" matInput required [(ngModel)]="waterDose.brand">
+    </mat-form-field>
+    <mat-form-field class="m-1">
+      <input [disabled]="disabled" type="text" placeholder="Product" matInput required [(ngModel)]="waterDose.product">
+    </mat-form-field>
+  </div>
+</div>
+<div>
+  <mat-dialog-actions align="end">
+    <button class="m-2 btn btn-danger" [mat-dialog-close]>Cancel</button>
+    <ng-container *ngIf="waterDose.id != undefined else create">
+      <button class="m-2 btn btn-danger" (click)='clickDeleteSnapshot()'>Delete</button>
+      <button type="submit" class="m-2 btn btn-primary" (click)="clickSubmit()">Update Water Dosing</button>
+    </ng-container>
+    <ng-template #create>
+      <button type="submit" class="m-2 btn btn-success" (click)="clickSubmit()">Add Water Dosing</button>
+    </ng-template>
+  </mat-dialog-actions>
+</div>

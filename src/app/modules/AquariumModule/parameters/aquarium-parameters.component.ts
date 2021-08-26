@@ -8,13 +8,19 @@ import { getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
 import { take } from 'rxjs/operators';
 import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
 import * as moment from 'moment';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ATOStatus } from 'src/app/models/ATOStatus';
 import { PaginationSliver } from 'src/app/models/PaginationSliver';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CreateWaterParameterModalComponent } from '../../SharedModule/modals/create-water-parameter-modal/create-water-parameter-modal.component';
 import { NotificationService } from 'src/app/services/notification.service';
+import { CreateWaterChangeModalComponent } from '../../SharedModule/modals/create-water-change-modal/create-water-change-modal.component';
+import { CreateWaterDoseModalComponent } from '../../SharedModule/modals/create-water-dose-modal/create-water-dose-modal.component';
+import { WaterDosing } from 'src/app/models/WaterDosing';
+import { ParameterSelectDateAction } from 'src/app/store/parameter/parameter.actions';
+import { ParameterState } from 'src/app/store/parameter/parameter.reducer';
+import { getPaginatedATOStatuses, getSelectedDate } from 'src/app/store/parameter/parameter.selector';
 
 
 @Component({
@@ -26,12 +32,9 @@ export class AquariumParametersComponent implements OnInit {
 
   public aquarium: Aquarium;
   public pagination: PaginationSliver = new PaginationSliver();
-  public waterATOData$: Subject<any> = new Subject();
-  public waterAlkalinityData$: Subject<any> = new Subject();
-  public waterMagnesiumData$: Subject<any> = new Subject();
-  public waterCalciumData$: Subject<any> = new Subject();
-
   public dateRange: FormGroup;
+  public selectedDate: Observable<ParameterState> = this.store.select(getSelectedDate);
+
 
 
   constructor(public aquariumService: AquariumService,
@@ -39,103 +42,24 @@ export class AquariumParametersComponent implements OnInit {
     public dialog: MatDialog,
     public store: Store<AppState>
   ) {
-    this.dateRange = new FormGroup({
-      end: new FormControl(new Date()),
-      start: new FormControl(moment().subtract(30, 'd').toDate())
-    });
   }
 
   ngOnInit() {
     this.store.select(getSelectedAquarium).pipe(take(1)).subscribe(aq => this.aquarium = aq);
-
-    this.updateFilteredDate();
-
-    this.addWaterParameter();
-  }
-  public loadWaterATOData() {
-    this.pagination.descending = true;
-    this.pagination.count = 100;
-    //this.pagination.startDate = moment().utc().subtract(60, 'd').format();
-
-    this.aquariumService.getDeviceATOHistory(this.aquarium.device.id, this.pagination).subscribe((atoHistory: ATOStatus[]) => {
-      function computeDuration(atoStatus: ATOStatus) {
-        var actual = moment(atoStatus.actualEndTime);
-        var est = moment(atoStatus.startTime);
-        var s = moment.duration(actual.diff(est)).asSeconds();
-        return Math.ceil(s);
+    this.selectedDate.pipe(take(1)).subscribe(state => {
+      if (state.pagination) {
+        this.pagination = state.pagination;
+        this.dateRange = new FormGroup({
+          end: new FormControl(new Date(this.pagination.endDate)),
+          start: new FormControl(new Date(this.pagination.startDate))
+        });
+        this.updateFilteredDate();
       }
-      //Create data for graph
-      var data = [];
-      atoHistory.forEach(h => {
-        //did it complete?
-        if (h.actualEndTime == undefined)
-          return;
-
-        data.push({
-          x: moment.utc(h.startTime).local().toDate(),
-          y: (computeDuration(h) * h.mlPerSec) / 3785 //gallons
-        })
-      })
-      this.waterATOData$.next(data);
-      //this.loading = false;
-    }, (err: HttpErrorResponse) => {
-      //this.loading = false;
-    })
-  }
-  public addWaterATOData() {
-
-  }
-  public loadWaterParameterData() {
-    this.pagination.descending = true;
-    this.pagination.count = 100;
-    this.aquariumService.getWaterParameters(this.aquarium.id, this.pagination).subscribe((parameters: AquariumSnapshot[]) => {
-      console.log("Alkalinity data:", parameters);
-      //Create data for graph
-      var alkalinityData = [];
-      var calciumData = [];
-      var magnesiumData = [];
-      parameters.forEach(p => {
-
-        if (p.alkalinity != null)
-          alkalinityData.push({
-            x: moment.utc(p.startTime).local().toDate(),
-            y: p.alkalinity
-          })
-        if (p.magnesium != null)
-          magnesiumData.push({
-            x: moment.utc(p.startTime).local().toDate(),
-            y: p.magnesium
-          })
-        if (p.calcium != null)
-          calciumData.push({
-            x: moment.utc(p.startTime).local().toDate(),
-            y: p.calcium
-          })
-      })
-      this.waterAlkalinityData$.next(alkalinityData);
-      this.waterMagnesiumData$.next(magnesiumData);
-      this.waterCalciumData$.next(calciumData);
-      //this.loading = false;
-    }, (err: HttpErrorResponse) => {
-      //this.loading = false;
-
-      this.notificationService.notify("error","Could not load water parameters for aquarium");
-    })
-  }
-  public addWaterParameter() {
-    this.dialog.open(CreateWaterParameterModalComponent, {
-      width: "50%",
-      data: this.aquarium,
-    }).afterClosed().subscribe((newParameter: AquariumSnapshot) => {
-      if(!newParameter) 
-        return;
-      this.notificationService.notify("success",`New water parameter added (id: ${newParameter.id})`)
-      this.updateFilteredDate();
+      else
+        this.loadDefaultDate();
     });
+
   }
-
-
-
   public updateFilteredDate() {
     var startDate = this.dateRange.value.start;
     var endDate = this.dateRange.value.end;
@@ -149,7 +73,26 @@ export class AquariumParametersComponent implements OnInit {
     else
       delete this.pagination.endDate;
 
-    this.loadWaterATOData();
-    this.loadWaterParameterData();
+
+    //Update the store
+    this.store.dispatch(new ParameterSelectDateAction({
+      aquariumId: this.aquarium.id,
+      pagination: this.pagination
+    }));
+
+  }
+  private loadDefaultDate() {
+    this.pagination.startDate = moment().subtract(30, 'd').utc().startOf('day').format();
+    this.pagination.endDate = moment().utc().startOf('day').format();
+    this.pagination.descending = true;
+    this.pagination.count = 100;
+    this.dateRange = new FormGroup({
+      end: new FormControl(new Date(this.pagination.endDate)),
+      start: new FormControl(new Date(this.pagination.startDate))
+    });
+    this.store.dispatch(new ParameterSelectDateAction({
+      aquariumId: this.aquarium.id,
+      pagination: this.pagination
+    }));
   }
 }

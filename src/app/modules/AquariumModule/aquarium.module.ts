@@ -39,8 +39,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { FishComponent } from './fish/fish.component';
 import { LightingComponent } from './lighting/lighting.component';
 import { AquariumParametersComponent } from './parameters/aquarium-parameters.component';
-import { ParametersSnapshotListComponent } from './parameters/snapshots/parameters-snapshot-list.component';
-import { ParametersWaterTestsListComponent } from './parameters/water-tests/parameters-water-tests-list.component';
+import { ParametersOverviewComponent } from './parameters/overview/parameters-overview.component';
+import { ParametersWaterListComponent } from './parameters/list/parameters-water-list.component';
 import { AquariumPhotosContainerComponent } from './photos/aquarium-photos-container.component';
 import { AquariumPhotosComponent } from './photos/aquarium/aquarium-photos.component';
 import { SnapshotPhotosComponent } from './photos/snapshot/snapshot-photos.component';
@@ -56,8 +56,6 @@ import { Ng5SliderModule } from 'ng5-slider';
 import { DeviceModule } from '../DeviceModule/device.module';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { WaterChangeTableComponent } from './parameters/water-change-table/water-change-table.component';
-import { WaterChangeComponent } from './parameters/water-change/water-change.component';
-import { WaterDoseComponent } from './parameters/water-dose/water-dose.component';
 import { WaterChangeListComponent } from './maintenance/water-change-list/water-change-list.component';
 import { EquipmentListComponent } from './maintenance/equipment-list/equipment-list.component';
 import { DosingListComponent } from './maintenance/dosing-list/dosing-list.component';
@@ -113,8 +111,8 @@ import { NotificationService } from 'src/app/services/notification.service';
     FishComponent,
     LightingComponent,
     AquariumParametersComponent,
-    ParametersSnapshotListComponent,
-    ParametersWaterTestsListComponent,
+    ParametersOverviewComponent,
+    ParametersWaterListComponent,
 
     AquariumPhotosContainerComponent,
     AquariumPhotosComponent,
@@ -123,8 +121,6 @@ import { NotificationService } from 'src/app/services/notification.service';
     SettingsComponent,
     MaintenanceComponent,
 
-    WaterChangeComponent,
-    WaterDoseComponent,
     WaterChangeTableComponent,
     WaterChangeListComponent,
     EquipmentListComponent,

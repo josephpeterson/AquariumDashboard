@@ -6,8 +6,8 @@ import { AuthGuard } from '../../guards/AuthGuard';
 import { AquariumContainer } from './AquariumContainer/aquarium-container.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AquariumParametersComponent } from './parameters/aquarium-parameters.component';
-import { ParametersWaterTestsListComponent } from './parameters/water-tests/parameters-water-tests-list.component';
-import { ParametersSnapshotListComponent } from './parameters/snapshots/parameters-snapshot-list.component';
+import { ParametersWaterListComponent } from './parameters/list/parameters-water-list.component';
+import { ParametersOverviewComponent } from './parameters/overview/parameters-overview.component';
 import { AquariumPhotosContainerComponent } from './photos/aquarium-photos-container.component';
 import { LightingComponent } from './lighting/lighting.component';
 import { SettingsComponent } from './settings/settings.component';
@@ -38,26 +38,35 @@ const secondaryRoutes: Routes = [
                 path: 'dashboard',
                 component: DashboardComponent
             },
-           /* {
-                path: 'fish',
-                component: AquariumFishComponent
-            }, */
+            /* {
+                 path: 'fish',
+                 component: AquariumFishComponent
+             }, */
             {
                 path: 'parameters',
                 component: AquariumParametersComponent,
+                runGuardsAndResolvers: "always",
                 children: [
                     {
-                        path: 'water',
-                        component: ParametersWaterTestsListComponent
+                        path: 'overview',
+                        component: ParametersOverviewComponent
                     },
                     {
-                        path: 'snapshots',
-                        component: ParametersSnapshotListComponent
+                        path: 'list',
+                        component: ParametersWaterListComponent
                     },
                     {
-                        path: '',
-                        component: ParametersWaterTestsListComponent
-                    }]
+                        path: 'analysis',
+                        component: ParametersOverviewComponent
+                    },
+                    {
+                        path: 'settings',
+                        component: ParametersOverviewComponent
+                    },
+                    {
+                        path: '', 
+                        redirectTo:'overview'
+                    },]
             },
             {
                 path: 'photos',

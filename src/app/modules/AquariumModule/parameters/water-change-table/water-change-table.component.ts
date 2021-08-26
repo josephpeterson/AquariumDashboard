@@ -43,6 +43,6 @@ export class WaterChangeTableComponent implements OnInit {
   ngOnInit() {
   }
   loadWaterChanges() {
-    return this._aquariumService.getWaterChangesByAquarium(this.aquarium.id);
+    return this._aquariumService.getWaterChangesByAquarium(this.aquarium.id,null);
   }
 }
