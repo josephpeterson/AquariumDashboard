@@ -3,8 +3,10 @@
 <ng-container *ngIf="user$ | async else notlogged">
     <div class="container-fluid">
         <div class="row">
-            <side-bar></side-bar>
-            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <div class="col-md-2 p-0 border-right bg-light">
+                <side-bar class="position-fixed"></side-bar>
+            </div>
+            <main role="main" class="col-lg-10">
                 <div
                     class="justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
                     <router-outlet></router-outlet>
@@ -13,9 +15,7 @@
 
         </div>
     </div>
-    <!-- <notifier-container></notifier-container> -->
 </ng-container>
 <ng-template #notlogged>
     <router-outlet></router-outlet>
-
 </ng-template>

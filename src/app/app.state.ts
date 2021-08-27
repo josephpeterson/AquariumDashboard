@@ -5,6 +5,7 @@ import { SpeciesState } from './store/species/species.reducer';
 import { FishState } from './store/fish/fish.reducer';
 import { PostState } from './store/post/post.reducer';
 import { AuthState } from './store/auth/auth.reducer';
+import { ParameterState } from './store/parameter/parameter.reducer';
 
 export interface AppState {
     readonly aquariums: AquariumsState
@@ -13,4 +14,5 @@ export interface AppState {
     readonly fish: FishState
     readonly post: PostState
     readonly auth: AuthState
+    readonly parameters: ParameterState
 }

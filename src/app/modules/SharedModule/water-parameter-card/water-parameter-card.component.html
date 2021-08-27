@@ -6,7 +6,7 @@
                     <div class="col ">
                         <h5>
                             {{this.label}}
-                            <button *ngIf="addClicked" class="p-1 btn btn-link" (click)="addClicked()">
+                            <button *ngIf="addClicked" class="p-1 btn btn-link" (click)="addClicked(label)">
                                 <fa-icon [icon]="faPlus"></fa-icon>
                             </button>
                             <button *ngIf="info" class="p-1 btn btn-link" (click)="toggleInfoBox()">

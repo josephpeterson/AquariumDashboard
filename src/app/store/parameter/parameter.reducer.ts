@@ -35,6 +35,10 @@ export function parameterReducer(state = initialState, action: AllParameterActio
 				pagination: action.payload.pagination,
 				aquariumId: action.payload.aquariumId
 			}
+		case ParameterActions.ReloadDate:
+			return {
+				...state,
+			}
 		case ParameterActions.LoadParameterSuccess:
 			return {
 				...state,

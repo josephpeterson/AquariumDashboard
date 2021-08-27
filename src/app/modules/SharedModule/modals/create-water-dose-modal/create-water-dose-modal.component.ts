@@ -43,7 +43,7 @@ export class CreateWaterDoseModalComponent implements OnInit {
     if(!this.waterDose)
     {
       var s = new WaterDosing();
-      s.date = moment().toDate();
+      s.startTime = moment().toDate();
       this.waterDose = s;
     }
 

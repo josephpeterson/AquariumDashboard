@@ -12,14 +12,14 @@
 
 <div class="row" *ngIf="waterChange">
   <div class="col">
-
-
+    <input [(ngModel)]="waterChange.startTime" [matDatepicker]="picker" class="form-control">
+    <mat-datepicker #picker></mat-datepicker>
     <mat-form-field>
-      <input [disabled]="disabled" type="number" placeholder="Water added (G)" matInput 
+      <input [disabled]="disabled" type="number" placeholder="Water added (G)" matInput
         [(ngModel)]="waterChange.gallonsAdded">
     </mat-form-field>
     <mat-form-field>
-      <input [disabled]="disabled" type="number" placeholder="Water removed (G)" matInput 
+      <input [disabled]="disabled" type="number" placeholder="Water removed (G)" matInput
         [(ngModel)]="waterChange.gallonsRemoved">
     </mat-form-field>
   </div>

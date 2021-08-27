@@ -42,7 +42,7 @@ export class CreateWaterChangeModalComponent implements OnInit {
     if(!this.waterChange)
     {
       var s = new WaterChange();
-      s.date = moment().toDate();
+      s.startTime = moment().toDate();
       this.waterChange = s;
     }
 

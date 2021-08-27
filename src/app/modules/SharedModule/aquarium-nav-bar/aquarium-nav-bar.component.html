@@ -1,7 +1,7 @@
 <div *ngFor="let aq of aquariums$ | async" class="aquarium-nav-bar">
   <ng-container *ngIf="selectedAquarium$ | async as selectedAquarium else listItem">
     <ng-container *ngIf="selectedAquarium.id == aq.id else listItem">
-      <div class="subContainer">
+      <div class="subContainer border-top border-bottom">
         <!-- Dashboard -->
         <a class="nav-link" [routerLink]='["/aquarium",aq.id]' [routerLinkActiveOptions]='{ exact: true }'
           [routerLinkActive]='["link-active"]'>

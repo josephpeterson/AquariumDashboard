@@ -13,6 +13,7 @@ export enum ParameterActions {
   LoadChangeSuccess = '[Parameter] Load Change Success',
   LoadDoseSuccess = '[Parameter] Load Dose Success',
   LoadFail = '[Parameter] Load Failure',
+  ReloadDate = '[Parameter] Date reload',
 }
 
 
@@ -58,7 +59,9 @@ export class ParameterSelectDateFailAction implements Action {
   constructor(public payload: HttpErrorResponse) {
   }
 }
-
+export class ParameterReloadDateAction implements Action {
+  readonly type = ParameterActions.ReloadDate
+}
 
 
 export type AllParameterActions = ParameterSelectDateAction | 
@@ -66,4 +69,5 @@ ParameterWaterParameterSuccessAction |
 ParameterSelectDateFailAction |
 ParameterWaterChangeSuccessAction |
 ParameterWaterDoseSuccessAction |
+ParameterReloadDateAction |
 ParameterWaterATOSuccessAction

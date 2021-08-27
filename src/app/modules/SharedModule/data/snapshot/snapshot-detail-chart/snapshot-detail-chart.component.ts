@@ -55,8 +55,7 @@ export class SnapshotDetailChartComponent implements OnInit {
 
     }
     ngOnInit() {
-        if (this.snapshot)
-            this.snapshot = { ...this.snapshot };
+
     }
     ngOnDestory() {
         this.componentLifeCycle$.next();

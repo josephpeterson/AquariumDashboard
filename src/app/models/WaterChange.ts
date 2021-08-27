@@ -7,7 +7,7 @@ export class WaterChange
   gallonsAdded: number
   gallonsRemoved: number
   color: string
-  date: Date
+  startTime: Date
 
   aquarium: Aquarium | null
 }

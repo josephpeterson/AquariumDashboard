@@ -7,6 +7,6 @@ export class WaterDosing {
   product: string;
   amount: number;
   color: string;
-  date: Date;
+  startTime: Date;
   aquarium: Aquarium | null;
 }

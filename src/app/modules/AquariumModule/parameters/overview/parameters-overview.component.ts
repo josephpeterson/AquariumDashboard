@@ -18,8 +18,10 @@ import { PaginationSliver } from 'src/app/models/PaginationSliver';
 import { WaterDosing } from 'src/app/models/WaterDosing';
 import { CreateWaterChangeModalComponent } from 'src/app/modules/SharedModule/modals/create-water-change-modal/create-water-change-modal.component';
 import { CreateWaterDoseModalComponent } from 'src/app/modules/SharedModule/modals/create-water-dose-modal/create-water-dose-modal.component';
-import { getPaginatedATOStatuses, getPaginatedParameters, getSelectedDate } from 'src/app/store/parameter/parameter.selector';
+import { getPaginatedATOStatuses, getPaginatedParameters, getPaginatedWaterChanges, getPaginatedWaterDosings, getSelectedDate } from 'src/app/store/parameter/parameter.selector';
 import { ParameterState } from 'src/app/store/parameter/parameter.reducer';
+import { WaterChange } from 'src/app/models/WaterChange';
+import { ParameterReloadDateAction, ParameterSelectDateAction } from 'src/app/store/parameter/parameter.actions';
 
 
 @Component({
@@ -63,6 +65,12 @@ export class ParametersOverviewComponent implements OnInit {
     this.store.select(getPaginatedParameters).subscribe(parameters =>
       this.parseParameterData(parameters)
     );
+    this.store.select(getPaginatedWaterChanges).subscribe(waterChanges =>
+      this.parseWaterChangeData(waterChanges)
+    );
+    this.store.select(getPaginatedWaterDosings).subscribe(waterDosings =>
+      this.parseWaterDosingData(waterDosings)
+    );
   }
   public parseATOData(atoStatuses: ATOStatus[]) {
     if (!atoStatuses)
@@ -86,6 +94,31 @@ export class ParametersOverviewComponent implements OnInit {
       })
     });
     this.waterATOData$.next(data);
+  }
+  public parseWaterChangeData(waterChanges: WaterChange[]) {
+    if (!waterChanges)
+      return;
+    var data = [];
+    waterChanges.forEach(h => {
+      data.push({
+        x: moment.utc(h.startTime).local().toDate(),
+        y: h.gallonsAdded
+      })
+    });
+    this.waterChangeData$.next(data);
+  }
+  public parseWaterDosingData(waterDosings: WaterDosing[]) {
+    if (!waterDosings)
+      return;
+ 
+    var data = [];
+    waterDosings.forEach(h => {
+      data.push({
+        x: moment.utc(h.startTime).local().toDate(),
+        y: h.amount
+      })
+    });
+    this.waterDosingData$.next(data);
   }
   public parseParameterData(parameters: AquariumSnapshot[]) {
     if(!parameters)
@@ -155,15 +188,18 @@ export class ParametersOverviewComponent implements OnInit {
       //this.updateFilteredDate();
     });
   }
-  public addWaterParameter() {
-    this.dialog.open(CreateWaterParameterModalComponent, {
+  public addWaterParameter(parameterName: string) {
+    var d = this.dialog.open(CreateWaterParameterModalComponent, {
       width: "50%",
       data: this.aquarium,
-    }).afterClosed().subscribe((newParameter: AquariumSnapshot) => {
+    });
+    d.componentInstance.focus = parameterName;
+    
+    d.afterClosed().subscribe((newParameter: AquariumSnapshot) => {
       if (!newParameter)
         return;
       this.notificationService.notify("success", `New water parameter added (id: ${newParameter.id})`)
       //this.updateFilteredDate();
-    });
+    })
   }
 }

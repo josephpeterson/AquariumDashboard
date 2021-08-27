@@ -5,3 +5,5 @@ export const parameterState = createFeatureSelector<ParameterReducer.ParameterSt
 export const getSelectedDate = createSelector(parameterState, (state: ParameterReducer.ParameterState) => state);
 export const getPaginatedParameters = createSelector(parameterState, (state: ParameterReducer.ParameterState) => state.paginatedParameters);
 export const getPaginatedATOStatuses = createSelector(parameterState, (state: ParameterReducer.ParameterState) => state.paginatedATOStatuses);
+export const getPaginatedWaterChanges = createSelector(parameterState, (state: ParameterReducer.ParameterState) => state.paginatedWaterChanges);
+export const getPaginatedWaterDosings = createSelector(parameterState, (state: ParameterReducer.ParameterState) => state.paginatedWaterDosings);
