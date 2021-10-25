@@ -33,10 +33,11 @@ export class TestDeviceSensorModalComponent implements OnInit {
     private _aquariumService: AquariumService) {
   }
   ngOnInit() {
-    this.request.sensorId = this.sensor.id;
-    this.request.deviceId = this.device.id;
+    
   }
   public clickRunTest() {
+    this.request.sensorId = this.sensor.id;
+    this.request.deviceId = this.device.id;
     this._aquariumService.testDeviceSensor(this.request).subscribe(
       (request: DeviceSensorTestRequest) => {
         this.notifier.notify("success", `Successfully ran test for sensor: ${this.sensor.name}`);
