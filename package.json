@@ -35,6 +35,7 @@
     "@ngrx/store-devtools": "^7.4.0",
     "amazing-time-picker": "^1.8.0",
     "angular-bootstrap-md": "^7.5.4",
+    "angular-calendar": "^0.28.27",
     "angular-material": "^1.2.3",
     "bootstrap": "^4.6.0",
     "chart.js": "^2.9.4",

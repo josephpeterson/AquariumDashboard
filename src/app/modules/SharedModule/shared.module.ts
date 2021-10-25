@@ -123,6 +123,7 @@ import { NotificationDialogComponent } from './notification-dialog/notification-
 import { CreateWaterParameterModalComponent } from './modals/create-water-parameter-modal/create-water-parameter-modal.component';
 import { CreateWaterChangeModalComponent } from './modals/create-water-change-modal/create-water-change-modal.component';
 import { CreateWaterDoseModalComponent } from './modals/create-water-dose-modal/create-water-dose-modal.component';
+import { TestDeviceSensorModalComponent } from './modals/test-device-sensor-modal/test-device-sensor-modal.component';
 
 
 var modals = [
@@ -156,6 +157,7 @@ var modals = [
   SelectScheduleModalComponent,
   CreateScheduleTaskModalComponent,
   CreateDeviceSensorModalComponent,
+  TestDeviceSensorModalComponent,
   CreateWaterParameterModalComponent,
   CreateWaterChangeModalComponent,
   CreateWaterDoseModalComponent,

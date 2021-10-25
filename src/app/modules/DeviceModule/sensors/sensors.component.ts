@@ -3,7 +3,7 @@ import { Aquarium } from 'src/app/models/Aquarium';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
 
-import { faCheckCircle, faEdit, faSync, faTrash, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { faCheckCircle, faEdit, faSync, faTrash, faVial, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateDeviceSensorModalComponent } from '../../SharedModule/modals/create-device-sensor-modal/create-device-sensor-modal.component';
 import { take } from 'rxjs/operators';
@@ -11,6 +11,8 @@ import { DeviceSensor } from 'src/app/models/DeviceSensor';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { NotificationService } from 'src/app/services/notification.service';
+import { TestDeviceSensorModalComponent } from '../../SharedModule/modals/test-device-sensor-modal/test-device-sensor-modal.component';
+import { ConfirmModalComponent } from '../../SharedModule/modals/confirm-modal/confirm-modal.component';
 
 @Component({
   selector: 'device-sensors',
@@ -30,6 +32,7 @@ export class DeviceSensorsComponent implements OnInit {
   public faRefresh: IconDefinition = faSync;
   public faTrash: IconDefinition = faTrash;
   public faEdit: IconDefinition = faEdit;
+  public faVial: IconDefinition = faVial;
   faCheck = faCheckCircle;
 
 
@@ -63,17 +66,27 @@ export class DeviceSensorsComponent implements OnInit {
     //dialog.error = new ConnectionError(error);
   }
   clickRemoveSensor(deviceSensor: DeviceSensor) {
-    if (this.disabledIds.indexOf(deviceSensor.id) != -1)
-      return;
 
-    this.disabledIds.push(deviceSensor.id);
-    delete this.error;
-    this._aquariumService.removeDeviceSensor(this.device.id, deviceSensor).subscribe(res => {
-      this.disabledIds.splice(this.disabledIds.indexOf(deviceSensor.id), 1);
-      this.sensors.splice(this.sensors.indexOf(deviceSensor), 1);
-    }, (err: HttpErrorResponse) => {
-      this.error = err.message;
-      this.disabledIds.splice(this.disabledIds.indexOf(deviceSensor.id), 1);
+
+    var dialog = this.dialog.open(ConfirmModalComponent, {
+    });
+    dialog.componentInstance.title = "Delete Sensor";
+    dialog.componentInstance.body = "Are you sure you want to remove this sensor? This will remove this sensor from any schedules and tasks that require this sensor. This action cannot be undone.";
+    dialog.afterClosed().pipe(take(1)).subscribe((confirm: boolean) => {
+      if (confirm) {
+        if (this.disabledIds.indexOf(deviceSensor.id) != -1)
+          return;
+
+        this.disabledIds.push(deviceSensor.id);
+        delete this.error;
+        this._aquariumService.removeDeviceSensor(this.device.id, deviceSensor).subscribe(res => {
+          this.disabledIds.splice(this.disabledIds.indexOf(deviceSensor.id), 1);
+          this.sensors.splice(this.sensors.indexOf(deviceSensor), 1);
+        }, (err: HttpErrorResponse) => {
+          this.error = err.message;
+          this.disabledIds.splice(this.disabledIds.indexOf(deviceSensor.id), 1);
+        });
+      }
     });
   }
   clickEditSensor(deviceSensor: DeviceSensor) {
@@ -92,6 +105,20 @@ export class DeviceSensorsComponent implements OnInit {
       if (sensor) {
         this.sensors.splice(this.sensors.indexOf(deviceSensor), 1, sensor);
       }
+    });
+  }
+  clickTestSensor(deviceSensor: DeviceSensor) {
+    if (this.disabledIds.indexOf(deviceSensor.id) != -1)
+      return;
+    this.disabledIds.push(deviceSensor.id);
+    delete this.error;
+
+    var dialog = this.dialog.open(TestDeviceSensorModalComponent, {
+    });
+    dialog.componentInstance.sensor = deviceSensor;
+    dialog.componentInstance.device = this.device;
+    dialog.afterClosed().pipe(take(1)).subscribe((sensor) => {
+      this.disabledIds.splice(this.disabledIds.indexOf(deviceSensor.id), 1);
     });
   }
   getSensorReadableType(types, type: number) {

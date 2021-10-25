@@ -28,6 +28,7 @@ import { WaterDosing } from '../models/WaterDosing';
 import { PhotoTimelapseOptions } from '../models/PhotoTimelapseOptions';
 import { ATOStatus } from "../models/ATOStatus";
 import { DeviceSensor } from "../models/DeviceSensor";
+import { DeviceSensorTestRequest } from "../models/DeviceSensorTestRequest";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -429,5 +430,8 @@ export class AquariumService {
   }
   public updateDeviceSensor(deviceId: number, deviceSensor: DeviceSensor) {
     return this.http.put<DeviceSensor>(this._url + `/v1/Device/${deviceId}/Sensor/Update`, deviceSensor);
+  }
+  public testDeviceSensor(testRequest: DeviceSensorTestRequest): Observable<DeviceSensorTestRequest> {
+    return this.http.post<DeviceSensorTestRequest>(this._url + `/v1/Device/${testRequest.sensorId}/Sensor/Test`, testRequest);
   }
 }

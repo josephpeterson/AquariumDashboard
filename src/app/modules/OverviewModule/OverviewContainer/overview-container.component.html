@@ -1,8 +1,16 @@
-<div class="container">
-    <h3 class="m-2">Aquariums</h3>
-    <aquarium-table (rowClicked)="clickAquarium($event[1])"></aquarium-table>
-    <button mat-list-item type="button" class="mt-2 btn btn-primary btn-sm" routerLink="/aquarium/new">
-      <fa-icon class="addIcon mr-2" [icon]="faCreate"></fa-icon>New Aquarium...
-    </button>
-    <temperature-histogram></temperature-histogram>
+<div class="row bg-theme-secondary">
+  <div class="col-lg-8">
+    <h1 class="display-4">Dashboard</h1>
+    <p class="lead">
+      View all of your aquariums here.
+    </p>
   </div>
+</div>
+<div class="container">
+  <h5 class="m-2">Aquariums</h5>
+  <aquarium-table (rowClicked)="clickAquarium($event[1])"></aquarium-table>
+  <button mat-list-item type="button" class="mt-2 btn btn-primary btn-sm" routerLink="/aquarium/new">
+    <fa-icon class="addIcon mr-2" [icon]="faCreate"></fa-icon>New Aquarium...
+  </button>
+  <h5>Maintenance</h5>
+</div>
