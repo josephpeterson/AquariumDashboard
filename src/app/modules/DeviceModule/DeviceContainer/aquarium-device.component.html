@@ -1,10 +1,10 @@
 <div class="row bg-theme-secondary mb-2">
-	<div class="col-lg-8">
-		<h1 class="display-4">Device</h1>
-		<p class="lead">
-			Manage your aquarium device, perform auto top off and look at device schedule status.
-		</p>
-	</div>
+    <div class="col-lg-8">
+        <h1 class="display-4">Device</h1>
+        <p class="lead">
+            Manage your aquarium device, perform auto top off and look at device schedule status.
+        </p>
+    </div>
 </div>
 <div *ngIf="device as d else noDevice"
     class="justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
@@ -25,12 +25,38 @@
         </div>
     </div>
 
+    <div class="card mb-4">
+        <div class="card-body">
+            <div class="row mt-2">
+                <div class="col-md-8">
+                    <h4>Sensors</h4>
+                    <p class="text-muted">These are all of the sensors the device is currently equipped with.</p>
+                    <hr>
+                </div>
+            </div>
+            <device-sensors [device]="device"></device-sensors>
+        </div>
+    </div>
+
+
+
 
     <div class="card mb-4">
         <div class="card-body">
+            <div class="row mt-2">
+                <div class="col-md-8">
+                    <h4>Schedule Automation</h4>
+                    <p class="text-muted">You may create a schedule to deploy to the pi here. You may preform automous
+                        events, timed
+                        events
+                        etc.</p>
+                    <hr>
+                </div>
+            </div>
             <device-schedule-builder [device]="device"></device-schedule-builder>
         </div>
     </div>
+
     <!-- <device-peripherials [aquarium]="aquarium"></device-peripherials> -->
 
 
@@ -38,12 +64,6 @@
         <div class="card-body">
 
             <device-ato-status [aquarium]="aquarium"></device-ato-status>
-        </div>
-    </div>
-    <div class="card mb-4">
-        <div class="card-body">
-
-            <device-sensors [device]="device"></device-sensors>
         </div>
     </div>
     <device-information [aquarium]="aquarium"></device-information>

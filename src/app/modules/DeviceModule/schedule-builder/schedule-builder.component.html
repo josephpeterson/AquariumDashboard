@@ -1,15 +1,4 @@
 <div class="row">
-  <div class="col-md-8">
-    <h3>Schedules</h3>
-    <p class="text-muted">You may create a schedule to deploy to the pi here. You may preform automous events, timed
-      events
-      etc.</p>
-    <hr>
-  </div>
-</div>
-
-
-<div class="row">
   <div class="col-sm-4">
     <h6>On Device</h6>
     <div class="schedule-list">
@@ -17,7 +6,6 @@
         <div *ngFor="let scheduleAssignment of device.scheduleAssignments">
           <div class="schedule list-group-item">
             <div class="row">
-
               <div class="col">
                 {{scheduleAssignment.schedule.name}}
                 <div class="time">

@@ -12,6 +12,7 @@ import { DeviceScheduleTask, DeviceScheduleTaskTypes } from 'src/app/models/Devi
 
 import { DeviceScheduleState } from 'src/app/models/DeviceScheduleState';
 import { NotificationService } from 'src/app/services/notification.service';
+import { DeviceInformation } from 'src/app/models/DeviceInformation';
 
 @Component({
     selector: 'device-overview-card',
@@ -24,6 +25,7 @@ export class DeviceOverviewCardComponent implements OnInit {
     public latestSnapshot: AquariumSnapshot;
     public deviceStatus: number;
     public lastUpdateTime: Date;
+    public deviceInformation: DeviceInformation;
 
     public faDevice: IconDefinition = faDesktop;
     public faRedo: IconDefinition = faRedo;
@@ -54,6 +56,7 @@ export class DeviceOverviewCardComponent implements OnInit {
     public pingAquariumDevice() {
         this.deviceStatus = 1;
         this._aquariumService.pingDevice(this.aquarium.device.id).pipe(take(1)).subscribe(val => {
+            this.deviceInformation = val;
             this.deviceStatus = 2;
             this.lastUpdateTime = new Date();
         }, (err) => {

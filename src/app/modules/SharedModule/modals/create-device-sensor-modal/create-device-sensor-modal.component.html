@@ -1,4 +1,5 @@
-<h4 class="justify-content-center">Add Sensor</h4>
+<h4 *ngIf="!newDeviceSensor.id">Add Sensor</h4>
+<h4 *ngIf="newDeviceSensor.id">Edit Sensor</h4>
 <ng-container *ngIf="!loading else loadingTemplate">
 	<div *ngIf="error" class="alert alert-danger">
 		<p class="error">{{error}}</p>
@@ -53,7 +54,7 @@
 				<button class="m-2 btn btn-danger" mat-dialog-close>Cancel</button>
 				<button *ngIf="newDeviceSensor.id" class="m-2 btn btn-success" (click)="clickEditSensor()">Save</button>
 				<button *ngIf="!newDeviceSensor.id" class="m-2 btn btn-success"
-					(click)="clickCreateSensor()">Create</button>
+					(click)="clickCreateSensor()">{{newDeviceSensor.id == null ? "Create":"Update"}}</button>
 			</div>
 		</div>
 	</div>

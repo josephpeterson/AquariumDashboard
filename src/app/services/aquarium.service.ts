@@ -29,6 +29,7 @@ import { PhotoTimelapseOptions } from '../models/PhotoTimelapseOptions';
 import { ATOStatus } from "../models/ATOStatus";
 import { DeviceSensor } from "../models/DeviceSensor";
 import { DeviceSensorTestRequest } from "../models/DeviceSensorTestRequest";
+import { DeviceInformation } from "../models/DeviceInformation";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -203,7 +204,7 @@ export class AquariumService {
     return this.http.get<AquariumDevice>(this._url + `/v1/Device/${deviceId}/Scan`);
   }
   pingDevice(deviceId: number) {
-    return this.http.get(this._url + `/v1/Device/${deviceId}/Ping`);
+    return this.http.get<DeviceInformation>(this._url + `/v1/Device/${deviceId}/Ping`);
   }
 
   /* Profile Controller */

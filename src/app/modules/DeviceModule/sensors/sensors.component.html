@@ -1,12 +1,3 @@
-<div class="row">
-  <div class="col-md-8">
-    <h3>
-      Sensors
-    </h3>
-    <p class="text-muted">These are all of the sensors the device is currently equipped with.</p>
-    <hr>
-  </div>
-</div>
 <div *ngIf="error" class="alert alert-danger">
   <p class="error">{{error}}</p>
   <button class="btn btn-secondary" (click)="loadDeviceSensors()">
@@ -20,20 +11,34 @@
   <ng-container *ngIf="!loading else loadingTemplate">
     <ul class="list-group w-50">
       <li *ngFor="let s of sensors" class="list-group-item">
-        <h5>{{s.name}} ({{s.polarity ? "Output":"Input"}})</h5>
-        <div>
-          Type: {{getSensorReadableType(types,s.type)}}
+        <div class="row">
+          <div class="col-md">
+            <h5>{{s.name}} <small class="text-muted">(ID: {{s.id}})</small></h5>
+            <div>Polarity: {{s.polarity ? "Output":"Input"}}</div>
+            <div>
+              Type: {{getSensorReadableType(types,s.type)}}
+            </div>
+            <div>
+              Gpio Pin: {{s.pin}}
+            </div>
+          </div>
+          <div class="col-sm">
+            <button (click)="clickRemoveSensor(s)" class="float-md-right btn btn-danger"
+              [disabled]="disabledIds.indexOf(s.id) != -1">
+              <fa-icon [icon]="faTrash"></fa-icon>
+            </button>
+            <button (click)="clickEditSensor(s)" class="float-md-right btn btn-secondary mr-2"
+              [disabled]="disabledIds.indexOf(s.id) != -1">
+              <fa-icon [icon]="faEdit"></fa-icon>
+            </button>
+            <button (click)="clickTestSensor(s)" class="float-md-right btn btn-secondary mr-2"
+              [disabled]="disabledIds.indexOf(s.id) != -1">
+              <fa-icon [icon]="faVial"></fa-icon>
+            </button>
+          </div>
         </div>
-        [Pin: {{s.pin}}]
-        <button (click)="clickRemoveSensor(s)" class="float-md-right btn btn-danger" [disabled]="disabledIds.indexOf(s.id) != -1">
-          <fa-icon [icon]="faTrash" ></fa-icon>
-        </button>
-        <button (click)="clickEditSensor(s)" class="float-md-right btn btn-secondary mr-2" [disabled]="disabledIds.indexOf(s.id) != -1">
-          <fa-icon [icon]="faEdit" ></fa-icon>
-        </button>
-        <button (click)="clickTestSensor(s)" class="float-md-right btn btn-secondary mr-2" [disabled]="disabledIds.indexOf(s.id) != -1">
-          <fa-icon [icon]="faVial" ></fa-icon>
-        </button>
+
+
       </li>
     </ul>
     <button class="mt-2 btn btn-success" (click)="clickAddSensor()">Add</button>

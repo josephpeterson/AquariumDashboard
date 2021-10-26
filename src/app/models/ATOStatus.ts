@@ -12,6 +12,7 @@ export class ATOStatus {
   runtimeRemaining: number;
   runIndefinitely: boolean;
   startTime: string;
+  nextRunTime: string | null;
   actualEndTime: string;
   estimatedEndTime: string;
   enabled: boolean;

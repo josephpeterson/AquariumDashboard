@@ -99,7 +99,7 @@ export class DeviceSensorsComponent implements OnInit {
       width: "40%",
     });
     dialog.componentInstance.device = this.device;
-    dialog.componentInstance.newDeviceSensor = deviceSensor;
+    dialog.componentInstance.newDeviceSensor = {...deviceSensor};
     dialog.afterClosed().pipe(take(1)).subscribe((sensor) => {
       this.disabledIds.splice(this.disabledIds.indexOf(deviceSensor.id), 1);
       if (sensor) {
