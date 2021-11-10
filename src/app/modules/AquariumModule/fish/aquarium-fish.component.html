@@ -1,3 +1,11 @@
+<div class="row bg-theme-secondary">
+	<div class="col-lg-8">
+		<h1 class="display-4">Fish</h1>
+		<p class="lead">
+			View the fish in your aquarium.
+		</p>
+	</div>
+</div>
 <ng-container *ngIf="aquarium$ | async as aquarium">
     <div class="empty-card" *ngIf="!aquarium.fish || aquarium.fish.length == 0 else hasFish">
         <p>

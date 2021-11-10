@@ -1,0 +1,23 @@
+<div *ngIf="device as d else noDevice"
+	class="justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+
+	<div class="card mb-4">
+		<div class="card-body">
+			<div class="row mt-2">
+				<div class="col-md-8">
+					<h4>Schedule Automation</h4>
+					<p class="text-muted">You may create a schedule to deploy to the pi here. You may preform automous
+						events, timed
+						events
+						etc.</p>
+					<hr>
+				</div>
+			</div>
+			<device-schedule-builder [device]="device"></device-schedule-builder>
+		</div>
+	</div>
+</div>
+
+<ng-template #noDevice>
+	<device-detail-form [aquarium]="aquarium"></device-detail-form>
+</ng-template>

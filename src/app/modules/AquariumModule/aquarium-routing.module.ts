@@ -15,6 +15,7 @@ import { MaintenanceComponent } from './maintenance/maintenance.component';
 import { PageNotFoundComponent } from '../SharedModule/page-not-found/page-not-found.component';
 import { AquariumsContainer } from './AquariumsContainer/aquariums-container.component';
 import { AquariumModule } from './aquarium.module';
+import { AquariumFishComponent } from './fish/aquarium-fish.component';
 
 const secondaryRoutes: Routes = [
     {
@@ -38,10 +39,10 @@ const secondaryRoutes: Routes = [
                 path: 'dashboard',
                 component: DashboardComponent
             },
-            /* {
-                 path: 'fish',
-                 component: AquariumFishComponent
-             }, */
+            {
+                path: 'fish',
+                component: AquariumFishComponent
+            },
             {
                 path: 'parameters',
                 component: AquariumParametersComponent,
@@ -64,8 +65,8 @@ const secondaryRoutes: Routes = [
                         component: ParametersOverviewComponent
                     },
                     {
-                        path: '', 
-                        redirectTo:'overview'
+                        path: '',
+                        redirectTo: 'overview'
                     },]
             },
             {

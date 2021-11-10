@@ -2,10 +2,10 @@
 //services are just arbitrary examples, your module might be different
 import { NgModule }       from '@angular/core';
 import { CommonModule }   from '@angular/common';
-import { DeviceInformationComponent } from './information/device-information.component';
+import { DeviceInformationComponent } from './settings/information/device-information.component';
 import { DevicePeripherialsComponent } from './Peripherials/peripherials.component';
-import { DeviceScheduleStatusComponent } from './schedule-status/schedule-status.component';
-import { ScheduleBuilderComponent } from './schedule-builder/schedule-builder.component';
+import { DeviceScheduleStatusComponent } from './schedule/schedule-status/schedule-status.component';
+import { ScheduleBuilderComponent } from './schedule/schedule-builder/schedule-builder.component';
 import { DeviceRoutes } from './device-routing.module';
 import { AquariumDeviceComponent } from './DeviceContainer/aquarium-device.component';
 import { SharedModule } from '../SharedModule/shared.module';
@@ -38,8 +38,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Ng5SliderModule } from 'ng5-slider';
-import { DeviceDetailFormComponent } from './device-detail-form/device-detail-form.component';
-import { DeviceLogComponent } from './device-log/device-log.component';
+import { DeviceDetailFormComponent } from './settings/device-detail-form/device-detail-form.component';
+import { DeviceLogComponent } from './settings/device-log/device-log.component';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { FishService } from 'src/app/services/fish.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -53,6 +53,9 @@ import { DeviceSensorCardComponent } from './device-sensor-card/device-sensor-ca
 import { DeviceOverviewCardComponent } from './device-overview-card/device-overview-card.component';
 import { DeviceSnapshotCarouselComponent } from './device-snapshot-carousel/device-snapshot-carousel.component';
 import { NotificationService } from 'src/app/services/notification.service';
+import { DeviceOverviewComponent } from './overview/device-overview.component';
+import { DeviceSettingsComponent } from './settings/device-settings.component';
+import { DeviceScheduleComponent } from './schedule/device-schedule.component';
 
 
 @NgModule({
@@ -105,6 +108,9 @@ import { NotificationService } from 'src/app/services/notification.service';
     DeviceScheduleStatusComponent,
     DeviceATOStatusComponent,
     DeviceSnapshotCarouselComponent,
+    DeviceOverviewComponent,
+    DeviceSettingsComponent,
+    DeviceScheduleComponent,
   ],
   exports: [
     DeviceDetailFormComponent

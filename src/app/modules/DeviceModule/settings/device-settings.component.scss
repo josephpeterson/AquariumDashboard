@@ -1,0 +1,29 @@
+.lighting-component
+{
+  .card {
+    width:100%;
+    user-select:none;
+  }
+
+  .ledRow
+  {
+    padding-top:5px;
+    
+    .led
+    {
+      display: inline-block;
+      height:40px;
+      width:40px;
+      background-color:lightgray;
+      margin:5px;
+
+      text-align: center;
+      line-height: 35px;
+      color: gray;
+    }
+    .led.active
+    {
+      background-color:black;
+    }
+  }
+}

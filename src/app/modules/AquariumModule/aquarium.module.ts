@@ -36,7 +36,6 @@ import { AquariumsContainer } from './AquariumsContainer/aquariums-container.com
 import { CreateAquariumComponent } from './create-aquarium/create-aquarium.component';
 import { AquariumContainer } from './AquariumContainer/aquarium-container.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { FishComponent } from './fish/fish.component';
 import { LightingComponent } from './lighting/lighting.component';
 import { AquariumParametersComponent } from './parameters/aquarium-parameters.component';
 import { ParametersOverviewComponent } from './parameters/overview/parameters-overview.component';
@@ -62,6 +61,7 @@ import { DosingListComponent } from './maintenance/dosing-list/dosing-list.compo
 import { TaskTabComponent } from './maintenance/task-tab/task-list.component';
 import { NotificationsListComponent } from './maintenance/notifications-list/notifications-list.component';
 import { NotificationService } from 'src/app/services/notification.service';
+import { AquariumFishComponent } from './fish/aquarium-fish.component';
 
 
 @NgModule({
@@ -108,7 +108,7 @@ import { NotificationService } from 'src/app/services/notification.service';
     CreateAquariumComponent,
 
     DashboardComponent,
-    FishComponent,
+    AquariumFishComponent,
     LightingComponent,
     AquariumParametersComponent,
     ParametersOverviewComponent,

@@ -1,0 +1,13 @@
+<div *ngIf="device as d else noDevice"
+	class="justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+
+	<device-information [aquarium]="aquarium"></device-information>
+
+	<device-detail-form [aquarium]="aquarium"></device-detail-form>
+
+	<device-log [device]="device"></device-log>
+</div>
+
+<ng-template #noDevice>
+	<device-detail-form [aquarium]="aquarium"></device-detail-form>
+</ng-template>

@@ -89,7 +89,7 @@ import { SpeciesCardComponent } from './data/species/species-card/species-card.c
 import { FishAddFormComponent } from './data/fish/fish-add-form/fish-add-form.component';
 import { FishAddPhotoButtonComponent } from './data/fish/add-photo-button/fish-add-photo-button.component';
 import { AutocompleteTypeComponent } from './form/autocomplete-type/autocomplete-type.component';
-import { AquariumNavBarComponent } from './aquarium-nav-bar/aquarium-nav-bar.component';
+import { AquariumNavBarComponent } from './side-bar/aquarium-nav-bar/aquarium-nav-bar.component';
 import { FishPhotoSelectComponent } from './data/fish/photo-select/fish-photo-select.component';
 import { FishCardDetailedComponent } from 'src/app/modules/SharedModule/fish-card-detailed/fish-card-detailed.component';
 import { ApplicationLogViewComponent } from './application-log-view/application-log-view.component';

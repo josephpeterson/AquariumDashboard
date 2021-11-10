@@ -1,0 +1,49 @@
+
+<div *ngIf="device as d else noDevice"
+class="justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+<div class="row">
+	<div class="col-sm-3">
+		<div class="card mb-4">
+			<div class="card-body">
+				<device-overview-card [aquarium]="aquarium"></device-overview-card>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-9">
+		<div class="card mb-4">
+			<div class="card-body">
+				<device-snapshot-carousel></device-snapshot-carousel>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="card mb-4">
+	<div class="card-body">
+		<div class="row mt-2">
+			<div class="col-md-8">
+				<h4>Sensors</h4>
+				<p class="text-muted">These are all of the sensors the device is currently equipped with.</p>
+				<hr>
+			</div>
+		</div>
+		<device-sensors [device]="device"></device-sensors>
+	</div>
+</div>
+
+
+
+<!-- <device-peripherials [aquarium]="aquarium"></device-peripherials> -->
+
+
+<div class="card mb-4">
+	<div class="card-body">
+
+		<device-ato-status [aquarium]="aquarium"></device-ato-status>
+	</div>
+</div>
+</div>
+
+<ng-template #noDevice>
+<device-detail-form [aquarium]="aquarium"></device-detail-form>
+</ng-template>

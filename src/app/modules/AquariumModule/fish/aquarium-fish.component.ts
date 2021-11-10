@@ -12,13 +12,13 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Location } from '@angular/common';
 
 @Component({
-  selector: 'fish-page-component',
-  templateUrl: './fish.component.html',
-  styleUrls: ['./fish.component.scss']
+  selector: 'aquarium-fish',
+  templateUrl: './aquarium-fish.component.html',
+  styleUrls: ['./aquarium-fish.component.scss']
 })
 
 
-export class FishComponent implements OnInit {
+export class AquariumFishComponent implements OnInit {
 
   public fishId: number;
   public fish: Fish;

@@ -1,3 +1,11 @@
+<div class="row bg-theme-secondary">
+	<div class="col-lg-8">
+		<h1 class="display-4">Maintenance</h1>
+		<p class="lead">
+			View predictive maintenance that we have suggested based on information in our application.
+		</p>
+	</div>
+</div>
 <div class="container">
   <mat-tab-group class="m-t-30" #tabber (selectedTabChange)="updateTabRoute();" style="overflow-y: none;">
     <mat-tab label="{{tab.label}}" *ngFor="let tab of tabs" [ngSwitch]="tab.tabId" >

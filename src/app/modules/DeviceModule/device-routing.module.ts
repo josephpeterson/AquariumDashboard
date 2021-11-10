@@ -4,12 +4,33 @@ import { RouterModule, Routes } from '@angular/router';
 import { AquariumDeviceComponent } from './DeviceContainer/aquarium-device.component';
 import { AuthGuard } from 'src/app/guards/AuthGuard';
 import { DeviceModule } from './device.module';
+import { DeviceOverviewComponent } from './overview/device-overview.component';
+import { DeviceSettingsComponent } from './settings/device-settings.component';
+import { DeviceScheduleComponent } from './schedule/device-schedule.component';
 
 const secondaryRoutes: Routes = [
     {
         path: '',
         canActivate: [AuthGuard],
-        component: AquariumDeviceComponent
+        component: AquariumDeviceComponent,
+        children: [
+            {
+                path: 'overview',
+                component: DeviceOverviewComponent
+            },
+            {
+                path: 'settings',
+                component: DeviceSettingsComponent
+            },
+            {
+                path: 'schedule',
+                component: DeviceScheduleComponent
+            },
+            {
+                path: '',
+                redirectTo: 'overview'
+            },
+        ]
     },
 ];
 
