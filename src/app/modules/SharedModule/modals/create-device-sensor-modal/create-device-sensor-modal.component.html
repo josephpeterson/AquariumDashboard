@@ -1,61 +1,97 @@
-<h4 *ngIf="!newDeviceSensor.id">Add Sensor</h4>
-<h4 *ngIf="newDeviceSensor.id">Edit Sensor</h4>
+<h4 *ngIf="!newDeviceSensor.id">Add Device Sensor</h4>
+<h4 *ngIf="newDeviceSensor.id">Edit Device Sensor</h4>
+<div class="row">
+	<div class="col">
+		<p class="text-muted">Device sensors can be used to read values from your aquarium, and trigger automated processes. Examples may include pumps, float switches, etc.</p>
+	</div>
+</div>
 <ng-container *ngIf="!loading else loadingTemplate">
 	<div *ngIf="error" class="alert alert-danger">
 		<p class="error">{{error}}</p>
 	</div>
 	<div class="" *ngIf="getGpioConfiguration(device.type) else unsupported">
-		<mat-form-field class="m-2">
-			<input type="text" placeholder="Sensor Name" matInput [(ngModel)]="newDeviceSensor.name" name="name">
-		</mat-form-field>
-		<p class="text-muted" *ngIf="device.type">Your device model is current set to {{device.type}}.</p>
-		<div class="container">
-			<p>Select a pin location for the sensor. Based on your selected RaspberryPi configuration, this is your
-				Gpio arrangement.</p>
-
-
-
-
-
-			<div class="row">
-				<div class="gpioPort" *ngFor="let gpio of getGpioRow1(device.type)"
-					(click)="clickGpioPort(gpio)" [class.ground]="gpio == GpioPinTypes.Ground"
-					[class.selected]="isSelected(gpio)" [class.pwr5V]="gpio == GpioPinTypes.pwr5V"
-					[class.pwr3V]="gpio == GpioPinTypes.pwr3V" [class.disabled]="isPortDisabled(gpio)">
+		<div class="row">
+			<div class="col-sm">
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text" id="basic-addon3">Name</span>
+					</div>
+					<input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3"
+						[(ngModel)]="newDeviceSensor.name">
 				</div>
 			</div>
-			<div class="row">
-				<div class="gpioPort" *ngFor="let gpio of getGpioRow2(device.type)"
-					(click)="clickGpioPort(gpio)" [class.ground]="gpio == GpioPinTypes.Ground"
-					[class.selected]="isSelected(gpio)" [class.pwr5V]="gpio == GpioPinTypes.pwr5V"
-					[class.pwr3V]="gpio == GpioPinTypes.pwr3V" [class.disabled]="isPortDisabled(gpio)">
-				</div>
+			<div class="col-sm">
+
 			</div>
-
-
-
-
-			<div class="row">
+		</div>
+		<div class="row">
+			<div class="col-sm">
 				<generic-select label="Sensor Type" selectType="DeviceSensorTypes"
-					[(inputModel)]="newDeviceSensor.type"></generic-select>
+					[(inputModel)]="newDeviceSensor.type">
+				</generic-select>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col">
+				<p class="text-muted" *ngIf="device.type">Select a pin location for the sensor. Based on your selected
+					RaspberryPi configuration, this is your
+					Gpio arrangement. Your device model is current set to <b>{{device.type}}</b>.</p>
+			</div>
+		</div>
+		<div class="container mb-2">
+			<div class="row">
+				<div class="gpioPort" *ngFor="let gpio of getGpioRow1(device.type)" (click)="clickGpioPort(gpio)"
+					[class.ground]="gpio == GpioPinTypes.Ground" [class.selected]="isSelected(gpio)"
+					[class.pwr5V]="gpio == GpioPinTypes.pwr5V" [class.pwr3V]="gpio == GpioPinTypes.pwr3V"
+					[class.used]="isPortUsed(gpio)"
+					[class.disabled]="isPortDisabled(gpio)">
+				</div>
+			</div>
+			<div class="row">
+				<div class="gpioPort" *ngFor="let gpio of getGpioRow2(device.type)" (click)="clickGpioPort(gpio)"
+					[class.ground]="gpio == GpioPinTypes.Ground" [class.selected]="isSelected(gpio)"
+					[class.pwr5V]="gpio == GpioPinTypes.pwr5V" [class.pwr3V]="gpio == GpioPinTypes.pwr3V"
+					[class.disabled]="isPortDisabled(gpio)">
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<mat-radio-group aria-labelledby="example-radio-group-label" [(ngModel)]="newDeviceSensor.polarity">
+				<mat-radio-button [value]="0" class="ml-2">
+					Input
+				</mat-radio-button>
+				<mat-radio-button [value]="1" class="ml-2">
+					Output
+				</mat-radio-button>
+			</mat-radio-group>
+
+		</div>
+		<ng-container *ngIf="newDeviceSensor.polarity == 1">
+			<div class="row">
+				<div class="col">
+					<p class="text-muted">Set whether this sensor will start on or off</p>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col">
+					<div class="custom-control custom-switch">
+						<input type="checkbox" class="custom-control-input" id="customSwitches"
+							[(ngModel)]="newDeviceSensor.alwaysOn">
+						<label class="custom-control-label" for="customSwitches">Always On</label>
+					</div>
+				</div>
 
 			</div>
-			<div class="row">
-				<mat-radio-group aria-labelledby="example-radio-group-label" [(ngModel)]="newDeviceSensor.polarity">
-					<mat-radio-button [value]="0" class="ml-2">
-						Input
-					</mat-radio-button>
-					<mat-radio-button [value]="1" class="ml-2">
-						Output
-					</mat-radio-button>
-				</mat-radio-group>
-			</div>
-			<div class="row">
-				<button class="m-2 btn btn-danger" mat-dialog-close>Cancel</button>
-				<button *ngIf="newDeviceSensor.id" class="m-2 btn btn-success" (click)="clickEditSensor()">Save</button>
-				<button *ngIf="!newDeviceSensor.id" class="m-2 btn btn-success"
-					(click)="clickCreateSensor()">{{newDeviceSensor.id == null ? "Create":"Update"}}</button>
-			</div>
+		</ng-container>
+
+		<div class="row">
+			<button class="m-2 btn btn-danger" mat-dialog-close>Cancel</button>
+			<button *ngIf="newDeviceSensor.id" class="m-2 btn btn-success" (click)="clickEditSensor()">Save</button>
+			<button *ngIf="!newDeviceSensor.id" class="m-2 btn btn-success"
+				(click)="clickCreateSensor()">{{newDeviceSensor.id == null ? "Create":"Update"}}</button>
 		</div>
 	</div>
 </ng-container>

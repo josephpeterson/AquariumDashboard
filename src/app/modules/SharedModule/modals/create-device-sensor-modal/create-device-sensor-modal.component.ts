@@ -31,13 +31,16 @@ export class CreateDeviceSensorModalComponent implements OnInit {
   ngOnInit() {
   }
   isPortDisabled(portType: GpioPinTypes) {
+    return this.isPortUsed(portType) || portType == GpioPinTypes.pwr3V || portType == GpioPinTypes.pwr5V || portType == GpioPinTypes.Ground
+  }
+  isPortUsed(portType: GpioPinTypes) {
     //check if port is in use
     var used = false;
     this.device.sensors.forEach(s => {
       if (s.pin == portType && s.id != this.newDeviceSensor.id)
         used = true;
     });
-    return used || portType == GpioPinTypes.pwr3V || portType == GpioPinTypes.pwr5V || portType == GpioPinTypes.Ground
+    return used;
   }
   clickGpioPort(port: GpioPinTypes) {
     if (this.isPortDisabled(port))
