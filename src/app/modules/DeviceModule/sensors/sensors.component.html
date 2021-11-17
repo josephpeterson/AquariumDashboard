@@ -8,45 +8,38 @@
     </div>
     <div class="row">
       <div class="col-sm">
-        <div *ngFor="let s of d.sensors" class="card mb-2">
+        <div class="card">
           <div class="card-body">
-            <div class="row">
-              <div class="col-sm">
-                <h6>{{s.name}} <small class="text-muted">(<b>Sensor Id</b>: {{s.id}} <b>Gpio Port</b>:
-                    {{s.pin}})</small>
-                </h6>
-                <div>
-                  <b>Polarity</b>: {{s.polarity ? "Output":"Input"}}
-                </div>
-                <div>
-                  <b>Type</b>: {{getSensorReadableType(types,s.type)}}
-                </div>
-                <div *ngIf="s.alwaysOn">
-                  <b>Always On</b>
-                </div>
-              </div>
-              <div class="col-sm">
-                <button (click)="clickRemoveSensor(s)" class="float-md-right btn btn-danger"
-                  [disabled]="disabledIds.indexOf(s.id) != -1">
-                  <fa-icon [icon]="faTrash"></fa-icon>
-                </button>
-                <button (click)="clickEditSensor(s)" class="float-md-right btn btn-secondary mr-2"
-                  [disabled]="disabledIds.indexOf(s.id) != -1">
-                  <fa-icon [icon]="faEdit"></fa-icon>
-                </button>
-                <button (click)="clickTestSensor(s)" class="float-md-right btn btn-secondary mr-2"
-                  [disabled]="disabledIds.indexOf(s.id) != -1 || !s.polarity">
-                  <fa-icon [icon]="faVial"></fa-icon>
-                </button>
+            <h5 class="card-title">Sensors</h5>
+            <p class="card-text">
+              Manage assigned device sensors here.
+            </p>
+            <div>
+              <div *ngFor="let s of d.sensors">
+                <sensor-mini-card [sensor]="s" [device]="d" [types]="types"></sensor-mini-card>
               </div>
             </div>
+
+
+          </div>
+          <div class="card-body">
+              <button class="btn btn-success" (click)="clickAddSensor()">Add Sensor</button>
           </div>
         </div>
 
+
       </div>
       <div class="col-md">
+
         <div class="card">
           <div class="card-body">
+            <h5 class="card-title">Device Model</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{d.type}}</h6>
+            <p class="card-text">
+              You can change your model and manage advanced settings on the <a
+                [routerLink]="['../settings']">settings</a> page.
+            </p>
+            <h6>Gpio Usage</h6>
             <device-gpio-card [device]="d"></device-gpio-card>
           </div>
         </div>
@@ -57,10 +50,6 @@
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col">
-        <button class="mt-2 btn btn-success" (click)="clickAddSensor()">Add</button>
-      </div>
-    </div>
+    
   </ng-container>
 </div>

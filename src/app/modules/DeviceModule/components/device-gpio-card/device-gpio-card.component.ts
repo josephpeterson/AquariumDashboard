@@ -87,7 +87,7 @@ export class DeviceGpioCardComponent implements OnInit {
 
     var sensor = this.isPortUsed(pin);
     if(sensor)
-      str += "&#13;" + sensor.name;
+      str += "\n" + sensor.name;
     return str;
   }
 }

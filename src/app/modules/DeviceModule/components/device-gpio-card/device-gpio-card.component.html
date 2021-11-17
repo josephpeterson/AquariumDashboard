@@ -1,10 +1,4 @@
 <div class="" *ngIf="device && getGpioConfiguration(device.type) else unsupported">
-	<h6>{{device.type}}</h6>
-	<div class="row">
-		<div class="col">
-			<p class="text-muted" *ngIf="device.type">Sensor pins in use</p>
-		</div>
-	</div>
 	<div class="container mb-2">
 		<div class="row">
 			<div class="gpioPort" *ngFor="let gpio of getGpioRow1(device.type)" (click)="clickGpioPort(gpio)"

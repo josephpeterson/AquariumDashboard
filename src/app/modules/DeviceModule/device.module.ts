@@ -58,6 +58,7 @@ import { DeviceSettingsComponent } from './settings/device-settings.component';
 import { DeviceScheduleComponent } from './schedule/device-schedule.component';
 import { DeviceGpioCardComponent } from './components/device-gpio-card/device-gpio-card.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { DeviceSensorMiniCardComponent } from './sensors/sensor-mini-card/sensor-mini-card.component';
 
 
 @NgModule({
@@ -115,6 +116,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     DeviceSettingsComponent,
     DeviceScheduleComponent,
     DeviceGpioCardComponent,
+    DeviceSensorMiniCardComponent
   ],
   exports: [
     DeviceDetailFormComponent

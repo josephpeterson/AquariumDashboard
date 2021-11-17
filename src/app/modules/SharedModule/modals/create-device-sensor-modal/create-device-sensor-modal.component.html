@@ -1,8 +1,12 @@
 <h4 *ngIf="!newDeviceSensor.id">Add Device Sensor</h4>
 <h4 *ngIf="newDeviceSensor.id">Edit Device Sensor</h4>
 <div class="row">
+
+</div>
+<div class="row">
 	<div class="col">
-		<p class="text-muted">Device sensors can be used to read values from your aquarium, and trigger automated processes. Examples may include pumps, float switches, etc.</p>
+		<p class="text-muted">Device sensors can be used to read values from your aquarium, and trigger automated
+			processes. Examples may include pumps, float switches, etc.</p>
 	</div>
 </div>
 <ng-container *ngIf="!loading else loadingTemplate">
@@ -44,8 +48,7 @@
 				<div class="gpioPort" *ngFor="let gpio of getGpioRow1(device.type)" (click)="clickGpioPort(gpio)"
 					[class.ground]="gpio == GpioPinTypes.Ground" [class.selected]="isSelected(gpio)"
 					[class.pwr5V]="gpio == GpioPinTypes.pwr5V" [class.pwr3V]="gpio == GpioPinTypes.pwr3V"
-					[class.used]="isPortUsed(gpio)"
-					[class.disabled]="isPortDisabled(gpio)">
+					[class.used]="isPortUsed(gpio)" [class.disabled]="isPortDisabled(gpio)">
 				</div>
 			</div>
 			<div class="row">
@@ -60,10 +63,10 @@
 		<div class="row">
 			<mat-radio-group aria-labelledby="example-radio-group-label" [(ngModel)]="newDeviceSensor.polarity">
 				<mat-radio-button [value]="0" class="ml-2">
-					Input
+					Read
 				</mat-radio-button>
 				<mat-radio-button [value]="1" class="ml-2">
-					Output
+					Write
 				</mat-radio-button>
 			</mat-radio-group>
 
@@ -86,12 +89,18 @@
 
 			</div>
 		</ng-container>
-
-		<div class="row">
-			<button class="m-2 btn btn-danger" mat-dialog-close>Cancel</button>
+		<hr>
+		<div class="row mt-3">
+			<div class="col">
+				<button *ngIf="newDeviceSensor.id != null" (click)="clickRemoveSensor()" class="m-2 btn btn-danger" [disabled]="disabled">
+					<fa-icon [icon]="faTrash"></fa-icon> Delete
+				</button>
+			</div>
+			<button class="m-2 btn btn-secondary" mat-dialog-close>Cancel</button>
 			<button *ngIf="newDeviceSensor.id" class="m-2 btn btn-success" (click)="clickEditSensor()">Save</button>
 			<button *ngIf="!newDeviceSensor.id" class="m-2 btn btn-success"
 				(click)="clickCreateSensor()">{{newDeviceSensor.id == null ? "Create":"Update"}}</button>
+
 		</div>
 	</div>
 </ng-container>
