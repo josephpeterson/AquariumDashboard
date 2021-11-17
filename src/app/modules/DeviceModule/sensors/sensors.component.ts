@@ -13,6 +13,9 @@ import { Observable, Subject } from 'rxjs';
 import { NotificationService } from 'src/app/services/notification.service';
 import { TestDeviceSensorModalComponent } from '../../SharedModule/modals/test-device-sensor-modal/test-device-sensor-modal.component';
 import { ConfirmModalComponent } from '../../SharedModule/modals/confirm-modal/confirm-modal.component';
+import { getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
+import { AppState } from 'src/app/app.state';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'device-sensors',
@@ -27,6 +30,8 @@ export class DeviceSensorsComponent implements OnInit {
   public error: string;
   public sensors: DeviceSensor[];
   public disabledIds: number[] = [];
+  public aquarium$: Observable<Aquarium> = this.store.select(getSelectedAquarium);
+
 
 
   public faRefresh: IconDefinition = faSync;
@@ -42,11 +47,17 @@ export class DeviceSensorsComponent implements OnInit {
 
   constructor(public _aquariumService: AquariumService,
     public notifier: NotificationService,
+    public store: Store<AppState>,
     public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.loadDeviceSensors();
+    this.aquarium$.pipe().subscribe(aq => {
+      this.device = aq.device;
+    });
+    this.loadReadableTypes();
+  }
 
+  private loadReadableTypes() {
     this._aquariumService.getSelectOptionsByType("DeviceSensorTypes").subscribe((data: any[]) => {
       this.readableTypes.next(data);
     });
@@ -99,7 +110,7 @@ export class DeviceSensorsComponent implements OnInit {
       width: "40%",
     });
     dialog.componentInstance.device = this.device;
-    dialog.componentInstance.newDeviceSensor = {...deviceSensor};
+    dialog.componentInstance.newDeviceSensor = { ...deviceSensor };
     dialog.afterClosed().pipe(take(1)).subscribe((sensor) => {
       this.disabledIds.splice(this.disabledIds.indexOf(deviceSensor.id), 1);
       if (sensor) {

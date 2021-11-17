@@ -1,4 +1,4 @@
-<div *ngIf="device as d else noDevice"
+<div *ngIf="(aquarium$ | async).device as device"
 	class="justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
 
 	<div class="card mb-4">

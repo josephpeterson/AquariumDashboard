@@ -7,6 +7,7 @@ import { DeviceModule } from './device.module';
 import { DeviceOverviewComponent } from './overview/device-overview.component';
 import { DeviceSettingsComponent } from './settings/device-settings.component';
 import { DeviceScheduleComponent } from './schedule/device-schedule.component';
+import { DeviceSensorsComponent } from './sensors/sensors.component';
 
 const secondaryRoutes: Routes = [
     {
@@ -25,6 +26,10 @@ const secondaryRoutes: Routes = [
             {
                 path: 'schedule',
                 component: DeviceScheduleComponent
+            },
+            {
+                path: 'sensors',
+                component: DeviceSensorsComponent
             },
             {
                 path: '',

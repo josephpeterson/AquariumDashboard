@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { AquariumPhoto } from 'src/app/models/AquariumPhoto';
 import * as moment from 'moment';
-import { PhotoExpandedModalComponent } from '../../SharedModule/modals/photo-expanded-modal/photo-expanded-modal.component';
+import { PhotoExpandedModalComponent } from '../../../SharedModule/modals/photo-expanded-modal/photo-expanded-modal.component';
 
 
 @Component({

@@ -1,0 +1,35 @@
+<div class="" *ngIf="device && getGpioConfiguration(device.type) else unsupported">
+	<h6>{{device.type}}</h6>
+	<div class="row">
+		<div class="col">
+			<p class="text-muted" *ngIf="device.type">Sensor pins in use</p>
+		</div>
+	</div>
+	<div class="container mb-2">
+		<div class="row">
+			<div class="gpioPort" *ngFor="let gpio of getGpioRow1(device.type)" (click)="clickGpioPort(gpio)"
+				[class.ground]="gpio == GpioPinTypes.Ground" [class.selected]="isSelected(gpio)"
+				[class.pwr5V]="gpio == GpioPinTypes.pwr5V" [class.pwr3V]="gpio == GpioPinTypes.pwr3V"
+				[class.used]="isPortUsed(gpio)" [class.disabled]="isPortDisabled(gpio)"
+				#tooltip="matTooltip"
+				[matTooltip]="getGpioToolTip(gpio)"
+				matTooltipClass="gpio-tooltip"
+				>
+			</div>
+		</div>
+		<div class="row">
+			<div class="gpioPort" *ngFor="let gpio of getGpioRow2(device.type)" (click)="clickGpioPort(gpio)"
+				[class.ground]="gpio == GpioPinTypes.Ground" [class.selected]="isSelected(gpio)"
+				[class.pwr5V]="gpio == GpioPinTypes.pwr5V" [class.pwr3V]="gpio == GpioPinTypes.pwr3V"
+				[class.used]="isPortUsed(gpio)" [class.disabled]="isPortDisabled(gpio)"
+				#tooltip="matTooltip"
+				[matTooltip]="getGpioToolTip(gpio)"
+				matTooltipClass="gpio-tooltip"
+				>
+			</div>
+		</div>
+	</div>
+</div>
+<ng-template #unsupported>
+	Looks like we could not find your gpio port!
+</ng-template>

@@ -10,7 +10,7 @@ import { ATOStatus } from 'src/app/models/ATOStatus';
 import { HttpErrorResponse } from '@angular/common/http';
 import * as moment from 'moment';
 import { Subject } from 'rxjs';
-import { RunATOModalComponent } from '../../SharedModule/modals/run-ato-modal/run-ato-modal.component';
+import { RunATOModalComponent } from '../../../SharedModule/modals/run-ato-modal/run-ato-modal.component';
 import { PaginationSliver } from 'src/app/models/PaginationSliver';
 import { GpioPinValue } from 'src/app/models/types/GpioPinValue';
 import { DeviceScheduleTask } from 'src/app/models/DeviceScheduleTask';
