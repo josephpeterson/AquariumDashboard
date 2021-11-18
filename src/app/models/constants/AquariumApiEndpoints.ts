@@ -1,0 +1,57 @@
+export enum AquariumApiEndpoints
+{
+  //AdministrativeController
+  ADMIN_RETRIEVE_ACCOUNTS = "/v1/admin/Users",
+  ADMIN_RETRIEVE_BUGS = "/v1/admin/Bugs",
+  ADMIN_RETRIEVE_NOTIFICATIONS = "/v1/admin/Notifications",
+  ADMIN_NOTIFICATION_DISPATCH = "/v1/admin/Notification",
+  ADMIN_NOTIFICATION_DISMISS = "/v1/admin/Notification/Dismiss",
+  ADMIN_NOTIFICATION_DELETE_ALL = "/v1/admin/Notification/Delete",
+
+  //AccountController
+  ACCOUNT_GET_DETAILED = "/v1/Account/{id}", //not used
+  ACCOUNT_GET_CLAIMS = "/v1/Account/Claims", //not used
+  ACCOUNT_GET_CURRENT = "/v1/Account/Current",
+  ACCOUNT_RETRIEVE_NOTIFICATIONS = "/v1/Account/Notifications",
+  ACCOUNT_NOTIFICATION_DISMISS = "/v1/Account/Notifications/Dismiss",
+  ACCOUNT_UPDATE = "/v1/Account/Update", //not used
+
+  //DeviceController
+  DEVICE_RETRIEVE = "/v1/Device/{deviceId}",
+  DEVICE_DELETE = "/v1/Device/{deviceId}/Delete",
+  DEVICE_UPDATE = "/v1/Device/Update",
+  DEVICE_CREATE = "/v1/Device/Add",
+  DEVICE_DISPATCH_SCAN = "/v1/Device/{deviceId}/Scan",
+  DEVICE_DISPATCH_PING = "/v1/Device/{deviceId}/Ping",
+  DEVICE_DISPATCH_SNAPSHOT_CONFIGURATION = "/v1/Device/{deviceId}/CameraConfiguration",
+  DEVICE_LOG = "/v1/Device/{deviceId}/Log",
+  DEVICE_LOG_CLEAR = "/v1/Device/{deviceId}/Log/Clear",
+  DEVICE_RETRIEVE_DETAILED = "/v1/Device/{deviceId}/Information",
+  DEVICE_UPDATE_CONFIGURATION = "/v1/Device/{deviceId}/UpdateConfigurationFile",
+  DEVICE_SENSORS = "/v1/Device/{deviceId}/Sensors",
+  DEVICE_SENSOR_CREATE = "/v1/Device/{deviceId}/Sensor/Create",
+  DEVICE_SENSOR_DELETE = "/v1/Device/{deviceId}/Sensor/Remove",
+  DEVICE_SENSOR_UPDATE = "/v1/Device/{deviceId}/Sensor/Update",
+  DEVICE_SENSOR_TEST = "/v1/Device/{deviceId}/Sensor/Test",
+  DEVICE_SCHEDULE_DEPLOY = "/v1/Device/{deviceId}/DeploySchedule/{scheduleId}",
+  DEVICE_SCHEDULE_REMOVE = "/v1/Device/{deviceId}/RemoveSchedule/{scheduleId}",
+  DEVICE_SCHEDULE_STATUS = "/v1/Device/{deviceId}/Schedule/Status",
+  DEVICE_DISPATCH_TASK = "/v1/Device/{deviceId}/Schedule/PerformTask",
+}
+declare global {
+  interface String {
+    aggregate(...params): string;
+  }
+}
+
+String.prototype.aggregate = function (...params:string[]) {
+  var str = String(this);
+  var paramsToReplace = str.match(/(?<=\{).+?(?=\})/g);
+  paramsToReplace.forEach((p,i) => {
+    console.log(p,params[i],i);
+    str = str.replace(new RegExp(`{${p}}`,'g'),params[i]);
+  });
+  //console.log(paramsToReplace,params);
+  //console.log(str);
+  return str;
+};

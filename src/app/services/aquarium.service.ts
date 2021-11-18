@@ -30,6 +30,8 @@ import { ATOStatus } from "../models/ATOStatus";
 import { DeviceSensor } from "../models/DeviceSensor";
 import { DeviceSensorTestRequest } from "../models/DeviceSensorTestRequest";
 import { DeviceInformation } from "../models/DeviceInformation";
+import { AquariumCreateResetAction } from "../store/aquarium/aquarium.actions";
+import { AquariumApiEndpoints } from "../models/constants/AquariumApiEndpoints";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -54,7 +56,7 @@ export class AquariumService {
   }
 
   public getCurrentUser() {
-    return this.http.get<AquariumAccount>(this._url + "/v1/Account/Current");
+    return this.http.get<AquariumAccount>(this._url + AquariumApiEndpoints.ACCOUNT_GET_CURRENT);
   }
   public SendLightingConfiguration(config: LightingConfiguration) {
     return this.http.post<LightingConfiguration>(this._url + "/v1/lighting", config, httpOptions).toPromise()
@@ -189,22 +191,22 @@ export class AquariumService {
 
   /* Device Controller */
   createAquariumDevice(device: AquariumDevice): Observable<AquariumDevice> {
-    return this.http.post<AquariumDevice>(this._url + `/v1/Device/Add`, device);
+    return this.http.post<AquariumDevice>(this._url + AquariumApiEndpoints.DEVICE_CREATE, device);
   }
   getAquariumDeviceById(deviceId: number): Observable<AquariumDevice> {
-    return this.http.get<AquariumDevice>(this._url + `/v1/Device/${deviceId}`);
+    return this.http.get<AquariumDevice>(this._url + AquariumApiEndpoints.DEVICE_RETRIEVE.aggregate(deviceId));
   }
   updateAquariumDevice(device: AquariumDevice): Observable<AquariumDevice> {
-    return this.http.post<AquariumDevice>(this._url + `/v1/Device/Update`, device);
+    return this.http.post<AquariumDevice>(this._url + AquariumApiEndpoints.DEVICE_UPDATE, device);
   }
   deleteAquariumDevice(deviceId: number): Observable<AquariumDevice> {
-    return this.http.post<AquariumDevice>(this._url + `/v1/Device/${deviceId}/Delete`, deviceId);
+    return this.http.post<AquariumDevice>(this._url + AquariumApiEndpoints.DEVICE_DELETE.aggregate(deviceId), deviceId);
   }
   scanDeviceHardware(deviceId: number): Observable<AquariumDevice> {
-    return this.http.get<AquariumDevice>(this._url + `/v1/Device/${deviceId}/Scan`);
+    return this.http.get<AquariumDevice>(this._url + AquariumApiEndpoints.DEVICE_DISPATCH_SCAN.aggregate(deviceId));
   }
   pingDevice(deviceId: number) {
-    return this.http.get<DeviceInformation>(this._url + `/v1/Device/${deviceId}/Ping`);
+    return this.http.get<DeviceInformation>(this._url + AquariumApiEndpoints.DEVICE_DISPATCH_PING.aggregate(deviceId));
   }
 
   /* Profile Controller */
@@ -289,13 +291,13 @@ export class AquariumService {
 
 
   public getDeviceLog(deviceId: number) {
-    return this.http.post(this._url + `/v1/Device/${deviceId}/Log`, {}, { responseType: "text" });
+    return this.http.post(this._url + AquariumApiEndpoints.DEVICE_LOG.aggregate(deviceId), {}, { responseType: "text" });
   }
   clearDeviceLog(deviceId: number) {
-    return this.http.post(this._url + `/v1/Device/${deviceId}/Log/Clear`, {}, { responseType: "text" });
+    return this.http.post(this._url + AquariumApiEndpoints.DEVICE_LOG_CLEAR.aggregate(deviceId), {}, { responseType: "text" });
   }
   public getDeviceInformation(deviceId: number) {
-    return this.http.post(this._url + `/v1/Device/${deviceId}/Information`, {});
+    return this.http.post(this._url + AquariumApiEndpoints.DEVICE_RETRIEVE_DETAILED.aggregate(deviceId), {});
   }
 
   /* Device Schedules */
@@ -316,16 +318,16 @@ export class AquariumService {
     return this.http.delete(this._url + `/v1/Schedule/${deviceScheduleId}/Delete`);
   }
   public deploySchedule(deviceId: number, scheduleId: number) {
-    return this.http.post(this._url + `/v1/Device/${deviceId}/DeploySchedule/${scheduleId}`, {});
+    return this.http.post(this._url + AquariumApiEndpoints.DEVICE_SCHEDULE_DEPLOY.aggregate(deviceId,scheduleId), {});
   }
   public removeSchedule(deviceId: number, scheduleId: number) {
-    return this.http.post(this._url + `/v1/Device/${deviceId}/RemoveSchedule/${scheduleId}`, {});
+    return this.http.post(this._url + AquariumApiEndpoints.DEVICE_SCHEDULE_REMOVE.aggregate(deviceId,scheduleId), {});
   }
   public getDeviceScheduleStatus(deviceId: number) {
-    return this.http.post(this._url + `/v1/Device/${deviceId}/Schedule/Status`, {});
+    return this.http.post(this._url + AquariumApiEndpoints.DEVICE_SCHEDULE_STATUS.aggregate(deviceId), {});
   }
   performScheduleTask(deviceId: number, deviceScheduleTask: DeviceScheduleTask) {
-    return this.http.post(this._url + `/v1/Device/${deviceId}/Schedule/PerformTask`, deviceScheduleTask);
+    return this.http.post(this._url + AquariumApiEndpoints.DEVICE_DISPATCH_TASK.aggregate(deviceId), deviceScheduleTask);
   }
 
   public getAquariumPhotos(id: number, pagination: PaginationSliver) {
@@ -337,11 +339,12 @@ export class AquariumService {
   public getAquariumFishPhotos(id: number, pagination: PaginationSliver) {
     return this.http.post<FishPhoto[]>(this._url + `/v1/Photo/Aquarium/${id}/Fish`, pagination);
   }
+  
   public getNotifications() {
-    return this.http.get(this._url + `/v1/Account/Notifications`);
+    return this.http.get(this._url + AquariumApiEndpoints.ACCOUNT_RETRIEVE_NOTIFICATIONS);
   }
   public dismissNotifications(notifIds: number[]) {
-    return this.http.post(this._url + `/v1/Account/Notifications/Dismiss`, notifIds);
+    return this.http.post(this._url + AquariumApiEndpoints.ACCOUNT_NOTIFICATION_DISMISS, notifIds);
   }
 
   /* Water Changes */
@@ -421,18 +424,18 @@ export class AquariumService {
   /* Device Sensors */
   public createDeviceSensor(deviceId: number, deviceSensor: DeviceSensor) {
     console.log(deviceSensor);
-    return this.http.post<DeviceSensor>(this._url + `/v1/Device/${deviceId}/Sensor/Create`, deviceSensor);
+    return this.http.post<DeviceSensor>(this._url + AquariumApiEndpoints.DEVICE_SENSOR_CREATE.aggregate(deviceId), deviceSensor);
   }
   public getDeviceSensors(deviceId: number) {
-    return this.http.get<DeviceSensor[]>(this._url + `/v1/Device/${deviceId}/Sensors`);
+    return this.http.get<DeviceSensor[]>(this._url + AquariumApiEndpoints.DEVICE_SENSORS.aggregate(deviceId));
   }
   public removeDeviceSensor(deviceId: number, deviceSensor: DeviceSensor) {
-    return this.http.post<DeviceSensor>(this._url + `/v1/Device/${deviceId}/Sensor/Remove`, deviceSensor);
+    return this.http.post<DeviceSensor>(this._url + AquariumApiEndpoints.DEVICE_SENSOR_DELETE.aggregate(deviceId), deviceSensor);
   }
   public updateDeviceSensor(deviceId: number, deviceSensor: DeviceSensor) {
-    return this.http.put<DeviceSensor>(this._url + `/v1/Device/${deviceId}/Sensor/Update`, deviceSensor);
+    return this.http.put<DeviceSensor>(this._url + AquariumApiEndpoints.DEVICE_SENSOR_UPDATE.aggregate(deviceId), deviceSensor);
   }
   public testDeviceSensor(testRequest: DeviceSensorTestRequest): Observable<DeviceSensorTestRequest> {
-    return this.http.post<DeviceSensorTestRequest>(this._url + `/v1/Device/${testRequest.sensorId}/Sensor/Test`, testRequest);
+    return this.http.post<DeviceSensorTestRequest>(this._url + AquariumApiEndpoints.DEVICE_SENSOR_TEST.aggregate(testRequest.deviceId), testRequest);
   }
 }
