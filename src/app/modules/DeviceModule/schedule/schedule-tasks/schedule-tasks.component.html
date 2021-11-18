@@ -1,0 +1,28 @@
+<ng-container *ngIf="device.scheduleAssignments && device.scheduleAssignments.length > 0 else noDeployments">
+  <div *ngFor="let scheduleAssignment of device.scheduleAssignments">
+    <div class="schedule list-group-item">
+      <div class="row">
+        <div class="col">
+          {{scheduleAssignment.schedule.name}}
+          <div class="time">
+            {{getScheduleTimeSpan(scheduleAssignment.schedule)}}
+            <!-- {{getEarliestTask(scheduleAssignment.schedule)}} - {{getLatestTask(scheduleAssignment.schedule)}} -->
+          </div>
+        </div>
+        <div class="operations col">
+          <button class="float-right bg-transparent border-0"
+            (click)="clickUpdateSchedule(scheduleAssignment.schedule)">
+            <fa-icon size="1x" [styles]="iconStyle" [icon]="icon_edit"></fa-icon>
+          </button>
+          <button class="float-right bg-transparent border-0" (click)="clickRemoveSchedule(scheduleAssignment.schedule)"
+            [disabled]="managingSchedules">
+            <fa-icon size="1x" [styles]="iconStyle" [icon]="icon_remove"></fa-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+<ng-template #noDeployments>
+  <p class="p-2">No schedules have been deployed onto this device.</p>
+</ng-template>

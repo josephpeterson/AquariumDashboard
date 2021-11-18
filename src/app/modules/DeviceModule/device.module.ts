@@ -59,6 +59,7 @@ import { DeviceScheduleComponent } from './schedule/device-schedule.component';
 import { DeviceGpioCardComponent } from './components/device-gpio-card/device-gpio-card.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { DeviceSensorMiniCardComponent } from './sensors/sensor-mini-card/sensor-mini-card.component';
+import { DeviceScheduleTasksComponent } from './schedule/schedule-tasks/schedule-tasks.component';
 
 
 @NgModule({
@@ -100,23 +101,28 @@ import { DeviceSensorMiniCardComponent } from './sensors/sensor-mini-card/sensor
     DeviceRoutes //<-- import
   ],
   declarations: [
-    AquariumDeviceComponent,
-    DeviceDetailFormComponent,
-    DeviceLogComponent,
     DeviceOverviewCardComponent,
-    DeviceSensorCardComponent,
     DeviceInformationComponent,
-    DevicePeripherialsComponent,
-    DeviceSensorsComponent,
+    
+    DeviceScheduleComponent,
     ScheduleBuilderComponent,
     DeviceScheduleStatusComponent,
+    DeviceScheduleTasksComponent,
+    
+    DeviceOverviewComponent,
     DeviceATOStatusComponent,
     DeviceSnapshotCarouselComponent,
-    DeviceOverviewComponent,
-    DeviceSettingsComponent,
-    DeviceScheduleComponent,
+    
+    
+    DeviceSensorCardComponent,
+    DeviceSensorsComponent,
     DeviceGpioCardComponent,
-    DeviceSensorMiniCardComponent
+    DeviceSensorMiniCardComponent,
+    
+    DeviceSettingsComponent,
+    DeviceLogComponent,
+    AquariumDeviceComponent,
+    DeviceDetailFormComponent,
   ],
   exports: [
     DeviceDetailFormComponent

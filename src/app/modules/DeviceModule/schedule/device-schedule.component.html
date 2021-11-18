@@ -1,20 +1,33 @@
 <div *ngIf="(aquarium$ | async).device as device"
 	class="justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-
-	<div class="card mb-4">
-		<div class="card-body">
-			<div class="row mt-2">
-				<div class="col-md-8">
-					<h4>Schedule Automation</h4>
-					<p class="text-muted">You may create a schedule to deploy to the pi here. You may preform automous
-						events, timed
-						events
-						etc.</p>
-					<hr>
+	<div class="row">
+		<div class="col">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">Schedule Automation</h5>
+					<p class="card-text">
+						You may create a schedule to deploy to the pi here. You may preform
+								automous
+								events, timed
+								events
+								etc.
+					</p>
+					<device-schedule-builder [device]="device"></device-schedule-builder>
 				</div>
 			</div>
-			<device-schedule-builder [device]="device"></device-schedule-builder>
 		</div>
+		<div class="col">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">Task Queue</h5>
+					<p class="card-text">
+						All upcoming tasks are displayed here.
+					</p>
+					<device-schedule-tasks [device]="device"></device-schedule-tasks>
+				</div>
+			</div>
+		</div>
+
 	</div>
 </div>
 
