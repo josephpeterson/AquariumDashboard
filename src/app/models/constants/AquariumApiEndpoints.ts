@@ -1,5 +1,4 @@
-export enum AquariumApiEndpoints
-{
+export enum AquariumApiEndpoints {
   //AdministrativeController
   ADMIN_RETRIEVE_ACCOUNTS = "/v1/admin/Users",
   ADMIN_RETRIEVE_BUGS = "/v1/admin/Bugs",
@@ -15,6 +14,9 @@ export enum AquariumApiEndpoints
   ACCOUNT_RETRIEVE_NOTIFICATIONS = "/v1/Account/Notifications",
   ACCOUNT_NOTIFICATION_DISMISS = "/v1/Account/Notifications/Dismiss",
   ACCOUNT_UPDATE = "/v1/Account/Update", //not used
+
+  //Activity Controller
+  ACCOUNT_RETRIEVE_ACTIVITY = "/v1/Activity/{activityId}",
 
   //DeviceController
   DEVICE_RETRIEVE = "/v1/Device/{deviceId}",
@@ -37,6 +39,43 @@ export enum AquariumApiEndpoints
   DEVICE_SCHEDULE_REMOVE = "/v1/Device/{deviceId}/RemoveSchedule/{scheduleId}",
   DEVICE_SCHEDULE_STATUS = "/v1/Device/{deviceId}/Schedule/Status",
   DEVICE_DISPATCH_TASK = "/v1/Device/{deviceId}/Schedule/PerformTask",
+
+  //AquariumController
+  AQUARIUM_RETRIEVE_ALL = "/v1/Aquarium/All",
+  AQUARIUM_RETRIEVE_DETAILED = "/v1/Aquarium/{id}",
+  AQUARIUM_CREATE = "/v1/Aquarium/Add",
+  AQUARIUM_UPDATE = "/v1/Aquarium/Update",
+  AQUARIUM_DELETE = "/v1/Aquarium/Delete",
+  AQUARIUM_RETRIEVE_TEMPERATURE = "/v1/Aquarium/TemperatureHistogram",
+  AQUARIUM_RETRIEVE_TEMPERATURE_ALL = "/v1/Aquarium/TemperatureHistogram/All",
+  AQUARIUM_RETRIEVE_SNAPSHOTS = "/v1/Aquarium/{aquariumId}/Snapshots",
+  AQUARIUM_DELETE_SNAPSHOTS = "/v1/Aquarium/{aquariumId}/Snapshots",
+
+  //AuthController
+  AUTH_RENEW = "/v1/Auth/Renew",
+  AUTH_LOGIN = "/v1/Auth/Login",
+  AUTH_LOGIN_DEVICE = "/v1/Auth/Login/Device",
+  AUTH_SIGNUP = "/v1/Auth/Signup",
+  AUTH_PASSWORD_RESET = "/v1/Auth/PasswordReset/Attempt",
+  AUTH_PASSWORD_RESET_UPGRADE = "/v1/Auth/PasswordReset/Upgrade",
+  AUTH_PASSWORD_RESET_SUBMIT = "/v1/Auth/PasswordReset/Submit",
+
+  //BugController
+  BUG_SUBMIT = "/v1/Bug/Submit",
+
+  //DeviceATOController
+  DEVICE_ATO_STATUS = "/v1/Device/{deviceId}/ATO",
+  DEVICE_ATO_HISTORY = "/v1/Device/{deviceId}/ATO/History",
+  DEVICE_ATO_RUN = "/v1/Device/{deviceId}/ATO",
+  DEVICE_ATO_STOP = "/v1/Device/{deviceId}/ATO/Stop",
+
+  //DeviceScheduleController
+  SCHEDULE_CREATE = "/v1/Schedule/Add",
+  SCHEDULE_RETRIEVE = "/v1/Schedule",
+  SCHEDULE_RETRIEVE_TASKTYPES = "/v1/Schedule/Tasks",
+  SCHEDULE_RETRIEVE_SCHEDULED_JOBS = "/v1/Device/{deviceId}/Schedule/Jobs",
+  SCHEDULE_DELETE = "/v1/Schedule/{scheduleId}/Delete",
+  SCHEDULE_UPDATE = "/v1/Schedule/Update",
 }
 declare global {
   interface String {
@@ -44,12 +83,12 @@ declare global {
   }
 }
 
-String.prototype.aggregate = function (...params:string[]) {
+String.prototype.aggregate = function (...params: string[]) {
   var str = String(this);
   var paramsToReplace = str.match(/(?<=\{).+?(?=\})/g);
-  paramsToReplace.forEach((p,i) => {
-    console.log(p,params[i],i);
-    str = str.replace(new RegExp(`{${p}}`,'g'),params[i]);
+  paramsToReplace.forEach((p, i) => {
+    console.log(p, params[i], i);
+    str = str.replace(new RegExp(`{${p}}`, 'g'), params[i]);
   });
   //console.log(paramsToReplace,params);
   //console.log(str);

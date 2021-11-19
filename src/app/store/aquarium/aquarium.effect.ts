@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { Effect, Actions, ofType } from '@ngrx/effects'
-import { AquariumActions, AquariumListAction, AquariumLoadSuccessAction, AquariumLoadFailAction, AquariumUpdateAction, AquariumUpdateSuccessAction, AquariumUpdateFailAction, AquariumCreateSuccessAction, AquariumCreateFailAction, AquariumCreateAction, AquariumDeleteAction, AquariumDeleteSuccessAction, AquariumDeleteFailAction, AquariumLoadByIdAction, AquariumSelectionAction, AquariumAddFishAction, AquariumAddFishSuccessAction, AquariumAddFishFailAction, AquariumUpdateFishAction, AquariumUpdateFishSuccessAction, AquariumUpdateFishFailAction, AquariumDeleteFishAction, AquariumDeleteFishSuccessAction, AquariumDeleteFishFailAction } from './aquarium.actions';
+import { AquariumActions, AquariumListAction as AquariumLoadAllAction, AquariumLoadSuccessAction, AquariumLoadFailAction, AquariumUpdateAction, AquariumUpdateSuccessAction, AquariumUpdateFailAction, AquariumCreateSuccessAction, AquariumCreateFailAction, AquariumCreateAction, AquariumDeleteAction, AquariumDeleteSuccessAction, AquariumDeleteFailAction, AquariumLoadByIdAction, AquariumSelectionAction, AquariumAddFishAction, AquariumAddFishSuccessAction, AquariumAddFishFailAction, AquariumUpdateFishAction, AquariumUpdateFishSuccessAction, AquariumUpdateFishFailAction, AquariumDeleteFishAction, AquariumDeleteFishSuccessAction, AquariumDeleteFishFailAction } from './aquarium.actions';
 
 import { map, catchError, mergeMap } from 'rxjs/operators'
 import { AquariumService } from 'src/app/services/aquarium.service';
@@ -17,7 +17,7 @@ export class AquariumEffects {
     }
 
     @Effect()
-    loadAquariums$ = this.actions$.pipe(ofType<AquariumListAction>(AquariumActions.Load),
+    loadAquariums$ = this.actions$.pipe(ofType<AquariumLoadAllAction>(AquariumActions.Load),
         mergeMap(() => this.aquariumService.getAquariums().pipe(
             map(aquariums => new AquariumLoadSuccessAction(aquariums)),
             catchError(error => of(new AquariumLoadFailAction(error)))

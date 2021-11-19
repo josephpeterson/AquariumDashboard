@@ -8,6 +8,7 @@ import { SignupRequest } from '../models/SignupRequest';
 import { Store } from "@ngrx/store";
 import { AppState } from "../app.state";
 import { AuthSetAuthenticatedUserAction } from "../store/auth/auth.actions";
+import { AquariumApiEndpoints } from "../models/constants/AquariumApiEndpoints";
 
 @Injectable({
   providedIn: "root"
@@ -43,7 +44,7 @@ export class AuthService {
     return false;
   }
   public login(email: string, password: string) {
-    var req = this.http.post(this._url + `/v1/Auth/Login`, {
+    var req = this.http.post(this._url + AquariumApiEndpoints.AUTH_LOGIN, {
       email: email,
       password: password
     });
@@ -58,7 +59,7 @@ export class AuthService {
     return a;
   }
   public signup(signupRequest: SignupRequest) {
-    var req = this.http.post(this._url + `/v1/Auth/Signup`, signupRequest);
+    var req = this.http.post(this._url + AquariumApiEndpoints.AUTH_SIGNUP, signupRequest);
     var a = new Subject();
     req.subscribe((response: TokenResponse) => {
       this.storeToken(response.token);
@@ -93,7 +94,7 @@ export class AuthService {
 
   //Password
   public resetPasswordHandshake(resetToken: string) {
-    var req = this.http.post(this._url + `/v1/Auth/PasswordReset/Upgrade`, {
+    var req = this.http.post(this._url + AquariumApiEndpoints.AUTH_PASSWORD_RESET_UPGRADE, {
       token: resetToken
     });
     var a = new Subject<string>();
@@ -106,7 +107,7 @@ export class AuthService {
     return a;
   }
   public submitPasswordResetRequest(requestToken: string, newPassword: string) {
-    var req = this.http.post(this._url + `/v1/Auth/PasswordReset/Submit`, {
+    var req = this.http.post(this._url + AquariumApiEndpoints.AUTH_PASSWORD_RESET_SUBMIT, {
       token: requestToken,
       password: newPassword
     });

@@ -74,7 +74,7 @@ export class AquariumService {
   //deprecated obsolete
   public getSnapshots(aqId: number, offset: number, count: number): Observable<AquariumSnapshot[]> {
 
-    return this.http.post<AquariumSnapshot[]>(this._url + `/v1/Aquarium/${aqId}/Snapshots`, {
+    return this.http.post<AquariumSnapshot[]>(this._url + AquariumApiEndpoints.AQUARIUM_RETRIEVE_SNAPSHOTS.aggregate(aqId), {
       offset: offset,
       max: count
     });
@@ -92,7 +92,7 @@ export class AquariumService {
   public updateSnapshot(snapshot: AquariumSnapshot): Observable<AquariumSnapshot> {
     return this.http.post<AquariumSnapshot>(this._url + "/v1/Snapshot/Update", snapshot);
   }
-  public createSnapshot(aquariumId: number,snapshot: AquariumSnapshot, uploadedPhoto: any): Observable<any> {
+  public createSnapshot(aquariumId: number, snapshot: AquariumSnapshot, uploadedPhoto: any): Observable<any> {
     const url = this._url + "/v1/Snapshot/" + aquariumId + "/Create";
     let formData = new FormData();
 
@@ -122,19 +122,19 @@ export class AquariumService {
 
   /* Aquariums */
   public getAquariums(): Observable<Aquarium[]> {
-    return this.http.get<Aquarium[]>(this._url + "/v1/Aquarium/All");
+    return this.http.get<Aquarium[]>(this._url + AquariumApiEndpoints.AQUARIUM_RETRIEVE_ALL);
   }
   public getAquariumById(aquariumId: number) {
-    return this.http.get<Aquarium>(this._url + "/v1/Aquarium/" + aquariumId);
+    return this.http.get<Aquarium>(this._url + AquariumApiEndpoints.AQUARIUM_RETRIEVE_DETAILED.aggregate(aquariumId));
   }
   public updateAquarium(aquarium: Aquarium): Observable<Aquarium> {
-    return this.http.post<Aquarium>(this._url + "/v1/Aquarium/Update", aquarium);
+    return this.http.post<Aquarium>(this._url + AquariumApiEndpoints.AQUARIUM_UPDATE, aquarium);
   }
   public createAquarium(aquarium: Aquarium): Observable<Aquarium> {
-    return this.http.post<Aquarium>(this._url + "/v1/Aquarium/Add", aquarium);
+    return this.http.post<Aquarium>(this._url + AquariumApiEndpoints.AQUARIUM_CREATE, aquarium);
   }
   public deleteAquarium(aquarium: Aquarium): Observable<Aquarium> {
-    return this.http.post<Aquarium>(this._url + "/v1/Aquarium/Delete", aquarium.id);
+    return this.http.post<Aquarium>(this._url + AquariumApiEndpoints.AQUARIUM_DELETE, aquarium.id);
   }
 
 
@@ -216,7 +216,7 @@ export class AquariumService {
 
   /* Bug Reports */
   submitBugReport(report: BugReport): Observable<BugReport> {
-    return this.http.post<BugReport>(this._url + `/v1/Bug/Submit`, report);
+    return this.http.post<BugReport>(this._url + AquariumApiEndpoints.BUG_SUBMIT, report);
   }
   public uploadFishPhoto(fishId: number, uploadedPhoto: any): Observable<any> {
     const url = this._url + "/v1/Fish/" + fishId + "/UploadPhoto";
@@ -243,7 +243,7 @@ export class AquariumService {
 
   /* Activity */
   public getAccountActivity(activityId: number): Observable<Activity> {
-    return this.http.get<Activity>(this._url + `/v1/Activity/${activityId}`);
+    return this.http.get<Activity>(this._url + AquariumApiEndpoints.ACCOUNT_RETRIEVE_ACTIVITY.aggregate(activityId));
   }
 
   public upsertFollowUser(relationship: AccountRelationship): Observable<AccountRelationship> {
@@ -285,7 +285,7 @@ export class AquariumService {
 
 
   public getTemperatureHistogramAll() {
-    return this.http.get<Aquarium[]>(this._url + `/v1/Aquarium/TemperatureHistogram/All`);
+    return this.http.get<Aquarium[]>(this._url + AquariumApiEndpoints.AQUARIUM_RETRIEVE_TEMPERATURE_ALL);
 
   }
 
@@ -302,26 +302,25 @@ export class AquariumService {
 
   /* Device Schedules */
   public getDeviceScheduleTaskTypes() {
-    return this.http.get(this._url + `/v1/Schedule/Tasks`);
+    return this.http.get(this._url + AquariumApiEndpoints.SCHEDULE_RETRIEVE_TASKTYPES);
   }
   public getDeviceSchedules() {
-    return this.http.get(this._url + `/v1/Schedule`);
+    return this.http.get(this._url + AquariumApiEndpoints.SCHEDULE_RETRIEVE);
   }
   public createDeviceSchedule(deviceSchedule: DeviceSchedule) {
-    console.log(deviceSchedule);
-    return this.http.post(this._url + `/v1/Schedule/Add`, deviceSchedule);
+    return this.http.post(this._url + AquariumApiEndpoints.SCHEDULE_CREATE, deviceSchedule);
   }
   public updateDeviceSchedule(deviceSchedule: DeviceSchedule) {
-    return this.http.post(this._url + `/v1/Schedule/Update`, deviceSchedule);
+    return this.http.post(this._url + AquariumApiEndpoints.SCHEDULE_UPDATE, deviceSchedule);
   }
   public deleteDeviceSchedule(deviceScheduleId: number) {
-    return this.http.delete(this._url + `/v1/Schedule/${deviceScheduleId}/Delete`);
+    return this.http.delete(this._url + AquariumApiEndpoints.SCHEDULE_DELETE);
   }
   public deploySchedule(deviceId: number, scheduleId: number) {
-    return this.http.post(this._url + AquariumApiEndpoints.DEVICE_SCHEDULE_DEPLOY.aggregate(deviceId,scheduleId), {});
+    return this.http.post(this._url + AquariumApiEndpoints.DEVICE_SCHEDULE_DEPLOY.aggregate(deviceId, scheduleId), {});
   }
   public removeSchedule(deviceId: number, scheduleId: number) {
-    return this.http.post(this._url + AquariumApiEndpoints.DEVICE_SCHEDULE_REMOVE.aggregate(deviceId,scheduleId), {});
+    return this.http.post(this._url + AquariumApiEndpoints.DEVICE_SCHEDULE_REMOVE.aggregate(deviceId, scheduleId), {});
   }
   public getDeviceScheduleStatus(deviceId: number) {
     return this.http.post(this._url + AquariumApiEndpoints.DEVICE_SCHEDULE_STATUS.aggregate(deviceId), {});
@@ -339,7 +338,7 @@ export class AquariumService {
   public getAquariumFishPhotos(id: number, pagination: PaginationSliver) {
     return this.http.post<FishPhoto[]>(this._url + `/v1/Photo/Aquarium/${id}/Fish`, pagination);
   }
-  
+
   public getNotifications() {
     return this.http.get(this._url + AquariumApiEndpoints.ACCOUNT_RETRIEVE_NOTIFICATIONS);
   }
@@ -354,11 +353,11 @@ export class AquariumService {
   public addWaterParameters(aquariumId: number, parameters: AquariumSnapshot) {
     return this.http.post<AquariumSnapshot[]>(this._url + `/v1/Water/${aquariumId}/Parameters/Add`, parameters);
   }
-  public getWaterChangesByAquarium(aquariumId: number,pagination: PaginationSliver) {
-    return this.http.post<WaterChange[]>(this._url + `/v1/Water/${aquariumId}/Change`,pagination);
+  public getWaterChangesByAquarium(aquariumId: number, pagination: PaginationSliver) {
+    return this.http.post<WaterChange[]>(this._url + `/v1/Water/${aquariumId}/Change`, pagination);
   }
   public getWaterATOsByAquarium(aquariumId: number, pagination: PaginationSliver) {
-    return this.http.post<ATOStatus[]>(this._url + `/v1/Water/${aquariumId}/ATOStatuses`,pagination);
+    return this.http.post<ATOStatus[]>(this._url + `/v1/Water/${aquariumId}/ATOStatuses`, pagination);
   }
   public addWaterChange(aquariumId: number, waterChange: WaterChange) {
     return this.http.post<WaterChange>(this._url + `/v1/Aquarium/${aquariumId}/Water/Change`, waterChange);
@@ -370,8 +369,8 @@ export class AquariumService {
     return this.http.post(this._url + `/v1/Aquarium/${aquariumId}/Water/Change/Delete`, waterChangeIds);
   }
   /* Water Dosings */
-  public getWaterDosesByAquarium(aquariumId: number,pagination: PaginationSliver) {
-    return this.http.post<WaterDosing[]>(this._url + `/v1/Water/${aquariumId}/Dose`,pagination);
+  public getWaterDosesByAquarium(aquariumId: number, pagination: PaginationSliver) {
+    return this.http.post<WaterDosing[]>(this._url + `/v1/Water/${aquariumId}/Dose`, pagination);
   }
   public addWaterDosing(aquariumId: number, waterDosing: WaterDosing) {
     return this.http.post<WaterDosing>(this._url + `/v1/Aquarium/${aquariumId}/Water/Dose`, waterDosing);
@@ -392,11 +391,6 @@ export class AquariumService {
   }
 
 
-  /* New navigation menu */
-  public getAquariumsOverview() {
-    return this.http.get<Aquarium[]>(this._url + `/v1/Aquariums/All`);
-  }
-
   /* Form Components */
   public getSelectOptionsByType(selectType: string) {
     return this.http.get<any[]>(this._url + `/v1/Form/Select/${selectType}`);
@@ -406,16 +400,16 @@ export class AquariumService {
   /* Device ATO Status */
   /* Form Components */
   public getDeviceATOStatus(deviceId: number) {
-    return this.http.get<ATOStatus>(this._url + `/v1/Device/${deviceId}/ATO`);
+    return this.http.get<ATOStatus>(this._url + AquariumApiEndpoints.DEVICE_ATO_STATUS.aggregate(deviceId));
   }
   public runDeviceATO(deviceId: number, maxRuntime: number) {
-    return this.http.post<ATOStatus>(this._url + `/v1/Device/${deviceId}/ATO`, maxRuntime);
+    return this.http.post<ATOStatus>(this._url + AquariumApiEndpoints.DEVICE_ATO_RUN.aggregate(deviceId), maxRuntime);
   }
   public stopDeviceATO(deviceId: number) {
-    return this.http.post<ATOStatus>(this._url + `/v1/Device/${deviceId}/ATO/Stop`, null);
+    return this.http.post<ATOStatus>(this._url + AquariumApiEndpoints.DEVICE_ATO_STOP.aggregate(deviceId), null);
   }
   public getDeviceATOHistory(deviceId: number, pagination: PaginationSliver) {
-    return this.http.post<ATOStatus[]>(this._url + `/v1/Device/${deviceId}/ATO/History`, pagination);
+    return this.http.post<ATOStatus[]>(this._url + AquariumApiEndpoints.DEVICE_ATO_HISTORY.aggregate(deviceId), pagination);
   }
 
 

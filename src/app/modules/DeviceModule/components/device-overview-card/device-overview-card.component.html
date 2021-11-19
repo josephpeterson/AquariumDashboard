@@ -1,64 +1,37 @@
-<div class="row no-gutters">
-    <div class="col-auto">
-        <h5 class="mr-2">
-            <fa-icon class="mr-1" [icon]="faDevice"></fa-icon>
-            {{aquarium.device.name}}
-        </h5>
-    </div>
-    <div class="col-auto">
-        <small *ngIf="deviceStatus == 2" class="online">
-            <fa-icon [icon]="faCheck" class="mr-1"></fa-icon>Online
-        </small>
-        <small *ngIf="deviceStatus == 0" class="disabled">
-            <fa-icon [icon]="faTimes" class="mr-1"></fa-icon>Offline
-        </small>
-        <small *ngIf="deviceStatus == 1">
-            <fa-icon [icon]="faSpinner" class="mr-1"></fa-icon>Loading
-        </small>
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-5">
-        <p class="text-muted">Version:
-            <span class="float-right">----</span>
-        </p>
-        <p class="text-muted">Uptime:
-            <span class="float-right">--:--</span>
-        </p>
-
-    </div>
-</div>
-<div class="row mb-2">
-    <div class="col-lg-12">
-        <ul class="list-group" *ngIf="deviceInformation">
-            <li class="list-group-item py-1"><small>Device Sensors {{deviceInformation.sensors.length}}</small></li>
-            <li class="list-group-item py-1"><small>Schedules {{deviceInformation.schedules.length}}</small></li>
-            <li class="list-group-item py-1"><small>ATO Enabled</small></li>
-            <li class="list-group-item py-1"><small>AWC Enabled</small></li>
-            <li class="list-group-item py-1"><small>Snapshot Enabled</small></li>
-        </ul>
-    </div>
-</div>
-<h6>Schedule<small class="ml-1 text-muted" *ngIf="scheduleState.running">Running</small></h6>
-<div class="row" *ngIf="scheduleState.running">
-    <div class="col-lg-12">
-        <div>
-            <b>{{scheduleState.taskCount}}</b> tasks from <b>{{scheduleState.schedules.length}}</b> schedules
+<div class="container">
+    <div class="row">
+        <div class="col-auto">
+            <h5 class="mr-2">
+                <fa-icon class="mr-1" [icon]="faDevice"></fa-icon>
+                {{aquarium.device.name}}
+            </h5>
         </div>
-        <div *ngIf="scheduleState.nextTask as task">
-            Next Task:
-            <span class="float-right">{{getTaskNameFromId(task.taskId)}} ({{getETAForTask(task)}})</span>
+        <div class="col-auto">
+            <small *ngIf="deviceStatus == 2" class="online">
+                <fa-icon [icon]="faCheck" class="mr-1"></fa-icon>Online
+            </small>
+            <small *ngIf="deviceStatus == 0" class="disabled">
+                <fa-icon [icon]="faTimes" class="mr-1"></fa-icon>Offline
+            </small>
+            <small *ngIf="deviceStatus == 1">
+                <fa-icon [icon]="faSpinner" class="mr-1"></fa-icon>Loading
+            </small>
+        </div>
+        <div class="col-auto">
+            <small>
+                Version: ----
+            </small>
         </div>
     </div>
-</div>
-
-<!-- Update Timestamp -->
-<div class="row" *ngIf="lastUpdateTime">
-    <div class="col">
-        <span class="text-muted">Last Updated at {{parseDate(lastUpdateTime)}}
-            <button class="btn btn-link" (click)="pingAquariumDevice()">
-                <fa-icon [icon]="faRedo"></fa-icon>
-            </button>
-        </span>
+    <div class="row" *ngIf="lastUpdateTime">
+        <div class="col">
+            <small>
+                <span class="text-muted">Last Updated at {{parseDate(lastUpdateTime)}}
+                    <button class="btn btn-link" (click)="pingAquariumDevice()">
+                        <fa-icon [icon]="faRedo"></fa-icon>
+                    </button>
+                </span>
+            </small>
+        </div>
     </div>
 </div>
