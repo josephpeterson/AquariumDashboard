@@ -19,14 +19,12 @@ import { FishPhotoSelectModal } from './modals/fish-photo-select-modal/fish-phot
 import { FishDiseaseModalComponent } from './modals/fish-disease-modal/fish-disease-modal.component';
 import { FishBreedModalComponent } from './modals/fish-breed-modal/fish-breed-modal.component';
 import { FishTransferModalComponent } from './modals/fish-transfer-modal/fish-transfer-modal.component';
-import { LoginModalComponent } from './modals/login-modal/login-modal.component';
 import { PostCreateCategoryModalComponent } from './modals/post-create-category-modal/post-create-category-modal.component';
 import { PostCreateBoardModalComponent } from './modals/post-create-board-modal/post-create-board-modal.component';
 import { PostCreateThreadModalComponent } from './modals/post-create-thread-modal/post-create-thread-modal.component';
 import { PostDeleteCategoryModalComponent } from './modals/post-delete-category-modal/post-delete-category-modal.component';
 import { PostDeleteBoardModalComponent } from './modals/post-delete-board-modal/post-delete-board-modal.component';
 import { PostDeleteThreadModalComponent } from './modals/post-delete-thread-modal/post-delete-thread-modal.component';
-import { ForgotPasswordModalComponent } from './modals/forgot-password-modal/forgot-password-modal.component';
 import { SelectAquariumModalComponent } from './modals/select-aquarium-modal/select-aquarium-modal.component';
 import { PhotoApplyModalComponent } from './modals/photo-apply-modal/photo-apply-modal.component';
 import { CreateNotificationModalComponent } from './modals/create-notification-modal/create-notification-modal.component';
@@ -143,14 +141,12 @@ var modals = [
   FishDiseaseModalComponent,
   FishBreedModalComponent,
   FishTransferModalComponent,
-  LoginModalComponent,
   PostCreateCategoryModalComponent,
   PostCreateBoardModalComponent,
   PostCreateThreadModalComponent,
   PostDeleteCategoryModalComponent,
   PostDeleteBoardModalComponent,
   PostDeleteThreadModalComponent,
-  ForgotPasswordModalComponent,
   SelectAquariumModalComponent,
   PhotoApplyModalComponent,
   CreateNotificationModalComponent,

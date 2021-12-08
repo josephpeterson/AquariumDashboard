@@ -1,36 +1,39 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
-import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
+import { faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ForgotPasswordModalComponent } from 'src/app/modules/SharedModule/modals/forgot-password-modal/forgot-password-modal.component';
-
 
 
 @Component({
-  selector: 'login-component',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'login-modal-component',
+  templateUrl: './login-modal.component.html',
+  styleUrls: ['./login-modal.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginModalComponent implements OnInit {
 
-
-  constructor(private dialog: MatDialog,private auth: AuthService, private router: Router) { }
-
-  public error: string;
-  public password: string;
-  public email: string;
   public disabled: boolean = false;
+  public error: string;
+  public email: string;
+  public password: string;
 
   public faUser = faUser;
   public faLock = faLock;
+
+  constructor(private dialog: MatDialog, 
+    private auth: AuthService,
+    private _dialog: MatDialogRef<LoginModalComponent>,
+    private router: Router) { }
+
+
 
   ngOnInit() {
 
   }
 
-  clickLogin() {
+
+  public clickSubmit() {
     this.disabled = true;
     this.auth.login(this.email, this.password).subscribe(() => {
 
@@ -42,18 +45,24 @@ export class LoginComponent implements OnInit {
       }
       else
         this.router.navigateByUrl("dashboard");
+
+
+      this._dialog.close();
     }, (err: HttpErrorResponse) => {
       this.disabled = false;
 
       switch (err.status) {
         case 401:
-          this.error = "Invalid login information";
+          this.error = "Incorrect username/password.";
           break;
         case 0:
-          this.error = "Server currently unavailable. Please try again later.";
+          this.error = "Aquarium service is currently unavailable. Please try again later.";
           break;
         case 404:
-          this.error = "Could not find page. Invalid request.";
+          this.error = "Could not contact aquarium service. Plelase try again later.";
+          break;
+        case 500:
+          this.error = "An unknown error occured within the aquarium service. Please try again later.";
           break;
         default:
           console.log(err);
@@ -61,13 +70,8 @@ export class LoginComponent implements OnInit {
       }
     });
   }
+  public clickForgotPassword() {
 
-  forgotPassword() {
-    this.dialog.open(ForgotPasswordModalComponent, {
-      width: "30%",
-      data: this.email,
-      restoreFocus: false
-    });
   }
 }
 

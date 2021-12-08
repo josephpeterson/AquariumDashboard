@@ -49,7 +49,7 @@
               <div class="form-group">
                 <input type="text" class="form-control" placeholder="Enter Your Answer *"  [disabled]="disabled" name="securityAnswer" [(ngModel)]="newUser.securityAnswer"/>
               </div>
-              <mat-error>{{error}}</mat-error>
+              <span class="error">{{error}}</span>
               <input type="submit" class="btnRegister" value="Register" [disabled]="disabled" (click)="clickSignup()"/>
             </div>
           </div>

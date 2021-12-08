@@ -56,9 +56,6 @@ import { AquariumInterceptor } from './services/aquarium.interceptor';
 import { AquariumService } from './services/aquarium.service';
 import { AuthGuard } from './guards/AuthGuard';
 import { AuthService } from './services/auth.service';
-import { LoginComponent } from './components/login/login.component';
-import { SignupComponent } from './components/signup/signup.component';
-import { HomeComponent } from './components/home/home.component';
 
 import { AdminService } from './services/admin.service';
 import { ProfileReducer } from './store/profile/profile.reducer';
@@ -66,7 +63,6 @@ import { ProfileEffects } from './store/profile/profile.effect';
 import { PostReducer } from './store/post/post.reducer';
 import { PostEffects } from './store/post/post.effect';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-import { PasswordResetComponent } from './components/passwordreset/password-reset.component';
 import { AppComponent } from './components/app-root/app.component';
 import { Ng5SliderModule } from 'ng5-slider';
 import { FishService } from './services/fish.service';
@@ -75,6 +71,8 @@ import { AuthReducer } from './store/auth/auth.reducer';
 import { NotificationService } from './services/notification.service';
 import { ParameterEffects } from './store/parameter/parameter.effect';
 import { parameterReducer } from './store/parameter/parameter.reducer';
+import { HomeNavComponent } from './modules/CoreModule/components/home/home/home-nav/home-nav.component';
+import { CoreModule } from './modules/CoreModule/core.module';
 
 
 
@@ -86,12 +84,6 @@ import { parameterReducer } from './store/parameter/parameter.reducer';
 @NgModule({
   declarations: [
     AppComponent,
-
-    /* Not logged in */
-    HomeComponent,
-    LoginComponent,
-    SignupComponent,
-    PasswordResetComponent,
   ],
   entryComponents: [
   ],
@@ -101,6 +93,7 @@ import { parameterReducer } from './store/parameter/parameter.reducer';
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
+    CoreModule,
     SharedModule,
 
     MatSidenavModule,
