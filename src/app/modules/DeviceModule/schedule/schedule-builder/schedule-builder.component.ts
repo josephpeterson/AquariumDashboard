@@ -21,13 +21,12 @@ export class ScheduleBuilderComponent implements OnInit {
   @Input("device") device: AquariumDevice;
 
   public icon_delete = faTrash;
-  public icon_remove = faMinus;
+  public faMinus = faMinus;
   public icon_edit = faPenFancy;
   public icon_create = faPlus;
   public iconStyle = { 'stroke': '#9ed2da', 'color': '#9ed2da' };
 
 
-  public schedule_list: DeviceSchedule[] = [];
 
   addingSchedule: boolean;
   public newScheduleDeployment: DeviceSchedule;
@@ -38,19 +37,11 @@ export class ScheduleBuilderComponent implements OnInit {
     private _dialog: MatDialog) { }
 
   ngOnInit() {
-    this.loadScheduleList();
-  }
 
-  public loadScheduleList() {
-    this._aquariumService.getDeviceSchedules().subscribe((data: DeviceSchedule[]) => {
-      this.schedule_list = data;
-    }, err => {
-      
-    })
   }
   public reloadDeviceSchedules() {
     this._aquariumService.getAquariumDeviceById(this.device.id).subscribe((data: AquariumDevice) => {
-      this.device.scheduleAssignments = data.scheduleAssignments;
+      this.device.schedules = data.schedules;
     }, err => {
 
     })
@@ -64,10 +55,10 @@ export class ScheduleBuilderComponent implements OnInit {
     this.managingSchedules = true;
 
 
-    this._aquariumService.deploySchedule(this.device.id, this.newScheduleDeployment.id).subscribe((data: DeviceScheduleAssignment[]) => {
+    this._aquariumService.deploySchedule(this.device.id, this.newScheduleDeployment.id).subscribe((data: DeviceSchedule[]) => {
       this._notifier.notify("success", `Schedule '${this.newScheduleDeployment.name}' deployed to device!`);
-      console.log(data);
-      this.device.scheduleAssignments = data;
+      console.debug(data);
+      this.device.schedules = data;
       this.managingSchedules = false;
 
     }, err => {
@@ -78,14 +69,12 @@ export class ScheduleBuilderComponent implements OnInit {
     })
   }
 
-  public clickRemoveSchedule(schedule: DeviceSchedule) {
-
+  public clickDeleteSchedule(schedule: DeviceSchedule) {
     this.managingSchedules = true;
-
-    this._aquariumService.removeSchedule(this.device.id, schedule.id).subscribe((data: DeviceScheduleAssignment[]) => {
-      this._notifier.notify("success", `Schedule '${schedule.name}' removed from device!`);
+    this._aquariumService.deleteDeviceSchedule(this.device.id, schedule.id).subscribe((data: DeviceSchedule[]) => {
+      this._notifier.notify("success", `Schedule '${schedule.name}' deleted!`);
       this.managingSchedules = false;
-      this.device.scheduleAssignments = data;
+      this.device.schedules = data;
     }, err => {
       this._notifier.notify("error", "Could not remove schedule from device");
       console.error(err);
@@ -96,11 +85,13 @@ export class ScheduleBuilderComponent implements OnInit {
   public clickUpdateSchedule(schedule: DeviceSchedule) {
 
     var dialog = this._dialog.open(CreateScheduleModalComponent, {
-      width: "60%"
+      width: "60%",
+      data: {
+        device: this.device,
+        schedule: schedule
+      }
     });
-    dialog.componentInstance.schedule = schedule;
     dialog.afterClosed().subscribe(d => {
-      this.loadScheduleList();
       this.reloadDeviceSchedules();
     });
   }
@@ -116,10 +107,9 @@ export class ScheduleBuilderComponent implements OnInit {
 
 
       this._notifier.notify("warning", `Deploying '${schedule.name}' schedule...`);
-      this._aquariumService.deploySchedule(this.device.id, schedule.id).subscribe((data: DeviceScheduleAssignment[]) => {
+      this._aquariumService.deploySchedule(this.device.id, schedule.id).subscribe((data: DeviceSchedule[]) => {
         this._notifier.notify("success", `Schedule '${schedule.name}' deployed to device!`);
-        console.log(data);
-        this.device.scheduleAssignments = data;
+        this.device.schedules = data;
         //this.managingSchedules = false;
         //this.loadScheduleList();
         //this.reloadDeviceSchedules();
@@ -136,32 +126,4 @@ export class ScheduleBuilderComponent implements OnInit {
     });
   }
 
-  public getEarliestTask(schedule:DeviceSchedule) {
-    var task = schedule.tasks.sort((a, b) => {
-      var timeA = new Date(a.startTime);
-      var timeB = new Date(b.startTime);
-      return (timeA > timeB) ? 1 : -1;
-    })[0];
-    if (task) {
-      return moment.utc(task.startTime).local().format('HH:mm a');
-    }
-  }
-  public getEndTime(schedule:DeviceSchedule) {
-    var interval = false;
-    var task = schedule.tasks.sort((a, b) => {
-      if(a.interval != null || b.interval != null)
-        interval = true;
-      var timeA = new Date(a.endTime);
-      var timeB = new Date(b.endTime);
-      return (timeA < timeB) ? 1 : -1;
-    })[0];
-    if (task && interval) {
-      return moment.utc(task.endTime).local().format('hh:mm a');
-    }
-    return "";
-  }
-  public getScheduleTimeSpan(schedule:DeviceSchedule) {
-    var str = this.getEarliestTask(schedule);
-    return str + this.getEndTime(schedule); //todo
-  }
 }

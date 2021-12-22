@@ -8,7 +8,8 @@ import { AquariumService } from 'src/app/services/aquarium.service';
 import { take } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { Aquarium } from 'src/app/models/Aquarium';
-import { DeviceScheduleTask, DeviceScheduleTaskTypes } from 'src/app/models/DeviceScheduleTask';
+import { DeviceScheduleTask } from 'src/app/models/DeviceScheduleTask';
+import { DeviceScheduleTaskTypes } from "src/app/models/types/DeviceScheduleTaskTypes";
 
 import { DeviceScheduleState } from 'src/app/models/DeviceScheduleState';
 import { NotificationService } from 'src/app/services/notification.service';
@@ -92,5 +93,4 @@ export class DeviceOverviewCardComponent implements OnInit {
 
 
     public getTaskNameFromId = DeviceScheduleTask.getTaskNameFromId;
-    public getETAForTask = DeviceScheduleTask.getETAForTask;
 }

@@ -1,26 +1,21 @@
 <div class="row">
-  <div class="col-sm-4">
+  <div class="col">
     <h6>On Device</h6>
     <div class="schedule-list">
-      <ng-container *ngIf="device.scheduleAssignments && device.scheduleAssignments.length > 0 else noDeployments">
-        <div *ngFor="let scheduleAssignment of device.scheduleAssignments">
+      <ng-container *ngIf="device.schedules && device.schedules.length > 0 else noDeployments">
+        <div *ngFor="let schedule of device.schedules" (click)="clickUpdateSchedule(schedule)">
           <div class="schedule list-group-item">
             <div class="row">
               <div class="col">
-                {{scheduleAssignment.schedule.name}}
+                {{schedule.name}}
                 <div class="time">
-                  {{getScheduleTimeSpan(scheduleAssignment.schedule)}}
-                  <!-- {{getEarliestTask(scheduleAssignment.schedule)}} - {{getLatestTask(scheduleAssignment.schedule)}} -->
+
                 </div>
               </div>
               <div class="operations col">
-                <button class="float-right bg-transparent border-0"
-                  (click)="clickUpdateSchedule(scheduleAssignment.schedule)">
-                  <fa-icon size="1x" [styles]="iconStyle" [icon]="icon_edit"></fa-icon>
-                </button>
-                <button class="float-right bg-transparent border-0"
-                  (click)="clickRemoveSchedule(scheduleAssignment.schedule)" [disabled]="managingSchedules">
-                  <fa-icon size="1x" [styles]="iconStyle" [icon]="icon_remove"></fa-icon>
+                <button class="float-right btn btn-primary" (click)="$event.stopPropagation();clickDeleteSchedule(schedule)"
+                  [disabled]="managingSchedules">
+                  <fa-icon size="1x" [styles]="iconStyle" [icon]="faMinus"></fa-icon> Remove
                 </button>
               </div>
             </div>
@@ -34,9 +29,6 @@
   </div>
 </div>
 <div class="row p-3">
-  <button mat-list-item type="button" class="mt-2 btn btn-primary btn-sm" (click)="clickAddSchedule()">
-    <fa-icon class="icon_add mr-2" [icon]="icon_create"></fa-icon>Add Schedule
-  </button>
   <button mat-list-item type="button" class="ml-3 mt-2 btn btn-primary btn-sm" (click)="clickCreateSchedule()">
     <fa-icon class="addIcon mr-2" [icon]="icon_create"></fa-icon>Create Schedule...
   </button>

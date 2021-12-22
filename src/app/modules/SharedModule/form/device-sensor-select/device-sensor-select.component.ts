@@ -7,25 +7,25 @@ import { AppState } from 'src/app/app.state';
 import { takeUntil } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { CreateSpeciesModalComponent } from '../../modals/create-species-modal/create-species-modal.component';
 import { Fish } from 'src/app/models/Fish';
 import { SpeciesLoadAction } from 'src/app/store/species/species.actions';
 import { TypeCheckCompiler } from '@angular/compiler/src/view_compiler/type_check_compiler';
-import { AquariumService } from 'src/app/services/aquarium.service';
+import { CreateSpeciesModalComponent } from '../../modals/create-species-modal/create-species-modal.component';
+import { DeviceSensor } from 'src/app/models/DeviceSensor';
+import { getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
 
 @Component({
-    selector: 'generic-select',
-    templateUrl: './generic-select.component.html',
-    styleUrls: ['./generic-select.component.scss'],
+    selector: 'device-sensor-select',
+    templateUrl: './device-sensor-select.component.html',
+    styleUrls: ['./device-sensor-select.component.scss'],
 })
-export class GenericSelectComponent {
-    public listOptions: any[] = [];
-    public loading: boolean = false;
+export class DeviceSensorSelectComponent {
+    public availableDeviceSensors: DeviceSensor[] = [];
 
+    public aquarium$ = this.store.pipe(select(getSelectedAquarium));
     public componentLifeCycle$ = new Subject();
 
     public selectControl: FormControl = new FormControl();
-
 
     @Input() set disabled(condition: boolean) {
         if (condition)
@@ -33,32 +33,27 @@ export class GenericSelectComponent {
         else
             this.selectControl.enable();
     }
+    @Input() inputModelId: number; //so we can look up by ID instead of object
+    @Input() inputModel: DeviceSensor;
+    @Output() inputModelChange = new EventEmitter<DeviceSensor>(); //This needs to match inputModel
 
-    @Input() inputModel: string;
-    @Output() inputModelChange = new EventEmitter<string>();
-
-    @Output() onChange = new EventEmitter();
-    //@Input() value: Species;
-    @Input() selectType: string;
-    @Input() label: string;
-
-    constructor(private _aquariumService: AquariumService) {
+    constructor(private store: Store<AppState>,private dialog:MatDialog) {
     }
     ngOnInit() {
         this.selectControl.valueChanges.pipe(takeUntil(this.componentLifeCycle$)).subscribe(val => {
             this.inputModelChange.emit(val);
-            this.onChange.emit(val);
         });
-        this.load();
+        this.aquarium$.pipe(takeUntil(this.componentLifeCycle$)).subscribe(aquarium => {
+            this.availableDeviceSensors = aquarium.device.sensors;
+            if(this.inputModel || this.inputModelId) {
+                var s = aquarium.device.sensors.filter(s => this.inputModelId == s.id || s.id == this.inputModel?.id)[0];
+                this.inputModel = s;
+                this.selectControl.setValue(s);
+            }
+        })
         this.selectControl.setValue(this.inputModel);
     }
-    load() {
-        this.loading = true;
 
-        this._aquariumService.getSelectOptionsByType(this.selectType).subscribe((data: any[]) => {
-            this.listOptions = data;
-        });
-    }
     ngOnDestory() {
         this.componentLifeCycle$.next();
         this.componentLifeCycle$.unsubscribe();

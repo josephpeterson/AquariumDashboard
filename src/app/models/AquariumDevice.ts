@@ -1,6 +1,8 @@
 import { Aquarium } from './Aquarium';
 import { CameraConfiguration } from './CameraConfiguration';
+import { DeviceSchedule } from './DeviceSchedule';
 import { DeviceScheduleAssignment } from './DeviceScheduleAssignment';
+import { DeviceScheduleTask } from './DeviceScheduleTask';
 import { DeviceSensor } from './DeviceSensor';
 
 export class AquariumDevice
@@ -22,5 +24,6 @@ export class AquariumDevice
   
   aquarium: Aquarium
   sensors: DeviceSensor[]
-  scheduleAssignments: DeviceScheduleAssignment[]
+  tasks: DeviceScheduleTask[]
+  schedules: DeviceSchedule[]
 }

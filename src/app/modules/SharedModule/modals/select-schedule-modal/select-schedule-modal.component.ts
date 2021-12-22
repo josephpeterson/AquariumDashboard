@@ -51,7 +51,7 @@ export class SelectScheduleModalComponent implements OnInit {
       this.loading = false;
 
       data = data.filter(d => {
-        var add = this.device.scheduleAssignments.filter(s => s.scheduleId == d.id).length > 0;
+        var add = this.device.schedules.filter(s => s.id == d.id).length > 0;
         return !add;
       });
       this.dataSource.data = data;

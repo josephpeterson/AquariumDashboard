@@ -63,7 +63,6 @@ import { ProfileIconBadgeComponent } from 'src/app/modules/SharedModule/profile-
 import { FollowButtonComponent } from 'src/app/modules/SharedModule/follow-button/follow-button.component';
 import { BugReportButtonComponent } from './bugreport-button/bugreport-button.component';
 import { LoadingContainerComponent } from './loading-container/loading-container.component';
-import { ScheduleTaskTableComponent } from './schedule-task-table/schedule-task-table.component';
 import { SnapshotCarouselComponent } from './data/snapshot/carousel/snapshot-carousel.component';
 import { SnapshotTakeButtonComponent } from './data/snapshot/take-button/snapshot-take-button.component';
 import { SnapshotDeleteButtonComponent } from './data/snapshot/delete-button/snapshot-delete-button.component';
@@ -122,6 +121,9 @@ import { CreateWaterParameterModalComponent } from './modals/create-water-parame
 import { CreateWaterChangeModalComponent } from './modals/create-water-change-modal/create-water-change-modal.component';
 import { CreateWaterDoseModalComponent } from './modals/create-water-dose-modal/create-water-dose-modal.component';
 import { TestDeviceSensorModalComponent } from './modals/test-device-sensor-modal/test-device-sensor-modal.component';
+import { DeviceSensorSelectComponent } from './form/device-sensor-select/device-sensor-select.component';
+import { DateTimeSelectComponent } from './form/date-time-select/date-time-select.component';
+import { DeviceTaskSelectComponent } from './form/device-task-select/device-task-select.component';
 
 
 var modals = [
@@ -209,7 +211,6 @@ var modals = [
     FollowButtonComponent,
     BugReportButtonComponent,
     LoadingContainerComponent,
-    ScheduleTaskTableComponent,
 
 
     SnapshotCarouselComponent,
@@ -261,6 +262,9 @@ var modals = [
     SpeciesTableComponent,
     PageNotFoundComponent,
     GenericSelectComponent,
+    DeviceSensorSelectComponent,
+    DeviceTaskSelectComponent,
+    DateTimeSelectComponent,
 
     ...modals,
   ],
@@ -270,7 +274,6 @@ var modals = [
     SideBarComponent,
     LoadingContainerComponent,
     FollowButtonComponent, // Maybe?
-    ScheduleTaskTableComponent, // Maybe?
     SnapshotPhotoConfigDetail, // Maybe? Deprecate?
     SpeciesDetailViewComponent, //Deprecate?
     SpeciesTableComponent,

@@ -36,9 +36,12 @@ export enum AquariumApiEndpoints {
   DEVICE_SENSOR_UPDATE = "/v1/Device/{deviceId}/Sensor/Update",
   DEVICE_SENSOR_TEST = "/v1/Device/{deviceId}/Sensor/Test",
   DEVICE_SCHEDULE_DEPLOY = "/v1/Device/{deviceId}/DeploySchedule/{scheduleId}",
-  DEVICE_SCHEDULE_REMOVE = "/v1/Device/{deviceId}/RemoveSchedule/{scheduleId}",
   DEVICE_SCHEDULE_STATUS = "/v1/Device/{deviceId}/Schedule/Status",
   DEVICE_DISPATCH_TASK = "/v1/Device/{deviceId}/Schedule/PerformTask",
+  DEVICE_TASK_CREATE = "/v1/Device/{deviceId}/Task/Create",
+  DEVICE_TASK_UPDATE = "/v1/Device/{deviceId}/Task/Update",
+  DEVICE_TASK_DELETE = "/v1/Device/{deviceId}/Task/{taskId}/Delete",
+
 
   //AquariumController
   AQUARIUM_RETRIEVE_ALL = "/v1/Aquarium/All",
@@ -70,11 +73,11 @@ export enum AquariumApiEndpoints {
   DEVICE_ATO_STOP = "/v1/Device/{deviceId}/ATO/Stop",
 
   //DeviceScheduleController
-  SCHEDULE_CREATE = "/v1/Schedule/Add",
+  SCHEDULE_CREATE = "/v1/Device/{deviceId}/Schedule/Create",
   SCHEDULE_RETRIEVE = "/v1/Schedule",
   SCHEDULE_RETRIEVE_TASKTYPES = "/v1/Schedule/Tasks",
   SCHEDULE_RETRIEVE_SCHEDULED_JOBS = "/v1/Device/{deviceId}/Schedule/Jobs",
-  SCHEDULE_DELETE = "/v1/Schedule/{scheduleId}/Delete",
+  SCHEDULE_DELETE = "/v1/Device/{deviceId}/Schedule/{scheduleId}/Delete",
   SCHEDULE_UPDATE = "/v1/Schedule/Update",
 }
 declare global {
@@ -87,10 +90,7 @@ String.prototype.aggregate = function (...params: string[]) {
   var str = String(this);
   var paramsToReplace = str.match(/(?<=\{).+?(?=\})/g);
   paramsToReplace.forEach((p, i) => {
-    console.log(p, params[i], i);
     str = str.replace(new RegExp(`{${p}}`, 'g'), params[i]);
   });
-  //console.log(paramsToReplace,params);
-  //console.log(str);
   return str;
 };

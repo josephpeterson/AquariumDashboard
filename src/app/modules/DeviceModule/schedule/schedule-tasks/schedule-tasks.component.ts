@@ -3,11 +3,17 @@ import { Aquarium } from 'src/app/models/Aquarium';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
 
-import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { faCheckCircle, faEdit, faMinus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { DeviceScheduleState } from 'src/app/models/DeviceScheduleState';
 import * as moment from 'moment';
-import { DeviceScheduleTask, DeviceScheduleTaskTypes } from 'src/app/models/DeviceScheduleTask';
+import { DeviceScheduleTask } from 'src/app/models/DeviceScheduleTask';
+import { DeviceScheduleTaskTypes } from "src/app/models/types/DeviceScheduleTaskTypes";
 import { NotificationService } from 'src/app/services/notification.service';
+import { DeviceSchedule } from 'src/app/models/DeviceSchedule';
+import { MatDialog } from '@angular/material/dialog';
+import { CreateScheduleTaskModalComponent } from 'src/app/modules/SharedModule/modals/create-schedule-task-modal/create-schedule-task-modal.component';
+import { ConfirmModalComponent } from 'src/app/modules/SharedModule/modals/confirm-modal/confirm-modal.component';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'device-schedule-tasks',
@@ -19,32 +25,28 @@ export class DeviceScheduleTasksComponent implements OnInit {
   @Input("device") public device: AquariumDevice;
   scanning: boolean;
 
-  faCheck = faCheckCircle;
+  faMinus = faMinus;
+  faEdit = faEdit;
+  faTrash = faTrash;
   pinging: boolean;
   scheduleState: DeviceScheduleState;
   performingTask: boolean;
+  taskNames: any[];
 
 
-  constructor(public _aquariumService: AquariumService, public notifier: NotificationService) { }
+  constructor(public _aquariumService: AquariumService,
+    public _dialog: MatDialog,
+    public notifier: NotificationService) { }
 
   ngOnInit() {
-    console.log("wat",this.device);
+    this._aquariumService.getSelectOptionsByType("DeviceTaskTypes").subscribe((data: any[]) => {
+      this.taskNames = data;
+    });
   }
 
-  clickGetDeviceScheduleStatus() {
-    this.scanning = true;
-    this._aquariumService.getDeviceScheduleStatus(this.device.id).subscribe(
-      (scheduleState: DeviceScheduleState) => {
-        console.log(scheduleState);
-        this.scheduleState = scheduleState;
-      }, err => {
-        this.scanning = false;
-        this.notifier.notify("error", "Could not retrieve device information");
-      })
-  }
   clickPerformTask(task: DeviceScheduleTask) {
     this.performingTask = true;
-    this._aquariumService.performScheduleTask(this.device.id,task).subscribe(
+    this._aquariumService.performScheduleTask(this.device.id, task).subscribe(
       (data) => {
         this.performingTask = false;
         this.notifier.notify("success", "Task was performed successfully!");
@@ -53,13 +55,54 @@ export class DeviceScheduleTasksComponent implements OnInit {
         this.notifier.notify("error", "Task: " + err.error);
       })
   }
+  public clickAddTask() {
+    var dialog = this._dialog.open(CreateScheduleTaskModalComponent, {
+      data: {
+        device: this.device
+      }
+    });
+    dialog.afterClosed().subscribe((task: DeviceScheduleTask) => {
+      this.device.tasks.splice(0,0,task);
+    })
+  }
+  public clickUpdateTask(task: DeviceScheduleTask) {
+
+    var dialog = this._dialog.open(CreateScheduleTaskModalComponent, {
+      data: {
+        device: this.device,
+        task: {...task}
+      }
+    });
+    dialog.afterClosed().subscribe(d => {
+      if(d)
+        this.device.tasks.splice(this.device.tasks.indexOf(task),1,d);
+    });
+  }
+  public clickDeleteTask(task: DeviceScheduleTask) {
+    var dialog = this._dialog.open(ConfirmModalComponent, {
+    });
+    dialog.componentInstance.title = "Delete Task";
+    dialog.componentInstance.body = "Are you sure you would like to delete this task?";
+
+    dialog.afterClosed().pipe(take(1)).subscribe((confirm: boolean) => {
+      if (confirm) {
+        this._aquariumService.deleteDeviceTask(this.device.id,task.id).subscribe(() => {
+          this.device.tasks.splice(this.device.tasks.indexOf(task),1);
+          this.notifier.notify("success","Task deleted");
+        },err => {
+          this.notifier.notify("error","Could not delete task");
+        })
+      }
+    });
+  }
   public readableDuration(task: DeviceScheduleTask) {
+    return;
+    /*
     var d = moment(task.startTime).diff(moment());
     return moment.duration(d).humanize();
+    */
   }
   public readableDate(date: string) {
     return moment(date).local().calendar();
   }
-  public getTaskNameFromId = DeviceScheduleTask.getTaskNameFromId;
-  
 }

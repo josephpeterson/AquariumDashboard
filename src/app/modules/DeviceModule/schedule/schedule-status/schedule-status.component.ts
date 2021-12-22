@@ -6,7 +6,8 @@ import { AquariumDevice } from 'src/app/models/AquariumDevice';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { DeviceScheduleState } from 'src/app/models/DeviceScheduleState';
 import * as moment from 'moment';
-import { DeviceScheduleTask, DeviceScheduleTaskTypes } from 'src/app/models/DeviceScheduleTask';
+import { DeviceScheduleTask } from 'src/app/models/DeviceScheduleTask';
+import { DeviceScheduleTaskTypes } from "src/app/models/types/DeviceScheduleTaskTypes";
 import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
@@ -53,8 +54,11 @@ export class DeviceScheduleStatusComponent implements OnInit {
       })
   }
   public readableDuration(task: DeviceScheduleTask) {
+    return;
+    /*
     var d = moment(task.startTime).diff(moment());
     return moment.duration(d).humanize();
+    */
   }
   public readableDate(date: string) {
     return moment(date).local().calendar();

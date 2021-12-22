@@ -1,18 +1,72 @@
 <div class="">
-  <h4 class="justify-content-center">{{schedule.id ? "Edit Schedule":"Create Schedule"}}</h4>
-  <mat-form-field appearance="standard">
-    <mat-label>Schedule Name</mat-label>
-    <input matInput placeholder="Placeholder" [(ngModel)]="schedule.name">
-    <mat-hint>Name of the schedule</mat-hint>
-  </mat-form-field>
+  <div class="row">
+    <h4 class="justify-content-center">{{schedule.id ? "Edit Schedule":"Create Schedule"}}</h4>
+  </div>
+  <div class="row">
+    <div class="col-sm">
+      <h6>General</h6>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Schedule Name</label>
+        <input [disabled]="disableInput" type="email" [(ngModel)]="schedule.name" class="form-control"
+          id="exampleInputEmail1" aria-describedby="scheduleNameHelp" placeholder="Schedule Name">
+        <small id="scheduleNameHelp" class="form-text text-muted">Friendly schedule name</small>
+      </div>
+      <h6>Tasks</h6>
+      <div *ngFor="let t of schedule.taskAssignments">
+        <div class="row">
+          <div class="col">
+            <generic-select [disabled]="disableInput" label="Trigger" selectType="TriggerTypes"
+              [(inputModel)]="t.triggerTypeId">
+            </generic-select>
+          </div>
+          <div class="col">
+            <div [ngSwitch]="t.triggerTypeId">
+              <date-time-select [disabled]="disableInput" [(inputModel)]="t.startTime" *ngSwitchCase="0">
+              </date-time-select>
+              <device-sensor-select [disabled]="disableInput" [(inputModel)]="t.triggerSensor" *ngSwitchCase="1">
+              </device-sensor-select>
+              <device-task-select [disabled]="disableInput" [(inputModel)]="t.triggerTask" *ngSwitchCase="2">
+              </device-task-select>
+            </div>
+            <br>
+          </div>
+          <div class="col">
+            <device-task-select [disabled]="disableInput" [(inputModel)]="t.task"></device-task-select>
+          </div>
+          <div class="col">
+            <mat-checkbox [disabled]="disableInput" class="p-1" [(ngModel)]="t.repeat">Repeat</mat-checkbox>
+          </div>
+          <div class="col" *ngIf="schedule.taskAssignments > 1">
+            <button [disabled]="disableInput" class="btn btn-danger" (click)="clickRemoveTask(t.id)">
+              <fa-icon [icon]="faTrash"></fa-icon>
+            </button>
+          </div>
 
-  <hr>
-  <h6 class="justify-content-center mt-4">Tasks</h6>
-  <schedule-task-table [(schedule)]="schedule"></schedule-task-table>  
+        </div>
+        <div class="row" *ngIf="t.repeat">
+          <div class="col">
+            <date-time-select [disabled]="disableInput" [(inputModel)]="t.repeatEndTime"></date-time-select>
+          </div>
+          <div class="col">
+            <mat-form-field>
+              <input type="number" [disabled]="disableInput" matInput placeholder="Repeat Interval (s)"
+                [(ngModel)]="t.repeatInterval">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
 
-  <mat-dialog-actions align="end">
-    <button  [disabled]="disableInput" class="m-2 btn btn-danger" mat-dialog-close>Cancel</button>
-    <button  *ngIf="schedule.id" [disabled]="disableInput" class="m-2 btn btn-danger md-float-right" (click)='clickDeleteSchedule()'>Delete Schedule</button>
-    <button  [disabled]="disableInput" class="m-2 btn btn-success md-float-right" (click)='clickSaveSchedule()'>Save Schedule</button>
-  </mat-dialog-actions>
+      <div class="row">
+        <button [disabled]="disableInput" class="btn btn-primary" (click)="clickAddTask()">Add Task</button>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <mat-dialog-actions align="end">
+      <button [disabled]="disableInput" class="m-2 btn btn-danger" mat-dialog-close>Cancel</button>
+      <button [disabled]="disableInput" class="m-2 btn btn-success" (click)='clickSaveSchedule()'>Save Schedule</button>
+    </mat-dialog-actions>
+  </div>
 </div>

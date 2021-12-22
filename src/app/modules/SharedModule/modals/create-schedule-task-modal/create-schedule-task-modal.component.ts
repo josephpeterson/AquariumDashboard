@@ -6,6 +6,7 @@ import { AquariumDevice } from 'src/app/models/AquariumDevice';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import * as moment from 'moment';
 import { AquariumService } from 'src/app/services/aquarium.service';
+import { DeviceSensor } from 'src/app/models/DeviceSensor';
 
 @Component({
   selector: 'create-schedule-modal',
@@ -13,12 +14,14 @@ import { AquariumService } from 'src/app/services/aquarium.service';
   styleUrls: ['./create-schedule-task-modal.component.scss']
 })
 export class CreateScheduleTaskModalComponent implements OnInit {
-  public taskTypes: any[] = [];
   public loading: boolean;
+  public error: string;
 
   public newTask:DeviceScheduleTask = new DeviceScheduleTask();
+  public device:AquariumDevice;
   
-  public addTaskRepeating:boolean;
+  public readSensorChecked:boolean;
+  public maxRunTimeChecked:boolean;
 
   public startTime:string;
   public endTime:string;
@@ -26,35 +29,42 @@ export class CreateScheduleTaskModalComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) private data,
     private _self: MatDialogRef<CreateScheduleTaskModalComponent>,
     private _aquariumService: AquariumService) {
-    this.startTime = "08:00";
-    this.endTime = "00:00";
+    if(data.task)
+      this.newTask = data.task;
+    this.device = data.device;
+
+    if(this.newTask.targetSensor == null)
+      this.newTask.targetSensor = new DeviceSensor();
+      if(this.newTask.triggerSensor == null)
+      this.newTask.triggerSensor = new DeviceSensor();
+
   }
   ngOnInit() {
-    this.loadTaskTypes();
-  }
-  loadTaskTypes() {
-    this.loading = true;
-    this._aquariumService.getDeviceScheduleTaskTypes().subscribe((data: any) => {
-      this.loading = false;
-      this.taskTypes = data;
-      this.newTask.taskId = data[data.length-1].id;
-    })
   }
   public clickFinishTask() {
-    function strToDate(str:string) {
-      var d = new Date();
-      var hours = parseInt(str.split(":")[0]);
-      var minutes = parseInt(str.split(":")[1]);
-      d.setHours(hours);
-      d.setMinutes(minutes);
-      return d;
-    }
-    var startDate = strToDate(this.startTime);
-    var endDate = strToDate(this.endTime);
-    this.newTask.startTime = startDate;
-    this.newTask.endTime = endDate;
-    if(!this.addTaskRepeating)
-      delete this.newTask.interval;
-    this._self.close(this.newTask);
+    this.validate();
+    if(this.error) return;
+
+    this.loading = true;
+
+    //set up data
+    this.newTask.targetSensorId = this.newTask.targetSensor.id;
+    if(this.readSensorChecked)
+      this.newTask.triggerSensorId = this.newTask.triggerSensor.id;
+
+    this._aquariumService.createDeviceTask(this.device.id,this.newTask).subscribe(deviceTask => {
+      this._self.close(deviceTask);
+      this.loading = false;
+    },
+    err => {
+      console.error("Error creating new device task:",err);
+      this.loading = false;
+    });
+  }
+  public validate() {
+    delete this.error;
+    if(this.newTask.targetSensor == null)
+      return this.error = "Please select a valid sensor";
+    return true;
   }
 }

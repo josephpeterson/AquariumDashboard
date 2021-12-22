@@ -1,0 +1,14 @@
+.task-list {
+    min-height:300px;
+    border:1px solid #dcdcdc;
+    background-color:#e6f3f5;
+
+
+    width:100%;
+    .task {
+        cursor: pointer;
+    }
+    .task:hover {
+        background-color:rgba(150,150,150,0.1);
+    }   
+}

@@ -1,67 +1,70 @@
 <div class="">
-  <h4 class="justify-content-center">Add Task</h4>
-
-  <ng-container *ngIf="!loading else loadingArea">
-
-
-    <div class="row">
-      <div class="col">
-        <mat-form-field>
-          <mat-label>Task</mat-label>
-          <mat-select [(ngModel)]="newTask.taskId">
-            <mat-option *ngFor="let task of taskTypes" [value]="task.id">
-              {{task.name}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-
-
-        <mat-form-field appearance="standard" class="pl-2">
-          <mat-label>Start Time</mat-label>
-          <input type="time" matInput placeholder="Placeholder" [(ngModel)]="startTime" value="08:00">
-          <mat-icon matSuffix></mat-icon>
-          <mat-hint>Start Time</mat-hint>
-        </mat-form-field>
-
-      </div>
+  <h4 class="justify-content-center">Add Task
+    <p *ngIf="loading">
+      <mat-progress-spinner color="warn" mode="indeterminate">
+      </mat-progress-spinner>
+    </p>
+  </h4>
+  <div class="row">
+    <p>Adding task to {{device.name}}</p>
+  </div>
+  <div class="row">
+    <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <input type="text" class="form-control" aria-describedby="taskNameHelp"
+        placeholder="Task Name" [(ngModel)]="newTask.name">
+      <small id="taskNameHelp" class="form-text text-muted">Task Name</small>
     </div>
-    <div class="row">
-      <mat-checkbox [(ngModel)]='addTaskRepeating' class="pl-2">Repeat</mat-checkbox>
-
+    <div class="col">
+      <generic-select label="Task Type" selectType="DeviceTaskTypes" [(inputModel)]="newTask.taskTypeId">
+      </generic-select>
     </div>
-    <ng-container *ngIf="addTaskRepeating">
-      <div class="row">
-        <div class="col">
-          <mat-form-field appearance="standard">
-            <mat-label>End Time</mat-label>
-            <input type="time" matInput placeholder="Placeholder" [(ngModel)]="endTime" [min]="startTime">
-            <mat-icon matSuffix></mat-icon>
-            <mat-hint>End Time</mat-hint>
-          </mat-form-field>
-          <mat-form-field appearance="standard" class="pl-2">
-            <mat-label>Interval</mat-label>
-            <input matInput placeholder="Placeholder" [(ngModel)]="newTask.interval" type="time" type="number">
-            <mat-icon matSuffix></mat-icon>
-            <mat-hint>Time between successions</mat-hint>
+  </div>
+  <div class="row">
+    <div class="col">
+      Set
+      <device-sensor-select [(inputModel)]="newTask.targetSensor" [inputModelId]="newTask.targetSensorId">
+      </device-sensor-select>
+      To
+      <generic-select label="Sensor Value" selectType="DeviceSensorValues" [(inputModel)]="newTask.targetSensorValue">
+      </generic-select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <h6>End Conditions</h6>
+      <mat-checkbox [(ngModel)]='maxRunTimeChecked' class="pl-2">Maximum Run Time</mat-checkbox>
+      <ng-container *ngIf="maxRunTimeChecked">
+        <div>
+          <mat-form-field>
+            <input [disabled]="loading" type="number" matInput placeholder="Maximum Runtime (s)"
+              [(ngModel)]="newTask.maximumRunTime">
           </mat-form-field>
         </div>
-      </div>
-    </ng-container>
 
-
-
-    <mat-dialog-actions align="end">
-      <button [disabled]="disableInput" class="m-2 btn btn-danger" mat-dialog-close>Cancel</button>
-      <button [disabled]="disableInput" class="m-2 btn btn-success md-float-right"
-        (click)='clickFinishTask()'>Finish</button>
-    </mat-dialog-actions>
-  </ng-container>
-  <ng-template #loadingArea>
-    <div *ngIf="loading else notLoading" class="p-5">
-      <mat-progress-spinner class="mr-auto ml-auto" color="warn" mode="indeterminate">
-      </mat-progress-spinner>
+      </ng-container>
     </div>
-
-  </ng-template>
-
+  </div>
+  <div class="row">
+    <div class="col">
+      <div>
+        <mat-checkbox [(ngModel)]='readSensorChecked' class="pl-2">Read Sensor Value</mat-checkbox>
+      </div>
+      <ng-container *ngIf="readSensorChecked">
+        When
+        <device-sensor-select [(inputModel)]="newTask.triggerSensor">
+        </device-sensor-select>
+        is
+        <generic-select label="Sensor Value" selectType="DeviceSensorValues"
+          [(inputModel)]="newTask.triggerSensorValue">
+        </generic-select>
+      </ng-container>
+    </div>
+  </div>
+  <mat-dialog-actions align="end">
+    <button [disabled]="loading" class="m-2 btn btn-danger" mat-dialog-close>Cancel</button>
+    <button [disabled]="loading" class="m-2 btn btn-success md-float-right" (click)='clickFinishTask()'>Finish</button>
+  </mat-dialog-actions>
 </div>

@@ -307,20 +307,24 @@ export class AquariumService {
   public getDeviceSchedules() {
     return this.http.get(this._url + AquariumApiEndpoints.SCHEDULE_RETRIEVE);
   }
-  public createDeviceSchedule(deviceSchedule: DeviceSchedule) {
-    return this.http.post(this._url + AquariumApiEndpoints.SCHEDULE_CREATE, deviceSchedule);
+  public createDeviceSchedule(deviceId: number, deviceSchedule: DeviceSchedule) {
+    return this.http.post(this._url + AquariumApiEndpoints.SCHEDULE_CREATE.aggregate(deviceId), deviceSchedule);
   }
   public updateDeviceSchedule(deviceSchedule: DeviceSchedule) {
     return this.http.post(this._url + AquariumApiEndpoints.SCHEDULE_UPDATE, deviceSchedule);
   }
-  public deleteDeviceSchedule(deviceScheduleId: number) {
-    return this.http.delete(this._url + AquariumApiEndpoints.SCHEDULE_DELETE);
+  public deleteDeviceSchedule(deviceId: number, deviceScheduleId: number) {
+    return this.http.delete(this._url + AquariumApiEndpoints.SCHEDULE_DELETE.aggregate(deviceId, deviceScheduleId));
+  }
+  public deleteDeviceTask(deviceId: number, deviceTaskId: number) {
+    return this.http.delete(this._url + AquariumApiEndpoints.DEVICE_TASK_DELETE.aggregate(deviceId, deviceTaskId));
   }
   public deploySchedule(deviceId: number, scheduleId: number) {
     return this.http.post(this._url + AquariumApiEndpoints.DEVICE_SCHEDULE_DEPLOY.aggregate(deviceId, scheduleId), {});
   }
   public removeSchedule(deviceId: number, scheduleId: number) {
-    return this.http.post(this._url + AquariumApiEndpoints.DEVICE_SCHEDULE_REMOVE.aggregate(deviceId, scheduleId), {});
+    console.log("not implemented");
+    return this.http.post(this._url + AquariumApiEndpoints.SCHEDULE_DELETE.aggregate(deviceId, scheduleId), {});
   }
   public getDeviceScheduleStatus(deviceId: number) {
     return this.http.post(this._url + AquariumApiEndpoints.DEVICE_SCHEDULE_STATUS.aggregate(deviceId), {});
@@ -431,5 +435,9 @@ export class AquariumService {
   }
   public testDeviceSensor(testRequest: DeviceSensorTestRequest): Observable<DeviceSensorTestRequest> {
     return this.http.post<DeviceSensorTestRequest>(this._url + AquariumApiEndpoints.DEVICE_SENSOR_TEST.aggregate(testRequest.deviceId), testRequest);
+  }
+  /* Device Tasks */
+  public createDeviceTask(deviceId: number, deviceTask: DeviceScheduleTask) {
+    return this.http.post<DeviceScheduleTask>(this._url + AquariumApiEndpoints.DEVICE_TASK_CREATE.aggregate(deviceId), deviceTask);
   }
 }
