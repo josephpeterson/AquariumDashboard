@@ -19,7 +19,7 @@ export class DeviceScheduleTask {
   triggerSensorId: number | null
   triggerSensor: DeviceSensor | null
   triggerSensorValue: GpioPinValue | null
-  maximumRunTime: number
+  maximumRuntime: number
 
   static getTaskNameFromId(taskId: number) {
     var types = DeviceScheduleTaskTypes;

@@ -17,25 +17,32 @@ export class CreateScheduleTaskModalComponent implements OnInit {
   public loading: boolean;
   public error: string;
 
-  public newTask:DeviceScheduleTask = new DeviceScheduleTask();
-  public device:AquariumDevice;
-  
-  public readSensorChecked:boolean;
-  public maxRunTimeChecked:boolean;
+  public newTask: DeviceScheduleTask = new DeviceScheduleTask();
+  public device: AquariumDevice;
 
-  public startTime:string;
-  public endTime:string;
-  
+  public readSensorChecked: boolean;
+  public maxRunTimeChecked: boolean;
+
+  public startTime: string;
+  public endTime: string;
+
   constructor(@Inject(MAT_DIALOG_DATA) private data,
     private _self: MatDialogRef<CreateScheduleTaskModalComponent>,
     private _aquariumService: AquariumService) {
-    if(data.task)
+    if (data.task)
       this.newTask = data.task;
     this.device = data.device;
 
-    if(this.newTask.targetSensor == null)
+
+    if(this.newTask.triggerSensorId != null)
+    {
+      this.newTask.triggerSensor = this.device.sensors.filter(s => s.id == this.newTask.triggerSensorId)[0];
+      this.readSensorChecked = true;
+    }
+
+    if (this.newTask.targetSensor == null)
       this.newTask.targetSensor = new DeviceSensor();
-      if(this.newTask.triggerSensor == null)
+    if (this.newTask.triggerSensor == null)
       this.newTask.triggerSensor = new DeviceSensor();
 
   }
@@ -43,27 +50,27 @@ export class CreateScheduleTaskModalComponent implements OnInit {
   }
   public clickFinishTask() {
     this.validate();
-    if(this.error) return;
+    if (this.error) return;
 
     this.loading = true;
 
     //set up data
     this.newTask.targetSensorId = this.newTask.targetSensor.id;
-    if(this.readSensorChecked)
+    if (this.readSensorChecked)
       this.newTask.triggerSensorId = this.newTask.triggerSensor.id;
 
-    this._aquariumService.createDeviceTask(this.device.id,this.newTask).subscribe(deviceTask => {
+    this._aquariumService.createDeviceTask(this.device.id, this.newTask).subscribe(deviceTask => {
       this._self.close(deviceTask);
       this.loading = false;
     },
-    err => {
-      console.error("Error creating new device task:",err);
-      this.loading = false;
-    });
+      err => {
+        console.error("Error creating new device task:", err);
+        this.loading = false;
+      });
   }
   public validate() {
     delete this.error;
-    if(this.newTask.targetSensor == null)
+    if (this.newTask.targetSensor == null)
       return this.error = "Please select a valid sensor";
     return true;
   }
