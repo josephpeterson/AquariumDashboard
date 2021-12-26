@@ -5,46 +5,31 @@ import { AquariumDevice } from 'src/app/models/AquariumDevice';
 
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { NotificationService } from 'src/app/services/notification.service';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/app.state';
+import { getDeployedDeviceInformation } from 'src/app/store/aquarium/aquarium.selector';
+import { DeviceInformation } from 'src/app/models/DeviceInformation';
+import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'device-information',
-  templateUrl: './device-information.component.html',
-  styleUrls: ['./device-information.component.scss']
+  selector: 'device-information-card',
+  templateUrl: './device-information-card.component.html',
+  //styleUrls: ['./device-information-card.component.scss']
 })
-export class DeviceInformationComponent implements OnInit {
+export class DeviceInformationCardComponent implements OnInit {
 
-  @Input("aquarium") public aquarium: Aquarium;
+  public deviceInformation$: Observable<DeviceInformation> = this.store.select(getDeployedDeviceInformation);
   scanning: boolean;
 
   faCheck = faCheckCircle;
   pinging: boolean;
-  deviceInformation: any;
 
-
-  constructor(public _aquariumService: AquariumService, public notifier: NotificationService) { }
+  constructor(public _aquariumService: AquariumService,
+    private store: Store<AppState>) { }
 
   ngOnInit() {
   }
 
-  clickGetDeviceInformation() {
-    console.log(this.aquarium);
-    this.scanning = true;
-    this._aquariumService.getDeviceInformation(this.aquarium.device.id).subscribe(
-      (deviceInformation) => {
-        console.log(deviceInformation);
-        this.deviceInformation = deviceInformation;
-      }, err => {
-        this.scanning = false;
-        this.notifier.notify("error", "Could not retrieve device information");
-      })
-  }
-
-  public parseCameraConfiguration() {
-    var aquarium: Aquarium = this.deviceInformation.aquarium;
-    var config = aquarium.device.cameraConfiguration;
-
-    return this.syntaxHighlight(config);
-  }
   private syntaxHighlight(json) {
     if (typeof json != 'string') {
          json = JSON.stringify(json, undefined, 2);

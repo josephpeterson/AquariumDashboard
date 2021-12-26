@@ -4,19 +4,17 @@ import { AquariumService } from 'src/app/services/aquarium.service';
 import { DeviceSchedule } from 'src/app/models/DeviceSchedule';
 import { faTrash, faPenFancy, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 
-import { DeviceScheduleAssignment } from 'src/app/models/DeviceScheduleAssignment';
 import { MatDialog } from '@angular/material/dialog';
-import * as moment from 'moment';
 import { CreateScheduleModalComponent } from 'src/app/modules/SharedModule/modals/create-schedule-modal/create-schedule-modal.component';
 import { SelectScheduleModalComponent } from 'src/app/modules/SharedModule/modals/select-schedule-modal/select-schedule-modal.component';
 import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
-  selector: 'device-schedule-builder',
-  templateUrl: './schedule-builder.component.html',
-  styleUrls: ['./schedule-builder.component.scss']
+  selector: 'device-schedule-card',
+  templateUrl: './device-schedule-card.component.html',
+  styleUrls: ['./device-schedule-card.component.scss']
 })
-export class ScheduleBuilderComponent implements OnInit {
+export class DeviceScheduleCardComponent implements OnInit {
 
   @Input("device") device: AquariumDevice;
 

@@ -1,12 +1,12 @@
 import { ModuleWithProviders } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AquariumDeviceComponent } from './DeviceContainer/aquarium-device.component';
 import { AuthGuard } from 'src/app/guards/AuthGuard';
 import { DeviceModule } from './device.module';
 import { DeviceOverviewComponent } from './overview/device-overview.component';
 import { DeviceSettingsComponent } from './settings/device-settings.component';
 import { DeviceScheduleComponent } from './schedule/device-schedule.component';
+import { AquariumDeviceComponent } from './aquarium-device.component';
 import { DeviceSensorsComponent } from './sensors/sensors.component';
 
 const secondaryRoutes: Routes = [

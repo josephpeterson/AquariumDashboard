@@ -3,6 +3,7 @@ import { Aquarium } from 'src/app/models/Aquarium';
 import { Update } from '@ngrx/entity';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Fish } from 'src/app/models/Fish';
+import { DeviceInformation } from 'src/app/models/DeviceInformation';
 
 export enum AquariumActions {
   Update = '[Aquariums] Tank updated',
@@ -41,6 +42,14 @@ export enum AquariumActions {
 
   Decrement = '[Counter Component] Decrement',
   Reset = '[Counter Component] Reset',
+
+  /* Device store */
+  LoadDeployedDeviceByAquariumId = '[Aquariums] LoadDeployedDevice',
+  LoadDeployedDeviceSuccess = '[Aquariums] LoadDeployedDeviceSuccess',
+  LoadDeployedDeviceFailed = '[Aquariums] LoadDeployedDeviceFailed',
+  LoadDeployedDeviceRenew = '[Aquariums] LoadDeployedDeviceRenew',
+  LoadDeployedDeviceOnline = '[Aquariums] LoadDeployedDeviceOnline',
+  AttemptDeviceAuthRenew = '[Aquariums] AttemptDeviceAuthRenew',
 }
 
 
@@ -63,8 +72,39 @@ export class AquariumLoadFailAction implements Action {
 
   }
 }
+export class AquariumLoadDeployedDeviceByAquaruiumId implements Action {
+  readonly type = AquariumActions.LoadDeployedDeviceByAquariumId
+  constructor(public payload: number) {
+  }
+}
+export class AquariumAttemptAuthRenewByAquariumId implements Action {
+  readonly type = AquariumActions.AttemptDeviceAuthRenew
+  constructor(public payload: number) {
+  }
+}
+export class AquariumLoadDeployedDeviceSuccessAction implements Action {
+  readonly type = AquariumActions.LoadDeployedDeviceSuccess
+  constructor(public payload: DeviceInformation) {
 
+  }
+}
+export class AquariumLoadDeployedDeviceFailedAction implements Action {
+  readonly type = AquariumActions.LoadDeployedDeviceFailed
+  constructor(public payload: HttpErrorResponse[]) {
 
+  }
+}
+export class AquariumLoadDeployedDeviceRenewAction implements Action {
+  readonly type = AquariumActions.LoadDeployedDeviceRenew
+  constructor() {
+  }
+}
+export class AquariumLoadDeployedDeviceOnlineAction implements Action {
+  readonly type = AquariumActions.LoadDeployedDeviceOnline
+  constructor() {
+
+  }
+}
 
 
 
@@ -243,6 +283,12 @@ export type AllAquariumActions =
   AquariumDeleteFishAction |
   AquariumDeleteFishSuccessAction |
   AquariumDeleteFishFailAction |
-
+  AquariumLoadDeployedDeviceByAquaruiumId |
+  AquariumLoadDeployedDeviceSuccessAction |
+  AquariumLoadDeployedDeviceFailedAction |
+  AquariumAttemptAuthRenewByAquariumId |
+  AquariumLoadDeployedDeviceRenewAction |
+  AquariumLoadDeployedDeviceOnlineAction |
+  
   AquariumLoadSuccessAction |
   AquariumLoadFailAction;

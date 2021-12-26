@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
 import { faDesktop, IconDefinition, faCheck, faThermometer, faPhotoVideo, faSpinner, faTimesCircle, faSync, faTimes, faRedo } from '@fortawesome/free-solid-svg-icons';
 import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
@@ -14,20 +14,22 @@ import { DeviceScheduleTaskTypes } from "src/app/models/types/DeviceScheduleTask
 import { DeviceScheduleState } from 'src/app/models/DeviceScheduleState';
 import { NotificationService } from 'src/app/services/notification.service';
 import { DeviceInformation } from 'src/app/models/DeviceInformation';
+import { DeviceConnectionStatus } from "src/app/models/types/DeviceConnectionStatus";
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/app.state';
+import { AquariumLoadByIdAction, AquariumLoadDeployedDeviceByAquaruiumId } from 'src/app/store/aquarium/aquarium.actions';
 
 @Component({
     selector: 'device-overview-card',
     templateUrl: './device-overview-card.component.html',
     styleUrls: ['./device-overview-card.component.scss']
 })
-export class DeviceOverviewCardComponent implements OnInit {
+export class DeviceOverviewCardComponent {
 
     @Input() aquarium: Aquarium;
-    public latestSnapshot: AquariumSnapshot;
-    public deviceStatus: number;
-    public lastUpdateTime: Date;
-    public deviceInformation: DeviceInformation;
-
+    @Input() public deviceInformation: DeviceInformation;
+    @Input() public deviceConnectionStatus: DeviceConnectionStatus;
+    DeviceConnectionStatus = DeviceConnectionStatus;
     public faDevice: IconDefinition = faDesktop;
     public faRedo: IconDefinition = faRedo;
     public faCheck: IconDefinition = faCheck;
@@ -37,60 +39,18 @@ export class DeviceOverviewCardComponent implements OnInit {
     public faPhotoVideo: IconDefinition = faPhotoVideo
     public faThermometer: IconDefinition = faThermometer
     public faRefresh: IconDefinition = faSync;
-    private componentLifeCycle$ = new Subject();
-    scanning: boolean;
-    performingTask: boolean;
-    scheduleState: DeviceScheduleState = new DeviceScheduleState();
 
     constructor(private _aquariumService: AquariumService,
+        private store: Store<AppState>,
         private _notifier: NotificationService,
         private dialog: MatDialog) {
 
     }
-    ngOnInit() {
-        this.pingAquariumDevice();
-    }
-    ngOnDestory() {
-        this.componentLifeCycle$.next();
-        this.componentLifeCycle$.unsubscribe();
-    }
-    public pingAquariumDevice() {
-        this.deviceStatus = 1;
-        this._aquariumService.pingDevice(this.aquarium.device.id).pipe(take(1)).subscribe(val => {
-            this.deviceInformation = val;
-            this.deviceStatus = 2;
-            this.lastUpdateTime = new Date();
-        }, (err) => {
-            this.deviceStatus = 0;
-        });
-        this.clickGetDeviceScheduleStatus();
-    }
-    clickGetDeviceScheduleStatus() { //todo rename this
-        this.scanning = true;
-        this._aquariumService.getDeviceScheduleStatus(this.aquarium.device.id).subscribe(
-            (scheduleState: DeviceScheduleState) => {
-                console.log(scheduleState);
-                this.scheduleState = scheduleState;
-            }, err => {
-                this.scanning = false;
-                this._notifier.notify("error", "Could not retrieve device information");
-            })
-    }
-    clickPerformTask(task: DeviceScheduleTask) {
-        this.performingTask = true;
-        this._aquariumService.performScheduleTask(this.aquarium.device.id, task).subscribe(
-            (data) => {
-                this.performingTask = false;
-                this._notifier.notify("success", "Task was performed successfully!");
-            }, err => {
-                this.performingTask = false;
-                this._notifier.notify("error", "Task: " + err.error);
-            })
-    }
-    public parseDate(date: Date) {
-        return moment(date).local().calendar();
-    }
 
-
-    public getTaskNameFromId = DeviceScheduleTask.getTaskNameFromId;
+    public clickPingAquariumDevice() {
+        this.store.dispatch(new AquariumLoadDeployedDeviceByAquaruiumId(this.aquarium.device.id));
+    }
+    public readableDate(dateString: string) {
+        return moment(dateString).calendar();
+    }
 }

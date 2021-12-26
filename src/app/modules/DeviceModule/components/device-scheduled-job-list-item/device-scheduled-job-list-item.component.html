@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="col-sm">
+    {{scheduledJob.id}}
+  </div>
+  <div class="col-md">
+    <b>{{readableDateTimestamp(scheduledJob.startTime)}}</b>
+    <br>
+    <span class="text-muted">({{readableDuration(scheduledJob.startTime)}})</span>
+  </div>
+  <div class="col-sm">
+    <h6>{{scheduledJob.task.name}}</h6>
+  </div>
+  <div class="col-sm" *ngIf="getSensorFromId(scheduledJob.task.targetSensorId) as sensor">
+    Set <b>{{sensor.name}}</b> to <b>{{getSensorValueFromId(scheduledJob.task.targetSensorValue)}}</b>
+  </div>
+  <div class="col-sm" *ngIf="getSensorFromId(scheduledJob.task.targetSensorId) as sensor else maxTime">
+    Until 
+    <b>{{sensor.name}}</b> reads <b>{{getSensorValueFromId(scheduledJob.task.triggerSensorValue)}}</b>
+    <br> or for <b>{{readableDurationLength(scheduledJob.startTime,scheduledJob.maximumEndTime)}}</b>
+  </div>
+  <ng-template #maxTime>
+    <div class="col-sm">
+      Until 
+      <b>{{readableDurationLength(scheduledJob.startTime,scheduledJob.maximumEndTime)}}</b>
+    </div>
+  </ng-template>
+  <div class="col-sm">
+    Job Status: <b>{{getStatusFromJob(scheduledJob)}}</b>
+    <br>
+    Est. End Time: <b>{{readableTimestamp(scheduledJob.maximumEndTime)}}</b>
+  </div>
+  <div class='col-sm'>
+    <button (click)="clickPerformScheduledJob(scheduledJob)" class="btn btn-secondary mr-1"
+      *ngIf="!isJobRunning(scheduledJob)">Perform</button>
+    <button *ngIf="isJobCancelable(scheduledJob)" (click)="clickStopScheduledJob(scheduledJob)"
+      class="btn btn-secondary">Stop</button>
+  </div>
+</div>

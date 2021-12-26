@@ -7,11 +7,11 @@ import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
-  selector: 'device-log',
-  templateUrl: './device-log.component.html',
-  styleUrls: ['./device-log.component.scss']
+  selector: 'device-log-card',
+  templateUrl: './device-log-card.component.html',
+  styleUrls: ['./device-log-card.component.scss']
 })
-export class DeviceLogComponent implements OnInit {
+export class DeviceLogCardComponent implements OnInit {
 
   @Input("device") device: AquariumDevice;
   @ViewChild("scrollWindow") private scrollContainer: ElementRef;

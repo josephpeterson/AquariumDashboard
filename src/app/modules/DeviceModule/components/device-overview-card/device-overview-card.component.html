@@ -7,31 +7,44 @@
             </h5>
         </div>
         <div class="col-auto">
-            <small *ngIf="deviceStatus == 2" class="online">
+            <small *ngIf="deviceConnectionStatus == DeviceConnectionStatus.Online" class="online">
                 <fa-icon [icon]="faCheck" class="mr-1"></fa-icon>Online
             </small>
-            <small *ngIf="deviceStatus == 0" class="disabled">
+            <small *ngIf="deviceConnectionStatus == DeviceConnectionStatus.Connected" class="online">
+                <fa-icon [icon]="faCheck" class="mr-1"></fa-icon>Online
+            </small>
+            <small *ngIf="deviceConnectionStatus == DeviceConnectionStatus.Renew" class="online">
+                <fa-icon [icon]="faCheck" class="mr-1"></fa-icon>Renew. Log into this device
+            </small>
+            <small *ngIf="deviceConnectionStatus == DeviceConnectionStatus.Offline" class="disabled">
                 <fa-icon [icon]="faTimes" class="mr-1"></fa-icon>Offline
             </small>
-            <small *ngIf="deviceStatus == 1">
-                <fa-icon [icon]="faSpinner" class="mr-1"></fa-icon>Loading
-            </small>
-        </div>
-        <div class="col-auto">
-            <small>
-                Version: ----
+            <small *ngIf="deviceConnectionStatus == DeviceConnectionStatus.Connecting">
+                <fa-icon [icon]="faSpinner" class="mr-1"></fa-icon>Connecting
             </small>
         </div>
     </div>
-    <div class="row" *ngIf="lastUpdateTime">
-        <div class="col">
-            <small>
-                <span class="text-muted">Last Updated at {{parseDate(lastUpdateTime)}}
-                    <button class="btn btn-link" (click)="pingAquariumDevice()">
-                        <fa-icon [icon]="faRedo"></fa-icon>
-                    </button>
-                </span>
-            </small>
+    <div class="row" style="height:100px">
+        <div *ngIf="deviceConnectionStatus != DeviceConnectionStatus.Connecting && deviceInformation">
+            <div class="col-auto">
+                <small>
+                    Version: {{deviceInformation.version}}
+                </small>
+            </div>
+            <div class="col-auto">
+                <small>
+                    Running Tasks: <b>{{deviceInformation.runningJobs.length}}</b>
+                </small>
+            </div>
+            <div class="col-auto">
+                <small>
+                    <span class="text-muted">Last Updated at {{readableDate(deviceInformation.updatedAt)}}
+                        <button class="btn btn-link" (click)="clickPingAquariumDevice()">
+                            <fa-icon [icon]="faRedo"></fa-icon>
+                        </button>
+                    </span>
+                </small>
+            </div>
         </div>
     </div>
 </div>

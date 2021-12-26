@@ -1,5 +1,4 @@
 <div *ngIf="(aquarium$ | async).device as d">
-  <ng-container *ngIf="(readableTypes | async) as types">
     <div *ngIf="error" class="alert alert-danger">
       <p class="error">{{error}}</p>
       <button class="btn btn-secondary">
@@ -14,16 +13,16 @@
             <p class="card-text">
               Manage assigned device sensors here.
             </p>
-            <div>
+            <div *ngIf="(readableTypes | async) as types">
               <div *ngFor="let s of d.sensors">
-                <sensor-mini-card [sensor]="s" [device]="d" [types]="types"></sensor-mini-card>
+                <device-sensor-list-item [sensor]="s" [device]="d" [deviceInformation]="deviceInformation$ | async" [types]="types"></device-sensor-list-item>
               </div>
             </div>
 
 
           </div>
           <div class="card-body">
-              <button class="btn btn-success" (click)="clickAddSensor()">Add Sensor</button>
+              <button class="btn btn-success" (click)="clickAddSensor(d)">Add Sensor</button>
           </div>
         </div>
 
@@ -50,6 +49,4 @@
         </div>
       </div>
     </div>
-    
-  </ng-container>
 </div>

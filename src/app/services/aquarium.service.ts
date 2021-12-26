@@ -32,6 +32,7 @@ import { DeviceSensorTestRequest } from "../models/DeviceSensorTestRequest";
 import { DeviceInformation } from "../models/DeviceInformation";
 import { AquariumCreateResetAction } from "../store/aquarium/aquarium.actions";
 import { AquariumApiEndpoints } from "../models/constants/AquariumApiEndpoints";
+import { DeviceScheduledJob } from "../models/DeviceScheduledJob";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -208,7 +209,9 @@ export class AquariumService {
   pingDevice(deviceId: number) {
     return this.http.get<DeviceInformation>(this._url + AquariumApiEndpoints.DEVICE_DISPATCH_PING.aggregate(deviceId));
   }
-
+  attemptAuthRenew(deviceId: number) {
+    return this.http.get(this._url + AquariumApiEndpoints.DEVICE_DISPATCH_AUTH_RENEW.aggregate(deviceId));
+  }
   /* Profile Controller */
   getUserProfile(userId: number) {
     return this.http.get(this._url + `/v1/Profile/${userId}`);
@@ -331,6 +334,12 @@ export class AquariumService {
   }
   performScheduleTask(deviceId: number, deviceScheduleTask: DeviceScheduleTask) {
     return this.http.post(this._url + AquariumApiEndpoints.DEVICE_DISPATCH_TASK.aggregate(deviceId), deviceScheduleTask);
+  }
+  public getAllScheduledJobsOnDevice(deviceId) {
+    return this.http.get<DeviceScheduledJob[]>(this._url + AquariumApiEndpoints.SCHEDULE_RETRIEVE_SCHEDULED_JOBS_ON_DEVICE.aggregate(deviceId));
+  }
+  public stopScheduledJob(deviceId,scheduledJob: DeviceScheduledJob) {
+    return this.http.post(this._url + AquariumApiEndpoints.SCHEDULE_SCHEDULED_JOB_STOP.aggregate(deviceId), scheduledJob);
   }
 
   public getAquariumPhotos(id: number, pagination: PaginationSliver) {

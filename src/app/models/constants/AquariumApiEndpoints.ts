@@ -25,6 +25,7 @@ export enum AquariumApiEndpoints {
   DEVICE_CREATE = "/v1/Device/Add",
   DEVICE_DISPATCH_SCAN = "/v1/Device/{deviceId}/Scan",
   DEVICE_DISPATCH_PING = "/v1/Device/{deviceId}/Ping",
+  DEVICE_DISPATCH_AUTH_RENEW = "/v1/Device/{deviceId}/Renew",
   DEVICE_DISPATCH_SNAPSHOT_CONFIGURATION = "/v1/Device/{deviceId}/CameraConfiguration",
   DEVICE_LOG = "/v1/Device/{deviceId}/Log",
   DEVICE_LOG_CLEAR = "/v1/Device/{deviceId}/Log/Clear",
@@ -79,6 +80,9 @@ export enum AquariumApiEndpoints {
   SCHEDULE_RETRIEVE_SCHEDULED_JOBS = "/v1/Device/{deviceId}/Schedule/Jobs",
   SCHEDULE_DELETE = "/v1/Device/{deviceId}/Schedule/{scheduleId}/Delete",
   SCHEDULE_UPDATE = "/v1/Schedule/Update",
+  SCHEDULE_SCHEDULED_JOB_STOP = "/v1/Device/{deviceId}/Schedule/Job/Stop",
+  SCHEDULE_RETRIEVE_SCHEDULED_JOBS_ON_DEVICE = "/v1/Device/{deviceId}/Schedule/Job/Deployed",
+
 }
 declare global {
   interface String {

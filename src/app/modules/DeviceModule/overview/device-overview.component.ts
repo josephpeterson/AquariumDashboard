@@ -6,29 +6,13 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
 import { take } from 'rxjs/operators';
-import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
-import { NotificationService } from 'src/app/services/notification.service';
-import { CreateWaterParameterModalComponent } from 'src/app/modules/SharedModule/modals/create-water-parameter-modal/create-water-parameter-modal.component';
-import { HttpErrorResponse } from '@angular/common/http';
-import { FormGroup } from '@angular/forms';
-import * as moment from 'moment';
-import { Observable, Subject } from 'rxjs';
-import { ATOStatus } from 'src/app/models/ATOStatus';
-import { PaginationSliver } from 'src/app/models/PaginationSliver';
-import { WaterDosing } from 'src/app/models/WaterDosing';
-import { CreateWaterChangeModalComponent } from 'src/app/modules/SharedModule/modals/create-water-change-modal/create-water-change-modal.component';
-import { CreateWaterDoseModalComponent } from 'src/app/modules/SharedModule/modals/create-water-dose-modal/create-water-dose-modal.component';
-import { getPaginatedATOStatuses, getPaginatedParameters, getPaginatedWaterChanges, getPaginatedWaterDosings, getSelectedDate } from 'src/app/store/parameter/parameter.selector';
-import { ParameterState } from 'src/app/store/parameter/parameter.reducer';
-import { WaterChange } from 'src/app/models/WaterChange';
-import { ParameterReloadDateAction, ParameterSelectDateAction } from 'src/app/store/parameter/parameter.actions';
+import { Observable } from 'rxjs';
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
-
 
 @Component({
   selector: 'device-overview',
   templateUrl: './device-overview.component.html',
-  styleUrls: ['./device-overview.component.scss']
+  //styleUrls: ['./device-overview.component.scss']
 })
 export class DeviceOverviewComponent implements OnInit {
   public aquarium: Aquarium;

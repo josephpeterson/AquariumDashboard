@@ -2,39 +2,38 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
-
 import { faCarBattery, faCheckCircle, faEdit, faSync, faTrash, faVial, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateDeviceSensorModalComponent } from '../../../SharedModule/modals/create-device-sensor-modal/create-device-sensor-modal.component';
 import { take } from 'rxjs/operators';
 import { DeviceSensor } from 'src/app/models/DeviceSensor';
-import { HttpErrorResponse } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { NotificationService } from 'src/app/services/notification.service';
 import { TestDeviceSensorModalComponent } from '../../../SharedModule/modals/test-device-sensor-modal/test-device-sensor-modal.component';
-import { ConfirmModalComponent } from '../../../SharedModule/modals/confirm-modal/confirm-modal.component';
 import { getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
 import { AppState } from 'src/app/app.state';
 import { Store } from '@ngrx/store';
-import { AquariumLoadByIdAction, AquariumSelectionAction } from 'src/app/store/aquarium/aquarium.actions';
+import { AquariumSelectionAction } from 'src/app/store/aquarium/aquarium.actions';
+import { DeviceInformation } from 'src/app/models/DeviceInformation';
+import { GpioPinValue } from 'src/app/models/types/GpioPinValue';
 
 @Component({
-  selector: 'sensor-mini-card',
-  templateUrl: './sensor-mini-card.component.html',
-  styleUrls: ['./sensor-mini-card.component.scss']
+  selector: 'device-sensor-list-item',
+  templateUrl: './device-sensor-list-item.component.html',
+  //styleUrls: ['./device-sensor-list-item.component.scss']
 })
-export class DeviceSensorMiniCardComponent implements OnInit {
+export class DeviceSensorListItemComponent implements OnInit {
 
-  @Input("sensor") public sensor: DeviceSensor;
-  @Input("device") public device: AquariumDevice;
-  @Input("types") public types: [];
+  @Input() public sensor: DeviceSensor;
+  @Input() public device: AquariumDevice;
+  @Input() public types: [];
+  @Input() public deviceInformation: DeviceInformation;
 
   public loading: boolean = false;
   public error: string;
   public sensors: DeviceSensor[];
   public disabled: boolean = false;
   public aquarium$: Observable<Aquarium> = this.store.select(getSelectedAquarium);
-
 
 
   public faRefresh: IconDefinition = faSync;
@@ -47,22 +46,13 @@ export class DeviceSensorMiniCardComponent implements OnInit {
 
   public readableTypes = new Subject();
 
-
-
   constructor(public _aquariumService: AquariumService,
     public notifier: NotificationService,
     public store: Store<AppState>,
     public dialog: MatDialog) { }
 
   ngOnInit() {
-
-    this.loadReadableTypes();
-  }
-
-  private loadReadableTypes() {
-    this._aquariumService.getSelectOptionsByType("DeviceSensorTypes").subscribe((data: any[]) => {
-      this.readableTypes.next(data);
-    });
+    console.log(this.deviceInformation);
   }
   clickEditSensor() {
     if (this.disabled) return;
@@ -97,6 +87,7 @@ export class DeviceSensorMiniCardComponent implements OnInit {
     });
   }
   getSensorReadableType(types, type: number) {
+    if (!types) return "------";
     for (var i = 0; i < types.length; i++) {
       var t = types[i];
       if (t.value == type)
@@ -104,5 +95,12 @@ export class DeviceSensorMiniCardComponent implements OnInit {
     }
     return "Unknown";
   }
-
+  getSensorValue(sensor: DeviceSensor) {
+    if (!this.deviceInformation)
+      return null;
+    var s = this.deviceInformation.sensors.filter(ss => ss.id == sensor.id)[0];
+    if (GpioPinValue[s.value] != undefined)
+      return GpioPinValue[s.value].toString();
+    return null;
+  }
 }

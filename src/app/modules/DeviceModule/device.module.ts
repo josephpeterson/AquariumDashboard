@@ -2,14 +2,10 @@
 //services are just arbitrary examples, your module might be different
 import { NgModule }       from '@angular/core';
 import { CommonModule }   from '@angular/common';
-import { DeviceInformationComponent } from './settings/information/device-information.component';
-import { DevicePeripherialsComponent } from './components/Peripherials/peripherials.component';
-import { DeviceScheduleStatusComponent } from './schedule/schedule-status/schedule-status.component';
-import { ScheduleBuilderComponent } from './schedule/schedule-builder/schedule-builder.component';
+import { DeviceInformationCardComponent } from './components/device-information-card/device-information-card.component';
+import { DeviceScheduleCardComponent } from './components/device-schedule-card/device-schedule-card.component';
 import { DeviceRoutes } from './device-routing.module';
-import { AquariumDeviceComponent } from './DeviceContainer/aquarium-device.component';
 import { SharedModule } from '../SharedModule/shared.module';
-import { AppModule } from 'src/app/app.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterModule } from '@angular/router';
@@ -36,10 +32,9 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Ng5SliderModule } from 'ng5-slider';
 import { DeviceDetailFormComponent } from './settings/device-detail-form/device-detail-form.component';
-import { DeviceLogComponent } from './settings/device-log/device-log.component';
+import { DeviceLogCardComponent } from './components/device-log-card/device-log-card.component';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { FishService } from 'src/app/services/fish.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -47,7 +42,6 @@ import { AdminService } from 'src/app/services/admin.service';
 import { AuthGuard } from 'src/app/guards/AuthGuard';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AquariumInterceptor } from 'src/app/services/aquarium.interceptor';
-import { DeviceSensorsComponent } from './sensors/sensors.component';
 import { DeviceATOStatusComponent } from './components/ato-status/ato-status.component';
 import { DeviceSensorCardComponent } from './components/device-sensor-card/device-sensor-card.component';
 import { DeviceOverviewCardComponent } from './components/device-overview-card/device-overview-card.component';
@@ -58,8 +52,12 @@ import { DeviceSettingsComponent } from './settings/device-settings.component';
 import { DeviceScheduleComponent } from './schedule/device-schedule.component';
 import { DeviceGpioCardComponent } from './components/device-gpio-card/device-gpio-card.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { DeviceSensorMiniCardComponent } from './sensors/sensor-mini-card/sensor-mini-card.component';
-import { DeviceScheduleTasksComponent } from './schedule/schedule-tasks/schedule-tasks.component';
+import { DeviceTaskCardComponent } from './components/device-task-card/device-task-card.component';
+import { DeviceScheduledJobCardComponent } from './components/device-scheduled-job-card/device-scheduled-job-card.component';
+import { DeviceScheduledJobListItemComponent } from './components/device-scheduled-job-list-item/device-scheduled-job-list-item.component';
+import { AquariumDeviceComponent } from './aquarium-device.component';
+import { DeviceSensorsComponent } from './sensors/sensors.component';
+import { DeviceSensorListItemComponent } from './components/device-sensor-list-item/device-sensor-list-item.component';
 
 
 @NgModule({
@@ -102,25 +100,26 @@ import { DeviceScheduleTasksComponent } from './schedule/schedule-tasks/schedule
   ],
   declarations: [
     DeviceOverviewCardComponent,
-    DeviceInformationComponent,
+    DeviceInformationCardComponent,
     
     DeviceScheduleComponent,
-    ScheduleBuilderComponent,
-    DeviceScheduleStatusComponent,
-    DeviceScheduleTasksComponent,
+    DeviceScheduleCardComponent,
+    DeviceTaskCardComponent,
     
     DeviceOverviewComponent,
     DeviceATOStatusComponent,
     DeviceSnapshotCarouselComponent,
     
     
-    DeviceSensorCardComponent,
     DeviceSensorsComponent,
+    DeviceSensorCardComponent,
+    DeviceScheduledJobCardComponent,
+    DeviceScheduledJobListItemComponent,
     DeviceGpioCardComponent,
-    DeviceSensorMiniCardComponent,
+    DeviceSensorListItemComponent,
     
     DeviceSettingsComponent,
-    DeviceLogComponent,
+    DeviceLogCardComponent,
     AquariumDeviceComponent,
     DeviceDetailFormComponent,
   ],

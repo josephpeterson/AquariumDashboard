@@ -2,6 +2,8 @@ import { EntityState, EntityAdapter, createEntityAdapter, Update } from '@ngrx/e
 import { AquariumActions, AllAquariumActions } from './aquarium.actions';
 import { Aquarium } from '../../models/Aquarium';
 import { HttpErrorResponse } from '@angular/common/http';
+import { DeviceInformation } from 'src/app/models/DeviceInformation';
+import { DeviceConnectionStatus } from '../../models/types/DeviceConnectionStatus';
 
 export interface AquariumsState extends EntityState<Aquarium> {
 	loading: boolean
@@ -11,6 +13,9 @@ export interface AquariumsState extends EntityState<Aquarium> {
 	creating: boolean
 	aquariumCreated: boolean
 	createError: HttpErrorResponse
+
+	pingingAquariumDevice: DeviceConnectionStatus,
+	aquariumDeviceInformation: DeviceInformation,
 
 	updating: boolean
 	updated: boolean
@@ -39,6 +44,9 @@ export const defaultAquariumState: AquariumsState = {
 	loading: true,
 	selectedAquariumId: null,
 	error: null,
+
+	pingingAquariumDevice: DeviceConnectionStatus.Offline,
+	aquariumDeviceInformation: null,
 
 	creating: false,
 	aquariumCreated: false,
@@ -121,6 +129,38 @@ export function aquariumReducer(state = initialState, action: AllAquariumActions
 				updating: false,
 				updated: false,
 				error: action.payload
+			}
+
+
+		/* Deployed Device */
+		case AquariumActions.LoadDeployedDeviceByAquariumId:
+			return {
+				...state,
+				pingingAquariumDevice: DeviceConnectionStatus.Connecting
+			}
+
+		case AquariumActions.LoadDeployedDeviceFailed:
+			return {
+				...state,
+				pingingAquariumDevice: DeviceConnectionStatus.Offline
+				//error: action.payload,
+			}
+		case AquariumActions.LoadDeployedDeviceSuccess: //we're connected
+			return {
+				...state,
+				pingingAquariumDevice: DeviceConnectionStatus.Connected,
+				aquariumDeviceInformation: action.payload
+				//error: action.payload,
+			}
+		case AquariumActions.LoadDeployedDeviceRenew: //we're connected but renew is needed
+			return {
+				...state,
+				pingingAquariumDevice: DeviceConnectionStatus.Renew,
+			}
+		case AquariumActions.LoadDeployedDeviceOnline: //we're connected fully
+			return {
+				...state,
+				pingingAquariumDevice: DeviceConnectionStatus.Online,
 			}
 
 

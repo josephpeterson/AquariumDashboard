@@ -1,0 +1,81 @@
+import { Component, OnInit, Input } from '@angular/core';
+import { AquariumService } from 'src/app/services/aquarium.service';
+
+import { DeviceSensor } from 'src/app/models/DeviceSensor';
+import { faChargingStation, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { NotificationService } from 'src/app/services/notification.service';
+import { DeviceScheduledJob } from 'src/app/models/DeviceScheduledJob';
+import { AquariumDevice } from 'src/app/models/AquariumDevice';
+import { JobStatus } from 'src/app/models/types/JobStatus';
+import * as moment from 'moment';
+import { GpioPinValue } from 'src/app/models/types/GpioPinValue';
+import { AquariumLoadByIdAction, AquariumLoadDeployedDeviceByAquaruiumId, AquariumSelectionAction } from 'src/app/store/aquarium/aquarium.actions';
+import { AppState } from 'src/app/app.state';
+import { Store } from '@ngrx/store';
+
+@Component({
+  selector: 'device-scheduled-job-list-item',
+  templateUrl: './device-scheduled-job-list-item.component.html',
+  styleUrls: ['./device-scheduled-job-list-item.component.scss']
+})
+export class DeviceScheduledJobListItemComponent implements OnInit {
+
+  @Input("device") device: AquariumDevice;
+  @Input("scheduledJob") scheduledJob: DeviceScheduledJob;
+
+  constructor(public _aquariumService: AquariumService,
+    public store: Store<AppState>,
+    public notifier: NotificationService) { }
+
+  ngOnInit() {
+  }
+  public getSensorFromId(id:number) {
+    var sensor = this.device.sensors.find(s => s.id == id);
+    return sensor;
+  }
+  public getStatusFromJob(job:DeviceScheduledJob) {
+    return JobStatus[job.status].toString();
+  }
+  public getSensorValueFromId(id:number) {
+    return GpioPinValue[id].toString();
+  }
+  public isJobRunning(job:DeviceScheduledJob) {
+    return job.status == JobStatus.Running;
+  }
+  public isJobCancelable(job:DeviceScheduledJob) {
+    return job.status == JobStatus.Running || job.status == JobStatus.Pending;
+  }
+  public clickPerformScheduledJob(job:DeviceScheduledJob) {
+    this._aquariumService.performScheduleTask(this.device.id,job.task).subscribe(
+      (newJob: DeviceScheduledJob) => {
+        //todo we would reload stuff
+        this.notifier.notify("success", "Performed scheduled task");
+        this.store.dispatch(new AquariumLoadDeployedDeviceByAquaruiumId(this.device.id));
+      }, err => {
+        this.notifier.notify("error", "Could not perform scheduled task");
+      })
+  }
+  public clickStopScheduledJob(job:DeviceScheduledJob) {
+    this._aquariumService.stopScheduledJob(this.device.id,job).subscribe(
+      () => {
+        this.notifier.notify("success", "Scheduled job stopped");
+        this.store.dispatch(new AquariumLoadDeployedDeviceByAquaruiumId(this.device.id));
+      }, err => {
+        this.notifier.notify("error", "Could not stop scheduled job");
+      })
+  }
+  public readableDuration(time: string) {
+    var d = moment(time).diff(moment());
+    return moment.duration(d).humanize();
+  }
+  public readableDurationLength(startTime:string,endTime: string) {
+    var d = moment(endTime).diff(moment(startTime));
+    return moment.duration(d).humanize();
+  }
+  public readableTimestamp(time:string) {
+    return moment(time).local().format("LT");
+  }
+  public readableDateTimestamp(time:string) {
+    return moment(time).utc().local().calendar();
+  }
+}

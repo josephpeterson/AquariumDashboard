@@ -12,6 +12,16 @@ export const getSelectedAquarium = createSelector(AquariumsState,
         return state.entities[state.selectedAquariumId]
     }
 );
+export const getDeployedDeviceInformation = createSelector(AquariumsState,
+    (state: AquariumReducer.AquariumsState) => {
+        return state.aquariumDeviceInformation
+    }
+);
+export const getDeviceConnectionStatus = createSelector(AquariumsState,
+    (state: AquariumReducer.AquariumsState) => {
+        return state.pingingAquariumDevice
+    }
+);
 export const getAquariumById = createSelector(
     AquariumsState,
     (state: AquariumReducer.AquariumsState, aqId) => state.entities[aqId]

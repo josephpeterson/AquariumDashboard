@@ -11,6 +11,9 @@
     <div *ngIf="sensor.alwaysOn">
       <b>Always On</b>
     </div>
+    <div>
+      Value: <b>{{getSensorValue(sensor)}}</b>
+    </div>
   </div>
   <div class="col-sm">
     <button (click)="clickEditSensor()" class="float-md-right btn btn-link ml-2" [disabled]="disabled">

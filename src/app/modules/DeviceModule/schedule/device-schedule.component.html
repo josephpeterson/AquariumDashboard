@@ -2,35 +2,21 @@
 	class="justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
 	<div class="row">
 		<div class="col">
-			<div class="card">
-				<div class="card-body">
-					<h5 class="card-title">Schedule Automation</h5>
-					<p class="card-text">
-						You may create a schedule to deploy to the pi here. You may preform
-								automous
-								events, timed
-								events
-								etc.
-					</p>
-					<device-schedule-builder [device]="device"></device-schedule-builder>
-				</div>
-			</div>
+			<device-schedule-card [device]="device"></device-schedule-card>
 		</div>
 		<div class="col">
-			<div class="card">
-				<div class="card-body">
-					<h5 class="card-title">Task Queue</h5>
-					<p class="card-text">
-						All tasks created on this device.
-					</p>
-					<device-schedule-tasks [device]="device"></device-schedule-tasks>
-				</div>
-			</div>
+			<device-task-card [device]="device"></device-task-card>
 		</div>
-
+	</div>
+	<div class="row">
+		<h4 class="p-2">Scheduled Tasks</h4>
+	</div>
+	<div class="row p-2">
+		<div class="col">
+			<device-scheduled-job-card></device-scheduled-job-card>
+		</div>
 	</div>
 </div>
-
 <ng-template #noDevice>
 	<device-detail-form [aquarium]="aquarium"></device-detail-form>
 </ng-template>

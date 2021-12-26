@@ -13,38 +13,22 @@ import { Observable, Subject } from 'rxjs';
 import { NotificationService } from 'src/app/services/notification.service';
 import { TestDeviceSensorModalComponent } from '../../SharedModule/modals/test-device-sensor-modal/test-device-sensor-modal.component';
 import { ConfirmModalComponent } from '../../SharedModule/modals/confirm-modal/confirm-modal.component';
-import { getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
+import { getDeployedDeviceInformation, getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
 import { AppState } from 'src/app/app.state';
 import { Store } from '@ngrx/store';
 import { AquariumLoadByIdAction, AquariumSelectionAction } from 'src/app/store/aquarium/aquarium.actions';
+import { DeviceInformation } from 'src/app/models/DeviceInformation';
 
 @Component({
   selector: 'device-sensors',
   templateUrl: './sensors.component.html',
-  styleUrls: ['./sensors.component.scss']
+  //styleUrls: ['./sensors.component.scss']
 })
 export class DeviceSensorsComponent implements OnInit {
-
-  @Input("device") public device: AquariumDevice;
-
-  public loading: boolean = false;
-  public error: string;
-  public sensors: DeviceSensor[];
-  public disabledIds: number[] = [];
   public aquarium$: Observable<Aquarium> = this.store.select(getSelectedAquarium);
-
-
-
+  public deviceInformation$: Observable<DeviceInformation> = this.store.select(getDeployedDeviceInformation);
   public faRefresh: IconDefinition = faSync;
-  public faTrash: IconDefinition = faTrash;
-  public faEdit: IconDefinition = faEdit;
-  public faVial: IconDefinition = faVial;
-  faCheck = faCheckCircle;
-
-
   public readableTypes = new Subject();
-
-
 
   constructor(public _aquariumService: AquariumService,
     public notifier: NotificationService,
@@ -52,66 +36,25 @@ export class DeviceSensorsComponent implements OnInit {
     public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.aquarium$.pipe().subscribe(aq => {
-      this.device = aq.device;
-    });
     this.loadReadableTypes();
   }
-
   private loadReadableTypes() {
     this._aquariumService.getSelectOptionsByType("DeviceSensorTypes").subscribe((data: any[]) => {
       this.readableTypes.next(data);
     });
   }
 
-  clickAddSensor() {
+  clickAddSensor(device: AquariumDevice) {
     var dialog = this.dialog.open(CreateDeviceSensorModalComponent, {
       width: "40%",
     });
-    dialog.componentInstance.device = this.device;
+    dialog.componentInstance.device = device;
     dialog.afterClosed().pipe(take(1)).subscribe((sensor) => {
-      //this.data.load(); //Shouldn't have to do this if we just add to the store
-      //this.loadDeviceSensors();
       if (sensor)
-        this.store.dispatch(new AquariumSelectionAction(this.device.aquariumId));
-    });
-    //dialog.error = new ConnectionError(error);
-  }
-
-  clickEditSensor(deviceSensor: DeviceSensor) {
-    if (this.disabledIds.indexOf(deviceSensor.id) != -1)
-      return;
-    this.disabledIds.push(deviceSensor.id);
-    delete this.error;
-
-    var dialog = this.dialog.open(CreateDeviceSensorModalComponent, {
-      width: "40%",
-    });
-    dialog.componentInstance.device = this.device;
-    dialog.componentInstance.newDeviceSensor = { ...deviceSensor };
-    dialog.afterClosed().pipe(take(1)).subscribe((sensor) => {
-      this.disabledIds.splice(this.disabledIds.indexOf(deviceSensor.id), 1);
-      if (sensor) {
-        this.sensors.splice(this.sensors.indexOf(deviceSensor), 1, sensor);
-      }
-      else if (sensor == null) //deleted
-        this.sensors.splice(this.sensors.indexOf(deviceSensor), 1);
+        this.store.dispatch(new AquariumSelectionAction(device.aquariumId));
     });
   }
-  clickTestSensor(deviceSensor: DeviceSensor) {
-    if (this.disabledIds.indexOf(deviceSensor.id) != -1)
-      return;
-    this.disabledIds.push(deviceSensor.id);
-    delete this.error;
-
-    var dialog = this.dialog.open(TestDeviceSensorModalComponent, {
-    });
-    dialog.componentInstance.sensor = deviceSensor;
-    dialog.componentInstance.device = this.device;
-    dialog.afterClosed().pipe(take(1)).subscribe((sensor) => {
-      this.disabledIds.splice(this.disabledIds.indexOf(deviceSensor.id), 1);
-    });
-  }
+  //todo- eventually have a store manage a database of types
   getSensorReadableType(types, type: number) {
     for (var i = 0; i < types.length; i++) {
       var t = types[i];
@@ -119,17 +62,5 @@ export class DeviceSensorsComponent implements OnInit {
         return t.key;
     }
     return "Unknown";
-  }
-  loadDeviceSensors() {
-    this.loading = true;
-    delete this.error;
-    this._aquariumService.getDeviceSensors(this.device.id).subscribe((res: DeviceSensor[]) => {
-      this.loading = false;
-      this.sensors = res;
-      console.log(res);
-    }, (err: HttpErrorResponse) => {
-      this.loading = false;
-      this.error = err.message;
-    });
   }
 }

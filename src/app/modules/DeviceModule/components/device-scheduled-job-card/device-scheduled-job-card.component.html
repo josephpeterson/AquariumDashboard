@@ -1,0 +1,19 @@
+<div class="card p-3" *ngIf="deviceConnectionStatus$ | async as deviceConnectionStatus">
+  <div *ngIf="deviceConnectionStatus == DeviceConnectionStatus.Connected || (deviceInformation$ | async)">
+    <div *ngIf="(deviceInformation$ | async) as deviceInformation">
+      <ul *ngIf="deviceInformation.scheduledJobs.length > 0 else noScheduledJobs">
+        <device-scheduled-job-list-item *ngFor="let scheduledJob of deviceInformation.scheduledJobs" [device]="(aquarium$ | async).device"
+          [scheduledJob]="scheduledJob"></device-scheduled-job-list-item>
+      </ul>
+      <ng-template #noScheduledJobs>
+        <h6>No scheduled jobs on this device</h6>
+      </ng-template>
+    </div>
+  </div>
+  <div *ngIf="deviceConnectionStatus == DeviceConnectionStatus.Connecting">
+    Loading...
+  </div>
+  <div *ngIf="deviceConnectionStatus == DeviceConnectionStatus.Offline">
+    Could not connect to aquarium device. Please try again later.
+  </div>
+</div>

@@ -16,11 +16,11 @@ import { ConfirmModalComponent } from 'src/app/modules/SharedModule/modals/confi
 import { take } from 'rxjs/operators';
 
 @Component({
-  selector: 'device-schedule-tasks',
-  templateUrl: './schedule-tasks.component.html',
-  styleUrls: ['./schedule-tasks.component.scss']
+  selector: 'device-task-card',
+  templateUrl: './device-task-card.component.html',
+  styleUrls: ['./device-task-card.component.scss']
 })
-export class DeviceScheduleTasksComponent implements OnInit {
+export class DeviceTaskCardComponent implements OnInit {
 
   @Input("device") public device: AquariumDevice;
   scanning: boolean;
@@ -46,7 +46,7 @@ export class DeviceScheduleTasksComponent implements OnInit {
 
   clickPerformTask(task: DeviceScheduleTask) {
     this.performingTask = true;
-    this._aquariumService.performScheduleTask(this.device.id, task).subscribe(
+    this._aquariumService.performScheduleTask(task.deviceId, task).subscribe(
       (data) => {
         this.performingTask = false;
         this.notifier.notify("success", "Task was performed successfully!");
