@@ -21,7 +21,6 @@ export class CreateScheduleModalComponent implements OnInit {
   @Input("schedule_list") scheduleList: DeviceSchedule[];
   @Input("addingSchedule") addingSchedule;
   public icon_create = faPlus;
-  public faTrash = faTrash;
 
 
 

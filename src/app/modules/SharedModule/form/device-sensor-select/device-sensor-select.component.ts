@@ -47,8 +47,11 @@ export class DeviceSensorSelectComponent {
             this.availableDeviceSensors = aquarium.device.sensors;
             if(this.inputModel || this.inputModelId) {
                 var s = aquarium.device.sensors.filter(s => this.inputModelId == s.id || s.id == this.inputModel?.id)[0];
-                this.inputModel = s;
-                this.selectControl.setValue(s);
+                if(s)
+                {
+                    this.inputModel = s;
+                    this.selectControl.setValue(s);
+                }
             }
         })
         this.selectControl.setValue(this.inputModel);

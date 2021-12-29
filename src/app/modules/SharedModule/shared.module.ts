@@ -124,6 +124,7 @@ import { TestDeviceSensorModalComponent } from './modals/test-device-sensor-moda
 import { DeviceSensorSelectComponent } from './form/device-sensor-select/device-sensor-select.component';
 import { DateTimeSelectComponent } from './form/date-time-select/date-time-select.component';
 import { DeviceTaskSelectComponent } from './form/device-task-select/device-task-select.component';
+import { CreateTaskListItemComponent } from './modals/create-schedule-modal/components/create-task-list-item/create-task-list-item.component';
 
 
 var modals = [
@@ -265,6 +266,8 @@ var modals = [
     DeviceSensorSelectComponent,
     DeviceTaskSelectComponent,
     DateTimeSelectComponent,
+
+    CreateTaskListItemComponent,
 
     ...modals,
   ],

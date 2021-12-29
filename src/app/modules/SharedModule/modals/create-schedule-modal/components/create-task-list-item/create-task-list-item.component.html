@@ -1,0 +1,69 @@
+<div>
+  <div class="row">
+    <div class="col">
+      <generic-select [disabled]="disabled" label="Trigger" selectType="TriggerTypes"
+        [(inputModel)]="taskAssignment.triggerTypeId">
+      </generic-select>
+    </div>
+    <div class="col" [ngSwitch]="taskAssignment.triggerTypeId">
+      <date-time-select [disabled]="disabled" [(inputModel)]="taskAssignment.startTime" *ngSwitchCase="0">
+      </date-time-select>
+      <device-sensor-select [disabled]="disabled" [(inputModel)]="taskAssignment.triggerSensor" *ngSwitchCase="1">
+      </device-sensor-select>
+      <device-task-select [disabled]="disabled" [(inputModel)]="taskAssignment.triggerTask" *ngSwitchCase="2">
+      </device-task-select>
+    </div>
+    <div class="col">
+      <device-task-select [disabled]="disabled" [(inputModel)]="taskAssignment.task"></device-task-select>
+    </div>
+    <div class="col">
+      <mat-checkbox [disabled]="disabled" class="p-1" [(ngModel)]="taskAssignment.repeat">Repeat</mat-checkbox>
+    </div>
+    <div class="col" *ngIf="taskAssignment.id">
+      <button [disabled]="disabled" class="btn btn-danger" (click)="clickRemoveTask(taskAssignment.id)">
+        <fa-icon [icon]="faTrash"></fa-icon>
+      </button>
+    </div>
+  </div>
+  <div class="row" *ngIf="taskAssignment.repeat">
+    <div class="col">
+      <date-time-select [disabled]="disabled" [(inputModel)]="taskAssignment.repeatEndTime"></date-time-select>
+    </div>
+    <div class="col">
+      <mat-form-field>
+        <input type="number" [disabled]="disabled" matInput placeholder="Repeat Interval (s)"
+          [(ngModel)]="taskAssignment.repeatInterval">
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div id="accordion" role="tablist" class="col">
+      <div id="heading1" role="tab">
+        <h6 class="panel-title">
+          <a aria-controls="example1" aria-expanded="true" data-parent="#accordion" data-toggle="collapse"
+            href="#example1" role="button">Date Conditions<span class="glyphicon glyphicon-collapse-down"></span>
+          </a>
+        </h6>
+      </div>
+      <div aria-labelledby="heading1" class="panel-collapse collapse in" id="example1" role="tabpanel">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col">
+              <mat-checkbox *ngFor="let filter of filters" class="p-2" [(ngModel)]="filter.value" (change)="updateFilters()">{{filter.name}}
+              </mat-checkbox>
+            </div>
+            
+          </div>
+          <div class="row">
+            <div class="col">
+              <p class="text-muted">{{getDateConditionText()}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <hr>
+  </div>
+</div>

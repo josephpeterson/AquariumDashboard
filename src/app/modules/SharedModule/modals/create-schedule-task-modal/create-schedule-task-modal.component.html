@@ -52,7 +52,7 @@
       <div>
         <mat-checkbox [(ngModel)]='readSensorChecked' class="pl-2">Read Sensor Value</mat-checkbox>
       </div>
-      <ng-container *ngIf="readSensorChecked">
+      <div [class.d-none]="!readSensorChecked">
         When
         <device-sensor-select [(inputModel)]="newTask.triggerSensor">
         </device-sensor-select>
@@ -60,7 +60,7 @@
         <generic-select label="Sensor Value" selectType="DeviceSensorValues"
           [(inputModel)]="newTask.triggerSensorValue">
         </generic-select>
-      </ng-container>
+      </div>
     </div>
   </div>
   <mat-dialog-actions align="end">

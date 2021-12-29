@@ -39,14 +39,12 @@ export class CreateScheduleTaskModalComponent implements OnInit {
       this.newTask.triggerSensor = this.device.sensors.filter(s => s.id == this.newTask.triggerSensorId)[0];
       this.readSensorChecked = true;
     }
-
+  }
+  ngOnInit() {
     if (this.newTask.targetSensor == null)
       this.newTask.targetSensor = new DeviceSensor();
     if (this.newTask.triggerSensor == null)
       this.newTask.triggerSensor = new DeviceSensor();
-
-  }
-  ngOnInit() {
   }
   public clickFinishTask() {
     this.validate();
@@ -58,6 +56,12 @@ export class CreateScheduleTaskModalComponent implements OnInit {
     this.newTask.targetSensorId = this.newTask.targetSensor.id;
     if (this.readSensorChecked)
       this.newTask.triggerSensorId = this.newTask.triggerSensor.id;
+    else
+    {
+      this.newTask.triggerSensor = new DeviceSensor();
+      delete this.newTask.triggerSensorId;
+      delete this.newTask.triggerSensorValue;
+    }
 
     this._aquariumService.createDeviceTask(this.device.id, this.newTask).subscribe(deviceTask => {
       this._self.close(deviceTask);

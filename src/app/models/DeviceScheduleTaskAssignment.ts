@@ -14,6 +14,7 @@ export class DeviceScheduleTaskAssignment {
     repeat: boolean
     repeatInterval: number
     repeatEndTime: string
+    dateConditions: string
 
     schedule: DeviceSchedule | null
     task: DeviceScheduleTask | null
