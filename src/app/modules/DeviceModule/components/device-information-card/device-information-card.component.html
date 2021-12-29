@@ -1,8 +1,6 @@
 <div class="card m-2">
   <div class="card-body">
-    <div class="card-title">
-      <h3>Device Information</h3>
-    </div>
+    <h5 class="card-title">Device Information</h5>
     <p class="text-muted">
       This is the information contained on the pi itself. In the event the pi loses connection, the schedules may
       become out
@@ -17,56 +15,19 @@
           {{deviceInformation.aquarium ? deviceInformation.aquarium.name:"None"}}
         </div>
       </div>
-      <h4>Camera Configuration</h4>
-      <h5>Schedules on Device</h5>
+      <h6>Schedules on Device</h6>
       <table class="w-100">
-        <th>
-          Schedule Name
-        </th>
-        <th>
-          Service Host
-        </th>
         <tr *ngFor="let schedule of deviceInformation.schedules">
           <td>{{schedule.name}}</td>
           <td>{{schedule.host}}</td>
         </tr>
       </table>
       <hr>
-      <h5>Queue</h5>
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-          </tr>
-        </tbody>
-      </table>
-      <hr>
-      <h5>Configuration</h5>
+      <h6>Configuration</h6>
       <div class="row">
-        <code>{{deviceInformation.config}}</code>
+        <div class="col">
+          <pre><code>{{deviceInformation.config}}</code></pre>
+        </div>
       </div>
     </div>
     <ng-template #loading>

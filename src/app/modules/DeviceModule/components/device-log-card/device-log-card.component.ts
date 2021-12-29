@@ -20,7 +20,8 @@ export class DeviceLogCardComponent implements OnInit {
 
   clearingLog: boolean;
   
-  constructor(public _aquariumService: AquariumService, public notifier: NotificationService) { }
+  constructor(public _aquariumService: AquariumService,
+    public notifier: NotificationService) { }
 
   ngOnInit() {
   }
@@ -33,6 +34,7 @@ export class DeviceLogCardComponent implements OnInit {
       this.deviceLog = data;
     }, err => {
       console.log(err);
+      this.notifier.notify("error","Could not retrieve debug log from aquarium device");
     });
   }
   clickClearLog() {
