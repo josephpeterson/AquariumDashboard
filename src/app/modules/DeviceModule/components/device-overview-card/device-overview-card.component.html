@@ -25,7 +25,7 @@
         </div>
     </div>
     <div class="row" style="height:100px">
-        <div *ngIf="deviceConnectionStatus != DeviceConnectionStatus.Connecting && deviceInformation">
+        <div *ngIf="deviceInformation || (deviceConnectionStatus != DeviceConnectionStatus.Connecting && deviceInformation)">
             <div class="col-auto">
                 <small>
                     Version: {{deviceInformation.version}}
@@ -34,6 +34,11 @@
             <div class="col-auto">
                 <small>
                     Running Tasks: <b>{{deviceInformation.runningJobs.length}}</b>
+                </small>
+            </div>
+            <div class="col-auto">
+                <small>
+                    Next Task: <b>{{getNextTaskETA()}}</b>
                 </small>
             </div>
             <div class="col-auto">

@@ -34,8 +34,11 @@
     <ng-template #noTasks>
       <p class="p-2">This device does not have any tasks</p>
     </ng-template>
-    <div class="row">
-      <button class="btn btn-primary" (click)="clickAddTask()">Add Task</button>
-    </div>
+    
+  </div>
+  <div class="card-footer">
+    <button mat-list-item type="button" class="btn btn-primary btn-sm" (click)="clickAddTask()">
+      <fa-icon class="mr-2" [icon]="faPlus"></fa-icon>Create Task
+    </button>
   </div>
 </div>

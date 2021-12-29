@@ -53,4 +53,10 @@ export class DeviceOverviewCardComponent {
     public readableDate(dateString: string) {
         return moment(dateString).calendar();
     }
+    public getNextTaskETA() {
+        var task = this.deviceInformation.scheduledJobs[0];
+        if(!task)
+            return;
+        return moment.duration(moment(task.startTime).diff(this.deviceInformation.updatedAt)).humanize();
+    }
 }

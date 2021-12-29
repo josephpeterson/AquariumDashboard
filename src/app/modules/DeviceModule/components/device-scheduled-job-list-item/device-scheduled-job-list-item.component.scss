@@ -6,3 +6,11 @@
     height: 32px;
     width: 32px;
 }
+.operations {
+    visibility: hidden;
+}
+.row-item:hover {
+    .operations {
+        visibility: visible;
+    }
+}

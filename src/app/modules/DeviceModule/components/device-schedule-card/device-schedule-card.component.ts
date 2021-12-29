@@ -21,7 +21,7 @@ export class DeviceScheduleCardComponent implements OnInit {
   public icon_delete = faTrash;
   public faMinus = faMinus;
   public icon_edit = faPenFancy;
-  public icon_create = faPlus;
+  public faPlus = faPlus;
   public iconStyle = { 'stroke': '#9ed2da', 'color': '#9ed2da' };
 
 

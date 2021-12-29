@@ -1,10 +1,16 @@
 <div class="card p-3" *ngIf="deviceConnectionStatus$ | async as deviceConnectionStatus">
+  <h5 class="card-title">Scheduled Jobs</h5>
+  <p class="card-text">
+    These are all of the scheduled jobs currently assigned to your aquarium device. You will be able to cancel or perform tasks early here.
+  </p>
   <div *ngIf="deviceConnectionStatus == DeviceConnectionStatus.Connected || (deviceInformation$ | async)">
     <div *ngIf="(deviceInformation$ | async) as deviceInformation">
-      <ul *ngIf="deviceInformation.scheduledJobs.length > 0 else noScheduledJobs">
-        <device-scheduled-job-list-item *ngFor="let scheduledJob of deviceInformation.scheduledJobs" [device]="(aquarium$ | async).device"
-          [scheduledJob]="scheduledJob"></device-scheduled-job-list-item>
-      </ul>
+      <div class="task-list" *ngIf="deviceInformation.scheduledJobs.length > 0 else noScheduledJobs">
+        <div class="task list-group-item" *ngFor="let scheduledJob of deviceInformation.scheduledJobs">
+          <device-scheduled-job-list-item [device]="(aquarium$ | async).device" [scheduledJob]="scheduledJob">
+          </device-scheduled-job-list-item>
+        </div>
+      </div>
       <ng-template #noScheduledJobs>
         <h6>No scheduled jobs on this device</h6>
       </ng-template>

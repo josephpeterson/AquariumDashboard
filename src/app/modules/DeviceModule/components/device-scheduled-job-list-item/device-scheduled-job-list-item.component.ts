@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { AquariumService } from 'src/app/services/aquarium.service';
 
 import { DeviceSensor } from 'src/app/models/DeviceSensor';
-import { faChargingStation, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faChargingStation, faMinusCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { NotificationService } from 'src/app/services/notification.service';
 import { DeviceScheduledJob } from 'src/app/models/DeviceScheduledJob';
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
@@ -22,6 +22,8 @@ export class DeviceScheduledJobListItemComponent implements OnInit {
 
   @Input("device") device: AquariumDevice;
   @Input("scheduledJob") scheduledJob: DeviceScheduledJob;
+
+  public faMinusCircle = faMinusCircle;
 
   constructor(public _aquariumService: AquariumService,
     public store: Store<AppState>,
@@ -43,7 +45,7 @@ export class DeviceScheduledJobListItemComponent implements OnInit {
     return job.status == JobStatus.Running;
   }
   public isJobCancelable(job:DeviceScheduledJob) {
-    return job.status == JobStatus.Running || job.status == JobStatus.Pending;
+    return job.status != JobStatus.Running;
   }
   public clickPerformScheduledJob(job:DeviceScheduledJob) {
     this._aquariumService.performScheduleTask(this.device.id,job.task).subscribe(

@@ -18,7 +18,7 @@ import { Aquarium } from 'src/app/models/Aquarium';
 @Component({
   selector: 'device-scheduled-job-card',
   templateUrl: './device-scheduled-job-card.component.html',
-  //styleUrls: ['./device-scheduled-job-card.component.scss']
+  styleUrls: ['./device-scheduled-job-card.component.scss']
 })
 export class DeviceScheduledJobCardComponent {
 

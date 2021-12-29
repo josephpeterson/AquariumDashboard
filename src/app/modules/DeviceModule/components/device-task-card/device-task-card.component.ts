@@ -3,7 +3,7 @@ import { Aquarium } from 'src/app/models/Aquarium';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
 
-import { faCheckCircle, faEdit, faMinus, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faCheckCircle, faEdit, faMinus, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { DeviceScheduleState } from 'src/app/models/DeviceScheduleState';
 import * as moment from 'moment';
 import { DeviceScheduleTask } from 'src/app/models/DeviceScheduleTask';
@@ -14,6 +14,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { CreateScheduleTaskModalComponent } from 'src/app/modules/SharedModule/modals/create-schedule-task-modal/create-schedule-task-modal.component';
 import { ConfirmModalComponent } from 'src/app/modules/SharedModule/modals/confirm-modal/confirm-modal.component';
 import { take } from 'rxjs/operators';
+import { AppState } from 'src/app/app.state';
+import { Store } from '@ngrx/store';
+import { AquariumLoadDeployedDeviceByAquaruiumId } from 'src/app/store/aquarium/aquarium.actions';
 
 @Component({
   selector: 'device-task-card',
@@ -32,10 +35,13 @@ export class DeviceTaskCardComponent implements OnInit {
   scheduleState: DeviceScheduleState;
   performingTask: boolean;
   taskNames: any[];
+  
+  public faPlus = faPlus;
 
 
   constructor(public _aquariumService: AquariumService,
     public _dialog: MatDialog,
+    public store: Store<AppState>,
     public notifier: NotificationService) { }
 
   ngOnInit() {
@@ -62,7 +68,12 @@ export class DeviceTaskCardComponent implements OnInit {
       }
     });
     dialog.afterClosed().subscribe((task: DeviceScheduleTask) => {
-      this.device.tasks.splice(0,0,task);
+      if(task)
+      {
+        this.device.tasks.splice(0,0,task);
+        this.notifier.notify("success", "New task created successfully");
+        this.store.dispatch(new AquariumLoadDeployedDeviceByAquaruiumId(this.device.id));
+      }
     })
   }
   public clickUpdateTask(task: DeviceScheduleTask) {
@@ -75,7 +86,11 @@ export class DeviceTaskCardComponent implements OnInit {
     });
     dialog.afterClosed().subscribe(d => {
       if(d)
+      {
         this.device.tasks.splice(this.device.tasks.indexOf(task),1,d);
+        this.notifier.notify("success", "Task updated successfully");
+        this.store.dispatch(new AquariumLoadDeployedDeviceByAquaruiumId(this.device.id));
+      }
     });
   }
   public clickDeleteTask(task: DeviceScheduleTask) {
@@ -89,6 +104,7 @@ export class DeviceTaskCardComponent implements OnInit {
         this._aquariumService.deleteDeviceTask(this.device.id,task.id).subscribe(() => {
           this.device.tasks.splice(this.device.tasks.indexOf(task),1);
           this.notifier.notify("success","Task deleted");
+          this.store.dispatch(new AquariumLoadDeployedDeviceByAquaruiumId(this.device.id));
         },err => {
           this.notifier.notify("error","Could not delete task");
         })
