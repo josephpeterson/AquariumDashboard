@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { DeviceSchedule } from 'src/app/models/DeviceSchedule';
 import { DeviceScheduleTask } from 'src/app/models/DeviceScheduleTask';
 import { DeviceScheduleTaskAssignment } from 'src/app/models/DeviceScheduleTaskAssignment';
 
@@ -11,6 +12,7 @@ import { DeviceScheduleTaskAssignment } from 'src/app/models/DeviceScheduleTaskA
 export class CreateTaskListItemComponent implements OnInit {
 
   @Input() taskAssignment: DeviceScheduleTaskAssignment;
+  @Input() schedule: DeviceSchedule;
   @Input() disabled: boolean;
   public faTrash = faTrash;
 
@@ -41,7 +43,6 @@ export class CreateTaskListItemComponent implements OnInit {
     this.filters.forEach(f => {
       this.taskAssignment.dateConditions += f.value ? "1":"0";
     });
-    console.debug("here",this.taskAssignment.dateConditions);
   }
   public getDateConditionText() {
     var fs = this.filters.filter(f => f.value);
@@ -50,5 +51,8 @@ export class CreateTaskListItemComponent implements OnInit {
     if(fs.length == 1)
       return `This task will run every ${fs[0].name}`;
     return `This task will run ${fs.length} times a week`;
+  }
+  public getUniqueClass() {
+    return this.schedule.taskAssignments.indexOf(this.taskAssignment);
   }
 }

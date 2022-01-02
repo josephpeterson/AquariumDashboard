@@ -13,23 +13,24 @@
             <p class="card-text">
               Manage assigned device sensors here.
             </p>
-            <div *ngIf="(readableTypes | async) as types">
-              <div *ngFor="let s of d.sensors">
+            <div *ngIf="(readableTypes | async) as types" class="generic-list">
+              <div *ngFor="let s of d.sensors" class="generic-list-item">
                 <device-sensor-list-item [sensor]="s" [device]="d" [deviceInformation]="deviceInformation$ | async" [types]="types"></device-sensor-list-item>
               </div>
             </div>
 
 
           </div>
-          <div class="card-body">
-              <button class="btn btn-success" (click)="clickAddSensor(d)">Add Sensor</button>
+          <div class="card-footer">
+            <button mat-list-item type="button" class="btn btn-primary btn-sm" (click)="clickAddSensor(d)">
+              <fa-icon class="mr-2" [icon]="faPlus"></fa-icon>Create Sensor
+            </button>
           </div>
         </div>
 
 
       </div>
       <div class="col-md">
-
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Device Model</h5>
@@ -40,11 +41,6 @@
             </p>
             <h6>Gpio Usage</h6>
             <device-gpio-card [device]="d"></device-gpio-card>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-body">
-            <p>This is where upcomming tasks could be</p>
           </div>
         </div>
       </div>

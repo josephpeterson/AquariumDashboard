@@ -63,3 +63,24 @@ p.content {
     --pink-color: #E63946;
     --light-color: #F1FAEE;
 }
+
+
+
+.generic-list {
+    min-height:400px;
+    max-height: 400px;
+    border:1px solid #dcdcdc;
+    background-color:#e6f3f5;
+    overflow: auto;
+  
+  
+    .generic-list-item {
+        cursor: pointer;
+        padding: 0.75rem 1.25rem;
+        background-color: #fff;
+        border-bottom: 1px solid rgba(0,0,0,.125);
+    }
+    .generic-list-item:hover {
+        background-color:rgba(150,150,150,0.1);
+    }   
+  }

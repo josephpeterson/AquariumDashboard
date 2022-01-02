@@ -1,13 +1,13 @@
 <div class="card">
   <div class="card-body">
-    <h5 class="card-title">Task Queue</h5>
+    <h5 class="card-title">Tasks</h5>
     <p class="card-text">
       All tasks created on this device.
     </p>
     <ng-container *ngIf="device.tasks && device.tasks.length > 0 else noTasks">
-      <div class="task-list">
+      <div class="generic-list">
         <div *ngFor="let task of device.tasks" (click)="clickUpdateTask(task)">
-          <div class="task list-group-item">
+          <div class="generic-list-item">
             <div class="row">
               <div class="col">
                 Name: {{task.name}} TaskId: {{task.id}} Task Type: {{(task.taskTypeId)}}

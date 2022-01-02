@@ -66,6 +66,11 @@ export class DeviceScheduledJobListItemComponent implements OnInit {
         this.notifier.notify("error", "Could not stop scheduled job");
       })
   }
+  public getTaskFromJob(job: DeviceScheduledJob) {
+    if(job.task) return job.task;
+    var task = this.device.tasks.filter(t => t.id == job.taskId)[0];
+    return task;
+  }
   public readableDuration(time: string) {
     var d = moment(time).diff(moment());
     return moment.duration(d).humanize();

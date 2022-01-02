@@ -338,6 +338,9 @@ export class AquariumService {
   public getAllScheduledJobsOnDevice(deviceId) {
     return this.http.get<DeviceScheduledJob[]>(this._url + AquariumApiEndpoints.SCHEDULE_RETRIEVE_SCHEDULED_JOBS_ON_DEVICE.aggregate(deviceId));
   }
+  public getAllScheduledJobs(deviceId,pagination: PaginationSliver) {
+    return this.http.post<DeviceScheduledJob[]>(this._url + AquariumApiEndpoints.SCHEDULE_RETRIEVE_SCHEDULED_JOBS.aggregate(deviceId),pagination);
+  }
   public stopScheduledJob(deviceId,scheduledJob: DeviceScheduledJob) {
     return this.http.post(this._url + AquariumApiEndpoints.SCHEDULE_SCHEDULED_JOB_STOP.aggregate(deviceId), scheduledJob);
   }

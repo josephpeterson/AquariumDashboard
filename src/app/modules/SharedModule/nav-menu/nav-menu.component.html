@@ -11,8 +11,8 @@
           src="https://image.flaticon.com/icons/png/512/31/31267.png" />Dashboard</a>
       <a *ngIf="!(user$ | async)" class="navbar-brand" [routerLink]='["/"]'><img height="30px" class="mr-2"
           src="https://image.flaticon.com/icons/png/512/31/31267.png" />Aquarium Monitor</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse"
-        aria-label="Toggle navigation" [attr.aria-expanded]="isExpanded" (click)="toggle()">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse"
+        aria-label="Toggle navigation" (click)="toggle()">
         <span class="navbar-toggler-icon"></span>
       </button>
 
@@ -20,7 +20,7 @@
 
 
       <!-- Aquarium Navigation -->
-      <div class="navbar-collapse" [ngClass]='{"show": isExpanded}'>
+      <div class="navbar-collapse" [class.collapse]='!isExpanded'>
 
         <!-- 
         <button *ngIf="aquarium$ | async as aquarium" class="btn nav-link"

@@ -3,7 +3,7 @@ import { Aquarium } from 'src/app/models/Aquarium';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
 
-import { faCheckCircle, faEdit, faSync, faTrash, faVial, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { faCheckCircle, faEdit, faPlus, faSync, faTrash, faVial, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateDeviceSensorModalComponent } from '../../SharedModule/modals/create-device-sensor-modal/create-device-sensor-modal.component';
 import { take } from 'rxjs/operators';
@@ -28,6 +28,7 @@ export class DeviceSensorsComponent implements OnInit {
   public aquarium$: Observable<Aquarium> = this.store.select(getSelectedAquarium);
   public deviceInformation$: Observable<DeviceInformation> = this.store.select(getDeployedDeviceInformation);
   public faRefresh: IconDefinition = faSync;
+  public faPlus = faPlus;
   public readableTypes = new Subject();
 
   constructor(public _aquariumService: AquariumService,

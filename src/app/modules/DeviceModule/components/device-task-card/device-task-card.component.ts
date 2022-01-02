@@ -21,7 +21,7 @@ import { AquariumLoadDeployedDeviceByAquaruiumId } from 'src/app/store/aquarium/
 @Component({
   selector: 'device-task-card',
   templateUrl: './device-task-card.component.html',
-  styleUrls: ['./device-task-card.component.scss']
+  //styleUrls: ['./device-task-card.component.scss']
 })
 export class DeviceTaskCardComponent implements OnInit {
 

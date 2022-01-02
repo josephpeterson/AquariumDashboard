@@ -12,7 +12,7 @@ import { NotificationService } from 'src/app/services/notification.service';
 @Component({
   selector: 'device-schedule-card',
   templateUrl: './device-schedule-card.component.html',
-  styleUrls: ['./device-schedule-card.component.scss']
+  //styleUrls: ['./device-schedule-card.component.scss']
 })
 export class DeviceScheduleCardComponent implements OnInit {
 

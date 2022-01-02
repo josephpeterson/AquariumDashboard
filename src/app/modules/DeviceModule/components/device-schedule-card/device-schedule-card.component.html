@@ -11,10 +11,10 @@
     <div class="row">
       <div class="col">
         <h6>On Device</h6>
-        <div class="schedule-list">
+        <div class="generic-list">
           <ng-container *ngIf="device.schedules && device.schedules.length > 0 else noDeployments">
             <div *ngFor="let schedule of device.schedules" (click)="clickUpdateSchedule(schedule)">
-              <div class="schedule list-group-item">
+              <div class="generic-list-item">
                 <div class="row">
                   <div class="col">
                     {{schedule.name}}

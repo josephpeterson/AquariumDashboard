@@ -43,7 +43,6 @@ import { AuthGuard } from 'src/app/guards/AuthGuard';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AquariumInterceptor } from 'src/app/services/aquarium.interceptor';
 import { DeviceATOStatusComponent } from './components/ato-status/ato-status.component';
-import { DeviceSensorCardComponent } from './components/device-sensor-card/device-sensor-card.component';
 import { DeviceOverviewCardComponent } from './components/device-overview-card/device-overview-card.component';
 import { DeviceSnapshotCarouselComponent } from './components/device-snapshot-carousel/device-snapshot-carousel.component';
 import { NotificationService } from 'src/app/services/notification.service';
@@ -112,7 +111,6 @@ import { DeviceSensorListItemComponent } from './components/device-sensor-list-i
     
     
     DeviceSensorsComponent,
-    DeviceSensorCardComponent,
     DeviceScheduledJobCardComponent,
     DeviceScheduledJobListItemComponent,
     DeviceGpioCardComponent,

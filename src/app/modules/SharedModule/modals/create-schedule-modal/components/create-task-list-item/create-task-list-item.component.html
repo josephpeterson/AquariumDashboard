@@ -1,7 +1,10 @@
 <div>
   <div class="row">
     <div class="col">
-      <generic-select [disabled]="disabled" label="Trigger" selectType="TriggerTypes"
+      #{{getUniqueClass()}}
+    </div>
+    <div class="col">
+      <generic-select [disabled]="disabled" label="" selectType="TriggerTypes"
         [(inputModel)]="taskAssignment.triggerTypeId">
       </generic-select>
     </div>
@@ -12,6 +15,12 @@
       </device-sensor-select>
       <device-task-select [disabled]="disabled" [(inputModel)]="taskAssignment.triggerTask" *ngSwitchCase="2">
       </device-task-select>
+      <div *ngSwitchCase="3">
+        <mat-form-field>
+          <input type="number" matInput placeholder="Task assignment #"
+          [(inputModel)]="taskAssignment.triggerTaskAssignmentId" [disabled]="disabled">
+        </mat-form-field>
+      </div>
     </div>
     <div class="col">
       <device-task-select [disabled]="disabled" [(inputModel)]="taskAssignment.task"></device-task-select>
@@ -40,19 +49,21 @@
     <div id="accordion" role="tablist" class="col">
       <div id="heading1" role="tab">
         <h6 class="panel-title">
-          <a aria-controls="example1" aria-expanded="true" data-parent="#accordion" data-toggle="collapse"
-            href="#example1" role="button">Date Conditions<span class="glyphicon glyphicon-collapse-down"></span>
+          <a aria-expanded="true" data-parent="#accordion" data-toggle="collapse" [href]="'#example' + getUniqueClass()"
+            role="button">Date Conditions<span class="glyphicon glyphicon-collapse-down"></span>
           </a>
         </h6>
       </div>
-      <div aria-labelledby="heading1" class="panel-collapse collapse in" id="example1" role="tabpanel">
+      <div aria-labelledby="heading1" class="panel-collapse collapse in" [id]="'example' + getUniqueClass()"
+        role="tabpanel">
         <div class="panel-body">
           <div class="row">
             <div class="col">
-              <mat-checkbox *ngFor="let filter of filters" class="p-2" [(ngModel)]="filter.value" (change)="updateFilters()">{{filter.name}}
+              <mat-checkbox *ngFor="let filter of filters" class="p-2" [(ngModel)]="filter.value"
+                (change)="updateFilters()">{{filter.name}}
               </mat-checkbox>
             </div>
-            
+
           </div>
           <div class="row">
             <div class="col">
@@ -62,8 +73,5 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="row">
-    <hr>
   </div>
 </div>
