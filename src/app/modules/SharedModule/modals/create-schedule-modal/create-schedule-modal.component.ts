@@ -21,6 +21,7 @@ export class CreateScheduleModalComponent implements OnInit {
   @Input("schedule_list") scheduleList: DeviceSchedule[];
   @Input("addingSchedule") addingSchedule;
   public icon_create = faPlus;
+  public faTrash = faTrash;
 
 
 
@@ -64,7 +65,7 @@ export class CreateScheduleModalComponent implements OnInit {
       //trigger task
       var triggerTask = tasks.filter(tt => tt.id == t.triggerTaskId);
       if (triggerTask.length)
-        t.triggerTask = task[0];
+        t.triggerTask = triggerTask[0];
 
       //trigger sensor
       var sensor = sensors.filter(s => s.id == t.triggerSensorId);
