@@ -46,7 +46,7 @@
     </div>
   </div>
   <div class="row">
-    <div id="accordion" role="tablist" class="col">
+    <div id="accordion" role="tablist" class="col" *ngIf="taskAssignment.triggerTypeId == 0">
       <div id="heading1" role="tab">
         <h6 class="panel-title">
           <a aria-expanded="true" data-parent="#accordion" data-toggle="collapse" [href]="'#example' + getUniqueClass()"

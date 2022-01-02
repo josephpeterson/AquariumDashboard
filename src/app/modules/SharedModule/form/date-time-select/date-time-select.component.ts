@@ -32,6 +32,6 @@ export class DateTimeSelectComponent {
 
     ngOnInit() {
         if(this.inputModel)
-            this.inputModel = moment(this.inputModel).format("hh:mm:ss");
+            this.inputModel = moment(this.inputModel).format("HH:mm:ss");
     }
 }
