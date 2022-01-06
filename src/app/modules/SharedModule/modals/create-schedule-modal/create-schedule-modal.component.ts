@@ -91,7 +91,7 @@ export class CreateScheduleModalComponent implements OnInit {
         t.triggerTaskId = t.triggerTask.id;
     });
     this._aquariumService.createDeviceSchedule(this.device.id, this.schedule).subscribe((data: DeviceSchedule) => {
-      this._dialogRef.close();
+      this._dialogRef.close(data);
     }, err => {
       this.disableInput = false;
       this._notifier.notify("error", "Could not create device schedule...");
@@ -101,7 +101,7 @@ export class CreateScheduleModalComponent implements OnInit {
   public clickDeleteSchedule() {
     this.disableInput = true;
     this._aquariumService.deleteDeviceSchedule(this.device.id, this.schedule.id).subscribe(data => {
-      this._dialogRef.close();
+      this._dialogRef.close(data);
     }, err => {
       this.disableInput = false;
       this._notifier.notify("error", "Could not delete device schedule...");

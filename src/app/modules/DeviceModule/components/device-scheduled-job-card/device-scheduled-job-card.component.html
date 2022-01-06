@@ -1,55 +1,60 @@
 <div class="card p-3" *ngIf="deviceConnectionStatus$ | async as deviceConnectionStatus">
-  <h5 class="card-title">Scheduled Jobs</h5>
-  <p class="card-text">
-    These are all of the scheduled jobs currently assigned to your aquarium device. You will be able to cancel or
-    perform tasks early here.
-  </p>
-  <div class="row">
-    <div class="col">
-      <ul class="nav">
+  <div *ngIf="aquarium$ | async as aquarium">
+    <h5 class="card-title">Scheduled Jobs</h5>
+    <p class="card-text">
+      These are all of the scheduled jobs currently assigned to your aquarium device. You will be able to cancel or
+      perform tasks early here.
+    </p>
+    <div class="row pl-3">
+
+      <!-- Navigation -->
+      <ul class="nav nav-tabs">
         <li class="nav-item">
-          <button class="btn btn-link nav-link" [class.active]="tab == CardTab.Scheduled" aria-current="page"
-            (click)="clickCardTab(CardTab.Scheduled)">Scheduled</button>
+          <a class="nav-link" [queryParams]="{jobs: CardTab.Scheduled}" [routerLink]="" [class.active]="isTabActive(CardTab.Scheduled)" (click)="clickCardTab(CardTab.Scheduled)">Scheduled</a>
         </li>
         <li class="nav-item">
-          <button class="btn btn-link" [class.active]="tab == CardTab.Completed"
-            (click)="clickCardTab(CardTab.Completed)">Completed</button>
-        </li>
+          <a class="nav-link" [queryParams]="{jobs: CardTab.Completed}" [routerLink]="" [class.active]="isTabActive(CardTab.Completed)" (click)="clickCardTab(CardTab.Completed)">Completed</a>
+          </li>
       </ul>
     </div>
-  </div>
-  <ng-container *ngIf="tab == CardTab.Scheduled else Completed">
-    <div *ngIf="deviceConnectionStatus == DeviceConnectionStatus.Connected || (deviceInformation$ | async)">
-      <div *ngIf="(deviceInformation$ | async) as deviceInformation">
-        <div class="generic-list" *ngIf="deviceInformation.scheduledJobs.length > 0 else noScheduledJobs">
-          <div class="generic-list-item" *ngFor="let scheduledJob of deviceInformation.scheduledJobs">
-            <device-scheduled-job-list-item [device]="(aquarium$ | async).device" [scheduledJob]="scheduledJob">
-            </device-scheduled-job-list-item>
+    <div class="generic-list">
+
+      <ng-container *ngIf="isTabActive(CardTab.Scheduled) else Completed">
+        <div *ngIf="deviceConnectionStatus == DeviceConnectionStatus.Connected || (deviceInformation$ | async)">
+          <div *ngIf="(deviceInformation$ | async) as deviceInformation">
+            <div *ngIf="deviceInformation.scheduledJobs.length > 0 else noScheduledJobs">
+              <div class="generic-list-item" *ngFor="let scheduledJob of deviceInformation.scheduledJobs">
+                <device-scheduled-job-list-item [device]="(aquarium).device" [scheduledJob]="scheduledJob">
+                </device-scheduled-job-list-item>
+              </div>
+            </div>
+            <ng-template #noScheduledJobs>
+              <h6>No scheduled jobs on this device</h6>
+            </ng-template>
           </div>
         </div>
-        <ng-template #noScheduledJobs>
-          <h6>No scheduled jobs on this device</h6>
-        </ng-template>
-      </div>
-    </div>
-    <div *ngIf="deviceConnectionStatus == DeviceConnectionStatus.Connecting">
-      Loading...
-    </div>
-    <div *ngIf="deviceConnectionStatus == DeviceConnectionStatus.Offline">
-      Could not connect to aquarium device. Please try again later.
-    </div>
-  </ng-container>
-  <ng-template #Completed>
-    <div *ngIf="(completedScheduledJobs$ | async) as completedJobs">
-      <div class="generic-list" *ngIf="completedJobs.length > 0 else noScheduledJobs">
-        <div class="generic-list-item" *ngFor="let scheduledJob of completedJobs">
-          <device-scheduled-job-list-item [device]="(aquarium$ | async).device" [scheduledJob]="scheduledJob">
-          </device-scheduled-job-list-item>
+        <div *ngIf="deviceConnectionStatus == DeviceConnectionStatus.Connecting">
+          Loading...
         </div>
-      </div>
-      <ng-template #noScheduledJobs>
-        <h6>No completed jobs</h6>
+        <div *ngIf="deviceConnectionStatus == DeviceConnectionStatus.Offline">
+          Could not connect to aquarium device. Please try again later.
+        </div>
+      </ng-container>
+      <ng-template #Completed>
+        <div *ngIf="(completedScheduledJobs$ | async) as completedJobs">
+          <div *ngIf="completedJobs.length > 0 else noScheduledJobs">
+            <div class="generic-list-item" *ngFor="let scheduledJob of completedJobs">
+              <device-scheduled-job-list-item [device]="(aquarium).device" [scheduledJob]="scheduledJob">
+              </device-scheduled-job-list-item>
+            </div>
+          </div>
+          <ng-template #noScheduledJobs>
+            <h6>No completed jobs</h6>
+          </ng-template>
+        </div>
+
       </ng-template>
     </div>
-  </ng-template>
+  </div>
+
 </div>

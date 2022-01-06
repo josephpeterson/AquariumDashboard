@@ -19,7 +19,6 @@ import { DeviceInformation } from 'src/app/models/DeviceInformation';
 export class DeviceSettingsComponent {
   public aquarium$: Observable<Aquarium> = this.store.select(getSelectedAquarium);
   public deviceInformation$: Observable<DeviceInformation> = this.store.select(getDeployedDeviceInformation);
-  public device: AquariumDevice;
   deviceLog: any;
 
   constructor(public aquariumService: AquariumService,

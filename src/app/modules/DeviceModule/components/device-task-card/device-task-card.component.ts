@@ -17,6 +17,7 @@ import { take } from 'rxjs/operators';
 import { AppState } from 'src/app/app.state';
 import { Store } from '@ngrx/store';
 import { AquariumLoadDeployedDeviceByAquaruiumId } from 'src/app/store/aquarium/aquarium.actions';
+import { DeviceScheduledJob } from 'src/app/models/DeviceScheduledJob';
 
 @Component({
   selector: 'device-task-card',
@@ -53,9 +54,10 @@ export class DeviceTaskCardComponent implements OnInit {
   clickPerformTask(task: DeviceScheduleTask) {
     this.performingTask = true;
     this._aquariumService.performScheduleTask(task.deviceId, task).subscribe(
-      (data) => {
+      (data:DeviceScheduledJob) => {
         this.performingTask = false;
-        this.notifier.notify("success", "Task was performed successfully!");
+        this.notifier.notify("success", "Task running...");
+        this.store.dispatch(new AquariumLoadDeployedDeviceByAquaruiumId(this.device.id));
       }, err => {
         this.performingTask = false;
         this.notifier.notify("error", "Task: " + err.error);

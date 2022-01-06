@@ -55,4 +55,9 @@ export class CreateTaskListItemComponent implements OnInit {
   public getUniqueClass() {
     return this.schedule.taskAssignments.indexOf(this.taskAssignment);
   }
+  public clickRemoveTask(taId: number) {
+    var ta = this.schedule.taskAssignments.filter(ta => ta.id == taId)[0];
+    if(ta)
+      this.schedule.taskAssignments.splice(this.schedule.taskAssignments.indexOf(ta),1);
+  }
 }

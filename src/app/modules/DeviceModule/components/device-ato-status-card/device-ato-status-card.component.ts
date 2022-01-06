@@ -15,15 +15,22 @@ import { PaginationSliver } from 'src/app/models/PaginationSliver';
 import { GpioPinValue } from 'src/app/models/types/GpioPinValue';
 import { DeviceScheduleTask } from 'src/app/models/DeviceScheduleTask';
 import { NotificationService } from 'src/app/services/notification.service';
+import { DeviceInformation } from 'src/app/models/DeviceInformation';
+import { DeviceScheduleTaskTypes } from 'src/app/models/types/DeviceScheduleTaskTypes';
+import { JobStatus } from 'src/app/models/types/JobStatus';
+import { DeviceConnectionStatus } from 'src/app/models/types/DeviceConnectionStatus';
 
 @Component({
-  selector: 'device-ato-status',
-  templateUrl: './ato-status.component.html',
-  styleUrls: ['./ato-status.component.scss']
+  selector: 'device-ato-status-card',
+  templateUrl: './device-ato-status-card.component.html',
+  styleUrls: ['./device-ato-status-card.component.scss']
 })
 export class DeviceATOStatusComponent implements OnInit {
 
-  @Input("aquarium") public aquarium: Aquarium;
+  @Input() public device: AquariumDevice;
+  @Input() public deviceInformation: DeviceInformation; //deployed device information
+  @Input() public deviceConnectionStatus: DeviceConnectionStatus;
+  public DeviceConnectionStatus = DeviceConnectionStatus;
   scanning: boolean;
 
   faCheckCircle = faCheckCircle;
@@ -35,6 +42,7 @@ export class DeviceATOStatusComponent implements OnInit {
   pinging: boolean;
 
   public atoStatus: ATOStatus;
+  public enabled:boolean;
   public atoHistory: ATOStatus[];
 
   public loading: boolean = false;
@@ -57,23 +65,40 @@ export class DeviceATOStatusComponent implements OnInit {
     this.pagination.descending = true;
     this.pagination.count = 5;
 
-    this.loadStatus();
+    //this.loadStatus();
     this.loadATOHistory();
     this.updateTick = setInterval(() => this.updateATOProgress(), 100);
   }
   ngOnDestroy(): void {
     clearInterval(this.updateTick);
   }
-  public loadStatus() {
-    this.loading = true;
-    this._aquariumService.getDeviceATOStatus(this.aquarium.device.id).subscribe(status => {
-      this.atoStatus = status;
-      this.loading = false;
-      console.log(status);
-      //this.test();
-    }, (err: HttpErrorResponse) => {
-      this.loading = false;
-    })
+  public getRunningJob() {
+    var atoTasks = this.device.tasks.filter(t => t.taskTypeId == DeviceScheduleTaskTypes.StartATO);
+    var task = this.deviceInformation.scheduledJobs.filter(sj => sj.status == JobStatus.Running && atoTasks.filter(t => t.id == sj.taskId).length > 0);
+    if(task.length > 0)
+      return task[0];
+    return null;
+  }
+  public getSensorFromId(id: number) {
+    var sensor = this.device.sensors.find(s => s.id == id);
+    return sensor;
+  }
+  public getNextATOJob() {
+    var atoTasks = this.device.tasks.filter(t => t.taskTypeId == DeviceScheduleTaskTypes.StartATO);
+    var task = this.deviceInformation.scheduledJobs.filter(sj => sj.status == JobStatus.Ready && atoTasks.filter(t => t.id == sj.taskId).length > 0);
+    if(task.length > 0)
+    {
+      task[0].task = atoTasks.filter(t => t.id == task[0].taskId)[0];
+      return task[0];
+
+    }
+    return null;
+  }
+  public checkEnabled() {
+    if(!this.device.tasks)
+      return;
+    var task = this.device.tasks.filter(t => t.taskTypeId == DeviceScheduleTaskTypes.StartATO)
+    return task.length > 0;
   }
   //parse date from utc
   public parseDateFromUtc(date: string, timeOnly: boolean = false) {
@@ -122,7 +147,7 @@ export class DeviceATOStatusComponent implements OnInit {
     }).afterClosed().subscribe((res) => {
       if (res.run) {
         this.loading = true;
-        this._aquariumService.runDeviceATO(this.aquarium.device.id, parseInt(res.runtime)).subscribe(status => {
+        this._aquariumService.runDeviceATO(this.device.id, parseInt(res.runtime)).subscribe(status => {
           this.atoStatus = status;
           this.loading = false;
         }, (err: HttpErrorResponse) => {
@@ -133,7 +158,7 @@ export class DeviceATOStatusComponent implements OnInit {
   }
   public clickStopATO() {
     this.loading = true;
-    this._aquariumService.stopDeviceATO(this.aquarium.device.id).subscribe(status => {
+    this._aquariumService.stopDeviceATO(this.device.id).subscribe(status => {
       this.atoStatus = status;
       this.loading = false;
     }, (err: HttpErrorResponse) => {
@@ -141,21 +166,25 @@ export class DeviceATOStatusComponent implements OnInit {
     })
   }
   public clickRefresh() {
-    this.loadStatus();
+    //this.loadStatus();
     this.loadATOHistory();
   }
   public loadATOHistory() {
-    this._aquariumService.getDeviceATOHistory(this.aquarium.device.id, this.pagination).subscribe(atoHistory => {
+    this._aquariumService.getDeviceATOHistory(this.device.id, this.pagination).subscribe(atoHistory => {
       this.atoHistory = atoHistory;
       //this.loading = false;
     }, (err: HttpErrorResponse) => {
       //this.loading = false;
     })
   }
-  public isRunnable(ato: ATOStatus) {
-    if (!ato)
+  public isRunnable() {
+    var nextTask = this.getNextATOJob();
+    if (!nextTask)
       return false;
-    return ato.floatSensorValue == GpioPinValue.High;
+    var sensor = this.getSensorFromId(nextTask.task.triggerSensorId);
+    if(nextTask.task.triggerSensorValue == null || !sensor)
+      return true;
+    return nextTask.task.triggerSensorValue == sensor.value;
   }
   public loadForward() {
     var add = 5;

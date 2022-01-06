@@ -15,6 +15,8 @@ import { AppState } from 'src/app/app.state';
 import { getDeployedDeviceInformation, getDeviceConnectionStatus, getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { PaginationSliver } from 'src/app/models/PaginationSliver';
+import { Route } from '@angular/compiler/src/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'device-scheduled-job-card',
@@ -33,9 +35,16 @@ export class DeviceScheduledJobCardComponent implements OnInit {
   public CardTab = CardTab;
 
   constructor(public _aquariumService: AquariumService,
+    private route: ActivatedRoute,
     private store: Store<AppState>) { }
   public ngOnInit(): void {
     this.loadScheduledJobHistory();
+
+    this.route.queryParams
+      .subscribe(params => {
+        this.tab = params.jobs;
+      }
+    );
   }
   public loadScheduledJobHistory() {
     this.aquarium$.subscribe(aq => {
@@ -44,7 +53,7 @@ export class DeviceScheduledJobCardComponent implements OnInit {
       pagination.count = 10;
       pagination.descending = true;
       this._aquariumService.getAllScheduledJobs(d.id, pagination).subscribe(scheduledJobs => {
-        if(scheduledJobs)
+        if (scheduledJobs)
           this.completedScheduledJobs$.next(scheduledJobs);
       })
     });
@@ -52,6 +61,11 @@ export class DeviceScheduledJobCardComponent implements OnInit {
   public clickCardTab(tab: CardTab) {
     this.loadScheduledJobHistory();
     this.tab = tab;
+  }
+  public isTabActive(checkTab: CardTab) {
+    if(!this.tab && checkTab == CardTab.Scheduled)
+      return true;
+    return this.tab == checkTab;
   }
 }
 enum CardTab {

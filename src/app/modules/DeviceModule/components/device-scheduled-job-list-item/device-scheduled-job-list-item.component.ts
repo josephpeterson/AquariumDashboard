@@ -12,6 +12,7 @@ import { GpioPinValue } from 'src/app/models/types/GpioPinValue';
 import { AquariumLoadByIdAction, AquariumLoadDeployedDeviceByAquaruiumId, AquariumSelectionAction } from 'src/app/store/aquarium/aquarium.actions';
 import { AppState } from 'src/app/app.state';
 import { Store } from '@ngrx/store';
+import { JobEndReason } from 'src/app/models/types/JobEndReason';
 
 @Component({
   selector: 'device-scheduled-job-list-item',
@@ -23,6 +24,8 @@ export class DeviceScheduledJobListItemComponent implements OnInit {
   @Input("device") device: AquariumDevice;
   @Input("scheduledJob") scheduledJob: DeviceScheduledJob;
 
+  public currentScheduledJobProgress: number;
+  public updateTick;
   public faMinusCircle = faMinusCircle;
 
   constructor(public _aquariumService: AquariumService,
@@ -30,44 +33,38 @@ export class DeviceScheduledJobListItemComponent implements OnInit {
     public notifier: NotificationService) { }
 
   ngOnInit() {
+    this.updateTick = setInterval(() => this.updateScheduledJobProgress(), 100);
   }
-  public getSensorFromId(id:number) {
+  public getSensorFromId(id: number) {
     var sensor = this.device.sensors.find(s => s.id == id);
     return sensor;
   }
-  public getStatusFromJob(job:DeviceScheduledJob) {
+  public getStatusFromJob(job: DeviceScheduledJob) {
     return JobStatus[job.status].toString();
   }
-  public getSensorValueFromId(id:number) {
+  public getEndReasonFromJob(job: DeviceScheduledJob) {
+    return JobEndReason[job.endReason].toString();
+  }
+  public getSensorValueFromId(id: number) {
     return GpioPinValue[id].toString();
   }
-  public isJobRunning(job:DeviceScheduledJob) {
+  public isJobRunning(job: DeviceScheduledJob) {
     return job.status == JobStatus.Running;
   }
-  public isJobCancelable(job:DeviceScheduledJob) {
-    return job.status == JobStatus.Running;
+  public isJobCompleted(job: DeviceScheduledJob) {
+    return job.status == JobStatus.Completed;
   }
-  public clickPerformScheduledJob(job:DeviceScheduledJob) {
-    this._aquariumService.performScheduleTask(this.device.id,job.task).subscribe(
-      (newJob: DeviceScheduledJob) => {
-        //todo we would reload stuff
-        this.notifier.notify("success", "Performed scheduled task");
-        this.store.dispatch(new AquariumLoadDeployedDeviceByAquaruiumId(this.device.id));
-      }, err => {
-        this.notifier.notify("error", "Could not perform scheduled task");
-      })
-  }
-  public clickStopScheduledJob(job:DeviceScheduledJob) {
-    this._aquariumService.stopScheduledJob(this.device.id,job).subscribe(
+  public clickStopScheduledJob(job: DeviceScheduledJob) {
+    this._aquariumService.stopScheduledJob(this.device.id, job).subscribe(
       () => {
-        this.notifier.notify("success", "Scheduled job stopped");
+        this.notifier.notify("success", "Scheduled job stopped job id: " + job.id);
         this.store.dispatch(new AquariumLoadDeployedDeviceByAquaruiumId(this.device.id));
       }, err => {
         this.notifier.notify("error", "Could not stop scheduled job");
       })
   }
   public getTaskFromJob(job: DeviceScheduledJob) {
-    if(job.task) return job.task;
+    if (job.task) return job.task;
     var task = this.device.tasks.filter(t => t.id == job.taskId)[0];
     return task;
   }
@@ -75,14 +72,37 @@ export class DeviceScheduledJobListItemComponent implements OnInit {
     var d = moment(time).diff(moment());
     return moment.duration(d).humanize();
   }
-  public readableDurationLength(startTime:string,endTime: string) {
+  public readableDurationLength(startTime: string, endTime: string) {
     var d = moment(endTime).diff(moment(startTime));
     return moment.duration(d).humanize();
   }
-  public readableTimestamp(time:string) {
+  public readableTimestamp(time: string) {
     return moment(time).local().format("LT");
   }
-  public readableDateTimestamp(time:string) {
+  public readableDateTimestamp(time: string) {
     return moment(time).utc().local().calendar();
+  }
+  public onScheduledJobCompleted() {
+    this.store.dispatch(new AquariumLoadDeployedDeviceByAquaruiumId(this.device.id));
+    this.notifier.notify("success", "Schedule job completed! ID: " + this.scheduledJob.id);
+    this.scheduledJob.status = JobStatus.Pending; //this will get overritten
+  }
+
+  public updateScheduledJobProgress() {
+    if (!this.scheduledJob || this.scheduledJob.status != JobStatus.Running) {
+      clearInterval(this.updateTick);
+      return;
+    }
+    if (this.currentScheduledJobProgress > 100) {
+      clearInterval(this.updateTick);
+      this.onScheduledJobCompleted();
+      return;
+    }
+    var job = this.scheduledJob;
+    var start = Date.parse(job.startTime);
+    var estEnd = Date.parse(job.maximumEndTime);
+    var total = moment(estEnd).diff(start);
+    var runtime = moment().diff(start);
+    this.currentScheduledJobProgress = Math.floor(runtime / total * 100);
   }
 }

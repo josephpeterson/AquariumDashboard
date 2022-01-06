@@ -4,19 +4,22 @@ import { AquariumService } from 'src/app/services/aquarium.service';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
-import { getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
+import { getDeployedDeviceInformation, getDeviceConnectionStatus, getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
 import { take } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
+import { DeviceInformation } from 'src/app/models/DeviceInformation';
+import { DeviceConnectionStatus } from 'src/app/models/types/DeviceConnectionStatus';
 
 @Component({
   selector: 'device-overview',
   templateUrl: './device-overview.component.html',
   //styleUrls: ['./device-overview.component.scss']
 })
-export class DeviceOverviewComponent implements OnInit {
-  public aquarium: Aquarium;
+export class DeviceOverviewComponent {
   public aquarium$: Observable<Aquarium> = this.store.select(getSelectedAquarium);
+  public deviceInformation$: Observable<DeviceInformation> = this.store.select(getDeployedDeviceInformation);
+  public deviceConnectionStatus$: Observable<DeviceConnectionStatus> = this.store.select(getDeviceConnectionStatus);
   public device: AquariumDevice;
   deviceLog: any;
 
@@ -24,13 +27,4 @@ export class DeviceOverviewComponent implements OnInit {
     public dialog: MatDialog,
     public store: Store<AppState>
   ) { }
-  ngOnInit() {
-    this.aquarium$.pipe(take(1)).subscribe(aq => {
-      this.aquarium = aq
-      this.aquariumService.getAquariumDeviceById(aq.device.id).pipe(take(1)).subscribe(d => {
-        this.device = d;
-        d.aquarium = aq;
-      });
-    });
-  }
 }

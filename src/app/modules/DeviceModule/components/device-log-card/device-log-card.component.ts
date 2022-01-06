@@ -13,7 +13,7 @@ import { NotificationService } from 'src/app/services/notification.service';
 })
 export class DeviceLogCardComponent implements OnInit {
 
-  @Input("device") device: AquariumDevice;
+  @Input() device: AquariumDevice;
   @ViewChild("scrollWindow") private scrollContainer: ElementRef;
 
   deviceLog: any;
@@ -24,11 +24,11 @@ export class DeviceLogCardComponent implements OnInit {
     public notifier: NotificationService) { }
 
   ngOnInit() {
+    this.clickGetDeviceLog();
   }
 
   clickGetDeviceLog() {
-    if(!this.device)
-      return;
+    console.warn("Getting device log...");
     delete this.deviceLog;
     this._aquariumService.getDeviceLog(this.device.id).subscribe(data => {
       this.deviceLog = data;

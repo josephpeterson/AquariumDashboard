@@ -8,13 +8,16 @@ import { MatDialog } from '@angular/material/dialog';
 import { CreateScheduleModalComponent } from 'src/app/modules/SharedModule/modals/create-schedule-modal/create-schedule-modal.component';
 import { SelectScheduleModalComponent } from 'src/app/modules/SharedModule/modals/select-schedule-modal/select-schedule-modal.component';
 import { NotificationService } from 'src/app/services/notification.service';
+import { AquariumLoadByIdAction, AquariumLoadDeployedDeviceByAquaruiumId, AquariumSelectionAction } from 'src/app/store/aquarium/aquarium.actions';
+import { AppState } from 'src/app/app.state';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'device-schedule-card',
   templateUrl: './device-schedule-card.component.html',
   //styleUrls: ['./device-schedule-card.component.scss']
 })
-export class DeviceScheduleCardComponent implements OnInit {
+export class DeviceScheduleCardComponent {
 
   @Input("device") device: AquariumDevice;
 
@@ -32,54 +35,28 @@ export class DeviceScheduleCardComponent implements OnInit {
 
   constructor(private _aquariumService: AquariumService,
     private _notifier: NotificationService,
+    private store: Store<AppState>,
     private _dialog: MatDialog) { }
 
-  ngOnInit() {
-
-  }
   public reloadDeviceSchedules() {
-    this._aquariumService.getAquariumDeviceById(this.device.id).subscribe((data: AquariumDevice) => {
-      this.device.schedules = data.schedules;
-    }, err => {
-
-    })
+    this.store.dispatch(new AquariumSelectionAction(this.device.aquariumId));
+    this.store.dispatch(new AquariumLoadDeployedDeviceByAquaruiumId(this.device.id));
   }
-
   public clickCreateSchedule() {
     this.clickUpdateSchedule(new DeviceSchedule());
   }
-
-  public clickDeploySchedule() {
-    this.managingSchedules = true;
-
-
-    this._aquariumService.deploySchedule(this.device.id, this.newScheduleDeployment.id).subscribe((data: DeviceSchedule[]) => {
-      this._notifier.notify("success", `Schedule '${this.newScheduleDeployment.name}' deployed to device!`);
-      console.debug(data);
-      this.device.schedules = data;
-      this.managingSchedules = false;
-
-    }, err => {
-      this._notifier.notify("error", "Could not deploy schedule to device");
-      console.error(err);
-      this.managingSchedules = false;
-
-    })
-  }
-
   public clickDeleteSchedule(schedule: DeviceSchedule) {
     this.managingSchedules = true;
     this._aquariumService.deleteDeviceSchedule(this.device.id, schedule.id).subscribe((data: DeviceSchedule[]) => {
       this._notifier.notify("success", `Schedule '${schedule.name}' deleted!`);
       this.managingSchedules = false;
-      this.device.schedules = data;
+      this.reloadDeviceSchedules();
     }, err => {
       this._notifier.notify("error", "Could not remove schedule from device");
       console.error(err);
       this.managingSchedules = false;
     })
   }
-
   public clickUpdateSchedule(schedule: DeviceSchedule) {
 
     var dialog = this._dialog.open(CreateScheduleModalComponent, {
@@ -90,38 +67,8 @@ export class DeviceScheduleCardComponent implements OnInit {
       }
     });
     dialog.afterClosed().subscribe(d => {
-      this.reloadDeviceSchedules();
+      if(d)
+        this.reloadDeviceSchedules();
     });
   }
-
-  public clickAddSchedule() {
-    var dialog = this._dialog.open(SelectScheduleModalComponent, {
-      data: this.device
-    });
-    dialog.afterClosed().subscribe((schedule: DeviceSchedule) => {
-      console.log(schedule);
-      if (!schedule)
-        return; //cancel button
-
-
-      this._notifier.notify("warning", `Deploying '${schedule.name}' schedule...`);
-      this._aquariumService.deploySchedule(this.device.id, schedule.id).subscribe((data: DeviceSchedule[]) => {
-        this._notifier.notify("success", `Schedule '${schedule.name}' deployed to device!`);
-        this.device.schedules = data;
-        //this.managingSchedules = false;
-        //this.loadScheduleList();
-        //this.reloadDeviceSchedules();
-
-      }, err => {
-        this._notifier.notify("error", "Could not deploy schedule to device");
-        console.error(err);
-        //this.managingSchedules = false;
-
-      })
-
-
-
-    });
-  }
-
 }

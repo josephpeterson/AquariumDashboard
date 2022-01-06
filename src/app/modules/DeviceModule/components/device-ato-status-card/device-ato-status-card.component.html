@@ -1,0 +1,201 @@
+<div class="row header">
+
+
+  <div class="col-md-8">
+    <h3>
+      Auto Top Off
+      <small *ngIf="deviceConnectionStatus != DeviceConnectionStatus.Connecting && checkEnabled()">
+        <fa-icon [icon]="faCheck" class="mr-1"></fa-icon>Enabled
+      </small>
+      <small *ngIf="deviceConnectionStatus != DeviceConnectionStatus.Connecting && !checkEnabled()" class="disabled">
+        <fa-icon [icon]="faTimes" class="mr-1"></fa-icon>Disabled
+      </small>
+      <small *ngIf="deviceConnectionStatus == DeviceConnectionStatus.Connecting">
+        <fa-icon [icon]="faSpinner" class="mr-1"></fa-icon>Loading
+      </small>
+    </h3>
+    <p class="text-muted" *ngIf="checkEnabled()">Auto top off is currently enabled based on your device settings. You can manage your task on the <a [routerLink]="['../schedule']">schedule</a> page.
+      View all of your auto top off history or trigger one here.</p>
+    <p class="text-muted" *ngIf="!checkEnabled()">Auto top off is currently disabled. To enable auto top off, go into <a
+        [routerLink]="['../schedule']">Schedules</a> and create a new task with
+      <b>StartATO</b> task type.
+    </p>
+    <hr>
+  </div>
+</div>
+<ng-container *ngIf="checkEnabled() else notEnabled">
+
+  <ng-container *ngIf="getRunningJob() as job else onStandby">
+    <!-- Running Card -->
+    <div class="card">
+      <div class="card-header">
+        <h5>Running...</h5>
+        <p class="text-muted">Auto top off is currently running</p>
+      </div>
+      <div class="card-body">
+
+        <div class="row">
+          <ul class="list-group w-50">
+            <li class="list-group-item">
+              Id: {{atoStatus.id}}
+            </li>
+            <li class="list-group-item">
+              Start Time: {{parseDateFromUtc(atoStatus.startTime)}}
+            </li>
+            <li class="list-group-item">
+              Estimated End Time: {{parseDateFromUtc(atoStatus.estimatedEndTime)}}
+            </li>
+            <li class="list-group-item">
+              ATO Pump: Running
+            </li>
+            <li class="list-group-item">
+              Water Level: {{atoStatus.floatSensorValue ? "Low":"High"}}
+            </li>
+          </ul>
+        </div>
+        <div class="row m-3">
+          <mat-progress-bar [value]="currentATOProgress"></mat-progress-bar>
+        </div>
+        <div class="row">
+          <button class="mt-2 btn btn-danger" (click)="clickStopATO()">Stop</button>
+        </div>
+        <div class="row">
+          <ng-container *ngTemplateOutlet="timestamp"></ng-container>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template #onStandby>
+    <!-- Not currently running -->
+    <div class="row" *ngIf="getNextATOJob() as job else notScheduled">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-8">
+            <div class="alert alert-info alert-dismissible fade show" role="alert"
+              *ngIf="getNextATOJob() as job else checkATO">
+              <p>Auto top off is scheduled to run <b>{{parseDate(job.startTime)}}
+                  <small>({{parseDuration(job.startTime)}})</small></b>. If the task conditions are met the auto top off will begin.</p>
+            </div>
+            <ng-template #checkATO>
+              <div class="alert alert-info alert-dismissible fade show" role="alert" *ngIf="isRunnable()">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <p>
+                  We've detected that your water level is low! In order to maintain stable aquarium parameters we
+                  recommend
+                  topping
+                  off your aquarium with more water.
+                </p>
+                <hr>
+                <button class="btn btn-success" (click)="clickRunATO()">Run...</button>
+              </div>
+            </ng-template>
+            <p>
+              <button [disabled]="!isRunnable()" class="btn btn-success"
+                (click)="clickRunATO()">Run...</button>
+            </p>
+          </div>
+          <div class="col-sm-4 ml-auto">
+            <h5>Sensors</h5>
+            <div *ngIf="getSensorFromId(job.task.targetSensorId) as targetSensor">
+              <h6 class="text-muted">Pump: <b>{{targetSensor.name}}</b></h6>
+              <device-sensor-card [sensor]="targetSensor"></device-sensor-card>
+            </div>
+            <div *ngIf="getSensorFromId(job.task.triggerSensorId) as targetSensor">
+              <h6 class="text-muted">Sensor: <b>{{targetSensor.name}}</b></h6>
+              <device-sensor-card [sensor]="targetSensor"></device-sensor-card>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-template #notScheduled>
+      Auto top off currently not scheduled.
+    </ng-template>
+
+  </ng-template>
+
+
+</ng-container>
+
+
+
+<!-- History -->
+<div class="row" *ngIf="atoHistory && atoHistory.length">
+  <div class="col-lg-8">
+    <div class="p-2">
+      <h5>History</h5>
+      <table class="atoHistory table-sm w-100">
+        <thead>
+          <tr>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>End Reason</th>
+            <th>Run Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ato of atoHistory" [class.running]="!ato.completed">
+            <td>{{parseDateFromUtc(ato.startTime)}}</td>
+            <td>
+              <ng-container *ngIf="ato.actualEndTime else invalid">
+                {{parseDateFromUtc(ato.actualEndTime,true)}}
+                <small class="text-muted">
+                  ({{computeTimeDifference(ato)}}s)
+                </small>
+              </ng-container>
+
+
+            </td>
+            <td>{{ato.endReason}}
+            </td>
+            <td class="text-muted" *ngIf="ato.actualEndTime else invalid">
+              {{getRunTime(ato)}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div>
+        <button class="btn btn-link" (click)="loadBackward()" [disabled]="this.pagination.start == 0">
+          <fa-icon [icon]="faCaretLeft" class="mr-1"></fa-icon>
+        </button>
+        Page: {{getPageNumber()}}
+        <button class="btn btn-link" (click)="loadForward()">
+          <fa-icon [icon]="faCaretRight" class="mr-1"></fa-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Update Timestamp -->
+<div class="row" *ngIf="atoStatus">
+  <div class="col">
+    <span class="text-muted">Last Updated at {{parseDate(atoStatus.updatedAt)}}
+      <button class="btn btn-link" (click)="clickRefresh()">
+        <fa-icon [icon]="faRedo"></fa-icon>
+      </button>
+    </span>
+  </div>
+</div>
+
+<ng-template #invalid>
+  <span class="text-muted">--:--</span>
+</ng-template>
+
+
+
+
+<ng-template #noStatus>
+  <p>No auto top off status available for this device.</p>
+</ng-template>
+
+
+<ng-template #notEnabled>
+  <div class="alert alert-info alert-dismissible fade show" role="alert" *ngIf="atoRecommended">
+    <p>ATO is not enabled on this device. You must have two sensors equiped (ATO float sensor & Pump relay sensor).
+    </p>
+  </div>
+</ng-template>

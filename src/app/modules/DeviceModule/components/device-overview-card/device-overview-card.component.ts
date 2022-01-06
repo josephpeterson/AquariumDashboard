@@ -17,7 +17,7 @@ import { DeviceInformation } from 'src/app/models/DeviceInformation';
 import { DeviceConnectionStatus } from "src/app/models/types/DeviceConnectionStatus";
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
-import { AquariumLoadByIdAction, AquariumLoadDeployedDeviceByAquaruiumId } from 'src/app/store/aquarium/aquarium.actions';
+import { AquariumLoadByIdAction, AquariumLoadDeployedDeviceByAquaruiumId, AquariumSelectionAction } from 'src/app/store/aquarium/aquarium.actions';
 
 @Component({
     selector: 'device-overview-card',
@@ -48,7 +48,10 @@ export class DeviceOverviewCardComponent {
     }
 
     public clickPingAquariumDevice() {
+        //This one actually pings the device
         this.store.dispatch(new AquariumLoadDeployedDeviceByAquaruiumId(this.aquarium.device.id));
+        //This one reloads the API information
+        this.store.dispatch(new AquariumSelectionAction(this.aquarium.id));
     }
     public readableDate(dateString: string) {
         return moment(dateString).calendar();

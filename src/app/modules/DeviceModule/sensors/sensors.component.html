@@ -1,48 +1,52 @@
 <div *ngIf="(aquarium$ | async).device as d">
-    <div *ngIf="error" class="alert alert-danger">
-      <p class="error">{{error}}</p>
-      <button class="btn btn-secondary">
-        <fa-icon class="mr-2" [icon]="faRefresh" disabled></fa-icon>Refresh
-      </button>
-    </div>
-    <div class="row">
-      <div class="col-sm">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Sensors</h5>
-            <p class="card-text">
-              Manage assigned device sensors here.
-            </p>
-            <div *ngIf="(readableTypes | async) as types" class="generic-list">
+  <div *ngIf="error" class="alert alert-danger">
+    <p class="error">{{error}}</p>
+    <button class="btn btn-secondary">
+      <fa-icon class="mr-2" [icon]="faRefresh" disabled></fa-icon>Refresh
+    </button>
+  </div>
+  <div class="row">
+    <div class="col-sm">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Sensors</h5>
+          <p class="card-text">
+            Manage assigned device sensors here.
+          </p>
+          <div class="generic-list">
+
+            <div *ngIf="(readableTypes | async) as types">
               <div *ngFor="let s of d.sensors" class="generic-list-item">
-                <device-sensor-list-item [sensor]="s" [device]="d" [deviceInformation]="deviceInformation$ | async" [types]="types"></device-sensor-list-item>
+                <device-sensor-list-item [sensor]="s" [device]="d" [deviceInformation]="deviceInformation$ | async"
+                  [types]="types"></device-sensor-list-item>
               </div>
             </div>
+          </div>
 
 
-          </div>
-          <div class="card-footer">
-            <button mat-list-item type="button" class="btn btn-primary btn-sm" (click)="clickAddSensor(d)">
-              <fa-icon class="mr-2" [icon]="faPlus"></fa-icon>Create Sensor
-            </button>
-          </div>
         </div>
-
-
+        <div class="card-footer">
+          <button mat-list-item type="button" class="btn btn-primary btn-sm" (click)="clickAddSensor(d)">
+            <fa-icon class="mr-2" [icon]="faPlus"></fa-icon>Create Sensor
+          </button>
+        </div>
       </div>
-      <div class="col-md">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Device Model</h5>
-            <h6 class="card-subtitle mb-2 text-muted">{{d.type}}</h6>
-            <p class="card-text">
-              You can change your model and manage advanced settings on the <a
-                [routerLink]="['../settings']">settings</a> page.
-            </p>
-            <h6>Gpio Usage</h6>
-            <device-gpio-card [device]="d"></device-gpio-card>
-          </div>
+
+
+    </div>
+    <div class="col-md">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Device Model</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{d.type}}</h6>
+          <p class="card-text">
+            You can change your model and manage advanced settings on the <a [routerLink]="['../settings']">settings</a>
+            page.
+          </p>
+          <h6>Gpio Usage</h6>
+          <device-gpio-card [device]="d"></device-gpio-card>
         </div>
       </div>
     </div>
+  </div>
 </div>

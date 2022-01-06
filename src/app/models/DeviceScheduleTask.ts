@@ -11,7 +11,7 @@ export class DeviceScheduleTask {
   //startTime: any | null
   //endTime: any | null
   interval: number | null = 30
-  taskTypeId: number
+  taskTypeId: DeviceScheduleTaskTypes
   targetSensorId: number
   targetSensor: DeviceSensor
   targetSensorValue: GpioPinValue

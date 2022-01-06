@@ -25,7 +25,8 @@
         </div>
     </div>
     <div class="row" style="height:100px">
-        <div *ngIf="deviceInformation || (deviceConnectionStatus != DeviceConnectionStatus.Connecting && deviceInformation)">
+        <div
+            *ngIf="deviceInformation || (deviceConnectionStatus != DeviceConnectionStatus.Connecting && deviceInformation)">
             <div class="col-auto">
                 <small>
                     Version: {{deviceInformation.version}}
