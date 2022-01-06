@@ -45,7 +45,7 @@ export class DeviceScheduledJobListItemComponent implements OnInit {
     return job.status == JobStatus.Running;
   }
   public isJobCancelable(job:DeviceScheduledJob) {
-    return job.status != JobStatus.Running;
+    return job.status == JobStatus.Running;
   }
   public clickPerformScheduledJob(job:DeviceScheduledJob) {
     this._aquariumService.performScheduleTask(this.device.id,job.task).subscribe(
