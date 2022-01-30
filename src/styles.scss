@@ -83,4 +83,7 @@ p.content {
     .generic-list-item:hover {
         background-color:rgba(150,150,150,0.1);
     }   
-  }
+}
+.generic-list.mini {
+    min-height:180px;
+}

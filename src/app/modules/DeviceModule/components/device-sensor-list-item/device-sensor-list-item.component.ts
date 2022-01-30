@@ -52,7 +52,6 @@ export class DeviceSensorListItemComponent implements OnInit {
     public dialog: MatDialog) { }
 
   ngOnInit() {
-    console.log(this.deviceInformation);
   }
   clickEditSensor() {
     if (this.disabled) return;

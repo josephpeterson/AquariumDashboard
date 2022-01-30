@@ -1,4 +1,5 @@
 import { Aquarium } from './Aquarium';
+import { DeviceScheduledJob } from './DeviceScheduledJob';
 
 export class WaterChange
 {
@@ -7,8 +8,11 @@ export class WaterChange
   gallonsAdded: number
   gallonsRemoved: number
   color: string
-  startTime: Date
+  startTime: string
+  endTime: string
+  scheduleJobId: number
 
   aquarium: Aquarium | null
+  scheduleJob: DeviceScheduledJob
 }
 

@@ -57,6 +57,7 @@ import { DeviceScheduledJobListItemComponent } from './components/device-schedul
 import { AquariumDeviceComponent } from './aquarium-device.component';
 import { DeviceSensorsComponent } from './sensors/sensors.component';
 import { DeviceSensorListItemComponent } from './components/device-sensor-list-item/device-sensor-list-item.component';
+import { DeviceWaterChangeCardComponent } from './components/device-water-change-card/device-water-change-card.component';
 
 
 @NgModule({
@@ -107,6 +108,7 @@ import { DeviceSensorListItemComponent } from './components/device-sensor-list-i
     
     DeviceOverviewComponent,
     DeviceATOStatusComponent,
+    DeviceWaterChangeCardComponent,
     DeviceSnapshotCarouselComponent,
     
     

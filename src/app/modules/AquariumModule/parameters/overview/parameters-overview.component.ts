@@ -76,7 +76,7 @@ export class ParametersOverviewComponent implements OnInit {
     if (!atoStatuses)
       return;
     function computeDuration(atoStatus: ATOStatus) {
-      var actual = moment(atoStatus.actualEndTime);
+      var actual = moment(atoStatus.endTime);
       var est = moment(atoStatus.startTime);
       var s = moment.duration(actual.diff(est)).asSeconds();
       return Math.ceil(s);
@@ -85,7 +85,7 @@ export class ParametersOverviewComponent implements OnInit {
     var data = [];
     atoStatuses.forEach(h => {
       //did it complete?
-      if (h.actualEndTime == undefined)
+      if (h.endTime == undefined)
         return;
 
       data.push({

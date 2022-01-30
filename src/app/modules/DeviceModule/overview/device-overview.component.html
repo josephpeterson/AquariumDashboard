@@ -17,12 +17,29 @@
 				</div>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-md">
+				<div class="card mb-4">
+					<div class="card-body" *ngIf="deviceInformation$ | async as info">
+						<device-ato-status-card [aquarium]="aquarium" [device]="d" [deviceInformation]="info"
+							[deviceConnectionStatus]="deviceConnectionStatus$ | async">
+						</device-ato-status-card>
+					</div>
+				</div>
+			</div>
+			<div class="col-md">
+				<div class="card mb-4">
+					<div class="card-body" *ngIf="deviceInformation$ | async as info">
+						<device-water-change-card [aquarium]="aquarium" [device]="d" [deviceInformation]="info"
+							[deviceConnectionStatus]="deviceConnectionStatus$ | async">
+						</device-water-change-card>
+					</div>
+				</div>
+			</div>
+		</div>
 
 		<div class="card mb-4">
-			<div class="card-body" *ngIf="deviceInformation$ | async as info">
-				<device-ato-status-card [device]="d" [deviceInformation]="info" [deviceConnectionStatus]="deviceConnectionStatus$ | async">
-				</device-ato-status-card>
-			</div>
+
 		</div>
 	</div>
 	<ng-template #noDevice>

@@ -370,10 +370,10 @@ export class AquariumService {
     return this.http.post<AquariumSnapshot[]>(this._url + `/v1/Water/${aquariumId}/Parameters/Add`, parameters);
   }
   public getWaterChangesByAquarium(aquariumId: number, pagination: PaginationSliver) {
-    return this.http.post<WaterChange[]>(this._url + `/v1/Water/${aquariumId}/Change`, pagination);
+    return this.http.post<WaterChange[]>(this._url + AquariumApiEndpoints.AQUARIUM_WATER_RETRIEVE_WATERCHANGES.aggregate(aquariumId), pagination);
   }
-  public getWaterATOsByAquarium(aquariumId: number, pagination: PaginationSliver) {
-    return this.http.post<ATOStatus[]>(this._url + `/v1/Water/${aquariumId}/ATOStatuses`, pagination);
+  public getAutoWaterChangesByAquarium(aquariumId: number, pagination: PaginationSliver) {
+    return this.http.post<WaterChange[]>(this._url + AquariumApiEndpoints.AQUARIUM_WATER_RETRIEVE_AUTOWATERCHANGES.aggregate(aquariumId), pagination);
   }
   public addWaterChange(aquariumId: number, waterChange: WaterChange) {
     return this.http.post<WaterChange>(this._url + `/v1/Aquarium/${aquariumId}/Water/Change`, waterChange);
@@ -424,10 +424,18 @@ export class AquariumService {
   public stopDeviceATO(deviceId: number) {
     return this.http.post<ATOStatus>(this._url + AquariumApiEndpoints.DEVICE_ATO_STOP.aggregate(deviceId), null);
   }
-  public getDeviceATOHistory(deviceId: number, pagination: PaginationSliver) {
-    return this.http.post<ATOStatus[]>(this._url + AquariumApiEndpoints.DEVICE_ATO_HISTORY.aggregate(deviceId), pagination);
+  public getWaterATOsByAquarium(aquariumId: number, pagination: PaginationSliver) {
+    return this.http.post<ATOStatus[]>(this._url + AquariumApiEndpoints.AQUARIUM_WATER_RETRIEVE_WATERATOS.aggregate(aquariumId), pagination);
   }
-
+  public getWaterAutoATOsByAquarium(aquariumId: number, pagination: PaginationSliver) {
+    return this.http.post<ATOStatus[]>(this._url + AquariumApiEndpoints.AQUARIUM_WATER_RETRIEVE_AUTOWATERATOS.aggregate(aquariumId), pagination);
+  }
+  public upsertDeviceATO(aquariumId: number, waterATO: ATOStatus) {
+    return this.http.put<ATOStatus[]>(this._url + AquariumApiEndpoints.AQUARIUM_WATER_UPSERT_WATERATO.aggregate(aquariumId), waterATO);
+  }
+  public deleteDeviceATOs(aquariumId: number, waterATOIds) {
+    return this.http.delete(this._url + AquariumApiEndpoints.AQUARIUM_WATER_DELETE_WATERATOS.aggregate(aquariumId), waterATOIds);
+  }
 
 
 

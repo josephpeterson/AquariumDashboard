@@ -15,6 +15,7 @@
             </small>
             <small *ngIf="deviceConnectionStatus == DeviceConnectionStatus.Renew" class="online">
                 <fa-icon [icon]="faCheck" class="mr-1"></fa-icon>Renew. Log into this device
+                <a [href]="aquarium.device.host + ':' + aquarium.device.port" target="_blank">{{aquarium.device.host}}:{{aquarium.device.port}}</a>
             </small>
             <small *ngIf="deviceConnectionStatus == DeviceConnectionStatus.Offline" class="disabled">
                 <fa-icon [icon]="faTimes" class="mr-1"></fa-icon>Offline

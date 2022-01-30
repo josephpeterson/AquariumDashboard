@@ -28,3 +28,4 @@ export class PhotoSelection  {
     this.selection = [];
   }
 }
+

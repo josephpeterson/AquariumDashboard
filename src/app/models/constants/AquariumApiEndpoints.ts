@@ -55,6 +55,16 @@ export enum AquariumApiEndpoints {
   AQUARIUM_RETRIEVE_SNAPSHOTS = "/v1/Aquarium/{aquariumId}/Snapshots",
   AQUARIUM_DELETE_SNAPSHOTS = "/v1/Aquarium/{aquariumId}/Snapshots",
 
+  //WaterController
+  AQUARIUM_WATER_RETRIEVE_WATERCHANGES = "/v1/Aquarium/{aquariumId}/Water/WaterChanges",
+  AQUARIUM_WATER_RETRIEVE_AUTOWATERCHANGES = "/v1/Aquarium/{aquariumId}/Water/AutoWaterChanges",
+  AQUARIUM_WATER_UPSERT_WATERCHANGE = "/v1/Aquarium/{aquariumId}/Water/WaterChanges",
+  AQUARIUM_WATER_DELETE_WATERCHANGES = "/v1/Aquarium/{aquariumId}/Water/WaterChanges",
+  AQUARIUM_WATER_RETRIEVE_WATERATOS = "/v1/Aquarium/{aquariumId}/Water/WaterATOs",
+  AQUARIUM_WATER_RETRIEVE_AUTOWATERATOS = "/v1/Aquarium/{aquariumId}/Water/AutoWaterATOs",
+  AQUARIUM_WATER_UPSERT_WATERATO = "/v1/Aquarium/{aquariumId}/Water/WaterATOs",
+  AQUARIUM_WATER_DELETE_WATERATOS = "/v1/Aquarium/{aquariumId}/Water/WaterATOs",
+
   //AuthController
   AUTH_RENEW = "/v1/Auth/Renew",
   AUTH_LOGIN = "/v1/Auth/Login",
