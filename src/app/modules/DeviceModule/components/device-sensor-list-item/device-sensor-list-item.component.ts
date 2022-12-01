@@ -97,7 +97,7 @@ export class DeviceSensorListItemComponent implements OnInit {
   getSensorValue(sensor: DeviceSensor) {
     if (!this.deviceInformation)
       return null;
-    var s = this.deviceInformation.sensors.filter(ss => ss.id == sensor.id)[0];
+    var s = this.deviceInformation.sensors?.filter(ss => ss.id == sensor.id)[0];
     if (s && GpioPinValue[s.value] != undefined)
       return GpioPinValue[s.value].toString();
     return null;
