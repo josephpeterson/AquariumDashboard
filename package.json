@@ -24,7 +24,6 @@
     "@auth0/angular-jwt": "^3.0.1",
     "@ckeditor/ckeditor5-angular": "^1.2.3",
     "@ckeditor/ckeditor5-build-balloon": "^12.4.0",
-    "@fortawesome/angular-fontawesome": "^0.6.1",
     "@fortawesome/fontawesome-free": "^5.15.3",
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
