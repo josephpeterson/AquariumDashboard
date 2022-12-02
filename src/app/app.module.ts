@@ -36,9 +36,6 @@ import { ColorPickerModule } from 'ngx-color-picker';
 //ngRx Store support
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { AquariumEffects } from './store/aquarium/aquarium.effect';
-import { SnapshotEffects } from './store/snapshot/snapshot.effect';
-import { SpeciesEffects } from './store/species/species.effect';
 import { aquariumReducer } from './store/aquarium/aquarium.reducer';
 import { snapshotReducer } from './store/snapshot/snapshot.reducer';
 import { speciesReducer } from './store/species/species.reducer';
@@ -46,9 +43,7 @@ import { speciesReducer } from './store/species/species.reducer';
 import { AppRoutingModule } from './app-routing.module';
 
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 //import { NotifierModule } from 'angular-notifier';
-import { FishEffects } from './store/fish/fish.effect';
 import { fishReducer } from './store/fish/fish.reducer';
 
 import { AquariumInterceptor } from './services/aquarium.interceptor';
@@ -58,9 +53,7 @@ import { AuthService } from './services/auth.service';
 
 import { AdminService } from './services/admin.service';
 import { ProfileReducer } from './store/profile/profile.reducer';
-import { ProfileEffects } from './store/profile/profile.effect';
 import { PostReducer } from './store/post/post.reducer';
-import { PostEffects } from './store/post/post.effect';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { AppComponent } from './components/app-root/app.component';
 import { Ng5SliderModule } from 'ng5-slider';
@@ -68,10 +61,16 @@ import { FishService } from './services/fish.service';
 import { SharedModule } from './modules/SharedModule/shared.module';
 import { AuthReducer } from './store/auth/auth.reducer';
 import { NotificationService } from './services/notification.service';
-import { ParameterEffects } from './store/parameter/parameter.effect';
 import { parameterReducer } from './store/parameter/parameter.reducer';
 import { HomeNavComponent } from './modules/CoreModule/components/home/home/home-nav/home-nav.component';
 import { CoreModule } from './modules/CoreModule/core.module';
+import { AquariumEffects } from './store/aquarium/aquarium.effect';
+import { FishEffects } from './store/fish/fish.effect';
+import { ParameterEffects } from './store/parameter/parameter.effect';
+import { SpeciesEffects } from './store/species/species.effect';
+import { ProfileEffects } from './store/profile/profile.effect';
+import { PostEffects } from './store/post/post.effect';
+import { SnapshotEffects } from './store/snapshot/snapshot.effect';
 
 
 
@@ -134,10 +133,7 @@ import { CoreModule } from './modules/CoreModule/core.module';
     StoreModule.forFeature('post', PostReducer),
     StoreModule.forFeature('auth', AuthReducer),
     StoreModule.forFeature('parameter', parameterReducer),
-    StoreDevtoolsModule.instrument({
-      maxAge: 25
-    }),
-    EffectsModule.forRoot([AquariumEffects, SnapshotEffects, SpeciesEffects, FishEffects, ProfileEffects, PostEffects,ParameterEffects]),
+    EffectsModule.forRoot([AquariumEffects,FishEffects,ParameterEffects,SpeciesEffects,ProfileEffects,SnapshotEffects,PostEffects]),
   ],
   providers: [
     AquariumService,

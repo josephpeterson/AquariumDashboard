@@ -1,6 +1,6 @@
 import { state } from '@angular/animations';
 import { Injectable } from '@angular/core'
-import { Actions, Effect, ofType } from '@ngrx/effects'
+import { Actions, createEffect, ofType } from '@ngrx/effects'
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import { mergeMap, map, catchError, withLatestFrom, switchMap, tap } from 'rxjs/operators';
@@ -25,11 +25,10 @@ export class ParameterEffects {
 
     }
 
-    @Effect()
-    loadPaginatedParameters$ = this.actions$.pipe(
-        ofType<ParameterSelectDateAction>(
-            ParameterActions.SelectDate
-        ),
+
+    loadPaginatedParameters$ = createEffect(() => this.actions$.pipe(ofType<ParameterSelectDateAction>(
+        ParameterActions.SelectDate
+    ),
         map((action: ParameterSelectDateAction) => action.payload),
         mergeMap((payload: ParameterSelectDateActionPayload) =>
             this.aquariumService.getWaterParameters(payload.aquariumId, payload.pagination).pipe(
@@ -47,9 +46,9 @@ export class ParameterEffects {
                 })
             )
         )
-    );
-    @Effect()
-    loadPaginatedATOStatuses$ = this.actions$.pipe(
+    ));
+
+    loadPaginatedATOStatuses$ = createEffect(() => this.actions$.pipe(
         ofType<ParameterSelectDateAction>(
             ParameterActions.SelectDate
         ),
@@ -70,9 +69,9 @@ export class ParameterEffects {
                 })
             )
         )
-    );
-    @Effect()
-    loadPaginatedWaterChanges$ = this.actions$.pipe(
+    ));
+
+    loadPaginatedWaterChanges$ = createEffect(() => this.actions$.pipe(
         ofType<ParameterSelectDateAction>(
             ParameterActions.SelectDate
         ),
@@ -93,9 +92,9 @@ export class ParameterEffects {
                 })
             )
         )
-    );
-    @Effect()
-    loadPaginatedWaterDosings$ = this.actions$.pipe(
+    ));
+
+    loadPaginatedWaterDosings$ = createEffect(() => this.actions$.pipe(
         ofType<ParameterSelectDateAction>(
             ParameterActions.SelectDate
         ),
@@ -116,5 +115,5 @@ export class ParameterEffects {
                 })
             )
         )
-    );
+    ));
 }

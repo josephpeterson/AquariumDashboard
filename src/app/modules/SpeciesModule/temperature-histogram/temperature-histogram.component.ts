@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { Chart } from 'chart.js';
+import { Chart } from 'chartjs';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { NotificationService } from 'src/app/services/notification.service';
 

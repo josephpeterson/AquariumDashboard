@@ -10,7 +10,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { CreateSpeciesModalComponent } from '../../modals/create-species-modal/create-species-modal.component';
 import { Fish } from 'src/app/models/Fish';
 import { SpeciesLoadAction } from 'src/app/store/species/species.actions';
-import { TypeCheckCompiler } from '@angular/compiler/src/view_compiler/type_check_compiler';
 import { AquariumService } from 'src/app/services/aquarium.service';
 
 @Component({

@@ -9,7 +9,6 @@ import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { DeviceScheduleTaskAssignment } from 'src/app/models/DeviceScheduleTaskAssignment';
-import { templateJitUrl } from '@angular/compiler';
 
 @Component({
   selector: 'create-schedule-modal',

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { Effect, Actions, ofType } from '@ngrx/effects'
+import { Actions, ofType, createEffect } from '@ngrx/effects'
 import { map, catchError, mergeMap } from 'rxjs/operators'
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { of } from 'rxjs'
@@ -15,14 +15,12 @@ export class SpeciesEffects {
 
     }
 
-    @Effect()
-    loadAllSpecies$ = this.actions$.pipe(ofType<SpeciesLoadAction>(SpeciesActions.LoadSpecies),
+    loadAllSpecies$ = createEffect(() => this.actions$.pipe(ofType<SpeciesLoadAction>(SpeciesActions.LoadSpecies),
         mergeMap((action: SpeciesLoadAction) => this.aquariumService.getAllSpecies().pipe(
             map((species: Species[]) => new SpeciesLoadSuccessAction(species)),
             catchError(error => of(new SpeciesLoadFailAction(error)))
-        )));
-    @Effect()
-    createSpecies$ = this.actions$.pipe(
+        ))));
+    createSpecies$ = createEffect(() => this.actions$.pipe(
         ofType<SpeciesAddAction>(
             SpeciesActions.AddSpecies
         ),
@@ -37,9 +35,8 @@ export class SpeciesEffects {
                 catchError(err => of(new SpeciesAddFailAction(err)))
             )
         )
-    );
-    @Effect()
-    updateSpecies$ = this.actions$.pipe(
+    ));
+    updateSpecies$ = createEffect(() => this.actions$.pipe(
         ofType<SpeciesUpdateAction>(
             SpeciesActions.UpdateSpecies
         ),
@@ -57,11 +54,10 @@ export class SpeciesEffects {
                 catchError(err => of(new SpeciesUpdateFailAction(err)))
             )
         )
-    );
-    @Effect()
-    deleteSpecies$ = this.actions$.pipe(ofType<SpeciesDeleteAction>(SpeciesActions.DeleteSpecies),
+    ));
+    deleteSpecies$ = createEffect(() => this.actions$.pipe(ofType<SpeciesDeleteAction>(SpeciesActions.DeleteSpecies),
         mergeMap((action: SpeciesDeleteAction) => this.aquariumService.deleteSpecies(action.payload).pipe(
             map(() => new SpeciesDeleteSuccessAction(action.payload)),
             catchError(error => of(new SpeciesDeleteFailAction(error)))
-        )));
+        ))));
 }

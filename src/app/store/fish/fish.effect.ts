@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { Effect, Actions, ofType } from '@ngrx/effects'
+import { Actions, ofType, createEffect } from '@ngrx/effects'
 import { map, catchError, mergeMap, switchMap } from 'rxjs/operators'
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { of } from 'rxjs'
@@ -11,30 +11,29 @@ import { SpeciesLoadSuccessAction } from '../species/species.actions';
 export class FishEffects {
     constructor(private aquariumService: AquariumService,
         private actions$: Actions) { }
-    @Effect()
-    loadFishById$ = this.actions$.pipe(ofType<FishLoadByIdAction>(FishActions.LoadFishById),
+    loadFishById$ = createEffect(() => this.actions$.pipe(ofType<FishLoadByIdAction>(FishActions.LoadFishById),
         mergeMap((action: FishLoadByIdAction) => this.aquariumService.getFishById(action.payload).pipe(
             switchMap((fish: Fish) => [
                 new FishLoadSuccessAction([fish]),
             ]),
             catchError(error => of(new FishLoadFailAction(error)))
         ))
+    )
     );
 
 
 
-    @Effect()
-    createFish$ = this.actions$.pipe(ofType<FishAddAction>(FishActions.AddFish),
+    createFish$ = createEffect(() => this.actions$.pipe(ofType<FishAddAction>(FishActions.AddFish),
         mergeMap((action: FishAddAction) => this.aquariumService.createFish(action.payload).pipe(
             switchMap((fish: Fish) => [
                 new FishAddSuccessAction(fish),
             ]),
             catchError(error => of(new FishAddFailAction(error)))
         ))
+    )
     );
 
-    @Effect()
-    updateFish$ = this.actions$.pipe(
+    updateFish$ = createEffect(() => this.actions$.pipe(
         ofType<FishUpdateAction>(
             FishActions.UpdateFish
         ),
@@ -52,11 +51,12 @@ export class FishEffects {
                 catchError(err => of(new FishUpdateFailAction(err)))
             )
         )
+    )
     );
-    @Effect()
-    deleteFish$ = this.actions$.pipe(ofType<FishDeleteAction>(FishActions.DeleteFish),
+    deleteFish$ = createEffect(() => this.actions$.pipe(ofType<FishDeleteAction>(FishActions.DeleteFish),
         mergeMap((action: FishDeleteAction) => this.aquariumService.deleteFish(action.payload).pipe(
             map(() => new FishDeleteSuccessAction(action.payload)),
             catchError(error => of(new FishDeleteFailAction(error)))
+        )
         )));
 }

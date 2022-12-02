@@ -9,7 +9,6 @@ import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Fish } from 'src/app/models/Fish';
 import { SpeciesLoadAction } from 'src/app/store/species/species.actions';
-import { TypeCheckCompiler } from '@angular/compiler/src/view_compiler/type_check_compiler';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { FishPhoto } from 'src/app/models/FishPhoto';
 import { FishPhotoSelectModal } from '../../../modals/fish-photo-select-modal/fish-photo-select-modal.component';

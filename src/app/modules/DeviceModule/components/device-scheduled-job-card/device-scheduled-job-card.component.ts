@@ -15,7 +15,6 @@ import { AppState } from 'src/app/app.state';
 import { getDeployedDeviceInformation, getDeviceConnectionStatus, getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { PaginationSliver } from 'src/app/models/PaginationSliver';
-import { Route } from '@angular/compiler/src/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({

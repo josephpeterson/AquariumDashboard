@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
 import { take } from 'rxjs/operators';
-import Chart from 'chart.js';
+import Chart from 'chartjs';
 
 import { faCaretRight, faCaretLeft, faInfo, faInfoCircle, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
