@@ -30,8 +30,8 @@
   <div class="row">
     <mat-error>{{error}}</mat-error>
   </div>
-  <mat-dialog-actions align="end">
+  <div mat-dialog-actions align="end">
     <button [disabled]='disabled' class="m-2 btn btn-danger" mat-dialog-close>Cancel</button>
     <button [disabled]='disabled' class="m-2 btn btn-success" (click)="clickSubmit()">Submit</button>
-  </mat-dialog-actions>
+  </div>
 </div>

@@ -5,8 +5,8 @@
 	<div class="row">
 		<input type="text" placeholder="Max Runtime (min)"  [(ngModel)]="runtime">
 	</div>
-	<mat-dialog-actions>
+	<div mat-dialog-actions>
 		<button class="m-2 btn btn-danger" mat-dialog-close>Cancel</button>
 		<button class="m-2 btn btn-success" [mat-dialog-close]="{run: true, runtime: runtime}">Confirm</button>
-	</mat-dialog-actions>
+	</div>
 </div>

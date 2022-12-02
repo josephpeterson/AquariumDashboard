@@ -30,7 +30,7 @@
   </div>
 </div>
 <div>
-  <mat-dialog-actions align="end">
+  <div mat-dialog-actions align="end">
     <button class="m-2 btn btn-danger" [mat-dialog-close]>Cancel</button>
     <ng-container *ngIf="waterDose.id != undefined else create">
       <button class="m-2 btn btn-danger" (click)='clickDeleteSnapshot()'>Delete</button>
@@ -39,5 +39,5 @@
     <ng-template #create>
       <button type="submit" class="m-2 btn btn-success" (click)="clickSubmit()">Add Water Dosing</button>
     </ng-template>
-  </mat-dialog-actions>
+  </div>
 </div>
