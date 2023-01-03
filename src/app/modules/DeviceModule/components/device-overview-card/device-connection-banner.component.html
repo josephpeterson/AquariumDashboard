@@ -1,0 +1,57 @@
+<div class="container" *ngIf="deviceInformation$ | async as deviceInformation">
+    <div class="row" *ngIf="(deviceConnectionStatus$ | async).deviceConnectionStatus as connectionStatus">
+        <div class="col-auto">
+            <h5 class="mr-2">
+                <fa-icon class="mr-1" [icon]="faDevice"></fa-icon>
+                {{deviceInformation.configuredDevice.aquarium.device.name}}
+            </h5>
+        </div>
+        <div class="col-auto">
+            <small *ngIf="connectionStatus == DeviceConnectionStatus.Online" class="online">
+                <fa-icon [icon]="faCheck" class="mr-1"></fa-icon>Online
+            </small>
+            <small *ngIf="connectionStatus == DeviceConnectionStatus.Connected" class="online">
+                <fa-icon [icon]="faCheck" class="mr-1"></fa-icon>Online
+            </small>
+            <small *ngIf="connectionStatus == DeviceConnectionStatus.Renew" class="online">
+                <fa-icon [icon]="faCheck" class="mr-1"></fa-icon>Renew. Log into this device
+                <a [href]="deviceInformation.configuredDevice.aquarium.device.host + ':' + deviceInformation.configuredDevice.aquarium.device.port"
+                    target="_blank">{{deviceInformation.configuredDevice.aquarium.device.host}}:{{deviceInformation.configuredDevice.aquarium.device.port}}</a>
+            </small>
+            <small *ngIf="connectionStatus == DeviceConnectionStatus.Offline" class="disabled">
+                <fa-icon [icon]="faTimes" class="mr-1"></fa-icon>Offline
+            </small>
+            <small *ngIf="connectionStatus == DeviceConnectionStatus.Connecting">
+                <fa-icon [icon]="faSpinner" class="mr-1"></fa-icon>Connecting
+            </small>
+        </div>
+    </div>
+    <div class="row" style="height:100px">
+        <div>
+            <div class="col-auto">
+                <small>
+                    Version: {{deviceInformation.version}}
+                </small>
+            </div>
+            <div class="col-auto">
+                <small>
+                    Running Tasks: <b>{{deviceInformation?.scheduleStatus?.runningJobs?.length}}</b>
+                </small>
+            </div>
+            <div class="col-auto">
+                <small>
+                    Next Task: <b>{{getNextTaskETA()}}</b>
+                </small>
+            </div>
+            <div class="col-auto">
+                <small>
+                    <span class="text-muted">Last Updated at {{readableDate(deviceInformation.updatedAt)}}
+                        <button class="btn btn-link" (click)="clickPingAquariumDevice()">
+                            <fa-icon [icon]="faRedo"></fa-icon>
+                        </button>
+                    </span>
+                </small>
+            </div>
+        </div>
+    </div>
+</div>

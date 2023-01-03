@@ -4,7 +4,7 @@ import { AquariumFeeding } from './AquariumFeeding';
 import { FishSnapshot } from './FishSnapshot';
 import { FishNote } from './FishNote';
 import { FishPhoto } from './FishPhoto';
-import { AquariumAccount } from './AquariumAccount';
+import { AquariumAccount } from '../modules/SharedDeviceModule/models/AquariumAccount';
 import { DispatchedNotification } from './DispatchedNotification';
 
 export class Notification

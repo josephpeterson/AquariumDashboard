@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AquariumAccount } from 'src/app/models/AquariumAccount';
+import { AquariumAccount } from 'src/app/modules/SharedDeviceModule/models/AquariumAccount';
 
 @Component({
   selector: 'post-author-badge',

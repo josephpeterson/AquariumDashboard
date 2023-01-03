@@ -9,7 +9,7 @@
 <div class="container">
   <h5 class="m-2">Aquariums</h5>
   <aquarium-table (rowClicked)="clickAquarium($event[1])"></aquarium-table>
-  <button mat-list-item type="button" class="mt-2 btn btn-primary btn-sm" routerLink="/aquarium/new">
+  <button type="button" class="mt-2 btn btn-primary btn-sm" routerLink="/aquarium/new">
     <fa-icon class="addIcon mr-2" [icon]="faCreate"></fa-icon>New Aquarium...
   </button>
   <h5>Maintenance</h5>

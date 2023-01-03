@@ -10,9 +10,9 @@ import { faPenFancy, faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { ConfirmModalComponent } from '../../../modals/confirm-modal/confirm-modal.component';
 import { ScraperModalComponent } from '../../../modals/scraper-modal/scraper-modal.component';
 import { NotificationService } from 'src/app/services/notification.service';
+import { ConfirmModalComponent } from 'src/app/modules/SharedDeviceModule/components/modals/confirm-modal/confirm-modal.component';
 
 
 @Component({

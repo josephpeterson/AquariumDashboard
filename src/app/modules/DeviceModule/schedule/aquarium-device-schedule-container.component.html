@@ -1,0 +1,16 @@
+<div *ngIf="(deviceInformation$ | async)?.configuredDevice as configuredDevice">
+	<div class="row">
+		<div class="col">
+			<h5>Device Schedules</h5>
+			<device-schedule-list
+				[configuredDevice]="configuredDevice"></device-schedule-list>
+			<device-schedule-upsert-button>New Schedule...</device-schedule-upsert-button>
+
+		</div>
+		<div class="col">
+			<h5>Device Tasks</h5>
+			<device-task-list [configuredDevice]="configuredDevice"></device-task-list>
+			<device-task-upsert-button>New Task...</device-task-upsert-button>
+		</div>
+	</div>
+</div>

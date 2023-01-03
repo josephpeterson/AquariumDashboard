@@ -1,4 +1,4 @@
-import { AquariumAccount } from './AquariumAccount';
+import { AquariumAccount } from '../modules/SharedDeviceModule/models/AquariumAccount';
 import { PostBoard } from './PostBoard';
 import { Post } from './Post';
 export class PostThread {

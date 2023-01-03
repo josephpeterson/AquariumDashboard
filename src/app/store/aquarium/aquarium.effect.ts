@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { Effect, Actions, ofType } from '@ngrx/effects'
+import { Actions, createEffect, ofType } from '@ngrx/effects'
 import { AquariumActions, AquariumListAction as AquariumLoadAllAction, AquariumLoadSuccessAction, AquariumLoadFailAction, AquariumUpdateAction, AquariumUpdateSuccessAction, AquariumUpdateFailAction, AquariumCreateSuccessAction, AquariumCreateFailAction, AquariumCreateAction, AquariumDeleteAction, AquariumDeleteSuccessAction, AquariumDeleteFailAction, AquariumLoadByIdAction, AquariumSelectionAction, AquariumAddFishAction, AquariumAddFishSuccessAction, AquariumAddFishFailAction, AquariumUpdateFishAction, AquariumUpdateFishSuccessAction, AquariumUpdateFishFailAction, AquariumDeleteFishAction, AquariumDeleteFishSuccessAction, AquariumDeleteFishFailAction, AquariumLoadDeployedDeviceByAquaruiumId, AquariumLoadDeployedDeviceSuccessAction, AquariumLoadDeployedDeviceFailedAction, AquariumAttemptAuthRenewByAquariumId, AquariumLoadDeployedDeviceOnlineAction, AquariumLoadDeployedDeviceRenewAction } from './aquarium.actions';
 
 import { map, catchError, mergeMap } from 'rxjs/operators'
@@ -8,8 +8,9 @@ import { of } from 'rxjs'
 import { Aquarium } from 'src/app/models/Aquarium';
 import { Fish } from 'src/app/models/Fish';
 import { Update } from '@ngrx/entity';
-import { DeviceInformation } from 'src/app/models/DeviceInformation';
+import { DeviceInformation } from 'src/app/modules/SharedDeviceModule/models/DeviceInformation';
 import { HttpEvent, HttpResponse } from '@angular/common/http';
+import { connectToDevice } from 'src/app/modules/SharedDeviceModule/store/device.actions';
 
 @Injectable()
 export class AquariumEffects {
@@ -18,14 +19,13 @@ export class AquariumEffects {
 
     }
 
-    @Effect()
-    loadAquariums$ = this.actions$.pipe(ofType<AquariumLoadAllAction>(AquariumActions.Load),
+    loadAquariums$ = createEffect(() => this.actions$.pipe(ofType<AquariumLoadAllAction>(AquariumActions.Load),
         mergeMap(() => this.aquariumService.getAquariums().pipe(
             map(aquariums => new AquariumLoadSuccessAction(aquariums)),
             catchError(error => of(new AquariumLoadFailAction(error)))
+        )
         )));
-    @Effect()
-    loadAquariumDetailed$ = this.actions$.pipe(
+    loadAquariumDetailed$ = createEffect(() => this.actions$.pipe(
         ofType<AquariumSelectionAction>(AquariumActions.MakeSelection), mergeMap((action) =>
             this.aquariumService.getAquariumById(action.aquariumId).pipe(
                 map(
@@ -38,9 +38,9 @@ export class AquariumEffects {
             )
         ),
         catchError(err => of(new AquariumLoadFailAction(err)))
+    )
     );
-    @Effect()
-    loadDeployedDeviceByAquariumId$ = this.actions$.pipe(
+    loadDeployedDeviceByAquariumId$ = createEffect(() => this.actions$.pipe(
         ofType<AquariumLoadDeployedDeviceByAquaruiumId>(AquariumActions.LoadDeployedDeviceByAquariumId), mergeMap((action) =>
             this.aquariumService.pingDevice(action.payload).pipe(
                 map(
@@ -48,13 +48,13 @@ export class AquariumEffects {
                     (deviceInformation: DeviceInformation) => {
                         return new AquariumLoadDeployedDeviceSuccessAction(deviceInformation)
                     }
-                )
+                ),
             )
         ),
         catchError(err => of(new AquariumLoadDeployedDeviceFailedAction(err)))
+    )
     );
-    @Effect()
-    attemptDeviceAuthRenew$ = this.actions$.pipe(
+    attemptDeviceAuthRenew$ = createEffect(() => this.actions$.pipe(
         ofType<AquariumAttemptAuthRenewByAquariumId>(AquariumActions.AttemptDeviceAuthRenew), mergeMap((action) =>
             this.aquariumService.attemptAuthRenew(action.payload).pipe(
                 map(
@@ -69,9 +69,9 @@ export class AquariumEffects {
             )
         ),
         catchError(err => of(new AquariumLoadDeployedDeviceRenewAction()))
+    )
     );
-    @Effect()
-    updateAquarium$ = this.actions$.pipe(
+    updateAquarium$ = createEffect(() => this.actions$.pipe(
         ofType<AquariumUpdateAction>(
             AquariumActions.Update
         ),
@@ -89,9 +89,9 @@ export class AquariumEffects {
                 catchError(err => of(new AquariumUpdateFailAction(err)))
             )
         )
+    )
     );
-    @Effect()
-    createAquarium$ = this.actions$.pipe(
+    createAquarium$ = createEffect(() => this.actions$.pipe(
         ofType<AquariumCreateAction>(
             AquariumActions.Create
         ),
@@ -106,9 +106,9 @@ export class AquariumEffects {
                 catchError(err => of(new AquariumCreateFailAction(err)))
             )
         )
+    )
     );
-    @Effect()
-    deleteAquarium$ = this.actions$.pipe(
+    deleteAquarium$ = createEffect(() => this.actions$.pipe(
         ofType<AquariumDeleteAction>(
             AquariumActions.Delete
         ),
@@ -121,10 +121,10 @@ export class AquariumEffects {
                 catchError(err => of(new AquariumDeleteFailAction(err)))
             )
         )
+    )
     );
 
-    @Effect()
-    addFishToAquarium$ = this.actions$.pipe(
+    addFishToAquarium$ = createEffect(() => this.actions$.pipe(
         ofType<AquariumAddFishAction>(
             AquariumActions.AddFish
         ),
@@ -138,9 +138,9 @@ export class AquariumEffects {
                 catchError(err => of(new AquariumAddFishFailAction(err)))
             )
         )
+    )
     );
-    @Effect()
-    updateFish$ = this.actions$.pipe(
+    updateFish$ = createEffect(() => this.actions$.pipe(
         ofType<AquariumUpdateFishAction>(
             AquariumActions.UpdateFish
         ),
@@ -155,9 +155,9 @@ export class AquariumEffects {
                 catchError(err => of(new AquariumUpdateFishFailAction(err)))
             )
         )
+    )
     );
-    @Effect()
-    deleteFish$ = this.actions$.pipe(
+    deleteFish$ = createEffect(() => this.actions$.pipe(
         ofType<AquariumDeleteFishAction>(
             AquariumActions.DeleteFish
         ),
@@ -173,5 +173,6 @@ export class AquariumEffects {
                 catchError(err => of(new AquariumDeleteFishFailAction(err)))
             )
         )
+    )
     );
 }

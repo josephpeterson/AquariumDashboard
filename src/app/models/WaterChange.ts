@@ -1,5 +1,5 @@
 import { Aquarium } from './Aquarium';
-import { DeviceScheduledJob } from './DeviceScheduledJob';
+import { DeviceScheduledJob } from '../modules/SharedDeviceModule/models/DeviceScheduledJob';
 
 export class WaterChange
 {

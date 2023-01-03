@@ -1,27 +1,19 @@
-<div *ngIf="aquarium$ | async as aquarium else loading">
-	<div *ngIf="aquarium.device as d else noDevice"
-		class="justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-		<div class="row">
+<div *ngIf="aquarium$ | async as aquarium">
+	<div *ngIf="deviceInformation$ | async as deviceInformation">
+		<div class="row" *ngIf="deviceInformation.configuredDevice != null ">
 			<div class="col-sm-3">
-				<div class="card mb-4">
-					<div class="card-body">
-						<device-overview-card [aquarium]="aquarium"></device-overview-card>
-					</div>
-				</div>
+				<device-sensor-list [configuredDevice]="deviceInformation.configuredDevice" hideEdit small></device-sensor-list>
 			</div>
 			<div class="col-md-9">
-				<div class="card mb-4">
-					<div class="card-body">
-						<device-snapshot-carousel></device-snapshot-carousel>
-					</div>
-				</div>
+				<device-schedule-status [deviceInformation]="deviceInformation"></device-schedule-status>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md">
 				<div class="card mb-4">
-					<div class="card-body" *ngIf="deviceInformation$ | async as info">
-						<device-ato-status-card [aquarium]="aquarium" [device]="d" [deviceInformation]="info"
+					<div class="card-body">
+						<device-ato-status-card [aquarium]="aquarium" [device]="d"
+							[deviceInformation]="deviceInformation"
 							[deviceConnectionStatus]="deviceConnectionStatus$ | async">
 						</device-ato-status-card>
 					</div>
@@ -29,23 +21,14 @@
 			</div>
 			<div class="col-md">
 				<div class="card mb-4">
-					<div class="card-body" *ngIf="deviceInformation$ | async as info">
-						<device-water-change-card [aquarium]="aquarium" [device]="d" [deviceInformation]="info"
+					<div class="card-body">
+						<device-water-change-card [aquarium]="aquarium" [device]="d"
+							[deviceInformation]="deviceInformation"
 							[deviceConnectionStatus]="deviceConnectionStatus$ | async">
 						</device-water-change-card>
 					</div>
 				</div>
 			</div>
 		</div>
-
-		<div class="card mb-4">
-
-		</div>
 	</div>
-	<ng-template #noDevice>
-		<device-detail-form [aquarium]="aquarium"></device-detail-form>
-	</ng-template>
 </div>
-<ng-template #loading>
-	Loading...
-</ng-template>

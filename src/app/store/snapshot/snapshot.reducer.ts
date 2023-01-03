@@ -54,11 +54,11 @@ export function snapshotReducer(state = initialState, action: AllSnapshotActions
 				connectionError: action.payload
 			}
 		case SnapshotActions.LoadSuccess:
-			return adapter.addAll(action.payload, {
+			return {
 				...state,
 				loading: false,
 				connectionError: null
-			});
+			}
 
 		case SnapshotActions.Delete:
 			return {

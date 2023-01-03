@@ -15,8 +15,8 @@
     </p>
     <snapshot-photo-config-detail [device]="device"></snapshot-photo-config-detail>
   </ng-template>
-  <mat-dialog-actions align="end">
+  <div mat-dialog-actions align="end">
     <button class="m-2 btn btn-danger" mat-dialog-close [disabled]="updating">Cancel</button>
     <button class="m-2 btn btn-success" (click)="clickUpdateConfiguration()" [disabled]="updating">Confirm</button>
-  </mat-dialog-actions>
+  </div>
 </div>

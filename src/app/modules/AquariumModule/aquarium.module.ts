@@ -62,6 +62,7 @@ import { TaskTabComponent } from './maintenance/task-tab/task-list.component';
 import { NotificationsListComponent } from './maintenance/notifications-list/notifications-list.component';
 import { NotificationService } from 'src/app/services/notification.service';
 import { AquariumFishComponent } from './fish/aquarium-fish.component';
+import { SharedDeviceModule } from '../SharedDeviceModule/shared-device.module';
 
 
 @NgModule({

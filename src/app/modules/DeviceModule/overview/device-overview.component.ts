@@ -8,8 +8,9 @@ import { getDeployedDeviceInformation, getDeviceConnectionStatus, getSelectedAqu
 import { take } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
-import { DeviceInformation } from 'src/app/models/DeviceInformation';
 import { DeviceConnectionStatus } from 'src/app/models/types/DeviceConnectionStatus';
+import { DeviceInformation } from '../../SharedDeviceModule/models/DeviceInformation';
+import { selectDeviceInformation } from '../../SharedDeviceModule/store/device.selectors';
 
 @Component({
   selector: 'device-overview',
@@ -18,13 +19,14 @@ import { DeviceConnectionStatus } from 'src/app/models/types/DeviceConnectionSta
 })
 export class DeviceOverviewComponent {
   public aquarium$: Observable<Aquarium> = this.store.select(getSelectedAquarium);
-  public deviceInformation$: Observable<DeviceInformation> = this.store.select(getDeployedDeviceInformation);
+  public deviceInformation$: Observable<DeviceInformation> = this.store.select(selectDeviceInformation);
   public deviceConnectionStatus$: Observable<DeviceConnectionStatus> = this.store.select(getDeviceConnectionStatus);
   public device: AquariumDevice;
   deviceLog: any;
 
   constructor(public aquariumService: AquariumService,
     public dialog: MatDialog,
-    public store: Store<AppState>
-  ) { }
+    public store: Store
+  ) {
+  }
 }

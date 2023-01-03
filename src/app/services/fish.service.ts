@@ -13,7 +13,7 @@ import { CameraConfiguration } from 'src/app/models/CameraConfiguration';
 import { AquariumPhoto } from 'src/app/models/AquariumPhoto';
 import { FishPhoto } from '../models/FishPhoto';
 import { BugReport } from '../models/BugReport';
-import { AquariumAccount } from '../models/AquariumAccount';
+import { AquariumAccount } from '../modules/SharedDeviceModule/models/AquariumAccount';
 import { AccountProfile } from '../models/AquariumProfile';
 import { Activity } from '../models/Activity';
 import { AccountRelationship } from '../models/AccountRelationship';

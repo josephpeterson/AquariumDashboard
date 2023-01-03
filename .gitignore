@@ -1,5 +1,6 @@
 
 node_modules/*
+.angular/*
 dist2/*
 dist/*
 src/environments/environment.ts

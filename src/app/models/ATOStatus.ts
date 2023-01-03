@@ -1,4 +1,4 @@
-import { DeviceScheduledJob } from "./DeviceScheduledJob";
+import { DeviceScheduledJob } from "../modules/SharedDeviceModule/models/DeviceScheduledJob";
 import { GpioPinValue } from "./types/GpioPinValue";
 
 export class ATOStatus {

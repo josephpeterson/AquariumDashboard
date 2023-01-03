@@ -1,4 +1,4 @@
-import { AquariumAccount } from './AquariumAccount';
+import { AquariumAccount } from '../modules/SharedDeviceModule/models/AquariumAccount';
 import { Fish } from './Fish';
 import { Aquarium } from './Aquarium';
 import { Activity } from './Activity';

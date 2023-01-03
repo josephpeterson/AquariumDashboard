@@ -1,0 +1,19 @@
+<aquarium-monitor-nav-bar></aquarium-monitor-nav-bar>
+<ng-container *ngIf="user$ | async else notlogged">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2 p-0 border-right bg-light">
+                <aquarium-monitor-side-bar class="position-fixed"></aquarium-monitor-side-bar>
+            </div>
+            <main role="main" class="col-lg-10">
+                <div class="justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3">
+                    <router-outlet></router-outlet>
+                </div>
+            </main>
+
+        </div>
+    </div>
+</ng-container>
+<ng-template #notlogged>
+    <router-outlet></router-outlet>
+</ng-template>

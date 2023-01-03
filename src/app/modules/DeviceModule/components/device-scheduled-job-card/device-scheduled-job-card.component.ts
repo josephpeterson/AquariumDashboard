@@ -1,22 +1,16 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AquariumService } from 'src/app/services/aquarium.service';
 
-import { DeviceSensor } from 'src/app/models/DeviceSensor';
-import { faChargingStation, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { NotificationService } from 'src/app/services/notification.service';
-import { DeviceScheduledJob } from 'src/app/models/DeviceScheduledJob';
-import { AquariumDevice } from 'src/app/models/AquariumDevice';
-import { JobStatus } from 'src/app/models/types/JobStatus';
-import { DeviceInformation } from 'src/app/models/DeviceInformation';
+import { DeviceScheduledJob } from 'src/app/modules/SharedDeviceModule/models/DeviceScheduledJob';
+import { DeviceInformation } from 'src/app/modules/SharedDeviceModule/models/DeviceInformation';
 import { DeviceConnectionStatus } from "src/app/models/types/DeviceConnectionStatus";
 import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
-import { AppState } from 'src/app/app.state';
-import { getDeployedDeviceInformation, getDeviceConnectionStatus, getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
+import { getDeviceConnectionStatus, getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { PaginationSliver } from 'src/app/models/PaginationSliver';
-import { Route } from '@angular/compiler/src/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { selectDeviceInformation } from 'src/app/modules/SharedDeviceModule/store/device.selectors';
 
 @Component({
   selector: 'device-scheduled-job-card',
@@ -26,7 +20,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class DeviceScheduledJobCardComponent implements OnInit {
 
   public aquarium$: Observable<Aquarium> = this.store.select(getSelectedAquarium);
-  public deviceInformation$: Observable<DeviceInformation> = this.store.select(getDeployedDeviceInformation);
+  public deviceInformation$: Observable<DeviceInformation> = this.store.select(selectDeviceInformation);
   public deviceConnectionStatus$: Observable<DeviceConnectionStatus> = this.store.select(getDeviceConnectionStatus);
   public completedScheduledJobs$: Subject<DeviceScheduledJob[]> = new Subject<DeviceScheduledJob[]>();
   DeviceConnectionStatus = DeviceConnectionStatus;
@@ -36,7 +30,7 @@ export class DeviceScheduledJobCardComponent implements OnInit {
 
   constructor(public _aquariumService: AquariumService,
     private route: ActivatedRoute,
-    private store: Store<AppState>) { }
+    private store: Store) { }
   public ngOnInit(): void {
     this.loadScheduledJobHistory();
 

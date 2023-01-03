@@ -1,10 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AquariumService } from 'src/app/services/aquarium.service';
 
-import { DeviceSensor } from 'src/app/models/DeviceSensor';
+import { DeviceSensor } from 'src/app/modules/SharedDeviceModule/models/DeviceSensor';
 import { faChargingStation, faMinusCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { NotificationService } from 'src/app/services/notification.service';
-import { DeviceScheduledJob } from 'src/app/models/DeviceScheduledJob';
+import { DeviceScheduledJob } from 'src/app/modules/SharedDeviceModule/models/DeviceScheduledJob';
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
 import { JobStatus } from 'src/app/models/types/JobStatus';
 import * as moment from 'moment';
@@ -58,7 +58,7 @@ export class DeviceScheduledJobListItemComponent implements OnInit {
     this._aquariumService.stopScheduledJob(this.device.id, job).subscribe(
       () => {
         this.notifier.notify("success", "Scheduled job stopped job id: " + job.id);
-        this.store.dispatch(new AquariumLoadDeployedDeviceByAquaruiumId(this.device.id));
+        //this.store.dispatch(new AquariumLoadDeployedDeviceByAquaruiumId(this.device.id));
       }, err => {
         this.notifier.notify("error", "Could not stop scheduled job");
       })
@@ -83,7 +83,7 @@ export class DeviceScheduledJobListItemComponent implements OnInit {
     return moment(time).utc().local().calendar();
   }
   public onScheduledJobCompleted() {
-    this.store.dispatch(new AquariumLoadDeployedDeviceByAquaruiumId(this.device.id));
+    //this.store.dispatch(new AquariumLoadDeployedDeviceByAquaruiumId(this.device.id));
     this.notifier.notify("success", "Schedule job completed! ID: " + this.scheduledJob.id);
     this.scheduledJob.status = JobStatus.Pending; //this will get overritten
   }

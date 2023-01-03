@@ -3,25 +3,19 @@ import { Aquarium } from 'src/app/models/Aquarium';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
 
-import { faCaretLeft, faCaretRight, faCheck, faCheckCircle, faRedo, faSpinner, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faCheckCircle, faRedo, faSpinner, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { MatDialog } from '@angular/material/dialog';
-import { ManagePhotoConfigurationModal } from 'src/app/modules/SharedModule/modals/manage-photo-configuration/manage-photo-configuration.component';
 import { ATOStatus } from 'src/app/models/ATOStatus';
 import { HttpErrorResponse } from '@angular/common/http';
-import * as moment from 'moment';
-import { Subject } from 'rxjs';
 import { RunATOModalComponent } from '../../../SharedModule/modals/run-ato-modal/run-ato-modal.component';
-import { PaginationSliver } from 'src/app/models/PaginationSliver';
-import { GpioPinValue } from 'src/app/models/types/GpioPinValue';
-import { DeviceScheduleTask } from 'src/app/models/DeviceScheduleTask';
 import { NotificationService } from 'src/app/services/notification.service';
-import { DeviceInformation } from 'src/app/models/DeviceInformation';
 import { DeviceScheduleTaskTypes } from 'src/app/models/types/DeviceScheduleTaskTypes';
 import { JobStatus } from 'src/app/models/types/JobStatus';
 import { DeviceConnectionStatus } from 'src/app/models/types/DeviceConnectionStatus';
 import { WaterChange } from 'src/app/models/WaterChange';
 import { PaginatedComponent } from 'src/app/modules/CoreModule/components/PaginatedComponent';
 import { DateFormatProvider } from 'src/app/providers/DateFormatProvider';
+import { DeviceInformation } from 'src/app/modules/SharedDeviceModule/models/DeviceInformation';
 
 @Component({
   selector: 'device-water-change-card',
@@ -46,7 +40,7 @@ export class DeviceWaterChangeCardComponent extends PaginatedComponent implement
   pinging: boolean;
 
   public atoStatus: ATOStatus;
-  public enabled:boolean;
+  public enabled: boolean;
   public waterChangeHistory: WaterChange[];
 
   public loading: boolean = false;
@@ -75,12 +69,14 @@ export class DeviceWaterChangeCardComponent extends PaginatedComponent implement
     clearInterval(this.updateTick);
   }
   public getRunningJob() {
+    /*
     if(!this.device || !this.device.tasks)
       return null;
     var atoTasks = this.device.tasks.filter(t => t.taskTypeId == DeviceScheduleTaskTypes.WaterChangeDrain);
     var task = this.deviceInformation.scheduledJobs.filter(sj => sj.status == JobStatus.Running && atoTasks.filter(t => t.id == sj.taskId).length > 0);
     if(task.length > 0)
       return task[0];
+      */
     return null;
   }
   public getSensorFromId(id: number) {
@@ -88,6 +84,7 @@ export class DeviceWaterChangeCardComponent extends PaginatedComponent implement
     return sensor;
   }
   public getNextATOJob() {
+    /*
     if(!this.device || !this.device.tasks)
       return null;
     var atoTasks = this.device.tasks.filter(t => t.taskTypeId == DeviceScheduleTaskTypes.WaterChangeDrain);
@@ -98,16 +95,20 @@ export class DeviceWaterChangeCardComponent extends PaginatedComponent implement
       return task[0];
 
     }
+    */
     return null;
   }
   public checkEnabled() {
+    return false;
+    /*
     if(!this.device.tasks)
       return;
     var task = this.device.tasks.filter(t => t.taskTypeId == DeviceScheduleTaskTypes.WaterChangeDrain)
     var task2 = this.device.tasks.filter(t => t.taskTypeId == DeviceScheduleTaskTypes.WaterChangeReplentish)
     return task.length > 0 && task2.length > 0;
+    */
   }
-  
+
   public updateATOProgress() {
     return;
 
@@ -166,12 +167,12 @@ export class DeviceWaterChangeCardComponent extends PaginatedComponent implement
     if (!nextTask)
       return false;
     var sensor = this.getSensorFromId(nextTask.task.triggerSensorId);
-    if(nextTask.task.triggerSensorValue == null || !sensor)
+    if (nextTask.task.triggerSensorValue == null || !sensor)
       return true;
     return nextTask.task.triggerSensorValue == sensor.value;
   }
-  
-  
+
+
 
   //Misc. methods
   public loadForward() {
@@ -184,7 +185,7 @@ export class DeviceWaterChangeCardComponent extends PaginatedComponent implement
   }
   //parse date from utc
   public parseDateFromUtc(date: string, timeOnly: boolean = false) {
-    return DateFormatProvider.parseDateFromUtc(date,timeOnly);
+    return DateFormatProvider.parseDateFromUtc(date, timeOnly);
   }
   public parseDate(date: string) {
     return DateFormatProvider.parseDate(date);

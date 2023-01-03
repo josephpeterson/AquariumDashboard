@@ -9,6 +9,7 @@ import { take } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { CreateWaterParameterModalComponent } from '../../../modals/create-water-parameter-modal/create-water-parameter-modal.component';
+import { AquariumDeviceService } from 'src/app/modules/SharedDeviceModule/aquarium-device.service';
 
 
 @Component({
@@ -31,6 +32,7 @@ export class DeviceDetailViewComponent implements OnInit {
     private componentLifeCycle$ = new Subject();
 
     constructor(private _aquariumService: AquariumService,
+        private _aquariumDeviceService: AquariumDeviceService,
         private dialog: MatDialog) {
 
     }
@@ -55,7 +57,7 @@ export class DeviceDetailViewComponent implements OnInit {
     }
     public pingAquariumDevice() {
         this.deviceStatus = 1;
-        this._aquariumService.pingDevice(this.aquarium.device.id).pipe(take(1)).subscribe(val => {
+        this._aquariumDeviceService.getDeviceInformation().pipe(take(1)).subscribe(val => {
             this.deviceStatus = 2;
         }, (err) => {
             this.deviceStatus = 0;
@@ -63,7 +65,7 @@ export class DeviceDetailViewComponent implements OnInit {
     }
 
     public getSnapshotAge(): string {
-        if(this.latestSnapshot)
+        if (this.latestSnapshot)
             return moment.utc(this.latestSnapshot.startTime).local().calendar();
     }
 

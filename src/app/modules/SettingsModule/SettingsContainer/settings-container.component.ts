@@ -7,7 +7,7 @@ import { AppState } from 'src/app/app.state';
 import { getAllAquariums, isLoadingAquariums, getConnectionError } from 'src/app/store/aquarium/aquarium.selector';
 import { AuthService } from 'src/app/services/auth.service';
 import { Subject } from 'rxjs';
-import { AquariumAccount } from 'src/app/models/AquariumAccount';
+import { AquariumAccount } from 'src/app/modules/SharedDeviceModule/models/AquariumAccount';
 
 @Component({
   selector: 'settings-container-component',
