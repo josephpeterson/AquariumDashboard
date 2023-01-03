@@ -7,7 +7,7 @@ import { Aquarium } from 'src/app/models/Aquarium';
 import { getSelectedAquarium, isLoadingAquariums } from 'src/app/store/aquarium/aquarium.selector';
 import { AppState } from 'src/app/app.state';
 import { AquariumService } from 'src/app/services/aquarium.service';
-import { AquariumAccount } from 'src/app/models/AquariumAccount';
+import { AquariumAccount } from 'src/app/modules/SharedDeviceModule/models/AquariumAccount';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({

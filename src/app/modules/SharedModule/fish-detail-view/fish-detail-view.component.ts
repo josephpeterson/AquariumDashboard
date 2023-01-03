@@ -10,21 +10,16 @@ import { SpeciesLoadAction, SpeciesAddAction } from 'src/app/store/species/speci
 import { faTrash, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
-import { ConfirmModalComponent } from 'src/app/modules/SharedModule/modals/confirm-modal/confirm-modal.component';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { Fish } from 'src/app/models/Fish';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { AquariumLoadSuccessAction } from 'src/app/store/aquarium/aquarium.actions';
 import { FishPhoto } from 'src/app/models/FishPhoto';
-import { PhotoExpandedModalComponent } from 'src/app/modules/SharedModule/modals/photo-expanded-modal/photo-expanded-modal.component';
 import { FishUpdateAction, FishLoadByIdAction } from 'src/app/store/fish/fish.actions';
 import { getSelectedFish, isUpdatingFish, isCreatingFish, getFishUpdateError } from 'src/app/store/fish/fish.selector';
-import { FishBreedModalComponent } from 'src/app/modules/SharedModule/modals/fish-breed-modal/fish-breed-modal.component';
-import { FishTransferModalComponent } from 'src/app/modules/SharedModule/modals/fish-transfer-modal/fish-transfer-modal.component';
-import { FishDiseaseModalComponent } from 'src/app/modules/SharedModule/modals/fish-disease-modal/fish-disease-modal.component';
 import { AttachmentUploaderComponent } from 'src/app/modules/SharedModule/attachment-uploader/attachment-uploader.component';
 import { NotificationService } from 'src/app/services/notification.service';
+import { ConfirmModalComponent } from '../../SharedDeviceModule/components/modals/confirm-modal/confirm-modal.component';
 
 
 

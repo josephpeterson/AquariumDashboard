@@ -1,8 +1,7 @@
 <div class="row bg-theme-secondary">
 	<div class="col-lg-8">
-		<h1 class="display-4">Device</h1>
 		<div class="row p-2">
-			<device-overview-card [aquarium]="aquarium$ | async" [deviceInformation]="deviceInformation$ | async" [deviceConnectionStatus]="deviceConnectionStatus$ | async"></device-overview-card>
+			<device-connection-banner></device-connection-banner>
 		</div>
 	</div>
 
@@ -23,6 +22,9 @@
 		</li>
 		<li class="nav-item">
 			<a class="nav-link" [routerLink]="['schedule']" [routerLinkActive]='["active"]' >Schedule</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" [routerLink]="['mixingstation']" [routerLinkActive]='["active"]' >Mixing Station</a>
 		</li>
 		<li class="nav-item">
 			<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true" [routerLink]="['snapshots']" [routerLinkActive]='["active"]'>Snapshots</a>

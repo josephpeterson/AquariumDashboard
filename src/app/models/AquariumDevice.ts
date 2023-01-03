@@ -1,9 +1,8 @@
+import { DeviceSchedule } from '../modules/SharedDeviceModule/models/DeviceSchedule';
+import { DeviceScheduleTask } from '../modules/SharedDeviceModule/models/DeviceScheduleTask';
+import { DeviceSensor } from '../modules/SharedDeviceModule/models/DeviceSensor';
 import { Aquarium } from './Aquarium';
 import { CameraConfiguration } from './CameraConfiguration';
-import { DeviceSchedule } from './DeviceSchedule';
-import { DeviceScheduleAssignment } from './DeviceScheduleAssignment';
-import { DeviceScheduleTask } from './DeviceScheduleTask';
-import { DeviceSensor } from './DeviceSensor';
 
 export class AquariumDevice
 {

@@ -1,31 +1,40 @@
-/* You can add global styles to this file, and also import other style files */
-@import '~bootstrap/dist/css/bootstrap.min.css';
-@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
-//@import "~angular-notifier/styles";
-//@import "~ng-pick-datetime/assets/style/picker.min.css";
-
+@import '../node_modules/bootstrap/scss/bootstrap.scss'; //this can't go in angular.json because of toastr
+// then import toastr scss
+@import "../node_modules/ngx-toastr/toastr-bs5-alert.scss";
 
 body,.mat-drawer-container {
     background-color: #f5f6f8;
 }
-.mat-progress-spinner circle, .mat-spinner circle {
-    stroke: #859BD3 !important;
+
+body {
+    -webkit-font-smoothing: antialiased;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
+}
+.toast-container {
+    margin-top:60px;
+}
+.generic-list {
+    min-height: 400px;
+    max-height: 400px;
+    border: 1px solid #dcdcdc;
+    background-color: #e6f3f5;
+    overflow: auto;
+
+
+    .generic-list-item {
+        cursor: pointer;
+        padding: 0.75rem 1.25rem;
+        background-color: #fff;
+        border-bottom: 1px solid rgba(0, 0, 0, .125);
+    }
+
+    .generic-list-item:hover {
+        background-color: rgba(150, 150, 150, 0.1);
+    }
 }
 
-/* For snackbar notifications */
-.cdk-overlay-container {
-    position: fixed;
-    z-index: 10000;
-}
-.notification.success {
-    background-color: limegreen;
-    color: white;
-}
-.notification.error {
-    background-color: indianred;
-}
-.notification.warning {
-    background-color: gold;
+.generic-list.mini {
+    min-height: 180px;
 }
 
 .empty-card
@@ -43,47 +52,6 @@ body,.mat-drawer-container {
 }
 
 
-p.lead {
-    max-width: 80%;
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
-}
-p.content {
-    max-width: 80%;
-}
-
 .bg-theme-secondary {
     background-color:rgb(225, 236, 245);
-}
-.gpio-tooltip {
-    white-space: pre-line;
-}
-:root {
-    --dark-color: #011627;
-    --pink-color: #E63946;
-    --light-color: #F1FAEE;
-}
-
-
-
-.generic-list {
-    min-height:400px;
-    max-height: 400px;
-    border:1px solid #dcdcdc;
-    background-color:#e6f3f5;
-    overflow: auto;
-  
-  
-    .generic-list-item {
-        cursor: pointer;
-        padding: 0.75rem 1.25rem;
-        background-color: #fff;
-        border-bottom: 1px solid rgba(0,0,0,.125);
-    }
-    .generic-list-item:hover {
-        background-color:rgba(150,150,150,0.1);
-    }   
-}
-.generic-list.mini {
-    min-height:180px;
 }

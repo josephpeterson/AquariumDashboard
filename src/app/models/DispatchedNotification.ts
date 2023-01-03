@@ -1,4 +1,4 @@
-import { AquariumAccount } from './AquariumAccount';
+import { AquariumAccount } from '../modules/SharedDeviceModule/models/AquariumAccount';
 import { Notification } from './Notification';
 export class DispatchedNotification {
   id: number;

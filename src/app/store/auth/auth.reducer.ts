@@ -1,4 +1,4 @@
-import { AquariumAccount } from "src/app/models/AquariumAccount";
+import { AquariumAccount } from "src/app/modules/SharedDeviceModule/models/AquariumAccount";
 import { AuthActions, AuthActionTypes } from "./auth.actions";
 
 

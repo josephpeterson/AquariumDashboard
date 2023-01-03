@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { environment } from 'src/environments/environment';
 import { Observable, Subject } from 'rxjs';
 import { JwtHelperService } from "@auth0/angular-jwt";
-import { AquariumAccount } from '../models/AquariumAccount';
+import { AquariumAccount } from '../modules/SharedDeviceModule/models/AquariumAccount';
 import { SignupRequest } from '../models/SignupRequest';
 import { Store } from "@ngrx/store";
 import { AppState } from "../app.state";

@@ -9,7 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';
-import { AquariumAccount } from 'src/app/models/AquariumAccount';
+import { AquariumAccount } from 'src/app/modules/SharedDeviceModule/models/AquariumAccount';
 import { faSignOutAlt, faSlidersH, faPhotoVideo, faFish, faCogs, faChartLine, faNetworkWired, faBars } from '@fortawesome/free-solid-svg-icons';
 import { getAuthenticatedUser } from 'src/app/store/auth/auth.selector';
 

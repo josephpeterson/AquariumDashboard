@@ -12,13 +12,13 @@ import * as moment from 'moment';
 import { Subject } from 'rxjs';
 import { RunATOModalComponent } from '../../../SharedModule/modals/run-ato-modal/run-ato-modal.component';
 import { GpioPinValue } from 'src/app/models/types/GpioPinValue';
-import { DeviceScheduleTask } from 'src/app/models/DeviceScheduleTask';
+import { DeviceScheduleTask } from 'src/app/modules/SharedDeviceModule/models/DeviceScheduleTask';
 import { NotificationService } from 'src/app/services/notification.service';
-import { DeviceInformation } from 'src/app/models/DeviceInformation';
+import { DeviceInformation } from 'src/app/modules/SharedDeviceModule/models/DeviceInformation';
 import { DeviceScheduleTaskTypes } from 'src/app/models/types/DeviceScheduleTaskTypes';
 import { JobStatus } from 'src/app/models/types/JobStatus';
 import { DeviceConnectionStatus } from 'src/app/models/types/DeviceConnectionStatus';
-import { DeviceScheduledJob } from 'src/app/models/DeviceScheduledJob';
+import { DeviceScheduledJob } from 'src/app/modules/SharedDeviceModule/models/DeviceScheduledJob';
 import { DateFormatProvider } from 'src/app/providers/DateFormatProvider';
 import { PaginatedComponent } from '../../../CoreModule/components/PaginatedComponent';
 @Component({
@@ -54,7 +54,7 @@ export class DeviceATOStatusComponent extends PaginatedComponent implements OnIn
 
   public atoRecommended: boolean = true;
 
-  
+
   nextATOJob: DeviceScheduledJob;
   runningATOJob: DeviceScheduledJob;
   hasMore: boolean;
@@ -76,12 +76,14 @@ export class DeviceATOStatusComponent extends PaginatedComponent implements OnIn
     clearInterval(this.updateTick);
   }
   public getRunningJob(): DeviceScheduledJob {
+    /*
     if (!this.device || !this.device.tasks)
       return null;
     var atoTasks = this.device.tasks.filter(t => t.taskTypeId == DeviceScheduleTaskTypes.StartATO);
     var task = this.deviceInformation.scheduledJobs.filter(sj => sj.status == JobStatus.Running && atoTasks.filter(t => t.id == sj.taskId).length > 0);
     if (task.length > 0)
       return task[0];
+      */
     return null;
   }
   public getSensorFromId(id: number) {
@@ -89,6 +91,7 @@ export class DeviceATOStatusComponent extends PaginatedComponent implements OnIn
     return sensor;
   }
   public getNextATOJob(): DeviceScheduledJob {
+    /*
     if (!this.device || !this.device.tasks)
       return null;
     var atoTasks = this.device.tasks.filter(t => t.taskTypeId == DeviceScheduleTaskTypes.StartATO);
@@ -98,13 +101,17 @@ export class DeviceATOStatusComponent extends PaginatedComponent implements OnIn
       return task[0];
 
     }
+    */
     return null;
   }
   public checkEnabled() {
+    return false;
+    /*
     if (!this.device.tasks)
       return;
     var task = this.device.tasks.filter(t => t.taskTypeId == DeviceScheduleTaskTypes.StartATO)
     return task.length > 0;
+    */
   }
   public updateATOProgress() {
     return;
@@ -177,7 +184,7 @@ export class DeviceATOStatusComponent extends PaginatedComponent implements OnIn
   }
   //parse date from utc
   public parseDateFromUtc(date: string, timeOnly: boolean = false) {
-    return DateFormatProvider.parseDateFromUtc(date,timeOnly);
+    return DateFormatProvider.parseDateFromUtc(date, timeOnly);
   }
   public parseDate(date: string) {
     return DateFormatProvider.parseDate(date);

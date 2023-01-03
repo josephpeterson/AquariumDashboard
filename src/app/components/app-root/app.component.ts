@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { AppState } from 'src/app/app.state';
-import { AquariumAccount } from 'src/app/models/AquariumAccount';
+import { AquariumAccount } from 'src/app/modules/SharedDeviceModule/models/AquariumAccount';
 import { AuthService } from 'src/app/services/auth.service';
 import { getAuthenticatedUser } from 'src/app/store/auth/auth.selector';
 

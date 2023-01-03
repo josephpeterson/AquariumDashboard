@@ -8,9 +8,12 @@ import { getDeployedDeviceInformation, getDeviceConnectionStatus, getSelectedAqu
 import { take } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
-import { DeviceInformation } from 'src/app/models/DeviceInformation';
 import { AquariumAttemptAuthRenewByAquariumId, AquariumLoadDeployedDeviceByAquaruiumId } from 'src/app/store/aquarium/aquarium.actions';
 import { DeviceConnectionStatus } from "src/app/models/types/DeviceConnectionStatus";
+import { AquariumDeviceService } from '../SharedDeviceModule/aquarium-device.service';
+import { connectToDevice } from '../SharedDeviceModule/store/device.actions';
+import { selectConfiguredDevice, selectDeviceInformation } from '../SharedDeviceModule/store/device.selectors';
+import { DeviceInformation } from '../SharedDeviceModule/models/DeviceInformation';
 
 @Component({
   selector: 'aquarium-device',
@@ -21,18 +24,19 @@ export class AquariumDeviceComponent implements OnInit {
 
   public aquarium$: Observable<Aquarium> = this.store.select(getSelectedAquarium);
   //This is the deployed device information
-  public deviceInformation$: Observable<DeviceInformation> = this.store.select(getDeployedDeviceInformation);
+  public deviceInformation$: Observable<DeviceInformation> = this.store.select(selectDeviceInformation);
   public deviceConnectionStatus$: Observable<DeviceConnectionStatus> = this.store.select(getDeviceConnectionStatus);
 
   public attemptedRenew: boolean = false;
 
   constructor(public aquariumService: AquariumService,
+    public aquariumDeviceService: AquariumDeviceService,
     public dialog: MatDialog,
-    public store: Store<AppState>
+    public store: Store
   ) { }
   ngOnInit() {
     this.aquarium$.subscribe(aq => {
-      this.store.dispatch(new AquariumLoadDeployedDeviceByAquaruiumId(aq.device.id));
+      this.store.dispatch(connectToDevice());
       this.deviceConnectionStatus$.subscribe((status: DeviceConnectionStatus) => {
         if (status == DeviceConnectionStatus.Connected && !this.attemptedRenew) //connected but not tested
         {

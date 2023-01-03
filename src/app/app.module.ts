@@ -71,6 +71,8 @@ import { SpeciesEffects } from './store/species/species.effect';
 import { ProfileEffects } from './store/profile/profile.effect';
 import { PostEffects } from './store/post/post.effect';
 import { SnapshotEffects } from './store/snapshot/snapshot.effect';
+import { SharedDeviceModule } from './modules/SharedDeviceModule/shared-device.module';
+import { ToastrModule } from 'ngx-toastr';
 
 
 
@@ -92,38 +94,9 @@ import { SnapshotEffects } from './store/snapshot/snapshot.effect';
     FormsModule,
     AppRoutingModule,
     CoreModule,
-    SharedModule,
 
-    MatSidenavModule,
-    MatProgressSpinnerModule,
-    MatCardModule,
-    MatTableModule,
-    MatTabsModule,
-    MatCheckboxModule,
-    MatInputModule,
-    MatRadioModule,
-    MatSortModule,
-    MatMenuModule,
-    MatIconModule,
-    MatListModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatFormFieldModule,
-    MatPaginatorModule,
-    MatSelectModule,
-    MatDialogModule,
-    MatSliderModule,
-    MatButtonModule,
-    MatDatepickerModule,
-    MatAutocompleteModule,
-    MatNativeDateModule,
-    ReactiveFormsModule,
-    ColorPickerModule,
-    FontAwesomeModule,
-    Ng5SliderModule,
 
-    CKEditorModule,
-
+    ToastrModule.forRoot(),
     StoreModule.forRoot({}),
     StoreModule.forFeature('aquariums', aquariumReducer),
     StoreModule.forFeature('snapshots', snapshotReducer),

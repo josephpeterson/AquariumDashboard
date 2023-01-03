@@ -2,7 +2,7 @@ import { HttpHeaders, HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { environment } from "../../environments/environment";
-import { AquariumAccount } from '../models/AquariumAccount';
+import { AquariumAccount } from '../modules/SharedDeviceModule/models/AquariumAccount';
 import { BugReport } from '../models/BugReport';
 import { AquariumApiEndpoints } from "../models/constants/AquariumApiEndpoints";
 import { DispatchedNotification } from '../models/DispatchedNotification';

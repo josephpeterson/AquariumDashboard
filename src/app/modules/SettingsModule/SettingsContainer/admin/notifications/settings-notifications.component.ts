@@ -21,7 +21,7 @@ import { getSelectedAquarium, isLoadingAquariums } from 'src/app/store/aquarium/
 import { AppState } from 'src/app/app.state';
 import { AquariumService } from 'src/app/services/aquarium.service';
 
-import { AquariumAccount } from 'src/app/models/AquariumAccount';
+import { AquariumAccount } from 'src/app/modules/SharedDeviceModule/models/AquariumAccount';
 import { CreateNotificationModalComponent } from 'src/app/modules/SharedModule/modals/create-notification-modal/create-notification-modal.component';
 import { NotificationsTableComponent } from './notifications-table/notifications-table.component';
 import { NotificationService } from 'src/app/services/notification.service';

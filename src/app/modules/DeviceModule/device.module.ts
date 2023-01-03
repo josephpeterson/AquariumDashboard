@@ -3,7 +3,6 @@
 import { NgModule }       from '@angular/core';
 import { CommonModule }   from '@angular/common';
 import { DeviceInformationCardComponent } from './components/device-information-card/device-information-card.component';
-import { DeviceScheduleCardComponent } from './components/device-schedule-card/device-schedule-card.component';
 import { DeviceRoutes } from './device-routing.module';
 import { SharedModule } from '../SharedModule/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -43,27 +42,26 @@ import { AuthGuard } from 'src/app/guards/AuthGuard';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AquariumInterceptor } from 'src/app/services/aquarium.interceptor';
 import { DeviceATOStatusComponent } from './components/device-ato-status-card/device-ato-status-card.component';
-import { DeviceOverviewCardComponent } from './components/device-overview-card/device-overview-card.component';
 import { DeviceSnapshotCarouselComponent } from './components/device-snapshot-carousel/device-snapshot-carousel.component';
 import { NotificationService } from 'src/app/services/notification.service';
 import { DeviceOverviewComponent } from './overview/device-overview.component';
 import { DeviceSettingsComponent } from './settings/device-settings.component';
 import { DeviceScheduleComponent } from './schedule/device-schedule.component';
-import { DeviceGpioCardComponent } from './components/device-gpio-card/device-gpio-card.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { DeviceTaskCardComponent } from './components/device-task-card/device-task-card.component';
 import { DeviceScheduledJobCardComponent } from './components/device-scheduled-job-card/device-scheduled-job-card.component';
 import { DeviceScheduledJobListItemComponent } from './components/device-scheduled-job-list-item/device-scheduled-job-list-item.component';
 import { AquariumDeviceComponent } from './aquarium-device.component';
 import { DeviceSensorsComponent } from './sensors/sensors.component';
-import { DeviceSensorListItemComponent } from './components/device-sensor-list-item/device-sensor-list-item.component';
 import { DeviceWaterChangeCardComponent } from './components/device-water-change-card/device-water-change-card.component';
+import { SharedDeviceModule } from '../SharedDeviceModule/shared-device.module';
+import { DeviceConnectionBannerComponent } from './components/device-overview-card/device-connection-banner.component';
 
 
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
+    SharedDeviceModule,
 
     FormsModule,
     FontAwesomeModule,
@@ -99,12 +97,10 @@ import { DeviceWaterChangeCardComponent } from './components/device-water-change
     DeviceRoutes //<-- import
   ],
   declarations: [
-    DeviceOverviewCardComponent,
+    DeviceConnectionBannerComponent,
     DeviceInformationCardComponent,
     
     DeviceScheduleComponent,
-    DeviceScheduleCardComponent,
-    DeviceTaskCardComponent,
     
     DeviceOverviewComponent,
     DeviceATOStatusComponent,
@@ -115,8 +111,6 @@ import { DeviceWaterChangeCardComponent } from './components/device-water-change
     DeviceSensorsComponent,
     DeviceScheduledJobCardComponent,
     DeviceScheduledJobListItemComponent,
-    DeviceGpioCardComponent,
-    DeviceSensorListItemComponent,
     
     DeviceSettingsComponent,
     DeviceLogCardComponent,

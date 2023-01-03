@@ -8,8 +8,9 @@ import { of } from 'rxjs'
 import { Aquarium } from 'src/app/models/Aquarium';
 import { Fish } from 'src/app/models/Fish';
 import { Update } from '@ngrx/entity';
-import { DeviceInformation } from 'src/app/models/DeviceInformation';
+import { DeviceInformation } from 'src/app/modules/SharedDeviceModule/models/DeviceInformation';
 import { HttpEvent, HttpResponse } from '@angular/common/http';
+import { connectToDevice } from 'src/app/modules/SharedDeviceModule/store/device.actions';
 
 @Injectable()
 export class AquariumEffects {
@@ -47,7 +48,7 @@ export class AquariumEffects {
                     (deviceInformation: DeviceInformation) => {
                         return new AquariumLoadDeployedDeviceSuccessAction(deviceInformation)
                     }
-                )
+                ),
             )
         ),
         catchError(err => of(new AquariumLoadDeployedDeviceFailedAction(err)))

@@ -1,8 +1,0 @@
-<mat-form-field>
-    <mat-label>Select Task</mat-label>
-    <mat-select [formControl]="selectControl">
-        <mat-option *ngFor="let s of availableDeviceTasks" [value]="s">
-            {{s.name}}
-        </mat-option>
-    </mat-select>
-</mat-form-field>

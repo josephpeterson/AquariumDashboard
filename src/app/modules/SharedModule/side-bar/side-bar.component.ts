@@ -15,7 +15,7 @@ import { Aquarium } from 'src/app/models/Aquarium';
 import { faSignOutAlt, faSlidersH, faPhotoVideo, faFish, faCogs, faChartLine, faNetworkWired, faDesktop, faWater, faUser, faBook, faCalendar } from '@fortawesome/free-solid-svg-icons';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { AquariumAccount } from 'src/app/models/AquariumAccount';
+import { AquariumAccount } from 'src/app/modules/SharedDeviceModule/models/AquariumAccount';
 import { getAuthenticatedUser } from 'src/app/store/auth/auth.selector';
 
 @Component({

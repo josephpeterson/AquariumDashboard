@@ -1,23 +1,16 @@
-<div *ngIf="(aquarium$ | async) as aquarium"
-	class="justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3">
-	<div class="aquarium.device as device else noDevice">
+<div *ngIf="(deviceInformation$ | async)?.configuredDevice as configuredDevice">
+	<div class="row">
+		<div class="col">
+			<h5>Device Schedules</h5>
+			<device-schedule-list
+				[configuredDevice]="configuredDevice"></device-schedule-list>
+			<device-schedule-upsert-button>New Schedule...</device-schedule-upsert-button>
 
-
-		<div class="row">
-			<div class="col">
-				<device-schedule-card [device]="aquarium.device"></device-schedule-card>
-			</div>
-			<div class="col">
-				<device-task-card [device]="aquarium.device"></device-task-card>
-			</div>
 		</div>
-		<div class="row mt-2">
-			<div class="col">
-				<device-scheduled-job-card></device-scheduled-job-card>
-			</div>
+		<div class="col">
+			<h5>Device Tasks</h5>
+			<device-task-list [configuredDevice]="configuredDevice"></device-task-list>
+			<device-task-upsert-button>New Task...</device-task-upsert-button>
 		</div>
 	</div>
-	<ng-template #noDevice>
-		<device-detail-form [aquarium]="aquarium"></device-detail-form>
-	</ng-template>
 </div>

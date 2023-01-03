@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
-import { AquariumAccount } from 'src/app/models/AquariumAccount';
+import { AquariumAccount } from 'src/app/modules/SharedDeviceModule/models/AquariumAccount';
 
 @Component({
   selector: 'star-button',

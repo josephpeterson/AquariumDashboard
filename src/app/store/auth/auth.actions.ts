@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { AquariumAccount } from 'src/app/models/AquariumAccount';
+import { AquariumAccount } from 'src/app/modules/SharedDeviceModule/models/AquariumAccount';
 
 export enum AuthActionTypes {
   SetAuthenticatedUser = '[Auth] Authenticated user applied',

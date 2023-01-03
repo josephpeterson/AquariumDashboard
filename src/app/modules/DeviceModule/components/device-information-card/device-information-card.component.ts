@@ -7,9 +7,9 @@ import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { NotificationService } from 'src/app/services/notification.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
-import { getDeployedDeviceInformation } from 'src/app/store/aquarium/aquarium.selector';
-import { DeviceInformation } from 'src/app/models/DeviceInformation';
 import { Observable } from 'rxjs';
+import { selectDeviceInformation } from 'src/app/modules/SharedDeviceModule/store/device.selectors';
+import { DeviceInformation } from 'src/app/modules/SharedDeviceModule/models/DeviceInformation';
 
 @Component({
   selector: 'device-information-card',
@@ -18,14 +18,14 @@ import { Observable } from 'rxjs';
 })
 export class DeviceInformationCardComponent implements OnInit {
 
-  public deviceInformation$: Observable<DeviceInformation> = this.store.select(getDeployedDeviceInformation);
+  public deviceInformation$: Observable<DeviceInformation> = this.store.select(selectDeviceInformation);
   scanning: boolean;
 
   faCheck = faCheckCircle;
   pinging: boolean;
 
   constructor(public _aquariumService: AquariumService,
-    private store: Store<AppState>) { }
+    private store: Store) { }
 
   ngOnInit() {
   }

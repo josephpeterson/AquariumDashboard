@@ -1,16 +1,7 @@
-import { Component, OnInit, Input, Inject } from '@angular/core';
-import { DeviceScheduleTask } from 'src/app/models/DeviceScheduleTask';
-import { DeviceSchedule } from 'src/app/models/DeviceSchedule';
+import { Component, OnInit, Inject } from '@angular/core';
 
-import { AquariumDevice } from 'src/app/models/AquariumDevice';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import * as moment from 'moment';
 import { AquariumService } from 'src/app/services/aquarium.service';
-import { GpioPinTypes } from '../../../../models/GpioPinTypes';
-import { RaspberryPi3ModelB } from '../../../../models/RaspberryPi3ModelB';
-import { DeviceSensor } from 'src/app/models/DeviceSensor';
-import { RaspberryPiModels } from 'src/app/models/types/RaspberyPiModels';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'run-ato-modal',

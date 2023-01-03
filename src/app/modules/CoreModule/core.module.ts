@@ -14,6 +14,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { LoginModalComponent } from './components/login-modal/login-modal.component';
 import { ForgotPasswordModalComponent } from './components/forgot-password-modal/forgot-password-modal.component';
+import { AquariumDeviceHttpClient } from './aquarium-device-client.service';
+import { SharedDeviceModule } from '../SharedDeviceModule/shared-device.module';
+import { SharedModule } from '../SharedModule/shared.module';
 
 
 @NgModule({
@@ -22,7 +25,9 @@ import { ForgotPasswordModalComponent } from './components/forgot-password-modal
     FontAwesomeModule,
     FormsModule,
     ReactiveFormsModule,
-    MatDialogModule
+    MatDialogModule,
+    SharedModule,
+    SharedDeviceModule //this only needs to be here because aquarium-service uses aquarium-device-service
   ],
   declarations: [
     /* Not logged in */

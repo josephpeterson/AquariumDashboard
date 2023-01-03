@@ -14,7 +14,7 @@ import { Store } from '@ngrx/store';
 import { Species } from 'src/app/models/Species';
 import { getAllSpecies } from 'src/app/store/species/species.selector';
 import { SpeciesLoadAction } from 'src/app/store/species/species.actions';
-import { AquariumAccount } from 'src/app/models/AquariumAccount';
+import { AquariumAccount } from 'src/app/modules/SharedDeviceModule/models/AquariumAccount';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { AdminService } from 'src/app/services/admin.service';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';

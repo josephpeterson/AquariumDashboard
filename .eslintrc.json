@@ -30,7 +30,12 @@
           }
         ],
         "@angular-eslint/component-selector": [
-          "off"
+          "error",
+          {
+            "type": "element",
+            "prefix": "device",
+            "style": "kebab-case"
+          }
         ]
       }
     },

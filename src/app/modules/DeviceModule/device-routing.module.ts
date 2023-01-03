@@ -8,6 +8,7 @@ import { DeviceSettingsComponent } from './settings/device-settings.component';
 import { DeviceScheduleComponent } from './schedule/device-schedule.component';
 import { AquariumDeviceComponent } from './aquarium-device.component';
 import { DeviceSensorsComponent } from './sensors/sensors.component';
+import { DeviceMixingStationContainerComponent } from './mixing-station/mixing-station.component';
 
 const secondaryRoutes: Routes = [
     {
@@ -30,6 +31,10 @@ const secondaryRoutes: Routes = [
             {
                 path: 'sensors',
                 component: DeviceSensorsComponent
+            },
+            {
+                path: 'mixingstation',
+                component: DeviceMixingStationContainerComponent
             },
             {
                 path: '',

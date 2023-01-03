@@ -7,13 +7,13 @@ import { AppState } from 'src/app/app.state';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { Aquarium } from 'src/app/models/Aquarium';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmModalComponent } from 'src/app/modules/SharedModule/modals/confirm-modal/confirm-modal.component';
 import { take } from 'rxjs/operators';
 import { faCheckCircle, faDesktop, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { AquariumLoadSuccessAction } from 'src/app/store/aquarium/aquarium.actions';
 import { HttpErrorResponse } from '@angular/common/http';
 import { RaspberryPiModels } from 'src/app/models/types/RaspberyPiModels';
 import { NotificationService } from 'src/app/services/notification.service';
+import { ConfirmModalComponent } from 'src/app/modules/SharedDeviceModule/components/modals/confirm-modal/confirm-modal.component';
 
 
 @Component({

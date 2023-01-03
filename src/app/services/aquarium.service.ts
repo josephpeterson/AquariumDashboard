@@ -5,7 +5,6 @@ import { environment } from "../../environments/environment";
 import { LightingConfiguration } from 'src/app/models/LightingConfiguration';
 import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
 import { Aquarium } from 'src/app/models/Aquarium';
-import { catchError, map } from 'rxjs/operators';
 import { Fish } from 'src/app/models/Fish';
 import { Species } from 'src/app/models/Species';
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
@@ -13,26 +12,26 @@ import { CameraConfiguration } from 'src/app/models/CameraConfiguration';
 import { AquariumPhoto } from 'src/app/models/AquariumPhoto';
 import { FishPhoto } from '../models/FishPhoto';
 import { BugReport } from '../models/BugReport';
-import { AquariumAccount } from '../models/AquariumAccount';
 import { AccountProfile } from '../models/AquariumProfile';
 import { Activity } from '../models/Activity';
 import { AccountRelationship } from '../models/AccountRelationship';
 import { SearchOptions } from '../models/SearchOptions';
 import { SearchResult } from '../models/SearchResult';
 import { PhotoContent } from '../models/PhotoContent';
-import { DeviceSchedule } from '../models/DeviceSchedule';
-import { DeviceScheduleTask } from '../models/DeviceScheduleTask';
 import { PaginationSliver } from '../models/PaginationSliver';
 import { WaterChange } from '../models/WaterChange';
 import { WaterDosing } from '../models/WaterDosing';
 import { PhotoTimelapseOptions } from '../models/PhotoTimelapseOptions';
 import { ATOStatus } from "../models/ATOStatus";
-import { DeviceSensor } from "../models/DeviceSensor";
-import { DeviceSensorTestRequest } from "../models/DeviceSensorTestRequest";
-import { DeviceInformation } from "../models/DeviceInformation";
-import { AquariumCreateResetAction } from "../store/aquarium/aquarium.actions";
 import { AquariumApiEndpoints } from "../models/constants/AquariumApiEndpoints";
-import { DeviceScheduledJob } from "../models/DeviceScheduledJob";
+import { AquariumDeviceHttpClient } from "../modules/CoreModule/aquarium-device-client.service";
+import { AquariumDeviceService } from "../modules/SharedDeviceModule/aquarium-device.service";
+import { AquariumAccount } from "../modules/SharedDeviceModule/models/AquariumAccount";
+import { DeviceSchedule } from "../modules/SharedDeviceModule/models/DeviceSchedule";
+import { DeviceScheduledJob } from "../modules/SharedDeviceModule/models/DeviceScheduledJob";
+import { DeviceScheduleTask } from "../modules/SharedDeviceModule/models/DeviceScheduleTask";
+import { DeviceSensor } from "../modules/SharedDeviceModule/models/DeviceSensor";
+import { DeviceSensorTestRequest } from "../modules/SharedDeviceModule/models/DeviceSensorTestRequest";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -51,7 +50,10 @@ export class AquariumService {
 
   public aquariumId: number;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+    private aquariumDeviceHttp: AquariumDeviceHttpClient,
+    private aquariumDeviceService: AquariumDeviceService
+  ) {
     this._url = environment.urls.aquariumApi;
     this._cdn = environment.urls.azureCDN;
   }
@@ -207,7 +209,7 @@ export class AquariumService {
     return this.http.get<AquariumDevice>(this._url + AquariumApiEndpoints.DEVICE_DISPATCH_SCAN.aggregate(deviceId));
   }
   pingDevice(deviceId: number) {
-    return this.http.get<DeviceInformation>(this._url + AquariumApiEndpoints.DEVICE_DISPATCH_PING.aggregate(deviceId));
+    return this.aquariumDeviceService.getDeviceInformation();
   }
   attemptAuthRenew(deviceId: number) {
     return this.http.get(this._url + AquariumApiEndpoints.DEVICE_DISPATCH_AUTH_RENEW.aggregate(deviceId));
@@ -338,10 +340,10 @@ export class AquariumService {
   public getAllScheduledJobsOnDevice(deviceId) {
     return this.http.get<DeviceScheduledJob[]>(this._url + AquariumApiEndpoints.SCHEDULE_RETRIEVE_SCHEDULED_JOBS_ON_DEVICE.aggregate(deviceId));
   }
-  public getAllScheduledJobs(deviceId,pagination: PaginationSliver) {
-    return this.http.post<DeviceScheduledJob[]>(this._url + AquariumApiEndpoints.SCHEDULE_RETRIEVE_SCHEDULED_JOBS.aggregate(deviceId),pagination);
+  public getAllScheduledJobs(deviceId, pagination: PaginationSliver) {
+    return this.http.post<DeviceScheduledJob[]>(this._url + AquariumApiEndpoints.SCHEDULE_RETRIEVE_SCHEDULED_JOBS.aggregate(deviceId), pagination);
   }
-  public stopScheduledJob(deviceId,scheduledJob: DeviceScheduledJob) {
+  public stopScheduledJob(deviceId, scheduledJob: DeviceScheduledJob) {
     return this.http.post(this._url + AquariumApiEndpoints.SCHEDULE_SCHEDULED_JOB_STOP.aggregate(deviceId), scheduledJob);
   }
 
@@ -454,7 +456,7 @@ export class AquariumService {
     return this.http.put<DeviceSensor>(this._url + AquariumApiEndpoints.DEVICE_SENSOR_UPDATE.aggregate(deviceId), deviceSensor);
   }
   public testDeviceSensor(testRequest: DeviceSensorTestRequest): Observable<DeviceSensorTestRequest> {
-    return this.http.post<DeviceSensorTestRequest>(this._url + AquariumApiEndpoints.DEVICE_SENSOR_TEST.aggregate(testRequest.deviceId), testRequest);
+    return this.aquariumDeviceService.testDeviceSensor(testRequest);
   }
   /* Device Tasks */
   public createDeviceTask(deviceId: number, deviceTask: DeviceScheduleTask) {

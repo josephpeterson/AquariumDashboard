@@ -2,7 +2,7 @@ import { EntityState, EntityAdapter, createEntityAdapter, Update } from '@ngrx/e
 import { AquariumActions, AllAquariumActions } from './aquarium.actions';
 import { Aquarium } from '../../models/Aquarium';
 import { HttpErrorResponse } from '@angular/common/http';
-import { DeviceInformation } from 'src/app/models/DeviceInformation';
+import { DeviceInformation } from 'src/app/modules/SharedDeviceModule/models/DeviceInformation';
 import { DeviceConnectionStatus } from '../../models/types/DeviceConnectionStatus';
 
 export interface AquariumsState extends EntityState<Aquarium> {

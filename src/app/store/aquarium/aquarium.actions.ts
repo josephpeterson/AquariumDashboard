@@ -3,7 +3,7 @@ import { Aquarium } from 'src/app/models/Aquarium';
 import { Update } from '@ngrx/entity';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Fish } from 'src/app/models/Fish';
-import { DeviceInformation } from 'src/app/models/DeviceInformation';
+import { DeviceInformation } from 'src/app/modules/SharedDeviceModule/models/DeviceInformation';
 
 export enum AquariumActions {
   Update = '[Aquariums] Tank updated',

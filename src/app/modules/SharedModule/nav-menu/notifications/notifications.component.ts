@@ -6,8 +6,8 @@ import { Notification } from 'src/app/models/Notification';
 import * as moment from 'moment';
 import { NotificationTypes } from 'src/app/models/types/NotificationTypes';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmModalComponent } from '../../modals/confirm-modal/confirm-modal.component';
 import { Subject } from 'rxjs';
+import { ConfirmModalComponent } from 'src/app/modules/SharedDeviceModule/components/modals/confirm-modal/confirm-modal.component';
 
 @Component({
   selector: 'nav-menu-notifications',
