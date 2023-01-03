@@ -52,9 +52,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 //import { MatFileUploadModule } from 'angular-material-fileupload';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { NavMenuNotificationsComponent } from './nav-menu/notifications/notifications.component';
-import { SearchFormComponent } from './nav-menu/search-form/search-form.component';
 import { ProfileIconBadgeComponent } from 'src/app/modules/SharedModule/profile-icon-badge/profile-icon-badge.component';
 import { FollowButtonComponent } from 'src/app/modules/SharedModule/follow-button/follow-button.component';
 import { BugReportButtonComponent } from './bugreport-button/bugreport-button.component';
@@ -81,19 +78,16 @@ import { DeviceDetailViewComponent } from './data/device/device-detail-view/devi
 import { SpeciesCardComponent } from './data/species/species-card/species-card.component';
 import { FishAddFormComponent } from './data/fish/fish-add-form/fish-add-form.component';
 import { FishAddPhotoButtonComponent } from './data/fish/add-photo-button/fish-add-photo-button.component';
-import { AquariumNavBarComponent } from './side-bar/aquarium-nav-bar/aquarium-nav-bar.component';
 import { FishPhotoSelectComponent } from './data/fish/photo-select/fish-photo-select.component';
 import { FishCardDetailedComponent } from 'src/app/modules/SharedModule/fish-card-detailed/fish-card-detailed.component';
 import { ApplicationLogViewComponent } from './application-log-view/application-log-view.component';
 import { PhotoPaginator } from './photo-paginator/photo-paginator.component';
 import { StandardTableComponent } from './standard-table/standard-table.component';
 import { VisualAquariumComponent } from './visual-aquarium/visual-aquarium.component';
-import { SideBarComponent } from './side-bar/side-bar.component';
 import { TypeSelectComponent } from './form/type-select/type-select.component';
 import { SnapshotPhotoConfigDetail } from './photo-config-detail/snapshot-photo-config-detail.component';
 import { PhotoCardComponent } from './data/photo/photo-card/photo-card.component';
 import { EquipmentTableComponent } from './equipment-table/equipment-table.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { FishService } from 'src/app/services/fish.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -183,9 +177,6 @@ var modals = [
   ],
   declarations: [
     /* Nav Menu */
-    NavMenuComponent,
-    NavMenuNotificationsComponent,
-    SearchFormComponent,
     ProfileIconBadgeComponent,
 
     FollowButtonComponent,
@@ -216,14 +207,12 @@ var modals = [
     SpeciesCardComponent,
     FishAddFormComponent,
     FishAddPhotoButtonComponent,
-    AquariumNavBarComponent,
     FishPhotoSelectComponent,
     FishCardDetailedComponent,
     ApplicationLogViewComponent,
     PhotoPaginator,
     StandardTableComponent,
     VisualAquariumComponent,
-    SideBarComponent,
     TypeSelectComponent,
     SnapshotPhotoConfigDetail,
     PhotoCardComponent,
@@ -237,15 +226,12 @@ var modals = [
     DateFilterSelectorComponent,
     SpeciesSelectComponent,
     SpeciesTableComponent,
-    PageNotFoundComponent,
 
 
     ...modals,
   ],
   exports: [
     CommonModule,
-    NavMenuComponent,
-    SideBarComponent,
     LoadingContainerComponent,
     FollowButtonComponent, // Maybe?
     SnapshotPhotoConfigDetail, // Maybe? Deprecate?

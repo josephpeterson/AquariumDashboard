@@ -1,14 +1,12 @@
-
+<aquarium-monitor-nav-bar></aquarium-monitor-nav-bar>
 <ng-container *ngIf="user$ | async else notlogged">
-<nav-menu></nav-menu>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-2 p-0 border-right bg-light">
-                <side-bar class="position-fixed"></side-bar>
+                <aquarium-monitor-side-bar class="position-fixed"></aquarium-monitor-side-bar>
             </div>
             <main role="main" class="col-lg-10">
-                <div
-                    class="justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3">
+                <div class="justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3">
                     <router-outlet></router-outlet>
                 </div>
             </main>

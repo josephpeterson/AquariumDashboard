@@ -14,11 +14,11 @@ import { faSignOutAlt, faSlidersH, faPhotoVideo, faFish, faCogs, faChartLine, fa
 import { getAuthenticatedUser } from 'src/app/store/auth/auth.selector';
 
 @Component({
-  selector: 'nav-menu',
-  templateUrl: './nav-menu.component.html',
-  styleUrls: ['./nav-menu.component.scss']
+  selector: 'aquarium-monitor-nav-bar',
+  templateUrl: './aquarium-monitor-nav-bar.component.html',
+  styleUrls: ['./aquarium-monitor-nav-bar.component.scss']
 })
-export class NavMenuComponent {
+export class AquariumMonitorNavBarComponent {
   isExpanded = false;
 
   public loading$ = this.store.select(isLoadingAquariums);

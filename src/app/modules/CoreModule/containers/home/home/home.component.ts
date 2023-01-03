@@ -3,8 +3,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { MatDialog } from '@angular/material/dialog';
-import { LoginComponent } from '../login/login.component';
-import { LoginModalComponent } from '../../login-modal/login-modal.component';
+import { LoginModalComponent } from '../../../components/login-modal/login-modal.component';
 
 @Component({
   selector: 'home-component',

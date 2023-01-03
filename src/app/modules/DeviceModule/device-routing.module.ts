@@ -5,10 +5,10 @@ import { AuthGuard } from 'src/app/guards/AuthGuard';
 import { DeviceModule } from './device.module';
 import { DeviceOverviewComponent } from './overview/device-overview.component';
 import { DeviceSettingsComponent } from './settings/device-settings.component';
-import { DeviceScheduleComponent } from './schedule/device-schedule.component';
+import { AquariumDeviceScheduleContainerComponent } from './schedule/aquarium-device-schedule-container.component';
 import { AquariumDeviceComponent } from './aquarium-device.component';
 import { DeviceSensorsComponent } from './sensors/sensors.component';
-import { DeviceMixingStationContainerComponent } from './mixing-station/mixing-station.component';
+import { AquariumDeviceMixingStationContainerComponent } from './mixing-station/aquarium-device-mixing-station-container.component';
 
 const secondaryRoutes: Routes = [
     {
@@ -26,7 +26,7 @@ const secondaryRoutes: Routes = [
             },
             {
                 path: 'schedule',
-                component: DeviceScheduleComponent
+                component: AquariumDeviceScheduleContainerComponent
             },
             {
                 path: 'sensors',
@@ -34,7 +34,7 @@ const secondaryRoutes: Routes = [
             },
             {
                 path: 'mixingstation',
-                component: DeviceMixingStationContainerComponent
+                component: AquariumDeviceMixingStationContainerComponent
             },
             {
                 path: '',

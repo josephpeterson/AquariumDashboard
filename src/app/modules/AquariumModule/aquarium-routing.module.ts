@@ -12,7 +12,6 @@ import { AquariumPhotosContainerComponent } from './photos/aquarium-photos-conta
 import { LightingComponent } from './lighting/lighting.component';
 import { SettingsComponent } from './settings/settings.component';
 import { MaintenanceComponent } from './maintenance/maintenance.component';
-import { PageNotFoundComponent } from '../SharedModule/page-not-found/page-not-found.component';
 import { AquariumsContainer } from './AquariumsContainer/aquariums-container.component';
 import { AquariumModule } from './aquarium.module';
 import { AquariumFishComponent } from './fish/aquarium-fish.component';

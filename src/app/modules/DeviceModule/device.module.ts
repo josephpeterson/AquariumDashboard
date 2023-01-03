@@ -46,15 +46,16 @@ import { DeviceSnapshotCarouselComponent } from './components/device-snapshot-ca
 import { NotificationService } from 'src/app/services/notification.service';
 import { DeviceOverviewComponent } from './overview/device-overview.component';
 import { DeviceSettingsComponent } from './settings/device-settings.component';
-import { DeviceScheduleComponent } from './schedule/device-schedule.component';
+import { AquariumDeviceScheduleContainerComponent } from './schedule/aquarium-device-schedule-container.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { DeviceScheduledJobCardComponent } from './components/device-scheduled-job-card/device-scheduled-job-card.component';
 import { DeviceScheduledJobListItemComponent } from './components/device-scheduled-job-list-item/device-scheduled-job-list-item.component';
 import { AquariumDeviceComponent } from './aquarium-device.component';
 import { DeviceSensorsComponent } from './sensors/sensors.component';
 import { DeviceWaterChangeCardComponent } from './components/device-water-change-card/device-water-change-card.component';
-import { SharedDeviceModule } from '../SharedDeviceModule/shared-device.module';
 import { DeviceConnectionBannerComponent } from './components/device-overview-card/device-connection-banner.component';
+import { AquariumDeviceMixingStationContainerComponent } from './mixing-station/aquarium-device-mixing-station-container.component';
+import { SharedDeviceModule } from '../SharedDeviceModule/shared-device.module';
 
 
 @NgModule({
@@ -100,7 +101,8 @@ import { DeviceConnectionBannerComponent } from './components/device-overview-ca
     DeviceConnectionBannerComponent,
     DeviceInformationCardComponent,
     
-    DeviceScheduleComponent,
+    AquariumDeviceScheduleContainerComponent,
+    AquariumDeviceMixingStationContainerComponent,
     
     DeviceOverviewComponent,
     DeviceATOStatusComponent,

@@ -19,11 +19,11 @@ import { AquariumAccount } from 'src/app/modules/SharedDeviceModule/models/Aquar
 import { getAuthenticatedUser } from 'src/app/store/auth/auth.selector';
 
 @Component({
-  selector: 'side-bar',
-  templateUrl: './side-bar.component.html',
-  styleUrls: ['./side-bar.component.scss']
+  selector: 'aquarium-monitor-side-bar',
+  templateUrl: './aquarium-monitor-side-bar.component.html',
+  styleUrls: ['./aquarium-monitor-side-bar.component.scss']
 })
-export class SideBarComponent implements OnInit {
+export class AquariumMonitorSideBarComponent implements OnInit {
 
   public faLogout = faSignOutAlt;
   public faSliders = faSlidersH;

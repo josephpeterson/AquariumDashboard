@@ -5,13 +5,17 @@
 body,.mat-drawer-container {
     background-color: #f5f6f8;
 }
-
+.navbar-brand img
+{
+    margin-right:5px;
+}
 body {
     -webkit-font-smoothing: antialiased;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
 }
-.toast-container {
+.toast-container,.cdk-overlay-container {
     margin-top:60px;
+    z-index: 100;
 }
 .generic-list {
     min-height: 400px;

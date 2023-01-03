@@ -2,13 +2,7 @@
 //services are just arbitrary examples, your module might be different
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AquariumService } from '../../services/aquarium.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { HomeNavComponent } from './components/home/home/home-nav/home-nav.component';
-import { HomeComponent } from './components/home/home/home.component';
-import { SignupComponent } from './components/home/signup/signup.component';
-import { LoginComponent } from './components/home/login/login.component';
-import { PasswordResetComponent } from './components/home/passwordreset/password-reset.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -17,11 +11,22 @@ import { ForgotPasswordModalComponent } from './components/forgot-password-modal
 import { AquariumDeviceHttpClient } from './aquarium-device-client.service';
 import { SharedDeviceModule } from '../SharedDeviceModule/shared-device.module';
 import { SharedModule } from '../SharedModule/shared.module';
-
+import { AquariumMonitorNavBarComponent } from './components/aquarium-monitor-nav-bar/aquarium-monitor-nav-bar.component';
+import { SearchFormComponent } from './components/search-form/search-form.component';
+import { AquariumMonitorSideBarComponent } from './components/aquarium-monitor-side-bar/aquarium-monitor-side-bar.component';
+import { AquariumMonitorNavBarNotificationsComponent } from './components/aquarium-monitor-nav-bar-notifications/aquarium-monitor-nav-bar-notifications.component';
+import { AquariumMonitorSideBarAquariumSectionComponent } from './components/aquarium-monitor-side-bar-aquarium-section/aquarium-monitor-side-bar-aquarium-selection.component';
+import { HomeComponent } from './containers/home/home/home.component';
+import { HomeNavComponent } from './containers/home/home/home-nav/home-nav.component';
+import { LoginComponent } from './containers/home/login/login.component';
+import { PasswordResetComponent } from './containers/home/passwordreset/password-reset.component';
+import { SignupComponent } from './containers/home/signup/signup.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
     CommonModule,
+    RouterModule,
     FontAwesomeModule,
     FormsModule,
     ReactiveFormsModule,
@@ -30,6 +35,14 @@ import { SharedModule } from '../SharedModule/shared.module';
     SharedDeviceModule //this only needs to be here because aquarium-service uses aquarium-device-service
   ],
   declarations: [
+
+    AquariumMonitorNavBarComponent,
+    AquariumMonitorNavBarNotificationsComponent,
+    AquariumMonitorSideBarComponent,
+    AquariumMonitorSideBarAquariumSectionComponent,
+    
+    SearchFormComponent,
+
     /* Not logged in */
     HomeComponent,
     HomeNavComponent,
@@ -38,6 +51,14 @@ import { SharedModule } from '../SharedModule/shared.module';
     PasswordResetComponent,
     LoginModalComponent,
     ForgotPasswordModalComponent,
+  ],
+  exports: [
+    HomeComponent,
+    LoginComponent,
+    PasswordResetComponent,
+    
+    AquariumMonitorNavBarComponent,
+    AquariumMonitorSideBarComponent
   ],
   entryComponents: [
     LoginModalComponent,

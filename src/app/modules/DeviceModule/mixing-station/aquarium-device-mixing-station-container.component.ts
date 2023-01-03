@@ -6,11 +6,11 @@ import { connectToMixingStation } from '../../SharedDeviceModule/store/device.ac
 import { selectConfiguredDevice, selectMixingStationConnection, selectMixingStationStatus } from '../../SharedDeviceModule/store/device.selectors';
 
 @Component({
-  selector: 'device-mixing-station-container',
-  templateUrl: './mixing-station.component.html',
+  selector: 'aquarium-device-mixing-station-container',
+  templateUrl: './aquarium-device-mixing-station-container.component.html',
   //styleUrls: ['./sensors.component.scss']
 })
-export class DeviceMixingStationContainerComponent {
+export class AquariumDeviceMixingStationContainerComponent {
   public configuredDevice$ = this.store.select(selectConfiguredDevice);
   public mixingStation$ = this.store.select(selectMixingStationConnection);
   public mixingStationConnectionStatus$ = this.store.select(selectMixingStationStatus);

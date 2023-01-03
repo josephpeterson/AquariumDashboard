@@ -22,7 +22,6 @@ import { DeviceSensorUpsertModalComponent } from "./components/modals/device-sen
 import { DeviceSensorUpsertButtonComponent } from "./components/device-sensor-upsert-button/device-sensor-upsert-button.component";
 import { DeviceMixingStationListItemComponent } from "./components/device-mixing-station-list-item/device-mixing-station-list-item.component";
 import { DeviceMixingStationConfigurationComponent } from "./components/device-mixing-station-configuration/device-mixing-station-configuration.component";
-import { DeviceMixingStationDisconnectButtonComponent } from "./components/device-mixing-station-disconnect-button/device-mixing-station-disconnect-button.component";
 import { StoreModule } from "@ngrx/store";
 import { deviceReducer } from "./store/device.reducer";
 import { DeviceMixingStationSensorListItemComponent } from "./components/device-mixing-station-sensor-list-item/device-mixing-station-sensor-list-item.component";
@@ -50,6 +49,7 @@ import { DeviceScheduleStatusComponent } from "./components/device-schedule-stat
 import { DeviceScheduledJobListItemComponent } from "./components/device-scheduled-job-list-item/device-scheduled-job-list-item.component";
 import { DeviceScheduledJobListComponent } from "./components/device-scheduled-job-list/device-scheduled-job-list.component";
 import { ToastrModule } from "ngx-toastr";
+import { DeviceMixingStationDisconnectButtonComponent } from "./components/device-mixing-station-disconnect-button/device-mixing-station-disconnect-button.component";
 
 @NgModule({
     imports: [

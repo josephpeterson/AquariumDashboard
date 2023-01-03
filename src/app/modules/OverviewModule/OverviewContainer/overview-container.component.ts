@@ -21,7 +21,7 @@ information, as well as apply a filter if we scoped into a specific aquarium id
 @Component({
   selector: 'overview-container',
   templateUrl: './overview-container.component.html',
-  //styleUrls: ['./nav-menu.component.scss']
+  styleUrls: []
 })
 
 export class OverviewContainer {

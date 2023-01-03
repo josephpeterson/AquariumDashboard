@@ -2,10 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SpeciesContainer } from './modules/SpeciesModule/SpeciesContainer/species-container.component';
 import { AuthGuard } from './guards/AuthGuard';
-import { HomeComponent } from './modules/CoreModule/components/home/home/home.component';
-import { PageNotFoundComponent } from './modules/SharedModule/page-not-found/page-not-found.component';
-import { PasswordResetComponent } from './modules/CoreModule/components/home/passwordreset/password-reset.component';
-import { LoginComponent } from './modules/CoreModule/components/home/login/login.component';
+import { HomeComponent } from './modules/CoreModule/containers/home/home/home.component';
+import { LoginComponent } from './modules/CoreModule/containers/home/login/login.component';
+import { PasswordResetComponent } from './modules/CoreModule/containers/home/passwordreset/password-reset.component';
 
 const routes: Routes = [
   {
@@ -64,7 +63,7 @@ const routes: Routes = [
     loadChildren: () => import('./modules/CalendarModule/calendar.module').then(m => m.CalendarModule),
   },
   //Misc.
-  { path: '**', component: PageNotFoundComponent } /* Needs to be last */
+  //{ path: '**', component: PageNotFoundComponent } /* Needs to be last */
 ];
 @NgModule({
   exports: [RouterModule],

@@ -8,11 +8,11 @@ import { Observable } from 'rxjs';
 import { DeviceInformation } from '../../SharedDeviceModule/models/DeviceInformation';
 import { selectDeviceInformation } from '../../SharedDeviceModule/store/device.selectors';
 @Component({
-  selector: 'device-schedule',
-  templateUrl: './device-schedule.component.html',
+  selector: 'aquarium-device-schedule-container',
+  templateUrl: './aquarium-device-schedule-container.component.html',
   //styleUrls: ['./device-schedule.component.scss']
 })
-export class DeviceScheduleComponent implements OnInit {
+export class AquariumDeviceScheduleContainerComponent implements OnInit {
   public aquarium$: Observable<Aquarium> = this.store.select(getSelectedAquarium);
   public deviceInformation$: Observable<DeviceInformation> = this.store.select(selectDeviceInformation);
   

@@ -10,14 +10,14 @@ import { Subject } from 'rxjs';
 import { ConfirmModalComponent } from 'src/app/modules/SharedDeviceModule/components/modals/confirm-modal/confirm-modal.component';
 
 @Component({
-  selector: 'nav-menu-notifications',
-  templateUrl: './notifications.component.html',
-  styleUrls: ['./notifications.component.scss'],
+  selector: 'aquarium-monitor-nav-bar-notifications',
+  templateUrl: './aquarium-monitor-nav-bar-notifications.component.html',
+  styleUrls: ['./aquarium-monitor-nav-bar-notifications.component.scss'],
   host: {
     '(document:click)': 'onClick($event)',
   }
 })
-export class NavMenuNotificationsComponent implements OnInit {
+export class AquariumMonitorNavBarNotificationsComponent implements OnInit {
 
   public faBell = faBell;
   public open: boolean;

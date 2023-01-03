@@ -17,11 +17,11 @@ import { AquariumService } from 'src/app/services/aquarium.service';
 import { AquariumListAction } from 'src/app/store/aquarium/aquarium.actions';
 
 @Component({
-  selector: 'aquarium-nav-bar',
-  templateUrl: './aquarium-nav-bar.component.html',
-  styleUrls: ['./aquarium-nav-bar.component.scss']
+  selector: 'aquarium-monitor-side-bar-aquarium-section',
+  templateUrl: './aquarium-monitor-side-bar-aquarium-section.component.html',
+  styleUrls: ['./aquarium-monitor-side-bar-aquarium-section.component.scss']
 })
-export class AquariumNavBarComponent implements OnInit {
+export class AquariumMonitorSideBarAquariumSectionComponent implements OnInit {
 
   public faLogout = faSignOutAlt;
   public faSliders = faSlidersH;

@@ -1,3 +1,4 @@
+
 <header class="main-header">
 
   <nav
@@ -7,10 +8,10 @@
       <button *ngIf="sidenav" mat-button (click)="sidenav.toggle()">
         <fa-icon class="" [icon]="faDrawer"></fa-icon>
       </button>
-      <a *ngIf="user$ | async" class="navbar-brand" [routerLink]='["/dashboard"]'><img height="30px" class="mr-2"
-          src="https://image.flaticon.com/icons/png/512/31/31267.png" />Dashboard</a>
-      <a *ngIf="!(user$ | async)" class="navbar-brand" [routerLink]='["/"]'><img height="30px" class="mr-2"
-          src="https://image.flaticon.com/icons/png/512/31/31267.png" />Aquarium Monitor</a>
+      <a *ngIf="user$ | async" class="navbar-brand" [routerLink]='["/dashboard"]'><img height="30px"
+          src="/assets/logo.png" />Dashboard</a>
+      <a *ngIf="!(user$ | async)" class="navbar-brand" [routerLink]='["/"]'><img height="30px"
+          src="/assets/logo.png" />Aquarium Monitor</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse"
         aria-label="Toggle navigation" (click)="toggle()">
         <span class="navbar-toggler-icon"></span>

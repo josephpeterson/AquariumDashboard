@@ -2,8 +2,7 @@
 	<div *ngIf="deviceInformation$ | async as deviceInformation">
 		<div class="row" *ngIf="deviceInformation.configuredDevice != null ">
 			<div class="col-sm-3">
-				<device-sensor-list [deviceConfiguration]="deviceInformation.configuredDevice"></device-sensor-list>
-
+				<device-sensor-list [configuredDevice]="deviceInformation.configuredDevice" hideEdit small></device-sensor-list>
 			</div>
 			<div class="col-md-9">
 				<device-schedule-status [deviceInformation]="deviceInformation"></device-schedule-status>

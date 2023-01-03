@@ -9,8 +9,8 @@ import { take } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
 import { DeviceConnectionStatus } from 'src/app/models/types/DeviceConnectionStatus';
-import { selectDeviceInformation } from '../../SharedDeviceModule/store/device.selectors';
 import { DeviceInformation } from '../../SharedDeviceModule/models/DeviceInformation';
+import { selectDeviceInformation } from '../../SharedDeviceModule/store/device.selectors';
 
 @Component({
   selector: 'device-overview',
@@ -28,9 +28,5 @@ export class DeviceOverviewComponent {
     public dialog: MatDialog,
     public store: Store
   ) {
-    this.deviceInformation$.subscribe(x => {
-      console.log("Overview component", x);
-    })
-
   }
 }
