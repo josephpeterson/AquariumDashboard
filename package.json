@@ -4,8 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --port 4200",
-    "build-dev": "ng build --configuration dev --outputPath=dist/environments/dev",
-    "build-prod": "ng build --configuration prod --aot --outputPath=dist/environments/prod",
+    "build-dev": "ng build --configuration dev --output-path=dist/environments/dev",
+    "build-prod": "ng build --configuration prod --aot --output-path=dist/environments/prod",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint"
