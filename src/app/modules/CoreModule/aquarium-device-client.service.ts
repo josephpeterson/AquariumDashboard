@@ -23,11 +23,11 @@ export class AquariumDeviceHttpClient {
         public store: Store<AppState>
     ) {
         this.aquariumId$.subscribe(id => {
-            this._url = `${environment.urls.aquariumApi}/DeviceInteraction/${id}`;
+            this._url = `${environment.urls.aquariumApi}/DeviceInteraction/${id}/`;
         });
     }
     public get<T>(endpoint: DeviceEndpoints, body?: object): Observable<T> {
-        return this.http.get<T>(`${this._url}/${endpoint}`, body);
+        return this.http.get<T>(`${this._url}${endpoint}`, body);
     }
     public post<T>(endpoint: DeviceEndpoints, body?: object): Observable<T> {
         return this.http.post<T>(this._url + endpoint, body);

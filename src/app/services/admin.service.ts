@@ -24,7 +24,7 @@ export class AdminService {
   
 
   constructor(private http: HttpClient) {
-    this._url = environment.urls.aquariumApi;
+    this._url = environment.urls.aquariumApi + "/";
   }
   public getAllAquariumAccounts() {
     return this.http.get<AquariumAccount[]>(this._url + AquariumApiEndpoints.ADMIN_RETRIEVE_ACCOUNTS);
