@@ -8,6 +8,7 @@ import { AquariumLoadByIdAction } from 'src/app/store/aquarium/aquarium.actions'
 
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { NotificationService } from 'src/app/services/notification.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'fish-add-form',
@@ -26,7 +27,7 @@ export class FishAddFormComponent implements OnInit {
     public componentLifecycle = new Subject();
 
 
-    constructor(private store: Store<AppState>, private notifier: NotificationService,
+    constructor(private store: Store<AppState>, private notifier: ToastrService,
         private _aquariumService: AquariumService) {
     }
     ngOnInit() {
@@ -47,10 +48,10 @@ export class FishAddFormComponent implements OnInit {
         var fish = this.fish;
 
         this._aquariumService.updateFish(fish).subscribe(() => {
-            this.notifier.notify("success", "Fish was updated.");
+            this.notifier.success( "Fish was updated.");
             this.actionSuccess();
         }, err => {
-            this.notifier.notify("error", "Unable to update fish.");
+            this.notifier.error( "Unable to update fish.");
             console.log(err);
         });
     }
@@ -59,22 +60,22 @@ export class FishAddFormComponent implements OnInit {
         console.log(fish);
 
         this._aquariumService.createFish(fish).subscribe(fish => {
-            this.notifier.notify("success", "Fish added");
+            this.notifier.success( "Fish added");
 
             this.store.dispatch(new AquariumLoadByIdAction(fish.aquariumId));
             this.actionSuccess();
         }, err => {
-            this.notifier.notify("error", "Could not add fish to aquarium.");
+            this.notifier.error( "Could not add fish to aquarium.");
             console.log(err);
         });
     }
     clickDelete() {
         var fish = this.fish;
         this._aquariumService.deleteFish(fish).subscribe(() => {
-            this.notifier.notify("success", "Fish deleted");
+            this.notifier.success( "Fish deleted");
             this.actionSuccess();
         }, err => {
-            this.notifier.notify("error", "Could not delete fish.");
+            this.notifier.error( "Could not delete fish.");
             console.log(err);
         });
     }

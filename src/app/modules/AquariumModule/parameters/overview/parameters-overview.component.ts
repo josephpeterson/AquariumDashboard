@@ -22,6 +22,7 @@ import { getPaginatedATOStatuses, getPaginatedParameters, getPaginatedWaterChang
 import { ParameterState } from 'src/app/store/parameter/parameter.reducer';
 import { WaterChange } from 'src/app/models/WaterChange';
 import { ParameterReloadDateAction, ParameterSelectDateAction } from 'src/app/store/parameter/parameter.actions';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -54,7 +55,7 @@ export class ParametersOverviewComponent implements OnInit {
   constructor(public aquariumService: AquariumService,
     public dialog: MatDialog,
     public store: Store<AppState>,
-    public notificationService: NotificationService
+    public notificationService: ToastrService
   ) { }
 
   ngOnInit() {
@@ -174,7 +175,7 @@ export class ParametersOverviewComponent implements OnInit {
     }).afterClosed().subscribe((newParameter: AquariumSnapshot) => {
       if (!newParameter)
         return;
-      this.notificationService.notify("success", `New water change added (id: ${newParameter.id})`)
+      this.notificationService.success( `New water change added (id: ${newParameter.id})`)
       //this.updateFilteredDate();
     });
   }
@@ -184,7 +185,7 @@ export class ParametersOverviewComponent implements OnInit {
     }).afterClosed().subscribe((newParameter: WaterDosing) => {
       if (!newParameter)
         return;
-      this.notificationService.notify("success", `New water dosing added (id: ${newParameter.id})`)
+      this.notificationService.success( `New water dosing added (id: ${newParameter.id})`)
       //this.updateFilteredDate();
     });
   }
@@ -198,7 +199,7 @@ export class ParametersOverviewComponent implements OnInit {
     d.afterClosed().subscribe((newParameter: AquariumSnapshot) => {
       if (!newParameter)
         return;
-      this.notificationService.notify("success", `New water parameter added (id: ${newParameter.id})`)
+      this.notificationService.success( `New water parameter added (id: ${newParameter.id})`)
       //this.updateFilteredDate();
     })
   }

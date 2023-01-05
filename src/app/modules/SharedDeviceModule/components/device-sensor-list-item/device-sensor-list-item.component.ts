@@ -13,6 +13,7 @@ import { AquariumDeviceService } from "../../aquarium-device.service";
 import { DeviceSensorPolarity } from "../../models/DeviceSensorPolarity";
 import { selectDeviceSensorTypes } from "../../store/device.selectors";
 import { Store } from "@ngrx/store";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: 'device-sensor-list-item',
@@ -43,7 +44,7 @@ export class DeviceSensorListItemComponent implements OnInit {
 
   constructor(private service: AquariumDeviceService,
     private store: Store,
-    public notifier: NotificationService,
+    public notifier: ToastrService,
     public dialog: MatDialog) { }
 
   ngOnInit() {

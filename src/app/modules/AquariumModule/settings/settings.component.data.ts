@@ -9,6 +9,7 @@ import { CameraConfiguration } from 'src/app/models/CameraConfiguration';
 
 import { take } from 'rxjs/operators';
 import { NotificationService } from 'src/app/services/notification.service';
+import { ToastrService } from 'ngx-toastr';
 @Injectable({
   providedIn: "root"
 })
@@ -26,7 +27,7 @@ export class SettingsComponentData {
 
   public cameraConfiguration = this.service.getCameraConfiguration();
 
-  constructor(private store: Store<AppState>,private service: AquariumService,public notifier: NotificationService){
+  constructor(private store: Store<AppState>,private service: AquariumService,public notifier: ToastrService){
   }
 
   isDetailed(aq) {
@@ -37,7 +38,7 @@ export class SettingsComponentData {
     var err = false;
 
     this.updated.pipe(take(2)).subscribe(val => {
-      if(val) this.notifier.notify('success',"Changes saved successfully");
+      if(val) this.notifier.success("Changes saved successfully");
     })
     this.store.dispatch(new AquariumUpdateAction(aquarium));
   }

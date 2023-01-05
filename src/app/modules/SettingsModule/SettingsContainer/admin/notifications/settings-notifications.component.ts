@@ -25,6 +25,7 @@ import { AquariumAccount } from 'src/app/modules/SharedDeviceModule/models/Aquar
 import { CreateNotificationModalComponent } from 'src/app/modules/SharedModule/modals/create-notification-modal/create-notification-modal.component';
 import { NotificationsTableComponent } from './notifications-table/notifications-table.component';
 import { NotificationService } from 'src/app/services/notification.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'settings-notifications',
@@ -50,7 +51,7 @@ export class SettingsNotificationsComponent {
     public dialog: MatDialog,
     private store: Store<AppState>,
     private _aquariumService: AquariumService,
-    private notifier: NotificationService,
+    private notifier: ToastrService,
     private ref: ChangeDetectorRef
   ) { }
 

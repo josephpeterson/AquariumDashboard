@@ -1,4 +1,3 @@
-import { state } from '@angular/animations';
 import { Injectable } from '@angular/core'
 import { Actions, createEffect, ofType } from '@ngrx/effects'
 import { Store } from '@ngrx/store';
@@ -15,11 +14,13 @@ import { AquariumLoadSuccessAction, AquariumLoadFailAction } from '../aquarium/a
 import { ParameterActions, ParameterSelectDateAction, ParameterSelectDateActionPayload, ParameterSelectDateFailAction, ParameterWaterParameterSuccessAction, ParameterWaterATOSuccessAction, ParameterWaterChangeSuccessAction, ParameterWaterDoseSuccessAction, ParameterReloadDateAction } from './parameter.actions';
 import { ParameterState } from './parameter.reducer';
 import { getSelectedDate } from './parameter.selector';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Injectable()
 export class ParameterEffects {
     constructor(private aquariumService: AquariumService,
-        private notificationService: NotificationService,
+        private notificationService: ToastrService,
         private store: Store<AppState>,
         private actions$: Actions) {
 
@@ -35,12 +36,12 @@ export class ParameterEffects {
                 map(
                     //We can either return a new AquariumLoadAction, OR just update our store
                     (parameters: AquariumSnapshot[]) => {
-                        //this.notificationService.notify("success","Parameters loaded successfully: " + parameters.length);
+                        //this.notificationService.success("Parameters loaded successfully: " + parameters.length);
                         return new ParameterWaterParameterSuccessAction(parameters)
                     }
                 ),
                 catchError(err => {
-                    this.notificationService.notify("error", "Could not load aquarium parameters");
+                    this.notificationService.error( "Could not load aquarium parameters");
                     console.error(err);
                     return of(new ParameterSelectDateFailAction(err))
                 })
@@ -58,13 +59,13 @@ export class ParameterEffects {
                 map(
                     //We can either return a new AquariumLoadAction, OR just update our store
                     (atoStatuses: ATOStatus[]) => {
-                        //this.notificationService.notify("success","Water ATOs loaded successfully: " + atoStatuses.length);
+                        //this.notificationService.success("Water ATOs loaded successfully: " + atoStatuses.length);
                         console.debug("Water ATOs loaded successfully: " + atoStatuses.length);
                         return new ParameterWaterATOSuccessAction(atoStatuses)
                     }
                 ),
                 catchError(err => {
-                    this.notificationService.notify("error", "Could not load water ATOs");
+                    this.notificationService.error( "Could not load water ATOs");
                     return of(new ParameterSelectDateFailAction(err))
                 })
             )
@@ -81,13 +82,13 @@ export class ParameterEffects {
                 map(
                     //We can either return a new AquariumLoadAction, OR just update our store
                     (waterChanges: WaterChange[]) => {
-                        //this.notificationService.notify("success","Water changes loaded successfully: " + atoStatuses.length);
+                        //this.notificationService.success("Water changes loaded successfully: " + atoStatuses.length);
                         console.debug("Water changes loaded successfully: " + waterChanges.length);
                         return new ParameterWaterChangeSuccessAction(waterChanges)
                     }
                 ),
                 catchError(err => {
-                    this.notificationService.notify("error", "Could not load water changes");
+                    this.notificationService.error( "Could not load water changes");
                     return of(new ParameterSelectDateFailAction(err))
                 })
             )
@@ -104,13 +105,13 @@ export class ParameterEffects {
                 map(
                     //We can either return a new AquariumLoadAction, OR just update our store
                     (waterDosings: WaterDosing[]) => {
-                        //this.notificationService.notify("success","Water ATOs loaded successfully: " + atoStatuses.length);
+                        //this.notificationService.success("Water ATOs loaded successfully: " + atoStatuses.length);
                         console.debug("Water doses loaded successfully: " + waterDosings.length);
                         return new ParameterWaterDoseSuccessAction(waterDosings)
                     }
                 ),
                 catchError(err => {
-                    this.notificationService.notify("error", "Could not load water doses");
+                    this.notificationService.error( "Could not load water doses");
                     return of(new ParameterSelectDateFailAction(err))
                 })
             )

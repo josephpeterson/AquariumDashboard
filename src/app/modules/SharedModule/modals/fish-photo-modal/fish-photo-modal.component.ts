@@ -8,6 +8,7 @@ import { AppState } from 'src/app/app.state';
 import { Store } from '@ngrx/store';
 import { FishLoadByIdAction } from 'src/app/store/fish/fish.actions';
 import { NotificationService } from 'src/app/services/notification.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'fish-photo-modal',
@@ -20,7 +21,7 @@ export class FishPhotoModal implements OnInit {
   @ViewChild(AttachmentUploaderComponent) attachmentComponent: AttachmentUploaderComponent;
   constructor(private _aquariumService: AquariumService,
     private store: Store<AppState>,
-    private notifier: NotificationService,
+    private notifier: ToastrService,
     private _dialog: MatDialogRef<FishPhotoModal>) { }
   ngOnInit() {
   }
@@ -36,7 +37,7 @@ export class FishPhotoModal implements OnInit {
       this.store.dispatch(new FishLoadByIdAction(this.fishId));
     }, (err) => {
       this.loading = false;
-      this.notifier.notify("error", "Could not upload fish photo.");
+      this.notifier.error( "Could not upload fish photo.");
     });
   }
 }

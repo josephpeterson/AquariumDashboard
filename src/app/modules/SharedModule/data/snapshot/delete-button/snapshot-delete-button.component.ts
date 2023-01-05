@@ -10,6 +10,7 @@ import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
 import { HttpErrorResponse } from '@angular/common/http';
 import { faTrashAlt, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { NotificationService } from 'src/app/services/notification.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'snapshot-delete-button',
@@ -34,9 +35,9 @@ export class SnapshotDeleteButtonComponent
         });
     }
     handleError(error: HttpErrorResponse) {
-        this.notifier.notify("error","Could not delete snapshot");
+        this.notifier.error("Could not delete snapshot");
         console.log(error.message,error);
     }
-    constructor(private notifier: NotificationService,private store: Store<AppState>) {}
+    constructor(private notifier: ToastrService,private store: Store<AppState>) {}
 }
 

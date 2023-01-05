@@ -26,7 +26,7 @@ export class CreateTimelapseModalComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) photos,
     private _dialogRef: MatDialogRef<CreateTimelapseModalComponent>,
     private aquariumService: AquariumService,
-    private notifier: NotificationService,
+    private notifier: ToastrService,
     private dialog: MatDialog
   ) {
     this.timelapsePhotos = photos;
@@ -65,7 +65,7 @@ export class CreateTimelapseModalComponent implements OnInit {
         data: data
       });
     }, (err: HttpErrorResponse) => {
-      this.notifier.notify("error", `Could not generate timelapse. Unknown error occured`);
+      this.notifier.error( `Could not generate timelapse. Unknown error occured`);
       console.error(err);
     })
   }

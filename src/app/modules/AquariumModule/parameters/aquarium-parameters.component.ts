@@ -21,6 +21,7 @@ import { WaterDosing } from 'src/app/models/WaterDosing';
 import { ParameterSelectDateAction } from 'src/app/store/parameter/parameter.actions';
 import { ParameterState } from 'src/app/store/parameter/parameter.reducer';
 import { getPaginatedATOStatuses, getSelectedDate } from 'src/app/store/parameter/parameter.selector';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -38,7 +39,7 @@ export class AquariumParametersComponent implements OnInit {
 
 
   constructor(public aquariumService: AquariumService,
-    public notificationService: NotificationService,
+    public notificationService: ToastrService,
     public dialog: MatDialog,
     public store: Store<AppState>
   ) {

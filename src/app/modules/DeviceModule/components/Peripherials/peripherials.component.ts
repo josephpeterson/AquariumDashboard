@@ -23,7 +23,7 @@ export class DevicePeripherialsComponent implements OnInit {
 
 
   constructor(public _aquariumService: AquariumService,
-    public notifier: NotificationService,
+    public notifier: ToastrService,
     public dialog: MatDialog) { }
 
   ngOnInit() {
@@ -38,7 +38,7 @@ export class DevicePeripherialsComponent implements OnInit {
         this.scanning = false;
       }, err => {
         this.scanning = false;
-        this.notifier.notify("error", "Check Device Hardware Failed");
+        this.notifier.error( "Check Device Hardware Failed");
       })
   }
   clickPingDevice() {
@@ -46,10 +46,10 @@ export class DevicePeripherialsComponent implements OnInit {
     this._aquariumService.pingDevice(this.aquarium.device.id).subscribe(
       () => {
         this.pinging = false;
-        this.notifier.notify("success", "Connection to device was successfull");
+        this.notifier.success( "Connection to device was successfull");
       }, err => {
         this.pinging = false;
-        this.notifier.notify("error", "Could not connect to device");
+        this.notifier.error( "Could not connect to device");
       })
   }
   clickManagePhotoModule() {

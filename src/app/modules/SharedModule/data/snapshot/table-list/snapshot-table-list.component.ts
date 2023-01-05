@@ -20,6 +20,7 @@ import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
 import * as moment from 'moment';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { NotificationService } from 'src/app/services/notification.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -63,7 +64,7 @@ export class SnapshotTableListComponent implements OnInit {
   private componentLifeCycle$ = new Subject();
 
   constructor(private store: Store<AppState>, private _aquariumService: AquariumService,
-    private notifier: NotificationService) {
+    private notifier: ToastrService) {
   }
   ngOnInit() {
     if (this.searchBox)
@@ -127,11 +128,11 @@ export class SnapshotTableListComponent implements OnInit {
     var snapshotIds = this.getSelectedItems().map(s => s.id);
 
     this._aquariumService.deleteSnapshots(snapshotIds).subscribe(res => {
-      this.notifier.notify("success", `${snapshotIds.length} snapshots deleted`);
+      this.notifier.success( `${snapshotIds.length} snapshots deleted`);
       var newList = this.dataSource.data.filter(s => snapshotIds.indexOf(s.id) == -1);
       this.dataSource.data = newList;
     }, err => {
-      this.notifier.notify("error", "Could not delete selected snapshots");
+      this.notifier.error( "Could not delete selected snapshots");
     });
   }
 }

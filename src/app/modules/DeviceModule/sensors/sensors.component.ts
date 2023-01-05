@@ -8,6 +8,7 @@ import { Store } from '@ngrx/store';
 import { AquariumDeviceService } from '../../SharedDeviceModule/aquarium-device.service';
 import { DeviceInformation } from '../../SharedDeviceModule/models/DeviceInformation';
 import { selectDeviceInformation } from '../../SharedDeviceModule/store/device.selectors';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'device-sensors',
@@ -19,7 +20,7 @@ export class DeviceSensorsComponent {
 
   constructor(public _aquariumService: AquariumService,
     public _aquariumDeviceService: AquariumDeviceService,
-    public notifier: NotificationService,
+    public notifier: ToastrService,
     public store: Store,
     public dialog: MatDialog) { }
 }

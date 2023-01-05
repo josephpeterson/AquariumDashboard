@@ -21,6 +21,7 @@ import { DeviceConnectionStatus } from 'src/app/models/types/DeviceConnectionSta
 import { DeviceScheduledJob } from 'src/app/modules/SharedDeviceModule/models/DeviceScheduledJob';
 import { DateFormatProvider } from 'src/app/providers/DateFormatProvider';
 import { PaginatedComponent } from '../../../CoreModule/components/PaginatedComponent';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'device-ato-status-card',
   templateUrl: './device-ato-status-card.component.html',
@@ -60,7 +61,7 @@ export class DeviceATOStatusComponent extends PaginatedComponent implements OnIn
   hasMore: boolean;
 
   constructor(public _aquariumService: AquariumService,
-    public notifier: NotificationService,
+    public notifier: ToastrService,
     public dialog: MatDialog) { super(); }
 
   ngOnInit() {

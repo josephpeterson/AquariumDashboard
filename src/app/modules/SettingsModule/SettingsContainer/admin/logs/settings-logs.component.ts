@@ -9,6 +9,7 @@ import { AppState } from 'src/app/app.state';
 import { AquariumService } from 'src/app/services/aquarium.service';
 
 import { NotificationService } from 'src/app/services/notification.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'settings-logs',
@@ -33,7 +34,7 @@ export class SettingsLogsComponent implements OnInit {
     public dialog: MatDialog,
     private store: Store<AppState>,
     private _aquariumService: AquariumService,
-    private notifier: NotificationService
+    private notifier: ToastrService
   ) { }
 
   ngOnInit() {
@@ -49,9 +50,9 @@ export class SettingsLogsComponent implements OnInit {
     this.deleting = true;
     this._aquariumService.deleteApplicationLog().subscribe(val => {
       this.deleting = false;
-      this.notifier.notify('success', "Application log was deleted successfully");
+      this.notifier.success( "Application log was deleted successfully");
     }, err => {
-      this.notifier.notify('error', "Could not delete application log");
+      this.notifier.error("Could not delete application log");
       this.deleting = false;
       console.log(err);
     });
@@ -64,7 +65,7 @@ export class SettingsLogsComponent implements OnInit {
       this.refreshing = false;
     }, err => {
       this.refreshing = false;
-      this.notifier.notify("error", "An error occured while retrieving the application log file");
+      this.notifier.error( "An error occured while retrieving the application log file");
       console.log(err);
     });
   }

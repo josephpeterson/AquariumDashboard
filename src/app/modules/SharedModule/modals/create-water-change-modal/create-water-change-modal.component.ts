@@ -16,6 +16,7 @@ import { Aquarium } from 'src/app/models/Aquarium';
 import * as moment from 'moment';
 import { WaterChange } from 'src/app/models/WaterChange';
 import { VisualAquariumComponentOptions } from '../../visual-aquarium/visual-aquarium.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'create-water-change-modal',
@@ -32,7 +33,7 @@ export class CreateWaterChangeModalComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) aquarium: Aquarium,
     public _aquariumService: AquariumService,
-    private notifier: NotificationService,
+    private notifier: ToastrService,
     private dialogRef: MatDialogRef<CreateWaterChangeModalComponent>,
     private store: Store<AppState>) {
     this.aquarium = aquarium;
@@ -53,7 +54,7 @@ export class CreateWaterChangeModalComponent implements OnInit {
     this._aquariumService.addWaterChange(this.aquarium.id,this.waterChange).subscribe(data => {
       this.disabled = false;
       this.waterChange = new WaterChange();
-      this.notifier.notify("success","Water change successfully added (" + data.id + ")");
+      this.notifier.success("Water change successfully added (" + data.id + ")");
       this.dialogRef.close(data);
     },
     err => {

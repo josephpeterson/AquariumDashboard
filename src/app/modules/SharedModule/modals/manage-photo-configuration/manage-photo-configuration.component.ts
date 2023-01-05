@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
 import { NotificationService } from 'src/app/services/notification.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class ManagePhotoConfigurationModal implements OnInit {
   public updating: boolean = false;
   public device: AquariumDevice;
 
-  constructor(@Inject(MAT_DIALOG_DATA) data, private _aquariumService: AquariumService, private notifier: NotificationService, private dialogRef: MatDialogRef<ManagePhotoConfigurationModal>) {
+  constructor(@Inject(MAT_DIALOG_DATA) data, private _aquariumService: AquariumService, private notifier: ToastrService, private dialogRef: MatDialogRef<ManagePhotoConfigurationModal>) {
     this.device = {...data};
   }
 
@@ -32,7 +33,7 @@ export class ManagePhotoConfigurationModal implements OnInit {
         this.dialogRef.close(this.device);
       },
       (err) => {
-        this.notifier.notify("error", "Could not update camera settings");
+        this.notifier.error( "Could not update camera settings");
         this.updating = false;
       }
     );

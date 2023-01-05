@@ -12,10 +12,11 @@ import { take } from 'rxjs/operators';
 import { faArrowDown, faCalendar, faCalendarAlt, faCheckCircle, faDesktop, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { CameraConfiguration } from 'src/app/models/CameraConfiguration';
 import { AquariumSnapshot } from 'src/app/models/AquariumSnapshot';
-import $ from 'jquery';
 import { AttachmentUploaderComponent } from '../../../attachment-uploader/attachment-uploader.component';
 import { NotificationService } from 'src/app/services/notification.service';
 import * as moment from 'moment';
+import $ from 'jquery'
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'snapshot-detail-chart',
@@ -49,7 +50,7 @@ export class SnapshotDetailChartComponent implements OnInit {
 
 
     constructor(public aquariumService: AquariumService,
-        private notifier: NotificationService,
+        private notifier: ToastrService,
         private dialog: MatDialog,
     ) {
 

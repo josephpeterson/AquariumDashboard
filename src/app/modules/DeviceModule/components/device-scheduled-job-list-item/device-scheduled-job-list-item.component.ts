@@ -13,6 +13,7 @@ import { AquariumLoadByIdAction, AquariumLoadDeployedDeviceByAquaruiumId, Aquari
 import { AppState } from 'src/app/app.state';
 import { Store } from '@ngrx/store';
 import { JobEndReason } from 'src/app/models/types/JobEndReason';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'device-scheduled-job-list-item',
@@ -30,7 +31,7 @@ export class DeviceScheduledJobListItemComponent implements OnInit {
 
   constructor(public _aquariumService: AquariumService,
     public store: Store<AppState>,
-    public notifier: NotificationService) { }
+    public notifier: ToastrService) { }
 
   ngOnInit() {
     this.updateTick = setInterval(() => this.updateScheduledJobProgress(), 100);
@@ -57,10 +58,10 @@ export class DeviceScheduledJobListItemComponent implements OnInit {
   public clickStopScheduledJob(job: DeviceScheduledJob) {
     this._aquariumService.stopScheduledJob(this.device.id, job).subscribe(
       () => {
-        this.notifier.notify("success", "Scheduled job stopped job id: " + job.id);
+        this.notifier.success( "Scheduled job stopped job id: " + job.id);
         //this.store.dispatch(new AquariumLoadDeployedDeviceByAquaruiumId(this.device.id));
       }, err => {
-        this.notifier.notify("error", "Could not stop scheduled job");
+        this.notifier.error( "Could not stop scheduled job");
       })
   }
   public getTaskFromJob(job: DeviceScheduledJob) {
@@ -84,7 +85,7 @@ export class DeviceScheduledJobListItemComponent implements OnInit {
   }
   public onScheduledJobCompleted() {
     //this.store.dispatch(new AquariumLoadDeployedDeviceByAquaruiumId(this.device.id));
-    this.notifier.notify("success", "Schedule job completed! ID: " + this.scheduledJob.id);
+    this.notifier.success( "Schedule job completed! ID: " + this.scheduledJob.id);
     this.scheduledJob.status = JobStatus.Pending; //this will get overritten
   }
 

@@ -12,6 +12,7 @@ import { AquariumAddFishAction, AquariumLoadByIdAction, AquariumDeleteAction, Aq
 import { isCreatingFish, getFishCreateError } from 'src/app/store/fish/fish.selector';
 import { isDeletingFish, getFishDeleteError, isUpdatingFish, getFishUpdateError, getAquariumById } from 'src/app/store/aquarium/aquarium.selector';
 import { NotificationService } from 'src/app/services/notification.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'feeding-detail-form',
@@ -45,7 +46,7 @@ export class FeedingDetailFormComponent implements OnInit {
 
     public newFish: Fish = new Fish();
 
-    constructor(private store: Store<AppState>, private notifier: NotificationService) {
+    constructor(private store: Store<AppState>, private notifier: ToastrService) {
         this.fish.date = new Date(); //default date
     }
     ngOnInit() {
@@ -89,14 +90,14 @@ export class FeedingDetailFormComponent implements OnInit {
         this.addError$.pipe(take(2)).subscribe(err => {
             if (err) {
                 adding = false;
-                this.notifier.notify("error", "Unable to add fish to aquarium.");
+                this.notifier.error( "Unable to add fish to aquarium.");
                 console.log(err);
             }
         })
         var adding = true;
         this.adding$.pipe(take(2)).subscribe(val => {
             if (!val && adding) {
-                this.notifier.notify("success", "Added fish to aquarium.");
+                this.notifier.success( "Added fish to aquarium.");
                 this.actionSuccess();
             }
         });
@@ -107,13 +108,13 @@ export class FeedingDetailFormComponent implements OnInit {
         this.deleteError$.pipe(take(2)).subscribe(err => {
             if (err && deleting) {
                 deleting = false;
-                this.notifier.notify("error", "Could not remove fish from aquarium.");
+                this.notifier.error( "Could not remove fish from aquarium.");
                 console.log(err);
             }
         })
         this.deleting$.pipe(take(2)).subscribe(val => {
             if (!val && deleting) {
-                this.notifier.notify("success", "Successfully deleted this fish from the aquarium.");
+                this.notifier.success( "Successfully deleted this fish from the aquarium.");
                 this.actionSuccess();
             }
         });
@@ -124,13 +125,13 @@ export class FeedingDetailFormComponent implements OnInit {
         this.updateError$.pipe(take(2)).subscribe(err => {
             if (err && updating) {
                 updating = false;
-                this.notifier.notify("error", "Could not update fish.");
+                this.notifier.error( "Could not update fish.");
                 console.log(err);
             }
         })
         this.updating$.pipe(take(2)).subscribe(val => {
             if (val && updating) {
-                this.notifier.notify("success", "Successfully updated fish information.");
+                this.notifier.success( "Successfully updated fish information.");
                 this.actionSuccess();
             }
         });

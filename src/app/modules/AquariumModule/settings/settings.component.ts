@@ -14,6 +14,7 @@ import { AquariumService } from 'src/app/services/aquarium.service';
 import { CreateSpeciesModalComponent } from 'src/app/modules/SharedModule/modals/create-species-modal/create-species-modal.component';
 import { NotificationService } from 'src/app/services/notification.service';
 import { ConfirmModalComponent } from '../../SharedDeviceModule/components/modals/confirm-modal/confirm-modal.component';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -45,7 +46,7 @@ export class SettingsComponent implements OnInit {
 
   private aquarium: Aquarium;
 
-  constructor(private _aquariumService: AquariumService,private notifier: NotificationService,
+  constructor(private _aquariumService: AquariumService,private notifier: ToastrService,
     public data: SettingsComponentData, public dialog: MatDialog, private router: Router) { }
 
   ngOnInit() {

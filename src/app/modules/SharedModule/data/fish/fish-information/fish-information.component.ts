@@ -9,6 +9,7 @@ import { Species } from 'src/app/models/Species';
 import { SpeciesAddAction, SpeciesUpdateAction, SpeciesDeleteAction } from 'src/app/store/species/species.actions';
 import { Fish } from 'src/app/models/Fish';
 import { NotificationService } from 'src/app/services/notification.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'fish-information',
@@ -39,7 +40,7 @@ export class FishInformationComponent implements OnInit {
     public componentLifecycle = new Subject();
 
 
-    constructor(private store: Store<AppState>, private notifier: NotificationService) {
+    constructor(private store: Store<AppState>, private notifier: ToastrService) {
 
     }
     ngOnInit() {

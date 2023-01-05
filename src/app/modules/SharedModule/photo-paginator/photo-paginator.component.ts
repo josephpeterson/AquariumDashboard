@@ -15,6 +15,7 @@ import { PhotoTimelapseOptions } from 'src/app/models/PhotoTimelapseOptions';
 import { PhotoSelection } from 'src/app/providers/PhotoSelection';
 import { PhotoExpandedModalComponent } from '../modals/photo-expanded-modal/photo-expanded-modal.component';
 import { NotificationService } from 'src/app/services/notification.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'photo-paginator',
@@ -36,7 +37,7 @@ export class PhotoPaginator extends PhotoSelection implements OnInit {
 
   constructor(public aquariumService: AquariumService,
     public dialog: MatDialog,
-    public notifier: NotificationService,
+    public notifier: ToastrService,
     public store: Store<AppState>
   ) {
     super();

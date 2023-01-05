@@ -14,6 +14,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { RaspberryPiModels } from 'src/app/models/types/RaspberyPiModels';
 import { NotificationService } from 'src/app/services/notification.service';
 import { ConfirmModalComponent } from 'src/app/modules/SharedDeviceModule/components/modals/confirm-modal/confirm-modal.component';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -49,7 +50,7 @@ export class DeviceDetailFormComponent implements OnInit {
 
 
     constructor(private _aquariumService: AquariumService,
-        private notifier: NotificationService,
+        private notifier: ToastrService,
         private dialog: MatDialog,
         private store: Store<AppState>
     ) {
@@ -80,7 +81,7 @@ export class DeviceDetailFormComponent implements OnInit {
                 this.store.dispatch(new AquariumLoadSuccessAction([this.aquarium]));
             },
             () => {
-                this.notifier.notify("error", "Could not create device");
+                this.notifier.error( "Could not create device");
                 this.loading = false;
             }
         );
@@ -113,7 +114,7 @@ export class DeviceDetailFormComponent implements OnInit {
                 this.store.dispatch(new AquariumLoadSuccessAction([this.aquarium]));
             },
             err => {
-                this.notifier.notify("error", "Could not update device");
+                this.notifier.error( "Could not update device");
                 this.loading = false;
                 this.error = err;
             }
@@ -135,7 +136,7 @@ export class DeviceDetailFormComponent implements OnInit {
                     this.store.dispatch(new AquariumLoadSuccessAction([this.aquarium]));
                 },
                 err => {
-                    this.notifier.notify("error", "Could not delete device");
+                    this.notifier.error( "Could not delete device");
                     this.disabled = false;
                     this.loading = false;
                     this.error = err;
@@ -148,10 +149,10 @@ export class DeviceDetailFormComponent implements OnInit {
         this._aquariumService.pingDevice(this.device.id).subscribe(
             () => {
                 this.pinging = false;
-                this.notifier.notify("success", "Connection to device was successfull");
+                this.notifier.success( "Connection to device was successfull");
             }, () => {
                 this.pinging = false;
-                this.notifier.notify("error", "Could not connect to device");
+                this.notifier.error( "Could not connect to device");
             })
     }
     clickEditDevice() {

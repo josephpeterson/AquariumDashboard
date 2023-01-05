@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 import { ScraperModalComponent } from '../../../modals/scraper-modal/scraper-modal.component';
 import { NotificationService } from 'src/app/services/notification.service';
 import { ConfirmModalComponent } from 'src/app/modules/SharedDeviceModule/components/modals/confirm-modal/confirm-modal.component';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -42,7 +43,7 @@ export class SpeciesDetailViewComponent implements OnInit {
     private _matchedSpecies: Species;
 
 
-    constructor(private store: Store<AppState>, private notifier: NotificationService, private dialog: MatDialog, private router: Router) {
+    constructor(private store: Store<AppState>, private notifier: ToastrService, private dialog: MatDialog, private router: Router) {
 
     }
     ngOnInit() {
@@ -99,13 +100,13 @@ export class SpeciesDetailViewComponent implements OnInit {
         this.updateError$.pipe(take(2)).subscribe(err => {
             if (err && updating) {
                 updating = false;
-                this.notifier.notify("error", "Unable to update species");
+                this.notifier.error( "Unable to update species");
                 console.log(err);
             }
         })
         this.updating$.pipe(take(2)).subscribe(val => {
             if (!val && updating) {
-                this.notifier.notify("success", "Species updated");
+                this.notifier.success( "Species updated");
                 this.editing = false;
             }
         });
@@ -116,13 +117,13 @@ export class SpeciesDetailViewComponent implements OnInit {
         this.updateError$.pipe(take(2)).subscribe(err => {
             if (err && adding) {
                 adding = false;
-                this.notifier.notify("error", "Unable to add new species");
+                this.notifier.error( "Unable to add new species");
                 console.log(err);
             }
         })
         this.adding$.pipe(take(2)).subscribe(val => {
             if (!val && adding) {
-                this.notifier.notify("success", "Species added");
+                this.notifier.success( "Species added");
                 this.editing = false;
                 this.adding = false;
                 this.added = true;
@@ -144,14 +145,14 @@ export class SpeciesDetailViewComponent implements OnInit {
                 this.deleteError$.pipe(take(2)).subscribe(err => {
                     if (err && deleting) {
                         deleting = false;
-                        this.notifier.notify("error", "Unable to add new species");
+                        this.notifier.error( "Unable to add new species");
                         this.exists = true;
                         console.log(err);
                     }
                 })
                 this.deleting$.pipe(take(2)).subscribe(val => {
                     if (!val && deleting) {
-                        this.notifier.notify("success", "Species was removed successfully");
+                        this.notifier.success( "Species was removed successfully");
                         this.router.navigate(['']); //todo species listing?
                     }
                 });

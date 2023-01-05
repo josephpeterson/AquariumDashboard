@@ -3,7 +3,6 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { SearchOptions } from 'src/app/models/SearchOptions';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { SearchResult } from 'src/app/models/SearchResult';
-import $ from 'jquery';
 
 
 @Component({
@@ -30,6 +29,7 @@ export class SpeciesSearchFormComponent implements OnInit {
   public setSearchActive(val: boolean) {
     this.active = val;
 
+    /*
     var evt = (event) => {
       var a = $(".omni-species-search-form").find($(event.target));
       if(a.length) return;
@@ -39,7 +39,8 @@ export class SpeciesSearchFormComponent implements OnInit {
     };
     document.body.removeEventListener("click", evt);
     document.body.addEventListener("click", evt);
-  }
+    */
+  } 
   public performSearch() {
     this.searchInput.nativeElement.focus();
     this.options.query = this.searchInput.nativeElement.value;

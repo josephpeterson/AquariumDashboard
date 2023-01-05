@@ -20,6 +20,7 @@ import { getSelectedFish, isUpdatingFish, isCreatingFish, getFishUpdateError } f
 import { AttachmentUploaderComponent } from 'src/app/modules/SharedModule/attachment-uploader/attachment-uploader.component';
 import { NotificationService } from 'src/app/services/notification.service';
 import { ConfirmModalComponent } from '../../SharedDeviceModule/components/modals/confirm-modal/confirm-modal.component';
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -59,7 +60,7 @@ export class FishDetailViewComponent implements OnInit {
     uploadingPhoto: boolean;
 
 
-    constructor(private store: Store<AppState>, private notifier: NotificationService, private dialog: MatDialog, private _aquariumService: AquariumService) {
+    constructor(private store: Store<AppState>, private notifier: ToastrService, private dialog: MatDialog, private _aquariumService: AquariumService) {
 
     }
     ngOnInit() {
@@ -88,13 +89,13 @@ export class FishDetailViewComponent implements OnInit {
         this.updateError$.pipe(take(2)).subscribe(err => {
             if (err && updating) {
                 updating = false;
-                this.notifier.notify("error", "Unable to update fish");
+                this.notifier.error( "Unable to update fish");
                 console.log(err);
             }
         })
         this.updating$.pipe(take(2)).subscribe(val => {
             if (!val && updating) {
-                this.notifier.notify("success", "Fish updated");
+                this.notifier.success( "Fish updated");
                 this.editing = false;
             }
         });
@@ -105,13 +106,13 @@ export class FishDetailViewComponent implements OnInit {
         this.updateError$.pipe(take(2)).subscribe(err => {
             if (err && adding) {
                 adding = false;
-                this.notifier.notify("error", "Unable to add new species");
+                this.notifier.error( "Unable to add new species");
                 console.log(err);
             }
         })
         this.adding$.pipe(take(2)).subscribe(val => {
             if (!val && adding) {
-                this.notifier.notify("success", "Species added");
+                this.notifier.success( "Species added");
                 this.editing = false;
                 this.adding = false;
                 this.added = true;
@@ -133,7 +134,7 @@ export class FishDetailViewComponent implements OnInit {
                     this.store.dispatch(new AquariumLoadSuccessAction([this.aquarium]));
                     this.disabled = false;
                 }, () => {
-                    this.notifier.notify("error", "Could not delete fish");
+                    this.notifier.error( "Could not delete fish");
                     this.disabled = false;
                 });
             }
@@ -168,7 +169,7 @@ export class FishDetailViewComponent implements OnInit {
             this.attachmentComponent.clearAttachment();
         }, () => {
             this.uploadingPhoto = false;
-            this.notifier.notify("error", "Could not upload fish photo.");
+            this.notifier.error( "Could not upload fish photo.");
         });
     }
 }

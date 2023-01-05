@@ -14,6 +14,7 @@ import { FishUpdateAction, FishDeleteAction } from 'src/app/store/fish/fish.acti
 import { getSelectedFish, isUpdatingFish, isCreatingFish, getFishUpdateError } from 'src/app/store/fish/fish.selector';
 import { NotificationService } from 'src/app/services/notification.service';
 import { ConfirmModalComponent } from '../../SharedDeviceModule/components/modals/confirm-modal/confirm-modal.component';
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -49,7 +50,7 @@ export class FishEditViewComponent implements OnInit {
     faTrash = faTrash;
 
 
-    constructor(private store: Store<AppState>, private notifier: NotificationService, private dialog: MatDialog) {
+    constructor(private store: Store<AppState>, private notifier: ToastrService, private dialog: MatDialog) {
 
     }
     ngOnInit() {
@@ -77,13 +78,13 @@ export class FishEditViewComponent implements OnInit {
         this.updateError$.pipe(take(2)).subscribe(err => {
             if (err && updating) {
                 updating = false;
-                this.notifier.notify("error", "Unable to update fish");
+                this.notifier.error( "Unable to update fish");
                 console.log(err);
             }
         })
         this.updating$.pipe(take(2)).subscribe(val => {
             if (!val && updating) {
-                this.notifier.notify("success", "Fish updated");
+                this.notifier.success( "Fish updated");
                 this.editing = false;
             }
         });

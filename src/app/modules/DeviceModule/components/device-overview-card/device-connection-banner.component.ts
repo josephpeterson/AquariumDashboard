@@ -16,6 +16,7 @@ import { DeviceInformation } from 'src/app/modules/SharedDeviceModule/models/Dev
 import { connectToDevice } from 'src/app/modules/SharedDeviceModule/store/device.actions';
 import { selectDeviceConnection, selectDeviceInformation } from 'src/app/modules/SharedDeviceModule/store/device.selectors';
 import { DeviceConnectionState } from 'src/app/modules/SharedDeviceModule/store/device.reducer';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'device-connection-banner',
@@ -38,7 +39,7 @@ export class DeviceConnectionBannerComponent {
 
     constructor(private _aquariumService: AquariumService,
         private store: Store,
-        private _notifier: NotificationService,
+        private _notifier: ToastrService,
         private dialog: MatDialog) {
             
     }

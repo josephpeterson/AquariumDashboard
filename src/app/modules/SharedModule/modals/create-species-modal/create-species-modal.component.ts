@@ -10,6 +10,7 @@ import { getSpeciesCreateError, isCreatingSpecies } from 'src/app/store/species/
 import { MatDialogRef } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
 import { NotificationService } from 'src/app/services/notification.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'create-species-modal',
@@ -27,7 +28,7 @@ export class CreateSpeciesModalComponent implements OnInit {
   public componentLifeCycle = new Subject();
 
 
-  constructor(private store: Store<AppState>,private _dialog: MatDialogRef<CreateSpeciesModalComponent>, private notifier: NotificationService) { }
+  constructor(private store: Store<AppState>,private _dialog: MatDialogRef<CreateSpeciesModalComponent>, private notifier: ToastrService) { }
   ngOnInit() {
 
   }
@@ -44,13 +45,13 @@ export class CreateSpeciesModalComponent implements OnInit {
         if (err && adding) {
             console.log(err);
             adding = false;
-            this.notifier.notify("error", "Unable to add fish species.");
+            this.notifier.error( "Unable to add fish species.");
             console.log(err);
         }
     })
     this.adding$.pipe(take(2)).subscribe(val => {
         if (!val && adding){
-            this.notifier.notify("success", "Added new fish species.");
+            this.notifier.success( "Added new fish species.");
             this._dialog.close();
         }
     });

@@ -12,13 +12,15 @@ import { DeviceInformation } from "../models/DeviceInformation";
 import { AquariumMixingStationStatus } from "../models/AquariumMixingStationStatus";
 import { selectDeviceTypes } from "./device.selectors";
 import { DeviceSensor } from "../models/DeviceSensor";
+import { ToastrService } from "ngx-toastr";
 
 @Injectable()
 export class DeviceEffects {
     constructor(
         private actions$: Actions,
         private store: Store<SharedDeviceModuleState>,
-        private aquariumDeviceService: AquariumDeviceService
+        private aquariumDeviceService: AquariumDeviceService,
+        private notificationService: ToastrService,
     ) { }
 
     connectToDevice = createEffect(() =>
@@ -26,12 +28,15 @@ export class DeviceEffects {
             ofType(connectToDevice),
             switchMap(() => this.aquariumDeviceService.getDeviceInformation().pipe(
                 map((info: DeviceInformation) => deviceConnectionSuccess(info)),
-                catchError((d) => of(deviceConnectionFailure(d))),
+                catchError((d) => {
+                    this.notificationService.error("Could not connect to device: " + d?.message);
+                    return of(deviceConnectionFailure(d))
+                }),
             ))
         ))
     deviceGetSensorValues = createEffect(() =>
         this.actions$.pipe(
-            ofType(deviceConnectionSuccess,deviceGetSensorValues),
+            ofType(deviceConnectionSuccess, deviceGetSensorValues),
             switchMap(() => this.aquariumDeviceService.getDeviceSensorValues().pipe(
                 map((content) => deviceGetSensorValuesSuccess({ content: content }))
             ))

@@ -7,6 +7,7 @@ import { AquariumService } from 'src/app/services/aquarium.service';
 import { ManagePhotoConfigurationModal } from '../manage-photo-configuration/manage-photo-configuration.component';
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
 import { NotificationService } from 'src/app/services/notification.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'fish-feed-modal',
@@ -20,7 +21,7 @@ export class FishFeedModalComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) fish:Fish,
    private _aquariumService: AquariumService,
-    private notifier: NotificationService,
+    private notifier: ToastrService,
      private dialogRef: MatDialogRef<ManagePhotoConfigurationModal>) {
     this.fish = fish;
   }
@@ -38,7 +39,7 @@ export class FishFeedModalComponent implements OnInit {
         this.dialogRef.close(this.device);
       },
       (err) => {
-        this.notifier.notify("error", "Could not update camera settings");
+        this.notifier.error( "Could not update camera settings");
         this.updating = false;
       }
     );

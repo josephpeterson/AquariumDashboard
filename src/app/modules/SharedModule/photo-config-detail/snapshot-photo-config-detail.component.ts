@@ -12,6 +12,7 @@ import { AquariumService } from 'src/app/services/aquarium.service';
 import { AquariumDevice } from 'src/app/models/AquariumDevice';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NotificationService } from 'src/app/services/notification.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'snapshot-photo-config-detail',
@@ -58,11 +59,11 @@ export class SnapshotPhotoConfigDetail implements OnInit {
                 this.updating = false;
             },
             (err) => {
-                this.notifier.notify("error", "Could not update camera settings");
+                this.notifier.error( "Could not update camera settings");
                 this.updating = false;
             }
         );
     }
-    constructor(private notifier: NotificationService, private store: Store<AppState>, private _aquariumService: AquariumService){}
+    constructor(private notifier: ToastrService, private store: Store<AppState>, private _aquariumService: AquariumService){}
 }
 

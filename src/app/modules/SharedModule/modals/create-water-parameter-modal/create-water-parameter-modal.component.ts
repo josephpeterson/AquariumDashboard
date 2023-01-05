@@ -12,6 +12,7 @@ import { Aquarium } from 'src/app/models/Aquarium';
 import * as moment from 'moment';
 import { Subject } from 'rxjs';
 import { ElementRef } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'create-water-parameter-modal',
@@ -36,7 +37,7 @@ export class CreateWaterParameterModalComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) aquarium: Aquarium,
     public _aquariumService: AquariumService,
-    private notifier: NotificationService,
+    private notifier: ToastrService,
     private dialogRef: MatDialogRef<CreateWaterParameterModalComponent>,
     private store: Store<AppState>) {
     this.aquarium = aquarium;
@@ -85,7 +86,7 @@ export class CreateWaterParameterModalComponent implements OnInit {
     );
   }
   handleErr(err) {
-    this.notifier.notify("error", "Could not apply parameter settings");
+    this.notifier.error( "Could not apply parameter settings");
     this.updating = false;
   }
   clickDeleteSnapshot() {

@@ -7,6 +7,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { PhotoContent } from 'src/app/models/PhotoContent';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { NotificationService } from 'src/app/services/notification.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'photo-expanded-modal',
@@ -25,7 +26,7 @@ export class PhotoExpandedModalComponent implements OnInit {
     private _aquariumService: AquariumService,
     private _dialog: MatDialogRef<PhotoExpandedModalComponent>,
     private dialog: MatDialog,
-    private _notifier: NotificationService) {
+    private _notifier: ToastrService) {
   }
   ngOnInit() {
   }
@@ -35,10 +36,10 @@ export class PhotoExpandedModalComponent implements OnInit {
   }
   public clickDelete() {
     this._aquariumService.deletePhoto(this.photo).subscribe(() => {
-      this._notifier.notify("success", "Photo was successfully removed");
+      this._notifier.success( "Photo was successfully removed");
       this._dialog.close();
     }, err => {
-      this._notifier.notify("error", "Error removing photo");
+      this._notifier.error( "Error removing photo");
       console.error(err);
     });
   }

@@ -1,5 +1,6 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Chart } from 'chartjs';
+import { ToastrService } from 'ngx-toastr';
 import { AquariumService } from 'src/app/services/aquarium.service';
 import { NotificationService } from 'src/app/services/notification.service';
 
@@ -31,7 +32,7 @@ export class TemperatureHistogramComponent implements OnInit {
 
 
   constructor(public aquariumService: AquariumService,
-    public notifier: NotificationService) { }
+    public notifier: ToastrService) { }
 
 
   createChart() {
@@ -142,7 +143,7 @@ export class TemperatureHistogramComponent implements OnInit {
       });
 
     }, err => {
-      this.notifier.notify("error", "Could not load temp information");
+      this.notifier.error( "Could not load temp information");
     });
 
   }

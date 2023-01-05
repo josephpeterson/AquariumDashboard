@@ -8,6 +8,7 @@ import { Species } from 'src/app/models/Species';
 
 import { SpeciesAddAction, SpeciesUpdateAction, SpeciesDeleteAction } from 'src/app/store/species/species.actions';
 import { NotificationService } from 'src/app/services/notification.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'species-detail-form',
@@ -36,7 +37,7 @@ export class SpeciesDetailFormComponent implements OnInit {
     public componentLifecycle = new Subject();
     
 
-    constructor(private store: Store<AppState>, private notifier: NotificationService) {
+    constructor(private store: Store<AppState>, private notifier: ToastrService) {
 
     }
     ngOnInit() {
@@ -69,13 +70,13 @@ export class SpeciesDetailFormComponent implements OnInit {
         this.updateError$.pipe(take(2)).subscribe(err => {
             if (err && updating) {
                 updating = false;
-                this.notifier.notify("error", "Unable to update fish species.");
+                this.notifier.error( "Unable to update fish species.");
                 console.log(err);
             }
         })
         this.updating$.pipe(take(2)).subscribe(val => {
             if (!val && updating) {
-                this.notifier.notify("success", "Fish species was updated.");
+                this.notifier.success( "Fish species was updated.");
                 this.actionSuccess();
             }
         });
@@ -88,13 +89,13 @@ export class SpeciesDetailFormComponent implements OnInit {
         this.addError$.pipe(take(2)).subscribe(err => {
             if (err) {
                 adding = false;
-                this.notifier.notify("error", "Unable to add fish species.");
+                this.notifier.error( "Unable to add fish species.");
                 console.log(err);
             }
         })
         this.adding$.pipe(take(2)).subscribe(val => {
             if (!val && adding){
-                this.notifier.notify("success", "Added new fish species.");
+                this.notifier.success( "Added new fish species.");
                 this.actionSuccess();
             }
         });
@@ -107,13 +108,13 @@ export class SpeciesDetailFormComponent implements OnInit {
         this.deleteError$.pipe(take(2)).subscribe(err => {
             if (err && removing) {
                 removing = false;
-                this.notifier.notify("error", "Unable to delete fish species.");
+                this.notifier.error( "Unable to delete fish species.");
                 console.log(err);
             }
         })
         this.deleting$.pipe(take(2)).subscribe(val => {
             if (!val && removing) {
-                this.notifier.notify("success", "Fish species was deleted.");
+                this.notifier.success( "Fish species was deleted.");
                 this.actionSuccess();
             }
         });

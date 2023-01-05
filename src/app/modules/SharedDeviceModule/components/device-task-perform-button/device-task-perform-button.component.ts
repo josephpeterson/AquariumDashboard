@@ -12,6 +12,7 @@ import { DeviceTaskUpsertModalComponent } from '../modals/device-task-upsert-mod
 import { NotificationService } from 'src/app/services/notification.service';
 import { Store } from '@ngrx/store';
 import { deviceGetScheduleStatus, deviceGetSensorValues } from '../../store/device.actions';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'device-task-perform-button',
@@ -23,15 +24,15 @@ export class DeviceTaskPerformButtonComponent {
     @Input() disabled: boolean;
 
     public faTrash = faTrash;
-    constructor(private dialog: MatDialog, private store: Store, private service: AquariumDeviceService, private notifier: NotificationService) {
+    constructor(private dialog: MatDialog, private store: Store, private service: AquariumDeviceService, private notifier: ToastrService) {
     }
     public clickAction() {
         this.service.performScheduleTask(this.task).subscribe((data) => {
-            this.notifier.notify("success", "Task performed!");
+            this.notifier.success( "Task performed!");
             this.store.dispatch(deviceGetScheduleStatus());
             this.store.dispatch(deviceGetSensorValues());
         }, err => {
-            this.notifier.notify("error", "Could not perform device task...");
+            this.notifier.error( "Could not perform device task...");
             console.error(err);
         });
     }

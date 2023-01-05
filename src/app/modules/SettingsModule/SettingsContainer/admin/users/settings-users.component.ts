@@ -23,6 +23,7 @@ import { AquariumService } from 'src/app/services/aquarium.service';
 
 import { AquariumAccount } from 'src/app/modules/SharedDeviceModule/models/AquariumAccount';
 import { NotificationService } from 'src/app/services/notification.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'settings-users',
@@ -47,7 +48,7 @@ export class SettingsUsersComponent {
     public dialog: MatDialog,
     private store: Store<AppState>,
     private _aquariumService: AquariumService,
-    private notifier: NotificationService
+    private notifier: ToastrService
   ) { }
 
   ngOnDestroy() {

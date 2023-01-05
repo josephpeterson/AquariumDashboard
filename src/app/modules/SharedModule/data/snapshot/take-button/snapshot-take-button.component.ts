@@ -8,6 +8,7 @@ import { SnapshotTakeAction } from 'src/app/store/snapshot/snapshot.actions';
 import { getSelectedAquarium } from 'src/app/store/aquarium/aquarium.selector';
 import { faCamera, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { NotificationService } from 'src/app/services/notification.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'snapshot-take-button',
@@ -36,7 +37,7 @@ export class SnapshotTakeButtonComponent implements OnInit {
         var err = false;
         this.takeError$.pipe(take(2)).subscribe(error => {
             if (error) {
-                this.notifier.notify("error", error.message);
+                this.notifier.error( error.message);
                 err = true;
             }
         });
@@ -44,10 +45,10 @@ export class SnapshotTakeButtonComponent implements OnInit {
         this.taking$.pipe(take(2)).subscribe(val => {
             if (val || err) return;
             var eta = Date.now() - start;
-            this.notifier.notify("success", "Snapshot taken successfully (" + eta + "ms)");
+            this.notifier.success( "Snapshot taken successfully (" + eta + "ms)");
             this.onPhotoTaken.emit(val);
         });
     }
-    constructor(private notifier: NotificationService, private store: Store<AppState>) { }
+    constructor(private notifier: ToastrService, private store: Store<AppState>) { }
 }
 

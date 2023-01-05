@@ -19,12 +19,14 @@ import { MatTableModule } from '@angular/material/table';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CalendarContainerComponent } from './calendar-container/calendar-container.component';
+import { CoreModule } from '../CoreModule/core.module';
 
 
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
+    CoreModule,
     RouterModule,
     CalendarRoutes,
 

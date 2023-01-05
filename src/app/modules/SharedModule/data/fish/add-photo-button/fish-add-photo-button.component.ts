@@ -12,6 +12,7 @@ import { Aquarium } from 'src/app/models/Aquarium';
 import { Fish } from 'src/app/models/Fish';
 import { FishPhotoModal } from '../../../modals/fish-photo-modal/fish-photo-modal.component';
 import { NotificationService } from 'src/app/services/notification.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'fish-add-photo-button',
@@ -29,6 +30,6 @@ export class FishAddPhotoButtonComponent implements OnInit {
         });
         dialog.componentInstance.fishId = this.fish.id;
     }
-    constructor(private notifier: NotificationService, private store: Store<AppState>, private dialog: MatDialog) { }
+    constructor(private notifier: ToastrService, private store: Store<AppState>, private dialog: MatDialog) { }
 }
 

@@ -16,6 +16,7 @@ import { WaterChange } from 'src/app/models/WaterChange';
 import { PaginatedComponent } from 'src/app/modules/CoreModule/components/PaginatedComponent';
 import { DateFormatProvider } from 'src/app/providers/DateFormatProvider';
 import { DeviceInformation } from 'src/app/modules/SharedDeviceModule/models/DeviceInformation';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'device-water-change-card',
@@ -54,7 +55,7 @@ export class DeviceWaterChangeCardComponent extends PaginatedComponent implement
 
 
   constructor(public _aquariumService: AquariumService,
-    public notifier: NotificationService,
+    public notifier: ToastrService,
     public dialog: MatDialog) { super(); }
 
   ngOnInit() {

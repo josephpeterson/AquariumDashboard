@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
+import { ToastrService } from "ngx-toastr";
 import { Subject } from "rxjs";
 import { DeviceSensor } from "src/app/modules/SharedDeviceModule/models/DeviceSensor";
 import { NotificationService } from "src/app/services/notification.service";
@@ -24,7 +25,7 @@ export class DeviceSensorListComponent implements OnInit {
   @Input() public small: any = null;
 
   constructor(private service: AquariumDeviceService,
-    public notifier: NotificationService,
+    public notifier: ToastrService,
     public dialog: MatDialog) { }
 
   ngOnInit() {

@@ -20,9 +20,7 @@ import { Aquarium } from 'src/app/models/Aquarium';
 import { getSelectedAquarium, isLoadingAquariums } from 'src/app/store/aquarium/aquarium.selector';
 import { AppState } from 'src/app/app.state';
 import { AquariumService } from 'src/app/services/aquarium.service';
-
-import { AquariumAccount } from 'src/app/modules/SharedDeviceModule/models/AquariumAccount';
-import { NotificationService } from 'src/app/services/notification.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'settings-bugs',
@@ -47,7 +45,7 @@ export class SettingsBugsComponent {
     public dialog: MatDialog,
     private store: Store<AppState>,
     private _aquariumService: AquariumService,
-    private notifier: NotificationService
+    private notifier: ToastrService
   ) { }
 
   ngOnDestroy() {

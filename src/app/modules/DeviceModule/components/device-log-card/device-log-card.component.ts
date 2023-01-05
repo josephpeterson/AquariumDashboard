@@ -5,6 +5,7 @@ import { AquariumDevice } from 'src/app/models/AquariumDevice';
 
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { NotificationService } from 'src/app/services/notification.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'device-log-card',
@@ -21,7 +22,7 @@ export class DeviceLogCardComponent implements OnInit {
   clearingLog: boolean;
   
   constructor(public _aquariumService: AquariumService,
-    public notifier: NotificationService) { }
+    public notifier: ToastrService) { }
 
   ngOnInit() {
     this.clickGetDeviceLog();
@@ -34,7 +35,7 @@ export class DeviceLogCardComponent implements OnInit {
       this.deviceLog = data;
     }, err => {
       console.log(err);
-      this.notifier.notify("error","Could not retrieve debug log from aquarium device");
+      this.notifier.error("Could not retrieve debug log from aquarium device");
     });
   }
   clickClearLog() {
@@ -42,7 +43,7 @@ export class DeviceLogCardComponent implements OnInit {
     this._aquariumService.clearDeviceLog(this.device.id).subscribe(data => {
       this.clearingLog = false;
       delete this.deviceLog;
-      this.notifier.notify("success","Device log cleared");
+      this.notifier.success("Device log cleared");
     }, err => {
       console.log(err);
       this.clearingLog = false;
