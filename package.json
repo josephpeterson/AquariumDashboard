@@ -36,7 +36,7 @@
     "zone.js": "~0.11.4",
     "@auth0/angular-jwt": "^5.1.0",
     "@ckeditor/ckeditor5-angular": "^4.0.0",
-    "@ckeditor/ckeditor5-build-balloon": "^35.3.2",
+    "@ckeditor/ckeditor5-build-balloon": "^36.0.1",
     "@ngrx/entity": "^15.0.0",
     "ng5-slider": "^1.2.6",
     "ngx-color-picker": "^13.0.0",
